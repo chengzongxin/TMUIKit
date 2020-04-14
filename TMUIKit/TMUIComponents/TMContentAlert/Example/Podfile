@@ -1,0 +1,13 @@
+#use_frameworks!
+
+platform :ios, '8.2'
+
+target 'TMContentAlert_Example' do
+  pod 'TMUIKit', :path => '../../../../'
+
+  target 'TMContentAlert_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
