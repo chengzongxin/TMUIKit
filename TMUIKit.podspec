@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
                    TMUIKit iOS 是一个致力于提高项目 UI 开发效率的组件库，为工程提供一些通用的UI基础库及功能组件库以及一些通用的工具库。
                    旨在帮助快速高效的构建工程的基础设计元素，以及统一维护基础元素的版本兼容性处理，助于提高开发效率和项目质量。
                    DESC
-  s.homepage     = "http://repo.we.com:tubroker/tmuikit.git"
+  s.homepage     = "http://repo.we.com/tubroker/tmuikit.git"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "nigel.ning" => "nigel.ning@corp.to8to.com" }
 
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   # s.libraries = "iconv", "xml2"
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
-  s.source       = { :git => "http://repo.we.com:tubroker/tmuikit.git" }
+  s.source       = { :git => "http://repo.we.com/tubroker/tmuikit.git" }
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   s.source_files  = "TMUIKit/TMUIKit.h"
   
