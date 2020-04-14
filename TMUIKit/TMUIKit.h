@@ -14,14 +14,14 @@
 #import "TMUICore.h"
 #endif
 
-//components
+//Components
 #if __has_include("TMUIComponents.h")
 #import "TMUIComponents.h"
 #endif
 
-//extensions
-#if __has_include("UIView+TMUIKit.h")
-#import "UIView+TMUIKit.h"
+//Extensions
+#if __has_include("TMUIExtensions.h")
+#import "TMUIExtensions.h"
 #endif
 
 

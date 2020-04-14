@@ -35,8 +35,13 @@ Pod::Spec.new do |s|
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   s.source_files  = "TMUIKit/TMUIKit.h"
   
+  s.subspec 'TMUIExtensions' do |ss|
+      ss.source_files = 'TMUIKit/TMUIExtensions/TMUIExtensions.h', 'TMUIKit/TMUIExtensions/Extensions/*.{h,m}'
+  end
+  
   s.subspec 'TMUICore' do |ss|
-    ss.source_files = 'TMUIKit/TMUIKit.h', 'TMUIKit/TMUICore/*.{h,m}', 'TMUIKit/UIKitExtensions/*.{h,m}'    
+    ss.dependency 'TMUIKit/TMUIExtensions'
+    ss.source_files = 'TMUIKit/TMUIKit.h', 'TMUIKit/TMUICore/*.{h,m}'   
   end
 
   s.subspec 'TMUIComponents' do |ss|
