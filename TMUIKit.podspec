@@ -41,10 +41,12 @@ Pod::Spec.new do |s|
 
   s.subspec 'TMUIComponents' do |ss|
     ss.dependency 'TMUIKit/TMUICore'
+    ss.source_files = 'TMUIKit/TMUIComponents/TMUIComponents.h'
     
     ss.subspec 'TMContentAlert' do |sss|
       sss.source_files = 'TMUIKit/TMUIComponents/TMContentAlert/*.{h,m}'
-    end    
+    end
+    
   end
 
 
