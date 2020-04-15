@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		4A3AE36CF457F3E0D1F09899 /* libPods-TMUIKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7730AE0891D67086950AD6C /* libPods-TMUIKitDemo.a */; };
 		A6C3102E2445C1C600BF81B7 /* TMUIKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A6C3102D2445C1C600BF81B7 /* TMUIKit.podspec */; };
+		A6C310602446999A00BF81B7 /* ExtensionDemoTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3105F2446999A00BF81B7 /* ExtensionDemoTableVC.m */; };
+		A6C31063244699AF00BF81B7 /* ComponentDemoTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C31062244699AF00BF81B7 /* ComponentDemoTableVC.m */; };
+		A6C31066244699C000BF81B7 /* CoreDemoTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C31065244699C000BF81B7 /* CoreDemoTableVC.m */; };
+		A6C3106A24469AE500BF81B7 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3106924469AE500BF81B7 /* TabBarController.m */; };
+		A6C3106D24469AFC00BF81B7 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3106C24469AFC00BF81B7 /* NavigationController.m */; };
+		A6C310802446F77700BF81B7 /* TestForTMContentAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3107F2446F77700BF81B7 /* TestForTMContentAlert.m */; };
 		A6C3FEF02445A71E00BF81B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3FEEF2445A71E00BF81B7 /* AppDelegate.m */; };
-		A6C3FEF62445A71E00BF81B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3FEF52445A71E00BF81B7 /* ViewController.m */; };
 		A6C3FEF92445A71E00BF81B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C3FEF72445A71E00BF81B7 /* Main.storyboard */; };
 		A6C3FEFB2445A71F00BF81B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C3FEFA2445A71F00BF81B7 /* Assets.xcassets */; };
 		A6C3FEFE2445A71F00BF81B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C3FEFC2445A71F00BF81B7 /* LaunchScreen.storyboard */; };
@@ -20,11 +25,22 @@
 /* Begin PBXFileReference section */
 		085960C87BE2D89364D92617 /* Pods-TMUIKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMUIKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TMUIKitDemo/Pods-TMUIKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A6C3102D2445C1C600BF81B7 /* TMUIKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TMUIKit.podspec; path = ../../TMUIKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A6C3105E2446999A00BF81B7 /* ExtensionDemoTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDemoTableVC.h; sourceTree = "<group>"; };
+		A6C3105F2446999A00BF81B7 /* ExtensionDemoTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDemoTableVC.m; sourceTree = "<group>"; };
+		A6C31061244699AF00BF81B7 /* ComponentDemoTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentDemoTableVC.h; sourceTree = "<group>"; };
+		A6C31062244699AF00BF81B7 /* ComponentDemoTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComponentDemoTableVC.m; sourceTree = "<group>"; };
+		A6C31064244699C000BF81B7 /* CoreDemoTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDemoTableVC.h; sourceTree = "<group>"; };
+		A6C31065244699C000BF81B7 /* CoreDemoTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDemoTableVC.m; sourceTree = "<group>"; };
+		A6C3106724469A5D00BF81B7 /* TMUIKitDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TMUIKitDemo-Prefix.pch"; sourceTree = "<group>"; };
+		A6C3106824469AE500BF81B7 /* TabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		A6C3106924469AE500BF81B7 /* TabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		A6C3106B24469AFC00BF81B7 /* NavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		A6C3106C24469AFC00BF81B7 /* NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		A6C3107E2446F77700BF81B7 /* TestForTMContentAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestForTMContentAlert.h; sourceTree = "<group>"; };
+		A6C3107F2446F77700BF81B7 /* TestForTMContentAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestForTMContentAlert.m; sourceTree = "<group>"; };
 		A6C3FEEB2445A71E00BF81B7 /* TMUIKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6C3FEEE2445A71E00BF81B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C3FEEF2445A71E00BF81B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A6C3FEF42445A71E00BF81B7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A6C3FEF52445A71E00BF81B7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A6C3FEF82445A71E00BF81B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6C3FEFA2445A71F00BF81B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6C3FEFD2445A71F00BF81B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +70,53 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A6C3105A244698DA00BF81B7 /* OtherExamples */ = {
+			isa = PBXGroup;
+			children = (
+				A6C3105B244698EB00BF81B7 /* CoreDemos */,
+				A6C3105C244698F900BF81B7 /* ComponentDemos */,
+				A6C3105D2446990800BF81B7 /* ExtensionDemos */,
+			);
+			path = OtherExamples;
+			sourceTree = "<group>";
+		};
+		A6C3105B244698EB00BF81B7 /* CoreDemos */ = {
+			isa = PBXGroup;
+			children = (
+				A6C31064244699C000BF81B7 /* CoreDemoTableVC.h */,
+				A6C31065244699C000BF81B7 /* CoreDemoTableVC.m */,
+			);
+			path = CoreDemos;
+			sourceTree = "<group>";
+		};
+		A6C3105C244698F900BF81B7 /* ComponentDemos */ = {
+			isa = PBXGroup;
+			children = (
+				A6C31061244699AF00BF81B7 /* ComponentDemoTableVC.h */,
+				A6C31062244699AF00BF81B7 /* ComponentDemoTableVC.m */,
+				A6C3107D2446F64A00BF81B7 /* TestForTMContentAlert */,
+			);
+			path = ComponentDemos;
+			sourceTree = "<group>";
+		};
+		A6C3105D2446990800BF81B7 /* ExtensionDemos */ = {
+			isa = PBXGroup;
+			children = (
+				A6C3105E2446999A00BF81B7 /* ExtensionDemoTableVC.h */,
+				A6C3105F2446999A00BF81B7 /* ExtensionDemoTableVC.m */,
+			);
+			path = ExtensionDemos;
+			sourceTree = "<group>";
+		};
+		A6C3107D2446F64A00BF81B7 /* TestForTMContentAlert */ = {
+			isa = PBXGroup;
+			children = (
+				A6C3107E2446F77700BF81B7 /* TestForTMContentAlert.h */,
+				A6C3107F2446F77700BF81B7 /* TestForTMContentAlert.m */,
+			);
+			path = TestForTMContentAlert;
+			sourceTree = "<group>";
+		};
 		A6C3FEE22445A71E00BF81B7 = {
 			isa = PBXGroup;
 			children = (
@@ -78,13 +141,17 @@
 			children = (
 				A6C3FEEE2445A71E00BF81B7 /* AppDelegate.h */,
 				A6C3FEEF2445A71E00BF81B7 /* AppDelegate.m */,
-				A6C3FEF42445A71E00BF81B7 /* ViewController.h */,
-				A6C3FEF52445A71E00BF81B7 /* ViewController.m */,
+				A6C3106824469AE500BF81B7 /* TabBarController.h */,
+				A6C3106924469AE500BF81B7 /* TabBarController.m */,
+				A6C3106B24469AFC00BF81B7 /* NavigationController.h */,
+				A6C3106C24469AFC00BF81B7 /* NavigationController.m */,
+				A6C3105A244698DA00BF81B7 /* OtherExamples */,
 				A6C3FEF72445A71E00BF81B7 /* Main.storyboard */,
 				A6C3FEFA2445A71F00BF81B7 /* Assets.xcassets */,
 				A6C3FEFC2445A71F00BF81B7 /* LaunchScreen.storyboard */,
 				A6C3FEFF2445A71F00BF81B7 /* Info.plist */,
 				A6C3FF002445A71F00BF81B7 /* main.m */,
+				A6C3106724469A5D00BF81B7 /* TMUIKitDemo-Prefix.pch */,
 			);
 			path = TMUIKitDemo;
 			sourceTree = "<group>";
@@ -191,9 +258,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6C3FEF62445A71E00BF81B7 /* ViewController.m in Sources */,
+				A6C3106A24469AE500BF81B7 /* TabBarController.m in Sources */,
+				A6C310602446999A00BF81B7 /* ExtensionDemoTableVC.m in Sources */,
 				A6C3FEF02445A71E00BF81B7 /* AppDelegate.m in Sources */,
 				A6C3FF012445A71F00BF81B7 /* main.m in Sources */,
+				A6C3106D24469AFC00BF81B7 /* NavigationController.m in Sources */,
+				A6C310802446F77700BF81B7 /* TestForTMContentAlert.m in Sources */,
+				A6C31063244699AF00BF81B7 /* ComponentDemoTableVC.m in Sources */,
+				A6C31066244699C000BF81B7 /* CoreDemoTableVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +408,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TQ22J33PH2;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TMUIKitDemo/TMUIKitDemo-Prefix.pch";
 				INFOPLIST_FILE = TMUIKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -354,6 +428,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TQ22J33PH2;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TMUIKitDemo/TMUIKitDemo-Prefix.pch";
 				INFOPLIST_FILE = TMUIKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,5 +1,5 @@
 //
-//  UIView+TMUIKit.h
+//  UIView+TMUI.h
 //  TMUIKitDemo
 //
 //  Created by nigel.ning on 2020/4/14.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIView (TMUIKit)
+@interface UIView (TMUI)
 
 /**
  获取当前视图显示时对应的的viewController

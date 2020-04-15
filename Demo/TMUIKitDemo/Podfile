@@ -3,7 +3,7 @@
 platform :ios, '8.2'
 
 target 'TMUIKitDemo' do
-    #pod 'TMUIKit/TMUICore', :git => 'git@repo.we.com:tubroker/tmuikit.git'
-  pod 'TMUIKit', :path => '../../'
+  pod 'TMUIKit', :git => 'git@repo.we.com:tubroker/tmuikit.git'
+  #pod 'TMUIKit', :path => '../../'
   
 end

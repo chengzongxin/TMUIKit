@@ -1,49 +1,55 @@
 //
-//  ViewController.m
-//  Example
+//  TestForTMContentAlert.m
+//  TMUIKitDemo
 //
-//  Created by nigel.ning on 2020/4/14.
+//  Created by nigel.ning on 2020/4/15.
 //  Copyright © 2020 t8t. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "TestForTMContentAlert.h"
 
-@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface TestForTMContentAlert ()
+
 @property (nonatomic, weak)UIView *alertContentView;
 @property (nonatomic, assign)BOOL useAnimate;
+
 @end
 
-@implementation ViewController
+@implementation TestForTMContentAlert
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"kCell"];
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"无动画弹框";
-    }else {
-        cell.textLabel.text = @"自定义动画效果弹框";
-    }
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 0) {
-        [self showAlerView];
-    }else {
-        [self showAlertViewWithAnimate];
-    }
+    UIButton *btn0 = [[UIButton alloc] init];
+    [self.view addSubview:btn0];
+    UIButton *btn1 = [[UIButton alloc] init];
+    [self.view addSubview:btn1];
+    
+    [btn0 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(100);
+        make.centerX.mas_equalTo(self.view);
+        make.height.mas_equalTo(30);
+    }];
+    [btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(btn0.mas_bottom).mas_offset(30);
+        make.centerX.mas_equalTo(self.view);
+        make.height.mas_equalTo(30);
+    }];
+    
+    
+    [self confitBtn:btn0 title:@"无动效" action:@selector(showAlerView)];
+    [self confitBtn:btn1 title:@"微小的缩放动画" action:@selector(showAlertViewWithAnimate)];
 }
+
+- (void)confitBtn:(UIButton *)btn title:(NSString *)title action:(SEL)sel {
+    [btn addTarget:self action:sel forControlEvents:UIControlEventTouchUpInside];
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage tmui_imageWithColor:[[UIColor redColor] colorWithAlphaComponent:0.5]] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage tmui_imageWithColor:[[UIColor blueColor] colorWithAlphaComponent:0.5]] forState:UIControlStateNormal];
+}
+
 
 - (void)showAlerView {
     self.useAnimate = NO;

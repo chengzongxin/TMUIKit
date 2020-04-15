@@ -1,14 +1,14 @@
 //
-//  UIView+TMUIKit.m
+//  UIView+TMUI.m
 //  TMUIKitDemo
 //
 //  Created by nigel.ning on 2020/4/14.
 //  Copyright © 2020 t8t. All rights reserved.
 //
 
-#import "UIView+TMUIKit.h"
+#import "UIView+TMUI.h"
 
-@implementation UIView (TMUIKit)
+@implementation UIView (TMUI)
 
 - (UIViewController *)tmui_viewController {
     return [[self class] tmui_viewControllerOfView:self];

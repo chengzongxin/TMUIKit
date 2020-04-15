@@ -24,5 +24,7 @@
 #import "TMUIExtensions.h"
 #endif
 
+//dependency
+#import <Masonry/Masonry.h>
 
 #endif /* TMUIKit_h */

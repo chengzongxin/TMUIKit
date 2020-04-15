@@ -7,7 +7,7 @@
 //
 
 #import "TMContentAlert.h"
-#import "UIView+TMUIKit.h"
+#import "UIView+TMUI.h"
 
 @interface TMContentAlertContainerViewController : UIViewController
 @end

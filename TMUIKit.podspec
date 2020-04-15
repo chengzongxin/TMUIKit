@@ -30,22 +30,25 @@ Pod::Spec.new do |s|
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JSONKit", "~> 1.4"
+  s.dependency "Masonry", "~> 1.1.0"
   s.source       = { :git => "http://repo.we.com/tubroker/tmuikit.git" }
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
   s.source_files  = "TMUIKit/TMUIKit.h"
   
-  s.subspec 'TMUIExtensions' do |ss|
-      ss.source_files = 'TMUIKit/TMUIExtensions/TMUIExtensions.h', 'TMUIKit/TMUIExtensions/Extensions/*.{h,m}'
+  s.subspec 'TMUICore' do |ss|
+      ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+      ss.source_files = 'TMUIKit/TMUIKit.h', 'TMUIKit/TMUICore/*.{h,m}'   
   end
   
-  s.subspec 'TMUICore' do |ss|
-    ss.dependency 'TMUIKit/TMUIExtensions'
-    ss.source_files = 'TMUIKit/TMUIKit.h', 'TMUIKit/TMUICore/*.{h,m}'   
+  s.subspec 'TMUIExtensions' do |ss|
+      ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+      ss.dependency 'TMUIKit/TMUICore'
+      ss.source_files = 'TMUIKit/TMUIExtensions/TMUIExtensions.h', 'TMUIKit/TMUIExtensions/Extensions/*.{h,m}'
   end
 
   s.subspec 'TMUIComponents' do |ss|
     ss.dependency 'TMUIKit/TMUICore'
+    ss.dependency 'TMUIKit/TMUIExtensions'
     ss.source_files = 'TMUIKit/TMUIComponents/TMUIComponents.h'
     
     ss.subspec 'TMContentAlert' do |sss|

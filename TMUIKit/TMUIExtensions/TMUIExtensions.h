@@ -9,11 +9,18 @@
 #define TMUIExtensions_h
 
 
-#if __has_include("UIView+TMUIKit.h")
-#import "UIView+TMUIKit.h"
+#if __has_include("UIView+TMUI.h")
+#import "UIView+TMUI.h"
+#endif
+
+#if __has_include("UIImage+TMUI.h")
+#import "UIImage+TMUI.h"
 #endif
 
 
+#if __has_include("UIColor+TMUI.h")
+#import "UIColor+TMUI.h"
+#endif
 
 
 
