@@ -190,7 +190,11 @@
 #pragma mark - generate color image
 
 + (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color {
-    return [UIImage tmui_imageWithColor:color size:CGSizeMake(4, 4) cornerRadius:0];
+    return [UIImage tmui_imageWithColor:color size:CGSizeMake(4, 4)];
+}
+
++ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size {
+    return [UIImage tmui_imageWithColor:color size:size cornerRadius:0];
 }
 
 + (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius {
@@ -330,15 +334,6 @@
 
 #pragma mark - 截图
 
-/**
- 对传进来的 `UIView` 截图，生成一个 `UIImage` 并返回。注意这里使用的是 view.layer 来渲染图片内容。
-
- @param view 要截图的 `UIView`
-
- @return `UIView` 的截图
- 
- @warning UIView 的 transform 并不会在截图里生效
- */
 + (nullable UIImage *)tmui_imageWithView:(UIView *)view {
     return [UIImage tmui_imageWithSize:view.bounds.size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
         [view.layer renderInContext:contextRef];

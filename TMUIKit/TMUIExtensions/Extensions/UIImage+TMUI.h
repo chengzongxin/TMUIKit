@@ -105,6 +105,17 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
 + (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color;
 
 /**
+ *  创建指定size的纯色的UIImage
+ *
+ *  @param color 图片的颜色
+ *
+ *  @param size 指定生成的图片的size
+ *
+ *  @return 纯色的UIImage
+*/
++ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size;
+
+/**
  *  创建一个纯色的UIImage
  *
  *  @param  color           图片的颜色
