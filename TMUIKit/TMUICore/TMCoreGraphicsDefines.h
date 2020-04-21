@@ -22,7 +22,8 @@ CGFloatSafeValue(CGFloat value) {
 
 ///用于居中运算
 ///通常在计算子视图在父视图中显示的位置origin时用到，传入父视图宽或高及子视图宽或高，返回子视图显示时对应的origin的x或y值
-CG_INLINE CGFloat CGFloatGetCenter(CGFloat parent, CGFloat child) {
+CG_INLINE CGFloat
+CGFloatGetCenter(CGFloat parent, CGFloat child) {
     return ceilf((parent - child) / 2.0);
 }
 
@@ -30,7 +31,8 @@ CG_INLINE CGFloat CGFloatGetCenter(CGFloat parent, CGFloat child) {
 #pragma mark - CGSize
 
 /// 判断一个 CGSize 是否存在 NaN
-CG_INLINE BOOL CGSizeIsNaN(CGSize size) {
+CG_INLINE BOOL
+CGSizeIsNaN(CGSize size) {
     return isnan(size.width) || isnan(size.height);
 }
 

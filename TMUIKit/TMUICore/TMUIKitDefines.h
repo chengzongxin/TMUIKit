@@ -56,7 +56,7 @@ UIEdgeInsetsGetVerticalValue(UIEdgeInsets insets) {
 #define UIFontHeavy(size)         TMUIFontWeight(size, UIFontWeightHeavy)
 #define UIFontBlack(size)         TMUIFontWeight(size, UIFontWeightBlack)
 
-#define TMUIFontWeight(size, weight) [UIFont systemFontOfSize:size weight:weight]
+#define TMUIFontWeight(size_, weight_) [UIFont systemFontOfSize:size_ weight:weight_]
 
 
 #endif /* TMUIKitDefines_h */

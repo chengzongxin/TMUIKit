@@ -55,6 +55,15 @@ Pod::Spec.new do |s|
       sss.source_files = 'TMUIKit/TMUIComponents/TMContentAlert/*.{h,m}'
     end
     
+    ss.subspec 'TMContentPicker' do |sss|
+      sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}',
+      'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker',
+      'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker',
+      'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker',
+      'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
+      
+    end
+    
   end
 
 
