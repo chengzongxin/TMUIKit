@@ -35,6 +35,7 @@ TMUI_PropertyLazyLoad(UIView, contentBoxView);
 
 + (instancetype)pickerView {
     __kindof TMContentPicker *picker = [[[self class] alloc] init];
+    picker.autoDismissWhenTapBackground = YES;
     return picker;
 }
 
