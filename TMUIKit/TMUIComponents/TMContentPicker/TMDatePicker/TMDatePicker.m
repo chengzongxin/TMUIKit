@@ -27,6 +27,12 @@ const NSString *const TMDatePickerTitle = @"选择日期";
           finishSelectBlock:(void(^)(NSDate *selectedDate))finishSelectBlock
          fromViewController:(UIViewController *)fromVc {
     
+    NSAssert(finishSelectBlock, @"finishSelectBlock can not be nil");
+    
+    if (!finishSelectBlock) {
+        return;
+    }
+    
     TMDatePicker *picker = [TMDatePicker pickerView];
     picker.title = title ?: TMDatePickerTitle;
     

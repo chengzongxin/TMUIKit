@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, TMDatePickerMode) {
 @interface TMDatePicker : TMContentPicker
 
 
-/// 多表数据选择器初始化及UI显示的便捷方法
+/// 日期选择器初始化及UI显示的便捷方法
 /// @param title 选择器顶部的title串, 若为nil，则会取默认的title - 选择日期
 /// @param mode 对应日期选择器的模式，可指定年-月-日 或  时-分-秒 或 年-月-日-时-分-秒
 /// @param minDate  限制选择的日期范围最小值，若为nil表示不做限制

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TMNormalPicker : TMContentPicker
 
 
-/// 多表数据选择器初始化及UI显示的便捷方法
+/// 普通单一项数据选择器初始化及UI显示的便捷方法
 /// @param title 选择器顶部的title串，默认为nil
 /// @param itemListBlock 选择器的数据源block
 /// @param fetchShowStringBlock 某列某行的位置显示的字符串的数据源block

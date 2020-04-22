@@ -57,7 +57,7 @@ fetchShowStringForProvinceItem:(TMCityPickerFetchShowStringForProvinceBlock)fetc
     picker.cityItemListAtProvinceBlock = cityItemListAtProvinceBlock;
     picker.fetchShowStringForProvinceBlock = fetchShowStringForProvinceBlock;
     picker.fetchShowStringForCityBlock = fetchShowStringForCityBlock;
-    picker.title = title;
+    picker.title = title ?: TMCityPickerTitle;
     [picker loadContentPickerView];
     [picker initItemToProvinceIndex:curProvinceItemIndex cityIndex:curCityItemIndex];
     

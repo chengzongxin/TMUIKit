@@ -26,6 +26,16 @@
                curItemIndex:(NSInteger)idx
          fromViewController:(UIViewController *)fromVc {
     
+    NSAssert(itemListBlock, @"itemListBlock can not be nil");
+    NSAssert(fetchShowStringBlock, @"fetchShowStringBlock can not be nil");
+    NSAssert(finishSelectBlock, @"finishSelectBlock can not be nil");
+    
+    if (!itemListBlock ||
+        !fetchShowStringBlock ||
+        !finishSelectBlock) {
+        return;
+    }
+    
     TMNormalPicker *picker = [TMNormalPicker pickerView];
     picker.itemListBlock = itemListBlock;
     picker.fetchShowStringBlock = fetchShowStringBlock;
