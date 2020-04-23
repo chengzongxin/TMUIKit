@@ -13,5 +13,25 @@
 #import "TMContentAlert.h"
 #endif
 
+#if __has_include("TMNormalPicker.h")
+#import "TMNormalPicker.h"
+#endif
+
+#if __has_include("TMMultiDataPicker.h")
+#import "TMMultiDataPicker.h"
+#endif
+
+#if __has_include("TMDatePicker.h")
+#import "TMDatePicker.h"
+#endif
+
+#if __has_include("TMCityPicker.h")
+#import "TMCityPicker.h"
+#endif
+
+#if __has_include("TMActionSheet.h")
+#import "TMActionSheet.h"
+#endif
+
 
 #endif /* TMUIComponents_h */

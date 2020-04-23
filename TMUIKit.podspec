@@ -61,7 +61,10 @@ Pod::Spec.new do |s|
       'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker',
       'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker',
       'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
-      
+    end
+    
+    ss.subspec 'TMActionSheet' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
     end
     
   end
