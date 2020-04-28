@@ -33,5 +33,9 @@
 #import "TMActionSheet.h"
 #endif
 
+#if __has_include("TMToast.h")
+#import "TMToast.h"
+#endif
+
 
 #endif /* TMUIComponents_h */

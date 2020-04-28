@@ -75,6 +75,14 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
     end
     
+    ss.subspec 'TMToast' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMToast/*.{h,m}'
+        # TMToastAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMToastAssets.bundle
+        sss.resource_bundles = {
+            'TMToastAssets' => ['TMUIKit/TMUIComponents/TMToast/Resource/*.png']
+        }
+    end
+    
   end
 
 
