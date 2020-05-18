@@ -264,7 +264,7 @@ TMUI_PropertyLazyLoad(UIButton, cancelButton);
     
     [self setNeedsUpdateConstraints];
     [self updateConstraints];
-    [self layoutSubviews];
+    [self layoutIfNeeded];
 }
 
 #pragma mark - init
