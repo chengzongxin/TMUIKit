@@ -14,6 +14,8 @@
 @interface TMToastView : UIView
 @property (nonatomic, strong)UIVisualEffectView *effectView;
 @property (nonatomic, strong)UILabel *msgLbl;
+@property (nonatomic, copy)void(^_Nullable hideFinishBlock)(void);
+@property (nonatomic, assign)NSTimeInterval duration;
 @end
 
 @implementation TMToastView
@@ -21,12 +23,14 @@
 + (instancetype)toastViewWithString:(NSString *)str {
     TMToastView *view = [[self alloc] init];
     view.msgLbl.text = str;
+    view.duration = [TMToast duration];
     return view;
 }
 
 + (instancetype)toastViewWithAttributedString:(NSAttributedString *)attriStr {
     TMToastView *view = [[self alloc] init];
     view.msgLbl.attributedText = attriStr;
+    view.duration = [TMToast duration];
     return view;
 }
 
@@ -90,7 +94,7 @@
 }
 
 - (void)delayHide {
-    [self performSelector:@selector(dismiss) withObject:nil afterDelay:[TMToast duration]];
+    [self performSelector:@selector(dismiss) withObject:nil afterDelay:self.duration > 0 ? self.duration : [TMToast duration]];
 }
 
 - (void)dismiss {
@@ -98,6 +102,9 @@
         self.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
+        if (self.hideFinishBlock) {
+            self.hideFinishBlock();
+        }
     }];
 }
 
@@ -120,12 +127,68 @@ static NSTimeInterval s_duration = 1.0;
 }
 
 + (void)toast:(NSString *)str {
-    TMToastView *view = [TMToastView toastViewWithString:str];
-    [view show];
+    [self toast:str hideAfterDelay:[self duration] hideFinishBlock:nil];
 }
 
 + (void)toastAttributedString:(NSAttributedString *)attrStr {
+    [self toastAttributedString:attrStr hideAfterDelay:[self duration] hideFinishBlock:nil];
+}
+
+#pragma mark - 针对一些特殊场景需要自定义显示的时长及消失后的回调提供支持
+
++ (void)toast:(NSString *)str hideAfterDelay:(NSTimeInterval)delay hideFinishBlock:(void(^_Nullable)(void))block {
+    if (!str) {
+#if DEBUG
+        NSLog(@"toast 'str' must not be nil.");
+#endif
+        return;
+    }
+    
+    if (![str isKindOfClass:[NSString class]]) {
+#if DEBUG
+        NSLog(@"toast 'str' must be a string.");
+#endif
+        return;
+    }
+    
+    if (str.length == 0) {
+#if DEBUG
+        NSLog(@"toast 'str' must not be empty.");
+#endif
+        return;
+    }
+    
+    TMToastView *view = [TMToastView toastViewWithString:str];
+    view.duration = delay;
+    view.hideFinishBlock = block;
+    [view show];
+}
+
++ (void)toastAttributedString:(NSAttributedString *)attrStr hideAfterDelay:(NSTimeInterval)delay hideFinishBlock:(void(^_Nullable)(void))block {
+    if (!attrStr) {
+#if DEBUG
+        NSLog(@"toast 'attrStr' must not be nil.");
+#endif
+        return;
+    }
+    
+    if (![attrStr isKindOfClass:[NSAttributedString class]]) {
+#if DEBUG
+        NSLog(@"toast 'attrStr' must be a attributedString.");
+#endif
+        return;
+    }
+    
+    if (attrStr.length == 0) {
+#if DEBUG
+        NSLog(@"toast 'attrStr' must not be empty.");
+#endif
+        return;
+    }
+    
     TMToastView *view = [TMToastView toastViewWithAttributedString:attrStr];
+    view.duration = delay;
+    view.hideFinishBlock = block;
     [view show];
 }
 
