@@ -53,7 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  显示加兔币积分的提示视图的扩展方法
- @warning 若score<=0且content串长度为0，则内部会不作处理直接返回nil
+ @warning 若content串长度为0，则不会显示toast
+ @warning 若score<=0，则内部按普通toast样式显示，仅显示content内容
  */
 + (void)toastScore:(NSInteger)score content:(NSString *)content;
 

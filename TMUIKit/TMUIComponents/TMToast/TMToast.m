@@ -199,18 +199,23 @@ static NSTimeInterval s_duration = 1.0;
 
 + (void)toastScore:(NSInteger)score content:(NSString *)content {
     
-    if (score <= 0 && content.length == 0) {
+    if (content.length == 0) {
         return;
     }
     
     UIImage *icon = [UIImage imageNamed:@"TMToastAssets.bundle/icon_gold_coin"];
     NSAssert(icon, @"score icon should not be nil");
     
-    if (!icon) {
+    if (!icon ||
+        score <= 0) {
+        //当icon读取失败时  或
+        //score <= 0时
+        //按普通toast处理
         if (content.length > 0) {
             [self toast:content];
         }
     }else {
+        //score>0 && content有值时才显示指定样式的toast
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
         NSMutableAttributedString *mAttr = [[NSMutableAttributedString alloc] initWithString:@""];
