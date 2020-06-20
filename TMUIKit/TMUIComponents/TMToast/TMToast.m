@@ -57,9 +57,13 @@
         make.leading.mas_equalTo(16);
         make.trailing.mas_equalTo(-16);
         make.centerY.mas_equalTo(self.effectView.contentView.mas_centerY);
+        make.top.mas_equalTo(10);
+        make.bottom.mas_equalTo(-10);
     }];
     self.msgLbl.textColor = [UIColor whiteColor];
     self.msgLbl.font = UIFont(12);
+    self.msgLbl.numberOfLines = 0;
+    self.msgLbl.textAlignment = NSTextAlignmentCenter;
 }
 
 - (void)show {
@@ -69,9 +73,9 @@
     self.clipsToBounds = YES;
     self.layer.cornerRadius = 17;
     [self mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_greaterThanOrEqualTo(60);
-        make.trailing.mas_lessThanOrEqualTo(-60);
-        make.height.mas_equalTo(34);
+        make.leading.mas_greaterThanOrEqualTo(50);
+        make.trailing.mas_lessThanOrEqualTo(-50);
+        make.height.mas_greaterThanOrEqualTo(34);
         make.centerX.mas_equalTo(window.mas_centerX);
         make.top.mas_equalTo(tmui_safeAreaTopInset() + 44);
     }];
