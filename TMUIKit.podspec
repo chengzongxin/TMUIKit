@@ -82,6 +82,10 @@ Pod::Spec.new do |s|
             'TMToastAssets' => ['TMUIKit/TMUIComponents/TMToast/Resource/*.png']
         }
     end
+
+    ss.subspec 'TMPopoverView' do |sss|
+      sss.source_files = 'TMUIKit/TMUIComponents/TMPopoverView/*.{h,m}'
+    end
     
   end
 

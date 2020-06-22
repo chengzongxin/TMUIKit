@@ -37,5 +37,9 @@
 #import "TMToast.h"
 #endif
 
+#if __has_include("TMPopoverView.h")
+#import "TMPopoverView.h"
+#endif
+
 
 #endif /* TMUIComponents_h */
