@@ -204,8 +204,10 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
     [self.superview setNeedsUpdateConstraints];
     [self.superview updateConstraints];
     [self.superview layoutIfNeeded];
-    
+
+#if DEBUG
     MASAttachKeys(self, self.popoverArrowImgView, self.popoverContentContainerView);
+#endif
     
     //
     [UIView animateWithDuration:0.2 animations:^{
