@@ -41,6 +41,8 @@ typedef NS_ENUM(NSUInteger, TMPopoverArrowDirection) {
  */
 @property (nonatomic, assign)CGSize arrowSize;
 
+@property (nonatomic, assign)BOOL autoDismissWhenTouchOutSideContentView;///< 当点击了contentView之外的空白区域时是否自动消失，默认为YES 
+
 #pragma mark - init methods
 
 /**当外部明确指定显示的内容视图的size大小时，可使用此方法初始化popoverview视图*/
@@ -69,6 +71,17 @@ typedef NS_ENUM(NSUInteger, TMPopoverArrowDirection) {
 - (void)dismiss;
 
 - (void)dismissWithFinishBlock:(void(^_Nullable)(void))dismissFinishBlock;
+
+@end
+
+/**方便从popoverView的contentView或contentView的任一子视图获取其所在的popoverView实例*/
+@interface UIView(TMPopoverView)
+
+/**外部仅在需要的时候关注此值的读取即可，相关赋值逻辑在TMPopoverView的内部处理逻辑会赋值
+ @note 当popoverView的contentView或contentView的任一子视图调用此属性值均能正常返回其显示所属的poperView实例
+ @warning 若是非popoverView的contentView及其子视图对象调用此方法，则内部实现会向上逐级遍历父视图并查询对应的缓存数据，若无则返回nil
+ */
+@property (nonatomic, nullable, weak)TMPopoverView *tmui_popoverView;
 
 @end
 

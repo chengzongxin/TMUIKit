@@ -9,6 +9,9 @@
 #import <Masonry/Masonry.h>
 #import "TMUICore.h"
 #import "TMUIExtensions.h"
+#import "TMUIWeakObjectContainer.h"
+#import <objc/runtime.h>
+
 
 @interface TMPopoverView()
 @property (nonatomic, strong)UIControl *bgMaskControl;///< 背景蒙层，加到delegate的window上
@@ -44,8 +47,20 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
         make.leading.top.mas_equalTo(4);
         make.trailing.bottom.mas_equalTo(-4);
     }];
+    
+    //将popoverView赋值给contentView的tmui_popoverView间接弱持有，方便外部通过子视图获取其所在的popoverView实例进行相关dimiss等操作
+    contentView.tmui_popoverView = popoverView;
+    
     return popoverView;
 }
+
+#pragma mark - dealloc log
+
+#if DEBUG
+- (void)dealloc {
+    NSLog(@"dealloc %@", NSStringFromClass(self.class));
+}
+#endif
 
 #pragma mark - init
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -56,16 +71,20 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
     return self;
 }
 
-- (void)loadSubUIs {
+- (void)initConfig {
     self.arrowSize = CGSizeMake(6, 4);
+    _autoDismissWhenTouchOutSideContentView = YES;
     _maskBackgroundColor = [UIColor clearColor];
     _popoverBackgroundColor = UIColorHexString(@"353535");
-    self.popoverLayoutMargins = UIEdgeInsetsMake(tmui_safeAreaTopInset(), 10, tmui_safeAreaBottomInset(), 10);
-    
+    _popoverLayoutMargins = UIEdgeInsetsMake(tmui_safeAreaTopInset(), 10, tmui_safeAreaBottomInset(), 10);
+}
+
+- (void)loadSubUIs {
+    [self initConfig];
     //蒙层视图是在显示时加到当前视图的superview上
     self.bgMaskControl.backgroundColor = self.maskBackgroundColor;
     [self.bgMaskControl addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.bgMaskControl.enabled = self.autoDismissWhenTouchOutSideContentView;
     //
     [self addSubview:self.popoverArrowImgView];
     [self addSubview:self.popoverContentContainerView];
@@ -214,7 +233,7 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
         self.alpha = 1;
         self.bgMaskControl.alpha = 1;
     } completion:^(BOOL finished) {
-        self.bgMaskControl.enabled = YES;
+        self.bgMaskControl.enabled = self.autoDismissWhenTouchOutSideContentView;
     }];
 }
 
@@ -238,6 +257,11 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
 }
 
 #pragma mark - private
+
+- (void)setAutoDismissWhenTouchOutSideContentView:(BOOL)autoDismissWhenTouchOutSideContentView {
+    _autoDismissWhenTouchOutSideContentView = autoDismissWhenTouchOutSideContentView;
+    self.bgMaskControl.enabled = autoDismissWhenTouchOutSideContentView;
+}
 
 - (void)setMaskBackgroundColor:(UIColor *)maskBackgroundColor {
     _maskBackgroundColor = maskBackgroundColor;
@@ -289,6 +313,43 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
         }
     }];
     return itemView;
+}
+
+@end
+
+
+@implementation UIView(TMPopoverView)
+
+- (void)setTmui_popoverView:(TMPopoverView *)tmui_popoverView {
+    if (tmui_popoverView && ![tmui_popoverView isKindOfClass:[TMPopoverView class]]) {
+        NSLog(@"setTmui_popoverView: tmui_popoverView must be kind of TMPopoverView.class .");
+        return;
+    }
+    
+    TMUIWeakObjectContainer *weakObjContainer = objc_getAssociatedObject(self, @selector(tmui_popoverView));
+    if (!weakObjContainer) {
+        weakObjContainer = [TMUIWeakObjectContainer containerWithObject:tmui_popoverView];
+    }
+    weakObjContainer.object = tmui_popoverView;
+    
+    if (!tmui_popoverView) {
+        weakObjContainer = nil;
+    }
+    objc_setAssociatedObject(self, @selector(tmui_popoverView), weakObjContainer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (TMPopoverView *_Nullable)tmui_popoverView {
+    TMUIWeakObjectContainer *weakObjContainer = objc_getAssociatedObject(self, @selector(tmui_popoverView));
+    if (weakObjContainer.object) {
+        return weakObjContainer.object;
+    }
+    
+    //若无缓存则向上逐级遍历找到父视图为TMPopoverView类型的数据并返回
+    if (self.superview) {
+        return self.superview.tmui_popoverView;
+    }
+    
+    return nil;
 }
 
 @end

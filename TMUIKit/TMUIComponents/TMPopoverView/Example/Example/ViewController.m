@@ -86,5 +86,31 @@
     [popView showFromRect:btn.frame inView:self.view arrowDirection:TMPopoverArrowDirectionRight];
 }
 
+- (IBAction)showCustomGuideBtn:(UIButton *)btn {
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor redColor];
+    UIButton *closeBtn = [[UIButton alloc] init];
+    [closeBtn addTarget:self action:@selector(closeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:closeBtn];
+    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.mas_equalTo(-2);
+        make.top.mas_equalTo(2);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
+    closeBtn.backgroundColor = [UIColor blueColor];
+        
+    TMPopoverView *popView = [TMPopoverView popoverViewWithContentView:view layoutContentViewSize:^(MASConstraintMaker * _Nonnull make) {
+        make.size.mas_equalTo(CGSizeMake(100, 180));
+    }];
+    popView.autoDismissWhenTouchOutSideContentView = NO;
+    popView.arrowSize = CGSizeMake(10, 6);
+    [popView showFromRect:btn.frame inView:self.view arrowDirection:TMPopoverArrowDirectionLeft];
+}
+
+- (void)closeBtnClick:(UIButton *)btn  {
+    [btn.tmui_popoverView dismissWithFinishBlock:^{
+        NSLog(@"popoverView dismissed!");
+    }];
+}
 
 @end
