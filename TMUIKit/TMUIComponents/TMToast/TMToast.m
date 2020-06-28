@@ -229,16 +229,16 @@ static NSTimeInterval s_duration = 1.0;
         attachment.bounds = CGRectMake(0, -4, 16, 16);
         [mAttr appendAttributedString:[NSAttributedString attributedStringWithAttachment:attachment]];
         
-        NSMutableAttributedString *leftTxtStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" +%ld", score] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightRegular]}].mutableCopy;
-        //微调+号的显示位置，默认位置太靠下了，上移一点
-        //NSRange addSymbolRange = [leftTxtStr.string rangeOfString:@"+"];
-        //[leftTxtStr addAttribute:NSBaselineOffsetAttributeName value:@(2) range:addSymbolRange];
-        [mAttr appendAttributedString:leftTxtStr];
-        
         if (content.length > 0) {
-            NSAttributedString *contentStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@", content] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightRegular]}];
+            NSAttributedString *contentStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", content] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: UIFont(12)}];
             [mAttr appendAttributedString:contentStr];
         }
+        
+        NSMutableAttributedString *rightTxtStr = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" +%ld兔币", score] attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: UIFont(12)}].mutableCopy;
+        //微调+号的显示位置，默认位置太靠下了，上移一点
+        //NSRange addSymbolRange = [rightTxtStr.string rangeOfString:@"+"];
+        //[rightTxtStr addAttribute:NSBaselineOffsetAttributeName value:@(2) range:addSymbolRange];
+        [mAttr appendAttributedString:rightTxtStr];
         
         [mAttr addAttributes:@{NSParagraphStyleAttributeName: paragraphStyle} range:NSMakeRange(0, mAttr.length)];
         
