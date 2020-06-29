@@ -67,7 +67,10 @@
 }
 
 - (void)show {
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    if (!window) {
+        window = [UIApplication sharedApplication].delegate.window;
+    }
     [window addSubview:self];
     self.alpha = 0;
     self.clipsToBounds = YES;
