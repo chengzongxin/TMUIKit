@@ -41,5 +41,9 @@
 #import "TMPopoverView.h"
 #endif
 
+#if __has_include("TMEmptyView.h")
+#import "TMEmptyView.h"
+#endif
+
 
 #endif /* TMUIComponents_h */

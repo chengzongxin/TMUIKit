@@ -1,0 +1,10 @@
+#use_frameworks!
+
+platform :ios, '8.2'
+
+target 'Example' do
+  #pod 'TMUIKit/TMUICore', :git => 'git@repo.we.com:tubroker/tmuikit.git'
+  pod 'TMUIKit/TMUICore', :path => '../../../../'     #<根据实际目录的相对路径配置此path>
+  pod 'TMUIKit/TMUIComponents', :path => '../../../../' #<根据实际目录的相对路径配置此path>
+    
+end
