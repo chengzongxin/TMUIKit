@@ -44,6 +44,7 @@
 
 - (void)loadUI {
     //self.backgroundColor = [[UIColor tmui_colorWithHexString:@"353535"] colorWithAlphaComponent:0.5];
+    self.layer.zPosition = FLT_MAX;//保证始终显示在最上层
     UIVisualEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     self.effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
     [self addSubview:self.effectView];
