@@ -69,7 +69,7 @@
 
 - (void)show {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    if (!window) {
+    if (!window || window.isHidden) {
         window = [UIApplication sharedApplication].delegate.window;
     }
     [window addSubview:self];
