@@ -10,7 +10,7 @@
 #import "TMUIKitDefines.h"
 #import "TMUIExtensions.h"
 
-const NSString *const TMDatePickerTitle = @"选择日期";
+NSString *const TMDatePickerTitle = @"选择日期";
 
 @interface TMDatePicker()
 @property (nonatomic, strong)UIDatePicker *datePickerView;

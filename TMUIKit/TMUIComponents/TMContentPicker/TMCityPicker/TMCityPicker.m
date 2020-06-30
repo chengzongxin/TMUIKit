@@ -10,7 +10,7 @@
 #import "TMUIKitDefines.h"
 #import "TMUIExtensions.h"
 
-const NSString *const TMCityPickerTitle = @"选择城市";
+NSString *const TMCityPickerTitle = @"选择城市";
 
 
 @interface TMCityPicker()<UIPickerViewDelegate, UIPickerViewDataSource>

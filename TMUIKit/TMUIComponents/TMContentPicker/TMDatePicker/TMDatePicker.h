@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN const NSString *const TMDatePickerTitle;
+UIKIT_EXTERN NSString *const TMDatePickerTitle;
 
 typedef NS_ENUM(NSInteger, TMDatePickerMode) {
     TMDatePickerModeDate = 0,       ///< 年-月-日

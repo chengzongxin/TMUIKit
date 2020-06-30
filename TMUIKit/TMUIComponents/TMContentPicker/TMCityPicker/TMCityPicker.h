@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-UIKIT_EXTERN const NSString *const TMCityPickerTitle;
+UIKIT_EXTERN NSString *const TMCityPickerTitle;
 
 typedef NSArray * _Nonnull (^TMCityPickerProvinceItemListBlock)(void);
 typedef NSArray * _Nonnull (^TMCityPickerCityItemListAtProvinceBlock)(id provinceItem, NSInteger provinceIndex);
