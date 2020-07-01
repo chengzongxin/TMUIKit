@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 以下几个为扩展支持更多自定义数据的方法，外部可指定类型以确定读取合适的占位图，以及可修改默认的相关文案数据
 
 /**外部可通过configContentBlock对默认的相关显示文案进行修改
- @warning configContentBlock里直接修改clickEmptyBlock 回调将无效，内部处理逻辑会以参数block作为回调处理
+ @warning configContentBlock里若直接修改clickEmptyBlock 回调，则会覆盖clickBlock的赋值处理逻辑
  */
 + (instancetype)showEmptyInView:(UIView *)view
                      safeMargin:(UIEdgeInsets)margin

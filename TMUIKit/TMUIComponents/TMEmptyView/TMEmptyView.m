@@ -58,10 +58,10 @@
              configContentBlock:(void(^_Nullable)(NSObject<TMEmptyContentItemProtocol> *content))configContentBlock
                      clickBlock:(void(^_Nullable)(void))block {
     TMEmptyContentItem *item = tmui_emptyContentItemByType(contentType);
+    item.clickEmptyBlock = block;
     if (configContentBlock) {
         configContentBlock(item);
     }
-    item.clickEmptyBlock = block;
     return [self showEmptyInView:view safeMargin:margin withContentItem:item];
 }
 
