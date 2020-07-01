@@ -32,14 +32,39 @@
 }
 #endif
 
+/**margin缺省为UIEdgeInsetsZero，点击block缺省为nil*/
++ (instancetype)showEmptyInView:(UIView *)view
+                    contentType:(TMEmptyContentType)contentType {
+    return [self showEmptyInView:view contentType:contentType clickBlock:nil];
+}
+
+/**margin缺省为UIEdgeInsetsZero*/
++ (instancetype)showEmptyInView:(UIView *)view
+                    contentType:(TMEmptyContentType)contentType
+                     clickBlock:(void(^_Nullable)(void))block {
+    return [self showEmptyInView:view safeMargin:UIEdgeInsetsZero contentType:contentType clickBlock:block];
+}
+
 + (instancetype)showEmptyInView:(UIView *)view
                      safeMargin:(UIEdgeInsets)margin
-                withContentType:(TMEmptyContentType)contentType
+                    contentType:(TMEmptyContentType)contentType
+                     clickBlock:(void(^_Nullable)(void))block {
+    return [self showEmptyInView:view safeMargin:margin contentType:contentType configContentBlock:nil clickBlock:block];
+}
+
++ (instancetype)showEmptyInView:(UIView *)view
+                     safeMargin:(UIEdgeInsets)margin
+                    contentType:(TMEmptyContentType)contentType
+             configContentBlock:(void(^_Nullable)(NSObject<TMEmptyContentItemProtocol> *content))configContentBlock
                      clickBlock:(void(^_Nullable)(void))block {
     TMEmptyContentItem *item = tmui_emptyContentItemByType(contentType);
+    if (configContentBlock) {
+        configContentBlock(item);
+    }
     item.clickEmptyBlock = block;
     return [self showEmptyInView:view safeMargin:margin withContentItem:item];
 }
+
 
 + (instancetype)showEmptyInView:(UIView *)view
                      safeMargin:(UIEdgeInsets)margin
@@ -193,12 +218,12 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
     }];
     
     //
-    self.titleLbl.numberOfLines = 0;
+    self.titleLbl.numberOfLines = 2;
     self.titleLbl.textAlignment = NSTextAlignmentCenter;
     self.titleLbl.font = UIFontSemibold(14);
     self.titleLbl.textColor = UIColorHexString(@"111111");
     
-    self.descLbl.numberOfLines = 0;
+    self.descLbl.numberOfLines = 3;
     self.descLbl.textAlignment = NSTextAlignmentCenter;
     self.descLbl.font = UIFontRegular(14);
     self.descLbl.textColor = UIColorHexString(@"AAAFBE");

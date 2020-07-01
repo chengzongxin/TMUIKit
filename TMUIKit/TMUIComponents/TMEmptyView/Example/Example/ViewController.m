@@ -84,13 +84,13 @@
     
     if (indexPath.section == 0) {
         @TMUI_weakify(self);
-        [TMEmptyView showEmptyInView:self.view safeMargin:UIEdgeInsetsZero withContentType:self.dataSource[indexPath.section][indexPath.row].type clickBlock:^{
+        [TMEmptyView showEmptyInView:self.view safeMargin:UIEdgeInsetsZero contentType:self.dataSource[indexPath.section][indexPath.row].type clickBlock:^{
             @TMUI_strongify(self);
             [self.view.tmui_emptyView remove];
         }];
     }else {
         @TMUI_weakify(self);
-        [TMEmptyView showEmptyInView:self.tableView safeMargin:UIEdgeInsetsMake(30, 0, 50, 0) withContentType:self.dataSource[indexPath.section][indexPath.row].type clickBlock:^{
+        [TMEmptyView showEmptyInView:self.tableView safeMargin:UIEdgeInsetsMake(30, 0, 50, 0) contentType:self.dataSource[indexPath.section][indexPath.row].type clickBlock:^{
             @TMUI_strongify(self);
             [self.tableView.tmui_emptyView remove];
         }];
