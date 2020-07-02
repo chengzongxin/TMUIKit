@@ -75,7 +75,7 @@ NS_INLINE NSString *tmui_emptyDescByType(TMEmptyContentType type) {
         @"去分享一下你的灵感吧",
         @"去看看其他有趣的内容吧",
         @"快去发表你的观点吧",
-        @"没找到呢 换个关键词试试",
+        @"没找到呢，换个关键词试试",
         @"去开启你的装修之旅吧",
         @"去参加活动赢取大奖吧"
     ];

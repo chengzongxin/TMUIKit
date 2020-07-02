@@ -11,7 +11,8 @@
 
 /// 相关统计整理后的空态页面显的类型值
 ///@note 以下type值的赋值及定义顺序后续不能修改，否则可能影响对应type下的展示内容
-///@warning 因相关内部处理逻辑对展示图片、标题串等数据时，是直接以此type值为数组索引，故：后续不能修改此具体type值的赋值及定义顺序 
+///@warning 因相关内部处理逻辑对展示图片、标题串等数据时，是直接以此type值为数组索引，故：后续不能修改此具体type值的赋值及定义顺序
+///@warning 若有其它未定义的内容空态类型，则可均按默认的通用无数据类型处理，对应的图片外部不用关心，相关文案外部可再自行调整
 typedef  NS_ENUM(NSInteger, TMEmptyContentType) {
     TMEmptyContentTypeNoData = 0,           ///< 通用的无内容, 这里空空如也
     TMEmptyContentTypeNetErr,               ///<  网络不好或断开
@@ -27,5 +28,28 @@ typedef  NS_ENUM(NSInteger, TMEmptyContentType) {
     
     TMEmptyContentTypeNoGift,               ///<   还没有获得礼品
 };
+
+#pragma mark - 其它一些标题、描述串的常量字义
+
+///当一些页面为接口调用成功但属于业务范围的错误时，即比如：参数错误等业务错误时 图片可以延用NoData对应的图，而标题及副标题可以用以下定义的建议值，若服务端有返回相关错误信息串，则保留以下title中的显示，将显示的desc替换为服务端接口返回的错误信息串
+static NSString *const kTMEmptyViewServerErrTitle = @"服务器走神了~";
+static NSString *const kTMEmptyViewServerErrDesc  = @"稍后再重试";
+
+/// 看别人的个人主页的动态列表页的空态页
+static NSString *const kTMEmptyViewOtherFeedEmptyTitle = @"TA还没有动态";
+static NSString *const kTMEmptyViewOtherFeedEmptyDesc  = @"去看看其他有趣的动态吧";
+
+///一些列表页筛选操作的后的空态页
+static NSString *const kTMEmptyViewFilterCompanyEmptyTitle      = @"暂无符合条件的装修公司";
+static NSString *const kTMEmptyViewFilterPrettyImageEmptyTitle  = @"暂无符合条件的效果图";
+static NSString *const kTMEmptyViewFilterCaseEmptyTitle         = @"暂无符合条件的整屋案例";
+static NSString *const kTMEmptyViewFilterEmptyDesc              = @"没找到呢，换个筛选条件试试";
+
+
+///用户页若用户已注销则显示的空态页
+static NSString *const kTMEmptyViewUserNoExistEmptyTitle        = @"该用户已注销";
+static NSString *const kTMEmptyViewUserNoExistEmptyDesc         = @"去看看其他有趣的人吧";
+
+
 
 #endif /* TMEmptyDefine_h */
