@@ -62,24 +62,33 @@ typedef NS_ENUM(NSUInteger, TMPopoverArrowDirection) {
  @note 一般情况 箭头向下，显示在视图上方；箭头向上，显示在视图下方；箭头向左，显示在视图右方；箭头向右，显示在视图左方
  @warning 若view为nil则不会显示
  @warning ⚠️⚠️⚠️ 传入的位置参数与arrowDirection要确实合适，否则可能会报内部视图的约束警告
+ @warning ⚠️⚠️⚠️传入的rectr和view是为了方便内部计算出合适的显示位置，但不是显示在view上，而是直接显示在当前AppDelegate的window上
  */
 - (void)showFromRect:(CGRect)rect inView:(UIView *)view
       arrowDirection:(TMPopoverArrowDirection)arrowDirection;
 
 #pragma mark - dismiss methods
 
+/**
+ 消失隐藏
+ */
 - (void)dismiss;
 
+/**
+ 消失隐藏并在消失后执行回调
+ */
 - (void)dismissWithFinishBlock:(void(^_Nullable)(void))dismissFinishBlock;
 
 @end
 
-/**方便从popoverView的contentView或contentView的任一子视图获取其所在的popoverView实例*/
+/**方便从popoverView的contentView或contentView的任一子视图获取其所在的popoverView实例
+ */
 @interface UIView(TMPopoverView)
 
 /**外部仅在需要的时候关注此值的读取即可，相关赋值逻辑在TMPopoverView的内部处理逻辑会赋值
  @note 当popoverView的contentView或contentView的任一子视图调用此属性值均能正常返回其显示所属的poperView实例
  @warning 若是非popoverView的contentView及其子视图对象调用此方法，则内部实现会向上逐级遍历父视图并查询对应的缓存数据，若无则返回nil
+ @warning ⚠️⚠️⚠️ view.tmui_popoverView表示的是view为对应popoverView中的contentView或contentView的子视图,  【重要】：切忌不要认为其表示显示在view上的popoverView视图
  */
 @property (nonatomic, nullable, weak)TMPopoverView *tmui_popoverView;
 

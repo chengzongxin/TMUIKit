@@ -106,7 +106,7 @@
     TMEmptyView *emptyV = [[TMEmptyView alloc] initWithFrame:rt];
     [emptyV updateUiWithContentItem:contentItem];
     view.tmui_emptyView = emptyV;
-    emptyV.backgroundColor = (view.backgroundColor && ![view.backgroundColor isEqual:[UIColor clearColor]]) ? view.backgroundColor : [UIColor whiteColor];
+    emptyV.backgroundColor = view.backgroundColor;
     [view addSubview:emptyV];
     if ([view isKindOfClass:[UIScrollView class]]) {
         //父视图指定为scrollview类型，则不添加相关约束，因scrollview的约束比较特殊，加了会使UI显示异常
