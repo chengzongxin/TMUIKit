@@ -16,6 +16,7 @@
 typedef  NS_ENUM(NSInteger, TMEmptyContentType) {
     TMEmptyContentTypeNoData = 0,           ///< 通用的无内容, 这里空空如也
     TMEmptyContentTypeNetErr,               ///<  网络不好或断开
+    TMEmptyContentTypeServerErr,            ///<  服务端业务错误
     TMEmptyContentTypeNoCollection,         ///<  收藏夹空空的
     TMEmptyContentTypeNoLike,               ///<  还没有喜欢的内容
     TMEmptyContentTypeNoPublishUgc,         ///<  还没有发布过内容
@@ -31,6 +32,7 @@ typedef  NS_ENUM(NSInteger, TMEmptyContentType) {
 
 #pragma mark - 其它一些标题、描述串的常量字义
 
+///TMEmptyContentTypeServerErr 类型时，默认为以下文案
 ///当一些页面为接口调用成功但属于业务范围的错误时，即比如：参数错误等业务错误时 图片可以延用NoData对应的图，而标题及副标题可以用以下定义的建议值，若服务端有返回相关错误信息串，则保留以下title中的显示，将显示的desc替换为服务端接口返回的错误信息串
 static NSString *const kTMEmptyViewServerErrTitle = @"服务器走神了~";
 static NSString *const kTMEmptyViewServerErrDesc  = @"稍后再重试";

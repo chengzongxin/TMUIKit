@@ -20,6 +20,16 @@ TMUI_PropertySyntheSize(desc);
 TMUI_PropertySyntheSize(attributedDesc);
 TMUI_PropertySyntheSize(clickEmptyBlock);
 
+
++ (instancetype)itemWithEmptyType:(TMEmptyContentType)type emptyImgSize:(CGSize)imgSize {
+    UIImage *img = nil;
+    NSString *imgName = tmui_emptyImageNameByType(type);
+    if (imgName) {
+        img = [UIImage imageNamed:imgName];
+    }
+    return [self itemWithEmptyImg:img emptyImgSize:imgSize];
+}
+
 + (instancetype)itemWithEmptyImg:(UIImage *)img emptyImgSize:(CGSize)imgSize {
     TMEmptyContentItem *item = [[[self class] alloc] initWithEmptyImg:img emptyImgSize:imgSize];
     return item;
@@ -32,6 +42,24 @@ TMUI_PropertySyntheSize(clickEmptyBlock);
         self.emptyImgSize = imgSize;
     }
     return self;
+}
+
+#pragma mark - protocol api methods
+- (void)updateImage:(UIImage *)img {
+    self.emptyImg = img;
+}
+
+- (void)updateImageFromType:(TMEmptyContentType)type {
+    UIImage *img = nil;
+    NSString *imgName = tmui_emptyImageNameByType(type);
+    if (imgName) {
+        img = [UIImage imageNamed:imgName];
+    }
+    self.emptyImg = img;
+}
+
+- (void)updateImageSize:(CGSize)imgSize {
+    self.emptyImgSize = imgSize;
 }
 
 @end

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface TMEmptyContentItem : NSObject<TMEmptyContentItemProtocol>
 
++ (instancetype)itemWithEmptyType:(TMEmptyContentType)type emptyImgSize:(CGSize)imgSize;
+
 + (instancetype)itemWithEmptyImg:(UIImage *)img emptyImgSize:(CGSize)imgSize;
 
 @end
@@ -30,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_INLINE NSString *tmui_emptyImageNameByType(TMEmptyContentType type) {
     NSArray *imgNames = @[
         @"noData",
+        @"netErr",
         @"netErr",
         @"noCollection",
         @"noLike",
@@ -53,6 +56,7 @@ NS_INLINE NSString *tmui_emptyTitleByType(TMEmptyContentType type) {
     NSArray *titles = @[
         @"这里空空如也",
         @"网络正在开小差",
+        kTMEmptyViewServerErrTitle,
         @"收藏夹空空的",
         @"还没有喜欢的内容",
         @"还没有发布过内容",
@@ -70,6 +74,7 @@ NS_INLINE NSString *tmui_emptyDescByType(TMEmptyContentType type) {
     NSArray *descs = @[
         @"人在旅途 常回家看看",
         @"点击刷新一下屏幕吧",
+        kTMEmptyViewServerErrDesc,
         @"快去找感兴趣的内容吧",
         @"快去找喜欢的内容吧",
         @"去分享一下你的灵感吧",

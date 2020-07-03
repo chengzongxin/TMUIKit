@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "TMEmptyDefine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,6 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 整个空白页提示视图点击后的回调配置
 @property (nonatomic, copy, nullable)void (^clickEmptyBlock)(void);
+
+#pragma mark - 提供单独更新图片及图片size的接口
+
+- (void)updateImage:(UIImage *)img;
+- (void)updateImageFromType:(TMEmptyContentType)type;
+- (void)updateImageSize:(CGSize)imgSize;
 
 @end
 
