@@ -19,7 +19,7 @@ TMUI_PropertySyntheSize(attributedTitle);
 TMUI_PropertySyntheSize(desc);
 TMUI_PropertySyntheSize(attributedDesc);
 TMUI_PropertySyntheSize(clickEmptyBlock);
-
+TMUI_PropertySyntheSize(contentCenterOffsetY);
 
 + (instancetype)itemWithEmptyType:(TMEmptyContentType)type emptyImgSize:(CGSize)imgSize {
     UIImage *img = nil;
@@ -40,6 +40,7 @@ TMUI_PropertySyntheSize(clickEmptyBlock);
     if (self) {
         self.emptyImg = img;
         self.emptyImgSize = imgSize;
+        self.contentCenterOffsetY = -70;
     }
     return self;
 }

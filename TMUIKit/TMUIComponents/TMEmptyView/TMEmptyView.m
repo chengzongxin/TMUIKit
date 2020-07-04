@@ -129,6 +129,9 @@
 - (void)updateUiWithContentItem:(NSObject<TMEmptyContentItemProtocol> *)contentItem {
     self.contentItem = contentItem;
     
+    [self.contentBoxView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.mas_centerY).mas_offset(contentItem.contentCenterOffsetY);
+    }];
     [self.imgView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(contentItem.emptyImgSize.width);
         make.height.mas_equalTo(contentItem.emptyImgSize.height);
@@ -195,7 +198,7 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
     [self.contentBoxView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.mas_leading);
         make.trailing.mas_equalTo(self.mas_trailing);
-        make.centerY.mas_equalTo(self.mas_centerY).mas_offset(-70);
+        make.centerY.mas_equalTo(self.mas_centerY);
     }];
     
     [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 空白页占位图配置
 
+@property (nonatomic, assign)CGFloat contentCenterOffsetY;///<  具体展示的内容块整体Y轴上居中位置后的偏移参数，若为0表示整体居中效果，若<0表示居中上移，>0表示居中下移 | 按设计稿此值通常会被赋值为默认值-70，即表示居中位置上移70pt
+
 @property (nonatomic, assign, readonly)CGSize emptyImgSize;///< 返回空白页相关提示图片视图显示的尺寸，按显示的pt为准
 
 @property (nonatomic, strong, readonly)UIImage *emptyImg;///<  返回空白页相关的提示图片对象
