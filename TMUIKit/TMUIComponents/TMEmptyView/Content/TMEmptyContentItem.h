@@ -72,7 +72,7 @@ NS_INLINE NSString *tmui_emptyTitleByType(TMEmptyContentType type) {
 
 NS_INLINE NSString *tmui_emptyDescByType(TMEmptyContentType type) {
     NSArray *descs = @[
-        @"人在旅途 常回家看看",
+        @"去其它地方逛逛吧",
         @"点击刷新一下屏幕吧",
         kTMEmptyViewServerErrDesc,
         @"快去找感兴趣的内容吧",
