@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		55CC37712B50F6F6690FD6B4 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D370FAFCE3D80C574FD24CE /* libPods-Example.a */; };
+		A6911CC524C851E600C0F6E8 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6911CC424C851E600C0F6E8 /* NavigationController.m */; };
 		A6C3103D2445C78A00BF81B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3103C2445C78A00BF81B7 /* AppDelegate.m */; };
 		A6C310432445C78A00BF81B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C310422445C78A00BF81B7 /* ViewController.m */; };
 		A6C310462445C78A00BF81B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C310442445C78A00BF81B7 /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* Begin PBXFileReference section */
 		1D370FAFCE3D80C574FD24CE /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA35B19DCA6CCEC800E4248 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A6911CC324C851E600C0F6E8 /* NavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		A6911CC424C851E600C0F6E8 /* NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		A6C310382445C78A00BF81B7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6C3103B2445C78A00BF81B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C3103C2445C78A00BF81B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 			children = (
 				A6C3103B2445C78A00BF81B7 /* AppDelegate.h */,
 				A6C3103C2445C78A00BF81B7 /* AppDelegate.m */,
+				A6911CC324C851E600C0F6E8 /* NavigationController.h */,
+				A6911CC424C851E600C0F6E8 /* NavigationController.m */,
 				A6C310412445C78A00BF81B7 /* ViewController.h */,
 				A6C310422445C78A00BF81B7 /* ViewController.m */,
 				A6C310442445C78A00BF81B7 /* Main.storyboard */,
@@ -190,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6C310432445C78A00BF81B7 /* ViewController.m in Sources */,
+				A6911CC524C851E600C0F6E8 /* NavigationController.m in Sources */,
 				A6C3103D2445C78A00BF81B7 /* AppDelegate.m in Sources */,
 				A6C3104E2445C78B00BF81B7 /* main.m in Sources */,
 			);

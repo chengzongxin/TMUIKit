@@ -10,12 +10,20 @@
 #import "UIView+TMUI.h"
 
 @interface TMContentAlertContainerViewController : UIViewController
+@property (nonatomic, weak)UIViewController *pVc;
 @end
 @implementation TMContentAlertContainerViewController
 - (void)dealloc {
 #if DEBUG
     NSLog(@"Dealloc_TMContentAlertContainerViewController");
 #endif
+}
+#pragma mark - 状态条样式跟弹出前的vc保持一致
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [self.pVc preferredStatusBarStyle];
+}
+- (BOOL)prefersStatusBarHidden {
+    return [self.pVc prefersStatusBarHidden];
 }
 @end
 
@@ -39,7 +47,8 @@
         pVC = pVC.presentedViewController;
     }
     
-    UIViewController *toShowVc = [[TMContentAlertContainerViewController alloc] init];
+    TMContentAlertContainerViewController *toShowVc = [[TMContentAlertContainerViewController alloc] init];
+    toShowVc.pVc = fromVc;
     toShowVc.view.frame = [UIScreen mainScreen].bounds;
     toShowVc.view.backgroundColor = [UIColor clearColor];
     toShowVc.view.clipsToBounds = YES;
