@@ -31,5 +31,13 @@
 #endif
 
 
+#if __has_include("TMAssociatedPropertyMacro.h")
+#import "TMAssociatedPropertyMacro.h"
+#endif
+
+#if __has_include("TMInitMacro.h")
+#import "TMInitMacro.h"
+#endif
+
 
 #endif /* TMUICore_h */

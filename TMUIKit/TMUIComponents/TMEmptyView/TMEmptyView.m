@@ -109,7 +109,17 @@
     emptyV.backgroundColor = [UIColor whiteColor];
     [view addSubview:emptyV];
     if ([view isKindOfClass:[UIScrollView class]]) {
-        //父视图指定为scrollview类型，则不添加相关约束，因scrollview的约束比较特殊，加了会使UI显示异常
+//父视图指定为scrollview类型，约束需要特殊处理
+//因部分页可能在viewDidAppear响应之前就调用了showEmpty，此时取到的view.bounds为初始值并非最终显示的实际尺寸，故此处考虑还是用约束来指定空态视图的位置尺寸
+        [emptyV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(view.mas_top).mas_offset(margin.top);
+            make.leading.mas_equalTo(view.mas_leading).mas_offset(margin.left);
+            make.trailing.mas_equalTo(view.mas_trailing).mas_offset(-margin.right);
+            make.bottom.mas_equalTo(view.mas_bottom).mas_offset(-margin.bottom);
+            //必须额外指定显示位置居中才能保持显示效果正常
+            make.center.mas_equalTo(view);
+        }];
+        
     }else {
         [emptyV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(view.mas_top).mas_offset(margin.top);
