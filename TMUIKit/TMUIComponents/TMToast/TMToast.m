@@ -88,10 +88,10 @@
     [self.superview layoutSubviews];
     
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         self.alpha = 1;
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(tmui_safeAreaTopInset() + 44 + 80);
+            make.top.mas_equalTo(tmui_safeAreaTopInset() + 44 + 54);
         }];
         [self.superview setNeedsUpdateConstraints];
         [self.superview updateConstraints];
@@ -106,7 +106,7 @@
 }
 
 - (void)dismiss {
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         self.alpha = 0;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
