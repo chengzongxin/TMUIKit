@@ -90,7 +90,7 @@
         }];
     }else {
         @TMUI_weakify(self);
-        [TMEmptyView showEmptyInView:self.tableView safeMargin:UIEdgeInsetsMake(30, 0, 50, 0) contentType:self.dataSource[indexPath.section][indexPath.row].type clickBlock:^{
+        [TMEmptyView showEmptyInView:self.tableView safeMargin:UIEdgeInsetsMake(30, 20, 0, 30) contentType:self.dataSource[indexPath.section][indexPath.row].type clickBlock:^{
             @TMUI_strongify(self);
             [self.tableView.tmui_emptyView remove];
         }];
