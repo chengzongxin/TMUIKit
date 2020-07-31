@@ -116,8 +116,9 @@
             make.leading.mas_equalTo(view.mas_leading).mas_offset(margin.left);
             make.trailing.mas_equalTo(view.mas_trailing).mas_offset(-margin.right);
             make.bottom.mas_equalTo(view.mas_bottom).mas_offset(-margin.bottom);
-            //必须额外指定显示位置居中才能保持显示效果正常
-            make.center.mas_equalTo(view);
+            //必须额外指定显示位置居中才能保持显示效果正常\ 因可能外部有自定义左右、上下边距，这里还需要单独处理，以下赋值逻辑是否正确还有待后续的UI多场景的实际效果
+            make.centerX.mas_equalTo(view.mas_centerX).mas_offset((margin.left - margin.right) * 0.5);
+            make.centerY.mas_equalTo(view.mas_centerY).mas_offset((margin.top - margin.bottom) * 0.5);
         }];
         
     }else {
