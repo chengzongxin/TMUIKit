@@ -99,9 +99,9 @@ Pod::Spec.new do |s|
     end
 
     ss.subspec 'TMSearchController' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
-        sss.private_header_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h}'
+        sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'        
         sss.subspec 'Private' do |ssss|
+          ssss.private_header_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h}'
           ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h,m}'
         end
         sss.subspec 'Extensions' do |ssss|
