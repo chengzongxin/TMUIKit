@@ -97,6 +97,18 @@ Pod::Spec.new do |s|
             'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
         }
     end
+
+    ss.subspec 'TMSearchController' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
+        sss.private_header_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h}'
+        sss.subspec 'Private' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h,m}'
+        end
+        sss.subspec 'Extensions' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Extensions/*.{h,m}'
+        end
+    end
+
     
   end
 

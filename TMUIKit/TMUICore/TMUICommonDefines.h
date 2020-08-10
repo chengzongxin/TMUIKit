@@ -81,6 +81,23 @@ tmui_keywordify \
     __strong __typeof__(obj) obj = obj##_tmui_weak_;
 
 
+#pragma mark - Debug Code & Logger Helpers
+///可用于调试的代码，宏参数里的代码仅在DEBUG模式下会有效执行
+#if DEBUG
+#define TMUI_DEBUG_Code(...) \
+    __VA_ARGS__;
+#else
+#define TMUI_DEBUG_Code(...)
+#endif
+
+///用于调试时重写类的dealloc方法并打印相关log的便捷宏
+#define TMUI_DEBUG_Code_Dealloc \
+TMUI_DEBUG_Code (   \
+- (void)dealloc {   \
+NSLog(@"dealloc: %@", NSStringFromClass(self.classForCoder));   \
+}   \
+)   \
+
 #pragma mark - 普通对象懒加载宏
 
 ///协议属性的synthesize声明宏

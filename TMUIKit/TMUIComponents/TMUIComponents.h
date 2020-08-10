@@ -45,5 +45,9 @@
 #import "TMEmptyView.h"
 #endif
 
+#if __has_include("TMSearchKit.h")
+#import "TMSearchKit.h"
+#endif
+
 
 #endif /* TMUIComponents_h */
