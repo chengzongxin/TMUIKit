@@ -107,6 +107,10 @@ Pod::Spec.new do |s|
         sss.subspec 'Extensions' do |ssss|
           ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Extensions/*.{h,m}'
         end
+        # TMSearchUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMSearchUIAssets.bundle
+        sss.resource_bundles = {
+            'TMSearchUIAssets' => ['TMUIKit/TMUIComponents/TMSearchController/Resource/*.png']
+        }
     end
 
     

@@ -9,6 +9,8 @@
 #import "TMSearchBar.h"
 #import <Masonry/Masonry.h>
 #import "TMUICommonDefines.h"
+#import "TMUIExtensions.h"
+#import "TMUIKitDefines.h"
 
 #pragma mark -
 #pragma mark - TMSearchBarCancelButton
@@ -27,18 +29,23 @@
 #pragma mark -
 #pragma mark - TMSearchBarInnerTextField
 @interface TMSearchBarInnerTextField : UITextField
-@property (nonatomic, assign)float leftViewWidthLimit;///< 左侧视图最大宽度限制，默认为0，当为0时取用默认最大宽度20作限制
+@property (nonatomic, assign)float leftViewWidth;///< 当左侧视图有值时有效。左侧视图展示时的宽度，需要外部赋值，若外部不赋值则取默认值20
 @end
 
 @implementation TMSearchBarInnerTextField
 - (CGRect)leftViewRectForBounds:(CGRect)bounds {
     CGRect rt = [super leftViewRectForBounds:bounds];
-    rt.size.height = MIN(rt.size.height, bounds.size.height);
+    if (!self.leftView) {
+        return rt;
+    }
     
-    if (self.leftViewWidthLimit == 0.0) {
-        rt.size.width = MIN(MIN(rt.size.width, 20), bounds.size.width);
+    rt.size.height = MIN(rt.size.height, bounds.size.height);
+    rt.size.width = MIN(rt.size.width, bounds.size.width);
+    
+    if (self.leftViewWidth == 0.0) {
+        rt.size.width = MIN(20, rt.size.width);
     }else {
-        rt.size.width = MIN(MIN(rt.size.width, self.leftViewWidthLimit), bounds.size.width);
+        rt.size.width = MIN(self.leftViewWidth, rt.size.width);
     }
     
     return rt;
@@ -84,7 +91,7 @@ TMUI_DEBUG_Code_Dealloc_Other(
     
     _textField = [[TMSearchBarInnerTextField alloc] init];
     _textField.clipsToBounds = YES;
-    _textField.backgroundColor = [UIColor colorWithRed:235.0f/255.0f green:235.0f/255.0f blue:236.0f/255.0f alpha:1];
+    _textField.backgroundColor = UIColorRGB(235.0f, 235.0f, 236.0f);
     [self addSubview:_textField];
     [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.mas_leading).mas_offset(self.contentEdgeInsets.left);
@@ -109,7 +116,7 @@ TMUI_DEBUG_Code_Dealloc_Other(
     
     self.bottomLineView = [[UIView alloc] init];
     self.bottomLineView.clipsToBounds = YES;
-    self.bottomLineView.backgroundColor = [UIColor colorWithRed:228.0f/255.0f green:228.0f/255.0f blue:229.0f/255.0f alpha:1];
+    self.bottomLineView.backgroundColor = UIColorRGB(228.0f, 228.0f, 229.0f);
     [self addSubview:self.bottomLineView];
     [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.mas_equalTo(0);
@@ -129,28 +136,32 @@ TMUI_DEBUG_Code_Dealloc_Other(
     _cancelButtonTitleColor = [UIColor blackColor];
 }
 
+- (UIImage *)searchBarIcon {
+    UIImage *icon = [UIImage imageNamed:@"TMSearchUIAssets.bundle/searchBarLeftIcon"];
+    return icon;
+}
+
 - (void)configTextField {
     _textField.returnKeyType = UIReturnKeySearch;
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         
-#warning TODO : search Icon
-    UIImage *searchIcon = nil;
-    float glassSize = 12;
-    //系统指定leftView默认的宽度为20
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 24)];
+    UIImage *searchIcon = [self searchBarIcon];
+    float searchIconSize = MIN(ceil(searchIcon.size.width), 20);//icon尺寸最多不能超过20x20,超出则统一按20x20显示效果处理
+    float searchIconGap = 4;
+    //手动指定leftView默认的宽度为searchIcon + gap * 2, 注意：需要给_textField.leftViewWidth赋值才算有效
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, searchIconSize + searchIconGap * 2, searchIconSize + searchIconGap * 2)];
     leftView.clipsToBounds = YES;
-    leftView.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.3];
-    UIImageView *glassIconView = [[UIImageView alloc] initWithFrame:CGRectMake(4, 4, glassSize, glassSize)];
-    [leftView addSubview:glassIconView];
-    [glassIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIImageView *searchIconImgView = [[UIImageView alloc] initWithFrame:CGRectMake(searchIconGap, searchIconGap, searchIconSize, searchIconSize)];
+    [leftView addSubview:searchIconImgView];
+    [searchIconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(leftView);
-        make.width.height.mas_equalTo(glassSize);
-    }];
-    glassIconView.backgroundColor = [UIColor redColor];
-    glassIconView.layer.cornerRadius = glassSize/2;
-    glassIconView.clipsToBounds = YES;
-    glassIconView.image = searchIcon;
+        make.width.height.mas_equalTo(searchIconSize);
+    }];    
+    searchIconImgView.clipsToBounds = YES;
+    searchIconImgView.image = searchIcon;
+    searchIconImgView.contentMode = UIViewContentModeScaleAspectFit;
         
+    _textField.leftViewWidth = searchIconSize + searchIconGap * 2;
     _textField.leftView = leftView;
     _textField.leftViewMode = UITextFieldViewModeAlways;
 }
@@ -281,6 +292,11 @@ TMUI_DEBUG_Code_Dealloc_Other(
 - (void)setBottomLineHide:(BOOL)bottomLineHide {
     _bottomLineHide = bottomLineHide;
     self.bottomLineView.hidden = bottomLineHide;
+}
+
+- (void)setBottomLineColor:(UIColor *)bottomLineColor {
+    _bottomLineColor = bottomLineColor;
+    self.bottomLineView.backgroundColor = bottomLineColor;
 }
 
 #pragma mark - firstResponder
