@@ -8,16 +8,15 @@
 
 #import "TMContentAlert.h"
 #import "UIView+TMUI.h"
+#import "TMUICommonDefines.h"
 
 @interface TMContentAlertContainerViewController : UIViewController
 @property (nonatomic, weak)UIViewController *pVc;
 @end
 @implementation TMContentAlertContainerViewController
-- (void)dealloc {
-#if DEBUG
-    NSLog(@"Dealloc_TMContentAlertContainerViewController");
-#endif
-}
+
+TMUI_DEBUG_Code_Dealloc;
+
 #pragma mark - 状态条样式跟弹出前的vc保持一致
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [self.pVc preferredStatusBarStyle];

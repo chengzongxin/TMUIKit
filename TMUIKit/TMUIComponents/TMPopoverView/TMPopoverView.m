@@ -56,11 +56,7 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
 
 #pragma mark - dealloc log
 
-#if DEBUG
-- (void)dealloc {
-    NSLog(@"dealloc %@", NSStringFromClass(self.class));
-}
-#endif
+TMUI_DEBUG_Code_Dealloc;
 
 #pragma mark - init
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -177,7 +173,7 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
             //再低优先级约束箭头视图的x轴中心尽量与内容视图的居中位置一致，当整体视图左右安全边距不满足箭头在内容视图的居中x轴位置显示时， \
             //优先保证安全边距的约束，故箭头与内容视图的x轴居中对齐的优先级设置为Low
             make.centerX.mas_equalTo(superView.mas_leading).mas_offset(CGRectGetMidX(viewFrameToSuperView));
-            make.centerX.mas_equalTo(self.mas_centerX).priorityLow();
+            make.centerX.mas_equalTo(self.mas_centerX).mas_offset(self.arrowCenterOffset).priorityLow();
         }else if (self.arrowDirection == TMPopoverArrowDirectionDown) {
             make.bottom.mas_equalTo(0);
             make.leading.mas_greaterThanOrEqualTo(self.mas_leading).mas_offset(arrowLeftGap);
@@ -186,7 +182,7 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
             //再低优先级约束箭头视图的x轴中心尽量与内容视图的居中位置一致，当整体视图左右安全边距不满足箭头在内容视图的居中x轴位置显示时， \
             //优先保证安全边距的约束，故箭头与内容视图的x轴居中对齐的优先级设置为Low
             make.centerX.mas_equalTo(superView.mas_leading).mas_offset(CGRectGetMidX(viewFrameToSuperView));
-            make.centerX.mas_equalTo(self.mas_centerX).priorityLow();
+            make.centerX.mas_equalTo(self.mas_centerX).mas_offset(self.arrowCenterOffset).priorityLow();
         }else if (self.arrowDirection == TMPopoverArrowDirectionLeft) {
             make.leading.mas_equalTo(0);
             make.top.mas_greaterThanOrEqualTo(self.mas_top).mas_offset(arrowTopGap);
@@ -195,7 +191,7 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
             //再低优先级约束箭头视图的y轴中心尽量与内容视图的居中位置一致，当整体视图上下安全边距不满足箭头在内容视图的居中y轴位置显示时， \
             //优先保证安全边距的约束，故箭头与内容视图的y轴居中对齐的优先级设置为Low
             make.centerY.mas_equalTo(superView.mas_top).mas_offset(CGRectGetMidY(viewFrameToSuperView));
-            make.centerY.mas_equalTo(self.mas_centerY).priorityLow();
+            make.centerY.mas_equalTo(self.mas_centerY).mas_offset(self.arrowCenterOffset).priorityLow();
         }else if (self.arrowDirection == TMPopoverArrowDirectionRight) {
             make.trailing.mas_equalTo(0);
             make.top.mas_greaterThanOrEqualTo(self.mas_top).mas_offset(arrowTopGap);
@@ -204,7 +200,7 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
             //再低优先级约束箭头视图的y轴中心尽量与内容视图的居中位置一致，当整体视图上下安全边距不满足箭头在内容视图的居中y轴位置显示时， \
             //优先保证安全边距的约束，故箭头与内容视图的y轴居中对齐的优先级设置为Low
             make.centerY.mas_equalTo(superView.mas_top).mas_offset(CGRectGetMidY(viewFrameToSuperView));
-            make.centerY.mas_equalTo(self.mas_centerY).priorityLow();
+            make.centerY.mas_equalTo(self.mas_centerY).mas_offset(self.arrowCenterOffset).priorityLow();
         }
     }];
     
@@ -322,7 +318,9 @@ TMUI_PropertyLazyLoad(UIView, popoverContentContainerView);
 
 - (void)setTmui_popoverView:(TMPopoverView *)tmui_popoverView {
     if (tmui_popoverView && ![tmui_popoverView isKindOfClass:[TMPopoverView class]]) {
-        NSLog(@"setTmui_popoverView: tmui_popoverView must be kind of TMPopoverView.class .");
+TMUI_DEBUG_Code(
+                NSLog(@"setTmui_popoverView: tmui_popoverView must be kind of TMPopoverView.class .");
+                )
         return;
     }
     

@@ -146,23 +146,23 @@ static NSTimeInterval s_duration = 1.0;
 
 + (void)toast:(NSString *)str hideAfterDelay:(NSTimeInterval)delay hideFinishBlock:(void(^_Nullable)(void))block {
     if (!str) {
-#if DEBUG
-        NSLog(@"toast 'str' must not be nil.");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"toast 'str' must not be nil.");
+                )
         return;
     }
     
     if (![str isKindOfClass:[NSString class]]) {
-#if DEBUG
-        NSLog(@"toast 'str' must be a string.");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"toast 'str' must be a string.");
+                )
         return;
     }
     
     if (str.length == 0) {
-#if DEBUG
-        NSLog(@"toast 'str' must not be empty.");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"toast 'str' must not be empty.");
+                )
         return;
     }
     
@@ -174,23 +174,23 @@ static NSTimeInterval s_duration = 1.0;
 
 + (void)toastAttributedString:(NSAttributedString *)attrStr hideAfterDelay:(NSTimeInterval)delay hideFinishBlock:(void(^_Nullable)(void))block {
     if (!attrStr) {
-#if DEBUG
-        NSLog(@"toast 'attrStr' must not be nil.");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"toast 'attrStr' must not be nil.");
+                )
         return;
     }
     
     if (![attrStr isKindOfClass:[NSAttributedString class]]) {
-#if DEBUG
-        NSLog(@"toast 'attrStr' must be a attributedString.");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"toast 'attrStr' must be a attributedString.");
+                )
         return;
     }
     
     if (attrStr.length == 0) {
-#if DEBUG
-        NSLog(@"toast 'attrStr' must not be empty.");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"toast 'attrStr' must not be empty.");
+                )
         return;
     }
     

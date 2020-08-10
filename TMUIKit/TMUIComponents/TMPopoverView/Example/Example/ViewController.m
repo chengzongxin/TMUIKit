@@ -63,6 +63,11 @@
     view.backgroundColor = [UIColor redColor];
     
     TMPopoverView *popView = [TMPopoverView popoverViewWithContentView:view contentSize:CGSizeMake(120, 200)];
+    NSInteger arc4Offset = (NSInteger)(arc4random()%120) - 60;
+    TMUI_DEBUG_Code(
+                    NSLog(@"arrow_offset_%@", @(arc4Offset));
+                    )
+    popView.arrowCenterOffset = arc4Offset;//设置箭头在居中的情况下，随机向左或右偏移一些位置显示
     [popView showFromBarButtonItem:item arrowDirection:TMPopoverArrowDirectionDown];
 }
 
@@ -109,7 +114,9 @@
 
 - (void)closeBtnClick:(UIButton *)btn  {
     [btn.tmui_popoverView dismissWithFinishBlock:^{
-        NSLog(@"popoverView dismissed!");
+        TMUI_DEBUG_Code(
+                        NSLog(@"popoverView dismissed!");
+                        )
     }];
 }
 

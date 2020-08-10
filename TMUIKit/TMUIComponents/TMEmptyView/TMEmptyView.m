@@ -26,11 +26,7 @@
 
 @implementation TMEmptyView
 
-#if DEBUG
-- (void)dealloc {
-    NSLog(@"dealloc %@", NSStringFromClass(self.class));
-}
-#endif
+TMUI_DEBUG_Code_Dealloc;
 
 /**margin缺省为UIEdgeInsetsZero，点击block缺省为nil*/
 + (instancetype)showEmptyInView:(UIView *)view
@@ -70,25 +66,25 @@
                      safeMargin:(UIEdgeInsets)margin
                 withContentItem:(NSObject<TMEmptyContentItemProtocol> *)contentItem {
     if (!view) {
-#if DEBUG
-        NSLog(@"empty must not be show in view: nil");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"empty must not be show in view: nil");
+                )
         return nil;
     }
     
     if (!contentItem) {
-#if DEBUG
-        NSLog(@"empty must not be show with contentItem: nil");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"empty must not be show with contentItem: nil");
+                )
         return nil;
     }
     
     if (!contentItem.emptyImg &&
         contentItem.title.length == 0 &&
         contentItem.desc.length == 0) {
-#if DEBUG
-        NSLog(@"empty contentItem is invalid. img: %@, title: %@, desc: %@", contentItem.emptyImg ? @"OK" : @"nil", contentItem.title.length > 0 ? contentItem.title : @"nil", contentItem.desc.length > 0 ? contentItem.desc : @"nil");
-#endif
+TMUI_DEBUG_Code(
+                NSLog(@"empty contentItem is invalid. img: %@, title: %@, desc: %@", contentItem.emptyImg ? @"OK" : @"nil", contentItem.title.length > 0 ? contentItem.title : @"nil", contentItem.desc.length > 0 ? contentItem.desc : @"nil");
+                )
         return nil;
     }
     
@@ -274,7 +270,9 @@ NS_INLINE TMEmptyContentItem *tmui_emptyContentItemByType(TMEmptyContentType typ
 
 - (void)setTmui_emptyView:(TMEmptyView *)tmui_emptyView {
     if (tmui_emptyView && ![tmui_emptyView isKindOfClass:[TMEmptyView class]]) {
-        NSLog(@"setTmui_emptyView: setTmui_emptyView must be kind of TMEmptyView.class .");
+TMUI_DEBUG_Code(
+                NSLog(@"setTmui_emptyView: setTmui_emptyView must be kind of TMEmptyView.class .");
+                )
         return;
     }
     

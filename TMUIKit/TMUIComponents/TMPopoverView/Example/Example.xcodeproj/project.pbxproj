@@ -170,17 +170,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMToastAssets.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C01DEFE48F407CA6BEE1E5F3 /* [CP] Check Pods Manifest.lock */ = {

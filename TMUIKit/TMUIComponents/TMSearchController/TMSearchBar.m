@@ -58,12 +58,10 @@
 @synthesize textField = _textField;
 @synthesize text = _text;
 
-- (void)dealloc {
-    TMUI_DEBUG_Code(
-                    NSLog(@"dealloc: %@", NSStringFromClass(self.classForCoder));
-                    )
+TMUI_DEBUG_Code_Dealloc_Other(
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+                              )
+
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

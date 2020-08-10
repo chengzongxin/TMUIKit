@@ -33,7 +33,13 @@ typedef NS_ENUM(NSUInteger, TMPopoverArrowDirection) {
 
 @property (nonatomic, strong)UIColor *popoverBackgroundColor;///< 弹出视图的背景色，默认为 353535 | show方法调用之前赋值有效
 
-@property (nonatomic, assign)UIEdgeInsets popoverLayoutMargins;///< popover视图显示的四周的案例边距，默认为{top: tmui_safeAreaTopInset(), left: 10, bottom: tmui_safeAreaBottomInset(), right: 10} | show方法调用之前赋值有效
+@property (nonatomic, assign)UIEdgeInsets popoverLayoutMargins;///< popover视图显示的四周的安全边距，默认为{top: tmui_safeAreaTopInset(), left: 10, bottom: tmui_safeAreaBottomInset(), right: 10} | show方法调用之前赋值有效
+
+/** 箭头在可以显示为默认居中效果的前提下，可额外指定相对中间位置的偏移值(当箭头显示方向为上或下时，此值影响横坐标方向，正值为中间位置再向右偏移，负值则中间位置再向左偏移；当箭头显示方向为左或右时，此值影响纵坐标方向，正值为中间位置再向下偏移，负值则中间位置再向上偏移)
+ @warning 注意合理给值，若给的值经过约束计算后的显示位置超出实际展示的区域，则可能造成UI显示异常
+ @note 默认为 0，即当内容显示后，箭头有条件居中显示则居中显示
+ */
+@property (nonatomic, assign)CGFloat arrowCenterOffset;
 
 /**
  显示的箭头尺寸，以正向的三角型尺寸赋值，即底边为宽，高度为三角型的高，默认为{6, 4}

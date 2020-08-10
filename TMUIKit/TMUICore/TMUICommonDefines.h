@@ -94,7 +94,16 @@ tmui_keywordify \
 #define TMUI_DEBUG_Code_Dealloc \
 TMUI_DEBUG_Code (   \
 - (void)dealloc {   \
-NSLog(@"dealloc: %@", NSStringFromClass(self.classForCoder));   \
+NSLog(@"dealloc: %@", NSStringFromClass(self.class));   \
+}   \
+)   \
+
+///用于调试时重写类的dealloc方法并打印相关log及添加其它额外代码的便捷宏
+#define TMUI_DEBUG_Code_Dealloc_Other(...) \
+TMUI_DEBUG_Code (   \
+- (void)dealloc {   \
+NSLog(@"dealloc: %@", NSStringFromClass(self.class));   \
+    __VA_ARGS__;    \
 }   \
 )   \
 
