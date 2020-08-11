@@ -314,7 +314,13 @@ TMUI_DEBUG_Code_Dealloc_Other(
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {return YES;}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(tmSearchBarTextShouldBeginEditing:)]) {
+        return [self.delegate tmSearchBarTextShouldBeginEditing:self];
+    }
+    //default return YES;
+    return YES;
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     if ([self.delegate respondsToSelector:@selector(tmSearchBarTextDidBeginEditing:)]) {

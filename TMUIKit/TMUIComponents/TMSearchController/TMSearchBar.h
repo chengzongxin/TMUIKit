@@ -62,10 +62,12 @@ typedef UITextField TMSearchBarTextField;
 
 @end
 
+#pragma mark - 跳转UITextField的一些delegeta事件的自定义协议
 @protocol TMSearchBarDelegate
 
 @optional
 
+- (BOOL)tmSearchBarTextShouldBeginEditing:(TMSearchBar *)searchBar;///< 若不实现则默认返回按YES处理
 - (void)tmSearchBarTextDidBeginEditing:(TMSearchBar *)searchBar;                     // called when text starts editing
 - (void)tmSearchBar:(TMSearchBar *)searchBar textDidChange:(NSString *)searchText;   // called when text changes (including clear)
 - (void)tmSearchBarSearchButtonClicked:(TMSearchBar *)searchBar;                     // called when keyboard search button pressed
