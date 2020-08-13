@@ -255,7 +255,7 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
 
 NS_INLINE TMEmptyContentItem *tmui_emptyContentItemByType(TMEmptyContentType type) {
     NSString *imgName = tmui_emptyImageNameByType(type);
-    TMEmptyContentItem *item = [TMEmptyContentItem itemWithEmptyImg:imgName ? [UIImage imageNamed:imgName] : nil emptyImgSize:imgName ? CGSizeMake(160, 160) : CGSizeZero];
+    TMEmptyContentItem *item = [TMEmptyContentItem itemWithEmptyImg:imgName ? [UIImage imageNamed:imgName] : nil emptyImgSize:imgName ? CGSizeMake(100, 100) : CGSizeZero];
     item.title = tmui_emptyTitleByType(type);
     item.desc  = tmui_emptyDescByType(type);
     return  item;
