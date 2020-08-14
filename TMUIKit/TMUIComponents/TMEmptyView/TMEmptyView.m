@@ -25,6 +25,7 @@
 
 @property (nonatomic, strong)UIButton *navBackBtn;
 @property (nonatomic, assign)BOOL canShowNavBackBtn;///< 是否应该显示额外的返回按钮，默认为NO，仅在有系统nav且系统导航条隐藏的情况下需要调整为YES，其它情况都为NO
+@property (nonatomic, assign)BOOL hasSetShowNavBackBtnFlag;///< 若外部手动调用了setShowNavBackBtn则标记为YES
 
 @end
 
@@ -130,16 +131,10 @@ TMUI_DEBUG_Code(
         }];
     }
     
-    UINavigationController *nav = [emptyV __navVc];
-    if (nav && nav.isNavigationBarHidden && nav.viewControllers.count > 1) {
-        emptyV.canShowNavBackBtn = YES;
-        emptyV.showNavBackBtn = YES;
-        //赋值指定的合适的返回icon
-        if (contentItem.navBackIcon) {
-            [emptyV.navBackBtn setImage:contentItem.navBackIcon forState:UIControlStateNormal];
-        }
+    //赋值指定的合适的返回icon
+    if (contentItem.navBackIcon) {
+        [emptyV.navBackBtn setImage:contentItem.navBackIcon forState:UIControlStateNormal];
     }
-    
     return emptyV;
 }
 
@@ -149,6 +144,7 @@ TMUI_DEBUG_Code(
 
 - (void)setShowNavBackBtn:(BOOL)showNavBackBtn {
     _showNavBackBtn = showNavBackBtn;
+    self.hasSetShowNavBackBtnFlag = YES;
     if (self.canShowNavBackBtn) {
         self.navBackBtn.hidden = !showNavBackBtn;
     }
@@ -226,20 +222,6 @@ TMUI_DEBUG_Code(
     }else {
         self.descLbl.text = contentItem.desc.length > 0 ? contentItem.desc : nil;
     }    
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    if (self.superview) {
-        BOOL showNavBtn = NO;
-        if(self.superview.frame.origin.x == 0.0 && self.superview.frame.origin.y == 0.0 &&
-           CGSizeEqualToSize(self.bounds.size, [UIScreen mainScreen].bounds.size)) {
-            if (self.canShowNavBackBtn && self.showNavBackBtn) {
-                showNavBtn = YES;
-            }
-        }
-        self.navBackBtn.hidden = !showNavBtn;
-    }
 }
 
 #pragma mark - private
@@ -343,6 +325,37 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
         self.contentItem.clickEmptyBlock();
     }
     self.bgButton.enabled = YES;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.superview) {
+        BOOL showNavBtn = NO;
+        if(self.superview.frame.origin.x == 0.0 && self.superview.frame.origin.y == 0.0 &&
+           CGSizeEqualToSize(self.bounds.size, [UIScreen mainScreen].bounds.size)) {
+            [self updateNavBackBtnCanShowIfNeed];
+            if (self.canShowNavBackBtn) {
+                if (!self.hasSetShowNavBackBtnFlag) {
+                    self.showNavBackBtn = YES;
+                    showNavBtn = YES;
+                    return;
+                }else {
+                    showNavBtn = self.showNavBackBtn;
+                }
+            }
+        }
+        
+        self.navBackBtn.hidden = !showNavBtn;
+    }
+}
+
+- (void)updateNavBackBtnCanShowIfNeed {
+    UINavigationController *nav = [self __navVc];
+    if (nav && nav.isNavigationBarHidden && nav.viewControllers.count > 1) {
+        self.canShowNavBackBtn = YES;
+    }else {
+        self.canShowNavBackBtn = NO;
+    }
 }
 
 #pragma mark - template content items
