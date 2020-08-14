@@ -12,6 +12,7 @@
 #import "UIColor+TMUI.h"
 #import "TMUIWeakObjectContainer.h"
 #import <objc/runtime.h>
+#import "UIView+TMUI.h"
 
 @interface TMEmptyView()
 @property (nonatomic, strong) UIButton *bgButton;
@@ -21,6 +22,9 @@
 @property (nonatomic, strong) UILabel *descLbl;
 
 @property (nonatomic, strong)NSObject<TMEmptyContentItemProtocol> *contentItem;
+
+@property (nonatomic, strong)UIButton *navBackBtn;
+@property (nonatomic, assign)BOOL canShowNavBackBtn;///< 是否应该显示额外的返回按钮，默认为NO，仅在有系统nav且系统导航条隐藏的情况下需要调整为YES，其它情况都为NO
 
 @end
 
@@ -102,7 +106,7 @@ TMUI_DEBUG_Code(
     TMEmptyView *emptyV = [[TMEmptyView alloc] initWithFrame:rt];
     [emptyV updateUiWithContentItem:contentItem];
     view.tmui_emptyView = emptyV;
-    emptyV.backgroundColor = [UIColor whiteColor];
+    emptyV.backgroundColor = contentItem.emptyBackgroundColor ?: [UIColor whiteColor];
     [view addSubview:emptyV];
     if ([view isKindOfClass:[UIScrollView class]]) {
 //父视图指定为scrollview类型，约束需要特殊处理
@@ -125,11 +129,72 @@ TMUI_DEBUG_Code(
             make.bottom.mas_equalTo(view.mas_bottom).mas_offset(-margin.bottom);
         }];
     }
+    
+    UINavigationController *nav = [emptyV __navVc];
+    if (nav && nav.isNavigationBarHidden && nav.viewControllers.count > 1) {
+        emptyV.canShowNavBackBtn = YES;
+        emptyV.showNavBackBtn = YES;
+        //赋值指定的合适的返回icon
+        if (contentItem.navBackIcon) {
+            [emptyV.navBackBtn setImage:contentItem.navBackIcon forState:UIControlStateNormal];
+        }
+    }
+    
     return emptyV;
 }
 
 - (void)remove {
     [self removeFromSuperview];
+}
+
+- (void)setShowNavBackBtn:(BOOL)showNavBackBtn {
+    _showNavBackBtn = showNavBackBtn;
+    if (self.canShowNavBackBtn) {
+        self.navBackBtn.hidden = !showNavBackBtn;
+    }
+}
+
+- (void)navBackBtnClick {
+    if (self.navBackBtnCustomClickBlock) {
+        self.navBackBtnCustomClickBlock();
+    }else {
+        UINavigationController *nav = [self __navVc];
+        if (nav) {
+            [[self __navVc] popViewControllerAnimated:YES];
+        }else {
+            NSAssert(NO, @"操作错误，当前emptyview无法向上追溯到navigationController实例");
+        }
+    }
+}
+
+- (UINavigationController *)__navVc {
+    UIViewController *vc = self.tmui_viewController;
+    UINavigationController *nav = nil;
+    
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        nav = (UINavigationController*)vc;
+    }else {
+        nav = vc.navigationController;
+    }
+    
+    if (!nav) {
+        UIViewController *parentVc = vc.parentViewController;
+        while (parentVc) {
+            if ([parentVc isKindOfClass:[UINavigationController class]]) {
+                nav = (UINavigationController *)parentVc;
+            }else if (parentVc.navigationController) {
+                nav = parentVc.navigationController;
+            }
+            
+            if (nav) {
+                break;
+            }
+            
+            parentVc = parentVc.parentViewController;
+        }
+    }
+    
+    return nav;
 }
 
 #pragma mark - update ui
@@ -142,6 +207,9 @@ TMUI_DEBUG_Code(
     [self.imgView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(contentItem.emptyImgSize.width);
         make.height.mas_equalTo(contentItem.emptyImgSize.height);
+    }];
+    [self.titleLbl mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.imgView.mas_bottom).mas_offset(contentItem.distanceBetweenImgBottomAndTitleTop > 0 ? contentItem.distanceBetweenImgBottomAndTitleTop : 24);
     }];
     [self setNeedsUpdateConstraints];
     [self updateConstraints];
@@ -156,7 +224,7 @@ TMUI_DEBUG_Code(
     if (contentItem.attributedDesc.length > 0) {
         self.descLbl.attributedText = contentItem.attributedDesc;
     }else {
-        self.descLbl.text = contentItem.desc;
+        self.descLbl.text = contentItem.desc.length > 0 ? contentItem.desc : nil;
     }    
 }
 
@@ -237,9 +305,21 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
     self.descLbl.textAlignment = NSTextAlignmentCenter;
     self.descLbl.font = UIFontRegular(14);
     self.descLbl.textColor = UIColorHexString(@"AAAFBE");
+    
+    //迭代追加带nav但navBar隐藏时全屏空态页下，左上角增加返回按钮
+    self.navBackBtn = [[UIButton alloc] init];
+    [self.navBackBtn addTarget:self action:@selector(navBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    self.navBackBtn.hidden = YES;//默认为隐藏
+    [self.navBackBtn setImage:tmui_emptyNavBackIconByType(TMEmptyContentTypeNoData) forState:UIControlStateNormal];//指定默认的返回icon为黑色
+    [self addSubview:self.navBackBtn];
+    [self.navBackBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(0);
+        make.width.height.mas_equalTo(44);
+        make.top.mas_equalTo(MAX(20, tmui_safeAreaTopInset()));
+    }];
     //
 #if DEBUG
-    MASAttachKeys(self.bgButton, self.imgView, self.titleLbl, self.descLbl, self.contentBoxView);
+    MASAttachKeys(self.bgButton, self.imgView, self.titleLbl, self.descLbl, self.contentBoxView, self.navBackBtn);
 #endif
 }
 
@@ -255,9 +335,22 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
 
 NS_INLINE TMEmptyContentItem *tmui_emptyContentItemByType(TMEmptyContentType type) {
     NSString *imgName = tmui_emptyImageNameByType(type);
-    TMEmptyContentItem *item = [TMEmptyContentItem itemWithEmptyImg:imgName ? [UIImage imageNamed:imgName] : nil emptyImgSize:imgName ? CGSizeMake(100, 100) : CGSizeZero];
+    CGSize imgSize = tmui_emptyImgSizeByType(type);
+    UIImage *img = imgName ? [UIImage imageNamed:imgName] : nil;
+    
+    TMEmptyContentItem *item = [TMEmptyContentItem itemWithEmptyImg:img emptyImgSize:img ? imgSize : CGSizeZero];
+    
     item.title = tmui_emptyTitleByType(type);
+    item.attributedTitle = tmui_emptyAttributedTitleByType(type);
+    
     item.desc  = tmui_emptyDescByType(type);
+    item.attributedDesc = tmui_emptyAttributedDescByType(type);
+    
+    item.distanceBetweenImgBottomAndTitleTop = tmui_emptyDistanceBetweenImgBottomAndTitleTopByType(type);
+    item.emptyBackgroundColor = tmui_emptyBackgroundColorByType(type);
+    
+    item.navBackIcon = tmui_emptyNavBackIconByType(type);
+    
     return  item;
 }
 

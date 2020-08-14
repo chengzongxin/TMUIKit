@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		55CC37712B50F6F6690FD6B4 /* libPods-Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D370FAFCE3D80C574FD24CE /* libPods-Example.a */; };
+		A63CCDC924E66F12001F7E82 /* FullPageVc.m in Sources */ = {isa = PBXBuildFile; fileRef = A63CCDC824E66F12001F7E82 /* FullPageVc.m */; };
+		A63CCDCC24E66F46001F7E82 /* TestItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A63CCDCB24E66F46001F7E82 /* TestItem.m */; };
 		A6C3103D2445C78A00BF81B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C3103C2445C78A00BF81B7 /* AppDelegate.m */; };
 		A6C310432445C78A00BF81B7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C310422445C78A00BF81B7 /* ViewController.m */; };
 		A6C310462445C78A00BF81B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C310442445C78A00BF81B7 /* Main.storyboard */; };
@@ -19,6 +21,10 @@
 /* Begin PBXFileReference section */
 		1D370FAFCE3D80C574FD24CE /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA35B19DCA6CCEC800E4248 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A63CCDC724E66F12001F7E82 /* FullPageVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullPageVc.h; sourceTree = "<group>"; };
+		A63CCDC824E66F12001F7E82 /* FullPageVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullPageVc.m; sourceTree = "<group>"; };
+		A63CCDCA24E66F46001F7E82 /* TestItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestItem.h; sourceTree = "<group>"; };
+		A63CCDCB24E66F46001F7E82 /* TestItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestItem.m; sourceTree = "<group>"; };
 		A6C310382445C78A00BF81B7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6C3103B2445C78A00BF81B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C3103C2445C78A00BF81B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -76,8 +82,12 @@
 			children = (
 				A6C3103B2445C78A00BF81B7 /* AppDelegate.h */,
 				A6C3103C2445C78A00BF81B7 /* AppDelegate.m */,
+				A63CCDCA24E66F46001F7E82 /* TestItem.h */,
+				A63CCDCB24E66F46001F7E82 /* TestItem.m */,
 				A6C310412445C78A00BF81B7 /* ViewController.h */,
 				A6C310422445C78A00BF81B7 /* ViewController.m */,
+				A63CCDC724E66F12001F7E82 /* FullPageVc.h */,
+				A63CCDC824E66F12001F7E82 /* FullPageVc.m */,
 				A6C310442445C78A00BF81B7 /* Main.storyboard */,
 				A6C310472445C78B00BF81B7 /* Assets.xcassets */,
 				A6C310492445C78B00BF81B7 /* LaunchScreen.storyboard */,
@@ -170,19 +180,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMEmptyUIAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMToastAssets.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMEmptyUIAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C01DEFE48F407CA6BEE1E5F3 /* [CP] Check Pods Manifest.lock */ = {
@@ -210,7 +217,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A63CCDC924E66F12001F7E82 /* FullPageVc.m in Sources */,
 				A6C310432445C78A00BF81B7 /* ViewController.m in Sources */,
+				A63CCDCC24E66F46001F7E82 /* TestItem.m in Sources */,
 				A6C3103D2445C78A00BF81B7 /* AppDelegate.m in Sources */,
 				A6C3104E2445C78B00BF81B7 /* main.m in Sources */,
 			);

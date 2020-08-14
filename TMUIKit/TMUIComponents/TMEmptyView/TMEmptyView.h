@@ -77,6 +77,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)remove;
 
+#pragma mark - 部分全屏页(有nav但导航条隐藏的页面)显示时，默认会在左上角增加一个返回按钮，并内部会自行响应点击作pop操作
+#pragma makr - 这里针对隐藏系统导航条的页面,显示的返回按钮时,可额外调手动控制回按钮的显示和隐藏以及使用自定义的返回响应
+
+/** 当调用showXXXX方法后，此属性会根据情况被赋值为合适的值，此后若外部手动赋值此值也可影响返回按钮的显示和隐藏
+ @warning 当有系统导航条显示时 或  无系统nav的视图时，此值无意义，返回按钮始终隐藏
+ */
+@property (nonatomic, assign)BOOL showNavBackBtn;
+
+/** 当返回按钮显示时，可指定自行控制点击返回按钮后的处理逻辑
+ @warning 若为nil则点击返回后，内部会执行默认的pop操作；若有值则进行回调，且原内部pop逻辑不会被触发，需要外部自行控制视图的返回
+ */
+@property (nonatomic, copy, nullable)void(^navBackBtnCustomClickBlock)(void);
+
 @end
 
 /**方便TMEmptyView的父视图获取当前空态页视图对象，若有则返回对应视图对象，若无则返回nil*/

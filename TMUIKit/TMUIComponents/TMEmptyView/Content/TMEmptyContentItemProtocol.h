@@ -19,6 +19,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly)CGSize emptyImgSize;///< 返回空白页相关提示图片视图显示的尺寸，按显示的pt为准
 
+/** 图片底部与标题顶部之间的间距，当为0时，会按默认值24处理
+ @note 部分特定UI效果，可外部指定其间距值
+ */
+@property (nonatomic, assign)NSInteger distanceBetweenImgBottomAndTitleTop;
+
+/** 空态页背景底色
+ @note 若为nil，则在展示时会取whiteColor作为底色,默认为nil
+ */
+@property (nonatomic, strong, nullable)UIColor *emptyBackgroundColor;
+
+/** 全屏空态页时，若有nav且系统导航条隐藏，则需要外部根据实际的背景色赋值合适的icon
+ @note 若有type进行内部接口初始化的对象，则此库内部会给定合适的icon
+ @note 通常情况下，外部不用修改此值
+ */
+@property (nonatomic, strong, nullable)UIImage *navBackIcon;
+
 @property (nonatomic, strong, readonly)UIImage *emptyImg;///<  返回空白页相关的提示图片对象
 
 #pragma mark - 空白页占位图下方的标题串配置 | 当富文本有值时优先取富文本展示

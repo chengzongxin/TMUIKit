@@ -7,22 +7,8 @@
 //
 
 #import "ViewController.h"
-#import <TMEmptyView.h>
-#import <TMEmptyContentItem.h>
-
-@interface TestItem : NSObject
-@property (nonatomic, assign)TMEmptyContentType type;
-@property (nonatomic, copy)NSString *title;
-@end
-
-@implementation TestItem
-+ (instancetype)itemWithType:(TMEmptyContentType)type {
-    TestItem *item = [[self alloc] init];
-    item.type = type;
-    item.title = tmui_emptyTitleByType(type);
-    return item;
-}
-@end
+#import "TestItem.h"
+#import "FullPageVc.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)IBOutlet UITableView *tableView;
@@ -36,10 +22,11 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"空态视图样式展示";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"To全屏" style:UIBarButtonItemStylePlain target:self action:@selector(toFullPageVc)];
     
     NSMutableArray *items0 = [NSMutableArray array];
     NSMutableArray *items1 = [NSMutableArray array];
-    for (NSInteger i = 0; i <= TMEmptyContentTypeNoGift; ++i) {
+    for (NSInteger i = 0; i <= TMEmptyContentTypeVideoDetailErr; ++i) {
         [items0 addObject:({
             TestItem *item = [TestItem itemWithType:i];
             item;
@@ -53,6 +40,12 @@
         items0,
         items1
     ];
+}
+
+- (void)toFullPageVc {
+    FullPageVc *vc = [[FullPageVc alloc] init];
+    vc.dataSource = self.dataSource;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

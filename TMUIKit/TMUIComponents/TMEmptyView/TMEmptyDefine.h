@@ -28,6 +28,10 @@ typedef  NS_ENUM(NSInteger, TMEmptyContentType) {
     /// 目前来看，工程内暂无 NoGift 的使用页
     
     TMEmptyContentTypeNoGift,               ///<   还没有获得礼品
+    
+    ///8.8 新增的特定页面的空态页类型，背景色默认为黑色
+    TMEmptyContentTypePhotoDetailErr,       ///< 单张图的效果图详情页接口调用失败后展示的类型
+    TMEmptyContentTypeVideoDetailErr,       ///< 单个视频的视频详情页---接口调用失败或视频加载、播放后展示的类型
 };
 
 #pragma mark - 其它一些标题、描述串的常量字义
@@ -53,5 +57,10 @@ static NSString *const kTMEmptyViewUserNoExistEmptyTitle        = @"该用户已
 static NSString *const kTMEmptyViewUserNoExistEmptyDesc         = @"去看看其他有趣的人吧";
 
 
+///效果图详情页，若当前仅有一张图数据展示(即不能左右滑动的前提下)，当图片详情接口调用失败后需要展示的特定空态页对应的title. 此时desc默认为nil
+static NSString *const kTMEmptyViewPhotoDetailEmptyTitle        = @"加载失败";
+
+///视频详情页，若当前仅有一条视频数据展示(即不能上下滑动的前提下)，当详情接口调用失败后或视频加载、播放失败后展示的特定空态页对应的title，此时desc默认为nil
+static NSString *const kTMEmptyViewVideoDetailEmptyTitle        = @"视频加载失败,请稍后再试";
 
 #endif /* TMEmptyDefine_h */

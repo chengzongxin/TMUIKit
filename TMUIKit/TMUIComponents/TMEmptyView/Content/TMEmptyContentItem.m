@@ -20,6 +20,9 @@ TMUI_PropertySyntheSize(desc);
 TMUI_PropertySyntheSize(attributedDesc);
 TMUI_PropertySyntheSize(clickEmptyBlock);
 TMUI_PropertySyntheSize(contentCenterOffsetY);
+TMUI_PropertySyntheSize(distanceBetweenImgBottomAndTitleTop);
+TMUI_PropertySyntheSize(emptyBackgroundColor);
+TMUI_PropertySyntheSize(navBackIcon);
 
 + (instancetype)itemWithEmptyType:(TMEmptyContentType)type emptyImgSize:(CGSize)imgSize {
     UIImage *img = nil;
@@ -38,6 +41,7 @@ TMUI_PropertySyntheSize(contentCenterOffsetY);
 - (instancetype)initWithEmptyImg:(UIImage *)img emptyImgSize:(CGSize)imgSize {
     self = [super init];
     if (self) {
+        self.distanceBetweenImgBottomAndTitleTop = 24;
         self.emptyImg = img;
         self.emptyImgSize = imgSize;
         self.contentCenterOffsetY = -70;

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "TMEmptyContentItemProtocol.h"
 #import "TMEmptyDefine.h"
+#import "TMUIKitDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,7 +42,10 @@ NS_INLINE NSString *tmui_emptyImageNameByType(TMEmptyContentType type) {
         @"noComment",
         @"noSearchResult",
         @"noOrder",
-        @"noGift"
+        @"noGift",
+        //8.8新增特定场景空态或错误页
+        @"photoDetailErr",
+        @"videoDetailErr"
     ];
     
     NSString *imgName = (type >= 0 && type < imgNames.count) ? imgNames[type] : nil;
@@ -50,6 +54,14 @@ NS_INLINE NSString *tmui_emptyImageNameByType(TMEmptyContentType type) {
     }
     
     return imgName;
+}
+
+NS_INLINE CGSize tmui_emptyImgSizeByType(TMEmptyContentType type) {
+    if (type == TMEmptyContentTypePhotoDetailErr ||
+        type == TMEmptyContentTypeVideoDetailErr) {
+        return CGSizeMake(50, 36);
+    }
+    return CGSizeMake(100, 100);
 }
 
 NS_INLINE NSString *tmui_emptyTitleByType(TMEmptyContentType type) {
@@ -64,10 +76,32 @@ NS_INLINE NSString *tmui_emptyTitleByType(TMEmptyContentType type) {
         @"还没有评论",
         @"暂无搜索结果",
         @"还没有相关订单",
-        @"暂时还没有获得礼品哦"
+        @"暂时还没有获得礼品哦",
+        //8.8新增特定场景空态或错误页
+        kTMEmptyViewPhotoDetailEmptyTitle,
+        kTMEmptyViewVideoDetailEmptyTitle,
     ];
     
     return (type >= 0 && type < titles.count) ? titles[type] : nil;
+}
+
+
+NS_INLINE NSAttributedString *tmui_emptyAttributedTitleByType(TMEmptyContentType type) {
+    if (type == TMEmptyContentTypePhotoDetailErr ||
+        type == TMEmptyContentTypeVideoDetailErr) {
+        NSString *title = tmui_emptyTitleByType(type);
+        if (title.length > 0) {
+            NSMutableParagraphStyle *pStyle = [NSParagraphStyle defaultParagraphStyle].mutableCopy;
+            pStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+            pStyle.alignment = NSTextAlignmentCenter;
+            NSAttributedString *attrStr = [[NSAttributedString alloc]
+                                                  initWithString:title attributes:@{NSParagraphStyleAttributeName: pStyle, NSForegroundColorAttributeName : [[UIColor whiteColor] colorWithAlphaComponent:0.6],
+                                                                                    NSFontAttributeName: UIFont(14)
+                                                  }];
+            return attrStr;
+        }
+    }
+    return nil;
 }
 
 NS_INLINE NSString *tmui_emptyDescByType(TMEmptyContentType type) {
@@ -82,10 +116,46 @@ NS_INLINE NSString *tmui_emptyDescByType(TMEmptyContentType type) {
         @"快去发表你的观点吧",
         @"没找到呢，换个关键词试试",
         @"去开启你的装修之旅吧",
-        @"去参加活动赢取大奖吧"
+        @"去参加活动赢取大奖吧",
+        //8.8新增特定场景空态或错误页--desc默认为空
+        @"",
+        @"",
     ];
     
     return (type >= 0 && type < descs.count) ? descs[type] : nil;
+}
+
+NS_INLINE NSAttributedString *tmui_emptyAttributedDescByType(TMEmptyContentType type) {
+    return nil;
+}
+
+NS_INLINE NSInteger tmui_emptyDistanceBetweenImgBottomAndTitleTopByType(TMEmptyContentType type) {
+    if (type == TMEmptyContentTypePhotoDetailErr ||
+        type == TMEmptyContentTypeVideoDetailErr) {
+        return 16;
+    }
+    return 24;
+}
+
+NS_INLINE UIColor * tmui_emptyBackgroundColorByType(TMEmptyContentType type) {
+    if (type == TMEmptyContentTypePhotoDetailErr ||
+        type == TMEmptyContentTypeVideoDetailErr) {
+        return [UIColor blackColor];
+    }
+    return nil;
+}
+
+NS_INLINE UIImage * tmui_emptyNavBackIconByType(TMEmptyContentType type) {
+    NSString *imgName = @"navBackBlack";//默认白底用黑色icon
+    if (type == TMEmptyContentTypePhotoDetailErr ||
+        type == TMEmptyContentTypeVideoDetailErr) {
+        //黑底用白色icon
+        imgName = @"navBackWhite";
+    }
+    
+    imgName = [NSString stringWithFormat:@"TMEmptyUIAssets.bundle/%@", imgName];
+    
+    return [UIImage imageNamed:imgName];
 }
 
 NS_ASSUME_NONNULL_END
