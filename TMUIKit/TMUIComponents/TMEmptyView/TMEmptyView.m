@@ -228,6 +228,20 @@ TMUI_DEBUG_Code(
     }    
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.superview) {
+        BOOL showNavBtn = NO;
+        if(self.superview.frame.origin.x == 0.0 && self.superview.frame.origin.y == 0.0 &&
+           CGSizeEqualToSize(self.bounds.size, [UIScreen mainScreen].bounds.size)) {
+            if (self.canShowNavBackBtn && self.showNavBackBtn) {
+                showNavBtn = YES;
+            }
+        }
+        self.navBackBtn.hidden = !showNavBtn;
+    }
+}
+
 #pragma mark - private
 
 - (instancetype)initWithFrame:(CGRect)frame {
