@@ -34,7 +34,7 @@ NS_INLINE NSString *tmui_emptyImageNameByType(TMEmptyContentType type) {
     NSArray *imgNames = @[
         @"noData",
         @"netErr",
-        @"netErr",
+        @"noData",
         @"noCollection",
         @"noLike",
         @"noPublishUgc",
