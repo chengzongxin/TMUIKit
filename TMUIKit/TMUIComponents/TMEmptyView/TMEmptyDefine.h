@@ -38,7 +38,7 @@ typedef  NS_ENUM(NSInteger, TMEmptyContentType) {
 
 ///TMEmptyContentTypeServerErr 类型时，默认为以下文案
 ///当一些页面为接口调用成功但属于业务范围的错误时，即比如：参数错误等业务错误时 图片可以延用NoData对应的图，而标题及副标题可以用以下定义的建议值，若服务端有返回相关错误信息串，则保留以下title中的显示，将显示的desc替换为服务端接口返回的错误信息串
-static NSString *const kTMEmptyViewServerErrTitle = @"服务器走神了~";
+static NSString *const kTMEmptyViewServerErrTitle = @"服务器开小差了";
 static NSString *const kTMEmptyViewServerErrDesc  = @"稍后再重试";
 
 /// 看别人的个人主页的动态列表页的空态页
