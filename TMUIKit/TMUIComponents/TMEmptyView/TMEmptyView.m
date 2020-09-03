@@ -58,7 +58,7 @@ TMUI_DEBUG_Code_Dealloc;
                     contentType:(TMEmptyContentType)contentType
              configContentBlock:(void(^_Nullable)(NSObject<TMEmptyContentItemProtocol> *content))configContentBlock
                      clickBlock:(void(^_Nullable)(void))block {
-    TMEmptyContentItem *item = tmui_emptyContentItemByType(contentType);
+    TMEmptyContentItem *item = [TMEmptyContentItem itemWithEmptyType:contentType];
     item.clickEmptyBlock = block;
     if (configContentBlock) {
         configContentBlock(item);
@@ -356,29 +356,6 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
     }else {
         self.canShowNavBackBtn = NO;
     }
-}
-
-#pragma mark - template content items
-
-NS_INLINE TMEmptyContentItem *tmui_emptyContentItemByType(TMEmptyContentType type) {
-    NSString *imgName = tmui_emptyImageNameByType(type);
-    CGSize imgSize = tmui_emptyImgSizeByType(type);
-    UIImage *img = imgName ? [UIImage imageNamed:imgName] : nil;
-    
-    TMEmptyContentItem *item = [TMEmptyContentItem itemWithEmptyImg:img emptyImgSize:img ? imgSize : CGSizeZero];
-    
-    item.title = tmui_emptyTitleByType(type);
-    item.attributedTitle = tmui_emptyAttributedTitleByType(type);
-    
-    item.desc  = tmui_emptyDescByType(type);
-    item.attributedDesc = tmui_emptyAttributedDescByType(type);
-    
-    item.distanceBetweenImgBottomAndTitleTop = tmui_emptyDistanceBetweenImgBottomAndTitleTopByType(type);
-    item.emptyBackgroundColor = tmui_emptyBackgroundColorByType(type);
-    
-    item.navBackIcon = tmui_emptyNavBackIconByType(type);
-    
-    return  item;
 }
 
 @end
