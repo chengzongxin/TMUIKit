@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "TMUIKit"
-  s.version      = "0.0.1"
+  s.version      = "0.0.5"
   s.summary      = "致力于提高项目UI开发效率的组件库"
   s.description  = <<-DESC
                    TMUIKit iOS 是一个致力于提高项目 UI 开发效率的组件库，为工程提供一些通用的UI基础库及功能组件库以及一些通用的工具库。
