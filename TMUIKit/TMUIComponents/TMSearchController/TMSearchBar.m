@@ -196,6 +196,8 @@ TMUI_DEBUG_Code_Dealloc_Other(
         CGSize cancelBtnSize = [self.cancelBtn intrinsicContentSize];
         [self.textField mas_updateConstraints:^(MASConstraintMaker *make) {
             make.trailing.mas_equalTo(self.mas_trailing).mas_offset(-self.contentEdgeInsets.right - 12 - cancelBtnSize.width);
+            make.top.mas_equalTo(self.mas_top).mas_offset(self.contentEdgeInsets.top);
+            make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-self.contentEdgeInsets.bottom);
         }];
         [self.cancelBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(self.mas_trailing).mas_offset(-self.contentEdgeInsets.right - cancelBtnSize.width);
@@ -203,6 +205,8 @@ TMUI_DEBUG_Code_Dealloc_Other(
     }else {
         [self.textField mas_updateConstraints:^(MASConstraintMaker *make) {
             make.trailing.mas_equalTo(self.mas_trailing).mas_offset(-self.contentEdgeInsets.right);
+            make.top.mas_equalTo(self.mas_top).mas_offset(self.contentEdgeInsets.top);
+            make.bottom.mas_equalTo(self.mas_bottom).mas_offset(-self.contentEdgeInsets.bottom);
         }];
         [self.cancelBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.leading.mas_equalTo(self.mas_trailing);
