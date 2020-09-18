@@ -306,7 +306,7 @@ TMUI_PropertyLazyLoad(UILabel, descLbl);
     self.navBackBtn = [[UIButton alloc] init];
     [self.navBackBtn addTarget:self action:@selector(navBackBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.navBackBtn.hidden = YES;//默认为隐藏
-    [self.navBackBtn setImage:tmui_emptyNavBackIconByType(TMEmptyContentTypeNoData) forState:UIControlStateNormal];//指定默认的返回icon为黑色
+    [self.navBackBtn setImage:[TMEmptyContentItem emptyNavBackIconByType:TMEmptyContentTypeNoData] forState:UIControlStateNormal];//指定默认的返回icon为黑色
     [self addSubview:self.navBackBtn];
     [self.navBackBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(0);

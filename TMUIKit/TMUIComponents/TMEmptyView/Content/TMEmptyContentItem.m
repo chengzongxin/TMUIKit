@@ -26,33 +26,29 @@ TMUI_PropertySyntheSize(navBackIcon);
 
 
 + (instancetype)itemWithEmptyType:(TMEmptyContentType)type {
-    NSString *imgName = tmui_emptyImageNameByType(type);
+    
     CGSize imgSize = tmui_emptyImgSizeByType(type);
-    UIImage *img = imgName ? [UIImage imageNamed:imgName] : nil;
+    UIImage *img = [self emptyImageByType:type];
     
     TMEmptyContentItem *item = [self itemWithEmptyImg:img emptyImgSize:img ? imgSize : CGSizeZero];
     
-    item.title = tmui_emptyTitleByType(type);
+    item.title = [self emptyTitleByType:type];
     item.attributedTitle = tmui_emptyAttributedTitleByType(type);
     
-    item.desc  = tmui_emptyDescByType(type);
+    item.desc  = [self emptyDescByType:type];
     item.attributedDesc = tmui_emptyAttributedDescByType(type);
     
     item.distanceBetweenImgBottomAndTitleTop = tmui_emptyDistanceBetweenImgBottomAndTitleTopByType(type);
     item.emptyBackgroundColor = tmui_emptyBackgroundColorByType(type);
     
-    item.navBackIcon = tmui_emptyNavBackIconByType(type);
+    item.navBackIcon = [self emptyNavBackIconByType:type];
     item.contentCenterOffsetY = tmui_emptyContentCenterOffsetYByType(type);
     
     return item;
 }
 
 + (instancetype)itemWithEmptyType:(TMEmptyContentType)type emptyImgSize:(CGSize)imgSize {
-    UIImage *img = nil;
-    NSString *imgName = tmui_emptyImageNameByType(type);
-    if (imgName) {
-        img = [UIImage imageNamed:imgName];
-    }
+    UIImage *img = [self emptyImageByType:type];
     return [self itemWithEmptyImg:img emptyImgSize:imgSize];
 }
 
@@ -78,11 +74,7 @@ TMUI_PropertySyntheSize(navBackIcon);
 }
 
 - (void)updateImageFromType:(TMEmptyContentType)type {
-    UIImage *img = nil;
-    NSString *imgName = tmui_emptyImageNameByType(type);
-    if (imgName) {
-        img = [UIImage imageNamed:imgName];
-    }
+    UIImage *img = [self.class emptyImageByType:type];
     self.emptyImg = img;
 }
 
@@ -90,7 +82,50 @@ TMUI_PropertySyntheSize(navBackIcon);
     self.emptyImgSize = imgSize;
 }
 
+- (void)updateEmptyInfoFromType:(TMEmptyContentType)type {
+        
+    CGSize imgSize = tmui_emptyImgSizeByType(type);
+    UIImage *img = [self.class emptyImageByType:type];
+    self.emptyImg = img;
+    self.emptyImgSize = img ? imgSize : CGSizeZero;
+    
+    self.title = [self.class emptyTitleByType:type];
+    self.attributedTitle = tmui_emptyAttributedTitleByType(type);
+    
+    self.desc  = [self.class emptyDescByType:type];
+    self.attributedDesc = tmui_emptyAttributedDescByType(type);
+    
+    self.distanceBetweenImgBottomAndTitleTop = tmui_emptyDistanceBetweenImgBottomAndTitleTopByType(type);
+    self.emptyBackgroundColor = tmui_emptyBackgroundColorByType(type);
+    
+    self.navBackIcon = [self.class emptyNavBackIconByType:type];
+    self.contentCenterOffsetY = tmui_emptyContentCenterOffsetYByType(type);
+}
+
+#pragma mark - helper methods
+
++ (UIImage *)emptyImageByType:(TMEmptyContentType)type {
+    NSString *imgName = tmui_emptyImageNameByType(type);
+    UIImage *img = imgName ? [UIImage imageNamed:imgName] : nil;
+    return img;
+}
+
++ (NSString *)emptyTitleByType:(TMEmptyContentType)type {
+    return tmui_emptyTitleByType(type);
+}
+
++ (NSString *)emptyDescByType:(TMEmptyContentType)type {
+    return tmui_emptyDescByType(type);
+}
+
++ (UIImage *)emptyNavBackIconByType:(TMEmptyContentType)type {
+    return tmui_emptyNavBackIconByType(type);
+}
+
 #pragma mark - INLINE HELP METHODS
+
+/// !!!: 普通场景模版样式的空态页显示对应的占位图、标题串、副描述串等数据的取值方法|  注意：以下type对应获取的图片名、标题串、副描述串均为常规类型页面下的显示数据，一些特定场景数据可能只会用到指定的某类型的占位图，其它标题、描述串可能是额外指定其它的值
+/// !!!: 8.9 版本更新，优化相关代码将外部不用关注的其它inline方法放置到.m文件中，不对外暴露
 
 NS_INLINE CGSize tmui_emptyImgSizeByType(TMEmptyContentType type) {
     if (type == TMEmptyContentTypePhotoDetailErr ||
@@ -98,6 +133,46 @@ NS_INLINE CGSize tmui_emptyImgSizeByType(TMEmptyContentType type) {
         return CGSizeMake(50, 36);
     }
     return CGSizeMake(100, 100);
+}
+
+/// @warning 因相关资源图片是打包到此私有库中 且配置的资源代码读取路径为 TMEmptyUIAssets.bundle， 故相关图片名为拼接串，拼接格式为： "TMEmptyUIAssets.bundle/imgName"
+NS_INLINE NSString *tmui_emptyImageNameByType(TMEmptyContentType type) {
+    NSArray *imgNames = @[
+        @"noData",
+        @"netErr",
+        @"noData",
+        @"noCollection",
+        @"noLike",
+        @"noPublishUgc",
+        @"dataNoExist",
+        @"noComment",
+        @"noSearchResult",
+        @"noOrder",
+        @"noGift",
+        //8.8新增特定场景空态或错误页
+        @"photoDetailErr",
+        @"videoDetailErr"
+    ];
+    
+    NSString *imgName = (type >= 0 && type < imgNames.count) ? imgNames[type] : nil;
+    if (imgName.length > 0) {
+        imgName = [NSString stringWithFormat:@"TMEmptyUIAssets.bundle/%@", imgName];
+    }
+    
+    return imgName;
+}
+
+NS_INLINE UIImage * tmui_emptyNavBackIconByType(TMEmptyContentType type) {
+    NSString *imgName = @"navBackBlack";//默认白底用黑色icon
+    if (type == TMEmptyContentTypePhotoDetailErr ||
+        type == TMEmptyContentTypeVideoDetailErr) {
+        //黑底用白色icon
+        imgName = @"navBackWhite";
+    }
+    
+    imgName = [NSString stringWithFormat:@"TMEmptyUIAssets.bundle/%@", imgName];
+    
+    return [UIImage imageNamed:imgName];
 }
 
 NS_INLINE NSString *tmui_emptyTitleByType(TMEmptyContentType type) {

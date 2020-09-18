@@ -56,6 +56,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateImageFromType:(TMEmptyContentType)type;
 - (void)updateImageSize:(CGSize)imgSize;
 
+#pragma mark - 若初始化时以默认NoData而在自定义回调里又需要调整为其它类型则可以用以下方法直接更新到对应的图片、文案
+
+/**以新类型对应的图片及文案更新当前已有的数据赋值*/
+- (void)updateEmptyInfoFromType:(TMEmptyContentType)type;
+
 @end
 
 NS_ASSUME_NONNULL_END

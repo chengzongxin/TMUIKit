@@ -12,7 +12,7 @@
 + (instancetype)itemWithType:(TMEmptyContentType)type {
     TestItem *item = [[self alloc] init];
     item.type = type;
-    item.title = tmui_emptyTitleByType(type);
+    item.title = [TMEmptyContentItem emptyTitleByType:type];
     return item;
 }
 @end
