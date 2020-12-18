@@ -46,6 +46,10 @@ TMUI_DEBUG_Code_Dealloc;
         pVC = pVC.presentedViewController;
     }
     
+    if([pVC isKindOfClass:[UIAlertController class]]){
+        return;
+    }
+    
     TMContentAlertContainerViewController *toShowVc = [[TMContentAlertContainerViewController alloc] init];
     toShowVc.pVc = fromVc;
     toShowVc.view.frame = [UIScreen mainScreen].bounds;
