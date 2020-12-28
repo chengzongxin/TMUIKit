@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name         = "TMUIKit"
-  s.version      = "0.0.6"
-  s.summary      = "致力于提高项目UI开发效率的组件库"
+  s.version      = "0.0.7"
+  s.summary      = "致力于提高项目UI开发效率的组件库| 0.0.7版本临时集成 OpenSSL-Universal，0.0.8之后暂会屏蔽掉，登录模块重构完成接入工程内时再重新打开支持。"
   s.description  = <<-DESC
                    TMUIKit iOS 是一个致力于提高项目 UI 开发效率的组件库，为工程提供一些通用的UI基础库及功能组件库以及一些通用的工具库。
                    旨在帮助快速高效的构建工程的基础设计元素，以及统一维护基础元素的版本兼容性处理，助于提高开发效率和项目质量。
@@ -112,7 +112,16 @@ Pod::Spec.new do |s|
             'TMSearchUIAssets' => ['TMUIKit/TMUIComponents/TMSearchController/Resource/*.png']
         }
     end
-
+    
+    #tools
+    s.subspec 'TMTools' do |ss|
+      ss.subspec 'TMRsaTool' do |sss|
+        sss.frameworks = 'Foundation'
+        sss.dependency 'OpenSSL-Universal', '~> 1.0.2.20' #openssl库的集成，涉及rsa加密功能, pod install 此库20多MB，下载稍慢，耐心等待一会即可
+        sss.source_files = 'TMUIKit/TMTools/TMRsaTool/*.{h,m}'
+      end
+    end
+    
     
   end
 
