@@ -32,7 +32,7 @@
         <scene sceneID="Twt-sj-wUb">
             <objects>
                 <navigationController id="htX-QX-CEn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Lib" id="HIa-Xp-3Xt"/>
+                    <tabBarItem key="tabBarItem" title="Lib" image="icon_tabbar_lab" selectedImage="icon_tabbar_lab_selected" id="HIa-Xp-3Xt"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="seK-WK-xbD">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -65,7 +65,7 @@
         <scene sceneID="GVV-7C-nbu">
             <objects>
                 <navigationController id="VVl-pp-ZXH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="UIKit" id="cMh-GP-lRS"/>
+                    <tabBarItem key="tabBarItem" title="UIKit" image="icon_tabbar_uikit" selectedImage="icon_tabbar_uikit_selected" id="cMh-GP-lRS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lta-Fb-GOH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -98,7 +98,7 @@
         <scene sceneID="DH4-1E-6wF">
             <objects>
                 <navigationController id="Fji-V4-SGi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Components" id="HSs-Fv-4tw"/>
+                    <tabBarItem key="tabBarItem" title="Components" image="icon_tabbar_component" selectedImage="icon_tabbar_component_selected" id="HSs-Fv-4tw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pyd-xh-Jao">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -129,6 +129,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_tabbar_component" width="24" height="24"/>
+        <image name="icon_tabbar_component_selected" width="24" height="24"/>
+        <image name="icon_tabbar_lab" width="24" height="24"/>
+        <image name="icon_tabbar_lab_selected" width="24" height="24"/>
+        <image name="icon_tabbar_uikit" width="24" height="24"/>
+        <image name="icon_tabbar_uikit_selected" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
