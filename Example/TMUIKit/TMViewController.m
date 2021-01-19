@@ -7,7 +7,7 @@
 //
 
 #import "TMViewController.h"
-
+#import <TMUIKit.h>
 @interface TMViewController ()
 
 @end
@@ -18,12 +18,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    TMButton *button = [[TMButton alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+    button.backgroundColor = UIColor.orangeColor;
+    [self.view addSubview:button];
+    
+    [button log];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
 }
-
 @end

@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  'TMUIKit' 是个UI库，包含UI，组件，宏，库等。
                        DESC
 
   s.homepage         = 'https://github.com/chengzongxin/TMUIKit'
@@ -36,7 +36,7 @@ TODO: Add long description of the pod here.
   #   'TMUIKit' => ['TMUIKit/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+   s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end

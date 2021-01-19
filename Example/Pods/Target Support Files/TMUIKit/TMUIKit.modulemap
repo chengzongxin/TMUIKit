@@ -1,0 +1,6 @@
+framework module TMUIKit {
+  umbrella header "TMUIKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
