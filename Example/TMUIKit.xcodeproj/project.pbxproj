@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		16455E0A25B6EDEC00BBBEC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16455E0825B6EDEC00BBBEC2 /* Main.storyboard */; };
+		16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */; };
+		16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */; };
+		16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */; };
 		52AA95FF97D709B34111E0F1 /* Pods_TMUIKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4E72FB6DA06837170F286D /* Pods_TMUIKit_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -15,7 +18,6 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* TMAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* TMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* TMViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -38,6 +40,12 @@
 
 /* Begin PBXFileReference section */
 		16455E0925B6EDEC00BBBEC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		16455E3C25B6F3E400BBBEC2 /* TMUIKitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIKitViewController.h; sourceTree = "<group>"; };
+		16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIKitViewController.m; sourceTree = "<group>"; };
+		16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMComponentsViewController.h; sourceTree = "<group>"; };
+		16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMComponentsViewController.m; sourceTree = "<group>"; };
+		16455E4625B6F3FB00BBBEC2 /* TMLibViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMLibViewController.h; sourceTree = "<group>"; };
+		16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMLibViewController.m; sourceTree = "<group>"; };
 		1976D91023AE2364E10F98EF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		218D29A02E3A1772CA45141D /* Pods_TMUIKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMUIKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* TMUIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMUIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,8 +58,6 @@
 		6003F59B195388D20070C39A /* TMUIKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TMUIKit-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* TMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* TMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* TMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* TMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* TMUIKit_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMUIKit_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -95,6 +101,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16455E3925B6F3C600BBBEC2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
+				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		16455E3A25B6F3C600BBBEC2 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				16455E4625B6F3FB00BBBEC2 /* TMLibViewController.h */,
+				16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		16455E3B25B6F3C600BBBEC2 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				16455E3C25B6F3E400BBBEC2 /* TMUIKitViewController.h */,
+				16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		2BBD86156EF43A871B91179E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,13 +176,9 @@
 		6003F593195388D20070C39A /* Example for TMUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				6003F59C195388D20070C39A /* TMAppDelegate.h */,
-				6003F59D195388D20070C39A /* TMAppDelegate.m */,
-				6003F5A5195388D20070C39A /* TMViewController.h */,
-				6003F5A6195388D20070C39A /* TMViewController.m */,
-				16455E0825B6EDEC00BBBEC2 /* Main.storyboard */,
-				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
-				6003F5A8195388D20070C39A /* Images.xcassets */,
+				16455E3B25B6F3C600BBBEC2 /* UIKit */,
+				16455E3925B6F3C600BBBEC2 /* Components */,
+				16455E3A25B6F3C600BBBEC2 /* Lib */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			name = "Example for TMUIKit";
@@ -159,6 +188,11 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6003F59C195388D20070C39A /* TMAppDelegate.h */,
+				6003F59D195388D20070C39A /* TMAppDelegate.m */,
+				16455E0825B6EDEC00BBBEC2 /* Main.storyboard */,
+				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F595195388D20070C39A /* TMUIKit-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
@@ -364,8 +398,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */,
+				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* TMViewController.m in Sources */,
+				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
