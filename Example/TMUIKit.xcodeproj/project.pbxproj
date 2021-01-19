@@ -11,6 +11,7 @@
 		16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */; };
 		16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */; };
 		16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */; };
+		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
 		52AA95FF97D709B34111E0F1 /* Pods_TMUIKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4E72FB6DA06837170F286D /* Pods_TMUIKit_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -46,6 +47,8 @@
 		16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMComponentsViewController.m; sourceTree = "<group>"; };
 		16455E4625B6F3FB00BBBEC2 /* TMLibViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMLibViewController.h; sourceTree = "<group>"; };
 		16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMLibViewController.m; sourceTree = "<group>"; };
+		16455E5A25B6FBC700BBBEC2 /* InjectionIIIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjectionIIIHelper.h; sourceTree = "<group>"; };
+		16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjectionIIIHelper.m; sourceTree = "<group>"; };
 		218D29A02E3A1772CA45141D /* Pods_TMUIKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMUIKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* TMUIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMUIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,6 +145,23 @@
 			path = "TMUIKit/Supporting Files";
 			sourceTree = SOURCE_ROOT;
 		};
+		16455E5825B6FBC000BBBEC2 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				16455E5925B6FBC700BBBEC2 /* InjectionIIIHelper */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		16455E5925B6FBC700BBBEC2 /* InjectionIIIHelper */ = {
+			isa = PBXGroup;
+			children = (
+				16455E5A25B6FBC700BBBEC2 /* InjectionIIIHelper.h */,
+				16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */,
+			);
+			path = InjectionIIIHelper;
+			sourceTree = "<group>";
+		};
 		2BBD86156EF43A871B91179E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +212,7 @@
 				16455E3B25B6F3C600BBBEC2 /* UIKit */,
 				16455E3925B6F3C600BBBEC2 /* Components */,
 				16455E3A25B6F3C600BBBEC2 /* Lib */,
+				16455E5825B6FBC000BBBEC2 /* Other */,
 				16455E4F25B6F51F00BBBEC2 /* Supporting Files */,
 			);
 			name = "Example for TMUIKit";
@@ -323,10 +344,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh",
+				"${PODS_ROOT}/LookinServer/LookinServer.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/TMUIKit/TMUIKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TMUIKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +415,7 @@
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

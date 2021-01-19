@@ -2,7 +2,7 @@
   "name": "TMUIKit",
   "version": "0.1.0",
   "summary": "A short description of TMUIKit.",
-  "description": "TODO: Add long description of the pod here.",
+  "description": "'TMUIKit' 是个UI库，包含UI，组件，宏，库等。",
   "homepage": "https://github.com/chengzongxin/TMUIKit",
   "license": {
     "type": "MIT",

@@ -8,6 +8,8 @@
 
 #import "TMUIKitViewController.h"
 #import <TMUIKit.h>
+#import <Masonry.h>
+
 @interface TMUIKitViewController ()
 
 @end
@@ -19,11 +21,21 @@
     // Do any additional setup after loading the view.
     
     
-    TMButton *button = [[TMButton alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+    TMButton *button = [[TMButton alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
     button.backgroundColor = UIColor.orangeColor;
     [self.view addSubview:button];
     
     [button log123];
+    
+    TMButton *button2 = [[TMButton alloc] init];
+    button2.backgroundColor = UIColor.orangeColor;
+    [self.view addSubview:button2];
+    
+    [button2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(@100);
+        make.top.equalTo(button.mas_bottom).inset(100);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
+    }];
 }
 
 /*
