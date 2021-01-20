@@ -8,5 +8,6 @@
 #ifndef TMUIDefines_h
 #define TMUIDefines_h
 
+#import "TMUIAssociatedObjectDefine.h"
 
 #endif /* TMUIDefines_h */

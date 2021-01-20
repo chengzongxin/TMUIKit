@@ -28,6 +28,9 @@
     
     [self.view addSubview:view];
     
+    NSLog(@"%d",view.tmui_visible);
+    NSLog(@"%@",view.tmui_viewController);
+//    NSLog(@"%d",self.view.tmui_isControllerRootView);
 }
 
 

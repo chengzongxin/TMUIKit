@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UIView (TMUI_layout)
+@interface UIView (TMUI_Layout)
 
 @property (assign, nonatomic) CGFloat   top;
 @property (assign, nonatomic) CGFloat   bottom;
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UIView (TMUI_appearance)
+@interface UIView (TMUI_Appearance)
 
 
 /**
@@ -146,7 +146,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UIView (TMUI_gesture)
+@interface UIView (TMUI_Gesture)
 
 /// 点击手势
 /// @param tapBlock 手势回调
@@ -197,6 +197,39 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param numberOfTouches 手指数
 /// @param block 手势回调
 - (void)tmui_addSwipeGestureWithDirection:(UISwipeGestureRecognizerDirection)direction numberOfTouchesRequired:(NSUInteger)numberOfTouches block:(void (^)(UIGestureRecognizerState state))block;
+
+@end
+
+@interface UIView (TMUI_ViewController)
+
+/**
+ 获取当前视图显示时对应的的viewController
+ @note 若当前视图vc承载进行展示则返回nil
+ @note 只读方法，不支持kvo
+ */
+@property (nonatomic, readonly, nullable)UIViewController *tmui_viewController;
+
+/**返回view展示时对应承载的viewController*/
++ (UIViewController *_Nullable)tmui_viewControllerOfView:(UIView *)view;
+
+/**
+ 判断当前的 view 是否属于可视（可视的定义为已存在于 view 层级树里，或者在所处的 UIViewController 的 [viewWillAppear, viewWillDisappear) 生命周期之间）
+ */
+@property(nonatomic, assign, readonly) BOOL tmui_visible;
+
+/**
+ 当前的 view 是否是某个 UIViewController.view
+ */
+//@property(nonatomic, assign) BOOL tmui_isControllerRootView;
+
+/**
+ 获取当前 view 所在的 UIViewController，会递归查找 superview，因此注意使用场景不要有过于频繁的调用
+ */
+//@property(nullable, nonatomic, weak, readonly) __kindof UIViewController *tmui_viewController;
+
+
+
+
 
 @end
 

@@ -7,6 +7,8 @@
 
 #import "UIView+TMUI.h"
 #import <objc/runtime.h>
+#import "TMUIWeakObjectContainer.h"
+#import "TMUIDefines.h"
 
 @implementation UIView (TMUI)
 
@@ -16,7 +18,7 @@
 
 @end
 
-@implementation UIView (TMUI_layout)
+@implementation UIView (TMUI_Layout)
 
 @dynamic top;
 @dynamic bottom;
@@ -177,7 +179,7 @@
 
 @end
 
-@implementation UIView (TMUI_appearance)
+@implementation UIView (TMUI_Appearance)
 
 
 // 半圆角
@@ -323,7 +325,7 @@ static const char *tmui_p_rotationGestureKey;
 static const char *tmui_p_panGestureKey;
 static const char *tmui_p_swipeGestureKey;
 
-@implementation UIView (TMUI_gesture)
+@implementation UIView (TMUI_Gesture)
 
 - (void)tmui_addSingerTapWithBlock:(void (^)(void))tapBlock {
     self.userInteractionEnabled = YES;
@@ -496,5 +498,68 @@ static const char *tmui_p_swipeGestureKey;
         action(gesture.state);
     }
 }
+
+@end
+
+
+
+@implementation UIView (QMUI_ViewController)
+
+- (UIViewController *)tmui_viewController {
+    return [[self class] tmui_viewControllerOfView:self];
+}
+
++ (UIViewController *)tmui_viewControllerOfView:(UIView *)view {
+    UIResponder *nextResponder = view;
+    do {
+        nextResponder = [nextResponder nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController*)nextResponder;
+        }
+    } while (nextResponder != nil);
+
+    return nil;
+}
+
+TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootView)
+
+- (BOOL)tmui_visible {
+    if (self.hidden || self.alpha <= 0.01) {
+        return NO;
+    }
+    if (self.window) {
+        return YES;
+    }
+    if ([self isKindOfClass:UIWindow.class]) {
+        if (@available(iOS 13.0, *)) {
+            return !!((UIWindow *)self).windowScene;
+        } else {
+            return YES;
+        }
+    }
+    
+    return NO;
+//    UIViewController *viewController = self.tmui_viewController;
+//    return viewController.qmui_visibleState >= QMUIViewControllerWillAppear && viewController.qmui_visibleState < QMUIViewControllerWillDisappear;
+}
+
+//static char kAssociatedObjectKey_viewController;
+//- (void)setTmui_viewController:(__kindof UIViewController * _Nullable)tmui_viewController {
+//    TMUIWeakObjectContainer *weakContainer = objc_getAssociatedObject(self, &kAssociatedObjectKey_viewController);
+//    if (!weakContainer) {
+//        weakContainer = [[TMUIWeakObjectContainer alloc] init];
+//    }
+//    weakContainer.object = tmui_viewController;
+//    objc_setAssociatedObject(self, &kAssociatedObjectKey_viewController, weakContainer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//
+//    self.tmui_isControllerRootView = !!tmui_viewController;
+//}
+//
+//- (__kindof UIViewController *)tmui_viewController {
+//    if (self.tmui_isControllerRootView) {
+//        return (__kindof UIViewController *)((TMUIWeakObjectContainer *)objc_getAssociatedObject(self, &kAssociatedObjectKey_viewController)).object;
+//    }
+//    return self.superview.tmui_viewController;
+//}
 
 @end
