@@ -7,6 +7,7 @@
 //
 
 #import "UIViewTMUIViewController.h"
+#import <Masonry.h>
 
 @interface UIViewTMUIViewController ()
 
@@ -31,6 +32,15 @@
     NSLog(@"%d",view.tmui_visible);
     NSLog(@"%@",view.tmui_viewController);
 //    NSLog(@"%d",self.view.tmui_isControllerRootView);
+    
+    
+//    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+//    view2.backgroundColor = UIColor.redColor;
+//    [self.view addSubview:view2];
+//    [view2 mas_makeConstraints:^(MASConstraintMaker *make) {
+////        make.left.right.top.bottom.equalTo(self.view).inset(100);
+//        make.edges.mas_equalTo(UIEdgeInsetsMake(100, 100, 100, 100));
+//    }];
 }
 
 
