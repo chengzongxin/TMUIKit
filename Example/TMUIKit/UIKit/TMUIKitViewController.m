@@ -10,7 +10,11 @@
 #import <TMUIKit.h>
 #import <Masonry.h>
 
-@interface TMUIKitViewController ()
+@interface TMUIKitViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) NSArray *datas;
 
 @end
 
@@ -18,34 +22,49 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
+    _datas = @[
+        @{@"title":@"TMButton",@"class":@"TMButtonViewController"}
+    ];
     
-    TMButton *button = [[TMButton alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
-    button.backgroundColor = UIColor.orangeColor;
-    [self.view addSubview:button];
+    [self.view addSubview:self.tableView];
     
-    [button log123];
-    
-    TMButton *button2 = [[TMButton alloc] init];
-    button2.backgroundColor = UIColor.orangeColor;
-    [self.view addSubview:button2];
-    
-    [button2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(@100);
-        make.top.equalTo(button.mas_bottom).inset(100);
-        make.size.mas_equalTo(CGSizeMake(100, 100));
-    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _datas.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"cell";
+    NSDictionary *dict = _datas[indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = dict[@"title"];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dict = _datas[indexPath.row];
+    Class class = NSClassFromString(dict[@"class"]);
+    UIViewController *vc = [[class alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
 
 @end

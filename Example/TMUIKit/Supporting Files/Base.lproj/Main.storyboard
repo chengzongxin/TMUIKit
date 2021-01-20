@@ -45,10 +45,10 @@
             </objects>
             <point key="canvasLocation" x="432" y="790"/>
         </scene>
-        <!--View Controller-->
+        <!--Lib View Controller-->
         <scene sceneID="cKn-YG-eHf">
             <objects>
-                <viewController id="ctd-p5-0Wl" sceneMemberID="viewController">
+                <viewController id="ctd-p5-0Wl" customClass="TMLibViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SZZ-Ac-L2C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="462" y="112"/>
         </scene>
-        <!--View Controller-->
+        <!--Components View Controller-->
         <scene sceneID="yBI-6k-qu4">
             <objects>
-                <viewController id="qYE-gZ-s4X" sceneMemberID="viewController">
+                <viewController id="qYE-gZ-s4X" customClass="TMComponentsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4RV-5L-zeA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

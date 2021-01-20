@@ -10,8 +10,13 @@
 #endif
 #endif
 
-#import "TMButton.h"
+#import "TMUIComponents.h"
+#import "TMUIDefines.h"
+#import "TMUIExtensions.h"
+#import "UIView+TMUI.h"
 #import "TMUIKit.h"
+#import "TMButton.h"
+#import "TMUIWidgets.h"
 
 FOUNDATION_EXPORT double TMUIKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char TMUIKitVersionString[];

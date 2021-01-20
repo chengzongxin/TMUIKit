@@ -12,6 +12,8 @@
 		16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */; };
 		16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */; };
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
+		16945FD525B7C4DD0056AE74 /* TMButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMButtonViewController.m */; };
+		1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */; };
 		52AA95FF97D709B34111E0F1 /* Pods_TMUIKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D4E72FB6DA06837170F286D /* Pods_TMUIKit_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -49,6 +51,10 @@
 		16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMLibViewController.m; sourceTree = "<group>"; };
 		16455E5A25B6FBC700BBBEC2 /* InjectionIIIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjectionIIIHelper.h; sourceTree = "<group>"; };
 		16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjectionIIIHelper.m; sourceTree = "<group>"; };
+		16945FD325B7C4DD0056AE74 /* TMButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMButtonViewController.h; sourceTree = "<group>"; };
+		16945FD425B7C4DD0056AE74 /* TMButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMButtonViewController.m; sourceTree = "<group>"; };
+		1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUIViewController.h; sourceTree = "<group>"; };
+		1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUIViewController.m; sourceTree = "<group>"; };
 		218D29A02E3A1772CA45141D /* Pods_TMUIKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMUIKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* TMUIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMUIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -115,6 +121,7 @@
 			children = (
 				16455E4625B6F3FB00BBBEC2 /* TMLibViewController.h */,
 				16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */,
+				1694602825B7DC770056AE74 /* UIViewTMUIViewController */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -124,6 +131,7 @@
 			children = (
 				16455E3C25B6F3E400BBBEC2 /* TMUIKitViewController.h */,
 				16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */,
+				16945FD225B7C4D10056AE74 /* TMButtonViewController */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -160,6 +168,24 @@
 				16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */,
 			);
 			path = InjectionIIIHelper;
+			sourceTree = "<group>";
+		};
+		16945FD225B7C4D10056AE74 /* TMButtonViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16945FD325B7C4DD0056AE74 /* TMButtonViewController.h */,
+				16945FD425B7C4DD0056AE74 /* TMButtonViewController.m */,
+			);
+			path = TMButtonViewController;
+			sourceTree = "<group>";
+		};
+		1694602825B7DC770056AE74 /* UIViewTMUIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */,
+				1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */,
+			);
+			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
 		};
 		2BBD86156EF43A871B91179E /* Pods */ = {
@@ -414,8 +440,10 @@
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
+				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
+				16945FD525B7C4DD0056AE74 /* TMButtonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
