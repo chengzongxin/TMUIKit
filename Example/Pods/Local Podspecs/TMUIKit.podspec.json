@@ -23,6 +23,14 @@
   "dependencies": {
     "Masonry": [
 
+    ],
+    "LookinServer": [
+
+    ]
+  },
+  "configuration_pod_whitelist": {
+    "LookinServer": [
+      "debug"
     ]
   }
 }
