@@ -2,10 +2,10 @@ PODS:
   - LookinServer (1.0.0)
   - Masonry (1.1.0)
   - TMUIKit (0.2.0):
-    - LookinServer
     - Masonry
 
 DEPENDENCIES:
+  - LookinServer
   - TMUIKit (from `../`)
 
 SPEC REPOS:
@@ -20,8 +20,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  TMUIKit: 58e21494f9f7ab4e1e5c59e16d5098768b7e389a
+  TMUIKit: 524aedbdbd0c54c0afaf7ff20b1bf5c4f7c665b4
 
-PODFILE CHECKSUM: 8812f27cdd9118502ba85b73ad67439823786d63
+PODFILE CHECKSUM: ea9ae044bed2dcb92f3ad7c56701df7a6dc1bfaf
 
 COCOAPODS: 1.10.0

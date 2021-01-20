@@ -19,71 +19,71 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		00F4B4E839498A13784D2B2C84EAC2F2 /* TMUICommonDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 940BD93968541F19F0B7C4064DE4971A /* TMUICommonDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00CFBD16A7E4D7D399610EE9D189A40E /* TMUICore.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC602B2B9AC4E9B87B7504D0EB1AD1E /* TMUICore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0150D90578471BBDA419CD313EB37252 /* UIColor+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 136EAE04ECEC213CD9FC122251B023E7 /* UIColor+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		028B99C8FDB836F128E3791DFCBAACB0 /* TMUIWeakObjectContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF16A860C87688F4112FDE94ECA2005 /* TMUIWeakObjectContainer.m */; };
 		05A040F35BF1C88F869404E1A940B493 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 450E919A3B89AC156023ED8BD689221B /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05EA1447EEA0EB669F8DEE73964A7C60 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 888BDF2E82C7ED85EE13682F16DD2C71 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		09470D0A5562336D502281032C0CEC26 /* UIView+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3830A0FDD7B1A781D3B0F57F5660474A /* UIView+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0967598607D521318F69D7D39D517B20 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2A590B6E160EB73238649768548BA0 /* ViewController+MASAdditions.m */; };
 		098630ECDB64ED7B89F5F687C82B4AC3 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2B67502631CBC60302EEE224933A6B /* NSArray+MASAdditions.m */; };
-		0ADA487EAF4C061D88509F2FEA508317 /* TMUIKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A28CBB16C75D3E0683079086F5E253A /* TMUIKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0AF1AD35706D90B1A91F291B899EF8C0 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9B22115B28A021DDE951FEEFF6AED6 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DA23838CCEE45123DB94E0BDE6637D7 /* TMUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 93762A61781D6788A7CC6A88AA50A715 /* TMUIHelper.m */; };
+		13939A95E4F5F5EAE94B86F56D781CFE /* TMUIKitDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C72267C6E45BAED43CB10F458912780 /* TMUIKitDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1972E85F0FCD0F3EAF28ED7CD036286E /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7ED150AFEB8A35236D241E4D47E1F /* Masonry-dummy.m */; };
-		1AC372B05F469BD5FA83F319AC2F456B /* UIColor+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F9CDE9B83962CA2BDAF73B63FECD4C /* UIColor+TMUI.m */; };
-		2498FF59BB449D1477EF2FCCA851622F /* TMUIKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AF167C77476DD2CA324A331579AE5415 /* TMUIKit-dummy.m */; };
-		25B5D109AB5C673450D3F8F1484DE6A7 /* UIColor+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 136EAE04ECEC213CD9FC122251B023E7 /* UIColor+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		25B6AEEDF41530F9E6C9FEA1994BE645 /* UIView+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EE274219D23A1CC0860BB494C5EA0127 /* UIView+TMUI.m */; };
+		1E0537964D8A9B27DE4860C872B95464 /* UIImage+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A370CDF4F4DFB5B45A5869A3AF56A /* UIImage+TMUI.m */; };
+		230C8C941C9AC6D6616BD9E5B7F08019 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE446476C51FAE0ACFF4FBB24E50A65 /* Foundation.framework */; };
 		280D36330BAC5715615FF4A8B42D60D6 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9ADFAD6146613FCB335FF838937EDC50 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		297A3627CF2F032CBFDC61D1A3786E63 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF0A2AFB7933612CCA604D80C596B73 /* MASViewAttribute.m */; };
-		29E946A3C4BB2A06BD1C8C624A0B0EE5 /* TMUIHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = B69CC32AD335BC4D7A77A93775FDA57B /* TMUIHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		346080C0D1CA23399ADD739D722D7CEF /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = FF6F0DEE9CF7F2AD10339363B3CF6A2A /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C5E65DAEB502BCB35E7FC349031CDFC /* Pods-TMUIKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 054B58D5F71F45FED9B3FB2F8D638F26 /* Pods-TMUIKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3DA5F1D8E51CDD102A871C2F37770C7B /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = D9C81AF301293B09C7D82A9F310EC3D3 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E58F9A00FBD2FDBEF60B8B323B4F557 /* TMUICore.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC602B2B9AC4E9B87B7504D0EB1AD1E /* TMUICore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F426652808CCB0D58E0045771DB0391 /* TMUIWeakObjectContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 205A2E7BEF71E73F04C9EFAD80D65DB0 /* TMUIWeakObjectContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		410F7F3E0A67EB0AA6B6D2EED42B5931 /* TMUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E5EEA8418A9BFA12DC342E480258D7 /* TMUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		44853EABAF33E16B2B599CCFC2ED14B9 /* TMInitMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B14D4A9B6653673A6CC0F32B4DA52A /* TMInitMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46FC8C2589130EAC7156BA0F500EB1D1 /* TMUIKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A28CBB16C75D3E0683079086F5E253A /* TMUIKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49BF3989537747D766BBB21AF4B69FCD /* TMUICommonDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 940BD93968541F19F0B7C4064DE4971A /* TMUICommonDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B0981F9AC628CF5100C50FF4A163A4A /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 27D8FA62A8537C1F7B93EC559B0861E4 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4D1B33252905C6EE63E05992FDD7BB0E /* UIImage+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A370CDF4F4DFB5B45A5869A3AF56A /* UIImage+TMUI.m */; };
-		4F6E7CA58EEDA1D044091F98AA98B01E /* TMUIWeakObjectContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 205A2E7BEF71E73F04C9EFAD80D65DB0 /* TMUIWeakObjectContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D876FEE91123100D7CD117584924D97 /* TMUIDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 450255D0B732F961A67C3C374D6DAE75 /* TMUIDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		512A1763451791C2A77F6A81DC2F4496 /* UIView+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = EE274219D23A1CC0860BB494C5EA0127 /* UIView+TMUI.m */; };
+		520E53CE0E1E7757A83770D8A917F371 /* TMUIComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = BE956D9AC5D94641D6F2512F16FAAF34 /* TMUIComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		576CF917883CC4385FB23C6735C8D27F /* TMCoreGraphicsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E847BF9C07CD5CAB7D5A220DE70A16F /* TMCoreGraphicsDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58AF805046CFD9986EFEAACCBA61F9BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE446476C51FAE0ACFF4FBB24E50A65 /* Foundation.framework */; };
 		5A2DB4752BFDFEDC247AC799BD8F60A6 /* Pods-TMUIKit_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A53BDD23765E84D92A482BCB0F43663D /* Pods-TMUIKit_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BBED7C654600E5FEA4FD5C341146D0A /* TMUIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 26351BE1A3FC4922220C1CBC2165BF9E /* TMUIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D5AB502D85BF8E27246A5964F6B3E9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3CF773651727D50CDFC96D527CE18A6 /* UIKit.framework */; };
-		66F740CD751F86B1F9B5551EC6E9D714 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B28864E3F11E1DDE7AEF55AFFD8B0FE /* Masonry.framework */; };
 		6A6AD3A5BBDBFD0B4AF936BD518EC0B1 /* Masonry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ACFCF2A12ACF15C58D8B9CAC73D3AAD /* Masonry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A99E5A2AC5664B057745B28E643B9B0 /* UIViewController+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D698B30F230E2CC5F66B5795CE68F350 /* UIViewController+TMUI.m */; };
+		73DB429B06F96169EA3324E98AA2AB68 /* TMButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F44177096ABBE693EB17DE03160A8B3 /* TMButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78B2727EE5D693F58D019DB098005101 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 151B9557DAB8D3D17A4E49DCCCC309A2 /* MASConstraintMaker.m */; };
 		7BFF65958F014760B6AC4742824892EB /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 881FE2511B55C2AC19143B9458724D70 /* MASCompositeConstraint.m */; };
 		8539B851E01A58467BE49CA3FA77223C /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CC64519363338C1030CFC236057A86 /* MASLayoutConstraint.m */; };
-		8761C621698D57B14A49BFBD07062A28 /* TMUIComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = BE956D9AC5D94641D6F2512F16FAAF34 /* TMUIComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		89C9D8F9C8F203CBEF32FFFCE6CC7A91 /* TMUIAssociatedObjectDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 04438EBA89E9775532CCB3A92D91242A /* TMUIAssociatedObjectDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		897A956AE6F44C1D74F36750D41743C8 /* TMUIWidgets.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E1F68E4D79749F3D78F6FFF82B856D /* TMUIWidgets.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8AF9FF3FE3B9136F3EE605C25996BA92 /* TMUIHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = B69CC32AD335BC4D7A77A93775FDA57B /* TMUIHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B92011C9373001132C8148BFC8F50B3 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD4AF8593EBC6FC3BA4A3FB6E95621C /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D4D1F6E4709EBB13974E95DC1059DDC /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = AB0FFFDFD900D36DCD2730324C5A93E6 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D65CE579E516BDD5FB36CAA21D693F6 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 15D98B24A3C879D116E72805D0E265F5 /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		941955A19C40899D275604E6E9C21A6D /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = E2DB8A316377A7AB678378286F644CCB /* MASConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9940EF69CB946D1BE398C73A998B8BA8 /* TMButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F44177096ABBE693EB17DE03160A8B3 /* TMButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		974170EE6DE22BB764E315692388EBE4 /* UIView+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 3830A0FDD7B1A781D3B0F57F5660474A /* UIView+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D546E1168C04B0B2EAE005D9275D18B /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 92E3275EACF944921A484FDA2EAB4001 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A323B1AB2941CFF4661CB1B12DEA7CBE /* TMUIKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AF167C77476DD2CA324A331579AE5415 /* TMUIKit-dummy.m */; };
 		A35FBEEC7D088AEC05297E8292A32C77 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9857985E56CF9842D3DCA62D522DC5B3 /* View+MASAdditions.m */; };
-		A831FDBBD363EBB402FBF355F429F53B /* TMUIWeakObjectContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF16A860C87688F4112FDE94ECA2005 /* TMUIWeakObjectContainer.m */; };
 		AAB888E9F7C14AC6F8CE5FF40938BEAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE446476C51FAE0ACFF4FBB24E50A65 /* Foundation.framework */; };
-		AEB333C4265ADA044BACAC1A4CEDDC65 /* TMUIWidgets.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E1F68E4D79749F3D78F6FFF82B856D /* TMUIWidgets.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B1F8C80CC72AD530B7BB50329E5FAAD0 /* TMUIExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 26351BE1A3FC4922220C1CBC2165BF9E /* TMUIExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6C6B4DF04395AD35EE7CE19F872D122 /* UIViewController+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 356786BE0F2735C5F01486ACA9170180 /* UIViewController+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7D645EC004610E8A581E532D28771EC /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A637F1C0093199AF14CA5F0257CBF133 /* MASViewConstraint.m */; };
-		BF25FE1CC972C62AFA4C5910C6408836 /* UIViewController+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 356786BE0F2735C5F01486ACA9170180 /* UIViewController+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BFF98AE3068608C28A02616017D076C1 /* TMUIKitDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C72267C6E45BAED43CB10F458912780 /* TMUIKitDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B88C682F9F82081036CBA593A2DDB385 /* UIImage+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B7ACE7EA85187E20F1F841A62398772 /* UIImage+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFB040ADA871CE1FF0B771C77AB703B1 /* TMAssociatedPropertyMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D7157815DCAE8A09C25FC3960F40E0A /* TMAssociatedPropertyMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0861ADB4C5FA30F4F9E051F7638A264 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8889847C5162228B1C6AC0FB65A73380 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		C48E20E7AF87CB654973DD7344966493 /* TMUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E5EEA8418A9BFA12DC342E480258D7 /* TMUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C77414A24B5B15D7F81A90C7305367E2 /* UIViewController+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D698B30F230E2CC5F66B5795CE68F350 /* UIViewController+TMUI.m */; };
 		CAAE13458BAC95F140992E8CDF24C4B2 /* Pods-TMUIKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E5068F033BB49ECE138B10F65481D8 /* Pods-TMUIKit_Example-dummy.m */; };
-		CC0A4EA7E6A452A28AB6FF3E7F74C93C /* UIImage+TMUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B7ACE7EA85187E20F1F841A62398772 /* UIImage+TMUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CC7185659F96021F4B2C46708A635CAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE446476C51FAE0ACFF4FBB24E50A65 /* Foundation.framework */; };
-		D0FC0F006F90B381B6E9E0469D0C7E84 /* TMInitMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B14D4A9B6653673A6CC0F32B4DA52A /* TMInitMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8A9F382C389CF9688DFB55047FE50B4 /* TMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F970D4E9069C2390076232A08F62950C /* TMButton.m */; };
-		E56080030D54C4ADE151FCEDC1AC2E4F /* TMAssociatedPropertyMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D7157815DCAE8A09C25FC3960F40E0A /* TMAssociatedPropertyMacro.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E63B88DF0150B8C7CCD82EB1C3731AB7 /* TMUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 93762A61781D6788A7CC6A88AA50A715 /* TMUIHelper.m */; };
+		DE22E73DB199D66602B6DCBCDD4EBD10 /* TMUIAssociatedObjectDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 04438EBA89E9775532CCB3A92D91242A /* TMUIAssociatedObjectDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3CD9C87D526A9DB2D0AD521201B86C6 /* TMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F970D4E9069C2390076232A08F62950C /* TMButton.m */; };
 		E7CA20228B3583F41927813EE904CAD3 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 5769C4321399FA473A0DBA662C11C30C /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E858EF38FA2516A77C23EE37B305BE8E /* TMCoreGraphicsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E847BF9C07CD5CAB7D5A220DE70A16F /* TMCoreGraphicsDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E7CECFEFB8D6DE75FFABA238E8728FDE /* UIColor+TMUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 87F9CDE9B83962CA2BDAF73B63FECD4C /* UIColor+TMUI.m */; };
 		E8DD5D1D406150E1C80AD015271B6848 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C936E96AC64EDE39E71C7148308F53 /* MASConstraint.m */; };
 		EAE8B0895956885A752B173683A0D889 /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = C573F93665EE98D293A942F0A816BC10 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1798DD6B49B8A7EF1F4AD87D984FB74 /* Pods-TMUIKit_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 049603A117E2AAA0857AD55AE9F8D884 /* Pods-TMUIKit_Tests-dummy.m */; };
-		F2748F7928ED876494C467849F597760 /* TMUIDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 450255D0B732F961A67C3C374D6DAE75 /* TMUIDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F349BD1A308D2FD593F421B5CB218A3D /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B28864E3F11E1DDE7AEF55AFFD8B0FE /* Masonry.framework */; };
 		FAFBFA90F7BC3E7CF50F8A5CF0A8B264 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = CE5CC9D80BD64D93072B2FE9C7A085AB /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF672993BBFB9B16A8B8E29F3176690E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFE446476C51FAE0ACFF4FBB24E50A65 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +101,7 @@
 			remoteGlobalIDString = AB444A9F74D595D87ADA014479FA1D1D;
 			remoteInfo = TMUIKit;
 		};
-		5F0C0021F13D904DE4F7380EE08FFD20 /* PBXContainerItemProxy */ = {
+		497F5D0A7B0AD8D9959F974925B583C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -121,13 +121,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
 			remoteInfo = Masonry;
-		};
-		D2E5B71E07E630162B831DAF06111B51 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 638FEAAFC575BB76BC6AC055CDDA3506;
-			remoteInfo = LookinServer;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -231,6 +224,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		136570816428B160C8BCDBBDFD25C476 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				230C8C941C9AC6D6616BD9E5B7F08019 /* Foundation.framework in Frameworks */,
+				F349BD1A308D2FD593F421B5CB218A3D /* Masonry.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1CFAD24CC9114ED310FB6BE087C311D8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,15 +247,6 @@
 			files = (
 				58AF805046CFD9986EFEAACCBA61F9BE /* Foundation.framework in Frameworks */,
 				5D5AB502D85BF8E27246A5964F6B3E9F /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B840D732965F02CC6A4BE06B0EB136CA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FF672993BBFB9B16A8B8E29F3176690E /* Foundation.framework in Frameworks */,
-				66F740CD751F86B1F9B5551EC6E9D714 /* Masonry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,30 +556,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		55796E951214E6D8DE105043832BD259 /* Headers */ = {
+		4C8DFDD910F76EDC2C288BB460D69253 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E56080030D54C4ADE151FCEDC1AC2E4F /* TMAssociatedPropertyMacro.h in Headers */,
-				9940EF69CB946D1BE398C73A998B8BA8 /* TMButton.h in Headers */,
-				E858EF38FA2516A77C23EE37B305BE8E /* TMCoreGraphicsDefines.h in Headers */,
-				D0FC0F006F90B381B6E9E0469D0C7E84 /* TMInitMacro.h in Headers */,
-				89C9D8F9C8F203CBEF32FFFCE6CC7A91 /* TMUIAssociatedObjectDefine.h in Headers */,
-				00F4B4E839498A13784D2B2C84EAC2F2 /* TMUICommonDefines.h in Headers */,
-				8761C621698D57B14A49BFBD07062A28 /* TMUIComponents.h in Headers */,
-				3E58F9A00FBD2FDBEF60B8B323B4F557 /* TMUICore.h in Headers */,
-				F2748F7928ED876494C467849F597760 /* TMUIDefines.h in Headers */,
-				B1F8C80CC72AD530B7BB50329E5FAAD0 /* TMUIExtensions.h in Headers */,
-				29E946A3C4BB2A06BD1C8C624A0B0EE5 /* TMUIHelper.h in Headers */,
-				0ADA487EAF4C061D88509F2FEA508317 /* TMUIKit-umbrella.h in Headers */,
-				C48E20E7AF87CB654973DD7344966493 /* TMUIKit.h in Headers */,
-				BFF98AE3068608C28A02616017D076C1 /* TMUIKitDefines.h in Headers */,
-				4F6E7CA58EEDA1D044091F98AA98B01E /* TMUIWeakObjectContainer.h in Headers */,
-				AEB333C4265ADA044BACAC1A4CEDDC65 /* TMUIWidgets.h in Headers */,
-				25B5D109AB5C673450D3F8F1484DE6A7 /* UIColor+TMUI.h in Headers */,
-				CC0A4EA7E6A452A28AB6FF3E7F74C93C /* UIImage+TMUI.h in Headers */,
-				09470D0A5562336D502281032C0CEC26 /* UIView+TMUI.h in Headers */,
-				BF25FE1CC972C62AFA4C5910C6408836 /* UIViewController+TMUI.h in Headers */,
+				BFB040ADA871CE1FF0B771C77AB703B1 /* TMAssociatedPropertyMacro.h in Headers */,
+				73DB429B06F96169EA3324E98AA2AB68 /* TMButton.h in Headers */,
+				576CF917883CC4385FB23C6735C8D27F /* TMCoreGraphicsDefines.h in Headers */,
+				44853EABAF33E16B2B599CCFC2ED14B9 /* TMInitMacro.h in Headers */,
+				DE22E73DB199D66602B6DCBCDD4EBD10 /* TMUIAssociatedObjectDefine.h in Headers */,
+				49BF3989537747D766BBB21AF4B69FCD /* TMUICommonDefines.h in Headers */,
+				520E53CE0E1E7757A83770D8A917F371 /* TMUIComponents.h in Headers */,
+				00CFBD16A7E4D7D399610EE9D189A40E /* TMUICore.h in Headers */,
+				4D876FEE91123100D7CD117584924D97 /* TMUIDefines.h in Headers */,
+				5BBED7C654600E5FEA4FD5C341146D0A /* TMUIExtensions.h in Headers */,
+				8AF9FF3FE3B9136F3EE605C25996BA92 /* TMUIHelper.h in Headers */,
+				46FC8C2589130EAC7156BA0F500EB1D1 /* TMUIKit-umbrella.h in Headers */,
+				410F7F3E0A67EB0AA6B6D2EED42B5931 /* TMUIKit.h in Headers */,
+				13939A95E4F5F5EAE94B86F56D781CFE /* TMUIKitDefines.h in Headers */,
+				3F426652808CCB0D58E0045771DB0391 /* TMUIWeakObjectContainer.h in Headers */,
+				897A956AE6F44C1D74F36750D41743C8 /* TMUIWidgets.h in Headers */,
+				0150D90578471BBDA419CD313EB37252 /* UIColor+TMUI.h in Headers */,
+				B88C682F9F82081036CBA593A2DDB385 /* UIImage+TMUI.h in Headers */,
+				974170EE6DE22BB764E315692388EBE4 /* UIView+TMUI.h in Headers */,
+				B6C6B4DF04395AD35EE7CE19F872D122 /* UIViewController+TMUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,18 +685,17 @@
 		};
 		AB444A9F74D595D87ADA014479FA1D1D /* TMUIKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A3FEC9B5413CF643A20BAEDAF27132BD /* Build configuration list for PBXNativeTarget "TMUIKit" */;
+			buildConfigurationList = 71DAD6B480B21BD5505A11FE73AAEFCE /* Build configuration list for PBXNativeTarget "TMUIKit" */;
 			buildPhases = (
-				55796E951214E6D8DE105043832BD259 /* Headers */,
-				F3A25AB12F338522CCBD291B712A86F2 /* Sources */,
-				B840D732965F02CC6A4BE06B0EB136CA /* Frameworks */,
-				3DA0FD2B4F1734EC4C2199030282047C /* Resources */,
+				4C8DFDD910F76EDC2C288BB460D69253 /* Headers */,
+				15D60620A83203BBC92467D808C8B4BC /* Sources */,
+				136570816428B160C8BCDBBDFD25C476 /* Frameworks */,
+				949BEC34E955BB686C074706A1DE7A6F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3130DA20FDA576A5BF6B17A69ED439CA /* PBXTargetDependency */,
-				9EDC218BEE8CC5719570A2B21D7B130C /* PBXTargetDependency */,
+				1AC57D7058901039B5BBB5DE5413653F /* PBXTargetDependency */,
 			);
 			name = TMUIKit;
 			productName = TMUIKit;
@@ -749,14 +741,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3DA0FD2B4F1734EC4C2199030282047C /* Resources */ = {
+		895ED1B8779C1D82DF681CBFF67AC570 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		895ED1B8779C1D82DF681CBFF67AC570 /* Resources */ = {
+		949BEC34E955BB686C074706A1DE7A6F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -791,6 +783,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		15D60620A83203BBC92467D808C8B4BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3CD9C87D526A9DB2D0AD521201B86C6 /* TMButton.m in Sources */,
+				0DA23838CCEE45123DB94E0BDE6637D7 /* TMUIHelper.m in Sources */,
+				A323B1AB2941CFF4661CB1B12DEA7CBE /* TMUIKit-dummy.m in Sources */,
+				028B99C8FDB836F128E3791DFCBAACB0 /* TMUIWeakObjectContainer.m in Sources */,
+				E7CECFEFB8D6DE75FFABA238E8728FDE /* UIColor+TMUI.m in Sources */,
+				1E0537964D8A9B27DE4860C872B95464 /* UIImage+TMUI.m in Sources */,
+				512A1763451791C2A77F6A81DC2F4496 /* UIView+TMUI.m in Sources */,
+				6A99E5A2AC5664B057745B28E643B9B0 /* UIViewController+TMUI.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3B3CE7B3027BBF7969E047039C7116A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -807,29 +814,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F3A25AB12F338522CCBD291B712A86F2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D8A9F382C389CF9688DFB55047FE50B4 /* TMButton.m in Sources */,
-				E63B88DF0150B8C7CCD82EB1C3731AB7 /* TMUIHelper.m in Sources */,
-				2498FF59BB449D1477EF2FCCA851622F /* TMUIKit-dummy.m in Sources */,
-				A831FDBBD363EBB402FBF355F429F53B /* TMUIWeakObjectContainer.m in Sources */,
-				1AC372B05F469BD5FA83F319AC2F456B /* UIColor+TMUI.m in Sources */,
-				4D1B33252905C6EE63E05992FDD7BB0E /* UIImage+TMUI.m in Sources */,
-				25B6AEEDF41530F9E6C9FEA1994BE645 /* UIView+TMUI.m in Sources */,
-				C77414A24B5B15D7F81A90C7305367E2 /* UIViewController+TMUI.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3130DA20FDA576A5BF6B17A69ED439CA /* PBXTargetDependency */ = {
+		1AC57D7058901039B5BBB5DE5413653F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = LookinServer;
-			target = 638FEAAFC575BB76BC6AC055CDDA3506 /* LookinServer */;
-			targetProxy = D2E5B71E07E630162B831DAF06111B51 /* PBXContainerItemProxy */;
+			name = Masonry;
+			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
+			targetProxy = 497F5D0A7B0AD8D9959F974925B583C0 /* PBXContainerItemProxy */;
 		};
 		32B2A58CFA10C797E695CD706007EF9E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -842,12 +834,6 @@
 			name = TMUIKit;
 			target = AB444A9F74D595D87ADA014479FA1D1D /* TMUIKit */;
 			targetProxy = 1367A7375285F0714E10A26C835D0C92 /* PBXContainerItemProxy */;
-		};
-		9EDC218BEE8CC5719570A2B21D7B130C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Masonry;
-			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = 5F0C0021F13D904DE4F7380EE08FFD20 /* PBXContainerItemProxy */;
 		};
 		AE0A9F02D25CA8D44A7AD3DAF6DBD840 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -864,6 +850,36 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		00A50C49981301F7074F7807B6B480F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99D6431C9E154E7A56EAFDAF0268273C /* TMUIKit.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TMUIKit/TMUIKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TMUIKit/TMUIKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TMUIKit/TMUIKit.modulemap";
+				PRODUCT_MODULE_NAME = TMUIKit;
+				PRODUCT_NAME = TMUIKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		1044F608529563CC21E43DA4A90D1F72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 91C1EE367824A4BF6A4BEDF3392F3DD3 /* Pods-TMUIKit_Example.release.xcconfig */;
@@ -1042,6 +1058,37 @@
 			};
 			name = Release;
 		};
+		A9DE7D54B49DE016525E8444B3D16B49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 953E6491DF8E2F2AACB2B7445C9F2B1A /* TMUIKit.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TMUIKit/TMUIKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TMUIKit/TMUIKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TMUIKit/TMUIKit.modulemap";
+				PRODUCT_MODULE_NAME = TMUIKit;
+				PRODUCT_NAME = TMUIKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		B15A26F9132961F259A3A1D0FE5A5CD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2650DE74E4B8BAADA25ECCBEECC3CA77 /* Pods-TMUIKit_Tests.debug.xcconfig */;
@@ -1073,37 +1120,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		B40E198DB6A157F45613F26AB9A59AAB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 953E6491DF8E2F2AACB2B7445C9F2B1A /* TMUIKit.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TMUIKit/TMUIKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TMUIKit/TMUIKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/TMUIKit/TMUIKit.modulemap";
-				PRODUCT_MODULE_NAME = TMUIKit;
-				PRODUCT_NAME = TMUIKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		B56E73C20B612C5DD704279CAE32513C /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1241,36 +1257,6 @@
 			};
 			name = Debug;
 		};
-		EE3B5564BD08970F5D2B3E666B7CAF5F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99D6431C9E154E7A56EAFDAF0268273C /* TMUIKit.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TMUIKit/TMUIKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TMUIKit/TMUIKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/TMUIKit/TMUIKit.modulemap";
-				PRODUCT_MODULE_NAME = TMUIKit;
-				PRODUCT_NAME = TMUIKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1288,6 +1274,15 @@
 			buildConfigurations = (
 				25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */,
 				CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71DAD6B480B21BD5505A11FE73AAEFCE /* Build configuration list for PBXNativeTarget "TMUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00A50C49981301F7074F7807B6B480F5 /* Debug */,
+				A9DE7D54B49DE016525E8444B3D16B49 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1315,15 +1310,6 @@
 			buildConfigurations = (
 				63B8FDF36EFA35249FB4B8A795E71432 /* Debug */,
 				1044F608529563CC21E43DA4A90D1F72 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A3FEC9B5413CF643A20BAEDAF27132BD /* Build configuration list for PBXNativeTarget "TMUIKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EE3B5564BD08970F5D2B3E666B7CAF5F /* Debug */,
-				B40E198DB6A157F45613F26AB9A59AAB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

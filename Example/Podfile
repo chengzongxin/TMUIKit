@@ -4,6 +4,7 @@ platform :ios, '9.0'
 
 target 'TMUIKit_Example' do
   pod 'TMUIKit', :path => '../'
+  pod 'LookinServer', :configurations => ['Debug']
 
   target 'TMUIKit_Tests' do
     inherit! :search_paths

@@ -41,5 +41,5 @@ Pod::Spec.new do |s|
 #  s.public_header_files = 'TMUIKit/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
    s.dependency 'Masonry'
-   s.dependency 'LookinServer', :configurations => ['Debug']
+#   s.dependency 'LookinServer', :configurations => ['Debug']
 end
