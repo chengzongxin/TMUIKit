@@ -19,7 +19,7 @@
     
     self.view.backgroundColor = UIColor.whiteColor;
     
-    TMButton *btn = [[TMButton alloc] initWithFrame:CGRectMake(100, 100, 100, 300)];
+    TMButton *btn = [[TMButton alloc] initWithFrame:CGRectMake(100, 100, 220, 300)];
     btn.backgroundColor = UIColor.orangeColor;
     [self.view addSubview: btn];
     

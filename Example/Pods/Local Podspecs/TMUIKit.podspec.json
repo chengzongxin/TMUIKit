@@ -1,8 +1,8 @@
 {
   "name": "TMUIKit",
   "version": "0.2.0",
-  "summary": "A short description of TMUIKit.",
-  "description": "'TMUIKit' 是个UI库，包含UI，组件，宏，库等。",
+  "summary": "TMUIKit 是个UI库，包含UI，组件，宏，库工具等。",
+  "description": "'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'",
   "homepage": "https://github.com/chengzongxin/TMUIKit",
   "license": {
     "type": "MIT",
@@ -18,11 +18,45 @@
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "TMUIKit/Classes/**/*",
-  "public_header_files": "Pod/Classes/**/*.h",
+  "source_files": "TMUIKit/Classes/TMUIKit.h",
+  "public_header_files": "TMUIKit/Classes/TMUIKit.h",
   "dependencies": {
     "Masonry": [
 
     ]
-  }
+  },
+  "subspecs": [
+    {
+      "name": "TMUICore",
+      "source_files": "TMUIKit/Classes/TMUICore/**/*",
+      "public_header_files": "TMUIKit/Classes/TMUICore/*.h"
+    },
+    {
+      "name": "TMUIDefines",
+      "source_files": "TMUIKit/Classes/TMUIDefines/**/*",
+      "public_header_files": "TMUIKit/Classes/TMUIDefines/*.h"
+    },
+    {
+      "name": "TMUIWidgets",
+      "source_files": "TMUIKit/Classes/TMUIWidgets/**/*",
+      "public_header_files": "TMUIKit/Classes/TMUIWidgets/*.h",
+      "subspecs": [
+        {
+          "name": "TMButton",
+          "source_files": "TMUIKit/Classes/TMUIWidgets/TMButton/**/*",
+          "public_header_files": "TMUIKit/Classes/TMUIWidgets/TMButton/*.h"
+        }
+      ]
+    },
+    {
+      "name": "TMUIComponents",
+      "source_files": "TMUIKit/Classes/TMUIComponents/**/*",
+      "public_header_files": "TMUIKit/Classes/TMUIComponents/*.h"
+    },
+    {
+      "name": "TMUIExtensions",
+      "source_files": "TMUIKit/Classes/TMUIExtensions/**/*",
+      "public_header_files": "TMUIKit/Classes/TMUIExtensions/*.h"
+    }
+  ]
 }

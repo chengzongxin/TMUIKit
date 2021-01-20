@@ -3,6 +3,24 @@ PODS:
   - Masonry (1.1.0)
   - TMUIKit (0.2.0):
     - Masonry
+    - TMUIKit/TMUIComponents (= 0.2.0)
+    - TMUIKit/TMUICore (= 0.2.0)
+    - TMUIKit/TMUIDefines (= 0.2.0)
+    - TMUIKit/TMUIExtensions (= 0.2.0)
+    - TMUIKit/TMUIWidgets (= 0.2.0)
+  - TMUIKit/TMUIComponents (0.2.0):
+    - Masonry
+  - TMUIKit/TMUICore (0.2.0):
+    - Masonry
+  - TMUIKit/TMUIDefines (0.2.0):
+    - Masonry
+  - TMUIKit/TMUIExtensions (0.2.0):
+    - Masonry
+  - TMUIKit/TMUIWidgets (0.2.0):
+    - Masonry
+    - TMUIKit/TMUIWidgets/TMButton (= 0.2.0)
+  - TMUIKit/TMUIWidgets/TMButton (0.2.0):
+    - Masonry
 
 DEPENDENCIES:
   - LookinServer
@@ -20,7 +38,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  TMUIKit: 524aedbdbd0c54c0afaf7ff20b1bf5c4f7c665b4
+  TMUIKit: 61b55aa8c68b84df8445e3293e55c00bc83bc6a9
 
 PODFILE CHECKSUM: ea9ae044bed2dcb92f3ad7c56701df7a6dc1bfaf
 
