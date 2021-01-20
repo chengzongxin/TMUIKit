@@ -40,6 +40,14 @@
       "name": "TMUIWidgets",
       "source_files": "TMUIKit/Classes/TMUIWidgets/**/*",
       "public_header_files": "TMUIKit/Classes/TMUIWidgets/*.h",
+      "dependencies": {
+        "TMUIKit/TMUICore": [
+
+        ],
+        "TMUIKit/TMUIDefines": [
+
+        ]
+      },
       "subspecs": [
         {
           "name": "TMButton",
@@ -51,12 +59,28 @@
     {
       "name": "TMUIComponents",
       "source_files": "TMUIKit/Classes/TMUIComponents/**/*",
-      "public_header_files": "TMUIKit/Classes/TMUIComponents/*.h"
+      "public_header_files": "TMUIKit/Classes/TMUIComponents/*.h",
+      "dependencies": {
+        "TMUIKit/TMUICore": [
+
+        ],
+        "TMUIKit/TMUIDefines": [
+
+        ]
+      }
     },
     {
       "name": "TMUIExtensions",
       "source_files": "TMUIKit/Classes/TMUIExtensions/**/*",
-      "public_header_files": "TMUIKit/Classes/TMUIExtensions/*.h"
+      "public_header_files": "TMUIKit/Classes/TMUIExtensions/*.h",
+      "dependencies": {
+        "TMUIKit/TMUICore": [
+
+        ],
+        "TMUIKit/TMUIDefines": [
+
+        ]
+      }
     }
   ]
 }

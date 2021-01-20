@@ -61,6 +61,9 @@ Pod::Spec.new do |s|
     ss.source_files = 'TMUIKit/Classes/TMUIWidgets/**/*'
     #公开TMUIWidgets模块中的头文件
     ss.public_header_files = 'TMUIKit/Classes/TMUIWidgets/*.h'
+    #依赖的三方库，pod库或者可以是自身的subspec
+    ss.dependency 'TMUIKit/TMUICore'
+    ss.dependency 'TMUIKit/TMUIDefines'
     # TMButton
     ss.subspec 'TMButton' do |sss|
            sss.source_files = 'TMUIKit/Classes/TMUIWidgets/TMButton/**/*'
@@ -74,6 +77,9 @@ Pod::Spec.new do |s|
     ss.source_files = 'TMUIKit/Classes/TMUIComponents/**/*'
     #公开TMUIComponents模块中的头文件
     ss.public_header_files = 'TMUIKit/Classes/TMUIComponents/*.h'
+    #依赖的三方库，pod库或者可以是自身的subspec
+    ss.dependency 'TMUIKit/TMUICore'
+    ss.dependency 'TMUIKit/TMUIDefines'
   end
   
   #TMUIExtensions 分类
@@ -82,6 +88,9 @@ Pod::Spec.new do |s|
     ss.source_files = 'TMUIKit/Classes/TMUIExtensions/**/*'
     #公开TMUIExtensions模块中的头文件
     ss.public_header_files = 'TMUIKit/Classes/TMUIExtensions/*.h'
+    #依赖的三方库，pod库或者可以是自身的subspec
+    ss.dependency 'TMUIKit/TMUICore'
+    ss.dependency 'TMUIKit/TMUIDefines'
   end
   
   s.dependency 'Masonry'
