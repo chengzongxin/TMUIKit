@@ -11,10 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 控制图片在UIButton里的位置，默认为TMUIButtonImagePositionLeft
 typedef NS_ENUM(NSUInteger, TMUIButtonImagePosition) {
-    TMUIButtonImagePosition_Top,             // imageView在titleLabel上面
-    TMUIButtonImagePosition_Left,            // imageView在titleLabel左边
-    TMUIButtonImagePosition_Bottom,          // imageView在titleLabel下面
-    TMUIButtonImagePosition_Right,           // imageView在titleLabel右边
+    TMUIButtonImagePositionTop,             // imageView在titleLabel上面
+    TMUIButtonImagePositionLeft,            // imageView在titleLabel左边
+    TMUIButtonImagePositionBottom,          // imageView在titleLabel下面
+    TMUIButtonImagePositionRight,           // imageView在titleLabel右边
 };
 
 @interface TMButton : UIButton
