@@ -97,6 +97,7 @@ Pod::Spec.new do |s|
       ss.source_files = 'TMUIKit/TMUIComponents/TMUIComponents.h'
       
       ss.subspec 'TMContentAlert' do |sss|
+        sss.public_header_files = 'TMUIKit/TMUIComponents/TMContentAlert/TMContentAlert.h'
         sss.source_files = 'TMUIKit/TMUIComponents/TMContentAlert/*.{h,m}'
       end
 # ...
@@ -107,26 +108,27 @@ Pod::Spec.new do |s|
 #   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker/TMMultiDataPicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
 #   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker/TMCityPicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
 
-#      ss.subspec 'TMContentPicker' do |sss|
-#        sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}'
-#        sss.subspec 'TMNormalPicker' do |ssss|
-#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker'
-#        end
-#        sss.subspec 'TMDatePicker' do |ssss|
-#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
-#        end
-#        sss.subspec 'TMMultiDataPicker' do |ssss|
-#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
-#        end
-#        sss.subspec 'TMCityPicker' do |ssss|
-#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
-#        end
-#      end
+      ss.subspec 'TMContentPicker' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}'
+        sss.subspec 'TMNormalPicker' do |ssss|
+            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker'
+        end
+        sss.subspec 'TMDatePicker' do |ssss|
+            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
+        end
+        sss.subspec 'TMMultiDataPicker' do |ssss|
+            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
+        end
+        sss.subspec 'TMCityPicker' do |ssss|
+            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
+        end
+      end
 
-#      #'TMContentAlert.h' file not found
-#      ss.subspec 'TMActionSheet' do |sss|
-#          sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
-#      end
+      ss.subspec 'TMActionSheet' do |sss|
+          sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
+          #'TMContentAlert.h' file not found
+          sss.dependency 'TMUIKit/TMUIComponents/TMContentAlert'
+      end
 
       ss.subspec 'TMToast' do |sss|
           sss.source_files = 'TMUIKit/TMUIComponents/TMToast/*.{h,m}'
