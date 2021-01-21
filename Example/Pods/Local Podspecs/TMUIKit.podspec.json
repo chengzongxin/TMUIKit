@@ -1,6 +1,6 @@
 {
   "name": "TMUIKit",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "summary": "TMUIKit 是个UI库，包含UI，组件，宏，库工具等。",
   "description": "'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'",
   "homepage": "https://github.com/chengzongxin/TMUIKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/chengzongxin/TMUIKit.git",
-    "tag": "0.4.0"
+    "tag": "0.5.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -102,7 +102,87 @@
         "TMUIKit/TMUIDefines": [
 
         ]
-      }
+      },
+      "subspecs": [
+        {
+          "name": "TMContentAlert",
+          "source_files": "TMUIKit/Classes/TMUIComponents/TMContentAlert/*.{h,m}"
+        },
+        {
+          "name": "TMContentPicker",
+          "source_files": "TMUIKit/Classes/TMUIComponents/TMContentPicker/*.{h,m}",
+          "subspecs": [
+            {
+              "name": "TMNormalPicker",
+              "source_files": "TMUIKit/Classes/TMUIComponents/TMContentPicker/TMNormalPicker"
+            },
+            {
+              "name": "TMDatePicker",
+              "source_files": "TMUIKit/Classes/TMUIComponents/TMContentPicker/TMDatePicker"
+            },
+            {
+              "name": "TMMultiDataPicker",
+              "source_files": "TMUIKit/Classes/TMUIComponents/TMContentPicker/TMMultiDataPicker"
+            },
+            {
+              "name": "TMCityPicker",
+              "source_files": "TMUIKit/Classes/TMUIComponents/TMContentPicker/TMCityPicker"
+            }
+          ]
+        },
+        {
+          "name": "TMActionSheet",
+          "source_files": "TMUIKit/Classes/TMUIComponents/TMActionSheet/*.{h,m}"
+        },
+        {
+          "name": "TMToast",
+          "source_files": "TMUIKit/Classes/TMUIComponents/TMToast/*.{h,m}",
+          "resource_bundles": {
+            "TMToastAssets": [
+              "TMUIKit/Classes/TMUIComponents/TMToast/Resource/*.png"
+            ]
+          }
+        },
+        {
+          "name": "TMPopoverView",
+          "source_files": "TMUIKit/Classes/TMUIComponents/TMPopoverView/*.{h,m}"
+        },
+        {
+          "name": "TMEmptyView",
+          "source_files": "TMUIKit/Classes/TMUIComponents/TMEmptyView/*.{h,m}",
+          "resource_bundles": {
+            "TMEmptyUIAssets": [
+              "TMUIKit/Classes/TMUIComponents/TMEmptyView/Resource/*.png"
+            ]
+          },
+          "subspecs": [
+            {
+              "name": "Content",
+              "source_files": "TMUIKit/Classes/TMUIComponents/TMEmptyView/Content/*.{h,m}"
+            }
+          ]
+        },
+        {
+          "name": "TMSearchController",
+          "source_files": "TMUIKit/Classes/TMUIComponents/TMSearchController/*.{h,m}",
+          "resource_bundles": {
+            "TMSearchUIAssets": [
+              "TMUIKit/Classes/TMUIComponents/TMSearchController/Resource/*.png"
+            ]
+          },
+          "subspecs": [
+            {
+              "name": "Private",
+              "private_header_files": "TMUIKit/Classes/TMUIComponents/TMSearchController/Private/*.{h}",
+              "source_files": "TMUIKit/Classes/TMUIComponents/TMSearchController/Private/*.{h,m}"
+            },
+            {
+              "name": "Extensions",
+              "source_files": "TMUIKit/Classes/TMUIComponents/TMSearchController/Extensions/*.{h,m}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
