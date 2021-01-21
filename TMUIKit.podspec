@@ -108,21 +108,26 @@ Pod::Spec.new do |s|
 #   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker/TMMultiDataPicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
 #   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker/TMCityPicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
 
-      ss.subspec 'TMContentPicker' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}'
-        sss.subspec 'TMNormalPicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker'
-        end
-        sss.subspec 'TMDatePicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
-        end
-        sss.subspec 'TMMultiDataPicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
-        end
-        sss.subspec 'TMCityPicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
-        end
-      end
+#      ss.subspec 'TMContentPicker' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}'
+##        sss.public_header_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMContentPicker.h'
+#        sss.subspec 'TMNormalPicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker'
+#            ssss.dependency 'TMUIKit/TMUIComponents/TMContentAlert'
+#        end
+#        sss.subspec 'TMDatePicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
+##            ssss.dependency 'TMUIKit/TMUIComponents/TMContentPicker'
+#        end
+#        sss.subspec 'TMMultiDataPicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
+##            ssss.dependency 'TMUIKit/TMUIComponents/TMContentPicker'
+#        end
+#        sss.subspec 'TMCityPicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
+##            ssss.dependency 'TMUIKit/TMUIComponents/TMContentPicker'
+#        end
+#      end
 
       ss.subspec 'TMActionSheet' do |sss|
           sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
@@ -144,16 +149,17 @@ Pod::Spec.new do |s|
 #...
 #- ERROR | [iOS] [TMUIKit/TMUIComponents/TMEmptyView/Content] xcodebuild: Returned an unsuccessful exit code. You can use `--verbose` for more information.
 #- NOTE  | [iOS] [TMUIKit/TMUIComponents/TMEmptyView/Content] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMEmptyView/Content/TMEmptyContentItemProtocol.h:10:9: fatal error: 'TMEmptyDefine.h' file not found
-#      ss.subspec 'TMEmptyView' do |sss|
-#          sss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/*.{h,m}'
-#          sss.subspec 'Content' do |ssss|
-#              ssss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/Content/*.{h,m}'
-#          end
-#          # TMEmptyUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMEmptyUIAssets.bundle
-#          sss.resource_bundles = {
-#              'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
-#          }
-#      end
+      ss.subspec 'TMEmptyView' do |sss|
+          sss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/*.{h,m}'
+          sss.subspec 'Content' do |ssss|
+              ssss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/Content/*.{h,m}'
+#              ssss.dependency 'TMUIKit/TMUIComponents/TMEmptyView'
+          end
+          # TMEmptyUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMEmptyUIAssets.bundle
+          sss.resource_bundles = {
+              'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
+          }
+      end
 #
 #      ss.subspec 'TMSearchController' do |sss|
 #          sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
