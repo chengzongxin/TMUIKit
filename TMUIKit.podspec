@@ -99,27 +99,35 @@ Pod::Spec.new do |s|
       ss.subspec 'TMContentAlert' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMContentAlert/*.{h,m}'
       end
-      
-      ss.subspec 'TMContentPicker' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}'
-        sss.subspec 'TMNormalPicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker'
-        end
-        sss.subspec 'TMDatePicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
-        end
-        sss.subspec 'TMMultiDataPicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
-        end
-        sss.subspec 'TMCityPicker' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
-        end
-      end
-      
-      ss.subspec 'TMActionSheet' do |sss|
-          sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
-      end
-      
+# ...
+#- ERROR | [TMUIKit/TMUIComponents/TMContentPicker, TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker, TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker, and more...] xcodebuild: Returned an unsuccessful exit code. You can use `--verbose` for more information.
+#   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMContentPicker.m:9:9: fatal error: 'TMContentAlert.h' file not found
+#   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker/TMNormalPicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
+#   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker/TMDatePicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
+#   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker/TMMultiDataPicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
+#   - NOTE  | [iOS] [TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker/TMCityPicker.h:8:9: fatal error: 'TMContentPicker.h' file not found
+
+#      ss.subspec 'TMContentPicker' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}'
+#        sss.subspec 'TMNormalPicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker'
+#        end
+#        sss.subspec 'TMDatePicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
+#        end
+#        sss.subspec 'TMMultiDataPicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
+#        end
+#        sss.subspec 'TMCityPicker' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
+#        end
+#      end
+
+#      #'TMContentAlert.h' file not found
+#      ss.subspec 'TMActionSheet' do |sss|
+#          sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
+#      end
+
       ss.subspec 'TMToast' do |sss|
           sss.source_files = 'TMUIKit/TMUIComponents/TMToast/*.{h,m}'
           # TMToastAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMToastAssets.bundle
@@ -131,32 +139,35 @@ Pod::Spec.new do |s|
       ss.subspec 'TMPopoverView' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMPopoverView/*.{h,m}'
       end
-      
-      ss.subspec 'TMEmptyView' do |sss|
-          sss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/*.{h,m}'
-          sss.subspec 'Content' do |ssss|
-              ssss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/Content/*.{h,m}'
-          end
-          # TMEmptyUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMEmptyUIAssets.bundle
-          sss.resource_bundles = {
-              'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
-          }
-      end
-
-      ss.subspec 'TMSearchController' do |sss|
-          sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
-          sss.subspec 'Private' do |ssss|
-            ssss.private_header_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h}'
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h,m}'
-          end
-          sss.subspec 'Extensions' do |ssss|
-            ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Extensions/*.{h,m}'
-          end
-          # TMSearchUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMSearchUIAssets.bundle
-          sss.resource_bundles = {
-              'TMSearchUIAssets' => ['TMUIKit/TMUIComponents/TMSearchController/Resource/*.png']
-          }
-      end
+#...
+#- ERROR | [iOS] [TMUIKit/TMUIComponents/TMEmptyView/Content] xcodebuild: Returned an unsuccessful exit code. You can use `--verbose` for more information.
+#- NOTE  | [iOS] [TMUIKit/TMUIComponents/TMEmptyView/Content] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMEmptyView/Content/TMEmptyContentItemProtocol.h:10:9: fatal error: 'TMEmptyDefine.h' file not found
+#      ss.subspec 'TMEmptyView' do |sss|
+#          sss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/*.{h,m}'
+#          sss.subspec 'Content' do |ssss|
+#              ssss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/Content/*.{h,m}'
+#          end
+#          # TMEmptyUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMEmptyUIAssets.bundle
+#          sss.resource_bundles = {
+#              'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
+#          }
+#      end
+#
+#      ss.subspec 'TMSearchController' do |sss|
+#          sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
+#          sss.subspec 'Private' do |ssss|
+#            ssss.private_header_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h}'
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h,m}'
+#          end
+#          sss.subspec 'Extensions' do |ssss|
+#            ssss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Extensions/*.{h,m}'
+#          end
+#          # TMSearchUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMSearchUIAssets.bundle
+#          sss.resource_bundles = {
+#              'TMSearchUIAssets' => ['TMUIKit/TMUIComponents/TMSearchController/Resource/*.png']
+#          }
+#      end
   end
+  
   s.dependency "Masonry", "~> 1.1.0"
 end

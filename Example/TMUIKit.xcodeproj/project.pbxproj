@@ -276,7 +276,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				16B12CD981E3544E2489EEE4 /* [CP] Embed Pods Frameworks */,
-				E82F214B90E6BEE9FBDAAC65 /* [CP] Copy Pods Resources */,
+				6B9CE250A1556B2825DEB95C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -385,6 +385,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6B9CE250A1556B2825DEB95C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMEmptyUIAssets.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMSearchUIAssets.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMToastAssets.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMEmptyUIAssets.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMSearchUIAssets.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B617ED7A712722CD2A50BF03 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,28 +449,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E82F214B90E6BEE9FBDAAC65 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMEmptyUIAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMSearchUIAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMToastAssets.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMEmptyUIAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMSearchUIAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

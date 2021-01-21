@@ -23,6 +23,14 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [TMToast toastScore:123 content:@"333"];
+    
+//    TMContentAlert *alert = [[TMContentAlert alloc] init];
+    [TMContentAlert showFromViewController:self loadContentView:^(__kindof UIViewController * _Nonnull toShowVc) {
+        NSLog(@"dd");
+        } didShowBlock:^{
+            NSLog(@"ee");
+        }];
+//    NSLog(@"%@",alert);
 }
 
 @end
