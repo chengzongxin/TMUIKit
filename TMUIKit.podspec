@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '0.4.0'
+  s.version          = '0.5.0'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -45,6 +45,8 @@ Pod::Spec.new do |s|
     ss.source_files = 'TMUIKit/Classes/TMUICore/**/*'
     #公开TMUICore模块中的头文件
     ss.public_header_files = 'TMUIKit/Classes/TMUICore/*.h'
+    #依赖的三方库，pod库或者可以是自身的subspec
+    ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
   end
   
   #TMUIDefines 宏定义
@@ -53,22 +55,38 @@ Pod::Spec.new do |s|
     ss.source_files = 'TMUIKit/Classes/TMUIDefines/**/*'
     #公开TMUIDefines模块中的头文件
     ss.public_header_files = 'TMUIKit/Classes/TMUIDefines/*.h'
+    #依赖的三方库，pod库或者可以是自身的subspec
+    ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+    ss.dependency 'TMUIKit/TMUICore'
+  end
+  
+  
+  #TMUIExtensions 分类
+  s.subspec 'TMUIExtensions' do |ss|
+    #引入TMUIExtensions中所有资源文件
+    ss.source_files = 'TMUIKit/Classes/TMUIExtensions/**/*'
+    #公开TMUIExtensions模块中的头文件
+    ss.public_header_files = 'TMUIKit/Classes/TMUIExtensions/*.h'
+    #依赖的三方库，pod库或者可以是自身的subspec
+    ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+    ss.dependency 'TMUIKit/TMUICore'
+    ss.dependency 'TMUIKit/TMUIDefines'
   end
   
   #TMUIWidgets 基类控件
   s.subspec 'TMUIWidgets' do |ss|
     #引入TMUIWidgets中所有资源文件
-    ss.source_files = 'TMUIKit/Classes/TMUIWidgets/**/*'
+    ss.source_files = 'TMUIKit/Classes/TMUIWidgets/TMUIWidgets.h'
     #公开TMUIWidgets模块中的头文件
     ss.public_header_files = 'TMUIKit/Classes/TMUIWidgets/*.h'
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.dependency 'TMUIKit/TMUICore'
     ss.dependency 'TMUIKit/TMUIDefines'
+    ss.dependency 'TMUIKit/TMUIExtensions'
     # TMButton
     ss.subspec 'TMButton' do |sss|
-           sss.source_files = 'TMUIKit/Classes/TMUIWidgets/TMButton/**/*'
-           sss.public_header_files = 'TMUIKit/Classes/TMUIWidgets/TMButton/*.h'
-        end
+      sss.source_files = 'TMUIKit/Classes/TMUIWidgets/TMButton/'
+    end
   end
   
   #TMUIComponents 组件
@@ -82,16 +100,5 @@ Pod::Spec.new do |s|
     ss.dependency 'TMUIKit/TMUIDefines'
   end
   
-  #TMUIExtensions 分类
-  s.subspec 'TMUIExtensions' do |ss|
-    #引入TMUIExtensions中所有资源文件
-    ss.source_files = 'TMUIKit/Classes/TMUIExtensions/**/*'
-    #公开TMUIExtensions模块中的头文件
-    ss.public_header_files = 'TMUIKit/Classes/TMUIExtensions/*.h'
-    #依赖的三方库，pod库或者可以是自身的subspec
-    ss.dependency 'TMUIKit/TMUICore'
-    ss.dependency 'TMUIKit/TMUIDefines'
-  end
-  
-  s.dependency 'Masonry'
+  s.dependency "Masonry", "~> 1.1.0"
 end

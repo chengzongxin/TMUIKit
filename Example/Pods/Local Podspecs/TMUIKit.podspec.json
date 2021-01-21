@@ -1,6 +1,6 @@
 {
   "name": "TMUIKit",
-  "version": "0.2.0",
+  "version": "0.4.0",
   "summary": "TMUIKit 是个UI库，包含UI，组件，宏，库工具等。",
   "description": "'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'",
   "homepage": "https://github.com/chengzongxin/TMUIKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/chengzongxin/TMUIKit.git",
-    "tag": "0.2.0"
+    "tag": "0.4.0"
   },
   "platforms": {
     "ios": "9.0"
@@ -22,44 +22,44 @@
   "public_header_files": "TMUIKit/Classes/TMUIKit.h",
   "dependencies": {
     "Masonry": [
-
+      "~> 1.1.0"
     ]
   },
   "subspecs": [
     {
       "name": "TMUICore",
       "source_files": "TMUIKit/Classes/TMUICore/**/*",
-      "public_header_files": "TMUIKit/Classes/TMUICore/*.h"
+      "public_header_files": "TMUIKit/Classes/TMUICore/*.h",
+      "frameworks": [
+        "Foundation",
+        "UIKit",
+        "CoreGraphics"
+      ]
     },
     {
       "name": "TMUIDefines",
       "source_files": "TMUIKit/Classes/TMUIDefines/**/*",
-      "public_header_files": "TMUIKit/Classes/TMUIDefines/*.h"
-    },
-    {
-      "name": "TMUIWidgets",
-      "source_files": "TMUIKit/Classes/TMUIWidgets/**/*",
-      "public_header_files": "TMUIKit/Classes/TMUIWidgets/*.h",
+      "public_header_files": "TMUIKit/Classes/TMUIDefines/*.h",
+      "frameworks": [
+        "Foundation",
+        "UIKit",
+        "CoreGraphics"
+      ],
       "dependencies": {
         "TMUIKit/TMUICore": [
 
-        ],
-        "TMUIKit/TMUIDefines": [
-
         ]
-      },
-      "subspecs": [
-        {
-          "name": "TMButton",
-          "source_files": "TMUIKit/Classes/TMUIWidgets/TMButton/**/*",
-          "public_header_files": "TMUIKit/Classes/TMUIWidgets/TMButton/*.h"
-        }
-      ]
+      }
     },
     {
-      "name": "TMUIComponents",
-      "source_files": "TMUIKit/Classes/TMUIComponents/**/*",
-      "public_header_files": "TMUIKit/Classes/TMUIComponents/*.h",
+      "name": "TMUIExtensions",
+      "source_files": "TMUIKit/Classes/TMUIExtensions/**/*",
+      "public_header_files": "TMUIKit/Classes/TMUIExtensions/*.h",
+      "frameworks": [
+        "Foundation",
+        "UIKit",
+        "CoreGraphics"
+      ],
       "dependencies": {
         "TMUIKit/TMUICore": [
 
@@ -70,9 +70,31 @@
       }
     },
     {
-      "name": "TMUIExtensions",
-      "source_files": "TMUIKit/Classes/TMUIExtensions/**/*",
-      "public_header_files": "TMUIKit/Classes/TMUIExtensions/*.h",
+      "name": "TMUIWidgets",
+      "source_files": "TMUIKit/Classes/TMUIWidgets/TMUIWidgets.h",
+      "public_header_files": "TMUIKit/Classes/TMUIWidgets/*.h",
+      "dependencies": {
+        "TMUIKit/TMUICore": [
+
+        ],
+        "TMUIKit/TMUIDefines": [
+
+        ],
+        "TMUIKit/TMUIExtensions": [
+
+        ]
+      },
+      "subspecs": [
+        {
+          "name": "TMButton",
+          "source_files": "TMUIKit/Classes/TMUIWidgets/TMButton/"
+        }
+      ]
+    },
+    {
+      "name": "TMUIComponents",
+      "source_files": "TMUIKit/Classes/TMUIComponents/**/*",
+      "public_header_files": "TMUIKit/Classes/TMUIComponents/*.h",
       "dependencies": {
         "TMUIKit/TMUICore": [
 
