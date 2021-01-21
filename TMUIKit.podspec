@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '0.6.0'
+  s.version          = '0.7.0'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -92,9 +92,11 @@ Pod::Spec.new do |s|
   #TMUIComponents 组件
   s.subspec 'TMUIComponents' do |ss|
     #引入TMUIComponents中所有资源文件
-    ss.source_files = 'TMUIKit/Classes/TMUIComponents/**/*'
+#    ss.source_files = 'TMUIKit/Classes/TMUIComponents/**/*'
+    ss.source_files = 'TMUIKit/Classes/TMUIComponents/TMUIComponents.h'
     #公开TMUIComponents模块中的头文件
-    ss.public_header_files = 'TMUIKit/Classes/TMUIComponents/*.h'
+#    ss.public_header_files = 'TMUIKit/Classes/TMUIComponents/*.h'
+    ss.public_header_files = 'TMUIKit/Classes/TMUIComponents/TMUIComponents.h'
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.dependency 'TMUIKit/TMUICore'
     ss.dependency 'TMUIKit/TMUIDefines'
