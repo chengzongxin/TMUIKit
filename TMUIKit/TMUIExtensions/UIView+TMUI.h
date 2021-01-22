@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param radius 半圆半径,传0就默认高度一般(半圆)
  */
-- (void)halfCircleCornerDirect:(UIRectCorner)direct radius:(int)radius;
+- (void)tmui_halfCircleCornerDirect:(UIRectCorner)direct radius:(int)radius;
 
 
 /**
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param offset 阴影的偏移距离
  @param radius 阴影的圆角
  */
-- (void)shadowCornerRadius:(int)corner color:(UIColor *)color opacity:(float)opacity offsetSize:(CGSize)offset radius:(int)radius;
+- (void)tmui_shadowCornerRadius:(int)corner color:(UIColor *)color opacity:(float)opacity offsetSize:(CGSize)offset radius:(int)radius;
 
 
 
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param width 宽度
  @param radius 圆角
  */
-- (void)setBorderForColor:(UIColor *)color
+- (void)tmui_setBorderForColor:(UIColor *)color
                     width:(float)width
                    radius:(float)radius;
 
@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param borderColor 边框颜色
  @param borderWidth 边框宽度
  */
-- (void)setViewCornerRadius:(CGFloat)cornerRadius
+- (void)tmui_setViewCornerRadius:(CGFloat)cornerRadius
                 borderColor:(UIColor *)borderColor
                 borderWidth:(CGFloat)borderWidth;
 
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param borderColor 边框颜色
  @param borderWidth 边框宽度
  */
-- (void)setViewBorderColor:(UIColor *)borderColor
+- (void)tmui_setViewBorderColor:(UIColor *)borderColor
                borderWidth:(CGFloat)borderWidth;
 
 
@@ -105,12 +105,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param startColor 起始颜色
  @param endColor 结束颜色
  */
--(void)setGradientColorWithStartColor:(UIColor *)startColor
+-(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor
                              endColor:(UIColor *)endColor;
 
 
 //
--(void)setGradientColorWithStartColorToDown:(UIColor *)startColor endColor:(UIColor *)endColor;;
+-(void)tmui_setGradientColorWithStartColorToDown:(UIColor *)startColor endColor:(UIColor *)endColor;;
 
 /**
  设置View背景颜色渐变
@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param endPoint 结束位置
  @param locations 颜色分割点
  */
--(void)setGradientColorWithStartColor:(UIColor *)startColor
+-(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor
                              endColor:(UIColor *)endColor
                            startPoint:(CGPoint)startPoint
                              endPoint:(CGPoint)endPoint
@@ -135,14 +135,14 @@ NS_ASSUME_NONNULL_BEGIN
 @param locations 颜色分割点
 @param frame  渐变frame，页面没初始化需添加frame
 */
--(void)setGradientColorWithStartColor:(UIColor *)startColor
+-(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor
                              endColor:(UIColor *)endColor
                            startPoint:(CGPoint)startPoint
                              endPoint:(CGPoint)endPoint
                             locations:(NSArray<NSNumber *>*)locations
                                 frame:(CGRect)frame;
 
-- (void)addBorder:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect;
+- (void)tmui_addBorder:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect;
 
 @end
 

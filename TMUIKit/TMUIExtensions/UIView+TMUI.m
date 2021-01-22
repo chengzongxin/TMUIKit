@@ -183,7 +183,7 @@
 
 
 // 半圆角
-- (void)halfCircleCornerDirect:(UIRectCorner)direct radius:(int)radius {
+- (void)tmui_halfCircleCornerDirect:(UIRectCorner)direct radius:(int)radius {
     [self layoutIfNeeded];
     
     // 传0就默认高度一般(半圆)
@@ -197,7 +197,7 @@
 }
 
 
-- (void)shadowCornerRadius:(int)corner color:(UIColor *)color opacity:(float)opacity offsetSize:(CGSize)offset radius:(int)radius {
+- (void)tmui_shadowCornerRadius:(int)corner color:(UIColor *)color opacity:(float)opacity offsetSize:(CGSize)offset radius:(int)radius {
     // bgView 阴影圆角
     self.layer.cornerRadius  = corner;//设置imageView的圆角
     
@@ -212,7 +212,7 @@
     self.layer.shadowRadius  = radius;//设置阴影的圆角
 }
 
-- (void)setBorderForColor:(UIColor *)color
+- (void)tmui_setBorderForColor:(UIColor *)color
                     width:(float)width
                    radius:(float)radius
 {
@@ -223,15 +223,15 @@
 }
 
 
-- (void)setViewCornerRadius:(CGFloat)cornerRadius
+- (void)tmui_setViewCornerRadius:(CGFloat)cornerRadius
                 borderColor:(UIColor *)borderColor
                 borderWidth:(CGFloat)borderWidth{
     self.layer.cornerRadius = cornerRadius;
     self.layer.masksToBounds = YES;
-    [self setViewBorderColor:borderColor borderWidth:borderWidth];
+    [self tmui_setViewBorderColor:borderColor borderWidth:borderWidth];
 }
 
-- (void)setViewBorderColor:(UIColor *)borderColor
+- (void)tmui_setViewBorderColor:(UIColor *)borderColor
                borderWidth:(CGFloat)borderWidth{
     self.layer.borderColor = [borderColor CGColor];
     self.layer.borderWidth = borderWidth;
@@ -239,22 +239,22 @@
 
 
 //实现背景渐变
--(void)setGradientColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor {
+-(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor {
     CGPoint startPoint = CGPointMake(1, 0);
     CGPoint endPoint = CGPointMake(1, 1);
-    [self setGradientColorWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:@[]];
+    [self tmui_setGradientColorWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:@[]];
 }
 
--(void)setGradientColorWithStartColorToDown:(UIColor *)startColor endColor:(UIColor *)endColor {
+-(void)tmui_setGradientColorWithStartColorToDown:(UIColor *)startColor endColor:(UIColor *)endColor {
     CGPoint startPoint = CGPointMake(1, 1);
     CGPoint endPoint = CGPointMake(1, 0);
-    [self setGradientColorWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:@[]];
+    [self tmui_setGradientColorWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:@[]];
 }
--(void)setGradientColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint locations:(NSArray<NSNumber *>*)locations {
-    [self setGradientColorWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:locations frame:self.layer.bounds];
+-(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint locations:(NSArray<NSNumber *>*)locations {
+    [self tmui_setGradientColorWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:locations frame:self.layer.bounds];
 }
 
--(void)setGradientColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint locations:(NSArray<NSNumber *>*)locations frame:(CGRect)frame {
+-(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint locations:(NSArray<NSNumber *>*)locations frame:(CGRect)frame {
     //初始化CAGradientlayer对象，使它的大小为UIView的大小
     CAGradientLayer *gradientLayer  = [CAGradientLayer layer];
     
@@ -280,7 +280,7 @@
     [self.layer insertSublayer:gradientLayer atIndex:0];
 }
 
-- (void)addBorder:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect {
+- (void)tmui_addBorder:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect {
     UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
     switch (rect) {
         case UIRectEdgeAll:
