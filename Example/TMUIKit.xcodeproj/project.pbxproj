@@ -32,6 +32,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1634449625BA6DED0091D4EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1634448F25BA6DED0091D4EF /* qmuidemo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 165F42F01ADB60180057EF6A;
+			remoteInfo = qmuidemo;
+		};
+		1634449825BA6DED0091D4EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1634448F25BA6DED0091D4EF /* qmuidemo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD4EA595228D87B000A55066;
+			remoteInfo = QMUIDemoUITests;
+		};
 		6003F5B3195388D20070C39A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6003F582195388D10070C39A /* Project object */;
@@ -757,6 +771,7 @@
 		1634444825BA65FB0091D4EF /* GDTNativeExpressAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTNativeExpressAd.h; sourceTree = "<group>"; };
 		1634444925BA65FB0091D4EF /* GDTSDKDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDTSDKDefines.h; sourceTree = "<group>"; };
 		1634444A25BA65FB0091D4EF /* libGDTMobSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGDTMobSDK.a; sourceTree = "<group>"; };
+		1634448F25BA6DED0091D4EF /* qmuidemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = qmuidemo.xcodeproj; path = "../../QMUIDemo_iOS-master/qmuidemo.xcodeproj"; sourceTree = "<group>"; };
 		16455E0925B6EDEC00BBBEC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16455E3C25B6F3E400BBBEC2 /* TMUIKitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIKitViewController.h; sourceTree = "<group>"; };
 		16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIKitViewController.m; sourceTree = "<group>"; };
@@ -2821,6 +2836,15 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		1634449025BA6DED0091D4EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1634449725BA6DED0091D4EF /* qmuidemo.app */,
+				1634449925BA6DED0091D4EF /* QMUIDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		16455E3925B6F3C600BBBEC2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -2916,6 +2940,7 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
+				1634448F25BA6DED0091D4EF /* qmuidemo.xcodeproj */,
 				6003F593195388D20070C39A /* Example for TMUIKit */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
@@ -3054,6 +3079,12 @@
 			mainGroup = 6003F581195388D10070C39A;
 			productRefGroup = 6003F58B195388D20070C39A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1634449025BA6DED0091D4EF /* Products */;
+					ProjectRef = 1634448F25BA6DED0091D4EF /* qmuidemo.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6003F589195388D20070C39A /* TMUIKit_Example */,
@@ -3061,6 +3092,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1634449725BA6DED0091D4EF /* qmuidemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = qmuidemo.app;
+			remoteRef = 1634449625BA6DED0091D4EF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1634449925BA6DED0091D4EF /* QMUIDemoUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = QMUIDemoUITests.xctest;
+			remoteRef = 1634449825BA6DED0091D4EF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6003F588195388D20070C39A /* Resources */ = {
