@@ -363,7 +363,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				16B12CD981E3544E2489EEE4 /* [CP] Embed Pods Frameworks */,
-				322F64E552D3049C6549A945 /* [CP] Copy Pods Resources */,
+				50D5BA5C61224A1B2402313F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -517,7 +517,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		322F64E552D3049C6549A945 /* [CP] Copy Pods Resources */ = {
+		50D5BA5C61224A1B2402313F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

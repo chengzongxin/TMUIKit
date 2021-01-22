@@ -1,6 +1,6 @@
 {
   "name": "TMUIKit",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "summary": "TMUIKit 是个UI库，包含UI，组件，宏，库工具等。",
   "description": "'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'",
   "homepage": "https://github.com/chengzongxin/TMUIKit",
@@ -13,12 +13,13 @@
   },
   "source": {
     "git": "https://github.com/chengzongxin/TMUIKit.git",
-    "tag": "0.9.3"
+    "tag": "0.9.4"
   },
   "platforms": {
     "ios": "9.0"
   },
   "source_files": "TMUIKit/TMUIKit.h",
+  "public_header_files": "TMUIKit/TMUIKit.h",
   "dependencies": {
     "Masonry": [
       "~> 1.1.0"
@@ -28,6 +29,7 @@
     {
       "name": "TMUICore",
       "source_files": "TMUIKit/TMUICore/**/*",
+      "public_header_files": "TMUIKit/TMUICore/*.h",
       "frameworks": [
         "Foundation",
         "UIKit",
@@ -37,6 +39,7 @@
     {
       "name": "TMUIDefines",
       "source_files": "TMUIKit/TMUIDefines/**/*",
+      "public_header_files": "TMUIKit/TMUIDefines/*.h",
       "frameworks": [
         "Foundation",
         "UIKit",
@@ -51,6 +54,7 @@
     {
       "name": "TMUIExtensions",
       "source_files": "TMUIKit/TMUIExtensions/**/*",
+      "public_header_files": "TMUIKit/TMUIExtensions/*.h",
       "frameworks": [
         "Foundation",
         "UIKit",
@@ -68,6 +72,7 @@
     {
       "name": "TMUIWidgets",
       "source_files": "TMUIKit/TMUIWidgets/TMUIWidgets.h",
+      "public_header_files": "TMUIKit/TMUIWidgets/*.h",
       "dependencies": {
         "TMUIKit/TMUICore": [
 
