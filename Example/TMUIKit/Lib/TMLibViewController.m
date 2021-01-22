@@ -23,7 +23,8 @@
     [super viewDidLoad];
     
     _datas = @[
-        @{@"title":@"分类:UIView+TMUI",@"class":@"UIViewTMUIViewController"}
+        @{@"title":@"分类:UIView+TMUI",@"class":@"UIViewTMUIViewController"},
+        @{@"title":@"分类:UIButton+TMUI",@"class":@"UIButtonTMUIViewController"}
     ];
     
     [self.view addSubview:self.tableView];
@@ -53,6 +54,7 @@
     NSDictionary *dict = _datas[indexPath.row];
     Class class = NSClassFromString(dict[@"class"]);
     UIViewController *vc = [[class alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

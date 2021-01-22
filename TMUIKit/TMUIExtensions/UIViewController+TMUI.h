@@ -21,7 +21,8 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 };
 
 @interface UIViewController (TMUI)
-
+#pragma mark -  获取当前最顶层的ViewController
++ (UIViewController *)getCurrentVC;
 @end
 
 NS_ASSUME_NONNULL_END

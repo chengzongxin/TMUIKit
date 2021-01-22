@@ -14,5 +14,6 @@
 #import "UIView+TMUI.h"
 #import "UIViewController+TMUI.h"
 #import "NSBundle+TMUI.h"
+#import "UIButton+TMUI.h"
 
 #endif /* TMUIExtensions_h */

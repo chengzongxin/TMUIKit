@@ -19,7 +19,6 @@
     "ios": "9.0"
   },
   "source_files": "TMUIKit/TMUIKit.h",
-  "public_header_files": "TMUIKit/TMUIKit.h",
   "dependencies": {
     "Masonry": [
       "~> 1.1.0"
@@ -29,7 +28,6 @@
     {
       "name": "TMUICore",
       "source_files": "TMUIKit/TMUICore/**/*",
-      "public_header_files": "TMUIKit/TMUICore/*.h",
       "frameworks": [
         "Foundation",
         "UIKit",
@@ -39,7 +37,6 @@
     {
       "name": "TMUIDefines",
       "source_files": "TMUIKit/TMUIDefines/**/*",
-      "public_header_files": "TMUIKit/TMUIDefines/*.h",
       "frameworks": [
         "Foundation",
         "UIKit",
@@ -54,7 +51,6 @@
     {
       "name": "TMUIExtensions",
       "source_files": "TMUIKit/TMUIExtensions/**/*",
-      "public_header_files": "TMUIKit/TMUIExtensions/*.h",
       "frameworks": [
         "Foundation",
         "UIKit",
@@ -72,7 +68,6 @@
     {
       "name": "TMUIWidgets",
       "source_files": "TMUIKit/TMUIWidgets/TMUIWidgets.h",
-      "public_header_files": "TMUIKit/TMUIWidgets/*.h",
       "dependencies": {
         "TMUIKit/TMUICore": [
 

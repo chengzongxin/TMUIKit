@@ -1,6 +1,7 @@
 PODS:
   - LookinServer (1.0.0)
   - Masonry (1.1.0)
+  - ReactiveObjC (3.1.1)
   - TMUIKit (0.9.3):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUIComponents (= 0.9.3)
@@ -120,12 +121,14 @@ PODS:
 
 DEPENDENCIES:
   - LookinServer
+  - ReactiveObjC
   - TMUIKit (from `../`)
 
 SPEC REPOS:
   trunk:
     - LookinServer
     - Masonry
+    - ReactiveObjC
 
 EXTERNAL SOURCES:
   TMUIKit:
@@ -134,8 +137,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  TMUIKit: 32ef44316091169b24409365cfa6cddba8e526e6
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  TMUIKit: f98444640d6d73197430553739297e406f260783
 
-PODFILE CHECKSUM: 421e549943c90757e3ee3db7e673f7d3321a4baf
+PODFILE CHECKSUM: 820ec471527469e79fea92037810d459d19df395
 
 COCOAPODS: 1.10.0
