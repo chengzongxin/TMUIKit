@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '0.9.2'
+  s.version          = '0.9.3'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -149,17 +149,18 @@ Pod::Spec.new do |s|
 #...
 #- ERROR | [iOS] [TMUIKit/TMUIComponents/TMEmptyView/Content] xcodebuild: Returned an unsuccessful exit code. You can use `--verbose` for more information.
 #- NOTE  | [iOS] [TMUIKit/TMUIComponents/TMEmptyView/Content] xcodebuild:  /Users/joe.cheng/Desktop/TMUIKit/TMUIKit/TMUIComponents/TMEmptyView/Content/TMEmptyContentItemProtocol.h:10:9: fatal error: 'TMEmptyDefine.h' file not found
-      ss.subspec 'TMEmptyView' do |sss|
-          sss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/*.{h,m}'
-          sss.subspec 'Content' do |ssss|
-              ssss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/Content/*.{h,m}'
+#      ss.subspec 'TMEmptyView' do |sss|
+#          sss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/*.{h,m}'
+#          sss.public_header_files = 'TMUIKit/TMUIComponents/TMEmptyView/TMEmptyDefine.h
+#          sss.subspec 'Content' do |ssss|
+#              ssss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/Content/*.{h,m}'
 #              ssss.dependency 'TMUIKit/TMUIComponents/TMEmptyView'
-          end
-          # TMEmptyUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMEmptyUIAssets.bundle
-          sss.resource_bundles = {
-              'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
-          }
-      end
+#          end
+#          # TMEmptyUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMEmptyUIAssets.bundle
+#          sss.resource_bundles = {
+#              'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
+#          }
+#      end
 #
 #      ss.subspec 'TMSearchController' do |sss|
 #          sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'

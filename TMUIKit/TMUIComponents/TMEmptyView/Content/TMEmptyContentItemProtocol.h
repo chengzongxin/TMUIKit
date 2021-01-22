@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "TMEmptyDefine.h"
+#import <TMEmptyDefine.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
