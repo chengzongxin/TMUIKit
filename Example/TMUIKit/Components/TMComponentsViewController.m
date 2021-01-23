@@ -19,6 +19,11 @@
     // Do any additional setup after loading the view.
     
     [TMToast toast:@"123123"];
+    
+//    AUInputBox *inputBox = [AUInputBox inputboxWithOriginY:startY inputboxType:AUInputBoxTypeNone];
+//    inputBox.titleLabel.text = @"提示文本";
+//    inputBox.textField.placeholder = @"请按提示输入";
+//    [self.view addSubview:inputBox];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

@@ -1,3 +1,10 @@
+# mPaaS Pods Begin
+#plugin "cocoapods-mPaaS"
+#source "https://code.aliyun.com/mpaas-public/podspecs.git"
+#mPaaS_baseline '10.1.32'  # 请将 x.x.x 替换成真实基线版本
+#mPaaS_version_code 18   # This line is maintained by MPaaS plugin automatically. Please don't modify.
+# mPaaS Pods End
+# ---------------------------------------------------------------------
 #use_frameworks!
 
 platform :ios, '9.0'
@@ -6,6 +13,13 @@ target 'TMUIKit_Example' do
   pod 'TMUIKit', :path => '../'
   pod 'LookinServer', :configurations => ['Debug']
   pod 'ReactiveObjC'
+  
+#  mPaaS_pod "mPaaS_RPC"
+#  mPaaS_pod "mPaaS_CommonUI"
+#  mPaaS_pod "mPaaS_BadgeService"
+#  mPaaS_pod "mPaaS_MobileFramework"
+#  mPaaS_pod "MPBaseTest"
+  
   
   target 'TMUIKit_Tests' do
     inherit! :search_paths

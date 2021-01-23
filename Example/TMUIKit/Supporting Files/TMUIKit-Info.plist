@@ -24,6 +24,15 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>Product ID</key>
+	<string>ONEXB583C93221900_IOS-default</string>
+	<key>Product Version</key>
+	<string>1.0.0.0</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -45,5 +54,23 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>mPaaS</key>
+	<dict>
+		<key>AppId</key>
+		<string>ONEXB583C93221900</string>
+		<key>Platform</key>
+		<string>IOS</string>
+		<key>UniformGateway</key>
+		<string>https://cn-hangzhou-component-gw.cloud.alipay.com/mgw.htm</string>
+		<key>WorkspaceId</key>
+		<string>default</string>
+	</dict>
+	<key>mPaaSInternal</key>
+	<dict>
+		<key>SyncPort</key>
+		<string>443</string>
+		<key>SyncServer</key>
+		<string>mpaas-mss.aliyuncs.com</string>
+	</dict>
 </dict>
 </plist>
