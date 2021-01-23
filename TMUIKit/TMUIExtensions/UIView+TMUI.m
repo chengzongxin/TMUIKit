@@ -557,3 +557,109 @@ TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootVi
 }
 
 @end
+
+
+
+@implementation UIView (Animate)
+
+- (void)tmui_animateWithDuration:(NSTimeInterval)duration animationType:(TMUIViewAnimationType)type completion:(void (^)(BOOL))completion {
+    switch (type) {
+        case TMUIViewAnimationTypeNone: {
+            if (completion) {
+                completion(YES);
+            }
+            break;
+        }
+        case TMUIViewAnimationTypeFadeIn: {
+            CGFloat originAlpha = self.alpha;
+            self.alpha = 0;
+            [UIView animateWithDuration:duration animations:^{
+                self.alpha = originAlpha;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+        case TMUIViewAnimationTypeFadeOut: {
+            [UIView animateWithDuration:duration animations:^{
+                self.alpha = 0;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+        case TMUIViewAnimationTypeZoomIn: {
+            self.transform = CGAffineTransformMakeScale(0, 0);
+            [UIView animateWithDuration:duration animations:^{
+                self.transform = CGAffineTransformMakeScale(1, 1);
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+        case TMUIViewAnimationTypeZoomOut: {
+            [UIView animateWithDuration:duration animations:^{
+                self.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                self.alpha = 0;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+        case TMUIViewAnimationTypeTopIn: {
+            CGRect orginFrame = self.frame;
+            self.frame = CGRectMake(orginFrame.origin.x, -orginFrame.size.height, orginFrame.size.width, orginFrame.size.height);
+            [UIView animateWithDuration:duration animations:^{
+                self.frame = orginFrame;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+        case TMUIViewAnimationTypeTopOut: {
+            CGRect orginFrame = self.frame;
+            [UIView animateWithDuration:duration animations:^{
+                self.frame = CGRectMake(orginFrame.origin.x, -orginFrame.size.height, orginFrame.size.width, orginFrame.size.height);
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+        case TMUIViewAnimationTypeBottomIn: {
+            CGRect orginFrame = self.frame;
+            self.frame = CGRectMake(orginFrame.origin.x, [UIScreen mainScreen].bounds.size.height, orginFrame.size.width, orginFrame.size.height);
+            [UIView animateWithDuration:duration animations:^{
+                self.frame = orginFrame;
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+        case TMUIViewAnimationTypeBottomOut: {
+            CGRect orginFrame = self.frame;
+            [UIView animateWithDuration:duration animations:^{
+                self.frame = CGRectMake(orginFrame.origin.x, [UIScreen mainScreen].bounds.size.height, orginFrame.size.width, orginFrame.size.height);
+            } completion:^(BOOL finished) {
+                if (completion) {
+                    completion(finished);
+                }
+            }];
+            break;
+        }
+    }
+}
+@end

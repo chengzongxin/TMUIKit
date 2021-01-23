@@ -45,6 +45,12 @@
     [self addSegmentedWithLabelText:@"设置圆角:" titles:@[@"none",@"TopLeft",@"TopRight",@"BottomLeft",@"BottomRight",@"LeftRight"] click:^(NSInteger index) {
         [cornerView tmui_cornerDirect:index radius:20];
     }];
+        
+    [self addSegmentedWithLabelText:@"动画:" titles:@[@"none",@"渐显",@"渐隐",@"逐渐放大",@"逐渐放大",@"从顶部出现",@"从顶部移除",@"从底部出现",@"从底部移除"] click:^(NSInteger index) {
+        [cornerView tmui_animateWithDuration:2 animationType:index completion:^(BOOL finished) {
+            NSLog(@"animate finish");
+        }];
+    }];
 }
 
 - (void)shadowGradientViewTest{

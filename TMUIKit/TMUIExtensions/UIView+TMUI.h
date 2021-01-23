@@ -208,4 +208,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+/// 显示(退出)动画
+typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
+    /// 无动画
+    TMUIViewAnimationTypeNone,
+    /// 渐显
+    TMUIViewAnimationTypeFadeIn,
+    /// 渐隐
+    TMUIViewAnimationTypeFadeOut,
+    /// 逐渐放大, 显示
+    TMUIViewAnimationTypeZoomIn,
+    /// 逐渐放大, 消失
+    TMUIViewAnimationTypeZoomOut,
+    /// 从顶部出现
+    TMUIViewAnimationTypeTopIn,
+    /// 从顶部移除
+    TMUIViewAnimationTypeTopOut,
+    /// 从底部出现
+    TMUIViewAnimationTypeBottomIn,
+    /// 从底部移除
+    TMUIViewAnimationTypeBottomOut
+};
+
+
+@interface UIView (TMUI_Animate)
+
+- (void)tmui_animateWithDuration:(NSTimeInterval)duration animationType:(TMUIViewAnimationType)type completion:(void (^ __nullable)(BOOL finished))completion;
+
+
+@end
+
 NS_ASSUME_NONNULL_END
