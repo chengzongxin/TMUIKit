@@ -24,10 +24,16 @@
     btn.tmui_image = [UIImage imageNamed:@"icon_moreOperation_shareWeibo"];
     btn.tmui_text = @"yyds";
     
-    btn.frame = CGRectMake(100, 100, 100, 100);
+//    btn.frame = CGRectMake(100, 100, 100, 100);
     btn.center = self.view.center;
     btn.backgroundColor = UIColor.grayColor;
     [self.view addSubview:btn];
+    
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(100);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
+    }];
+    
     [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         NSLog(@"click button");
     }];

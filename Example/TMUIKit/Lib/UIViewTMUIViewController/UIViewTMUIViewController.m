@@ -25,13 +25,18 @@
 
 - (void)cornerViewTest{
     
-    UIView *cornerView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 200, 100)];
+    UIView *cornerView = [[UIView alloc] init];
     cornerView.backgroundColor = UIColor.orangeColor;
     [cornerView tmui_addSingerTapWithBlock:^{
         NSLog(@"click view");
     }];
     
     [self.view addSubview:cornerView];
+    [cornerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(100);
+        make.top.mas_equalTo(100);
+        make.size.mas_equalTo(CGSizeMake(200, 100));
+    }];
     
     NSLog(@"%d",cornerView.tmui_visible);
     NSLog(@"%@",cornerView.tmui_viewController);
@@ -44,9 +49,13 @@
 
 - (void)shadowGradientViewTest{
     
-    UIView *shadowGradientView = [[UIView alloc] initWithFrame:CGRectMake(100, 300, 200, 100)];
+    UIView *shadowGradientView = [[UIView alloc] init];
     [self.view addSubview:shadowGradientView];
-    
+    [shadowGradientView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(100);
+        make.top.mas_equalTo(300);
+        make.size.mas_equalTo(CGSizeMake(200, 100));
+    }];
     shadowGradientView.backgroundColor = UIColor.orangeColor;
     shadowGradientView.layer.cornerRadius = 10;
     
@@ -54,10 +63,13 @@
     
     [shadowGradientView tmui_gradientLeftToRightWithStartColor:UIColor.redColor endColor:UIColor.greenColor];
     
-    UIView *shadowGradientView1 = [[UIView alloc] initWithFrame:CGRectMake(100, 500, 200, 100)];
-    
-    
+    UIView *shadowGradientView1 = [[UIView alloc] init];
     [self.view addSubview:shadowGradientView1];
+    [shadowGradientView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(100);
+        make.top.mas_equalTo(500);
+        make.size.mas_equalTo(CGSizeMake(200, 100));
+    }];
     shadowGradientView1.layer.cornerRadius = 10;
     
     shadowGradientView1.backgroundColor = UIColor.orangeColor;

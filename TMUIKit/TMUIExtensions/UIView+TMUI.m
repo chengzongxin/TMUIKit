@@ -240,6 +240,10 @@
             gradientLayer = layer;
         }
     }
+    if (!frame.size.height || !frame.size.height) {
+        [self layoutIfNeeded];  // masonry 立即刷新界面
+        frame = self.layer.bounds;
+    }
     gradientLayer.frame = frame;
     gradientLayer.cornerRadius = self.layer.cornerRadius;
     gradientLayer.masksToBounds = YES;
