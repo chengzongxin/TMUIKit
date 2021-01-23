@@ -17,30 +17,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = UIColor.whiteColor;
+    [self cornerViewTest];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 222, 100)];
-    view.backgroundColor = UIColor.orangeColor;
-    [view tmui_addSingerTapWithBlock:^{
+    [self shadowGradientViewTest];
+}
+
+- (void)cornerViewTest{
+    
+    UIView *cornerView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 200, 100)];
+    cornerView.backgroundColor = UIColor.orangeColor;
+    [cornerView tmui_addSingerTapWithBlock:^{
         NSLog(@"click view");
     }];
     
-    [self.view addSubview:view];
+    [self.view addSubview:cornerView];
     
-    NSLog(@"%d",view.tmui_visible);
-    NSLog(@"%@",view.tmui_viewController);
-//    NSLog(@"%d",self.view.tmui_isControllerRootView);
+    NSLog(@"%d",cornerView.tmui_visible);
+    NSLog(@"%@",cornerView.tmui_viewController);
     
     
-//    UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-//    view2.backgroundColor = UIColor.redColor;
-//    [self.view addSubview:view2];
-//    [view2 mas_makeConstraints:^(MASConstraintMaker *make) {
-////        make.left.right.top.bottom.equalTo(self.view).inset(100);
-//        make.edges.mas_equalTo(UIEdgeInsetsMake(100, 100, 100, 100));
-//    }];
+    [self addSegmentedWithLabelText:@"设置圆角:" titles:@[@"none",@"TopLeft",@"TopRight",@"BottomLeft",@"BottomRight",@"LeftRight"] click:^(NSInteger index) {
+        [cornerView tmui_cornerDirect:index radius:20];
+    }];
+}
+
+- (void)shadowGradientViewTest{
+    
+    UIView *shadowGradientView = [[UIView alloc] initWithFrame:CGRectMake(100, 300, 200, 100)];
+    [self.view addSubview:shadowGradientView];
+    
+    shadowGradientView.backgroundColor = UIColor.orangeColor;
+    shadowGradientView.layer.cornerRadius = 10;
+    
+    [shadowGradientView tmui_shadowColor:UIColor.grayColor opacity:0.5 offsetSize:CGSizeMake(10, 10) corner:5];
+    
+    [shadowGradientView tmui_gradientLeftToRightWithStartColor:UIColor.redColor endColor:UIColor.greenColor];
+    
+    UIView *shadowGradientView1 = [[UIView alloc] initWithFrame:CGRectMake(100, 500, 200, 100)];
+    
+    
+    [self.view addSubview:shadowGradientView1];
+    shadowGradientView1.layer.cornerRadius = 10;
+    
+    shadowGradientView1.backgroundColor = UIColor.orangeColor;
+    
+    [shadowGradientView1 tmui_shadowColor:UIColor.grayColor opacity:0.5 offsetSize:CGSizeMake(10, 10) corner:5];
+    
+    [shadowGradientView1 tmui_gradientUpToDownWithStartColorToDown:UIColor.redColor endColor:UIColor.greenColor];
+    
 }
 
 

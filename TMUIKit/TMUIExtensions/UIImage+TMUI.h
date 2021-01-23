@@ -149,6 +149,18 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  */
 + (nullable UIImage *)tmui_imageWithView:(UIView *)view;
 
+/**
+ 对传进来的 `UIView` 截图，生成一个 `UIImage` 并返回。注意这里使用的是 iOS 7的系统截图接口。
+
+ @param view         要截图的 `UIView`
+ @param afterUpdates 是否要在界面更新完成后才截图
+
+ @return `UIView` 的截图
+ 
+ @warning UIView 的 transform 并不会在截图里生效
+ */
++ (nullable UIImage *)tmui_imageWithView:(UIView *)view afterScreenUpdates:(BOOL)afterUpdates;
+
 @end
 
 NS_ASSUME_NONNULL_END

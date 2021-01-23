@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TMBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIViewTMUIViewController : UIViewController
+@interface UIViewTMUIViewController : TMBaseViewController
 
 @end
 

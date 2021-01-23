@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  设置半圆View
 
- @param direct 半圆的方向
+ @param direct 半圆的方向,支持 | 操作，比如 UIRectCornerTopLeft | UIRectCornerTopRight 即左上和右上圆角, 不可和阴影效果同时设置
  UIRectCornerTopLeft     = 1 << 0,
  UIRectCornerTopRight    = 1 << 1,
  UIRectCornerBottomLeft  = 1 << 2,
@@ -50,44 +50,21 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param radius 半圆半径,传0就默认高度一般(半圆)
  */
-- (void)tmui_halfCircleCornerDirect:(UIRectCorner)direct radius:(int)radius;
+- (void)tmui_cornerDirect:(UIRectCorner)direct radius:(int)radius;
 
 
 /**
  设置View和View的阴影圆角
  
- @param corner 设置View的圆角
  @param color   阴影的颜色
  @param opacity 阴影的透明度
  @param offset 阴影的偏移距离
- @param radius 阴影的圆角
+ @param corner 阴影的圆角
  */
-- (void)tmui_shadowCornerRadius:(int)corner color:(UIColor *)color opacity:(float)opacity offsetSize:(CGSize)offset radius:(int)radius;
-
-
-
-/**
- 设置View边框和颜色
-
- @param color 颜色
- @param width 宽度
- @param radius 圆角
- */
-- (void)tmui_setBorderForColor:(UIColor *)color
-                    width:(float)width
-                   radius:(float)radius;
-
-
-/**
- 设置View圆角,边框和颜色
-
- @param cornerRadius 圆角
- @param borderColor 边框颜色
- @param borderWidth 边框宽度
- */
-- (void)tmui_setViewCornerRadius:(CGFloat)cornerRadius
-                borderColor:(UIColor *)borderColor
-                borderWidth:(CGFloat)borderWidth;
+- (void)tmui_shadowColor:(UIColor *)color
+                 opacity:(float)opacity
+              offsetSize:(CGSize)offset
+                  corner:(int)corner;
 
 
 /**
@@ -96,8 +73,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param borderColor 边框颜色
  @param borderWidth 边框宽度
  */
-- (void)tmui_setViewBorderColor:(UIColor *)borderColor
-               borderWidth:(CGFloat)borderWidth;
+- (void)tmui_borderColor:(UIColor *)borderColor
+             borderWidth:(CGFloat)borderWidth;
 
 
 /**
@@ -105,26 +82,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param startColor 起始颜色
  @param endColor 结束颜色
  */
--(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor
-                             endColor:(UIColor *)endColor;
+-(void)tmui_gradientLeftToRightWithStartColor:(UIColor *)startColor
+                                     endColor:(UIColor *)endColor;
 
 
-//
--(void)tmui_setGradientColorWithStartColorToDown:(UIColor *)startColor endColor:(UIColor *)endColor;;
 
-/**
- 设置View背景颜色渐变
- @param startColor 起始颜色
- @param endColor 结束颜色
- @param startPoint 开始位置
- @param endPoint 结束位置
- @param locations 颜色分割点
- */
--(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor
-                             endColor:(UIColor *)endColor
-                           startPoint:(CGPoint)startPoint
-                             endPoint:(CGPoint)endPoint
-                            locations:(NSArray<NSNumber *>*)locations;
+-(void)tmui_gradientUpToDownWithStartColorToDown:(UIColor *)startColor
+                                        endColor:(UIColor *)endColor;;
 
 /**
 设置View背景颜色渐变
@@ -135,14 +99,14 @@ NS_ASSUME_NONNULL_BEGIN
 @param locations 颜色分割点
 @param frame  渐变frame，页面没初始化需添加frame
 */
--(void)tmui_setGradientColorWithStartColor:(UIColor *)startColor
-                             endColor:(UIColor *)endColor
-                           startPoint:(CGPoint)startPoint
-                             endPoint:(CGPoint)endPoint
-                            locations:(NSArray<NSNumber *>*)locations
-                                frame:(CGRect)frame;
+-(void)tmui_gradientWithStartColor:(UIColor *)startColor
+                          endColor:(UIColor *)endColor
+                        startPoint:(CGPoint)startPoint
+                          endPoint:(CGPoint)endPoint
+                         locations:(NSArray<NSNumber *>*)locations
+                             frame:(CGRect)frame;
 
-- (void)tmui_addBorder:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect;
+- (void)tmui_border:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect;
 
 @end
 
@@ -230,6 +194,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
+
+@end
+
+
+/**
+ *  方便地将某个 UIView 截图并转成一个 UIImage，注意如果这个 UIView 本身做了 transform，也不会在截图上反映出来，截图始终都是原始 UIView 的截图。
+ */
+@interface UIView (TMUI_Snapshotting)
+
+- (UIImage *)tmui_snapshotLayerImage;
+- (UIImage *)tmui_snapshotImageAfterScreenUpdates:(BOOL)afterScreenUpdates;
 
 @end
 
