@@ -9,5 +9,8 @@
 #define TMUIWidgets_h
 
 #import "TMButton.h"
+#import "TMLabel.h"
+#import "TMTextField.h"
+#import "TMTextView.h"
 
 #endif /* TMUIWidgets_h */

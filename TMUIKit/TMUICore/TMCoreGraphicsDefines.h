@@ -99,5 +99,19 @@ CGRectSafeValue(CGRect rect) {
     return CGRectMake(CGFloatSafeValue(CGRectGetMinX(rect)), CGFloatSafeValue(CGRectGetMinY(rect)), CGFloatSafeValue(CGRectGetWidth(rect)), CGFloatSafeValue(CGRectGetHeight(rect)));
 }
 
+#pragma mark - UIEdgeInsets
+
+/// 获取UIEdgeInsets在水平方向上的值
+NS_INLINE CGFloat
+UIEdgeInsetsGetHorizontalValue(UIEdgeInsets insets) {
+    return insets.left + insets.right;
+}
+
+/// 获取UIEdgeInsets在垂直方向上的值
+NS_INLINE CGFloat
+UIEdgeInsetsGetVerticalValue(UIEdgeInsets insets) {
+    return insets.top + insets.bottom;
+}
+
 
 #endif /* TMCoreGraphicsDefines_h */

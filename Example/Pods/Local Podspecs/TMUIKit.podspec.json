@@ -87,7 +87,19 @@
       "subspecs": [
         {
           "name": "TMButton",
-          "source_files": "TMUIKit/TMUIWidgets/TMButton/"
+          "source_files": "TMUIKit/TMUIWidgets/TMButton"
+        },
+        {
+          "name": "TMLabel",
+          "source_files": "TMUIKit/TMUIWidgets/TMLabel"
+        },
+        {
+          "name": "TMTextField",
+          "source_files": "TMUIKit/TMUIWidgets/TMTextField"
+        },
+        {
+          "name": "TMTextView",
+          "source_files": "TMUIKit/TMUIWidgets/TMTextView"
         }
       ]
     },

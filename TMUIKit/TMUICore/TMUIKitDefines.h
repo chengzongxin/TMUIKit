@@ -14,19 +14,6 @@
 
 /// !!!: 此UIKit库扩展的一些宏定义均以相关UIKit里的类名作开头
 
-#pragma mark - UIEdgeInsets
-
-/// 获取UIEdgeInsets在水平方向上的值
-NS_INLINE CGFloat
-UIEdgeInsetsGetHorizontalValue(UIEdgeInsets insets) {
-    return insets.left + insets.right;
-}
-
-/// 获取UIEdgeInsets在垂直方向上的值
-NS_INLINE CGFloat
-UIEdgeInsetsGetVerticalValue(UIEdgeInsets insets) {
-    return insets.top + insets.bottom;
-}
 
 
 #pragma mark - 创建UIKit库里基础对象的便捷宏

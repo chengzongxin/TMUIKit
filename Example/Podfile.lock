@@ -113,7 +113,25 @@ PODS:
     - TMUIKit/TMUIDefines
     - TMUIKit/TMUIExtensions
     - TMUIKit/TMUIWidgets/TMButton (= 0.9.4)
+    - TMUIKit/TMUIWidgets/TMLabel (= 0.9.4)
+    - TMUIKit/TMUIWidgets/TMTextField (= 0.9.4)
+    - TMUIKit/TMUIWidgets/TMTextView (= 0.9.4)
   - TMUIKit/TMUIWidgets/TMButton (0.9.4):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUICore
+    - TMUIKit/TMUIDefines
+    - TMUIKit/TMUIExtensions
+  - TMUIKit/TMUIWidgets/TMLabel (0.9.4):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUICore
+    - TMUIKit/TMUIDefines
+    - TMUIKit/TMUIExtensions
+  - TMUIKit/TMUIWidgets/TMTextField (0.9.4):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUICore
+    - TMUIKit/TMUIDefines
+    - TMUIKit/TMUIExtensions
+  - TMUIKit/TMUIWidgets/TMTextView (0.9.4):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUICore
     - TMUIKit/TMUIDefines
@@ -138,7 +156,7 @@ SPEC CHECKSUMS:
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  TMUIKit: 704a93b072eb86a4f5eae0c4aa3d5edbb5cc28a9
+  TMUIKit: f7d6db928a1c030a0e7e8c2ebe6011ab9944c3f7
 
 PODFILE CHECKSUM: 3311888867740602f7e0ae2f500038e5f3a8a593
 

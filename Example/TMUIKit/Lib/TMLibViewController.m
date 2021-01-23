@@ -24,7 +24,8 @@
     
     _datas = @[
         @{@"title":@"分类:UIView+TMUI",@"class":@"UIViewTMUIViewController"},
-        @{@"title":@"分类:UIButton+TMUI",@"class":@"UIButtonTMUIViewController"}
+        @{@"title":@"分类:UIButton+TMUI",@"class":@"UIButtonTMUIViewController"},
+        @{@"title":@"分类:UILable+TMUI",@"class":@"UILabelTMUIViewController"}
     ];
     
     [self.view addSubview:self.tableView];

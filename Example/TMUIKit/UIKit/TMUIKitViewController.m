@@ -24,7 +24,10 @@
     [super viewDidLoad];
     
     _datas = @[
-        @{@"title":@"TMButton",@"class":@"TMButtonViewController"}
+        @{@"title":@"TMButton",@"class":@"TMButtonViewController"},
+        @{@"title":@"TMLabel",@"class":@"TMLabelViewController"},
+        @{@"title":@"TMTextField",@"class":@"TMTextFieldViewController"},
+        @{@"title":@"TMTextView",@"class":@"TMTextViewViewController"}
     ];
     
     [self.view addSubview:self.tableView];
