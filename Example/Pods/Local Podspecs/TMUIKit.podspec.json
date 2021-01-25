@@ -86,20 +86,20 @@
       },
       "subspecs": [
         {
-          "name": "TMButton",
-          "source_files": "TMUIKit/TMUIWidgets/TMButton"
+          "name": "TMUIButton",
+          "source_files": "TMUIKit/TMUIWidgets/TMUIButton"
         },
         {
-          "name": "TMLabel",
-          "source_files": "TMUIKit/TMUIWidgets/TMLabel"
+          "name": "TMUILabel",
+          "source_files": "TMUIKit/TMUIWidgets/TMUILabel"
         },
         {
-          "name": "TMTextField",
-          "source_files": "TMUIKit/TMUIWidgets/TMTextField"
+          "name": "TMUITextField",
+          "source_files": "TMUIKit/TMUIWidgets/TMUITextField"
         },
         {
-          "name": "TMTextView",
-          "source_files": "TMUIKit/TMUIWidgets/TMTextView"
+          "name": "TMUITextView",
+          "source_files": "TMUIKit/TMUIWidgets/TMUITextView"
         }
       ]
     },

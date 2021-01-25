@@ -6,20 +6,20 @@
 //  Copyright © 2021 chengzongxin. All rights reserved.
 //
 
-#import "TMLabelViewController.h"
+#import "TMUILabelViewController.h"
 
-@interface TMLabelViewController ()
+@interface TMUILabelViewController ()
 
 @end
 
-@implementation TMLabelViewController
+@implementation TMUILabelViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     
-    TMLabel *label = [[TMLabel alloc] init];
+    TMUILabel *label = [[TMUILabel alloc] init];
     [self.view addSubview:label];
     label.text = @"可长按复制";
     label.backgroundColor = UIColor.tmui_randomColor;
@@ -32,12 +32,12 @@
     
     // set
     label.canPerformCopyAction = YES;
-    label.didCopyBlock = ^(TMLabel * _Nonnull label, NSString * _Nonnull stringCopied) {
+    label.didCopyBlock = ^(TMUILabel * _Nonnull label, NSString * _Nonnull stringCopied) {
         NSLog(@"%@",stringCopied);
     };
     
     
-    TMLabel *label1 = [TMLabel new];
+    TMUILabel *label1 = [TMUILabel new];
     label1.text = @"可设置contentinsets";
     label1.backgroundColor = UIColor.tmui_randomColor;
     [self.view addSubview:label1];

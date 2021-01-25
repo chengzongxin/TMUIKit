@@ -6,18 +6,18 @@
 //  Copyright © 2021 chengzongxin. All rights reserved.
 //
 
-#import "TMTextViewViewController.h"
+#import "TMUITextViewViewController.h"
 
-@interface TMTextViewViewController ()
+@interface TMUITextViewViewController ()
 
 @end
 
-@implementation TMTextViewViewController
+@implementation TMUITextViewViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    TMTextView *textView = [[TMTextView alloc] init];
+    TMUITextView *textView = [[TMUITextView alloc] init];
     [self.view addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@100);

@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, TMUIButtonImagePosition) {
     TMUIButtonImagePositionRight,           // imageView在titleLabel右边
 };
 
-@interface TMButton : UIButton
+@interface TMUIButton : UIButton
 
 /**
  * 设置按钮里图标和文字的相对位置，默认为TMUIButtonImagePositionLeft<br/>

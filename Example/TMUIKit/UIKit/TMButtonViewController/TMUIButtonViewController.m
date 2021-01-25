@@ -6,22 +6,22 @@
 //  Copyright © 2021 chengzongxin. All rights reserved.
 //
 
-#import "TMButtonViewController.h"
+#import "TMUIButtonViewController.h"
 
-@interface TMButtonViewController ()
+@interface TMUIButtonViewController ()
 
-@property (nonatomic, strong) TMButton *btn;
+@property (nonatomic, strong) TMUIButton *btn;
 
 @end
 
-@implementation TMButtonViewController
+@implementation TMUIButtonViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.whiteColor;
     
-    TMButton *btn = [[TMButton alloc] initWithFrame:CGRectMake(100, 100, 220, 300)];
+    TMUIButton *btn = [[TMUIButton alloc] initWithFrame:CGRectMake(100, 100, 220, 300)];
     btn.backgroundColor = UIColor.orangeColor;
     [self.view addSubview: btn];
     [btn setImage:[UIImage imageNamed:@"icon_moreOperation_shareWeibo"] forState:UIControlStateNormal];

@@ -24,10 +24,10 @@
     [super viewDidLoad];
     
     _datas = @[
-        @{@"title":@"TMButton",@"class":@"TMButtonViewController"},
-        @{@"title":@"TMLabel",@"class":@"TMLabelViewController"},
-        @{@"title":@"TMTextField",@"class":@"TMTextFieldViewController"},
-        @{@"title":@"TMTextView",@"class":@"TMTextViewViewController"}
+        @{@"title":@"TMUIButton",@"class":@"TMUIButtonViewController"},
+        @{@"title":@"TMUILabel",@"class":@"TMUILabelViewController"},
+        @{@"title":@"TMUITextField",@"class":@"TMUITextFieldViewController"},
+        @{@"title":@"TMUITextView",@"class":@"TMUITextViewViewController"}
     ];
     
     [self.view addSubview:self.tableView];
@@ -57,6 +57,7 @@
     NSDictionary *dict = _datas[indexPath.row];
     Class class = NSClassFromString(dict[@"class"]);
     UIViewController *vc = [[class alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

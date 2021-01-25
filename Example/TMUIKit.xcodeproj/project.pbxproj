@@ -13,11 +13,11 @@
 		16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */; };
 		16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */; };
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
-		16945FD525B7C4DD0056AE74 /* TMButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMButtonViewController.m */; };
+		16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */; };
 		1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */; };
-		16C6506925BC02300047618E /* TMLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6506825BC02300047618E /* TMLabelViewController.m */; };
-		16C6507325BC02390047618E /* TMTextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507225BC02390047618E /* TMTextFieldViewController.m */; };
-		16C6507825BC02410047618E /* TMTextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507725BC02410047618E /* TMTextViewViewController.m */; };
+		16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6506825BC02300047618E /* TMUILabelViewController.m */; };
+		16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507225BC02390047618E /* TMUITextFieldViewController.m */; };
+		16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507725BC02410047618E /* TMUITextViewViewController.m */; };
 		16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */; };
 		16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFDA25BA7BCD00A3273D /* TMBaseViewController.m */; };
 		16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFE125BAAD7D00A3273D /* UISegmentedControl+associateObject.m */; };
@@ -91,16 +91,16 @@
 		16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMLibViewController.m; sourceTree = "<group>"; };
 		16455E5A25B6FBC700BBBEC2 /* InjectionIIIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjectionIIIHelper.h; sourceTree = "<group>"; };
 		16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjectionIIIHelper.m; sourceTree = "<group>"; };
-		16945FD325B7C4DD0056AE74 /* TMButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMButtonViewController.h; sourceTree = "<group>"; };
-		16945FD425B7C4DD0056AE74 /* TMButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMButtonViewController.m; sourceTree = "<group>"; };
+		16945FD325B7C4DD0056AE74 /* TMUIButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIButtonViewController.h; sourceTree = "<group>"; };
+		16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIButtonViewController.m; sourceTree = "<group>"; };
 		1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUIViewController.h; sourceTree = "<group>"; };
 		1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUIViewController.m; sourceTree = "<group>"; };
-		16C6506725BC02300047618E /* TMLabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMLabelViewController.h; sourceTree = "<group>"; };
-		16C6506825BC02300047618E /* TMLabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMLabelViewController.m; sourceTree = "<group>"; };
-		16C6507125BC02390047618E /* TMTextFieldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMTextFieldViewController.h; sourceTree = "<group>"; };
-		16C6507225BC02390047618E /* TMTextFieldViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMTextFieldViewController.m; sourceTree = "<group>"; };
-		16C6507625BC02410047618E /* TMTextViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMTextViewViewController.h; sourceTree = "<group>"; };
-		16C6507725BC02410047618E /* TMTextViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMTextViewViewController.m; sourceTree = "<group>"; };
+		16C6506725BC02300047618E /* TMUILabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUILabelViewController.h; sourceTree = "<group>"; };
+		16C6506825BC02300047618E /* TMUILabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUILabelViewController.m; sourceTree = "<group>"; };
+		16C6507125BC02390047618E /* TMUITextFieldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITextFieldViewController.h; sourceTree = "<group>"; };
+		16C6507225BC02390047618E /* TMUITextFieldViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITextFieldViewController.m; sourceTree = "<group>"; };
+		16C6507625BC02410047618E /* TMUITextViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITextViewViewController.h; sourceTree = "<group>"; };
+		16C6507725BC02410047618E /* TMUITextViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITextViewViewController.m; sourceTree = "<group>"; };
 		16C650C525BC1DF00047618E /* UILabelTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabelTMUIViewController.h; sourceTree = "<group>"; };
 		16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILabelTMUIViewController.m; sourceTree = "<group>"; };
 		16EABFD925BA7BCD00A3273D /* TMBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMBaseViewController.h; sourceTree = "<group>"; };
@@ -234,14 +234,14 @@
 		16945FD225B7C4D10056AE74 /* TMButtonViewController */ = {
 			isa = PBXGroup;
 			children = (
-				16945FD325B7C4DD0056AE74 /* TMButtonViewController.h */,
-				16945FD425B7C4DD0056AE74 /* TMButtonViewController.m */,
-				16C6506725BC02300047618E /* TMLabelViewController.h */,
-				16C6506825BC02300047618E /* TMLabelViewController.m */,
-				16C6507125BC02390047618E /* TMTextFieldViewController.h */,
-				16C6507225BC02390047618E /* TMTextFieldViewController.m */,
-				16C6507625BC02410047618E /* TMTextViewViewController.h */,
-				16C6507725BC02410047618E /* TMTextViewViewController.m */,
+				16945FD325B7C4DD0056AE74 /* TMUIButtonViewController.h */,
+				16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */,
+				16C6506725BC02300047618E /* TMUILabelViewController.h */,
+				16C6506825BC02300047618E /* TMUILabelViewController.m */,
+				16C6507125BC02390047618E /* TMUITextFieldViewController.h */,
+				16C6507225BC02390047618E /* TMUITextFieldViewController.m */,
+				16C6507625BC02410047618E /* TMUITextViewViewController.h */,
+				16C6507725BC02410047618E /* TMUITextViewViewController.m */,
 			);
 			path = TMButtonViewController;
 			sourceTree = "<group>";
@@ -630,9 +630,9 @@
 				16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */,
 				163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */,
 				16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */,
-				16C6507825BC02410047618E /* TMTextViewViewController.m in Sources */,
-				16C6506925BC02300047618E /* TMLabelViewController.m in Sources */,
-				16C6507325BC02390047618E /* TMTextFieldViewController.m in Sources */,
+				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
+				16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */,
+				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
@@ -640,7 +640,7 @@
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
 				16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */,
-				16945FD525B7C4DD0056AE74 /* TMButtonViewController.m in Sources */,
+				16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */,
 				16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

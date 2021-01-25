@@ -5,9 +5,9 @@
 //  Created by Joe.cheng on 2021/1/23.
 //
 
-#import "TMTextView.h"
+#import "TMUITextView.h"
 
-@implementation TMTextView
+@implementation TMUITextView
 
 /*
 // Only override drawRect: if you perform custom drawing.

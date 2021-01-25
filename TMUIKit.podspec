@@ -83,21 +83,21 @@ Pod::Spec.new do |s|
     ss.dependency 'TMUIKit/TMUICore'
     ss.dependency 'TMUIKit/TMUIDefines'
     ss.dependency 'TMUIKit/TMUIExtensions'
-    # TMButton
-    ss.subspec 'TMButton' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMButton'
+    # TMUIButton
+    ss.subspec 'TMUIButton' do |sss|
+      sss.source_files = 'TMUIKit/TMUIWidgets/TMUIButton'
     end
-    # TMLabel
-    ss.subspec 'TMLabel' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMLabel'
+    # TMUILabel
+    ss.subspec 'TMUILabel' do |sss|
+      sss.source_files = 'TMUIKit/TMUIWidgets/TMUILabel'
     end
-    # TMTextField
-    ss.subspec 'TMTextField' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMTextField'
+    # TMUITextField
+    ss.subspec 'TMUITextField' do |sss|
+      sss.source_files = 'TMUIKit/TMUIWidgets/TMUITextField'
     end
-    # TMTextView
-    ss.subspec 'TMTextView' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMTextView'
+    # TMUITextView
+    ss.subspec 'TMUITextView' do |sss|
+      sss.source_files = 'TMUIKit/TMUIWidgets/TMUITextView'
     end
   end
   

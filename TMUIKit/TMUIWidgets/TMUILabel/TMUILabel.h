@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * 同时通过将`canPerformCopyAction`置为`YES`来开启长按复制文本的功能，复制 item 的文案可通过 menuItemTitleForCopyAction 修改，长按时label的背景色默认为`highlightedBackgroundColor`
  */
-@interface TMLabel : UILabel
+@interface TMUILabel : UILabel
 
 /// 控制label内容的padding，默认为UIEdgeInsetsZero
 @property(nonatomic,assign) UIEdgeInsets contentEdgeInsets;
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) IBInspectable UIColor *highlightedBackgroundColor UI_APPEARANCE_SELECTOR;
 
 /// 点击了“复制”后的回调
-@property(nonatomic, copy) void (^didCopyBlock)(TMLabel *label, NSString *stringCopied);
+@property(nonatomic, copy) void (^didCopyBlock)(TMUILabel *label, NSString *stringCopied);
 
 @end
 

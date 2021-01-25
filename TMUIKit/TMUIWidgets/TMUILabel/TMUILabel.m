@@ -5,18 +5,18 @@
 //  Created by Joe.cheng on 2021/1/23.
 //
 
-#import "TMLabel.h"
+#import "TMUILabel.h"
 #import "TMCoreGraphicsDefines.h"
 #import "TMUICommonDefines.h"
 
-@interface TMLabel ()
+@interface TMUILabel ()
 
 @property(nonatomic, strong) UIColor *originalBackgroundColor;
 @property(nonatomic, strong) UILongPressGestureRecognizer *longGestureRecognizer;
 @end
 
 
-@implementation TMLabel
+@implementation TMUILabel
 
 
 - (void)dealloc {

@@ -5,16 +5,16 @@
 //  Created by Joe.cheng on 2021/1/20.
 //
 
-#import "TMButton.h"
+#import "TMUIButton.h"
 #import "TMUICommonDefines.h"
 #import "TMCoreGraphicsDefines.h"
 
-@interface TMButton ()
+@interface TMUIButton ()
 
 
 @end
 
-@implementation TMButton
+@implementation TMUIButton
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

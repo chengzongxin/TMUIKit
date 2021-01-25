@@ -8,9 +8,9 @@
 #ifndef TMUIWidgets_h
 #define TMUIWidgets_h
 
-#import "TMButton.h"
-#import "TMLabel.h"
-#import "TMTextField.h"
-#import "TMTextView.h"
+#import "TMUIButton.h"
+#import "TMUILabel.h"
+#import "TMUITextField.h"
+#import "TMUITextView.h"
 
 #endif /* TMUIWidgets_h */
