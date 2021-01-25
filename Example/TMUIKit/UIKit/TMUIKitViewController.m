@@ -56,7 +56,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dict = _datas[indexPath.row];
     Class class = NSClassFromString(dict[@"class"]);
+    NSString *title = dict[@"title"];
     UIViewController *vc = [[class alloc] init];
+    vc.title = title;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

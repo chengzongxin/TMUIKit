@@ -59,6 +59,53 @@ tmui_safeAreaBottomInset(){
     return bottom;
 }
 
+#pragma mark - 导航栏和Tab栏高度
+NS_INLINE CGFloat
+tmui_navigationBarHeight(){
+    static CGFloat navHeight = 0;
+    if (navHeight > 0) {
+        return navHeight;
+    }
+    navHeight = 64;
+    if (@available(iOS 11.0, *)) {
+        CGFloat top = TMUI_AppWindow.safeAreaInsets.top;
+        navHeight = top > 0 ? TMUI_AppWindow.safeAreaInsets.top + 44 : 64;
+    }
+    return navHeight;
+}
+
+NS_INLINE CGFloat
+tmui_tabbarHeight(){
+    return tmui_safeAreaBottomInset() + 49;
+}
+
+/**
+ *  判断字符串是否为空
+ *
+ *  @param string 输入的字符串
+ *
+ *  @return YES,为空；NO,不为空
+ */
+NS_INLINE BOOL
+k_IsBlankString(NSString *string){
+    if (string == nil) {
+        return YES;
+    }
+    
+    if (string == NULL) {
+        return YES;
+    }
+    
+    if ([string isKindOfClass:[NSNull class]]) {
+        return YES;
+    }
+    
+    if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark - 数学计算
 
 /// 角度转弧度
