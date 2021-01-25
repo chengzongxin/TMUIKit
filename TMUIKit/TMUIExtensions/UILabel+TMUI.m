@@ -31,6 +31,10 @@
     return self;
 }
 
+- (CGFloat)tmui_attributeTextLineHeight{
+    return [(NSMutableParagraphStyle *)[self.attributedText attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:nil] lineSpacing];
+}
+
 @end
 
 
@@ -48,7 +52,7 @@
     }
 }
 
-- (void)tmui_addAttributesText:(CGFloat)lineSpacing{
+- (void)tmui_addAttributeslineSpacing:(CGFloat)lineSpacing{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
@@ -74,6 +78,15 @@
     if(range.location != NSNotFound) {
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
         [mat addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
+        self.attributedText = mat;
+    }
+}
+
+- (void)tmui_addAttributesUnderLink{
+    NSRange range = NSMakeRange(0, [self.attributedText string].length);
+    if(range.location != NSNotFound) {
+        NSMutableAttributedString *mat = [self.attributedText mutableCopy];
+        [mat addAttributes:@{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
         self.attributedText = mat;
     }
 }
@@ -154,14 +167,26 @@
 
 #pragma mark - mainFunction
 - (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings clickAction:(void (^)(NSString *string, NSRange range, NSInteger index))clickAction {
-    [self attrTextRangesWithStrings:strings];
-    if (self.clickBlock != clickAction) {
-        self.clickBlock = clickAction;
-    }
+    [self tmui_clickAttrTextWithStrings:strings attributes:nil delegate:nil clickAction:clickAction];
+}
+
+- (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings attributes:(nullable NSDictionary *)attributes clickAction:(nonnull void (^)(NSString * _Nonnull, NSRange, NSInteger))clickAction{
+    [self tmui_clickAttrTextWithStrings:strings attributes:attributes delegate:nil clickAction:clickAction];
 }
 
 - (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings delegate:(id<TMUIAttrTextDelegate>)delegate {
-    [self attrTextRangesWithStrings:strings];
+    [self tmui_clickAttrTextWithStrings:strings attributes:nil delegate:delegate clickAction:nil];
+}
+
+- (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings attributes:(nullable NSDictionary *)attributes delegate:(nonnull id<TMUIAttrTextDelegate>)delegate{
+    [self tmui_clickAttrTextWithStrings:strings attributes:attributes delegate:delegate clickAction:nil];
+}
+
+- (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings attributes:(nullable NSDictionary *)attributes delegate:(nullable id<TMUIAttrTextDelegate>)delegate clickAction:(nullable void (^)(NSString * _Nonnull, NSRange, NSInteger))clickAction{
+    [self attrTextRangesWithStrings:strings attributes:attributes];
+    if (self.clickBlock != clickAction) {
+        self.clickBlock = clickAction;
+    }
     if ([self delegate] != delegate) {
         [self setDelegate:delegate];
     }
@@ -347,7 +372,7 @@
 }
 
 #pragma mark - getRange
-- (void)attrTextRangesWithStrings:(NSArray <NSString *> *)strings {
+- (void)attrTextRangesWithStrings:(NSArray <NSString *> *)strings attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes{
     if (self.attributedText == nil) {
         self.isClickAction = NO;
         return;
@@ -364,6 +389,11 @@
         NSRange range = [totalStr rangeOfString:obj];
         if (range.length != 0) {
             totalStr = [totalStr stringByReplacingCharactersInRange:range withString:[strongSelf getStringWithRange:range]];
+            if (attributes) {
+                NSMutableAttributedString *originAttributedString = self.attributedText.mutableCopy;
+                [originAttributedString addAttributes:attributes range:range];
+                self.attributedText = originAttributedString;
+            }
             TMAttrTextModel *model = [[TMAttrTextModel alloc]init];
             model.range = range;
             model.str = obj;

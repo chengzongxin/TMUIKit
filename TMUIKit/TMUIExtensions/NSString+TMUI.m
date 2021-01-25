@@ -295,15 +295,17 @@
 
 @implementation NSString (TMUI_Drawing)
 
-- (CGSize)sizeForFont:(UIFont *)font size:(CGSize)size mode:(NSLineBreakMode)lineBreakMode {
+
+- (CGSize)tmui_sizeForFont:(UIFont *)font size:(CGSize)size lineHeight:(CGFloat)lineHeight mode:(NSLineBreakMode)lineBreakMode {
     CGSize result;
     if (!font) font = [UIFont systemFontOfSize:12];
     if ([self respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
         NSMutableDictionary *attr = [NSMutableDictionary new];
         attr[NSFontAttributeName] = font;
-        if (lineBreakMode != NSLineBreakByWordWrapping) {
+        if (lineBreakMode != NSLineBreakByWordWrapping || lineHeight) {
             NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
             paragraphStyle.lineBreakMode = lineBreakMode;
+            paragraphStyle.lineSpacing = lineHeight;
             attr[NSParagraphStyleAttributeName] = paragraphStyle;
         }
         CGRect rect = [self boundingRectWithSize:size
@@ -316,26 +318,26 @@
         result = [self sizeWithFont:font constrainedToSize:size lineBreakMode:lineBreakMode];
 #pragma clang diagnostic pop
     }
-    return result;
+    return CGSizeMake(ceilf(result.width), ceilf(result.height));
 }
 
-- (CGFloat)widthForFont:(UIFont *)font {
-    CGSize size = [self sizeForFont:font size:CGSizeMake(HUGE, HUGE) mode:NSLineBreakByWordWrapping];
+- (CGFloat)tmui_widthForFont:(UIFont *)font {
+    CGSize size = [self tmui_sizeForFont:font size:CGSizeMake(HUGE, HUGE) lineHeight:0 mode:NSLineBreakByWordWrapping];
     return size.width;
 }
 
-- (CGFloat)heightForFont:(UIFont *)font width:(CGFloat)width {
-    CGSize size = [self sizeForFont:font size:CGSizeMake(width, HUGE) mode:NSLineBreakByWordWrapping];
+- (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width {
+    CGSize size = [self tmui_sizeForFont:font size:CGSizeMake(width, HUGE) lineHeight:0 mode:NSLineBreakByWordWrapping];
     return size.height;
 }
 
 
 @end
 
-@implementation NSAttributedString (Extension)
+@implementation NSAttributedString (TMUI_Drawing)
 //固定宽度计算多行文本高度，支持开头空格、自定义插入的文本图片不纳入计算范围，包含emoji表情符仍然会有较大偏差，但在UITextView和UILabel等控件中不影响显示。
-- (CGSize)multiLineSize:(CGFloat)width {
-    CGRect rect = [self boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+- (CGSize)tmui_sizeForWidth:(CGFloat)width {
+    CGRect rect = [self boundingRectWithSize:CGSizeMake(width, HUGE) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
     return CGSizeMake(ceilf(rect.size.width), ceilf(rect.size.height));
 }
 

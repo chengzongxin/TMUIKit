@@ -170,14 +170,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param size          The maximum acceptable size for the string. This value is
  used to calculate where line breaks and wrapping would occur.
  
+ @param lineHeight  The The distance in points between the bottom of one line fragment and the top of the next..
+ 
  @param lineBreakMode The line break options for computing the size of the string.
  For a list of possible values, see NSLineBreakMode.
  
  @return              The width and height of the resulting string's bounding box.
  These values may be rounded up to the nearest whole number.
  */
-- (CGSize)sizeForFont:(UIFont *)font size:(CGSize)size mode:(NSLineBreakMode)lineBreakMode;
-
+- (CGSize)tmui_sizeForFont:(UIFont *)font size:(CGSize)size lineHeight:(CGFloat)lineHeight mode:(NSLineBreakMode)lineBreakMode;
 /**
  Returns the width of the string if it were to be rendered with the specified
  font on a single line.
@@ -187,7 +188,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return      The width of the resulting string's bounding box. These values may be
  rounded up to the nearest whole number.
  */
-- (CGFloat)widthForFont:(UIFont *)font;
+- (CGFloat)tmui_widthForFont:(UIFont *)font;
 
 /**
  Returns the height of the string if it were rendered with the specified constraints.
@@ -200,15 +201,15 @@ NS_ASSUME_NONNULL_BEGIN
  @return       The height of the resulting string's bounding box. These values
  may be rounded up to the nearest whole number.
  */
-- (CGFloat)heightForFont:(UIFont *)font width:(CGFloat)width;
+- (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width;
 
 @end
 
 
 /// 专门用来计算富文本高度的方法
-@interface NSAttributedString (Extension)
+@interface NSAttributedString (TMUI_Drawing)
 
-- (CGSize)multiLineSize:(CGFloat)width;
+- (CGSize)tmui_sizeForWidth:(CGFloat)width;
 
 @end
 
