@@ -18,5 +18,7 @@
 #import "UITextField+TMUI.h"
 #import "UITextView+TMUI.h"
 #import "UIViewController+TMUI.h"
+#import "NSString+TMUI.h"
+#import "NSArray+TMUI.h"
 
 #endif /* TMUIExtensions_h */

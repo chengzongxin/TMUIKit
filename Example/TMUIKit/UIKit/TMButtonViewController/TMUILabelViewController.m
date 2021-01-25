@@ -26,7 +26,7 @@
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@100);
         make.top.mas_equalTo(@100);
-        make.width.mas_equalTo(@100);
+        make.width.mas_equalTo(@300);
         make.height.mas_equalTo(@100);
     }];
     
@@ -44,12 +44,35 @@
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@100);
         make.top.mas_equalTo(@300);
-        make.width.mas_equalTo(@100);
+        make.width.mas_equalTo(300);
         make.height.mas_equalTo(@100);
     }];
     
-    // set
-    label1.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 50, 0);
+    
+    [self addSliderWithLabelText:@"→" slide:^(float padding) {
+        UIEdgeInsets insets = label1.contentEdgeInsets;
+        insets.right = padding;
+        label1.contentEdgeInsets = insets;
+    }];
+    
+    [self addSliderWithLabelText:@"↓" slide:^(float padding) {
+        UIEdgeInsets insets = label1.contentEdgeInsets;
+        insets.bottom = padding;
+        label1.contentEdgeInsets = insets;
+    }];
+    
+    [self addSliderWithLabelText:@"←" slide:^(float padding) {
+        UIEdgeInsets insets = label1.contentEdgeInsets;
+        insets.left = padding;
+        label1.contentEdgeInsets = insets;
+    }];
+    
+    [self addSliderWithLabelText:@"↑" slide:^(float padding) {
+        UIEdgeInsets insets = label1.contentEdgeInsets;
+        insets.top = padding;
+        label1.contentEdgeInsets = insets;
+    }];
+    
 }
 
 

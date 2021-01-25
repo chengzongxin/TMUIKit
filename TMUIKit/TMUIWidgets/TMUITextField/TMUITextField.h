@@ -9,9 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class QMUITextField;
+@class TMUITextField;
 
-@protocol QMUITextFieldDelegate <UITextFieldDelegate>
+@protocol TMUITextFieldDelegate <UITextFieldDelegate>
 
 @optional
 
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param range 要变化的文字的位置，如果在 UIControlEventEditingChanged 里，这里的 range 也即文字变化后的 range，所以可能比最大长度要大。
  *  @param replacementString 要变化的文字，如果在 UIControlEventEditingChanged 里，这里永远传入 nil。
  */
-- (void)textField:(QMUITextField *)textField didPreventTextChangeInRange:(NSRange)range replacementString:(NSString *)replacementString;
+- (void)textField:(TMUITextField *)textField didPreventTextChangeInRange:(NSRange)range replacementString:(NSString *)replacementString;
 
 @end
 
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface TMUITextField : UITextField
 
-@property(nonatomic, weak) id<QMUITextFieldDelegate> delegate;
+@property(nonatomic, weak) id<TMUITextFieldDelegate> delegate;
 
 /**
  *  修改 placeholder 的颜色，默认是 UIColorPlaceholder。
