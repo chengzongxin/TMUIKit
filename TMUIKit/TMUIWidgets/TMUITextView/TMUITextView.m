@@ -43,14 +43,6 @@ const UIEdgeInsets kSystemTextViewFixTextInsets = {0, 5, 0, 5};
     self = [super initWithFrame:frame];
     if (self) {
         [self didInitialize];
-//        if (TMUICMIActivated) {
-//            UIColor *textColor = TextFieldTextColor;
-//            if (textColor) {
-//                self.textColor = textColor;
-//            }
-//
-//            self.tintColor = TextFieldTintColor;
-//        }
     }
     return self;
 }
@@ -71,7 +63,6 @@ const UIEdgeInsets kSystemTextViewFixTextInsets = {0, 5, 0, 5};
     self.delegate = self.delegator;
     
     self.scrollsToTop = NO;
-//    if (TMUICMIActivated) self.placeholderColor = UIColorPlaceholder;
     self.placeholderMargins = UIEdgeInsetsZero;
     self.maximumHeight = CGFLOAT_MAX;
     self.maximumTextLength = NSUIntegerMax;

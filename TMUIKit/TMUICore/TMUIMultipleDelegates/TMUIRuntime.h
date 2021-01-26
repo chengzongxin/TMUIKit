@@ -334,15 +334,15 @@ typedef struct classref *classref_t;
  
  @code
  classref_t *classes = nil;
- int count = qmui_getProjectClassList(&classes);
+ int count = tmui_getProjectClassList(&classes);
  Class class = (__bridge Class)classes[0];
  @endcode
  */
-FOUNDATION_EXPORT int qmui_getProjectClassList(classref_t **classes);
+FOUNDATION_EXPORT int tmui_getProjectClassList(classref_t **classes);
 /**
  检测是否存在某个dyld  image
  */
-FOUNDATION_EXPORT BOOL qmui_exists_dyld_image(const char *target_image_name);
+FOUNDATION_EXPORT BOOL tmui_exists_dyld_image(const char *target_image_name);
 
 
 @interface TMUIRuntime : NSObject

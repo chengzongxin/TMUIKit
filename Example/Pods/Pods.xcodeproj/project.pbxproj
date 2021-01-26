@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = LookinServer;
+			productName = LookinServer;
 		};
 /* End PBXAggregateTarget section */
 
@@ -453,12 +454,12 @@
 		0D27232CFC5783AD70632CBFAF8492A1 /* RACCompoundDisposable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACCompoundDisposable.m; path = ReactiveObjC/RACCompoundDisposable.m; sourceTree = "<group>"; };
 		0F290BB62794FC5AD9F3BA5CE73E5507 /* TMActionSheet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMActionSheet.h; path = TMUIKit/TMUIComponents/TMActionSheet/TMActionSheet.h; sourceTree = "<group>"; };
 		11ABD1F5F5A4ECC6544D39E5B4F85424 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
-		11E8DE5D69C76947E6B830DF52364E74 /* TMToastAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TMToastAssets.bundle; path = "TMUIKit-TMToastAssets.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11E8DE5D69C76947E6B830DF52364E74 /* TMToastAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMToastAssets.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		127B893F81C3A40C8C60C78E8218084B /* LookinServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LookinServer.framework; sourceTree = "<group>"; };
 		133A00A8B47AEC4D311E1AFAD982168E /* UIView+TMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+TMUI.h"; path = "TMUIKit/TMUIExtensions/UIView+TMUI.h"; sourceTree = "<group>"; };
 		152E618DBA1FDD32E07BE9F0211533E6 /* NSIndexSet+RACSequenceAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSIndexSet+RACSequenceAdditions.m"; path = "ReactiveObjC/NSIndexSet+RACSequenceAdditions.m"; sourceTree = "<group>"; };
 		156C0D3B39DBEC2D6C301A9ACBFD9F09 /* TMSearchingController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TMSearchingController.m; path = TMUIKit/TMUIComponents/TMSearchController/Extensions/TMSearchingController.m; sourceTree = "<group>"; };
-		15EBF0DBBBC8B0D538BD2568AF38A46B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		15EBF0DBBBC8B0D538BD2568AF38A46B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		169BBA1AF6B815C4B0B1298405EACDFD /* LookinServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LookinServer.debug.xcconfig; sourceTree = "<group>"; };
 		170D29085F8ED3DCFB255A7BA92B076D /* RACKVOTrampoline.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACKVOTrampoline.m; path = ReactiveObjC/RACKVOTrampoline.m; sourceTree = "<group>"; };
 		183F4013DBEC014314FD8CE0595A4784 /* NSString+TMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+TMUI.h"; path = "TMUIKit/TMUIExtensions/NSString+TMUI.h"; sourceTree = "<group>"; };
@@ -475,7 +476,7 @@
 		1CEDC95F83865D56BB395E65EDFB692B /* NSInvocation+RACTypeParsing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+RACTypeParsing.h"; path = "ReactiveObjC/NSInvocation+RACTypeParsing.h"; sourceTree = "<group>"; };
 		1FB187D4961CA07344DBEAFA47170B46 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
 		1FE0F45FA76AE952EEE894EA00D41451 /* TMSearchBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMSearchBar.h; path = TMUIKit/TMUIComponents/TMSearchController/TMSearchBar.h; sourceTree = "<group>"; };
-		1FFED36A657123030ABB700256D73F15 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libMasonry.a; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FFED36A657123030ABB700256D73F15 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2048F8DCA435684EE23D70087AE18129 /* RACEagerSequence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACEagerSequence.h; path = ReactiveObjC/RACEagerSequence.h; sourceTree = "<group>"; };
 		22ACD9114D94CCFED54DF7C352ED0445 /* TMUIKitDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMUIKitDefines.h; path = TMUIKit/TMUICore/TMUIKitDefines.h; sourceTree = "<group>"; };
 		23A8EDB0731AA4C5643EAA93FBC08090 /* TMSearchPresentationAnimatedTransition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TMSearchPresentationAnimatedTransition.m; path = TMUIKit/TMUIComponents/TMSearchController/Private/TMSearchPresentationAnimatedTransition.m; sourceTree = "<group>"; };
@@ -488,7 +489,7 @@
 		2A24966E4A8D459D2F0A8DA01988F950 /* NSObject+RACLifting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+RACLifting.m"; path = "ReactiveObjC/NSObject+RACLifting.m"; sourceTree = "<group>"; };
 		2B40E4502D478534D4348E68BD84497F /* TMNormalPicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TMNormalPicker.m; path = TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker/TMNormalPicker.m; sourceTree = "<group>"; };
 		2E3F0A075B064FF9D2A9360622C9E28C /* Pods-TMUIKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TMUIKit_Example-frameworks.sh"; sourceTree = "<group>"; };
-		2EB72050A1D4B4B8866F1F6518280562 /* libPods-TMUIKit_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-TMUIKit_Tests.a"; path = "libPods-TMUIKit_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EB72050A1D4B4B8866F1F6518280562 /* libPods-TMUIKit_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TMUIKit_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ED861BB4C8D1D7F6E4E6F23B8F6B885 /* UIControl+RACSignalSupportPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIControl+RACSignalSupportPrivate.h"; path = "ReactiveObjC/UIControl+RACSignalSupportPrivate.h"; sourceTree = "<group>"; };
 		2F581AF2813CB4D985584045A0FEC16B /* RACSubscriptionScheduler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACSubscriptionScheduler.h; path = ReactiveObjC/RACSubscriptionScheduler.h; sourceTree = "<group>"; };
 		3015E762B2F8EFFCC0AE8D4E7DE49F8F /* MKAnnotationView+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "MKAnnotationView+RACSignalSupport.m"; path = "ReactiveObjC/MKAnnotationView+RACSignalSupport.m"; sourceTree = "<group>"; };
@@ -498,7 +499,7 @@
 		320F15D2BFFC1AB564771BD7160E49CB /* NSArray+RACSequenceAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+RACSequenceAdditions.m"; path = "ReactiveObjC/NSArray+RACSequenceAdditions.m"; sourceTree = "<group>"; };
 		32239FA5CB84FA2735CDAE434EA4720E /* TMUIMultipleDelegates.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TMUIMultipleDelegates.h; sourceTree = "<group>"; };
 		32449B62A6381746CDC96F1C30D3D35A /* TMUIExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMUIExtensions.h; path = TMUIKit/TMUIExtensions/TMUIExtensions.h; sourceTree = "<group>"; };
-		329314C300D696871D6AF9A5533FEC17 /* libPods-TMUIKit_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-TMUIKit_Example.a"; path = "libPods-TMUIKit_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		329314C300D696871D6AF9A5533FEC17 /* libPods-TMUIKit_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TMUIKit_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		339E834B039ABDBDDAE3AAC8A2D620F0 /* TMNormalPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMNormalPicker.h; path = TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker/TMNormalPicker.h; sourceTree = "<group>"; };
 		342A8FBBE878D4D7F7666F8F13605578 /* RACErrorSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACErrorSignal.m; path = ReactiveObjC/RACErrorSignal.m; sourceTree = "<group>"; };
 		3442352F9A249FE16BFDC919FB2848B2 /* noOrder@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "noOrder@2x.png"; path = "TMUIKit/TMUIComponents/TMEmptyView/Resource/noOrder@2x.png"; sourceTree = "<group>"; };
@@ -590,7 +591,7 @@
 		73C8F6CB3F52CCB5AA88E6814A05C609 /* UITableViewCell+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+RACSignalSupport.h"; path = "ReactiveObjC/UITableViewCell+RACSignalSupport.h"; sourceTree = "<group>"; };
 		74E5CDF74CA4B280FC32AB4478DB134B /* RACStringSequence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACStringSequence.h; path = ReactiveObjC/RACStringSequence.h; sourceTree = "<group>"; };
 		755D8939402B8118A85A7D131A032E69 /* NSURLConnection+RACSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURLConnection+RACSupport.h"; path = "ReactiveObjC/NSURLConnection+RACSupport.h"; sourceTree = "<group>"; };
-		75CEFBBD7878E5A968DA66771EFBC75C /* TMEmptyUIAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TMEmptyUIAssets.bundle; path = "TMUIKit-TMEmptyUIAssets.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75CEFBBD7878E5A968DA66771EFBC75C /* TMEmptyUIAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMEmptyUIAssets.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		7778FD02BFDB6F245F7F0262C85F804F /* UIViewController+TMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+TMUI.m"; path = "TMUIKit/TMUIExtensions/UIViewController+TMUI.m"; sourceTree = "<group>"; };
 		77F4276E0C218B10C536C867C758617D /* RACSignal+Operations.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "RACSignal+Operations.m"; path = "ReactiveObjC/RACSignal+Operations.m"; sourceTree = "<group>"; };
 		781514FBECCEFE955FD8149A71E67CEE /* TMUITextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMUITextField.h; path = TMUIKit/TMUIWidgets/TMUITextField/TMUITextField.h; sourceTree = "<group>"; };
@@ -604,7 +605,7 @@
 		7B248542A7C9D0CBD1CD98B51F88653D /* RACDynamicSequence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACDynamicSequence.h; path = ReactiveObjC/RACDynamicSequence.h; sourceTree = "<group>"; };
 		7B85CBA8C9638AB5B41E61BDBEFE2D12 /* NSURLConnection+RACSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSURLConnection+RACSupport.m"; path = "ReactiveObjC/NSURLConnection+RACSupport.m"; sourceTree = "<group>"; };
 		7BD411D72A31DE8054370F512E2C1E6F /* UIActionSheet+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActionSheet+RACSignalSupport.h"; path = "ReactiveObjC/UIActionSheet+RACSignalSupport.h"; sourceTree = "<group>"; };
-		7C39BCC3AF928B001E527AC54139A4E8 /* RACCompoundDisposableProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; name = RACCompoundDisposableProvider.d; path = ReactiveObjC/RACCompoundDisposableProvider.d; sourceTree = "<group>"; };
+		7C39BCC3AF928B001E527AC54139A4E8 /* RACCompoundDisposableProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.dtrace; name = RACCompoundDisposableProvider.d; path = ReactiveObjC/RACCompoundDisposableProvider.d; sourceTree = "<group>"; };
 		7C8D2CCE12493A64FC645666AFB4A530 /* UIStepper+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIStepper+RACSignalSupport.m"; path = "ReactiveObjC/UIStepper+RACSignalSupport.m"; sourceTree = "<group>"; };
 		7E89254F9B1C3196010AF0D3A34F2EFE /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		7FD6A7A07947C4A03F4FEA5294FCD2BD /* noPublishUgc@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "noPublishUgc@2x.png"; path = "TMUIKit/TMUIComponents/TMEmptyView/Resource/noPublishUgc@2x.png"; sourceTree = "<group>"; };
@@ -636,7 +637,7 @@
 		957A76EC325FFEC01A5CAC7486305ADB /* RACEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACEvent.h; path = ReactiveObjC/RACEvent.h; sourceTree = "<group>"; };
 		9580367D6178FFA3C474B5B1D9814142 /* NSData+RACSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+RACSupport.m"; path = "ReactiveObjC/NSData+RACSupport.m"; sourceTree = "<group>"; };
 		95BD12EE864B14509E39C05EB751E68D /* RACReturnSignal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACReturnSignal.m; path = ReactiveObjC/RACReturnSignal.m; sourceTree = "<group>"; };
-		9621C6383F5733C35183B2DE886C7EC6 /* libReactiveObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libReactiveObjC.a; path = libReactiveObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9621C6383F5733C35183B2DE886C7EC6 /* libReactiveObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactiveObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		983CC546FD7BC1C5E38F867CFC254B16 /* Masonry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.debug.xcconfig; sourceTree = "<group>"; };
 		998CECDADD582E0041DF96BBF72137C3 /* noComment@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "noComment@2x.png"; path = "TMUIKit/TMUIComponents/TMEmptyView/Resource/noComment@2x.png"; sourceTree = "<group>"; };
 		9A8D11A0F91F573FAA82FB2809031168 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
@@ -646,12 +647,12 @@
 		9CCA542428230D769B88A3B5B98EBBF2 /* RACBlockTrampoline.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACBlockTrampoline.m; path = ReactiveObjC/RACBlockTrampoline.m; sourceTree = "<group>"; };
 		9D58A1F30FC33B446F2CA744321443D7 /* noData@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "noData@2x.png"; path = "TMUIKit/TMUIComponents/TMEmptyView/Resource/noData@2x.png"; sourceTree = "<group>"; };
 		9D816E54631441577975A16B4BD0146A /* UIButton+RACCommandSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+RACCommandSupport.h"; path = "ReactiveObjC/UIButton+RACCommandSupport.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F68607C9F05EB6CB0DE8858DDC3DE97 /* TMMultiDataPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMMultiDataPicker.h; path = TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker/TMMultiDataPicker.h; sourceTree = "<group>"; };
 		9F851C4CF1E16F679365BC9C9C4D9F5A /* netErr@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "netErr@2x.png"; path = "TMUIKit/TMUIComponents/TMEmptyView/Resource/netErr@2x.png"; sourceTree = "<group>"; };
 		A0036E7CCA459F4414FD583B43E3F37A /* RACSubscriptionScheduler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACSubscriptionScheduler.m; path = ReactiveObjC/RACSubscriptionScheduler.m; sourceTree = "<group>"; };
 		A094CDD02C089D2DCFAC03B52184DB53 /* UITableViewHeaderFooterView+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewHeaderFooterView+RACSignalSupport.m"; path = "ReactiveObjC/UITableViewHeaderFooterView+RACSignalSupport.m"; sourceTree = "<group>"; };
-		A0E26A5EF4B7D0CEDE85327AC9DB0707 /* RACSignalProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; name = RACSignalProvider.d; path = ReactiveObjC/RACSignalProvider.d; sourceTree = "<group>"; };
+		A0E26A5EF4B7D0CEDE85327AC9DB0707 /* RACSignalProvider.d */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.dtrace; name = RACSignalProvider.d; path = ReactiveObjC/RACSignalProvider.d; sourceTree = "<group>"; };
 		A16C8167F5EF9AE98727F46CFA1E7564 /* NSBundle+TMUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+TMUI.m"; path = "TMUIKit/TMUIExtensions/NSBundle+TMUI.m"; sourceTree = "<group>"; };
 		A1B1E1BC2398AFACEF41E2404E380ACB /* NSObject+RACPropertySubscribing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+RACPropertySubscribing.h"; path = "ReactiveObjC/NSObject+RACPropertySubscribing.h"; sourceTree = "<group>"; };
 		A309A01079BAA0D50FB92B26F26DBC63 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
@@ -691,7 +692,7 @@
 		B4075F540AC340A89EEB164CAB8674FA /* UILabel+TMUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+TMUI.h"; path = "TMUIKit/TMUIExtensions/UILabel+TMUI.h"; sourceTree = "<group>"; };
 		B41B396C019AB60ECF935B9F2F380387 /* RACScheduler+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "RACScheduler+Private.h"; path = "ReactiveObjC/RACScheduler+Private.h"; sourceTree = "<group>"; };
 		B44835B04AF42ADEF966D7102B6B7D70 /* RACTestScheduler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RACTestScheduler.m; path = ReactiveObjC/RACTestScheduler.m; sourceTree = "<group>"; };
-		B4F41EF90651B6DD321604EFEA566B8A /* TMSearchUIAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TMSearchUIAssets.bundle; path = "TMUIKit-TMSearchUIAssets.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4F41EF90651B6DD321604EFEA566B8A /* TMSearchUIAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMSearchUIAssets.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50EA5E0160C2CA2AE3CEDF8F62DE3BC /* UIControl+RACSignalSupport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIControl+RACSignalSupport.m"; path = "ReactiveObjC/UIControl+RACSignalSupport.m"; sourceTree = "<group>"; };
 		B5301EFA0D6CDA15287CCDEAADD22085 /* UIAlertView+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+RACSignalSupport.h"; path = "ReactiveObjC/UIAlertView+RACSignalSupport.h"; sourceTree = "<group>"; };
 		B53B24DA15E606E1EED594E03C0972E6 /* TMUIHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TMUIHelper.h; path = TMUIKit/TMUICore/TMUIHelper.h; sourceTree = "<group>"; };
@@ -731,11 +732,11 @@
 		C6D2E55D41F47B8FF527438DCF6560B0 /* searchBarLeftIcon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "searchBarLeftIcon@2x.png"; path = "TMUIKit/TMUIComponents/TMSearchController/Resource/searchBarLeftIcon@2x.png"; sourceTree = "<group>"; };
 		C7249FA240005E2FD96EEE7319187E77 /* UITableViewHeaderFooterView+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewHeaderFooterView+RACSignalSupport.h"; path = "ReactiveObjC/UITableViewHeaderFooterView+RACSignalSupport.h"; sourceTree = "<group>"; };
 		C94AA06CEC8A9AE325E5AC994A940327 /* MKAnnotationView+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MKAnnotationView+RACSignalSupport.h"; path = "ReactiveObjC/MKAnnotationView+RACSignalSupport.h"; sourceTree = "<group>"; };
-		C974DF8D98886705B8C5E7D233434683 /* libTMUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libTMUIKit.a; path = libTMUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA2C1C42B493DFC615A7C0EDB6333EC9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		C974DF8D98886705B8C5E7D233434683 /* libTMUIKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTMUIKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA2C1C42B493DFC615A7C0EDB6333EC9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CA46DBEBDED32E042F06897FB5073633 /* Pods-TMUIKit_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TMUIKit_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CAA48F756354F185FE2F8CC0FCE7CCBC /* dataNoExist@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "dataNoExist@2x.png"; path = "TMUIKit/TMUIComponents/TMEmptyView/Resource/dataNoExist@2x.png"; sourceTree = "<group>"; };
-		CAF9D9B92D7FDF5F6C69716A38A02A7B /* TMUIKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TMUIKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CAF9D9B92D7FDF5F6C69716A38A02A7B /* TMUIKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = TMUIKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CB3EA330091FE1279082CF1BF6256D5F /* UIStepper+RACSignalSupport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIStepper+RACSignalSupport.h"; path = "ReactiveObjC/UIStepper+RACSignalSupport.h"; sourceTree = "<group>"; };
 		CB481111F2B2884BB5638408332B21C5 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
 		CB632CC22B21F535E92E249936AF3DD0 /* RACBehaviorSubject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACBehaviorSubject.h; path = ReactiveObjC/RACBehaviorSubject.h; sourceTree = "<group>"; };
@@ -957,6 +958,7 @@
 		3E7316A317D5D2BC3041659578D452AE /* TMUIExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				32449B62A6381746CDC96F1C30D3D35A /* TMUIExtensions.h */,
 				88FB98CDDE6175303DC60C1D760BD157 /* CALayer+TMUI.h */,
 				D657000CCD5CD2993128139CAD065479 /* CALayer+TMUI.m */,
 				2626F816D067EFDA6FBBD9174C8F671D /* NSArray+TMUI.h */,
@@ -969,7 +971,6 @@
 				8CC3A5241A577CC0CE1A8C304C6B6DBD /* NSObject+TMUI.m */,
 				183F4013DBEC014314FD8CE0595A4784 /* NSString+TMUI.h */,
 				C216710593D6FC566B2A677D8E986F00 /* NSString+TMUI.m */,
-				32449B62A6381746CDC96F1C30D3D35A /* TMUIExtensions.h */,
 				66AE6599CBF6E135C9FB5954A0FC4AAA /* UIButton+TMUI.h */,
 				4441FF8BD2E04DAB21E561DC19C3F3D0 /* UIButton+TMUI.m */,
 				B35705B088FE8F63C832B2E635923CD6 /* UIColor+TMUI.h */,
@@ -1289,7 +1290,6 @@
 				5CC3E58C825323877958720E01E93CC0 /* UITextView+RACSignalSupport.m */,
 				C0B4AB5CED483C3EFE39AA1254593715 /* Support Files */,
 			);
-			name = ReactiveObjC;
 			path = ReactiveObjC;
 			sourceTree = "<group>";
 		};
@@ -1584,7 +1584,6 @@
 				11ABD1F5F5A4ECC6544D39E5B4F85424 /* ViewController+MASAdditions.m */,
 				D7D744975001AD231576C60640B5AB28 /* Support Files */,
 			);
-			name = Masonry;
 			path = Masonry;
 			sourceTree = "<group>";
 		};
@@ -1603,7 +1602,6 @@
 				1EA5BE377A6E8F88F3EA951BE366281B /* Frameworks */,
 				B7DD4F51765D54D648986829C012F586 /* Support Files */,
 			);
-			name = LookinServer;
 			path = LookinServer;
 			sourceTree = "<group>";
 		};
@@ -2679,8 +2677,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

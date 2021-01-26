@@ -86,7 +86,7 @@
     }
     
 //    return NSMethodSignature.tmui_avoidExceptionSignature;
-    return [NSMethodSignature signatureWithObjCTypes:"@^v^c"];
+    return [NSMethodSignature signatureWithObjCTypes:"@^v^c"]; // 兜底
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {

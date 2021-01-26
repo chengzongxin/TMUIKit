@@ -185,7 +185,7 @@ static classref_t *getDataSection(const headerType *machHeader, const char *sect
     return data;
 }
 
-int qmui_getProjectClassList(classref_t **classes) {
+int tmui_getProjectClassList(classref_t **classes) {
     size_t count = 0;
     if (!!classes) {
         *classes = getDataSection(getProjectImageHeader(), "__objc_classlist", &count);
@@ -196,7 +196,7 @@ int qmui_getProjectClassList(classref_t **classes) {
 }
 
 
-BOOL qmui_exists_dyld_image(const char *target_image_name) {
+BOOL tmui_exists_dyld_image(const char *target_image_name) {
     const uint32_t imageCount = _dyld_image_count();
     for (uint32_t i = 0; i < imageCount; i++) {
         const char *image_name = _dyld_get_image_name(i);
