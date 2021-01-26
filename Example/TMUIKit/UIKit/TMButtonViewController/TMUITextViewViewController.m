@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.textViewMinimumHeight = 96;
     self.textView = [[TMUITextView alloc] init];
     self.textView.delegate = self;
     self.textView.placeholder = @"支持 placeholder、支持自适应高度、支持限制文本输入长度";
@@ -28,7 +30,7 @@
     self.textView.returnKeyType = UIReturnKeySend;
     self.textView.enablesReturnKeyAutomatically = YES;
     self.textView.typingAttributes = @{NSFontAttributeName: UIFont(15),
-                                       NSParagraphStyleAttributeName: [NSMutableParagraphStyle tmui_paragraphStyleWithLineHeight:20],
+                                       NSParagraphStyleAttributeName: [NSMutableParagraphStyle tmui_paragraphStyleWithLineHeight:30],
                                        NSForegroundColorAttributeName: self.textView.textColor
     };
 //    self.textView.backgroundColor = UIColor.qd_backgroundColorLighten;

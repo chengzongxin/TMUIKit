@@ -9,6 +9,7 @@
 #import "NSString+TMUI.h"
 #import "TMUICommonDefines.h"
 #import "UITextView+TMUI.h"
+#import "TMUICore.h"
 
 /// 系统 textView 默认的字号大小，用于 placeholder 默认的文字大小。实测得到，请勿修改。
 const CGFloat kSystemTextViewDefaultFontPointSize = 12.0f;
@@ -64,7 +65,7 @@ const UIEdgeInsets kSystemTextViewFixTextInsets = {0, 5, 0, 5};
 - (void)didInitialize {
     self.debug = NO;
     
-//    self.tmui_multipleDelegatesEnabled = YES;
+    self.tmui_multipleDelegatesEnabled = YES;
     self.delegator = [[_TMUITextViewDelegator alloc] init];
     self.delegator.textView = self;
     self.delegate = self.delegator;
