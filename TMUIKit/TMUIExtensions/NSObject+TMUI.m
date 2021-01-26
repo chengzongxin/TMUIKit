@@ -7,16 +7,19 @@
 
 #import "NSObject+TMUI.h"
 #import "NSString+TMUI.h"
-
+#import <objc/message.h>
+#import "TMUIWeakObjectContainer.h"
+#import "TMUICommonDefines.h"
+#import "TMUIAssociatedObjectDefine.h"
 
 @implementation NSObject (TMUI)
 
 
-- (BOOL)qmui_hasOverrideMethod:(SEL)selector ofSuperclass:(Class)superclass {
-    return [NSObject qmui_hasOverrideMethod:selector forClass:self.class ofSuperclass:superclass];
+- (BOOL)tmui_hasOverrideMethod:(SEL)selector ofSuperclass:(Class)superclass {
+    return [NSObject tmui_hasOverrideMethod:selector forClass:self.class ofSuperclass:superclass];
 }
 
-+ (BOOL)qmui_hasOverrideMethod:(SEL)selector forClass:(Class)aClass ofSuperclass:(Class)superclass {
++ (BOOL)tmui_hasOverrideMethod:(SEL)selector forClass:(Class)aClass ofSuperclass:(Class)superclass {
     if (![aClass isSubclassOfClass:superclass]) {
         return NO;
     }
@@ -33,7 +36,7 @@
     return YES;
 }
 
-- (id)qmui_performSelectorToSuperclass:(SEL)aSelector {
+- (id)tmui_performSelectorToSuperclass:(SEL)aSelector {
     struct objc_super mySuper;
     mySuper.receiver = self;
     mySuper.super_class = class_getSuperclass(object_getClass(self));
@@ -42,7 +45,7 @@
     return (*objc_superAllocTyped)(&mySuper, aSelector);
 }
 
-- (id)qmui_performSelectorToSuperclass:(SEL)aSelector withObject:(id)object {
+- (id)tmui_performSelectorToSuperclass:(SEL)aSelector withObject:(id)object {
     struct objc_super mySuper;
     mySuper.receiver = self;
     mySuper.super_class = class_getSuperclass(object_getClass(self));
@@ -51,7 +54,7 @@
     return (*objc_superAllocTyped)(&mySuper, aSelector, object);
 }
 
-- (id)qmui_performSelector:(SEL)selector withArguments:(void *)firstArgument, ... {
+- (id)tmui_performSelector:(SEL)selector withArguments:(void *)firstArgument, ... {
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
     [invocation setTarget:self];
     [invocation setSelector:selector];
@@ -73,7 +76,9 @@
     [invocation invoke];
     
     const char *typeEncoding = method_getTypeEncoding(class_getInstanceMethod(object_getClass(self), selector));
-    if (isObjectTypeEncoding(typeEncoding)) {
+    
+    if (strcmp(typeEncoding, @encode(id)) == 0 || strcmp(typeEncoding, @encode(Class)) == 0 || strcmp(typeEncoding, @encode(void (^)(void))) == 0) {
+//    if (isObjectTypeEncoding(typeEncoding)) {
         __unsafe_unretained id returnValue;
         [invocation getReturnValue:&returnValue];
         return returnValue;
@@ -81,11 +86,11 @@
     return nil;
 }
 
-- (void)qmui_performSelector:(SEL)selector withPrimitiveReturnValue:(void *)returnValue {
-    [self qmui_performSelector:selector withPrimitiveReturnValue:returnValue arguments:nil];
+- (void)tmui_performSelector:(SEL)selector withPrimitiveReturnValue:(void *)returnValue {
+    [self tmui_performSelector:selector withPrimitiveReturnValue:returnValue arguments:nil];
 }
 
-- (void)qmui_performSelector:(SEL)selector withPrimitiveReturnValue:(void *)returnValue arguments:(void *)firstArgument, ... {
+- (void)tmui_performSelector:(SEL)selector withPrimitiveReturnValue:(void *)returnValue arguments:(void *)firstArgument, ... {
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
     [invocation setTarget:self];
     [invocation setSelector:selector];
@@ -111,13 +116,13 @@
     }
 }
 
-- (void)qmui_enumrateIvarsUsingBlock:(void (^)(Ivar ivar, NSString *ivarDescription))block {
-    [self qmui_enumrateIvarsIncludingInherited:NO usingBlock:block];
+- (void)tmui_enumrateIvarsUsingBlock:(void (^)(Ivar ivar, NSString *ivarDescription))block {
+    [self tmui_enumrateIvarsIncludingInherited:NO usingBlock:block];
 }
 
-- (void)qmui_enumrateIvarsIncludingInherited:(BOOL)includingInherited usingBlock:(void (^)(Ivar ivar, NSString *ivarDescription))block {
+- (void)tmui_enumrateIvarsIncludingInherited:(BOOL)includingInherited usingBlock:(void (^)(Ivar ivar, NSString *ivarDescription))block {
     NSMutableArray<NSString *> *ivarDescriptions = [NSMutableArray new];
-    NSString *ivarList = [self qmui_ivarList];
+    NSString *ivarList = [self tmui_ivarList];
     NSError *error;
     NSRegularExpression *reg = [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"in %@:(.*?)((?=in \\w+:)|$)", NSStringFromClass(self.class)] options:NSRegularExpressionDotMatchesLineSeparators error:&error];
     if (!error) {
@@ -126,7 +131,7 @@
             NSString *ivars = [ivarList substringWithRange:[obj rangeAtIndex:1]];
             [ivars enumerateLinesUsingBlock:^(NSString * _Nonnull line, BOOL * _Nonnull stop) {
                 if (![line hasPrefix:@"\t\t"]) {// 有些 struct 类型的变量，会把 struct 的成员也缩进打出来，所以用这种方式过滤掉
-                    line = line.qmui_trim;
+                    line = line.tmui_trim;
                     if (line.length > 2) {// 过滤掉空行或者 struct 结尾的"}"
                         NSRange range = [line rangeOfString:@":"];
                         if (range.location != NSNotFound)// 有些"unknow type"的变量不会显示指针地址（例如 UIView->_viewFlags）
@@ -157,12 +162,12 @@
     if (includingInherited) {
         Class superclass = self.superclass;
         if (superclass) {
-            [NSObject qmui_enumrateIvarsOfClass:superclass includingInherited:includingInherited usingBlock:block];
+            [NSObject tmui_enumrateIvarsOfClass:superclass includingInherited:includingInherited usingBlock:block];
         }
     }
 }
 
-+ (void)qmui_enumrateIvarsOfClass:(Class)aClass includingInherited:(BOOL)includingInherited usingBlock:(void (^)(Ivar, NSString *))block {
++ (void)tmui_enumrateIvarsOfClass:(Class)aClass includingInherited:(BOOL)includingInherited usingBlock:(void (^)(Ivar, NSString *))block {
     if (!block) return;
     NSObject *obj = nil;
     if ([aClass isSubclassOfClass:[UICollectionView class]]) {
@@ -172,14 +177,14 @@
     } else {
         obj = [aClass new];
     }
-    [obj qmui_enumrateIvarsIncludingInherited:includingInherited usingBlock:block];
+    [obj tmui_enumrateIvarsIncludingInherited:includingInherited usingBlock:block];
 }
 
-- (void)qmui_enumratePropertiesUsingBlock:(void (^)(objc_property_t property, NSString *propertyName))block {
-    [NSObject qmui_enumratePropertiesOfClass:self.class includingInherited:NO usingBlock:block];
+- (void)tmui_enumratePropertiesUsingBlock:(void (^)(objc_property_t property, NSString *propertyName))block {
+    [NSObject tmui_enumratePropertiesOfClass:self.class includingInherited:NO usingBlock:block];
 }
 
-+ (void)qmui_enumratePropertiesOfClass:(Class)aClass includingInherited:(BOOL)includingInherited usingBlock:(void (^)(objc_property_t, NSString *))block {
++ (void)tmui_enumratePropertiesOfClass:(Class)aClass includingInherited:(BOOL)includingInherited usingBlock:(void (^)(objc_property_t, NSString *))block {
     if (!block) return;
     
     unsigned int propertiesCount = 0;
@@ -195,16 +200,16 @@
     if (includingInherited) {
         Class superclass = class_getSuperclass(aClass);
         if (superclass) {
-            [NSObject qmui_enumratePropertiesOfClass:superclass includingInherited:includingInherited usingBlock:block];
+            [NSObject tmui_enumratePropertiesOfClass:superclass includingInherited:includingInherited usingBlock:block];
         }
     }
 }
 
-- (void)qmui_enumrateInstanceMethodsUsingBlock:(void (^)(Method, SEL))block {
-    [NSObject qmui_enumrateInstanceMethodsOfClass:self.class includingInherited:NO usingBlock:block];
+- (void)tmui_enumrateInstanceMethodsUsingBlock:(void (^)(Method, SEL))block {
+    [NSObject tmui_enumrateInstanceMethodsOfClass:self.class includingInherited:NO usingBlock:block];
 }
 
-+ (void)qmui_enumrateInstanceMethodsOfClass:(Class)aClass includingInherited:(BOOL)includingInherited usingBlock:(void (^)(Method, SEL))block {
++ (void)tmui_enumrateInstanceMethodsOfClass:(Class)aClass includingInherited:(BOOL)includingInherited usingBlock:(void (^)(Method, SEL))block {
     if (!block) return;
     
     unsigned int methodCount = 0;
@@ -221,12 +226,12 @@
     if (includingInherited) {
         Class superclass = class_getSuperclass(aClass);
         if (superclass) {
-            [NSObject qmui_enumrateInstanceMethodsOfClass:superclass includingInherited:includingInherited usingBlock:block];
+            [NSObject tmui_enumrateInstanceMethodsOfClass:superclass includingInherited:includingInherited usingBlock:block];
         }
     }
 }
 
-+ (void)qmui_enumerateProtocolMethods:(Protocol *)protocol usingBlock:(void (^)(SEL))block {
++ (void)tmui_enumerateProtocolMethods:(Protocol *)protocol usingBlock:(void (^)(SEL))block {
     if (!block) return;
     
     unsigned int methodCount = 0;
@@ -242,38 +247,38 @@
 
 @end
 
-@implementation NSObject (QMUI_KeyValueCoding)
+@implementation NSObject (TMUI_KeyValueCoding)
 
-- (id)qmui_valueForKey:(NSString *)key {
-    if (@available(iOS 13.0, *)) {
-        if ([self isKindOfClass:[UIView class]] && QMUICMIActivated && !IgnoreKVCAccessProhibited) {
-            BeginIgnoreUIKVCAccessProhibited
-            id value = [self valueForKey:key];
-            EndIgnoreUIKVCAccessProhibited
-            return value;
-        }
-    }
-    return [self valueForKey:key];
-}
+//- (id)tmui_valueForKey:(NSString *)key {
+//    if (@available(iOS 13.0, *)) {
+//        if ([self isKindOfClass:[UIView class]] && TMUICMIActivated && !IgnoreKVCAccessProhibited) {
+//            BeginIgnoreUIKVCAccessProhibited
+//            id value = [self valueForKey:key];
+//            EndIgnoreUIKVCAccessProhibited
+//            return value;
+//        }
+//    }
+//    return [self valueForKey:key];
+//}
+//
+//- (void)tmui_setValue:(id)value forKey:(NSString *)key {
+//    if (@available(iOS 13.0, *)) {
+//        if ([self isKindOfClass:[UIView class]] && TMUICMIActivated && !IgnoreKVCAccessProhibited) {
+//            BeginIgnoreUIKVCAccessProhibited
+//            [self setValue:value forKey:key];
+//            EndIgnoreUIKVCAccessProhibited
+//            return;
+//        }
+//    }
+//    
+//    [self setValue:value forKey:key];
+//}
 
-- (void)qmui_setValue:(id)value forKey:(NSString *)key {
-    if (@available(iOS 13.0, *)) {
-        if ([self isKindOfClass:[UIView class]] && QMUICMIActivated && !IgnoreKVCAccessProhibited) {
-            BeginIgnoreUIKVCAccessProhibited
-            [self setValue:value forKey:key];
-            EndIgnoreUIKVCAccessProhibited
-            return;
-        }
-    }
-    
-    [self setValue:value forKey:key];
-}
-
-- (BOOL)qmui_canGetValueForKey:(NSString *)key {
+- (BOOL)tmui_canGetValueForKey:(NSString *)key {
     NSArray<NSString *> *getters = @[
-        [NSString stringWithFormat:@"get%@", key.qmui_capitalizedString],   // get<Key>
+        [NSString stringWithFormat:@"get%@", key.tmui_capitalizedString],   // get<Key>
         key,
-        [NSString stringWithFormat:@"is%@", key.qmui_capitalizedString],    // is<Key>
+        [NSString stringWithFormat:@"is%@", key.tmui_capitalizedString],    // is<Key>
         [NSString stringWithFormat:@"_%@", key]                             // _<key>
     ];
     for (NSString *selectorString in getters) {
@@ -282,13 +287,13 @@
     
     if (![self.class accessInstanceVariablesDirectly]) return NO;
     
-    return [self _qmui_hasSpecifiedIvarWithKey:key];
+    return [self _tmui_hasSpecifiedIvarWithKey:key];
 }
 
-- (BOOL)qmui_canSetValueForKey:(NSString *)key {
+- (BOOL)tmui_canSetValueForKey:(NSString *)key {
     NSArray<NSString *> *setter = @[
-        [NSString stringWithFormat:@"set%@:", key.qmui_capitalizedString],   // set<Key>:
-        [NSString stringWithFormat:@"_set%@", key.qmui_capitalizedString]   // _set<Key>
+        [NSString stringWithFormat:@"set%@:", key.tmui_capitalizedString],   // set<Key>:
+        [NSString stringWithFormat:@"_set%@", key.tmui_capitalizedString]   // _set<Key>
     ];
     for (NSString *selectorString in setter) {
         if ([self respondsToSelector:NSSelectorFromString(selectorString)]) return YES;
@@ -296,18 +301,18 @@
     
     if (![self.class accessInstanceVariablesDirectly]) return NO;
     
-    return [self _qmui_hasSpecifiedIvarWithKey:key];
+    return [self _tmui_hasSpecifiedIvarWithKey:key];
 }
 
-- (BOOL)_qmui_hasSpecifiedIvarWithKey:(NSString *)key {
+- (BOOL)_tmui_hasSpecifiedIvarWithKey:(NSString *)key {
     __block BOOL result = NO;
     NSArray<NSString *> *ivars = @[
         [NSString stringWithFormat:@"_%@", key],
-        [NSString stringWithFormat:@"_is%@", key.qmui_capitalizedString],
+        [NSString stringWithFormat:@"_is%@", key.tmui_capitalizedString],
         key,
-        [NSString stringWithFormat:@"is%@", key.qmui_capitalizedString]
+        [NSString stringWithFormat:@"is%@", key.tmui_capitalizedString]
     ];
-    [NSObject qmui_enumrateIvarsOfClass:self.class includingInherited:YES usingBlock:^(Ivar  _Nonnull ivar, NSString * _Nonnull ivarDescription) {
+    [NSObject tmui_enumrateIvarsOfClass:self.class includingInherited:YES usingBlock:^(Ivar  _Nonnull ivar, NSString * _Nonnull ivarDescription) {
         if (!result) {
             NSString *ivarName = [NSString stringWithFormat:@"%s", ivar_getName(ivar)];
             if ([ivars containsObject:ivarName]) {
@@ -321,61 +326,61 @@
 @end
 
 
-@implementation NSObject (QMUI_DataBind)
+@implementation NSObject (TMUI_DataBind)
 
-static char kAssociatedObjectKey_QMUIAllBoundObjects;
-- (NSMutableDictionary<id, id> *)qmui_allBoundObjects {
-    NSMutableDictionary<id, id> *dict = objc_getAssociatedObject(self, &kAssociatedObjectKey_QMUIAllBoundObjects);
+static char kAssociatedObjectKey_TMUIAllBoundObjects;
+- (NSMutableDictionary<id, id> *)tmui_allBoundObjects {
+    NSMutableDictionary<id, id> *dict = objc_getAssociatedObject(self, &kAssociatedObjectKey_TMUIAllBoundObjects);
     if (!dict) {
         dict = [NSMutableDictionary dictionary];
-        objc_setAssociatedObject(self, &kAssociatedObjectKey_QMUIAllBoundObjects, dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &kAssociatedObjectKey_TMUIAllBoundObjects, dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return dict;
 }
 
-- (void)qmui_bindObject:(id)object forKey:(NSString *)key {
+- (void)tmui_bindObject:(id)object forKey:(NSString *)key {
     if (!key.length) {
         NSAssert(NO, @"");
         return;
     }
     if (object) {
-        [[self qmui_allBoundObjects] setObject:object forKey:key];
+        [[self tmui_allBoundObjects] setObject:object forKey:key];
     } else {
-        [[self qmui_allBoundObjects] removeObjectForKey:key];
+        [[self tmui_allBoundObjects] removeObjectForKey:key];
     }
 }
 
-- (void)qmui_bindObjectWeakly:(id)object forKey:(NSString *)key {
+- (void)tmui_bindObjectWeakly:(id)object forKey:(NSString *)key {
     if (!key.length) {
         NSAssert(NO, @"");
         return;
     }
     if (object) {
-        QMUIWeakObjectContainer *container = [[QMUIWeakObjectContainer alloc] initWithObject:object];
-        [self qmui_bindObject:container forKey:key];
+        TMUIWeakObjectContainer *container = [[TMUIWeakObjectContainer alloc] initWithObject:object];
+        [self tmui_bindObject:container forKey:key];
     } else {
-        [[self qmui_allBoundObjects] removeObjectForKey:key];
+        [[self tmui_allBoundObjects] removeObjectForKey:key];
     }
 }
 
-- (id)qmui_getBoundObjectForKey:(NSString *)key {
+- (id)tmui_getBoundObjectForKey:(NSString *)key {
     if (!key.length) {
         NSAssert(NO, @"");
         return nil;
     }
-    id storedObj = [[self qmui_allBoundObjects] objectForKey:key];
-    if ([storedObj isKindOfClass:[QMUIWeakObjectContainer class]]) {
-        storedObj = [(QMUIWeakObjectContainer *)storedObj object];
+    id storedObj = [[self tmui_allBoundObjects] objectForKey:key];
+    if ([storedObj isKindOfClass:[TMUIWeakObjectContainer class]]) {
+        storedObj = [(TMUIWeakObjectContainer *)storedObj object];
     }
     return storedObj;
 }
 
-- (void)qmui_bindDouble:(double)doubleValue forKey:(NSString *)key {
-    [self qmui_bindObject:@(doubleValue) forKey:key];
+- (void)tmui_bindDouble:(double)doubleValue forKey:(NSString *)key {
+    [self tmui_bindObject:@(doubleValue) forKey:key];
 }
 
-- (double)qmui_getBoundDoubleForKey:(NSString *)key {
-    id object = [self qmui_getBoundObjectForKey:key];
+- (double)tmui_getBoundDoubleForKey:(NSString *)key {
+    id object = [self tmui_getBoundObjectForKey:key];
     if ([object isKindOfClass:[NSNumber class]]) {
         double doubleValue = [(NSNumber *)object doubleValue];
         return doubleValue;
@@ -385,12 +390,12 @@ static char kAssociatedObjectKey_QMUIAllBoundObjects;
     }
 }
 
-- (void)qmui_bindBOOL:(BOOL)boolValue forKey:(NSString *)key {
-    [self qmui_bindObject:@(boolValue) forKey:key];
+- (void)tmui_bindBOOL:(BOOL)boolValue forKey:(NSString *)key {
+    [self tmui_bindObject:@(boolValue) forKey:key];
 }
 
-- (BOOL)qmui_getBoundBOOLForKey:(NSString *)key {
-    id object = [self qmui_getBoundObjectForKey:key];
+- (BOOL)tmui_getBoundBOOLForKey:(NSString *)key {
+    id object = [self tmui_getBoundObjectForKey:key];
     if ([object isKindOfClass:[NSNumber class]]) {
         BOOL boolValue = [(NSNumber *)object boolValue];
         return boolValue;
@@ -400,12 +405,12 @@ static char kAssociatedObjectKey_QMUIAllBoundObjects;
     }
 }
 
-- (void)qmui_bindLong:(long)longValue forKey:(NSString *)key {
-    [self qmui_bindObject:@(longValue) forKey:key];
+- (void)tmui_bindLong:(long)longValue forKey:(NSString *)key {
+    [self tmui_bindObject:@(longValue) forKey:key];
 }
 
-- (long)qmui_getBoundLongForKey:(NSString *)key {
-    id object = [self qmui_getBoundObjectForKey:key];
+- (long)tmui_getBoundLongForKey:(NSString *)key {
+    id object = [self tmui_getBoundObjectForKey:key];
     if ([object isKindOfClass:[NSNumber class]]) {
         long longValue = [(NSNumber *)object longValue];
         return longValue;
@@ -415,80 +420,80 @@ static char kAssociatedObjectKey_QMUIAllBoundObjects;
     }
 }
 
-- (void)qmui_clearBindingForKey:(NSString *)key {
-    [self qmui_bindObject:nil forKey:key];
+- (void)tmui_clearBindingForKey:(NSString *)key {
+    [self tmui_bindObject:nil forKey:key];
 }
 
-- (void)qmui_clearAllBinding {
-    [[self qmui_allBoundObjects] removeAllObjects];
+- (void)tmui_clearAllBinding {
+    [[self tmui_allBoundObjects] removeAllObjects];
 }
 
-- (NSArray<NSString *> *)qmui_allBindingKeys {
-    NSArray<NSString *> *allKeys = [[self qmui_allBoundObjects] allKeys];
+- (NSArray<NSString *> *)tmui_allBindingKeys {
+    NSArray<NSString *> *allKeys = [[self tmui_allBoundObjects] allKeys];
     return allKeys;
 }
 
-- (BOOL)qmui_hasBindingKey:(NSString *)key {
-    return [[self qmui_allBindingKeys] containsObject:key];
+- (BOOL)tmui_hasBindingKey:(NSString *)key {
+    return [[self tmui_allBindingKeys] containsObject:key];
 }
 
 @end
 
-@implementation NSObject (QMUI_Debug)
+@implementation NSObject (TMUI_Debug)
 
 BeginIgnorePerformSelectorLeaksWarning
-- (NSString *)qmui_methodList {
+- (NSString *)tmui_methodList {
     return [self performSelector:NSSelectorFromString(@"_methodDescription")];
 }
 
-- (NSString *)qmui_shortMethodList {
+- (NSString *)tmui_shortMethodList {
     return [self performSelector:NSSelectorFromString(@"_shortMethodDescription")];
 }
 
-- (NSString *)qmui_ivarList {
+- (NSString *)tmui_ivarList {
     return [self performSelector:NSSelectorFromString(@"_ivarDescription")];
 }
 EndIgnorePerformSelectorLeaksWarning
 
 @end
 
-@implementation NSThread (QMUI_KVC)
+@implementation NSThread (TMUI_KVC)
 
-QMUISynthesizeBOOLProperty(qmui_shouldIgnoreUIKVCAccessProhibited, setQmui_shouldIgnoreUIKVCAccessProhibited)
-
-@end
-
-@interface NSException (QMUI_KVC)
+TMUISynthesizeBOOLProperty(tmui_shouldIgnoreUIKVCAccessProhibited, setTmui_shouldIgnoreUIKVCAccessProhibited)
 
 @end
 
-@implementation NSException (QMUI_KVC)
+@interface NSException (TMUI_KVC)
 
-+ (void)load {
-    if (@available(iOS 13.0, *)) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            OverrideImplementation(object_getClass([NSException class]), @selector(raise:format:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-                return ^(NSObject *selfObject, NSExceptionName raise, NSString *format, ...) {
-                    
-                    if (raise == NSGenericException && [format isEqualToString:@"Access to %@'s %@ ivar is prohibited. This is an application bug"]) {
-                        BOOL shouldIgnoreUIKVCAccessProhibited = ((QMUICMIActivated && IgnoreKVCAccessProhibited) || NSThread.currentThread.qmui_shouldIgnoreUIKVCAccessProhibited);
-                        if (shouldIgnoreUIKVCAccessProhibited) return;
-                        
-                        QMUILogWarn(@"NSObject (QMUI)", @"使用 KVC 访问了 UIKit 的私有属性，会触发系统的 NSException，建议尽量避免此类操作，仍需访问可使用 BeginIgnoreUIKVCAccessProhibited 和 EndIgnoreUIKVCAccessProhibited 把相关代码包裹起来，或者直接使用 qmui_valueForKey: 、qmui_setValue:forKey:");
-                    }
-                    
-                    id (*originSelectorIMP)(id, SEL, NSExceptionName name, NSString *, ...);
-                    originSelectorIMP = (id (*)(id, SEL, NSExceptionName name, NSString *, ...))originalIMPProvider();
-                    va_list args;
-                    va_start(args, format);
-                    NSString *reason =  [[NSString alloc] initWithFormat:format arguments:args];
-                    originSelectorIMP(selfObject, originCMD, raise, reason);
-                    va_end(args);
-                };
-            });
-        });
-    }
-}
+@end
+
+@implementation NSException (TMUI_KVC)
+
+//+ (void)load {
+//    if (@available(iOS 13.0, *)) {
+//        static dispatch_once_t onceToken;
+//        dispatch_once(&onceToken, ^{
+//            OverrideImplementation(object_getClass([NSException class]), @selector(raise:format:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//                return ^(NSObject *selfObject, NSExceptionName raise, NSString *format, ...) {
+//                    
+//                    if (raise == NSGenericException && [format isEqualToString:@"Access to %@'s %@ ivar is prohibited. This is an application bug"]) {
+//                        BOOL shouldIgnoreUIKVCAccessProhibited = ((TMUICMIActivated && IgnoreKVCAccessProhibited) || NSThread.currentThread.tmui_shouldIgnoreUIKVCAccessProhibited);
+//                        if (shouldIgnoreUIKVCAccessProhibited) return;
+//                        
+//                        TMUILogWarn(@"NSObject (TMUI)", @"使用 KVC 访问了 UIKit 的私有属性，会触发系统的 NSException，建议尽量避免此类操作，仍需访问可使用 BeginIgnoreUIKVCAccessProhibited 和 EndIgnoreUIKVCAccessProhibited 把相关代码包裹起来，或者直接使用 tmui_valueForKey: 、tmui_setValue:forKey:");
+//                    }
+//                    
+//                    id (*originSelectorIMP)(id, SEL, NSExceptionName name, NSString *, ...);
+//                    originSelectorIMP = (id (*)(id, SEL, NSExceptionName name, NSString *, ...))originalIMPProvider();
+//                    va_list args;
+//                    va_start(args, format);
+//                    NSString *reason =  [[NSString alloc] initWithFormat:format arguments:args];
+//                    originSelectorIMP(selfObject, originCMD, raise, reason);
+//                    va_end(args);
+//                };
+//            });
+//        });
+//    }
+//}
 
 @end

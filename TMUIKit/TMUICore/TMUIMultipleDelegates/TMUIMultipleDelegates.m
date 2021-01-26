@@ -57,7 +57,7 @@
 }
 
 - (BOOL)removeDelegate:(id)delegate {
-    NSUInteger index = [self.delegates qmui_indexOfPointer:(__bridge void *)delegate];
+    NSUInteger index = [self.delegates tmui_indexOfPointer:(__bridge void *)delegate];
     if (index != NSNotFound) {
         [self.delegates removePointerAtIndex:index];
         return YES;
@@ -72,7 +72,7 @@
 }
 
 - (BOOL)containsDelegate:(id)delegate {
-    return [self.delegates qmui_containsPointer:(__bridge void *)delegate];
+    return [self.delegates tmui_containsPointer:(__bridge void *)delegate];
 }
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
@@ -85,7 +85,7 @@
         }
     }
     
-//    return NSMethodSignature.qmui_avoidExceptionSignature;
+//    return NSMethodSignature.tmui_avoidExceptionSignature;
     return [NSMethodSignature signatureWithObjCTypes:"@^v^c"];
 }
 
@@ -184,7 +184,7 @@
 - (id)valueForKey:(NSString *)key {
     NSPointerArray *delegates = [self.delegates copy];
     for (id delegate in delegates) {
-        if ([delegate qmui_canGetValueForKey:key]) {
+        if ([delegate tmui_canGetValueForKey:key]) {
             return [delegate valueForKey:key];
         }
     }
@@ -194,7 +194,7 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
     NSPointerArray *delegates = [self.delegates copy];
     for (id delegate in delegates) {
-        if ([delegate qmui_canSetValueForKey:key]) {
+        if ([delegate tmui_canSetValueForKey:key]) {
             [delegate setValue:value forKey:key];
         }
     }

@@ -25,7 +25,7 @@
 //}
 
 
-- (NSUInteger)qmui_indexOfPointer:(nullable void *)pointer {
+- (NSUInteger)tmui_indexOfPointer:(nullable void *)pointer {
     if (!pointer) {
         return NSNotFound;
     }
@@ -39,11 +39,11 @@
     return NSNotFound;
 }
 
-- (BOOL)qmui_containsPointer:(void *)pointer {
+- (BOOL)tmui_containsPointer:(void *)pointer {
     if (!pointer) {
         return NO;
     }
-    if ([self qmui_indexOfPointer:pointer] != NSNotFound) {
+    if ([self tmui_indexOfPointer:pointer] != NSNotFound) {
         return YES;
     }
     return NO;

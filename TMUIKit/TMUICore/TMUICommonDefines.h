@@ -13,6 +13,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "TMCoreGraphicsDefines.h"
 #import "TMUIKitDefines.h"
+#import "NSString+TMUI.h"
 
 /// !!!: 此处定义的宏定义均以 TMUI_ 为前缀, 若为内联函数则以小写的tmui_为前缀
 
@@ -655,5 +656,20 @@ NSContainingRanges(NSRange outerRange, NSRange innerRange) {
     return NO;
 }
 
+
+/**
+ 根据给定的 getter selector 获取对应的 setter selector
+ @param getter 目标 getter selector
+ @return 对应的 setter selector
+ */
+CG_INLINE SEL
+setterWithGetter(SEL getter) {
+    NSString *getterString = NSStringFromSelector(getter);
+    NSMutableString *setterString = [[NSMutableString alloc] initWithString:@"set"];
+    [setterString appendString:getterString.tmui_capitalizedString];
+    [setterString appendString:@":"];
+    SEL setter = NSSelectorFromString(setterString);
+    return setter;
+}
 
 #endif /* TMUICommonDefines_h */
