@@ -173,6 +173,14 @@ Pod::Spec.new do |s|
           'TMSearchUIAssets' => ['TMUIKit/TMUIComponents/TMSearchController/Resource/*.png']
         }
       end
+      
+      ss.subspec 'TMUIPageViewController' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
+      end
+      
+      ss.subspec 'TMShowBigImageController' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
+      end
   end
   
   s.dependency "Masonry", "~> 1.1.0"

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860AD25C01D5E00F31337 /* TMPageRootViewController.m */; };
+		160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B225C01D8100F31337 /* Table3ViewController.m */; };
+		160860BD25C01D8100F31337 /* Table2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B425C01D8100F31337 /* Table2ViewController.m */; };
+		160860BE25C01D8100F31337 /* NormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B625C01D8100F31337 /* NormalViewController.m */; };
+		160860BF25C01D8100F31337 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B925C01D8100F31337 /* TableViewController.m */; };
+		160860C025C01D8100F31337 /* Table1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860BA25C01D8100F31337 /* Table1ViewController.m */; };
+		160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860D425C01E3200F31337 /* THKSegmentControl.m */; };
+		160860F625C01F1D00F31337 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860EB25C01F1D00F31337 /* UIView+Frame.m */; };
+		160860F725C01F1D00F31337 /* UIButton+Convenient.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860F125C01F1D00F31337 /* UIButton+Convenient.m */; };
+		160860F825C01F1D00F31337 /* UIViewController+Convenient.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860F325C01F1D00F31337 /* UIViewController+Convenient.m */; };
+		160860F925C01F1D00F31337 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860F425C01F1D00F31337 /* UIColor+HexString.m */; };
 		163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */; };
 		16455E0A25B6EDEC00BBBEC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16455E0825B6EDEC00BBBEC2 /* Main.storyboard */; };
 		16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */; };
@@ -80,6 +91,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		160860AC25C01D5E00F31337 /* TMPageRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMPageRootViewController.h; sourceTree = "<group>"; };
+		160860AD25C01D5E00F31337 /* TMPageRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMPageRootViewController.m; sourceTree = "<group>"; };
+		160860B225C01D8100F31337 /* Table3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Table3ViewController.m; sourceTree = "<group>"; };
+		160860B325C01D8100F31337 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		160860B425C01D8100F31337 /* Table2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Table2ViewController.m; sourceTree = "<group>"; };
+		160860B525C01D8100F31337 /* Table1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table1ViewController.h; sourceTree = "<group>"; };
+		160860B625C01D8100F31337 /* NormalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalViewController.m; sourceTree = "<group>"; };
+		160860B725C01D8100F31337 /* Table3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table3ViewController.h; sourceTree = "<group>"; };
+		160860B825C01D8100F31337 /* Table2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Table2ViewController.h; sourceTree = "<group>"; };
+		160860B925C01D8100F31337 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		160860BA25C01D8100F31337 /* Table1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Table1ViewController.m; sourceTree = "<group>"; };
+		160860BB25C01D8100F31337 /* NormalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalViewController.h; sourceTree = "<group>"; };
+		160860D425C01E3200F31337 /* THKSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THKSegmentControl.m; sourceTree = "<group>"; };
+		160860DA25C01E3200F31337 /* THKSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKSegmentControl.h; sourceTree = "<group>"; };
+		160860EA25C01F1D00F31337 /* THKColorsDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKColorsDefine.h; sourceTree = "<group>"; };
+		160860EB25C01F1D00F31337 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		160860EC25C01F1D00F31337 /* UIButton+Convenient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Convenient.h"; sourceTree = "<group>"; };
+		160860ED25C01F1D00F31337 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
+		160860EE25C01F1D00F31337 /* UIViewController+Convenient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Convenient.h"; sourceTree = "<group>"; };
+		160860EF25C01F1D00F31337 /* THKCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKCommonDefine.h; sourceTree = "<group>"; };
+		160860F025C01F1D00F31337 /* Define_SetValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_SetValues.h; sourceTree = "<group>"; };
+		160860F125C01F1D00F31337 /* UIButton+Convenient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Convenient.m"; sourceTree = "<group>"; };
+		160860F225C01F1D00F31337 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		160860F325C01F1D00F31337 /* UIViewController+Convenient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Convenient.m"; sourceTree = "<group>"; };
+		160860F425C01F1D00F31337 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
+		160860F525C01F1D00F31337 /* Define_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_Block.h; sourceTree = "<group>"; };
 		163444A825BA70910091D4EF /* UIButtonTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIButtonTMUIViewController.h; sourceTree = "<group>"; };
 		163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIButtonTMUIViewController.m; sourceTree = "<group>"; };
 		16455E0925B6EDEC00BBBEC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -168,11 +205,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160860A625C01D1800F31337 /* TMPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				160860E925C01F1D00F31337 /* CommonDefine */,
+				160860DA25C01E3200F31337 /* THKSegmentControl.h */,
+				160860D425C01E3200F31337 /* THKSegmentControl.m */,
+				160860AC25C01D5E00F31337 /* TMPageRootViewController.h */,
+				160860AD25C01D5E00F31337 /* TMPageRootViewController.m */,
+				160860B125C01D8100F31337 /* ChildVC */,
+			);
+			path = TMPageViewController;
+			sourceTree = "<group>";
+		};
+		160860B125C01D8100F31337 /* ChildVC */ = {
+			isa = PBXGroup;
+			children = (
+				160860BB25C01D8100F31337 /* NormalViewController.h */,
+				160860B625C01D8100F31337 /* NormalViewController.m */,
+				160860B525C01D8100F31337 /* Table1ViewController.h */,
+				160860BA25C01D8100F31337 /* Table1ViewController.m */,
+				160860B825C01D8100F31337 /* Table2ViewController.h */,
+				160860B425C01D8100F31337 /* Table2ViewController.m */,
+				160860B725C01D8100F31337 /* Table3ViewController.h */,
+				160860B225C01D8100F31337 /* Table3ViewController.m */,
+				160860B325C01D8100F31337 /* TableViewController.h */,
+				160860B925C01D8100F31337 /* TableViewController.m */,
+			);
+			path = ChildVC;
+			sourceTree = "<group>";
+		};
+		160860E925C01F1D00F31337 /* CommonDefine */ = {
+			isa = PBXGroup;
+			children = (
+				160860F525C01F1D00F31337 /* Define_Block.h */,
+				160860F025C01F1D00F31337 /* Define_SetValues.h */,
+				160860EA25C01F1D00F31337 /* THKColorsDefine.h */,
+				160860EF25C01F1D00F31337 /* THKCommonDefine.h */,
+				160860EC25C01F1D00F31337 /* UIButton+Convenient.h */,
+				160860F125C01F1D00F31337 /* UIButton+Convenient.m */,
+				160860ED25C01F1D00F31337 /* UIColor+HexString.h */,
+				160860F425C01F1D00F31337 /* UIColor+HexString.m */,
+				160860F225C01F1D00F31337 /* UIView+Frame.h */,
+				160860EB25C01F1D00F31337 /* UIView+Frame.m */,
+				160860EE25C01F1D00F31337 /* UIViewController+Convenient.h */,
+				160860F325C01F1D00F31337 /* UIViewController+Convenient.m */,
+			);
+			path = CommonDefine;
+			sourceTree = "<group>";
+		};
 		16455E3925B6F3C600BBBEC2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+				160860A625C01D1800F31337 /* TMPageViewController */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -627,20 +714,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				16EABFE725BAAE7C00A3273D /* UISlider+associateObject.m in Sources */,
+				160860BD25C01D8100F31337 /* Table2ViewController.m in Sources */,
+				160860F825C01F1D00F31337 /* UIViewController+Convenient.m in Sources */,
 				16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */,
 				163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */,
+				160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */,
+				160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */,
+				160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */,
 				16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */,
+				160860F625C01F1D00F31337 /* UIView+Frame.m in Sources */,
+				160860C025C01D8100F31337 /* Table1ViewController.m in Sources */,
 				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
 				16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */,
+				160860F725C01F1D00F31337 /* UIButton+Convenient.m in Sources */,
 				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
+				160860F925C01F1D00F31337 /* UIColor+HexString.m in Sources */,
+				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
 				16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */,
 				16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */,
+				160860BF25C01D8100F31337 /* TableViewController.m in Sources */,
 				16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

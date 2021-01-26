@@ -48,5 +48,14 @@
 #import "TMSearchKit.h"
 #endif
 
+#if __has_include("TMPageViewController.h")
+#import "TMPageViewController.h"
+#endif
+
+#if __has_include("TMShowBigImageViewController.h")
+#import "TMShowBigImageViewController.h"
+#endif
+
+
 
 #endif /* TMUIComponents_h */

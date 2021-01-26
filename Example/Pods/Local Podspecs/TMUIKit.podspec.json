@@ -1,6 +1,6 @@
 {
   "name": "TMUIKit",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "summary": "TMUIKit 是个UI库，包含UI，组件，宏，库工具等。",
   "description": "'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'",
   "homepage": "https://github.com/chengzongxin/TMUIKit",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/chengzongxin/TMUIKit.git",
-    "tag": "0.9.4"
+    "tag": "0.9.5"
   },
   "platforms": {
     "ios": "9.0"
@@ -34,6 +34,12 @@
         "Foundation",
         "UIKit",
         "CoreGraphics"
+      ],
+      "subspecs": [
+        {
+          "name": "TMUIMultipleDelegates",
+          "source_files": "TMUIKit/TMUICore/TMUIMultipleDelegates"
+        }
       ]
     },
     {
@@ -195,6 +201,14 @@
               "source_files": "TMUIKit/TMUIComponents/TMSearchController/Extensions/*.{h,m}"
             }
           ]
+        },
+        {
+          "name": "TMUIPageViewController",
+          "source_files": "TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}"
+        },
+        {
+          "name": "TMShowBigImageController",
+          "source_files": "TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}"
         }
       ]
     }
