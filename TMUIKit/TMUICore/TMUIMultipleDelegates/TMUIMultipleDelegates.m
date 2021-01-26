@@ -7,7 +7,6 @@
 
 #import "TMUIMultipleDelegates.h"
 #import <objc/runtime.h>
-#import "NSPointerArray+TMUI.h"
 #import "NSObject+TMUI.h"
 
 @interface TMUIMultipleDelegates ()
@@ -198,6 +197,51 @@
             [delegate setValue:value forKey:key];
         }
     }
+}
+
+@end
+
+
+@implementation NSPointerArray (TMUI_TMUIMultipleDelegates)
+
+
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        ExtendImplementationOfNonVoidMethodWithoutArguments([NSPointerArray class], @selector(description), NSString *, ^NSString *(NSPointerArray *selfObject, NSString *originReturnValue) {
+//            NSMutableString *result = [[NSMutableString alloc] initWithString:originReturnValue];
+//            NSPointerArray *array = [selfObject copy];
+//            for (NSInteger i = 0; i < array.count; i++) {
+//                ([result appendFormat:@"\npointer[%@] is %@", @(i), [array pointerAtIndex:i]]);
+//            }
+//            return result;
+//        });
+//    });
+//}
+
+
+- (NSUInteger)tmui_indexOfPointer:(nullable void *)pointer {
+    if (!pointer) {
+        return NSNotFound;
+    }
+    
+    NSPointerArray *array = [self copy];
+    for (NSUInteger i = 0; i < array.count; i++) {
+        if ([array pointerAtIndex:i] == ((void *)pointer)) {
+            return i;
+        }
+    }
+    return NSNotFound;
+}
+
+- (BOOL)tmui_containsPointer:(void *)pointer {
+    if (!pointer) {
+        return NO;
+    }
+    if ([self tmui_indexOfPointer:pointer] != NSNotFound) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

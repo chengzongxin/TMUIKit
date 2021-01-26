@@ -25,4 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface NSPointerArray (TMUI_TMUIMultipleDelegates)
+
+- (NSUInteger)tmui_indexOfPointer:(nullable void *)pointer;
+- (BOOL)tmui_containsPointer:(nullable void *)pointer;
+@end
+
+
 NS_ASSUME_NONNULL_END

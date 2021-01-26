@@ -8,7 +8,6 @@
 #import "NSObject+TMUIMultipleDelegates.h"
 #import "TMUIMultipleDelegates.h"
 #import "TMUICore.h"
-#import "NSPointerArray+TMUI.h"
 #import "NSString+TMUI.h"
 #import "TMUIAssociatedObjectDefine.h"
 #import "TMUIRuntime.h"
