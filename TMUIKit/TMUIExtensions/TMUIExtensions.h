@@ -20,5 +20,6 @@
 #import "UIViewController+TMUI.h"
 #import "NSString+TMUI.h"
 #import "NSArray+TMUI.h"
+#import "NSMutableParagraphStyle+TMUI.h"
 
 #endif /* TMUIExtensions_h */
