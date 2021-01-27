@@ -21,8 +21,20 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 };
 
 @interface UIViewController (TMUI)
+// 控制导航栏显示或隐藏
+@property (nonatomic, assign) BOOL navBarHidden;
+
+// 导航控制器中上一个viewcontroller
+- (UIViewController*)previousViewController;
+// 导航控制器中下一个viewcontroller
+- (UIViewController*)nextViewController;
 #pragma mark -  获取当前最顶层的ViewController
 + (UIViewController *)getCurrentVC;
+
+
+// 导航栏返回按钮方法
+-(void)navBackAction:(id)sender;
+
 @end
 
 

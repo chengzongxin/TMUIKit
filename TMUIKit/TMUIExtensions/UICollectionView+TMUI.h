@@ -1,15 +1,15 @@
 //
-//  UICollectionView+THKNib.h
-//  Housekeeper_ipad
+//  UICollectionView+TMUI.h
+//  TMUIKit
 //
-//  Created by to on 15-4-28.
-//  Copyright (c) 2015年 to. All rights reserved.
+//  Created by Joe.cheng on 2021/1/27.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface UICollectionView (TNib)
+NS_ASSUME_NONNULL_BEGIN
 
+@interface UICollectionView (TMUI)
 - (void)registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 
 // 标签是NSStringFromClass([TCPIntroTableViewCell class]
@@ -19,5 +19,6 @@
 
 - (void)t_registerNibIdentifierNSStringFromClass:(Class)aClass forSupplementaryViewOfKind:(NSString *)kind;
 
-
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,12 +1,59 @@
 //
-//  UITableView+set.m
-//  HouseKeeper
+//  UITableView+TMUI.m
+//  TMUIKit
 //
-//  Created by to on 14-7-16.
-//  Copyright (c) 2014年 binxun. All rights reserved.
+//  Created by Joe.cheng on 2021/1/27.
 //
 
-#import "UITableView+TRegisterCell.h"
+#import "UITableView+TMUI.h"
+
+@implementation UITableView (TMUI)
+
+- (NSUInteger)indexOfIndexPath:(NSIndexPath *)indexPath {
+    if (!self.dataSource) {
+        return 0;
+    }
+    NSUInteger index = 0;
+    NSUInteger sectionIndex = indexPath.section;
+    
+    for (int i=0; i<sectionIndex; i++) {
+        NSUInteger sectionRowsCount = [self.dataSource tableView:self numberOfRowsInSection:i];
+        index += sectionRowsCount;
+    }
+    
+    index += indexPath.row;
+    
+    return index;
+}
+
+- (NSIndexPath *)indexPathOfIndex:(NSUInteger)index {
+    if (!self.dataSource) {
+        return nil;
+    }
+    NSUInteger sectionIndex = 0;
+    while ([self.dataSource tableView:self numberOfRowsInSection:sectionIndex]<=index) {
+        index -= [self.dataSource tableView:self numberOfRowsInSection:sectionIndex];
+        sectionIndex ++;
+    }
+    return [NSIndexPath indexPathForRow:index inSection:sectionIndex];
+}
+
+@end
+
+
+@implementation UITableView (TNib)
+
+- (void)registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:cellClass]];
+    [self registerNib:nib forCellReuseIdentifier:identifier];
+}
+
+- (void)registerNibIdentifierNSStringFromClass:(Class)cellClass {
+    [self registerNibClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
+}
+
+@end
+
 
 @implementation UITableView (TRegisterCell)
 
@@ -55,3 +102,4 @@
 }
 
 @end
+

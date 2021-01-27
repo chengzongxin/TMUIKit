@@ -1,14 +1,30 @@
 //
-//  NSURL+TCategory.m
-//  TBasicLib
+//  NSURL+TMUI.m
+//  TMUIKit
 //
-//  Created by kevin.huang on 15-1-5.
-//  Copyright (c) 2015年 binxun. All rights reserved.
+//  Created by Joe.cheng on 2021/1/27.
 //
 
-#import "NSURL+TCategory.h"
+#import "NSURL+TMUI.h"
 
-@implementation NSURL (TCategory)
+@implementation NSURL (TMUI)
+
+- (NSDictionary<NSString *, NSString *> *)qmui_queryItems {
+    if (!self.absoluteString.length) {
+        return nil;
+    }
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithString:self.absoluteString];
+    
+    [urlComponents.queryItems enumerateObjectsUsingBlock:^(NSURLQueryItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.name) {
+            [params setObject:obj.value ?: [NSNull null] forKey:obj.name];
+        }
+    }];
+    return [params copy];
+}
+
 
 - (id)parameterValueForKey:(NSString *)key {
     if (![key isKindOfClass:[NSString class]]) {

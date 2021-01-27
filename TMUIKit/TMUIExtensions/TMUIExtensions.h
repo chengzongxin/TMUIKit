@@ -24,5 +24,8 @@
 #import "NSAttributedString+TMUI.h"
 #import "NSDate+TMUI.h"
 #import "NSDictionary+TMUI.h"
+#import "NSURL+TMUI.h"
+#import "UITableView+TMUI.h"
+#import "UICollectionView+TMUI.h"
 
 #endif /* TMUIExtensions_h */

@@ -1,14 +1,13 @@
 //
-//  UICollectionView+THKNib.m
-//  Housekeeper_ipad
+//  UICollectionView+TMUI.m
+//  TMUIKit
 //
-//  Created by to on 15-4-28.
-//  Copyright (c) 2015年 to. All rights reserved.
+//  Created by Joe.cheng on 2021/1/27.
 //
 
-#import "UICollectionView+TNib.h"
+#import "UICollectionView+TMUI.h"
 
-@implementation UICollectionView (TNib)
+@implementation UICollectionView (TMUI)
 
 - (void)registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:cellClass]];

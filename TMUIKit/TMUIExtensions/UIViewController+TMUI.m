@@ -6,8 +6,58 @@
 //
 
 #import "UIViewController+TMUI.h"
-
+#import <objc/runtime.h>
 @implementation UIViewController (TMUI)
+
+- (BOOL)navBarHidden {
+    BOOL hidden = [objc_getAssociatedObject(self, _cmd) boolValue];
+    return hidden;
+}
+
+- (void)setNavBarHidden:(BOOL)navBarHidden {
+    objc_setAssociatedObject(self, @selector(navBarHidden), @(navBarHidden), OBJC_ASSOCIATION_RETAIN);
+}
+
+#pragma mark - api
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIViewController*)previousViewController {
+    NSArray* viewControllers = self.navigationController.viewControllers;
+    if (viewControllers.count > 1) {
+        NSUInteger controllerIndex = [viewControllers indexOfObject:self];
+        if (controllerIndex != NSNotFound && controllerIndex > 0) {
+            return [viewControllers objectAtIndex:controllerIndex-1];
+        }
+    }
+    
+    return nil;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UIViewController*)nextViewController {
+    NSArray* viewControllers = self.navigationController.viewControllers;
+    if (viewControllers.count > 1) {
+        NSUInteger controllerIndex = [viewControllers indexOfObject:self];
+        if (controllerIndex != NSNotFound && controllerIndex+1 < viewControllers.count) {
+            return [viewControllers objectAtIndex:controllerIndex+1];
+        }
+    }
+    return nil;
+}
+
+
+#pragma mark - api
+
+- (void)navBackAction:(id)sender {
+    if (self.navigationController.viewControllers.count>1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+
 #pragma mark -  获取当前最顶层的ViewController
 + (UIViewController *)getCurrentVC {
     UIViewController *result = nil;
