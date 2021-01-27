@@ -10,6 +10,7 @@
 #import "TMUIWeakObjectContainer.h"
 #import "TMUIDefines.h"
 #import "UIImage+TMUI.h"
+#import "UIColor+TMUI.h"
 
 @implementation UIView (TMUI)
 
@@ -296,6 +297,61 @@
     shapeLayer.lineWidth = width;
     [self.layer addSublayer:shapeLayer];
 }
+@end
+
+
+@implementation UIView (TMUI_IBInspectable)
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    self.layer.cornerRadius = cornerRadius;
+    if (cornerRadius > 0) {
+        self.layer.masksToBounds = YES;
+    }
+}
+
+- (CGFloat)cornerRadius {
+    return self.layer.cornerRadius;
+}
+
+- (void)setBorderColor:(UIColor *)borderColor {
+    self.layer.borderColor = borderColor.CGColor;
+}
+
+- (UIColor *)borderColor {
+    return [UIColor colorWithCGColor:self.layer.borderColor];
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth {
+    self.layer.borderWidth = borderWidth;
+}
+
+- (CGFloat)borderWidth {
+    return self.layer.borderWidth;
+}
+
+static char bgColorHexStringKey;
+
+- (void)setBgColorHexString:(NSString *)bgColorHexString {
+    self.backgroundColor = [UIColor colorWithHexString:bgColorHexString];
+    objc_setAssociatedObject(self, &bgColorHexStringKey, bgColorHexString, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSString *)bgColorHexString {
+    return objc_getAssociatedObject(self, &bgColorHexStringKey);
+}
+
+static char borderColorHexStringKey;
+
+- (void)setBorderColorHexString:(NSString *)borderColorHexString {
+    self.layer.borderColor = [UIColor colorWithHexString:borderColorHexString].CGColor;
+    objc_setAssociatedObject(self, &borderColorHexStringKey, borderColorHexString, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSString *)borderColorHexString {
+    return objc_getAssociatedObject(self, &borderColorHexStringKey);
+}
+
+
 @end
 
 
@@ -662,4 +718,28 @@ TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootVi
         }
     }
 }
+@end
+
+@implementation UIView (TNib)
+
++ (instancetype)instantiateFromNib {
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil][0];
+}
+
++ (instancetype)loadNibViewWithFrame:(CGRect)frame {
+    return [self loadNibViewWithFrame:frame nibName:NSStringFromClass([self class])];
+}
+
++ (instancetype)loadNibViewWithName:(NSString *)name {
+    UIWindow *currentWindow = [[UIApplication sharedApplication].windows firstObject];
+    return [self loadNibViewWithFrame:[currentWindow frame] nibName:name];
+}
+
++ (instancetype)loadNibViewWithFrame:(CGRect)frame nibName:(NSString *)name {
+    NSArray* nibView =  [[NSBundle bundleForClass:self] loadNibNamed:name owner:self options:nil];
+    UIView *view =  [nibView objectAtIndex:0];
+    view.frame = frame;
+    return view;
+}
+
 @end

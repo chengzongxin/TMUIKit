@@ -163,4 +163,86 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
 
 @end
 
+@interface UIImage (Compression)
+
++ (NSData *)compressImage:(UIImage *)image dataLen:(NSInteger)dataLen ;
+
+@end
+
+
+#define kDefaultImgQuality 0.5
+
+@interface UIImage (scale)
+
+/**
+ *  缩放到指定大小，也就是指定的size(非等比)
+ *
+ *  @param thumbRect thumbRect的起始位置为(0,0)
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage*)resizedInRect:(CGRect)thumbRect;
+
+
+/**
+ * 按比例缩放 (通过计算得到缩放系数）
+ *
+ *  @param afterSize 要显示到多大区域
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage *)imageCompressFitTargetSize:(CGSize)afterSize;
+
+
+/**
+ * 按比例缩放 (以当前屏幕宽自适应,算出缩放系数,进行等比缩放）
+ *
+ *  区别:如果图片宽度小于屏幕宽,则显示照片实际高度
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage*)scaleToFit;
+
+
+/**
+ *  从图片中按指定的位置大小截取图片的一部分
+ *
+ *  @param rect 要截取的区域
+ *
+ *  @return 截取后的图片
+ */
+- (UIImage*)getSubImage:(CGRect)rect;
+
+/**
+ *  指定大小 等比例缩放,以最大的比率放大,以最小的比率缩小
+ *
+ *  @param size 要显示到多大区域
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage*)scaleToSize:(CGSize)size;
+
+/**
+ *  非等比例压缩
+ *
+ *  @param size 压缩后图片尺寸
+ *
+ *  @return 压缩后的图片
+ */
+- (UIImage *)unProportionScaleToSize:(CGSize)size;
+
+/**
+ *  指定最大data大小 先压缩质量、再压缩size，循环
+ *
+ *  @param maxDataLen 最大data大小 例：1Mb传 1024*1024
+ *
+ *  @param aspectRatio 限定宽高比
+ *
+ *  @return 压缩后的数据
+ */
+- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio;
+- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen;
+
+@end
+
 NS_ASSUME_NONNULL_END

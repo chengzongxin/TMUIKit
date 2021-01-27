@@ -26,6 +26,22 @@
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
 		16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */; };
 		1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */; };
+		16BA203B25C1096000E6F5C8 /* UINib+TLoadNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA1FF925C1096000E6F5C8 /* UINib+TLoadNib.m */; };
+		16BA204225C1096000E6F5C8 /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA200C25C1096000E6F5C8 /* UITextView+Placeholder.m */; };
+		16BA204325C1096000E6F5C8 /* NSURL+TCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA201025C1096000E6F5C8 /* NSURL+TCategory.m */; };
+		16BA204425C1096000E6F5C8 /* UICollectionView+TNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA201225C1096000E6F5C8 /* UICollectionView+TNib.m */; };
+		16BA204525C1096000E6F5C8 /* NSString+TDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA201525C1096000E6F5C8 /* NSString+TDigest.m */; };
+		16BA204625C1096000E6F5C8 /* NSString+TCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA201625C1096000E6F5C8 /* NSString+TCategory.m */; };
+		16BA204725C1096000E6F5C8 /* NSString+TSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA201A25C1096000E6F5C8 /* NSString+TSize.m */; };
+		16BA204825C1096000E6F5C8 /* UIViewController+TCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA201E25C1096000E6F5C8 /* UIViewController+TCategory.m */; };
+		16BA204925C1096000E6F5C8 /* UIViewController+TTableViewSeparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA201F25C1096000E6F5C8 /* UIViewController+TTableViewSeparator.m */; };
+		16BA204A25C1096000E6F5C8 /* UITableView+TNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA202325C1096000E6F5C8 /* UITableView+TNib.m */; };
+		16BA204B25C1096000E6F5C8 /* UITableView+TCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA202425C1096000E6F5C8 /* UITableView+TCategory.m */; };
+		16BA204C25C1096000E6F5C8 /* UITableView+TRegisterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA202625C1096000E6F5C8 /* UITableView+TRegisterCell.m */; };
+		16BA204D25C1096000E6F5C8 /* ALAssetsLibrary+TCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA202925C1096000E6F5C8 /* ALAssetsLibrary+TCategory.m */; };
+		16BA204E25C1096000E6F5C8 /* NSArray+TCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA202C25C1096000E6F5C8 /* NSArray+TCategory.m */; };
+		16BA204F25C1096000E6F5C8 /* NSAttributedString+TSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA202F25C1096000E6F5C8 /* NSAttributedString+TSize.m */; };
+		16BA205025C1096000E6F5C8 /* NSObject+TCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA203125C1096000E6F5C8 /* NSObject+TCategory.m */; };
 		16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6506825BC02300047618E /* TMUILabelViewController.m */; };
 		16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507225BC02390047618E /* TMUITextFieldViewController.m */; };
 		16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507725BC02410047618E /* TMUITextViewViewController.m */; };
@@ -132,6 +148,39 @@
 		16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIButtonViewController.m; sourceTree = "<group>"; };
 		1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUIViewController.h; sourceTree = "<group>"; };
 		1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUIViewController.m; sourceTree = "<group>"; };
+		16BA1FF825C1096000E6F5C8 /* UINib+TLoadNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINib+TLoadNib.h"; sourceTree = "<group>"; };
+		16BA1FF925C1096000E6F5C8 /* UINib+TLoadNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINib+TLoadNib.m"; sourceTree = "<group>"; };
+		16BA200C25C1096000E6F5C8 /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
+		16BA200D25C1096000E6F5C8 /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
+		16BA200F25C1096000E6F5C8 /* NSURL+TCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+TCategory.h"; sourceTree = "<group>"; };
+		16BA201025C1096000E6F5C8 /* NSURL+TCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+TCategory.m"; sourceTree = "<group>"; };
+		16BA201225C1096000E6F5C8 /* UICollectionView+TNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+TNib.m"; sourceTree = "<group>"; };
+		16BA201325C1096000E6F5C8 /* UICollectionView+TNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+TNib.h"; sourceTree = "<group>"; };
+		16BA201525C1096000E6F5C8 /* NSString+TDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TDigest.m"; sourceTree = "<group>"; };
+		16BA201625C1096000E6F5C8 /* NSString+TCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TCategory.m"; sourceTree = "<group>"; };
+		16BA201725C1096000E6F5C8 /* NSString+TSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TSize.h"; sourceTree = "<group>"; };
+		16BA201825C1096000E6F5C8 /* NSString+TCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TCategory.h"; sourceTree = "<group>"; };
+		16BA201925C1096000E6F5C8 /* NSString+TDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TDigest.h"; sourceTree = "<group>"; };
+		16BA201A25C1096000E6F5C8 /* NSString+TSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TSize.m"; sourceTree = "<group>"; };
+		16BA201C25C1096000E6F5C8 /* UIViewController+TCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TCategory.h"; sourceTree = "<group>"; };
+		16BA201D25C1096000E6F5C8 /* UIViewController+TTableViewSeparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTableViewSeparator.h"; sourceTree = "<group>"; };
+		16BA201E25C1096000E6F5C8 /* UIViewController+TCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TCategory.m"; sourceTree = "<group>"; };
+		16BA201F25C1096000E6F5C8 /* UIViewController+TTableViewSeparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TTableViewSeparator.m"; sourceTree = "<group>"; };
+		16BA202125C1096000E6F5C8 /* UITableView+TCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TCategory.h"; sourceTree = "<group>"; };
+		16BA202225C1096000E6F5C8 /* UITableView+TRegisterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TRegisterCell.h"; sourceTree = "<group>"; };
+		16BA202325C1096000E6F5C8 /* UITableView+TNib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TNib.m"; sourceTree = "<group>"; };
+		16BA202425C1096000E6F5C8 /* UITableView+TCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TCategory.m"; sourceTree = "<group>"; };
+		16BA202525C1096000E6F5C8 /* UITableView+TNib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+TNib.h"; sourceTree = "<group>"; };
+		16BA202625C1096000E6F5C8 /* UITableView+TRegisterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+TRegisterCell.m"; sourceTree = "<group>"; };
+		16BA202825C1096000E6F5C8 /* ALAssetsLibrary+TCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+TCategory.h"; sourceTree = "<group>"; };
+		16BA202925C1096000E6F5C8 /* ALAssetsLibrary+TCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+TCategory.m"; sourceTree = "<group>"; };
+		16BA202B25C1096000E6F5C8 /* NSArray+TCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+TCategory.h"; sourceTree = "<group>"; };
+		16BA202C25C1096000E6F5C8 /* NSArray+TCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+TCategory.m"; sourceTree = "<group>"; };
+		16BA202E25C1096000E6F5C8 /* NSAttributedString+TSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+TSize.h"; sourceTree = "<group>"; };
+		16BA202F25C1096000E6F5C8 /* NSAttributedString+TSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+TSize.m"; sourceTree = "<group>"; };
+		16BA203125C1096000E6F5C8 /* NSObject+TCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TCategory.m"; sourceTree = "<group>"; };
+		16BA203225C1096000E6F5C8 /* NSObject+TCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+TCategory.h"; sourceTree = "<group>"; };
+		16BA203325C1096000E6F5C8 /* TBTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTCategory.h; sourceTree = "<group>"; };
 		16C6506725BC02300047618E /* TMUILabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUILabelViewController.h; sourceTree = "<group>"; };
 		16C6506825BC02300047618E /* TMUILabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUILabelViewController.m; sourceTree = "<group>"; };
 		16C6507125BC02390047618E /* TMUITextFieldViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITextFieldViewController.h; sourceTree = "<group>"; };
@@ -346,6 +395,134 @@
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
 		};
+		16BA1FF025C1096000E6F5C8 /* TBTCategory */ = {
+			isa = PBXGroup;
+			children = (
+				16BA1FF725C1096000E6F5C8 /* UINib */,
+				16BA200B25C1096000E6F5C8 /* UITextView */,
+				16BA200E25C1096000E6F5C8 /* NSURL */,
+				16BA201125C1096000E6F5C8 /* UICollectionView */,
+				16BA201425C1096000E6F5C8 /* NSString */,
+				16BA201B25C1096000E6F5C8 /* UIViewController */,
+				16BA202025C1096000E6F5C8 /* UITableView */,
+				16BA202725C1096000E6F5C8 /* ALAssetsLibrary */,
+				16BA202A25C1096000E6F5C8 /* NSArray */,
+				16BA202D25C1096000E6F5C8 /* NSAttributedString */,
+				16BA203025C1096000E6F5C8 /* NSObject */,
+				16BA203325C1096000E6F5C8 /* TBTCategory.h */,
+			);
+			path = TBTCategory;
+			sourceTree = "<group>";
+		};
+		16BA1FF725C1096000E6F5C8 /* UINib */ = {
+			isa = PBXGroup;
+			children = (
+				16BA1FF825C1096000E6F5C8 /* UINib+TLoadNib.h */,
+				16BA1FF925C1096000E6F5C8 /* UINib+TLoadNib.m */,
+			);
+			path = UINib;
+			sourceTree = "<group>";
+		};
+		16BA200B25C1096000E6F5C8 /* UITextView */ = {
+			isa = PBXGroup;
+			children = (
+				16BA200C25C1096000E6F5C8 /* UITextView+Placeholder.m */,
+				16BA200D25C1096000E6F5C8 /* UITextView+Placeholder.h */,
+			);
+			path = UITextView;
+			sourceTree = "<group>";
+		};
+		16BA200E25C1096000E6F5C8 /* NSURL */ = {
+			isa = PBXGroup;
+			children = (
+				16BA200F25C1096000E6F5C8 /* NSURL+TCategory.h */,
+				16BA201025C1096000E6F5C8 /* NSURL+TCategory.m */,
+			);
+			path = NSURL;
+			sourceTree = "<group>";
+		};
+		16BA201125C1096000E6F5C8 /* UICollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				16BA201225C1096000E6F5C8 /* UICollectionView+TNib.m */,
+				16BA201325C1096000E6F5C8 /* UICollectionView+TNib.h */,
+			);
+			path = UICollectionView;
+			sourceTree = "<group>";
+		};
+		16BA201425C1096000E6F5C8 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				16BA201525C1096000E6F5C8 /* NSString+TDigest.m */,
+				16BA201625C1096000E6F5C8 /* NSString+TCategory.m */,
+				16BA201725C1096000E6F5C8 /* NSString+TSize.h */,
+				16BA201825C1096000E6F5C8 /* NSString+TCategory.h */,
+				16BA201925C1096000E6F5C8 /* NSString+TDigest.h */,
+				16BA201A25C1096000E6F5C8 /* NSString+TSize.m */,
+			);
+			path = NSString;
+			sourceTree = "<group>";
+		};
+		16BA201B25C1096000E6F5C8 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16BA201C25C1096000E6F5C8 /* UIViewController+TCategory.h */,
+				16BA201D25C1096000E6F5C8 /* UIViewController+TTableViewSeparator.h */,
+				16BA201E25C1096000E6F5C8 /* UIViewController+TCategory.m */,
+				16BA201F25C1096000E6F5C8 /* UIViewController+TTableViewSeparator.m */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		16BA202025C1096000E6F5C8 /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				16BA202125C1096000E6F5C8 /* UITableView+TCategory.h */,
+				16BA202225C1096000E6F5C8 /* UITableView+TRegisterCell.h */,
+				16BA202325C1096000E6F5C8 /* UITableView+TNib.m */,
+				16BA202425C1096000E6F5C8 /* UITableView+TCategory.m */,
+				16BA202525C1096000E6F5C8 /* UITableView+TNib.h */,
+				16BA202625C1096000E6F5C8 /* UITableView+TRegisterCell.m */,
+			);
+			path = UITableView;
+			sourceTree = "<group>";
+		};
+		16BA202725C1096000E6F5C8 /* ALAssetsLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				16BA202825C1096000E6F5C8 /* ALAssetsLibrary+TCategory.h */,
+				16BA202925C1096000E6F5C8 /* ALAssetsLibrary+TCategory.m */,
+			);
+			path = ALAssetsLibrary;
+			sourceTree = "<group>";
+		};
+		16BA202A25C1096000E6F5C8 /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				16BA202B25C1096000E6F5C8 /* NSArray+TCategory.h */,
+				16BA202C25C1096000E6F5C8 /* NSArray+TCategory.m */,
+			);
+			path = NSArray;
+			sourceTree = "<group>";
+		};
+		16BA202D25C1096000E6F5C8 /* NSAttributedString */ = {
+			isa = PBXGroup;
+			children = (
+				16BA202E25C1096000E6F5C8 /* NSAttributedString+TSize.h */,
+				16BA202F25C1096000E6F5C8 /* NSAttributedString+TSize.m */,
+			);
+			path = NSAttributedString;
+			sourceTree = "<group>";
+		};
+		16BA203025C1096000E6F5C8 /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				16BA203125C1096000E6F5C8 /* NSObject+TCategory.m */,
+				16BA203225C1096000E6F5C8 /* NSObject+TCategory.h */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
 		16EABFD825BA7BB200A3273D /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +612,7 @@
 		6003F593195388D20070C39A /* Example for TMUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				16BA1FF025C1096000E6F5C8 /* TBTCategory */,
 				16EABFD825BA7BB200A3273D /* Base */,
 				16455E3B25B6F3C600BBBEC2 /* UIKit */,
 				16455E3925B6F3C600BBBEC2 /* Components */,
@@ -715,30 +893,46 @@
 			files = (
 				16EABFE725BAAE7C00A3273D /* UISlider+associateObject.m in Sources */,
 				160860BD25C01D8100F31337 /* Table2ViewController.m in Sources */,
+				16BA205025C1096000E6F5C8 /* NSObject+TCategory.m in Sources */,
 				160860F825C01F1D00F31337 /* UIViewController+Convenient.m in Sources */,
 				16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */,
+				16BA204525C1096000E6F5C8 /* NSString+TDigest.m in Sources */,
+				16BA204725C1096000E6F5C8 /* NSString+TSize.m in Sources */,
+				16BA203B25C1096000E6F5C8 /* UINib+TLoadNib.m in Sources */,
+				16BA204F25C1096000E6F5C8 /* NSAttributedString+TSize.m in Sources */,
 				163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */,
 				160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */,
 				160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */,
 				160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */,
+				16BA204625C1096000E6F5C8 /* NSString+TCategory.m in Sources */,
 				16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */,
 				160860F625C01F1D00F31337 /* UIView+Frame.m in Sources */,
 				160860C025C01D8100F31337 /* Table1ViewController.m in Sources */,
 				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
 				16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */,
 				160860F725C01F1D00F31337 /* UIButton+Convenient.m in Sources */,
+				16BA204925C1096000E6F5C8 /* UIViewController+TTableViewSeparator.m in Sources */,
 				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
+				16BA204B25C1096000E6F5C8 /* UITableView+TCategory.m in Sources */,
 				160860F925C01F1D00F31337 /* UIColor+HexString.m in Sources */,
+				16BA204825C1096000E6F5C8 /* UIViewController+TCategory.m in Sources */,
+				16BA204C25C1096000E6F5C8 /* UITableView+TRegisterCell.m in Sources */,
 				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
+				16BA204E25C1096000E6F5C8 /* NSArray+TCategory.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
+				16BA204325C1096000E6F5C8 /* NSURL+TCategory.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
+				16BA204225C1096000E6F5C8 /* UITextView+Placeholder.m in Sources */,
+				16BA204D25C1096000E6F5C8 /* ALAssetsLibrary+TCategory.m in Sources */,
 				16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */,
 				16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */,
+				16BA204425C1096000E6F5C8 /* UICollectionView+TNib.m in Sources */,
 				160860BF25C01D8100F31337 /* TableViewController.m in Sources */,
+				16BA204A25C1096000E6F5C8 /* UITableView+TNib.m in Sources */,
 				16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

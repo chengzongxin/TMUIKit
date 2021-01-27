@@ -93,7 +93,7 @@
     }];
     
     [onlineLabel tmui_addAttributeslineSpacing:10];
-    [onlineLabel tmui_addAttributesText:onlineLabel.text color:UIColor.greenColor font:UIFont(14)];
+    [onlineLabel tmui_addAttributesText:onlineLabel.text color:UIColor.tmui_randomColor font:UIFont(14)];
     
     
     CGSize size1 = [onlineLabel.text tmui_sizeForFont:onlineLabel.font
@@ -106,11 +106,11 @@
     NSLog(@"attrSize1 = %@",NSStringFromCGSize(attrSize1));
     
     [onlineLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(attrSize1);
+        make.height.mas_equalTo(attrSize1.height);
     }];
     
     
-    NSDictionary *linkAttr1 = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(15),NSForegroundColorAttributeName:UIColor.orangeColor};
+    NSDictionary *linkAttr1 = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(13),NSForegroundColorAttributeName:UIColor.orangeColor};
     [onlineLabel tmui_clickAttrTextWithStrings:@[@"装修",@"水真的很深",@"能省点就省点",@"地板"] attributes:linkAttr1 clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
         NSLog(@"%@",string);
         [self showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {

@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UILabel (TMUI_AttributeText)
 
-
+- (void)setAtsWithStr:(NSString *)str lineGap:(CGFloat)lineGap;
 /// 给label指定text的颜色、字体，分段设置
 /// @param text 指定文本
 /// @param color 指定文本颜色

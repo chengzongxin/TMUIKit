@@ -9,6 +9,10 @@
 
 @implementation UIColor (TMUI)
 
++ (UIColor *)colorWithHexString:(NSString *)hexString{
+    return [self tmui_colorWithHexString:hexString];
+}
+
 + (UIColor *)tmui_colorWithHexString:(NSString *)hexString {
     if (hexString.length <= 0) return nil;
     

@@ -10,7 +10,7 @@
 #import <CoreText/CoreText.h>
 #import <Foundation/Foundation.h>
 #import "TMUICommonDefines.h"
-
+#import "NSAttributedString+TMUI.h"
 
 @interface TMAttrTextModel : NSObject
 @property (nonatomic, copy) NSString *str;
@@ -41,6 +41,10 @@
 
 @implementation UILabel (TMUI_AttributeText)
 
+- (void)setAtsWithStr:(NSString *)str lineGap:(CGFloat)lineGap {
+    CGFloat height = [NSAttributedString heightForAtsWithStr:str font:self.font width:self.frame.size.width lineH:lineGap];
+    self.attributedText = [NSAttributedString atsForStr:str lineHeight:(height<self.font.pointSize*2+lineGap)?0:lineGap];
+}
 
 - (void)tmui_addAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{
     NSRange range = [[self.attributedText string] rangeOfString:text];

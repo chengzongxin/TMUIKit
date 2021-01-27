@@ -110,6 +110,34 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UIView (TMUI_IBInspectable)
+
+/**
+ *  圆角
+ */
+@property (nonatomic, assign) IBInspectable CGFloat cornerRadius;
+
+/**
+ *  描边宽度
+ */
+@property (nonatomic, assign) IBInspectable CGFloat borderWidth;
+
+/**
+ *  描边颜色
+ */
+@property (nonatomic, copy) IBInspectable UIColor *borderColor;
+/**
+ *  背景颜色
+ */
+@property (nonatomic, copy) IBInspectable NSString *bgColorHexString;
+/**
+ *  描边颜色-16进制
+ */
+@property (nonatomic, copy) IBInspectable NSString *borderColorHexString;
+
+@end
+
+
 @interface UIView (TMUI_Gesture)
 
 /// 点击手势
@@ -236,6 +264,19 @@ typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
 
 - (void)tmui_animateWithDuration:(NSTimeInterval)duration animationType:(TMUIViewAnimationType)type completion:(void (^ __nullable)(BOOL finished))completion;
 
+
+@end
+
+
+@interface UIView (TNib)
+
++ (instancetype)instantiateFromNib;
+
++ (instancetype)loadNibViewWithFrame:(CGRect)frame;
+
++ (instancetype)loadNibViewWithFrame:(CGRect)frame nibName:(NSString *)name;
+
++ (instancetype)loadNibViewWithName:(NSString *)name;
 
 @end
 

@@ -8,6 +8,7 @@
 #import "UIImage+TMUI.h"
 #import "TMUICore.h"
 #import "UIColor+TMUI.h"
+#import <objc/runtime.h>
 
 #ifdef DEBUG
 #define CGContextInspectContext(context) { \
@@ -345,6 +346,402 @@
     return [UIImage tmui_imageWithSize:view.bounds.size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
         [view drawViewHierarchyInRect:CGRectMakeWithSize(view.bounds.size) afterScreenUpdates:afterUpdates];
     }];
+}
+
+@end
+
+
+
+@implementation UIImage (Compression)
+
+static char isCustomImage;
+static char customImageName;
+
++ (NSData *)compressImage:(UIImage *)image dataLen:(NSInteger)dataLen  {
+    
+    double size;
+    if (dataLen == 0) {
+        NSData *imageData = UIImageJPEGRepresentation(image, 1);
+        dataLen = imageData.length;
+    }
+    NSLog(@"image data size before compressed == %f Kb(w:%f-h:%f)",dataLen/1024.0, image.size.width, image.size.height);
+    
+    int fixelW = (int)image.size.width;
+    int fixelH = (int)image.size.height;
+    int thumbW = fixelW % 2  == 1 ? fixelW + 1 : fixelW;
+    int thumbH = fixelH % 2  == 1 ? fixelH + 1 : fixelH;
+    
+    int longSide = MAX(thumbW, thumbH);
+    int shortSide = MIN(thumbW, thumbH);
+    
+    int tLongSide = longSide;
+    int tShortSide = shortSide;
+    
+    double scale = ((double)shortSide/longSide);
+    
+    if (scale <= 1 && scale > 0.5625) {
+        if (longSide < 1664) {
+            if (dataLen/1024.0 < 150) {
+                return UIImageJPEGRepresentation(image, 1);;
+            }
+            tLongSide = longSide / 1;
+            tShortSide = shortSide / 1;
+            size = (tLongSide * tShortSide) / pow(1664, 2) * 150;
+            size = MAX(60, size);
+        }
+        else if (longSide >= 1664 && longSide < 4990) {
+            tLongSide = longSide / 2;
+            tShortSide = shortSide / 2;
+            size = (tLongSide * tShortSide) / pow(2495, 2) * 300;
+            size = MAX(60, size);
+        }
+        else if (longSide >= 4990 && longSide < 10240) {
+            tLongSide = longSide / 4;
+            tShortSide = shortSide / 4;
+            size = (tLongSide * tShortSide) / pow(2560, 2) * 300;
+            size = MAX(100, size);
+        }
+        else {
+            int multiple = fixelH / 1280 == 0 ? 1 : fixelH / 1280;
+            tLongSide = longSide / multiple;
+            tShortSide = shortSide / multiple;
+            size = (tLongSide * tShortSide) / pow(2560, 2) * 300;
+            size = MAX(100, size);
+        }
+    }
+    else if (scale <= 0.5625 && scale > 0.5) {
+        if (longSide < 1280 && dataLen/1024 < 200) {
+            return UIImageJPEGRepresentation(image, 1);;
+        }
+        int multiple = fixelH / 1280 == 0 ? 1 : fixelH / 1280;
+        tLongSide = longSide / multiple;
+        tShortSide = shortSide / multiple;
+        size = (tLongSide * tShortSide) / (1440.0 * 2560.0) * 200;
+        size = MAX(100, size);
+    }
+    else {
+        if (longSide < 1280 && dataLen/1024 < 200) {
+            return UIImageJPEGRepresentation(image, 1);;
+        }
+        int multiple = (int)ceil(fixelH / (1280.0 / scale));
+        tLongSide = longSide / multiple;
+        tShortSide = shortSide / multiple;
+        size = (tLongSide * tShortSide) / (1280 * 1280/scale) * 500;
+        size = MAX(100, size);
+    }
+    return [self compressWithImage:image thumbW:fixelW > fixelH ? tLongSide : tShortSide thumbH:fixelH > fixelW ? tLongSide : tShortSide size:size*3];
+}
+
++ (NSData *)compressWithImage:(UIImage *)image thumbW:(int)width thumbH:(int)height size:(double)size {
+    UIImage *thumbImage = [image imageCompressFitTargetSize:CGSizeMake(width, height)];
+    NSData *imageData = UIImageJPEGRepresentation(thumbImage, 0.95);
+    NSLog(@"image data size after compressed ==%f kb == %f(w:%d-h:%d)",imageData.length/1024.0, size, width, height);
+    return imageData;
+}
+
+@end
+
+
+@implementation UIImage (scale)
+
+
+/**
+ *  缩放到指定大小，也就是指定的size(非等比)
+ *
+ *  @param thumbRect thumbRect的起始位置为(0,0)
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage*)resizedInRect:(CGRect)thumbRect {
+    UIGraphicsBeginImageContext(thumbRect.size);
+    [self drawInRect:thumbRect];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
+/**
+ * 按比例缩放 (通过计算得到缩放系数）
+ *
+ *  @param afterSize 要显示到多大区域
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage *)imageCompressFitTargetSize:(CGSize)afterSize {
+    
+    //照片的宽高
+    CGSize imageSize = self.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    
+    //目标区域的宽高
+    CGFloat targetWidth = afterSize.width;
+    CGFloat targetHeight = afterSize.height;
+    
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    
+    CGFloat scaleFactor = 1;
+
+    //目标位置
+    CGPoint targetPoint = CGPointMake(0.0, 0.0);
+    
+    //将imageSize和afterSize的宽和高分别进行比较，都相等的时候返回YES.
+    if(CGSizeEqualToSize(imageSize, afterSize) == NO){
+        
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+
+        if(widthFactor > heightFactor){
+            scaleFactor = widthFactor;
+        }
+        else{
+            scaleFactor = heightFactor;
+        }
+        scaledWidth = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        if(widthFactor > heightFactor){
+            targetPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }else if(widthFactor < heightFactor){
+            targetPoint.x = (targetWidth - scaledWidth) * 0.5;
+        }
+    }
+    //目标图片的位置和宽高
+    CGRect targetRect = CGRectZero;
+    targetRect.origin = targetPoint;//origin = (x = -180, y = 0
+    targetRect.size.width = scaledWidth;
+    targetRect.size.height = scaledHeight;
+    
+    //创建一个基于位图的上下文（context）,并将其设置为当前上下文(context)
+    UIGraphicsBeginImageContext(afterSize);
+    //绘制改变大小的图片
+    [self drawInRect:targetRect];
+    //从上下文当中生成一张图片
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    //关闭上下文
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+
+/**
+ * 按比例缩放 (以当前屏幕宽自适应,算出缩放系数,进行等比缩放）
+ *
+ *  区别:如果图片宽度小于屏幕宽,则显示照片实际高度
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage*)scaleToFit {
+    
+    //获取当前屏幕的宽
+    CGFloat width = [UIScreen mainScreen].scale * [UIScreen mainScreen].bounds.size.width;//6s:375
+    CGFloat wid = self.size.width > width? width:self.size.width;
+    CGFloat width_scale = wid;//480.0;
+    CGFloat height_scale = self.size.height*(wid/self.size.width);
+    
+    //创建一个基于位图的上下文（context）,并将其设置为当前上下文(context)
+    UIGraphicsBeginImageContext(CGSizeMake(floorf(width_scale), floorf(height_scale)));
+    //绘制改变大小的图片
+    [self drawInRect:CGRectMake(0, 0, width_scale, height_scale)];
+    //从上下文当中生成一张图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    //关闭上下文.
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+
+/**
+ *  从图片中按指定的位置大小截取图片的一部分
+ *
+ *  @param rect 要截取的区域
+ *
+ *  @return 截取后的图片
+ */
+- (UIImage*)getSubImage:(CGRect)rect {
+    
+    //image:需要被裁剪的图片
+    //rect: 裁剪范围
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(self.CGImage, rect);
+    
+    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
+    
+    //创建一个基于位图的上下文（context）,并将其设置为当前上下文(context)
+    UIGraphicsBeginImageContext(smallBounds.size);
+    //获取上下文
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //根据上下文绘制图片
+    CGContextDrawImage(context, smallBounds, subImageRef);
+    
+    //获取裁剪后的图片
+    UIImage* smallImage = [UIImage imageWithCGImage:subImageRef];
+    //关闭上下文
+    UIGraphicsEndImageContext();
+    //只有当CGImageRef使用creat或retain后才要手动release
+    CGImageRelease(subImageRef);
+    
+    return smallImage;
+}
+
+/**
+ *  指定大小 等比例缩放,以最大的比率放大,以最小的比率缩小
+ *
+ *  @param size 要显示到多大区域
+ *
+ *  @return 缩放后的图片
+ */
+- (UIImage*)scaleToSize:(CGSize)size {
+    
+    CGSize imageSize = self.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;//(CGSize) imageSize = (width = 2448, height = 3264)
+
+    CGFloat verticalRadio = size.height / height; // 0.4411
+    CGFloat horizontalRadio = size.width / width; // 0.588
+
+    CGFloat radio = 1;
+
+    //放大
+    if(verticalRadio>1 && horizontalRadio>1){
+        //放大系数
+        radio = verticalRadio < horizontalRadio ? horizontalRadio : verticalRadio;
+    }else{
+        //缩小系数
+        radio = verticalRadio < horizontalRadio ? verticalRadio : horizontalRadio;
+    }
+
+    width = width*radio; // 1080
+    height = height*radio; //1440
+
+    CGPoint targetPoint = CGPointMake(0.0, 0.0);
+    
+    targetPoint.x = (size.width - width)/2;
+    targetPoint.y = (size.height - height)/2;
+
+    //目标图片的位置和宽高
+    CGRect targetRect = CGRectZero;
+    targetRect.origin = targetPoint;// origin = (x = 0, y = 240)
+    targetRect.size.width = width;
+    targetRect.size.height = height;
+
+    //创建一个基于位图的上下文（context）,并将其设置为当前上下文(context)
+    UIGraphicsBeginImageContext(size);
+    //绘制改变大小的图片
+    [self drawInRect:targetRect];
+    //从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    //关闭上下文
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
+
+/**
+ *  非等比例压缩
+ *
+ *  @param size 压缩后图片尺寸
+ *
+ *  @return 压缩后的图片
+ */
+- (UIImage *)unProportionScaleToSize:(CGSize)size {
+    
+    CGFloat width = CGImageGetWidth(self.CGImage);
+    CGFloat height = CGImageGetHeight(self.CGImage);
+    
+    CGFloat verticalScale = size.height*1.0/height;
+    CGFloat horizontalScale = size.width*1.0/width;
+    
+    CGFloat scale = 1;
+    
+    if (width>height) {
+        scale = verticalScale;
+    }else{
+        scale = horizontalScale;
+    }
+    width = width*scale;
+    height = height*scale;
+    UIImage *smallImgOfProportionScale = [self scaleToSize:CGSizeMake(width, height)];
+    int xPos = (width-size.width)/2;
+    int yPos = (height-size.height)/2;
+    UIImage *smallImgOfUnProportionScale = [smallImgOfProportionScale getSubImage:(CGRect){xPos,yPos,size}];
+    
+    return smallImgOfUnProportionScale;
+}
+
+/**
+ *  指定最大data大小 先压缩质量、再压缩size，循环
+ *
+ *  @param maxDataLen 最大data大小 例：1Mb传 1024*1024
+ *
+ *  @return 压缩后的图片
+ */
+- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen {
+    return [self resizedToMaxDataLen:maxDataLen aspectRatio:0];
+}
+
+- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio {
+    CGFloat compression = 1.0;
+    CGFloat scale = 1.0;
+    CGFloat imgW = self.size.width * self.scale ? : 1;  //防止为0
+    CGFloat imgH = self.size.height * self.scale ? : 1;
+    //按比例压缩
+    if (aspectRatio > 0) {
+        CGFloat finalAspectRatio = imgW / imgH;
+        if (finalAspectRatio > aspectRatio) {
+            imgW = imgH * aspectRatio;
+        } else {
+            imgH = imgW / aspectRatio;
+        }
+    }
+    UIImage *finalImg = (aspectRatio > 0) ? [self imageCompressFitTargetSize:CGSizeMake(imgW, imgH)] : self;
+    NSData *finalData = UIImageJPEGRepresentation(finalImg, 1.0);
+    //符合要求大小
+    if (maxDataLen <= 0 || finalData.length <= maxDataLen) {
+        return finalData;
+    }
+    NSLog(@"-iOS image data size before compressed == %f Kb----%@",finalData.length/1024.0, NSStringFromCGSize(self.size));
+
+    //先压缩质量、再压缩size，循环
+    BOOL bySize = NO;
+    NSUInteger count = 0;
+    
+    CGFloat scaleMax = 1.0;
+    CGFloat scaleMin = 0;
+    CGFloat comMax = 1.0;
+    CGFloat comMin = 0;
+    
+    NSUInteger successCount = 0;
+    
+    //压缩大小在 maxDataLen的0.9～1中间即为合适
+    while (finalData.length < maxDataLen * 0.9 || finalData.length > maxDataLen) {
+        scale = (scaleMax + scaleMin) / 2;
+        compression = (comMax + comMin) / 2;
+       
+        UIImage *img = (scale < 1.0 || aspectRatio > 0) ? [self imageCompressFitTargetSize:CGSizeMake(imgW * scale, imgH * scale)] : self;
+        finalData = UIImageJPEGRepresentation(img, compression);
+        if (finalData.length < maxDataLen * 0.9) {
+            successCount ++;
+            if (successCount > 6) {//6次基本符合要求，防止频繁压缩
+                break;
+            }
+            if (bySize) {
+                scaleMin = scale;
+            } else {
+                comMin = compression;
+            }
+        } else if (finalData.length > maxDataLen) {
+            if (bySize) {
+                scaleMax = scale;
+            } else {
+                comMax = compression;
+            }
+        }
+        bySize = !bySize;
+        count ++;
+    }
+    NSLog(@"-iOS image data size after compressed == %f Kb---scale%f, com--%f----count--%lu",finalData.length/1024.0, scale, compression, (unsigned long)count);
+
+    return finalData;
 }
 
 @end

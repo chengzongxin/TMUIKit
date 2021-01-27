@@ -165,6 +165,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns the size of the string if it were rendered with the specified constraints.
  
+ @note 高度取决于富文本中最大的字体，计算高度时候最好传入最大的字体
+ 
  @param font          The font to use for computing the string size.
  
  @param size          The maximum acceptable size for the string. This value is
@@ -202,14 +204,6 @@ NS_ASSUME_NONNULL_BEGIN
  may be rounded up to the nearest whole number.
  */
 - (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width;
-
-@end
-
-
-/// 专门用来计算富文本高度的方法
-@interface NSAttributedString (TMUI_Drawing)
-
-- (CGSize)tmui_sizeForWidth:(CGFloat)width;
 
 @end
 

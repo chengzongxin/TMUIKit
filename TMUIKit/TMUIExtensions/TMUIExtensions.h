@@ -21,5 +21,8 @@
 #import "NSString+TMUI.h"
 #import "NSArray+TMUI.h"
 #import "NSMutableParagraphStyle+TMUI.h"
+#import "NSAttributedString+TMUI.h"
+#import "NSDate+TMUI.h"
+#import "NSDictionary+TMUI.h"
 
 #endif /* TMUIExtensions_h */
