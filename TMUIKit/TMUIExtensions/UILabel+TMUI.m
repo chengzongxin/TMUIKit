@@ -274,6 +274,8 @@
     CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), origins);
     CGAffineTransform transform = [self transformForCoreText];
     CGFloat verticalOffset = 0;
+    
+    CGFloat maxY = 0;
 
     for (CFIndex i = 0; i < count; i++) {
         CGPoint linePoint = origins[i];
@@ -290,8 +292,12 @@
             lineSpace = 0;
         }
 
-        CGFloat lineOutSpace = (self.bounds.size.height - lineSpace * (count - 1) -rect.size.height * count) / 2;
-        rect.origin.y = lineOutSpace + rect.size.height * i + lineSpace * i;
+//        CGFloat lineOutSpace = (self.bounds.size.height - lineSpace * (count - 1) -rect.size.height * count) / 2;
+//        rect.origin.y = lineOutSpace + rect.size.height * i + lineSpace * i;
+        
+        rect.origin.y = maxY;
+        maxY = maxY + rect.size.height + lineSpace;
+
         if (CGRectContainsPoint(rect, point)) {
             CGPoint relativePoint = CGPointMake(point.x - CGRectGetMinX(rect), point.y - CGRectGetMinY(rect));
             CFIndex index = CTLineGetStringIndexForPosition(line, relativePoint);
@@ -339,13 +345,30 @@
     return CGAffineTransformScale(CGAffineTransformMakeTranslation(0, self.bounds.size.height), 1.f, -1.f);
 }
 
+
+- (CGFloat)aNewlineHeight{
+    UIFont *font = [self.attributedText attribute:NSFontAttributeName atIndex:0 effectiveRange:nil];
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"\n" attributes:@{NSFontAttributeName:font}];
+    CTLineRef newline = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)attrStr);
+    CGFloat ascent = 0.0f;
+    CGFloat descent = 0.0f;
+    CGFloat leading = 0.0f;
+    CTLineGetTypographicBounds(newline, &ascent, &descent, &leading);
+    CGFloat height = ascent + fabs(descent);
+    return height;
+}
+
 - (CGRect)getLineBounds:(CTLineRef)line point:(CGPoint)point {
     CGFloat ascent = 0.0f;
     CGFloat descent = 0.0f;
     CGFloat leading = 0.0f;
     CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
-    CGFloat height = ascent + fabs(descent) + leading;
+    CGFloat height = ascent + fabs(descent);
 
+    CGFloat nlHeight = [self aNewlineHeight];
+    
+    height = MAX(height, nlHeight);
+    
     return CGRectMake(point.x, point.y , width, height);
 }
 
