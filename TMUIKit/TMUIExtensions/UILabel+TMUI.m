@@ -42,8 +42,8 @@
 @implementation UILabel (TMUI_AttributeText)
 
 - (void)setAtsWithStr:(NSString *)str lineGap:(CGFloat)lineGap {
-    CGFloat height = [NSAttributedString heightForAtsWithStr:str font:self.font width:self.frame.size.width lineH:lineGap];
-    self.attributedText = [NSAttributedString atsForStr:str lineHeight:(height<self.font.pointSize*2+lineGap)?0:lineGap];
+    CGFloat height = [NSAttributedString tmui_heightForAtsWithStr:str font:self.font width:self.frame.size.width lineH:lineGap];
+    self.attributedText = [NSAttributedString tmui_atsForStr:str lineHeight:(height<self.font.pointSize*2+lineGap)?0:lineGap];
 }
 
 - (void)tmui_addAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{

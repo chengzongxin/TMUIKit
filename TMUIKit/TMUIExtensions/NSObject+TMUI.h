@@ -304,16 +304,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL tmui_shouldIgnoreUIKVCAccessProhibited;
 @end
 
-@interface NSObject (TCategory)
+@interface NSObject (TMUI_Associate)
 
-+ (instancetype)t_instance;
-+ (void)t_setNilForDefaultTarget;
++ (instancetype)tmui_instance;
++ (void)tmui_setNilForDefaultTarget;
 
-+ (instancetype)t_instanceForTarget:(id)target;
-+ (void)t_setNilForTarget:(id)target;
++ (instancetype)tmui_instanceForTarget:(id)target;
++ (void)tmui_setNilForTarget:(id)target;
 
-+ (instancetype)t_instanceForTarget:(id)target keyName:(NSString *)strKeyName;
-+ (void)t_setNilForTarget:(id)target keyName:(NSString *)strKeyName;
++ (instancetype)tmui_instanceForTarget:(id)target keyName:(NSString *)strKeyName;
++ (void)tmui_setNilForTarget:(id)target keyName:(NSString *)strKeyName;
 
 @end
 

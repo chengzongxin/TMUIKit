@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return 字典
  */
-- (NSDictionary *)t_dictionaryByAddingEntriesFromDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)tmui_dictionaryByAddingEntriesFromDictionary:(NSDictionary *)dictionary;
 
 /**
  *  根据字段集合keys删除字典里对应的键值对
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return 字典
  */
-- (NSDictionary *)t_dictionaryByRemovingEntriesWithKeys:(NSSet *)keys;
+- (NSDictionary *)tmui_dictionaryByRemovingEntriesWithKeys:(NSSet *)keys;
 
 @end
 

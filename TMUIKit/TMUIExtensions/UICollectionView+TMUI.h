@@ -10,14 +10,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UICollectionView (TMUI)
-- (void)registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)tmui_registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 
 // 标签是NSStringFromClass([TCPIntroTableViewCell class]
-- (void)registerNibIdentifierNSStringFromClass:(Class)cellClass;
+- (void)tmui_registerNibIdentifierNSStringFromClass:(Class)cellClass;
 
-- (void)t_registerNibClass:(Class)cellClass forSupplementaryViewOfKind:(NSString *)kind withReuseIdentifier:(NSString *)identifier;
+- (void)tmui_registerNibClass:(Class)cellClass forSupplementaryViewOfKind:(NSString *)kind withReuseIdentifier:(NSString *)identifier;
 
-- (void)t_registerNibIdentifierNSStringFromClass:(Class)aClass forSupplementaryViewOfKind:(NSString *)kind;
+- (void)tmui_registerNibIdentifierNSStringFromClass:(Class)aClass forSupplementaryViewOfKind:(NSString *)kind;
 
 @end
 

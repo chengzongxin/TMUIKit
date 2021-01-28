@@ -10,7 +10,41 @@
 @implementation NSAttributedString (TMUI)
 
 
-- (CGFloat)heightWithMaxWidth:(CGFloat)width {
+//- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo {
+//    return self.string.tmui_lengthWhenCountingNonASCIICharacterAsTwo;
+//}
+
++ (instancetype)tmui_attributedStringWithImage:(UIImage *)image {
+    return [self tmui_attributedStringWithImage:image baselineOffset:0 leftMargin:0 rightMargin:0];
+}
+
++ (instancetype)tmui_attributedStringWithImage:(UIImage *)image baselineOffset:(CGFloat)offset leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin {
+    if (!image) {
+        return nil;
+    }
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+    attachment.image = image;
+    attachment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+    NSMutableAttributedString *string = [[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy];
+    [string addAttribute:NSBaselineOffsetAttributeName value:@(offset) range:NSMakeRange(0, string.length)];
+    if (leftMargin > 0) {
+        [string insertAttributedString:[self tmui_attributedStringWithFixedSpace:leftMargin] atIndex:0];
+    }
+    if (rightMargin > 0) {
+        [string appendAttributedString:[self tmui_attributedStringWithFixedSpace:rightMargin]];
+    }
+    return string;
+}
+
++ (instancetype)tmui_attributedStringWithFixedSpace:(CGFloat)width {
+    UIGraphicsBeginImageContext(CGSizeMake(width, 1));
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return [self tmui_attributedStringWithImage:image];
+}
+
+
+- (CGFloat)tmui_heightWithMaxWidth:(CGFloat)width {
     CGRect rt = [self boundingRectWithSize:CGSizeMake(width, 100000)
                                    options:(NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin)
                                    context:nil];
@@ -18,11 +52,11 @@
 }
 
 // 设置行间距
-+ (instancetype)atsForStr:(NSString *)str lineHeight:(CGFloat)h {
-    return [self atsForStr:str lineHeight:h forCompute:NO];
++ (instancetype)tmui_atsForStr:(NSString *)str lineHeight:(CGFloat)h {
+    return [self tmui_atsForStr:str lineHeight:h forCompute:NO];
 }
 
-+ (instancetype)atsForStr:(NSString *)str lineHeight:(CGFloat)h forCompute:(BOOL)forCompute {
++ (instancetype)tmui_atsForStr:(NSString *)str lineHeight:(CGFloat)h forCompute:(BOOL)forCompute {
     if (![str isKindOfClass:[NSString class]] || str.length == 0) {
         return nil;
     }
@@ -35,39 +69,39 @@
 }
 
 // 获取设置行间距的NSAttributedString的高度
--(CGFloat)heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh {
-    CGFloat height = [self heightWithMaxWidth:w];
+-(CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh {
+    CGFloat height = [self tmui_heightWithMaxWidth:w];
     if (height < ft.pointSize*2+lh) {
         height = ft.lineHeight;
     }
     return ceilf(height);
 }
 
-+ (CGFloat)heightForAtsWithStr:(NSString *)str font:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat )lh {
++ (CGFloat)tmui_heightForAtsWithStr:(NSString *)str font:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat )lh {
     if (![str isKindOfClass:[NSString class]] || str.length == 0) {
         return 0;
     }
     
-    NSMutableAttributedString *attributedString = [NSMutableAttributedString atsForStr:str lineHeight:lh forCompute:YES];
+    NSMutableAttributedString *attributedString = [NSMutableAttributedString tmui_atsForStr:str lineHeight:lh forCompute:YES];
     [attributedString addAttribute:NSFontAttributeName value:ft range:NSMakeRange(0, str.length)];
     
-    CGFloat height = [attributedString heightWithFont:ft width:w lineH:lh];
+    CGFloat height = [attributedString tmui_heightWithFont:ft width:w lineH:lh];
     return ceilf(height);
 }
 
-- (CGFloat)heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lineGap maxLine:(NSUInteger)lineNum {
-    return [[self class] heightForAtsWithStr:self.string font:ft width:w lineH:lineGap maxLine:lineNum];
+- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lineGap maxLine:(NSUInteger)lineNum {
+    return [[self class] tmui_heightForAtsWithStr:self.string font:ft width:w lineH:lineGap maxLine:lineNum];
 }
 
-+ (CGFloat)heightForAtsWithStr:(NSString *)str font:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh maxLine:(NSUInteger)lineNum {
-    CGFloat heightOfAll = [self heightForAtsWithStr:str font:ft width:w lineH:lh];
++ (CGFloat)tmui_heightForAtsWithStr:(NSString *)str font:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh maxLine:(NSUInteger)lineNum {
+    CGFloat heightOfAll = [self tmui_heightForAtsWithStr:str font:ft width:w lineH:lh];
     CGFloat heightOfMax = CGFLOAT_MAX;
     if (lineNum != 0) {
         NSString *strTem = @"a";
         for (int i=0; i<lineNum-1; i++) {
             strTem = [strTem stringByAppendingString:@"\na"];
         }
-        heightOfMax = [self heightForAtsWithStr:strTem font:ft width:w lineH:lh];
+        heightOfMax = [self tmui_heightForAtsWithStr:strTem font:ft width:w lineH:lh];
     }
     return ceilf(MIN(heightOfAll, heightOfMax));
 }

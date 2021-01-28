@@ -15,7 +15,7 @@
  @param podName pod的名字
  @return bundle
  */
-+ (NSBundle *)bundleWithBundleName:(NSString *)bundleName podName:(NSString *)podName{
++ (NSBundle *)tmui_bundleWithBundleName:(NSString *)bundleName podName:(NSString *)podName{
     if (bundleName == nil && podName == nil) {
         @throw @"bundleName和podName不能同时为空";
     }else if (bundleName == nil ) {
@@ -44,14 +44,14 @@
     return associateBundleURL?[NSBundle bundleWithURL:associateBundleURL]:nil;
 }
 
-+ (NSString *)filePathWithFileName:(NSString *)fileName bundleName:(NSString *)bundleName podName:(NSString *)podName{
-    NSBundle *bundle = [self bundleWithBundleName:bundleName podName:podName];
++ (NSString *)tmui_filePathWithFileName:(NSString *)fileName bundleName:(NSString *)bundleName podName:(NSString *)podName{
+    NSBundle *bundle = [self tmui_bundleWithBundleName:bundleName podName:podName];
     NSString *path = [bundle pathForResource:fileName ofType:nil];
     return path;
 }
 
-+ (UIImage *)imageWithImageName:(NSString *)imageName bundleName:(NSString *)bundleName podName:(NSString *)podName{
-    NSString *path = [self filePathWithFileName:imageName bundleName:bundleName podName:podName];
++ (UIImage *)tmui_imageWithImageName:(NSString *)imageName bundleName:(NSString *)bundleName podName:(NSString *)podName{
+    NSString *path = [self tmui_filePathWithFileName:imageName bundleName:bundleName podName:podName];
     return [UIImage imageWithContentsOfFile:path];;
 }
 

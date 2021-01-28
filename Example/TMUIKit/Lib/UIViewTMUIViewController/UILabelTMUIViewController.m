@@ -59,7 +59,7 @@
     // 设置可交互文字
     [label tmui_clickAttrTextWithStrings:@[@"春眠",@"啼鸟",@"风雨声",@"花落知多少"] attributes:linkAttr clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
         NSLog(@"%@",string);
-        [self showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
+        [self tmui_showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
             NSLog(@"%@",action);
         }];
     }];
@@ -112,7 +112,7 @@
     NSDictionary *linkAttr1 = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(15),NSForegroundColorAttributeName:UIColor.orangeColor};
     [onlineLabel tmui_clickAttrTextWithStrings:@[@"装修",@"水真的很深",@"能省点就省点",@"地板"] attributes:linkAttr1 clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
         NSLog(@"%@",string);
-        [self showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
+        [self tmui_showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
             NSLog(@"%@",action);
         }];
     }];

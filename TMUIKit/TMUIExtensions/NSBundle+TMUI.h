@@ -17,11 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param podName pod的名字
  @return bundle
  */
-+ (NSBundle *)bundleWithBundleName:(NSString *)bundleName podName:(NSString *)podName;
++ (NSBundle *)tmui_bundleWithBundleName:(NSString *)bundleName podName:(NSString *)podName;
 
-+ (NSString *)filePathWithFileName:(NSString *)fileName bundleName:(NSString *)bundleName podName:(NSString *)podName;
++ (NSString *)tmui_filePathWithFileName:(NSString *)fileName bundleName:(NSString *)bundleName podName:(NSString *)podName;
 
-+ (UIImage *)imageWithImageName:(NSString *)imageName bundleName:(NSString *)bundleName podName:(NSString *)podName;
++ (UIImage *)tmui_imageWithImageName:(NSString *)imageName bundleName:(NSString *)bundleName podName:(NSString *)podName;
 
 @end
 

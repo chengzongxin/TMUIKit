@@ -9,13 +9,13 @@
 
 @implementation NSDictionary (TMUI)
 
-- (NSDictionary *)t_dictionaryByAddingEntriesFromDictionary:(NSDictionary *)dictionary {
+- (NSDictionary *)tmui_dictionaryByAddingEntriesFromDictionary:(NSDictionary *)dictionary {
     NSMutableDictionary *result = [self mutableCopy];
     [result addEntriesFromDictionary:dictionary];
     return result;
 }
 
-- (NSDictionary *)t_dictionaryByRemovingEntriesWithKeys:(NSSet *)keys {
+- (NSDictionary *)tmui_dictionaryByRemovingEntriesWithKeys:(NSSet *)keys {
     NSMutableDictionary *result = [self mutableCopy];
     [result removeObjectsForKeys:keys.allObjects];
     return result;

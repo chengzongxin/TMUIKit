@@ -9,19 +9,19 @@
 #import <objc/runtime.h>
 @implementation UIViewController (TMUI)
 
-- (BOOL)navBarHidden {
+- (BOOL)tmui_navBarHidden {
     BOOL hidden = [objc_getAssociatedObject(self, _cmd) boolValue];
     return hidden;
 }
 
-- (void)setNavBarHidden:(BOOL)navBarHidden {
-    objc_setAssociatedObject(self, @selector(navBarHidden), @(navBarHidden), OBJC_ASSOCIATION_RETAIN);
+- (void)setTmui_navBarHidden:(BOOL)navBarHidden {
+    objc_setAssociatedObject(self, @selector(tmui_navBarHidden), @(navBarHidden), OBJC_ASSOCIATION_RETAIN);
 }
 
 #pragma mark - api
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIViewController*)previousViewController {
+- (UIViewController*)tmui_previousViewController {
     NSArray* viewControllers = self.navigationController.viewControllers;
     if (viewControllers.count > 1) {
         NSUInteger controllerIndex = [viewControllers indexOfObject:self];
@@ -35,7 +35,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (UIViewController*)nextViewController {
+- (UIViewController*)tmui_nextViewController {
     NSArray* viewControllers = self.navigationController.viewControllers;
     if (viewControllers.count > 1) {
         NSUInteger controllerIndex = [viewControllers indexOfObject:self];
@@ -49,7 +49,7 @@
 
 #pragma mark - api
 
-- (void)navBackAction:(id)sender {
+- (void)tmui_navBackAction:(id)sender {
     if (self.navigationController.viewControllers.count>1) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
@@ -59,7 +59,7 @@
 
 
 #pragma mark -  获取当前最顶层的ViewController
-+ (UIViewController *)getCurrentVC {
++ (UIViewController *)tmui_topViewControllerget {
     UIViewController *result = nil;
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal) {
@@ -98,7 +98,7 @@
 
 
 
-@implementation UIViewController (Alert)
+@implementation UIViewController (TMUI_Alert)
 /**
  弹出UIAlertController
  
@@ -106,7 +106,7 @@
  @param message 消息
  @param sure    点击确定按钮
  */
-- (void)showAlertSureWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure;
+- (void)tmui_showAlertSureWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure;
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -126,7 +126,7 @@
  @param sure    点击确定
  @param cancel  点击取消
  */
-- (void)showAlertSureAndCancelWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure cancel:(void (^) (UIAlertAction *action))cancel
+- (void)tmui_showAlertSureAndCancelWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure cancel:(void (^) (UIAlertAction *action))cancel
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -146,7 +146,7 @@
  @param actionOneTitle 标题
  @param handlerOne     点击标题的事件
  */
-- (void)showSheetOneaction:(NSString *)actionOneTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne
+- (void)tmui_showSheetOneaction:(NSString *)actionOneTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne
 {
     UIAlertController *alertSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -169,7 +169,7 @@
  @param handlerOne     第一个标题点击事件
  @param handlerTwo     第二个标题点击事件
  */
-- (void)showSheetTwoaction:(NSString *)actionOneTitle actionTwo:(NSString *)actionTwoTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne handlerTwo:(void (^) (UIAlertAction *action))handlerTwo
+- (void)tmui_showSheetTwoaction:(NSString *)actionOneTitle actionTwo:(NSString *)actionTwoTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne handlerTwo:(void (^) (UIAlertAction *action))handlerTwo
 {
     UIAlertController *alertSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     

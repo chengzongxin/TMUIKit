@@ -163,16 +163,16 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
 
 @end
 
-@interface UIImage (Compression)
+@interface UIImage (TMUI_Compression)
 
-+ (NSData *)compressImage:(UIImage *)image dataLen:(NSInteger)dataLen ;
++ (NSData *)tmui_compressImage:(UIImage *)image dataLen:(NSInteger)dataLen ;
 
 @end
 
 
 #define kDefaultImgQuality 0.5
 
-@interface UIImage (scale)
+@interface UIImage (TMUI_Scale)
 
 /**
  *  缩放到指定大小，也就是指定的size(非等比)
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 缩放后的图片
  */
-- (UIImage*)resizedInRect:(CGRect)thumbRect;
+- (UIImage*)tmui_resizedInRect:(CGRect)thumbRect;
 
 
 /**
@@ -191,7 +191,7 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 缩放后的图片
  */
-- (UIImage *)imageCompressFitTargetSize:(CGSize)afterSize;
+- (UIImage *)tmui_imageCompressFitTargetSize:(CGSize)afterSize;
 
 
 /**
@@ -201,7 +201,7 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 缩放后的图片
  */
-- (UIImage*)scaleToFit;
+- (UIImage*)tmui_scaleToFit;
 
 
 /**
@@ -211,7 +211,7 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 截取后的图片
  */
-- (UIImage*)getSubImage:(CGRect)rect;
+- (UIImage*)tmui_getSubImage:(CGRect)rect;
 
 /**
  *  指定大小 等比例缩放,以最大的比率放大,以最小的比率缩小
@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 缩放后的图片
  */
-- (UIImage*)scaleToSize:(CGSize)size;
+- (UIImage*)tmui_scaleToSize:(CGSize)size;
 
 /**
  *  非等比例压缩
@@ -229,7 +229,7 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 压缩后的图片
  */
-- (UIImage *)unProportionScaleToSize:(CGSize)size;
+- (UIImage *)tmui_unProportionScaleToSize:(CGSize)size;
 
 /**
  *  指定最大data大小 先压缩质量、再压缩size，循环
@@ -240,8 +240,8 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 压缩后的数据
  */
-- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio;
-- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen;
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio;
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen;
 
 @end
 

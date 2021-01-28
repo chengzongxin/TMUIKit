@@ -9,7 +9,7 @@
 
 @implementation NSURL (TMUI)
 
-- (NSDictionary<NSString *, NSString *> *)qmui_queryItems {
+- (NSDictionary<NSString *, NSString *> *)tmui_queryItems {
     if (!self.absoluteString.length) {
         return nil;
     }
@@ -26,7 +26,7 @@
 }
 
 
-- (id)parameterValueForKey:(NSString *)key {
+- (id)tmui_parameterValueForKey:(NSString *)key {
     if (![key isKindOfClass:[NSString class]]) {
         return nil;
     }

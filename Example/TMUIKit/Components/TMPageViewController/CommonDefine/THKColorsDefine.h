@@ -10,7 +10,6 @@
 #define THKColorsDefine_h
 
 #import <Foundation/Foundation.h>
-#import "UIColor+HexString.h"
 
 ///MARK: 统一整理工程几种常用显示的颜色定义,参考UI设计给的颜色规范（参加：http://wiki.we.com:8090/pages/viewpage.action?pageId=71678928）。
 ///MARK:【注意】:以下定义并不表示工程里用到的颜色只有以下几种，以下仅为几种常见的通用颜色定义。
@@ -88,11 +87,11 @@
 #pragma mark - private methods
 
 #ifndef UIColorHex
-#define UIColorHex(_hex_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
+#define UIColorHex(_hex_)   [UIColor tmui_colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
 #endif
 
 NS_INLINE UIColor * _THKColorWithHexString(NSString *hexStr) {
-    return [UIColor colorWithHexString:hexStr];
+    return [UIColor tmui_colorWithHexString:hexStr];
 }
 
 #endif /* THKColorsDefine_h */

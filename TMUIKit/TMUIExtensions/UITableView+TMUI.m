@@ -9,7 +9,7 @@
 
 @implementation UITableView (TMUI)
 
-- (NSUInteger)indexOfIndexPath:(NSIndexPath *)indexPath {
+- (NSUInteger)tmui_indexOfIndexPath:(NSIndexPath *)indexPath {
     if (!self.dataSource) {
         return 0;
     }
@@ -26,7 +26,7 @@
     return index;
 }
 
-- (NSIndexPath *)indexPathOfIndex:(NSUInteger)index {
+- (NSIndexPath *)tmui_indexPathOfIndex:(NSUInteger)index {
     if (!self.dataSource) {
         return nil;
     }
@@ -41,28 +41,28 @@
 @end
 
 
-@implementation UITableView (TNib)
+@implementation UITableView (TMUI_Nib)
 
-- (void)registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
+- (void)tmui_registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:cellClass]];
     [self registerNib:nib forCellReuseIdentifier:identifier];
 }
 
-- (void)registerNibIdentifierNSStringFromClass:(Class)cellClass {
-    [self registerNibClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
+- (void)tmui_registerNibIdentifierNSStringFromClass:(Class)cellClass {
+    [self tmui_registerNibClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
 }
 
 @end
 
 
-@implementation UITableView (TRegisterCell)
+@implementation UITableView (TMUI_RegisterCell)
 
-- (void)registerNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier {
+- (void)tmui_registerNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier {
     UINib *nib = [UINib nibWithNibName:nibName bundle:[NSBundle bundleForClass:NSClassFromString(nibName)]];
     [self registerNib:nib forCellReuseIdentifier:identifier];
 }
 
-- (UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier
+- (UITableViewCell *)tmui_dequeueReusableCellWithIdentifier:(NSString *)identifier
                                          initWithClass:(Class)cellClass
                                                  Style:(UITableViewCellStyle)style {
     UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifier];
@@ -73,15 +73,15 @@
     return cell;
 }
 
-- (UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier
+- (UITableViewCell *)tmui_dequeueReusableCellWithIdentifier:(NSString *)identifier
                                          initWithClass:(Class)cellClass {
-   UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifier
+   UITableViewCell *cell = [self tmui_dequeueReusableCellWithIdentifier:identifier
                                                      initWithClass:cellClass
                                                              Style:UITableViewCellStyleDefault];
     return  cell;
 }
 
-- (UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier
+- (UITableViewCell *)tmui_dequeueReusableCellWithIdentifier:(NSString *)identifier
                                    initWithClassString:(NSString *)classString
                                                  Style:(UITableViewCellStyle)style {
     UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifier];
@@ -93,9 +93,9 @@
     return cell;
 }
 
-- (UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier
+- (UITableViewCell *)tmui_dequeueReusableCellWithIdentifier:(NSString *)identifier
                                    initWithClassString:(NSString *)classString {
-    UITableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifier
+    UITableViewCell *cell = [self tmui_dequeueReusableCellWithIdentifier:identifier
                                                 initWithClassString:classString
                                                               Style:UITableViewCellStyleDefault];
     return cell;

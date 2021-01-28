@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return query 参数列表，以字典返回。如果 absoluteString 为 nil 则返回 nil
  */
-@property(nonatomic, copy, readonly) NSDictionary<NSString *, NSString *> *qmui_queryItems;
+@property(nonatomic, copy, readonly) NSDictionary<NSString *, NSString *> *tmui_queryItems;
 
-- (id)parameterValueForKey:(NSString *)key;
+- (id)tmui_parameterValueForKey:(NSString *)key;
 
 @end
 

@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Take snapshot without transform, image's size equals to bounds.
  */
-- (nullable UIImage *)snapshotImage;
+- (nullable UIImage *)tmui_snapshotImage;
 
 /**
  Take snapshot without transform, PDF's page size equals to bounds.
  */
-- (nullable NSData *)snapshotPDF;
+- (nullable NSData *)tmui_snapshotPDF;
 
 /**
  Shortcut to set the layer's shadow
@@ -29,12 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param offset Shadow offset
  @param radius Shadow radius
  */
-- (void)setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
+- (void)tmui_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
 
 /**
  Remove all sublayers.
  */
-- (void)removeAllSublayers;
+- (void)tmui_removeAllSublayers;
 
 @property (nonatomic) CGFloat left;        ///< Shortcut for frame.origin.x.
 @property (nonatomic) CGFloat top;         ///< Shortcut for frame.origin.y
@@ -78,12 +78,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param duration Animation duration
  @param curve    Animation curve.
  */
-- (void)addFadeAnimationWithDuration:(NSTimeInterval)duration curve:(UIViewAnimationCurve)curve;
+- (void)tmui_addFadeAnimationWithDuration:(NSTimeInterval)duration curve:(UIViewAnimationCurve)curve;
 
 /**
  Cancel fade animation which is added with "-addFadeAnimationWithDuration:curve:".
  */
-- (void)removePreviousFadeAnimation;
+- (void)tmui_removePreviousFadeAnimation;
 
 
 /**
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param blur 模糊
  @param spread 延伸
  */
-- (void)applyShadow:(UIColor *)color alpha:(float)alpha x:(CGFloat)x y:(CGFloat)y blue:(CGFloat)blur spread:(CGFloat)spread;
+- (void)tmui_applyShadow:(UIColor *)color alpha:(float)alpha x:(CGFloat)x y:(CGFloat)y blue:(CGFloat)blur spread:(CGFloat)spread;
 
 @end
 

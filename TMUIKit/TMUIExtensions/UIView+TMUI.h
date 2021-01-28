@@ -268,15 +268,15 @@ typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
 @end
 
 
-@interface UIView (TNib)
+@interface UIView (TMUI_Nib)
 
-+ (instancetype)instantiateFromNib;
++ (instancetype)tmui_instantiateFromNib;
 
-+ (instancetype)loadNibViewWithFrame:(CGRect)frame;
++ (instancetype)tmui_loadNibViewWithFrame:(CGRect)frame;
 
-+ (instancetype)loadNibViewWithFrame:(CGRect)frame nibName:(NSString *)name;
++ (instancetype)tmui_loadNibViewWithFrame:(CGRect)frame nibName:(NSString *)name;
 
-+ (instancetype)loadNibViewWithName:(NSString *)name;
++ (instancetype)tmui_loadNibViewWithName:(NSString *)name;
 
 @end
 

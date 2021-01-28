@@ -456,7 +456,7 @@
 @end
 
 
-@implementation NSDate (THKCalendarLogic)
+@implementation NSDate (TMUI_Extensions)
 
 //上一个月
 - (NSDate *)dayInThePreviousMonth

@@ -10,7 +10,7 @@
 @implementation CALayer (TMUI)
 
 
-- (UIImage *)snapshotImage {
+- (UIImage *)tmui_snapshotImage {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self renderInContext:context];
@@ -19,7 +19,7 @@
     return image;
 }
 
-- (NSData *)snapshotPDF {
+- (NSData *)tmui_snapshotPDF {
     CGRect bounds = self.bounds;
     NSMutableData *data = [NSMutableData data];
     CGDataConsumerRef consumer = CGDataConsumerCreateWithCFData((__bridge CFMutableDataRef)data);
@@ -36,7 +36,7 @@
     return data;
 }
 
-- (void)setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius {
+- (void)tmui_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius {
     self.shadowColor = color.CGColor;
     self.shadowOffset = offset;
     self.shadowRadius = radius;
@@ -45,7 +45,7 @@
     self.rasterizationScale = [UIScreen mainScreen].scale;
 }
 
-- (void)removeAllSublayers {
+- (void)tmui_removeAllSublayers {
     while (self.sublayers.count) {
         [self.sublayers.lastObject removeFromSuperlayer];
     }
@@ -281,7 +281,7 @@
 //    self.contentsGravity = YYUIViewContentModeToCAGravity(contentMode);
 }
 
-- (void)addFadeAnimationWithDuration:(NSTimeInterval)duration curve:(UIViewAnimationCurve)curve {
+- (void)tmui_addFadeAnimationWithDuration:(NSTimeInterval)duration curve:(UIViewAnimationCurve)curve {
     if (duration <= 0) return;
     
     NSString *mediaFunction;
@@ -316,7 +316,7 @@
 
 
 
-- (void)applyShadow:(UIColor *)color alpha:(float)alpha x:(CGFloat)x y:(CGFloat)y blue:(CGFloat)blur spread:(CGFloat)spread{
+- (void)tmui_applyShadow:(UIColor *)color alpha:(float)alpha x:(CGFloat)x y:(CGFloat)y blue:(CGFloat)blur spread:(CGFloat)spread{
     self.shadowColor = color.CGColor;
     self.shadowOpacity = alpha;
     self.shadowOffset = CGSizeMake(x, y);

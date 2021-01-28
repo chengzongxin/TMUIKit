@@ -332,7 +332,7 @@
 static char bgColorHexStringKey;
 
 - (void)setBgColorHexString:(NSString *)bgColorHexString {
-    self.backgroundColor = [UIColor colorWithHexString:bgColorHexString];
+    self.backgroundColor = [UIColor tmui_colorWithHexString:bgColorHexString];
     objc_setAssociatedObject(self, &bgColorHexStringKey, bgColorHexString, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
@@ -343,7 +343,7 @@ static char bgColorHexStringKey;
 static char borderColorHexStringKey;
 
 - (void)setBorderColorHexString:(NSString *)borderColorHexString {
-    self.layer.borderColor = [UIColor colorWithHexString:borderColorHexString].CGColor;
+    self.layer.borderColor = [UIColor tmui_colorWithHexString:borderColorHexString].CGColor;
     objc_setAssociatedObject(self, &borderColorHexStringKey, borderColorHexString, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
@@ -720,22 +720,22 @@ TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootVi
 }
 @end
 
-@implementation UIView (TNib)
+@implementation UIView (TMUI_Nib)
 
-+ (instancetype)instantiateFromNib {
++ (instancetype)tmui_instantiateFromNib {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil][0];
 }
 
-+ (instancetype)loadNibViewWithFrame:(CGRect)frame {
-    return [self loadNibViewWithFrame:frame nibName:NSStringFromClass([self class])];
++ (instancetype)tmui_loadNibViewWithFrame:(CGRect)frame {
+    return [self tmui_loadNibViewWithFrame:frame nibName:NSStringFromClass([self class])];
 }
 
-+ (instancetype)loadNibViewWithName:(NSString *)name {
++ (instancetype)tmui_loadNibViewWithName:(NSString *)name {
     UIWindow *currentWindow = [[UIApplication sharedApplication].windows firstObject];
-    return [self loadNibViewWithFrame:[currentWindow frame] nibName:name];
+    return [self tmui_loadNibViewWithFrame:[currentWindow frame] nibName:name];
 }
 
-+ (instancetype)loadNibViewWithFrame:(CGRect)frame nibName:(NSString *)name {
++ (instancetype)tmui_loadNibViewWithFrame:(CGRect)frame nibName:(NSString *)name {
     NSArray* nibView =  [[NSBundle bundleForClass:self] loadNibNamed:name owner:self options:nil];
     UIView *view =  [nibView objectAtIndex:0];
     view.frame = frame;

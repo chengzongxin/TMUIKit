@@ -352,12 +352,9 @@
 
 
 
-@implementation UIImage (Compression)
+@implementation UIImage (TMUI_Compression)
 
-static char isCustomImage;
-static char customImageName;
-
-+ (NSData *)compressImage:(UIImage *)image dataLen:(NSInteger)dataLen  {
++ (NSData *)tmui_compressImage:(UIImage *)image dataLen:(NSInteger)dataLen  {
     
     double size;
     if (dataLen == 0) {
@@ -433,7 +430,7 @@ static char customImageName;
 }
 
 + (NSData *)compressWithImage:(UIImage *)image thumbW:(int)width thumbH:(int)height size:(double)size {
-    UIImage *thumbImage = [image imageCompressFitTargetSize:CGSizeMake(width, height)];
+    UIImage *thumbImage = [image tmui_imageCompressFitTargetSize:CGSizeMake(width, height)];
     NSData *imageData = UIImageJPEGRepresentation(thumbImage, 0.95);
     NSLog(@"image data size after compressed ==%f kb == %f(w:%d-h:%d)",imageData.length/1024.0, size, width, height);
     return imageData;
@@ -442,7 +439,7 @@ static char customImageName;
 @end
 
 
-@implementation UIImage (scale)
+@implementation UIImage (TMUI_Scale)
 
 
 /**
@@ -452,7 +449,7 @@ static char customImageName;
  *
  *  @return 缩放后的图片
  */
-- (UIImage*)resizedInRect:(CGRect)thumbRect {
+- (UIImage*)tmui_resizedInRect:(CGRect)thumbRect {
     UIGraphicsBeginImageContext(thumbRect.size);
     [self drawInRect:thumbRect];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
@@ -467,7 +464,7 @@ static char customImageName;
  *
  *  @return 缩放后的图片
  */
-- (UIImage *)imageCompressFitTargetSize:(CGSize)afterSize {
+- (UIImage *)tmui_imageCompressFitTargetSize:(CGSize)afterSize {
     
     //照片的宽高
     CGSize imageSize = self.size;
@@ -532,7 +529,7 @@ static char customImageName;
  *
  *  @return 缩放后的图片
  */
-- (UIImage*)scaleToFit {
+- (UIImage*)tmui_scaleToFit {
     
     //获取当前屏幕的宽
     CGFloat width = [UIScreen mainScreen].scale * [UIScreen mainScreen].bounds.size.width;//6s:375
@@ -559,7 +556,7 @@ static char customImageName;
  *
  *  @return 截取后的图片
  */
-- (UIImage*)getSubImage:(CGRect)rect {
+- (UIImage*)tmui_getSubImage:(CGRect)rect {
     
     //image:需要被裁剪的图片
     //rect: 裁剪范围
@@ -591,7 +588,7 @@ static char customImageName;
  *
  *  @return 缩放后的图片
  */
-- (UIImage*)scaleToSize:(CGSize)size {
+- (UIImage*)tmui_scaleToSize:(CGSize)size {
     
     CGSize imageSize = self.size;
     CGFloat width = imageSize.width;
@@ -643,7 +640,7 @@ static char customImageName;
  *
  *  @return 压缩后的图片
  */
-- (UIImage *)unProportionScaleToSize:(CGSize)size {
+- (UIImage *)tmui_unProportionScaleToSize:(CGSize)size {
     
     CGFloat width = CGImageGetWidth(self.CGImage);
     CGFloat height = CGImageGetHeight(self.CGImage);
@@ -660,10 +657,10 @@ static char customImageName;
     }
     width = width*scale;
     height = height*scale;
-    UIImage *smallImgOfProportionScale = [self scaleToSize:CGSizeMake(width, height)];
+    UIImage *smallImgOfProportionScale = [self tmui_scaleToSize:CGSizeMake(width, height)];
     int xPos = (width-size.width)/2;
     int yPos = (height-size.height)/2;
-    UIImage *smallImgOfUnProportionScale = [smallImgOfProportionScale getSubImage:(CGRect){xPos,yPos,size}];
+    UIImage *smallImgOfUnProportionScale = [smallImgOfProportionScale tmui_getSubImage:(CGRect){xPos,yPos,size}];
     
     return smallImgOfUnProportionScale;
 }
@@ -675,11 +672,11 @@ static char customImageName;
  *
  *  @return 压缩后的图片
  */
-- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen {
-    return [self resizedToMaxDataLen:maxDataLen aspectRatio:0];
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen {
+    return [self tmui_resizedToMaxDataLen:maxDataLen aspectRatio:0];
 }
 
-- (NSData *)resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio {
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio {
     CGFloat compression = 1.0;
     CGFloat scale = 1.0;
     CGFloat imgW = self.size.width * self.scale ? : 1;  //防止为0
@@ -693,7 +690,7 @@ static char customImageName;
             imgH = imgW / aspectRatio;
         }
     }
-    UIImage *finalImg = (aspectRatio > 0) ? [self imageCompressFitTargetSize:CGSizeMake(imgW, imgH)] : self;
+    UIImage *finalImg = (aspectRatio > 0) ? [self tmui_imageCompressFitTargetSize:CGSizeMake(imgW, imgH)] : self;
     NSData *finalData = UIImageJPEGRepresentation(finalImg, 1.0);
     //符合要求大小
     if (maxDataLen <= 0 || finalData.length <= maxDataLen) {
@@ -717,7 +714,7 @@ static char customImageName;
         scale = (scaleMax + scaleMin) / 2;
         compression = (comMax + comMin) / 2;
        
-        UIImage *img = (scale < 1.0 || aspectRatio > 0) ? [self imageCompressFitTargetSize:CGSizeMake(imgW * scale, imgH * scale)] : self;
+        UIImage *img = (scale < 1.0 || aspectRatio > 0) ? [self tmui_imageCompressFitTargetSize:CGSizeMake(imgW * scale, imgH * scale)] : self;
         finalData = UIImageJPEGRepresentation(img, compression);
         if (finalData.length < maxDataLen * 0.9) {
             successCount ++;

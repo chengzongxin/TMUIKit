@@ -9,22 +9,22 @@
 
 @implementation UICollectionView (TMUI)
 
-- (void)registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
+- (void)tmui_registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:cellClass]];
     [self registerNib:nib forCellWithReuseIdentifier:identifier];
 }
 
-- (void)registerNibIdentifierNSStringFromClass:(Class)cellClass {
-    [self registerNibClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
+- (void)tmui_registerNibIdentifierNSStringFromClass:(Class)cellClass {
+    [self tmui_registerNibClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
 }
 
-- (void)t_registerNibClass:(Class)cellClass forSupplementaryViewOfKind:(NSString *)kind withReuseIdentifier:(NSString *)identifier {
+- (void)tmui_registerNibClass:(Class)cellClass forSupplementaryViewOfKind:(NSString *)kind withReuseIdentifier:(NSString *)identifier {
     UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:cellClass]];
     [self registerNib:nib forSupplementaryViewOfKind:kind withReuseIdentifier:identifier];
 }
 
-- (void)t_registerNibIdentifierNSStringFromClass:(Class)aClass forSupplementaryViewOfKind:(NSString *)kind {
-    [self t_registerNibClass:aClass forSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(aClass)];
+- (void)tmui_registerNibIdentifierNSStringFromClass:(Class)aClass forSupplementaryViewOfKind:(NSString *)kind {
+    [self tmui_registerNibClass:aClass forSupplementaryViewOfKind:kind withReuseIdentifier:NSStringFromClass(aClass)];
 }
 
 @end

@@ -14,10 +14,6 @@
 		160860BF25C01D8100F31337 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B925C01D8100F31337 /* TableViewController.m */; };
 		160860C025C01D8100F31337 /* Table1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860BA25C01D8100F31337 /* Table1ViewController.m */; };
 		160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860D425C01E3200F31337 /* THKSegmentControl.m */; };
-		160860F625C01F1D00F31337 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860EB25C01F1D00F31337 /* UIView+Frame.m */; };
-		160860F725C01F1D00F31337 /* UIButton+Convenient.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860F125C01F1D00F31337 /* UIButton+Convenient.m */; };
-		160860F825C01F1D00F31337 /* UIViewController+Convenient.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860F325C01F1D00F31337 /* UIViewController+Convenient.m */; };
-		160860F925C01F1D00F31337 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860F425C01F1D00F31337 /* UIColor+HexString.m */; };
 		163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */; };
 		16455E0A25B6EDEC00BBBEC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16455E0825B6EDEC00BBBEC2 /* Main.storyboard */; };
 		16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */; };
@@ -112,16 +108,8 @@
 		160860D425C01E3200F31337 /* THKSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THKSegmentControl.m; sourceTree = "<group>"; };
 		160860DA25C01E3200F31337 /* THKSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKSegmentControl.h; sourceTree = "<group>"; };
 		160860EA25C01F1D00F31337 /* THKColorsDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKColorsDefine.h; sourceTree = "<group>"; };
-		160860EB25C01F1D00F31337 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
-		160860EC25C01F1D00F31337 /* UIButton+Convenient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Convenient.h"; sourceTree = "<group>"; };
-		160860ED25C01F1D00F31337 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
-		160860EE25C01F1D00F31337 /* UIViewController+Convenient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Convenient.h"; sourceTree = "<group>"; };
 		160860EF25C01F1D00F31337 /* THKCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKCommonDefine.h; sourceTree = "<group>"; };
 		160860F025C01F1D00F31337 /* Define_SetValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_SetValues.h; sourceTree = "<group>"; };
-		160860F125C01F1D00F31337 /* UIButton+Convenient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Convenient.m"; sourceTree = "<group>"; };
-		160860F225C01F1D00F31337 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		160860F325C01F1D00F31337 /* UIViewController+Convenient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Convenient.m"; sourceTree = "<group>"; };
-		160860F425C01F1D00F31337 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		160860F525C01F1D00F31337 /* Define_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_Block.h; sourceTree = "<group>"; };
 		163444A825BA70910091D4EF /* UIButtonTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIButtonTMUIViewController.h; sourceTree = "<group>"; };
 		163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIButtonTMUIViewController.m; sourceTree = "<group>"; };
@@ -261,14 +249,6 @@
 				160860F025C01F1D00F31337 /* Define_SetValues.h */,
 				160860EA25C01F1D00F31337 /* THKColorsDefine.h */,
 				160860EF25C01F1D00F31337 /* THKCommonDefine.h */,
-				160860EC25C01F1D00F31337 /* UIButton+Convenient.h */,
-				160860F125C01F1D00F31337 /* UIButton+Convenient.m */,
-				160860ED25C01F1D00F31337 /* UIColor+HexString.h */,
-				160860F425C01F1D00F31337 /* UIColor+HexString.m */,
-				160860F225C01F1D00F31337 /* UIView+Frame.h */,
-				160860EB25C01F1D00F31337 /* UIView+Frame.m */,
-				160860EE25C01F1D00F31337 /* UIViewController+Convenient.h */,
-				160860F325C01F1D00F31337 /* UIViewController+Convenient.m */,
 			);
 			path = CommonDefine;
 			sourceTree = "<group>";
@@ -787,7 +767,6 @@
 			files = (
 				16EABFE725BAAE7C00A3273D /* UISlider+associateObject.m in Sources */,
 				160860BD25C01D8100F31337 /* Table2ViewController.m in Sources */,
-				160860F825C01F1D00F31337 /* UIViewController+Convenient.m in Sources */,
 				16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */,
 				16BA204525C1096000E6F5C8 /* NSString+TDigest.m in Sources */,
 				16BA204725C1096000E6F5C8 /* NSString+TSize.m in Sources */,
@@ -798,16 +777,13 @@
 				160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */,
 				16BA204625C1096000E6F5C8 /* NSString+TCategory.m in Sources */,
 				16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */,
-				160860F625C01F1D00F31337 /* UIView+Frame.m in Sources */,
 				160860C025C01D8100F31337 /* Table1ViewController.m in Sources */,
 				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
 				16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */,
-				160860F725C01F1D00F31337 /* UIButton+Convenient.m in Sources */,
 				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
-				160860F925C01F1D00F31337 /* UIColor+HexString.m in Sources */,
 				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

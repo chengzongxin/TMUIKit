@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @return UIColor对象
  */
 + (nullable UIColor *)tmui_colorWithHexString:(nullable NSString *)hexString;
-+ (UIColor *)colorWithHexString:(NSString *) hexString;
 /**
  *  获取当前 UIColor 对象里的红色色值
  *

@@ -22,24 +22,24 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 
 @interface UIViewController (TMUI)
 // 控制导航栏显示或隐藏
-@property (nonatomic, assign) BOOL navBarHidden;
+@property (nonatomic, assign) BOOL tmui_navBarHidden;
 
 // 导航控制器中上一个viewcontroller
-- (UIViewController*)previousViewController;
+- (UIViewController*)tmui_previousViewController;
 // 导航控制器中下一个viewcontroller
-- (UIViewController*)nextViewController;
+- (UIViewController*)tmui_nextViewController;
 #pragma mark -  获取当前最顶层的ViewController
-+ (UIViewController *)getCurrentVC;
++ (UIViewController *)tmui_topViewControllerget;
 
 
 // 导航栏返回按钮方法
--(void)navBackAction:(id)sender;
+-(void)tmui_navBackAction:(id)sender;
 
 @end
 
 
 
-@interface UIViewController (Alert)
+@interface UIViewController (TMUI_Alert)
 /**
  弹出UIAlertController
  
@@ -47,7 +47,7 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
  @param message 消息
  @param sure    点击确定按钮
  */
-- (void)showAlertSureWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure;
+- (void)tmui_showAlertSureWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure;
 
 /**
  弹出UIAlerController
@@ -57,7 +57,7 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
  @param sure    点击确定
  @param cancel  点击取消
  */
-- (void)showAlertSureAndCancelWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure cancel:(void (^) (UIAlertAction *action))cancel;
+- (void)tmui_showAlertSureAndCancelWithTitle:(NSString *)title message:(NSString *)message sure:(void (^) (UIAlertAction *action))sure cancel:(void (^) (UIAlertAction *action))cancel;
 
 
 /**
@@ -66,7 +66,7 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
  @param actionOneTitle 标题
  @param handlerOne     点击标题的事件
  */
-- (void)showSheetOneaction:(NSString *)actionOneTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne;
+- (void)tmui_showSheetOneaction:(NSString *)actionOneTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne;
 
 /**
  弹出UIAlerController
@@ -76,7 +76,7 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
  @param handlerOne     第一个标题点击事件
  @param handlerTwo     第二个标题点击事件
  */
-- (void)showSheetTwoaction:(NSString *)actionOneTitle actionTwo:(NSString *)actionTwoTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne handlerTwo:(void (^) (UIAlertAction *action))handlerTwo;
+- (void)tmui_showSheetTwoaction:(NSString *)actionOneTitle actionTwo:(NSString *)actionTwoTitle handlerOne:(void(^)(UIAlertAction *action))handlerOne handlerTwo:(void (^) (UIAlertAction *action))handlerTwo;
 
 @end
 

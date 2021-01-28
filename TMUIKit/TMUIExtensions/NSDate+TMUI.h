@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 
-@interface NSDate (THKCalendarLogic)
+@interface NSDate (TMUI_Extensions)
 
 - (NSDate *)dayInThePreviousMonth;
 - (NSDate *)dayInTheFollowingMonth;

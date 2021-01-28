@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface NSArray (TCategory)
+@interface NSArray (TMUI_Extensions)
 
 /**
  *  删掉object
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return 数组
  */
-- (NSArray *)t_arrayByRemovingObject:(id)object;
+- (NSArray *)tmui_arrayByRemovingObject:(id)object;
 
 /**
  *  删掉数组中的第index个元素
@@ -59,21 +59,21 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return 数组
  */
-- (NSArray *)t_arrayByRemovingObjectAtIndex:(NSUInteger)index;
+- (NSArray *)tmui_arrayByRemovingObjectAtIndex:(NSUInteger)index;
 
 /**
  *  删掉数组中的第一个元素
  *
  *  @return 数组
  */
-- (NSArray *)t_arrayByRemovingFirstObject;
+- (NSArray *)tmui_arrayByRemovingFirstObject;
 
 /**
  *  删掉数组中的最后一个元素
  *
  *  @return 数组
  */
-- (NSArray *)t_arrayByRemovingLastObject;
+- (NSArray *)tmui_arrayByRemovingLastObject;
 
 /**
  *  添加object
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return 数组
  */
-- (NSArray *)t_arrayByAddObject:(id)object;
+- (NSArray *)tmui_arrayByAddObject:(id)object;
 
 /**
  *  判断数组中第index个元素是不是属于类型aClass
@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return obj
  */
-- (id)objectOfClass:(Class)aClass atIndex:(NSUInteger)index;
+- (id)tmui_objectOfClass:(Class)aClass atIndex:(NSUInteger)index;
 
 
 @end

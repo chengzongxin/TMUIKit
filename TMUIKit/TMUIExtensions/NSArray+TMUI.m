@@ -92,7 +92,7 @@
 
 
 
-@implementation NSArray (TCategory)
+@implementation NSArray (TMUI_Extensions)
 
 #pragma mark -
 
@@ -101,36 +101,36 @@
     dispatch_once(&onceToken, ^{
 
         Class class = NSClassFromString(@"NSArray");
-        [self sjb_instanceSwizzleMethodWithClass:class
+        [self tmui_instanceSwizzleMethodWithClass:class
                                    orginalMethod:@selector(objectAtIndexedSubscript:)
-                                   replaceMethod:@selector(t_objectAtIndexedSubscript:)];
+                                   replaceMethod:@selector(tmui_objectAtIndexedSubscript:)];
         
-        [self sjb_instanceSwizzleMethodWithClass:class
+        [self tmui_instanceSwizzleMethodWithClass:class
                                    orginalMethod:@selector(objectAtIndex:)
-                                   replaceMethod:@selector(t_objectAtIndex:)];
+                                   replaceMethod:@selector(tmui_objectAtIndex:)];
         
         if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11.0) {
             
             Class classTi = NSClassFromString(@"__NSArrayI");
-            [self sjb_instanceSwizzleMethodWithClass:classTi
+            [self tmui_instanceSwizzleMethodWithClass:classTi
                                        orginalMethod:@selector(objectAtIndexedSubscript:)
                                        replaceMethod:@selector(ti_objectAtIndexedSubscript:)];
             
-            [self sjb_instanceSwizzleMethodWithClass:classTi
+            [self tmui_instanceSwizzleMethodWithClass:classTi
                                        orginalMethod:@selector(objectAtIndex:)
                                        replaceMethod:@selector(ti_objectAtIndex:)];
             
             Class classTm = NSClassFromString(@"__NSArrayM");
-            [self sjb_instanceSwizzleMethodWithClass:classTm
+            [self tmui_instanceSwizzleMethodWithClass:classTm
                                        orginalMethod:@selector(objectAtIndexedSubscript:)
                                        replaceMethod:@selector(tm_objectAtIndexedSubscript:)];
             
-            [self sjb_instanceSwizzleMethodWithClass:classTm
+            [self tmui_instanceSwizzleMethodWithClass:classTm
                                        orginalMethod:@selector(objectAtIndex:)
                                        replaceMethod:@selector(tm_objectAtIndex:)];
             
             Class classCf = NSClassFromString(@"__NSCFArray");
-            [self sjb_instanceSwizzleMethodWithClass:classCf
+            [self tmui_instanceSwizzleMethodWithClass:classCf
                                        orginalMethod:@selector(objectAtIndexedSubscript:)
                                        replaceMethod:@selector(tcf_objectAtIndexedSubscript:)];
         }
@@ -146,7 +146,7 @@
     }
 }
 
-- (id)t_objectAtIndexedSubscript:(NSUInteger)idx {
+- (id)tmui_objectAtIndexedSubscript:(NSUInteger)idx {
     if (idx<self.count) {
         return [self objectAtIndex:idx];
     }
@@ -174,11 +174,11 @@
     return nil;
 }
 
-- (id)objectForKeyedSubscript:(NSString *)key {
+- (id)tmui_objectForKeyedSubscript:(NSString *)key {
     return nil;
 }
 
-- (NSArray *)t_arrayByAddObject:(id)object {
+- (NSArray *)tmui_arrayByAddObject:(id)object {
     if (!object) {
         return self;
     }
@@ -188,13 +188,13 @@
     return result;
 }
 
-- (NSArray *)t_arrayByRemovingObject:(id)object {
+- (NSArray *)tmui_arrayByRemovingObject:(id)object {
     NSMutableArray *result = [self mutableCopy];
     [result removeObject:object];
     return result;
 }
 
-- (NSArray *)t_arrayByRemovingObjectAtIndex:(NSUInteger)index {
+- (NSArray *)tmui_arrayByRemovingObjectAtIndex:(NSUInteger)index {
     if (index>=self.count) {
         return self;
     }
@@ -205,19 +205,19 @@
 
 
 
-- (NSArray *)t_arrayByRemovingFirstObject {
+- (NSArray *)tmui_arrayByRemovingFirstObject {
     if (self.count == 0) return self;
     
     return [self subarrayWithRange:NSMakeRange(1, self.count - 1)];
 }
 
-- (NSArray *)t_arrayByRemovingLastObject {
+- (NSArray *)tmui_arrayByRemovingLastObject {
     if (self.count == 0) return self;
     
     return [self subarrayWithRange:NSMakeRange(0, self.count - 1)];
 }
 
-- (id)objectOfClass:(Class)aClass atIndex:(NSUInteger)index {
+- (id)tmui_objectOfClass:(Class)aClass atIndex:(NSUInteger)index {
     id obj = self[index];
     if ([obj isKindOfClass:aClass]) {
         return obj;
@@ -226,9 +226,9 @@
 }
 
 
-- (id)t_objectAtIndex:(NSUInteger)idx {
+- (id)tmui_objectAtIndex:(NSUInteger)idx {
     if (idx < self.count) {
-        return [self t_objectAtIndex:idx];
+        return [self tmui_objectAtIndex:idx];
     }
     return nil;
 }
@@ -247,7 +247,7 @@
     return nil;
 }
 
-+ (void)sjb_instanceSwizzleMethodWithClass:(Class _Nonnull )klass
++ (void)tmui_instanceSwizzleMethodWithClass:(Class _Nonnull )klass
                              orginalMethod:(SEL _Nonnull )originalSelector
                              replaceMethod:(SEL _Nonnull )replaceSelector {
     Method origMethod = class_getInstanceMethod(klass, originalSelector);

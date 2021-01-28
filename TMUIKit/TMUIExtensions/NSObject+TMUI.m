@@ -500,25 +500,25 @@ TMUISynthesizeBOOLProperty(tmui_shouldIgnoreUIKVCAccessProhibited, setTmui_shoul
 
 
 
-@implementation NSObject (TCategory)
+@implementation NSObject (TMUI_Associate)
 
-+ (instancetype)t_instance {
-    return [self t_instanceForTarget:[UIApplication sharedApplication].delegate];
++ (instancetype)tmui_instance {
+    return [self tmui_instanceForTarget:[UIApplication sharedApplication].delegate];
 }
 
-+ (void)t_setNilForDefaultTarget {
-    [self t_setNilForTarget:[UIApplication sharedApplication].delegate];
++ (void)tmui_setNilForDefaultTarget {
+    [self tmui_setNilForTarget:[UIApplication sharedApplication].delegate];
 }
 
-+ (instancetype)t_instanceForTarget:(id)target {
-    return [self t_instanceForTarget:target keyName:NSStringFromClass([self class])];
++ (instancetype)tmui_instanceForTarget:(id)target {
+    return [self tmui_instanceForTarget:target keyName:NSStringFromClass([self class])];
 }
 
-+ (void)t_setNilForTarget:(id)target {
-    [self t_setNilForTarget:target keyName:NSStringFromClass([self class])];
++ (void)tmui_setNilForTarget:(id)target {
+    [self tmui_setNilForTarget:target keyName:NSStringFromClass([self class])];
 }
 
-+ (instancetype)t_instanceForTarget:(id)target keyName:(NSString *)strKeyName {
++ (instancetype)tmui_instanceForTarget:(id)target keyName:(NSString *)strKeyName {
     if (!target) {
         NSAssert(YES, @"no target");
     }
@@ -531,7 +531,7 @@ TMUISynthesizeBOOLProperty(tmui_shouldIgnoreUIKVCAccessProhibited, setTmui_shoul
     return obj;
 }
 
-+ (void)t_setNilForTarget:(id)target keyName:(NSString *)strKeyName {
++ (void)tmui_setNilForTarget:(id)target keyName:(NSString *)strKeyName {
     objc_setAssociatedObject(target, (__bridge const void *)(strKeyName), nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
