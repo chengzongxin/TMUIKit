@@ -116,50 +116,41 @@
             NSLog(@"%@",action);
         }];
     }];
+
+    // 24x24 emotion_06
+    NSMutableAttributedString *imgAttr = [[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_06"]] mutableCopy];
+//    [imgAttr appendAttributedString:[[NSAttributedString alloc] ]
+    NSAttributedString *atr = [NSAttributedString tmui_atsForStr:@"fdsfsafsfsf1" lineHeight:10];
+    [imgAttr appendAttributedString:atr];
+    
+    [imgAttr appendAttributedString:[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_07"]]];
+    
+    UILabel *imgLabel = [[UILabel alloc] init];
+    imgLabel.attributedText = imgAttr;
+    imgLabel.backgroundColor = UIColor.tmui_randomColor;
+    [self.view addSubview:imgLabel];
+    
+    [imgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(20);
+        make.top.mas_equalTo(onlineLabel.mas_bottom).offset(20);
+        make.width.mas_equalTo(300);
+        make.height.mas_equalTo(30);
+    }];
     
     
-    [self coreText];
+    CGSize imgLabelSize = [imgLabel.attributedText tmui_sizeForWidth:300];
+    [imgLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(imgLabelSize.width+24*2);
+        make.height.mas_equalTo(imgLabelSize.height);
+    }];
+    
+    [imgLabel tmui_clickAttrTextWithStrings:@[@"sf1"] clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
+        [self tmui_showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"%@",action);
+        }];
+    }];
 }
 
-
-
-
-- (void)coreText{
-//    [self coreTextHeight:@"装修这些点，足够坑你5⃣️万‼️"];
-//    [self coreTextHeight:@"👉现在建材市场水真的很深，很多建材商为了赚钱，老给客户推荐最贵的产品。"];
-    [self coreTextHeight:@"但并不是什么都要买贵的，能省点就省点，毕竟现在挣钱也都不容易。\n"];
-//    [self coreTextHeight:@"👉我家装修被坑了好几万，现在总结一些经验给大家，希望大家在购买建材时要注意。"];
-//    [self coreTextHeight:@"看，推荐给你们啦，有需要可以自行看"];
-}
-
-- (void)coreTextHeight:(NSString *)str{
-    
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.lineSpacing = 10;
-    NSAttributedString *attrns = [[NSAttributedString alloc] initWithString:str attributes:@{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(15),NSForegroundColorAttributeName:UIColor.orangeColor,NSParagraphStyleAttributeName:paragraphStyle}];
-    CFAttributedStringRef attr = (__bridge CFAttributedStringRef)(attrns);
-    CTLineRef line = CTLineCreateWithAttributedString(attr);
-    
-    CGFloat ascent = 0.0f;
-    CGFloat descent = 0.0f;
-    CGFloat leading = 0.0f;
-    CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
-    CGFloat height = ascent + fabs(descent) + leading;
-    
-    NSLog(@"height = %f,%f,%f,%f,%f",ascent,descent,leading,width,height);
-    
-    NSArray * arrGlyphRun = (NSArray *)CTLineGetGlyphRuns(line);
-    for (int j = 0; j < arrGlyphRun.count; j ++) {
-        CTRunRef run = (__bridge CTRunRef)arrGlyphRun[j];
-        
-        CGFloat run_ascent = 0.0f;
-        CGFloat run_descent = 0.0f;
-        
-        CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &run_ascent, &run_descent, NULL);
-        
-        NSLog(@"run %d = %f,%f,%f",j,run_ascent,run_descent,run_ascent+run_descent);
-    }
-}
 
 
 
@@ -169,7 +160,7 @@
 }
 
 - (NSString *)onlineText2{
-    return @"装修这些点，足够坑你5⃣️万‼️\n👉现在建材市场水真的很深，很多建材商为了赚钱，老给客户推荐最贵的产品。但并不是什么都要买贵的，能省点就省点，毕竟现在挣钱也都不容易。我家装修被坑了好几万，现在总结一些经验给大家，希望大家在购买建材时要注意。\n1、地板\n2、涂料\n3、地砖\n4、灯具\n5、门类\n6、吊顶\n7、橱柜\n8、油烟机\n9、马桶\n10、地漏\n11、榻榻米\n12、燃气热水器\n13、环保问题\n👆以上的装修点在装修时一定要注意到哦👐\n👇以下是我家用了一年的家具好物，现在还是很好用，颜值也超好看，推荐给你们啦，有需要可以自行看哦‼️";
+    return @"装修这些点，足够坑你5⃣️万‼️\n👉现在建材市场水真的很深，很多建材商为了赚钱，老给客户推荐最贵的产品。但并不是什么都要买贵的，能省点就省点，毕竟现在挣钱也都不容易。我家装修被坑了好几万，现在总结一些经验给大家，希望大家在购买建材时要注意。\n1、地板\n2、涂料\n3、地砖\n👆以上的装修点在装修时一定要注意到哦👐\n👇以下是我家用了一年的家具好物，现在还是很好用，颜值也超好看，推荐给你们啦，有需要可以自行看哦‼️";
 }
 
 - (NSString *)onlineText3{

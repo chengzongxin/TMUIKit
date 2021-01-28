@@ -347,7 +347,7 @@
 
 
 - (CGFloat)aNewlineHeight{
-    UIFont *font = [self.attributedText attribute:NSFontAttributeName atIndex:0 effectiveRange:nil];
+    UIFont *font = [self.attributedText attribute:NSFontAttributeName atIndex:0 effectiveRange:nil]?:self.font;
     NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"\n" attributes:@{NSFontAttributeName:font}];
     CTLineRef newline = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)attrStr);
     CGFloat ascent = 0.0f;
