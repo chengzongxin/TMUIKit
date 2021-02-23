@@ -18,9 +18,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *text = @"设置frame属性\n\
+    设置圆角、阴影、渐变、边框\n\
+    IBInspectable快速设置外观属性\n\
+    快速添加各种手势事件\n\
+    获取VC、view是否可见\n\
+    截图\n\
+    创建动画\n\
+    通过xib创建view";
+    
+    UILabel *label = [[UILabel alloc] tmui_initWithFont:UIFont(12) textColor:UIColor.tmui_randomColor];
+    [self.view addSubview:label];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(20);
+        make.top.mas_equalTo(100);
+        make.right.mas_equalTo(-20);
+    }];
+    [label tmui_setAttributesText:text lineSpacing:10];
+    
     [self cornerViewTest];
     
     [self shadowGradientViewTest];
+    
+    [self otherTest];
 }
 
 - (void)cornerViewTest{
@@ -84,6 +104,20 @@
     
     [shadowGradientView1 tmui_gradientUpToDownWithStartColorToDown:UIColor.redColor endColor:UIColor.greenColor];
     
+}
+
+- (void)otherTest{
+    UIView *testView = [UIView tmui_view];
+    testView.backgroundColor = UIColor.tmui_randomColor;
+    [self.view addSubview:testView];
+    [testView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(100);
+        make.top.mas_equalTo(550);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(100);
+    }];
+    
+    [testView tmui_cornerDirect:UIRectCornerTopLeft|UIRectCornerTopRight radius:10];
 }
 
 

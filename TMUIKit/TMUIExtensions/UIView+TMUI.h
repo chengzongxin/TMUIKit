@@ -11,7 +11,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (TMUI)
 
-+ (instancetype)tmui_viewFromXib;
+/// 创建view
++ (instancetype)tmui_view;
+
+/// 相当于 initWithFrame:CGRectMake(0, 0, size.width, size.height)
+/// @param size  初始化时的 size
+- (instancetype)tmui_initWithSize:(CGSize)size;
+
+/// 移除当前所有 subviews
+- (void)tmui_removeAllSubviews;
 
 @end
 

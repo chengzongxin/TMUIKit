@@ -41,9 +41,10 @@
 
 @implementation UILabel (TMUI_AttributeText)
 
-- (void)setAtsWithStr:(NSString *)str lineGap:(CGFloat)lineGap {
-    CGFloat height = [NSAttributedString tmui_heightForAtsWithStr:str font:self.font width:self.frame.size.width lineH:lineGap];
-    self.attributedText = [NSAttributedString tmui_atsForStr:str lineHeight:(height<self.font.pointSize*2+lineGap)?0:lineGap];
+- (void)tmui_setAttributesText:(NSString *)text lineSpacing:(CGFloat)lineSpacing{
+    CGFloat height = [NSAttributedString tmui_heightForAtsWithStr:text font:self.font width:self.frame.size.width lineH:lineSpacing];
+    self.attributedText = [NSAttributedString tmui_atsForStr:text lineHeight:(height<self.font.pointSize*2+lineSpacing)?0:lineSpacing];
+    self.numberOfLines = 0;
 }
 
 - (void)tmui_addAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{

@@ -14,8 +14,16 @@
 
 @implementation UIView (TMUI)
 
-+ (instancetype)tmui_viewFromXib {
-    return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil] lastObject];
++ (instancetype)tmui_view{
+    return [[self alloc] init];
+}
+
+- (instancetype)tmui_initWithSize:(CGSize)size{
+    return [self initWithFrame:CGRectMakeWithSize(size)];
+}
+
+- (void)tmui_removeAllSubviews{
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 @end
