@@ -23,36 +23,81 @@
     [super viewDidLoad];
     
     _datas = @[
-        @{@"title":@"分类:UIView+TMUI",@"class":@"UIViewTMUIViewController"},
-        @{@"title":@"分类:UIButton+TMUI",@"class":@"UIButtonTMUIViewController"},
-        @{@"title":@"分类:UILable+TMUI",@"class":@"UILabelTMUIViewController"}
+        @{@"sections":@"UIView+TMUI",
+          @"rows":@[
+                  @{
+                      @"rowTitle":@"123",
+                      @"class":@"UIViewTMUIViewController"
+                  },
+                  @{
+                      @"rowTitle":@"456",
+                      @"class":@"UIViewTMUIViewController"
+                  },
+                  @{
+                      @"rowTitle":@"789",
+                      @"class":@"UIViewTMUIViewController"
+                  }
+          ]},
+        @{@"sections":@"UIButton+TMUI",
+          @"rows":@[
+                  @{
+                      @"rowTitle":@"123",
+                      @"class":@"UIButtonTMUIViewController"
+                  }
+          ]},
+        @{@"sections":@"UILable+TMUI",
+          @"rows":@[
+                  @{
+                      @"rowTitle":@"123",
+                      @"class":@"UILabelTMUIViewController"
+                  }
+          ]},
     ];
+    
+    
+//    _datas = @[
+//        @{@"title":@"分类:UIView+TMUI",@"class":@"UIViewTMUIViewController"},
+//        @{@"title":@"分类:UIButton+TMUI",@"class":@"UIButtonTMUIViewController"},
+//        @{@"title":@"分类:UILable+TMUI",@"class":@"UILabelTMUIViewController"}
+//    ];
     
     [self.view addSubview:self.tableView];
     
 }
 
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _datas.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_datas[section][@"rows"] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return _datas[section][@"sections"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"cell";
-    NSDictionary *dict = _datas[indexPath.row];
+    
+    NSDictionary *dict = _datas[indexPath.section][@"rows"][indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
-    cell.textLabel.text = dict[@"title"];
+    cell.textLabel.text = dict[@"rowTitle"];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dict = _datas[indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dict = _datas[indexPath.section][@"rows"][indexPath.row];
     Class class = NSClassFromString(dict[@"class"]);
     UIViewController *vc = [[class alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
