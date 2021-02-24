@@ -33,21 +33,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param text 指定文本
 /// @param color 指定文本颜色
 /// @param font 指定文本字体
-- (void)tmui_addAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
+- (void)tmui_setAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
 
 /// 设置文字行间距,统一设置
 /// @param lineSpacing 行间距
-- (void)tmui_addAttributeslineSpacing:(CGFloat)lineSpacing;
+- (void)tmui_setAttributeslineSpacing:(CGFloat)lineSpacing;
 
 /// 给label文本设置垂直偏移
 /// @param lineOffset 偏移量
-- (void)tmui_addAttributesLineOffset:(CGFloat)lineOffset;
+- (void)tmui_setAttributesLineOffset:(CGFloat)lineOffset;
 
 /// 给label设置横线穿过样式
-- (void)tmui_addAttributesLineSingle;
+- (void)tmui_setAttributesLineSingle;
 
 /// 给label设置下划线样式
-- (void)tmui_addAttributesUnderLink;
+- (void)tmui_setAttributesUnderLink;
 
 @end
 

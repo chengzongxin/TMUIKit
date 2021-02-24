@@ -11,6 +11,11 @@
 
 @interface UILabelTMUIViewController ()
 
+
+@property(nonatomic, strong) UILabel *demo1lbl;
+@property(nonatomic, strong) UILabel *demo2lbl;
+@property(nonatomic, strong) UILabel *demo3lbl;
+
 @end
 
 @implementation UILabelTMUIViewController
@@ -18,8 +23,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSDictionary *linkAttr = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(20),NSForegroundColorAttributeName:UIColor.orangeColor};
+    [self demo1];
 
+    [self demo2];
+    
+    [self demo3];
+}
+
+
+
+- (void)demo1{
+    // tips
+    UILabel *tips = [[UILabel alloc] tmui_initWithFont:UIFont(14) textColor:UIColor.blackColor];
+    
+    tips.text = [NSString stringWithFormat:@"DEMO1:可点击带下划线的富文本"];
+    [self.view addSubview:tips];
+    tips.numberOfLines = 0;
+    [tips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view).inset(20);
+        make.top.mas_equalTo(@100);
+    }];
+
+
+    
     UILabel *label = [[UILabel alloc] tmui_initWithFont:UIFont(20) textColor:UIColor.orangeColor];
     label.backgroundColor = UIColor.lightGrayColor;
     [self.view addSubview:label];
@@ -27,36 +53,24 @@
     label.text = @"春眠不觉晓，\n处处闻啼鸟，\n夜来风雨声，\n花落知多少。";
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@20);
-        make.top.mas_equalTo(@100);
+        make.top.equalTo(tips.mas_bottom).offset(15);
         make.width.mas_equalTo(300);
         make.height.mas_equalTo(@200);
     }];
 
-
-    UILabel *tips = [[UILabel alloc] tmui_initWithFont:UIFont(15) textColor:UIColor.greenColor];
-    [self.view addSubview:tips];
-    tips.numberOfLines = 0;
-    tips.text = @"可点击富文本 '春眠' '啼鸟' '风雨声' '花落知多少'\n,下面的内容可点击 '装修' '水真的很深' '能省点就省点' '地板'";
-    [tips mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(@150);
-        make.top.mas_equalTo(@100);
-        make.right.mas_offset(0);
-        make.height.mas_equalTo(@100);
-    }];
-
-
     // 行间距
-    [label tmui_addAttributeslineSpacing:10];
+    [label tmui_setAttributeslineSpacing:10];
     // 指定富文本
-    [label tmui_addAttributesText:@"春眠不觉晓，" color:UIColor.systemPinkColor font:UIFont(15)];
-    [label tmui_addAttributesText:@"处处闻啼鸟，" color:UIColor.greenColor font:UIFont(15)];
-    [label tmui_addAttributesText:@"夜来风雨声，" color:UIColor.systemPurpleColor font:UIFont(15)];
-    [label tmui_addAttributesText:@"花落知多少。" color:UIColor.systemPurpleColor font:UIFont(15)];
+    [label tmui_setAttributesText:@"春眠不觉晓，" color:UIColor.systemPinkColor font:UIFont(15)];
+    [label tmui_setAttributesText:@"处处闻啼鸟，" color:UIColor.greenColor font:UIFont(15)];
+    [label tmui_setAttributesText:@"夜来风雨声，" color:UIColor.systemPurpleColor font:UIFont(15)];
+    [label tmui_setAttributesText:@"花落知多少。" color:UIColor.systemPurpleColor font:UIFont(15)];
     // 垂直偏移
-    [label tmui_addAttributesLineOffset:0];
+    [label tmui_setAttributesLineOffset:0];
     // 加横线
-    [label tmui_addAttributesLineSingle];
+    [label tmui_setAttributesLineSingle];
     // 设置可交互文字
+    NSDictionary *linkAttr = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(20),NSForegroundColorAttributeName:UIColor.orangeColor};
     [label tmui_clickAttrTextWithStrings:@[@"春眠",@"啼鸟",@"风雨声",@"花落知多少"] attributes:linkAttr clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
         NSLog(@"%@",string);
         [self tmui_showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
@@ -65,92 +79,121 @@
     }];
 
 
-
-    CGSize size = [label.text tmui_sizeForFont:label.font
+    // NSString 计算
+    CGSize size1 = [label.text tmui_sizeForFont:label.font
                                           size:CGSizeMake(self.view.width, HUGE)
                                     lineHeight:label.tmui_attributeTextLineHeight
                                           mode:label.lineBreakMode];
-    NSLog(@"size = %@",NSStringFromCGSize(size));
-
-    CGSize attrSize = [label.attributedText tmui_sizeForWidth:self.view.width];
-    NSLog(@"attrSize = %@",NSStringFromCGSize(attrSize));
-
+    // NSAttributionStirng 计算
+    CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width];
+    
     [label mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(attrSize);
+        make.size.mas_equalTo(size2);
+    }];
+    
+    _demo1lbl = label;
+    
+    
+    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@，富文本尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributeslineSpacing:3];
+}
+
+- (void)demo2{
+    // tips
+    UILabel *tips = [[UILabel alloc] tmui_initWithFont:UIFont(14) textColor:UIColor.blackColor];
+    
+    tips.text = [NSString stringWithFormat:@"DEMO2:包含emoji等图像的富文本"];
+    [self.view addSubview:tips];
+    tips.numberOfLines = 0;
+    [tips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view).inset(20);
+        make.top.equalTo(_demo1lbl.mas_bottom).offset(44);
     }];
 
+    
     // online text
-    UILabel *onlineLabel = [[UILabel alloc] tmui_initWithFont:UIFont(12) textColor:UIColor.lightTextColor];
-    onlineLabel.backgroundColor = UIColor.lightGrayColor;
-    [self.view addSubview:onlineLabel];
-    onlineLabel.numberOfLines = 0;
-    onlineLabel.text = [self onlineText2];
-    [onlineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    UILabel *label = [[UILabel alloc] tmui_initWithFont:UIFont(12) textColor:UIColor.lightTextColor];
+    label.backgroundColor = UIColor.lightGrayColor;
+    [self.view addSubview:label];
+    label.numberOfLines = 0;
+    label.text = [self onlineText2];
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view).inset(20);
-        make.top.equalTo(label.mas_bottom).offset(44);
+        make.top.equalTo(tips.mas_bottom).offset(15);
         make.height.mas_equalTo(@500);
     }];
     
-    [onlineLabel tmui_addAttributeslineSpacing:10];
-    [onlineLabel tmui_addAttributesText:onlineLabel.text color:UIColor.tmui_randomColor font:UIFont(15)];
+    [label tmui_setAttributeslineSpacing:10];
+    [label tmui_setAttributesText:label.text color:UIColor.tmui_randomColor font:UIFont(15)];
     
     
-    CGSize size1 = [onlineLabel.text tmui_sizeForFont:onlineLabel.font
+    CGSize size1 = [label.text tmui_sizeForFont:label.font
                                           size:CGSizeMake(self.view.width - 40, HUGE)
-                                    lineHeight:onlineLabel.tmui_attributeTextLineHeight
-                                          mode:onlineLabel.lineBreakMode];
-    NSLog(@"size1 = %@",NSStringFromCGSize(size1));
+                                    lineHeight:label.tmui_attributeTextLineHeight
+                                          mode:label.lineBreakMode];
     
-    CGSize attrSize1 = [onlineLabel.attributedText tmui_sizeForWidth:self.view.width - 40];
-    NSLog(@"attrSize1 = %@",NSStringFromCGSize(attrSize1));
+    CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width - 40];
     
-    [onlineLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(attrSize1.height);
+    [label mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(size2.height);
     }];
     
     
     NSDictionary *linkAttr1 = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(15),NSForegroundColorAttributeName:UIColor.orangeColor};
-    [onlineLabel tmui_clickAttrTextWithStrings:@[@"装修",@"水真的很深",@"能省点就省点",@"地板"] attributes:linkAttr1 clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
+    [label tmui_clickAttrTextWithStrings:@[@"装修",@"水真的很深",@"能省点就省点",@"地板"] attributes:linkAttr1 clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
         NSLog(@"%@",string);
         [self tmui_showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
             NSLog(@"%@",action);
         }];
     }];
 
-    // 24x24 emotion_06
-    NSMutableAttributedString *imgAttr = [[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_06"]] mutableCopy];
-//    [imgAttr appendAttributedString:[[NSAttributedString alloc] ]
-    NSAttributedString *atr = [NSAttributedString tmui_atsForStr:@"fdsfsafsfsf1" lineHeight:10];
-    [imgAttr appendAttributedString:atr];
-    
-    [imgAttr appendAttributedString:[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_07"]]];
-    
-    UILabel *imgLabel = [[UILabel alloc] init];
-    imgLabel.attributedText = imgAttr;
-    imgLabel.backgroundColor = UIColor.tmui_randomColor;
-    [self.view addSubview:imgLabel];
-    
-    [imgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
-        make.top.mas_equalTo(onlineLabel.mas_bottom).offset(20);
-        make.width.mas_equalTo(300);
-        make.height.mas_equalTo(30);
-    }];
+    _demo2lbl = label;
     
     
-    CGSize imgLabelSize = [imgLabel.attributedText tmui_sizeForWidth:300];
-    [imgLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(imgLabelSize.width+24*2);
-        make.height.mas_equalTo(imgLabelSize.height);
-    }];
-    
-    [imgLabel tmui_clickAttrTextWithStrings:@[@"sf1"] clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
-        [self tmui_showAlertSureWithTitle:string message:[NSString stringWithFormat:@"你点击了%@",string] sure:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"%@",action);
-        }];
-    }];
+    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@，富文本尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributeslineSpacing:3];
 }
 
+- (void)demo3{
+    // tips
+    UILabel *tips = [[UILabel alloc] tmui_initWithFont:UIFont(14) textColor:UIColor.blackColor];
+    tips.text = [NSString stringWithFormat:@"DEMO3:包含UIImage图像的富文本"];
+    [self.view addSubview:tips];
+    tips.numberOfLines = 0;
+    [tips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view).inset(20);
+        make.top.mas_equalTo(_demo2lbl.mas_bottom).offset(44);
+    }];
+    
+    // MARK: ImageLabel
+    // imageAttr (24x24 emotion_06)
+    NSMutableAttributedString *imgAttr = [[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_06"]] mutableCopy];
+    // textAttr
+    [imgAttr appendAttributedString:[NSAttributedString tmui_atsForStr:@"这是一个包含UIImage图像的富文本" lineHeight:10]];
+    // imageAttr
+    [imgAttr appendAttributedString:[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_07"]]];
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.attributedText = imgAttr;
+    label.backgroundColor = UIColor.tmui_randomColor;
+    [self.view addSubview:label];
+    
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).inset(20);
+        make.top.equalTo(tips.mas_bottom).offset(15);
+    }];
+    
+    CGSize size1 = [label.text tmui_sizeForFont:label.font size:CGSizeMake(self.view.width - 40, HUGE) lineHeight:label.tmui_attributeTextLineHeight mode:label.lineBreakMode];
+    CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width - 40];
+    size1.width += [UIImage imageNamed:@"emotion_06"].size.width+[UIImage imageNamed:@"emotion_07"].size.width;
+    size2.width += [UIImage imageNamed:@"emotion_06"].size.width+[UIImage imageNamed:@"emotion_07"].size.width;
+    [label mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(size1.width, size2.height));
+    }];
+    
+    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@，富文本尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributeslineSpacing:3];
+}
 
 
 

@@ -47,17 +47,27 @@
     self.numberOfLines = 0;
 }
 
-- (void)tmui_addAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{
+- (void)tmui_setAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{
     NSRange range = [[self.attributedText string] rangeOfString:text];
-    if(range.location != NSNotFound) {
+    if(range.location != NSNotFound && range.length) {
+        // 找到对应的字段
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
         [mat addAttributes:@{NSForegroundColorAttributeName:color} range:range];
         [mat addAttributes:@{NSFontAttributeName:font} range:range];
         self.attributedText = mat;
+    }else{
+        // 没有，在后面追加
+        NSRange range = NSMakeRange(0, text.length);
+        NSMutableAttributedString *appendAtr = [[NSMutableAttributedString alloc] initWithString:text];
+        [appendAtr addAttributes:@{NSForegroundColorAttributeName:color} range:range];
+        [appendAtr addAttributes:@{NSFontAttributeName:font} range:range];
+        NSMutableAttributedString *mat = [self.attributedText mutableCopy] ?: [[NSMutableAttributedString alloc] init];
+        [mat appendAttributedString:appendAtr];
+        self.attributedText = mat;
     }
 }
 
-- (void)tmui_addAttributeslineSpacing:(CGFloat)lineSpacing{
+- (void)tmui_setAttributeslineSpacing:(CGFloat)lineSpacing{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
@@ -68,7 +78,7 @@
     }
 }
 
-- (void)tmui_addAttributesLineOffset:(CGFloat)lineOffset{
+- (void)tmui_setAttributesLineOffset:(CGFloat)lineOffset{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
@@ -78,7 +88,7 @@
 }
 
 
-- (void)tmui_addAttributesLineSingle{
+- (void)tmui_setAttributesLineSingle{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
@@ -87,7 +97,7 @@
     }
 }
 
-- (void)tmui_addAttributesUnderLink{
+- (void)tmui_setAttributesUnderLink{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
