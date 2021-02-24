@@ -47,6 +47,12 @@
  */
 + (NSString *)strOfSpaceForWidth:(CGFloat)width withFont:(UIFont *)ft;
 
+/**计算文本行数*/
+- (NSInteger)tmui_numberOfLinesWithFont:(UIFont *)font
+                    contrainstedToWidth:(CGFloat)width;
 
+/**每一行文本高度*/
+- (CGFloat)tmui_lineHeightWithFont:(UIFont *)font
+               contrainstedToWidth:(CGFloat)width;
 
 @end

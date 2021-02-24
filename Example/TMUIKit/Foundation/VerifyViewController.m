@@ -8,6 +8,8 @@
 
 #import "VerifyViewController.h"
 #import "NSString+Verify.h"
+#import "NSFileManager+TMUI.h"
+#import "NSString+TMUI.h"
 
 @interface VerifyViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tf;
@@ -20,6 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSMutableString *mstr = @"".mutableCopy;
+    
+    NSLog(@"%@",NSHomeDirectory());
     
     NSString *str1 = nil;
     BOOL flag1 = [NSString tmui_isEmpty:str1];
@@ -43,6 +47,25 @@
     
     _tf.text = mstr;
     _tf.userInteractionEnabled = NO;
+    
+    [[NSFileManager defaultManager] tmui_createFileAtSandboxRootDirWithPathComponent:@"123/" isDirectory:NO removeOldFile:YES];
+    [[NSFileManager defaultManager] tmui_createFileAtSandboxRootDirWithPathComponent:@"tbt/" isDirectory:YES removeOldFile:YES];
+    [[NSFileManager defaultManager] tmui_createFileAtSandboxDocumentsDirWithPathComponent:@"/doc" isDirectory:NO removeOldFile:YES];
+    [[NSFileManager defaultManager] tmui_createFileAtSandboxTmpDirWithPathComponent:@"/tmp" isDirectory:YES removeOldFile:YES];
+    [[NSFileManager defaultManager] tmui_createFileAtSandboxCachesDirWithPathComponent:@"/xxx.jpg" isDirectory:NO removeOldFile:YES];
+    
+    NSString *lastPath = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastPath"];
+    if (lastPath.length) {
+        NSString *newPath = [[NSFileManager defaultManager] tmui_pathByReplacingSandboxDir:lastPath];
+        NSLog(@"newPath: %@",newPath);
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@%@",[NSFileManager defaultManager].tmui_sandboxRootDir,@"/123"] forKey:@"lastPath"];
+    
+    NSLog(@"tmp: %@",[[NSFileManager defaultManager] tmui_sandboxTmpDir]);
+    NSLog(@"caches: %@",[[NSFileManager defaultManager] tmui_sandboxCachesDir]);
+    NSLog(@"doc: %@",[[NSFileManager defaultManager] tmui_sandboxDocDir]);
+    
+    NSLog(@"");
 }
 
 /*

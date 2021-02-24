@@ -78,6 +78,33 @@
     return str;
 }
 
+- (NSInteger)tmui_numberOfLinesWithFont:(UIFont *)font contrainstedToWidth:(CGFloat)width
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGFLOAT_MAX)];
+    label.text = self;
+    label.numberOfLines = 0;
+    label.font = font?:[UIFont systemFontOfSize:17];
+    [label sizeToFit];
+    CGFloat height = CGRectGetHeight(label.frame);
+    CGFloat lineH = [self tmui_lineHeightWithFont:font contrainstedToWidth:width];
+    if (lineH>0) {
+        NSInteger lines = height/lineH;
+        return lines;
+    }
+    return 0;
+}
+
+- (CGFloat)tmui_lineHeightWithFont:(UIFont *)font contrainstedToWidth:(CGFloat)width
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGFLOAT_MAX)];
+    label.text = @"o";
+    label.numberOfLines = 0;
+    label.font = font?:[UIFont systemFontOfSize:17];
+    [label sizeToFit];
+    CGFloat height = CGRectGetHeight(label.frame);
+    return height;
+}
+
 @end
 
 #pragma GCC diagnostic pop

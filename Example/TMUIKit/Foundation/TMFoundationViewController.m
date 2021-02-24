@@ -27,7 +27,7 @@
         @[@{@"title":@"NSString+MD5",@"desc":@"md5",@"class":@"MD5VC"},
         @{@"title":@"NSString+Verify",@"desc":@"校验",@"class":@"VerifyViewController"},
         @{@"title":@"NSString+Format",@"desc":@"格式化"},
-        @{@"title":@"NSString+Attribute",@"desc":@"富文本"},
+          @{@"title":@"NSString+Attribute",@"desc":@"富文本",@"class":@"AttributeTextVC"},
         @{@"title":@"NSString+Size",@"desc":@"size计算"}],
     },
     @{@"title":@"NSArray"},

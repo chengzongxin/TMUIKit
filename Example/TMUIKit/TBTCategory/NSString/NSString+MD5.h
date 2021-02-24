@@ -12,17 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (MD5)
 
-//md5 16位加密 默认小写
+/**md5 16位加密 默认小写*/
 - (NSString *)tmui_getMd5_16Bit;
 
-//md5 32位加密 默认小写
+/**md5 32位加密 默认小写*/
 - (NSString *)tmui_getMd5_32Bit;
 
-//md5 16位加密 大写
-- (NSString *)tmui_getMd5_16Bitmui_upperString;
+/**md5 16位加密 大写*/
+- (NSString *)tmui_getMd5_16Bit_upperString;
 
-//md5 32位加密 大写
-- (NSString *)tmui_getMd5_32Bitmui_upperString;
+/**md5 32位加密 大写*/
+- (NSString *)tmui_getMd5_32Bit_upperString;
 
 @end
 

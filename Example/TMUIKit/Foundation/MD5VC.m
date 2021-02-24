@@ -38,13 +38,13 @@
     _tf2.text = [_tf1.text tmui_getMd5_16Bit];
 }
 - (IBAction)buton_2_click:(id)sender {
-    _tf3.text = [_tf1.text tmui_getMd5_16Bitmui_upperString];
+    _tf3.text = [_tf1.text tmui_getMd5_16Bit_upperString];
 }
 - (IBAction)buton_3_click:(id)sender {
     _tf4.text = [_tf1.text tmui_getMd5_32Bit];
 }
 - (IBAction)buton_4_click:(id)sender {
-    _tf5.text = [_tf1.text tmui_getMd5_32Bitmui_upperString];
+    _tf5.text = [_tf1.text tmui_getMd5_32Bit_upperString];
 }
 
 @end
