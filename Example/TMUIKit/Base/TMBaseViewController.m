@@ -22,13 +22,16 @@
     self.view.backgroundColor = UIColor.whiteColor;
 }
 
-
 - (UISegmentedControl *)addSegmentedWithLabelText:(NSString *)lbltext titles:(NSArray<NSString *> *)titles click:(void (^)(NSInteger))clickBlock{
     CGFloat y = [self getSubviewsTopViewBottom] - 44;
+    return [self addSegmentedWithTop:y labelText:lbltext titles:titles click:clickBlock];
+}
 
+- (UISegmentedControl *)addSegmentedWithTop:(CGFloat)top labelText:(NSString *)lbltext titles:(NSArray<NSString *> *)titles click:(void (^)(NSInteger))clickBlock{
     UILabel *label = [[UILabel alloc] init];
     label.text = lbltext;
-    label.adjustsFontSizeToFitWidth = YES;
+//    label.adjustsFontSizeToFitWidth = YES;
+    label.font = UIFont(12);
     [self.view addSubview:label];
     
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
@@ -37,16 +40,15 @@
     [self.view addSubview:segmentedControl];
     
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(20);
-        make.top.mas_equalTo(y);
-        make.size.mas_equalTo(CGSizeMake(80, 44));
+        make.left.mas_equalTo(15);
+        make.top.mas_equalTo(top);
     }];
     
     [segmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(@120);
-        make.top.mas_equalTo(y);
-        make.right.mas_offset(-20);
-        make.height.mas_equalTo(44);
+        make.left.mas_equalTo(label.mas_right).offset(15);
+        make.top.mas_equalTo(top);
+        make.right.mas_offset(-20).priorityLow();
+        make.centerY.mas_equalTo(label.mas_centerY);
     }];
     
     return segmentedControl;
@@ -62,7 +64,10 @@
 
 - (UISlider *)addSliderWithLabelText:(NSString *)lbltext slide:(void (^)(float))sliderBlock{
     CGFloat y = [self getSubviewsTopViewBottom] - 44;
-    
+    return [self addSliderWithTop:y labelText:lbltext slide:sliderBlock];
+}
+
+- (UISlider *)addSliderWithTop:(CGFloat)top labelText:(NSString *)lbltext slide:(void (^)(float))sliderBlock{
     UILabel *label = [[UILabel alloc] init];
     label.text = lbltext;
     label.adjustsFontSizeToFitWidth = YES;
@@ -77,13 +82,13 @@
     
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(20);
-        make.top.mas_equalTo(y);
+        make.top.mas_equalTo(top);
         make.size.mas_equalTo(CGSizeMake(80, 44));
     }];
     
     [slider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@120);
-        make.top.mas_equalTo(y);
+        make.top.mas_equalTo(top);
         make.right.mas_offset(-20);
         make.height.mas_equalTo(44);
     }];

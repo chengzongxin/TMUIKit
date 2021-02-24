@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TMBaseViewController : UIViewController
 
 
+- (UISegmentedControl *)addSegmentedWithTop:(CGFloat)top labelText:(NSString *)lbltext titles:(NSArray <NSString *>*)titles click:(void(^)(NSInteger index))clickBlock;
+- (UISlider *)addSliderWithTop:(CGFloat)top labelText:(NSString *)lbltext slide:(void(^)(float padding))sliderBlock;
 
 - (UISegmentedControl *)addSegmentedWithLabelText:(NSString *)lbltext titles:(NSArray <NSString *>*)titles click:(void(^)(NSInteger index))clickBlock;
 - (UISlider *)addSliderWithLabelText:(NSString *)lbltext slide:(void(^)(float padding))sliderBlock;

@@ -11,6 +11,7 @@
 #import "TMUIDefines.h"
 #import "UIImage+TMUI.h"
 #import "UIColor+TMUI.h"
+#import "NSArray+TMUI.h"
 
 @implementation UIView (TMUI)
 
@@ -189,7 +190,29 @@
 
 @end
 
+@interface UIView (TMUI_Appearance)
+// 由于圆角和阴影是无法共存的，如果一定要同时设置，那就要在多创建的layer里去做
+
+/// 圆角layer
+@property(nonatomic, strong) CAShapeLayer *tmui_cornerLayer;
+
+/// 阴影layer
+@property(nonatomic, strong) CAShapeLayer *tmui_shadowLayer;
+
+/// 边框layer
+@property(nonatomic, strong) CAShapeLayer *tmui_borderLayer;
+
+/// 渐变layer
+@property(nonatomic, strong) CAGradientLayer *tmui_gradientLayer;
+
+@end
+
 @implementation UIView (TMUI_Appearance)
+
+TMUISynthesizeIdStrongProperty(tmui_cornerLayer, setTmui_cornerLayer);
+TMUISynthesizeIdStrongProperty(tmui_shadowLayer, setTmui_shadowLayer);
+TMUISynthesizeIdStrongProperty(tmui_borderLayer, setTmui_borderLayer);
+TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
 
 // 半圆角
 - (void)tmui_cornerDirect:(UIRectCorner)direct radius:(int)radius {
@@ -221,55 +244,103 @@
 }
 
 
-//实现背景渐变
--(void)tmui_gradientLeftToRightWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor{
-    CGPoint startPoint = CGPointMake(0, 0);
-    CGPoint endPoint = CGPointMake(1, 0);
-    [self tmui_gradientWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:@[@0.5] frame:self.layer.bounds];
-}
 
--(void)tmui_gradientUpToDownWithStartColorToDown:(UIColor *)startColor endColor:(UIColor *)endColor{
-    CGPoint startPoint = CGPointMake(1, 1);
-    CGPoint endPoint = CGPointMake(1, 0);
-    [self tmui_gradientWithStartColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint locations:@[@0.5] frame:self.layer.bounds];
+
+// MARK: gradient colors
+
+- (void)tmui_gradientWithColors:(NSArray<UIColor *> *)colors gradientType:(TMUIGradientType)gradientType{
+    [self tmui_gradientWithColors:colors gradientType:gradientType locations:@[@0.5]];
 }
 
 
--(void)tmui_gradientWithStartColor:(UIColor *)startColor
-                          endColor:(UIColor *)endColor
-                        startPoint:(CGPoint)startPoint
-                          endPoint:(CGPoint)endPoint
-                         locations:(NSArray<NSNumber *>*)locations
-                             frame:(CGRect)frame{
-    //初始化CAGradientlayer对象，使它的大小为UIView的大小
-    CAGradientLayer *gradientLayer  = [CAGradientLayer layer];
-    
-    for (CAGradientLayer *layer in self.layer.sublayers) {
-        if ([layer isKindOfClass:CAGradientLayer.class]) {
-            gradientLayer = layer;
-        }
-    }
-    if (!frame.size.height || !frame.size.height) {
-        [self layoutIfNeeded];  // masonry 立即刷新界面
+- (void)tmui_gradientWithColors:(NSArray<UIColor *> *)colors gradientType:(TMUIGradientType)gradientType locations:(NSArray<NSNumber *> *)locations{
+    CGRect frame = self.layer.bounds;
+    if (CGRectIsEmpty(frame)) {
+        [self layoutIfNeeded];  // masonry 
         frame = self.layer.bounds;
     }
+    [self tmui_gradientWithColors:colors
+                     gradientType:gradientType
+                        locations:locations
+                            frame:frame];
+}
+
+
+- (void)tmui_gradientWithColors:(NSArray <UIColor *>*)colors
+                   gradientType:(TMUIGradientType)gradientType
+                      locations:(NSArray<NSNumber *>*)locations
+                          frame:(CGRect)frame{
+    [self.tmui_gradientLayer removeFromSuperlayer];
+    CAGradientLayer *gradientLayer  = [CAGradientLayer layer];
+    
     gradientLayer.frame = frame;
     gradientLayer.cornerRadius = self.layer.cornerRadius;
     gradientLayer.masksToBounds = YES;
     
     //设置渐变区域的起始和终止位置（范围为0-1）
-    gradientLayer.startPoint = startPoint;
-    gradientLayer.endPoint = endPoint;
+    CGFloat startX = 0, startY = 0, endX = 0, endY = 0;
+    switch (gradientType) {
+        case TMUIGradientTypeTopLeftToBottomRight: {
+            startX = 0;
+            startY = 0;
+            endX = 1;
+            endY = 1;
+        }
+            break;
+        case TMUIGradientTypeTopToBottom: {
+            startX = 0;
+            startY = 0;
+            endX = 0;
+            endY = 1;
+        }
+            break;
+        case TMUIGradientTypeLeftToRight: {
+            startX = 0;
+            startY = 0;
+            endX = 1;
+            endY = 0;
+        }
+            break;
+        case TMUIGradientTypeTopRightToBottomLeft: {
+            startX = 0;
+            startY = 1;
+            endX = 1;
+            endY = 0;
+        }
+            break;
+        case TMUIGradientTypeBottomRightToTopLeft: {
+            startX = 1;
+            startY = 1;
+            endX = 0;
+            endY = 0;
+        }
+            break;
+        case TMUIGradientTypeBottomLeftToTopRight: {
+            startX = 1;
+            startY = 0;
+            endX = 1;
+            endY = 0;
+        }
+            break;
+    }
+    gradientLayer.startPoint = CGPointMake(startX, startY);
+    gradientLayer.endPoint = CGPointMake(endX, endY);
     
     //设置颜色数组
-    gradientLayer.colors = @[(__bridge id)(startColor.CGColor), (__bridge id)endColor.CGColor];
+    colors = [colors tmui_mapWithBlock:^id _Nonnull(UIColor * _Nonnull item) {
+        return (__bridge id)item.CGColor;
+    }];
+    gradientLayer.colors = colors;
     
     //设置颜色分割点（范围：0-1）
     gradientLayer.locations = locations;
     
+    self.tmui_gradientLayer = gradientLayer;
+    
     //将CAGradientlayer对象添加在我们要设置背景色的视图的layer层
-    [self.layer insertSublayer:gradientLayer atIndex:0];
+    [self.layer insertSublayer:self.tmui_gradientLayer atIndex:1];
 }
+
 
 - (void)tmui_border:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect {
     UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
@@ -298,12 +369,14 @@
             break;
     }
     
+    [self.tmui_borderLayer removeFromSuperlayer];
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
     shapeLayer.strokeColor = color.CGColor;
     shapeLayer.fillColor = UIColor.clearColor.CGColor;
     shapeLayer.path = bezierPath.CGPath;
     shapeLayer.lineWidth = width;
-    [self.layer addSublayer:shapeLayer];
+    self.tmui_borderLayer = shapeLayer;
+    [self.layer insertSublayer:self.tmui_borderLayer atIndex:2];
 }
 @end
 

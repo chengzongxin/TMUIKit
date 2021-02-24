@@ -9,6 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, TMUIGradientType) {
+    TMUIGradientTypeLeftToRight,
+    TMUIGradientTypeTopLeftToBottomRight,
+    TMUIGradientTypeTopToBottom,
+    TMUIGradientTypeTopRightToBottomLeft,
+    TMUIGradientTypeBottomRightToTopLeft,
+    TMUIGradientTypeBottomLeftToTopRight,
+};
+
 @interface UIView (TMUI)
 
 /// 创建view
@@ -49,8 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  设置半圆View
-
- @param direct 半圆的方向,支持 | 操作，比如 UIRectCornerTopLeft | UIRectCornerTopRight 即左上和右上圆角, 不可和阴影效果同时设置
+ @note 不可和阴影效果同时设置
+ @param direct 半圆的方向,支持 | 操作，比如 UIRectCornerTopLeft | UIRectCornerTopRight 即左上和右上圆角
  UIRectCornerTopLeft     = 1 << 0,
  UIRectCornerTopRight    = 1 << 1,
  UIRectCornerBottomLeft  = 1 << 2,
@@ -63,7 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  设置View和View的阴影圆角
- 
+ @note 不可和圆角效果同时设置
  @param color   阴影的颜色
  @param opacity 阴影的透明度
  @param offset 阴影的偏移距离
@@ -85,36 +94,37 @@ NS_ASSUME_NONNULL_BEGIN
              borderWidth:(CGFloat)borderWidth;
 
 
-/**
- 设置View背景颜色渐变
- @param startColor 起始颜色
- @param endColor 结束颜色
- */
--(void)tmui_gradientLeftToRightWithStartColor:(UIColor *)startColor
-                                     endColor:(UIColor *)endColor;
 
+// MARK: Gradient BackGound Colors
 
+/// 设置渐变
+/// @param colors 颜色数组
+/// @param gradientType 渐变类型
+- (void)tmui_gradientWithColors:(NSArray <UIColor *>*)colors
+                   gradientType:(TMUIGradientType)gradientType;
 
--(void)tmui_gradientUpToDownWithStartColorToDown:(UIColor *)startColor
-                                        endColor:(UIColor *)endColor;;
+/// 设置渐变
+/// @param colors 颜色数组
+/// @param gradientType 渐变类型
+/// @param locations 渐变开始的位置，从中间开始渐变过渡，@[@0.5]，如果超过两个颜色，需要和颜色数组个数对应 - 1，
+- (void)tmui_gradientWithColors:(NSArray <UIColor *>*)colors
+                   gradientType:(TMUIGradientType)gradientType
+                      locations:(NSArray<NSNumber *>*)locations;
 
-/**
-设置View背景颜色渐变
-@param startColor 起始颜色
-@param endColor 结束颜色
-@param startPoint 开始位置
-@param endPoint 结束位置
-@param locations 颜色分割点
-@param frame  渐变frame，页面没初始化需添加frame
-*/
--(void)tmui_gradientWithStartColor:(UIColor *)startColor
-                          endColor:(UIColor *)endColor
-                        startPoint:(CGPoint)startPoint
-                          endPoint:(CGPoint)endPoint
-                         locations:(NSArray<NSNumber *>*)locations
-                             frame:(CGRect)frame;
+/// 设置渐变
+/// @param colors 颜色数组
+/// @param gradientType 渐变类型
+/// @param locations 渐变开始的位置，从中间开始渐变过渡，@[@0.5]，如果超过两个颜色，需要和颜色数组个数对应 - 1，
+/// @param frame 渐变layer的frame，一般不需要传，默认取当前view的bounds
+- (void)tmui_gradientWithColors:(NSArray <UIColor *>*)colors
+                   gradientType:(TMUIGradientType)gradientType
+                      locations:(NSArray<NSNumber *>*)locations
+                          frame:(CGRect)frame;
 
-- (void)tmui_border:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect;
+// MARK: View Border
+- (void)tmui_border:(UIColor *)color
+              width:(CGFloat)width
+               type:(UIRectEdge)rect;
 
 @end
 

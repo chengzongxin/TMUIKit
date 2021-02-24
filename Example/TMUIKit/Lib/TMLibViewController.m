@@ -26,29 +26,29 @@
         @{@"sections":@"UIView+TMUI",
           @"rows":@[
                   @{
-                      @"rowTitle":@"123",
+                      @"rowTitle":@"设置圆角、阴影、渐变、边框",
                       @"class":@"UIViewTMUIViewController"
                   },
                   @{
-                      @"rowTitle":@"456",
-                      @"class":@"UIViewTMUIViewController"
+                      @"rowTitle":@"快速添加各种手势事件",
+                      @"class":@"UIViewTMUI2ViewController"
                   },
                   @{
-                      @"rowTitle":@"789",
-                      @"class":@"UIViewTMUIViewController"
+                      @"rowTitle":@"创建动画",
+                      @"class":@"UIViewTMUI3ViewController"
                   }
           ]},
         @{@"sections":@"UIButton+TMUI",
           @"rows":@[
                   @{
-                      @"rowTitle":@"123",
+                      @"rowTitle":@"设置图片位置、图文间距、扩大点击区域",
                       @"class":@"UIButtonTMUIViewController"
                   }
           ]},
         @{@"sections":@"UILable+TMUI",
           @"rows":@[
                   @{
-                      @"rowTitle":@"123",
+                      @"rowTitle":@"设置富文本属性、计算文本size、富文本超链接",
                       @"class":@"UILabelTMUIViewController"
                   }
           ]},
@@ -100,6 +100,7 @@
     NSDictionary *dict = _datas[indexPath.section][@"rows"][indexPath.row];
     Class class = NSClassFromString(dict[@"class"]);
     UIViewController *vc = [[class alloc] init];
+    vc.title = dict[@"rowTitle"];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

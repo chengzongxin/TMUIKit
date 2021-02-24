@@ -30,8 +30,10 @@
     [self.view addSubview:btn];
     
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.mas_equalTo(100);
-        make.size.mas_equalTo(CGSizeMake(100, 100));
+        make.centerX.mas_equalTo(self.view);
+        make.centerY.mas_equalTo(self.view).offset(-100);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(100);
     }];
     
     [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
@@ -53,20 +55,22 @@
      TMUIButtonImageTitleStyleLeftRight,         //图片在左，文字在右，距离按钮两边边距
      */
     @weakify(self);
-    _segment = [self addSegmentedWithLabelText:@"direction:" titles:@[@"left",@"right",@"up",@"down"] click:^(NSInteger index) {
+    _segment = [self addSegmentedWithTop:520 labelText:@"图片位置:" titles:@[@"left",@"right",@"up",@"down"] click:^(NSInteger index) {
         @strongify(self);
         [btn tmui_buttonImageTitleWithStyle:index padding:self.slider.value];
     }];
-    _segment.selectedSegmentIndex = 0;
     
-    _slider = [self addSliderWithLabelText:@"图文padding:" slide:^(float padding) {
+    _slider = [self addSliderWithTop:570 labelText:@"图文间距" slide:^(float padding) {
         @strongify(self);
         [btn tmui_buttonImageTitleWithStyle:self.segment.selectedSegmentIndex padding:padding];
     }];
     
-    [self addSliderWithLabelText:@"扩大响应范围:" slide:^(float padding) {
+    [self addSliderWithTop:620 labelText:@"扩大响应范围:" slide:^(float padding) {
         [btn tmui_setEnlargeEdgeWithTop:padding right:padding bottom:padding left:padding];
     }];
+    
+    
+    
 }
 
 @end
