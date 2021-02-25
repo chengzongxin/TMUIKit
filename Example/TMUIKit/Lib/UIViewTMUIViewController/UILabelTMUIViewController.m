@@ -157,6 +157,8 @@
     
     UIButton *btn = [UIButton tmui_button];
     btn.backgroundColor = UIColor.tmui_randomColor;
+    btn.tmui_text = @"我是遮罩按钮";
+    btn.tmui_font = UIFont(12);
     [label addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(50);
@@ -164,9 +166,7 @@
         make.width.mas_equalTo(100);
         make.height.mas_equalTo(100);
     }];
-//    [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-//        NSLog(@"%@",x);
-//    }];
+    
     [btn tmui_addTarget:self action:@selector(btnclick)];
 }
 

@@ -23,6 +23,14 @@
     return self.currentTitle;
 }
 
+- (void)setTmui_font:(UIFont *)tmui_font{
+    self.titleLabel.font = tmui_font;
+}
+
+- (UIFont *)tmui_font{
+    return self.titleLabel.font;
+}
+
 - (void)setTmui_attrText:(NSAttributedString *)tmui_attrText{
     [self setAttributedTitle:tmui_attrText forState:UIControlStateNormal];
 }

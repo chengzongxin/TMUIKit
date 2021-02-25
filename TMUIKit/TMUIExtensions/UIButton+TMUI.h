@@ -35,6 +35,9 @@ typedef NS_ENUM(NSInteger, TMUIButtonImageTitleStyle) {
 /// 只提供属性生成Set和Get方法，访问或者设置按钮文字，不生成成员变量
 @property (nonatomic, strong) NSString *tmui_text;
 
+/// 只提供属性生成Set和Get方法，访问或者设置按钮文字字体，不生成成员变量
+@property (nonatomic, strong) UIFont *tmui_font;
+
 /// 只提供属性生成Set和Get方法，访问或者设置按钮富文本，不生成成员变量
 @property (nonatomic, strong) NSAttributedString *tmui_attrText;
 
