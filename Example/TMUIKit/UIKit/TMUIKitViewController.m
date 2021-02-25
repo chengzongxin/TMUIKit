@@ -27,7 +27,8 @@
         @{@"title":@"TMUIButton",@"class":@"TMUIButtonViewController"},
         @{@"title":@"TMUILabel",@"class":@"TMUILabelViewController"},
         @{@"title":@"TMUITextField",@"class":@"TMUITextFieldViewController"},
-        @{@"title":@"TMUITextView",@"class":@"TMUITextViewViewController"}
+        @{@"title":@"TMUITextView",@"class":@"TMUITextViewViewController"},
+//        @{@"title":@"ChainUI",@"class":@"TMChainUIViewController"}
     ];
     
     [self.view addSubview:self.tableView];
