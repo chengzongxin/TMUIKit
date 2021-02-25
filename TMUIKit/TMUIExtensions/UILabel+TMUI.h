@@ -74,6 +74,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL tmui_enabledClickEffect;
 
 /**
+ *  是否扩大点击范围，默认是打开
+ */
+@property (nonatomic, assign) CGPoint tmui_enlargeClickArea;
+
+/**
  *  点击效果颜色 默认lightGrayColor
  */
 @property (nonatomic, strong) UIColor *tmui_clickEffectColor;
@@ -111,6 +116,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @param delegate 富文本代理
  */
 - (void)tmui_clickAttrTextWithStrings:(NSArray <NSString *> *)strings attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes delegate:(id <TMUIAttrTextDelegate> )delegate;
+
+
+/// 移除点击事件
+- (void)tmui_removeAttributeAction;
 
 @end
 

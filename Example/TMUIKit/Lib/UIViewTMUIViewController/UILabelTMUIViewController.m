@@ -44,6 +44,9 @@
         make.top.mas_equalTo(@100);
     }];
 
+    [tips tmui_addSingerTapWithBlock:^{
+        [TMToast toast:tips.text];
+    }];
 
     
     UILabel *label = [[UILabel alloc] tmui_initWithFont:UIFont(20) textColor:UIColor.orangeColor];
@@ -144,12 +147,31 @@
     }];
     label.tmui_enabledClickEffect = YES;
     label.tmui_clickEffectColor = UIColor.redColor;
-    
+    label.tmui_enlargeClickArea = CGPointMake(-5, -5);
     _demo2lbl = label;
     
     
     [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@，富文本尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
+    
+    
+    UIButton *btn = [UIButton tmui_button];
+    btn.backgroundColor = UIColor.tmui_randomColor;
+    [label addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(50);
+        make.top.mas_equalTo(50);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(100);
+    }];
+//    [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+//        NSLog(@"%@",x);
+//    }];
+    [btn tmui_addTarget:self action:@selector(btnclick)];
+}
+
+- (void)btnclick{
+    NSLog(@"blick");
 }
 
 - (void)demo3{

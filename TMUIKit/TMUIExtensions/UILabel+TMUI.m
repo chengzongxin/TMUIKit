@@ -116,6 +116,7 @@
 @property(nonatomic, assign) BOOL tmui_isClickAction;
 @property(nonatomic, assign) BOOL tmui_isClickEffect;
 @property(nonatomic, copy) void (^tmui_clickBlock)(NSString *, NSRange, NSInteger);
+@property(nonatomic, weak) id<TMUIAttrTextDelegate> tmui_delegate;
 
 @end
 
@@ -126,7 +127,7 @@
 
 // MARK: Publick Properties
 TMUISynthesizeBOOLProperty(tmui_enabledClickEffect, setTmui_enabledClickEffect);
-
+TMUISynthesizeCGPointProperty(tmui_enlargeClickArea,setTmui_enlargeClickArea);
 - (UIColor *)tmui_clickEffectColor {
     UIColor *obj = objc_getAssociatedObject(self, _cmd);
     if(obj == nil) {obj = [UIColor lightGrayColor];}
@@ -143,7 +144,7 @@ TMUISynthesizeIdStrongProperty(tmui_effectDic, setTmui_effectDic);
 TMUISynthesizeBOOLProperty(tmui_isClickAction, setTmui_isClickAction);
 TMUISynthesizeBOOLProperty(tmui_isClickEffect, setTmui_isClickEffect);
 TMUISynthesizeIdCopyProperty(tmui_clickBlock, setTmui_clickBlock);
-TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_Delegate);
+TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_delegate);
 
 
 #pragma mark - mainFunction
@@ -164,18 +165,32 @@ TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_Delegate);
 }
 
 - (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings attributes:(nullable NSDictionary *)attributes delegate:(nullable id<TMUIAttrTextDelegate>)delegate clickAction:(nullable void (^)(NSString * _Nonnull, NSRange, NSInteger))clickAction{
+    [self tmui_removeAttributeAction];
+    self.userInteractionEnabled = YES;
     [self attrTextRangesWithStrings:strings attributes:attributes];
     if (self.tmui_clickBlock != clickAction) {
         self.tmui_clickBlock = clickAction;
     }
     if ([self tmui_delegate] != delegate) {
-        [self setTmui_Delegate:delegate];
+        [self setTmui_delegate:delegate];
     }
+}
+
+- (void)tmui_removeAttributeAction{
+    self.tmui_enabledClickEffect = NO;
+    self.tmui_enlargeClickArea = CGPointZero;
+    self.tmui_isClickAction = NO;
+    self.tmui_isClickEffect = NO;
+    self.tmui_clickBlock = nil;
+    self.tmui_delegate = nil;
+    self.tmui_attributeStrings = [NSMutableArray array];
+    self.tmui_effectDic = nil;
 }
 
 #pragma mark - touchAction
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if (!self.tmui_isClickAction) {
+        [super touchesBegan:touches withEvent:event];
         return;
     }
 
@@ -188,7 +203,7 @@ TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_Delegate);
     CGPoint point = [touch locationInView:self];
 
     __weak __typeof(self)weakSelf = self;
-    [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         
         if (strongSelf.tmui_clickBlock) {
@@ -204,9 +219,63 @@ TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_Delegate);
             [strongSelf clickEffectWithStatus:YES];
         }
     }];
+    
+    if (!ret) {
+        [super touchesBegan:touches withEvent:event];
+    }
 }
 
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (!self.tmui_isClickAction) {
+        [super touchesEnded:touches withEvent:event];
+        return;
+    }
+    if (self.tmui_isClickEffect) {
+        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
+    }
+    UITouch *touch = [touches anyObject];
+
+    CGPoint point = [touch locationInView:self];
+
+    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+    }];
+    
+    if (!ret) {
+        [super touchesEnded:touches withEvent:event];
+    }
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (!self.tmui_isClickAction) {
+        [super touchesEnded:touches withEvent:event];
+        return;
+    }
+    if (self.tmui_isClickEffect) {
+        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
+    }
+    UITouch *touch = [touches anyObject];
+
+    CGPoint point = [touch locationInView:self];
+
+    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+    }];
+    
+    if (!ret) {
+        [super touchesCancelled:touches withEvent:event];
+    }
+}
+
+
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *subview;
+    if (self.subviews.count) {
+        subview = [super hitTest:point withEvent:event];
+    }
+    // 有subview时返回subview， 不拦截subview事件
+    if (subview) {
+        return subview;
+    }
+    
     if((self.tmui_isClickAction) && ([self attrTextFrameWithTouchPoint:point result:nil])) {
         return self;
     }
@@ -269,11 +338,11 @@ TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_Delegate);
             lineSpace = 0;
         }
 
-//        CGFloat lineOutSpace = (self.bounds.size.height - lineSpace * (count - 1) -rect.size.height * count) / 2;
-//        rect.origin.y = lineOutSpace + rect.size.height * i + lineSpace * i;
-        
         rect.origin.y = maxY;
         maxY = maxY + rect.size.height + lineSpace;
+        // 增加点击区域
+        CGRect largeRect = CGRectInset(rect, self.tmui_enlargeClickArea.x, self.tmui_enlargeClickArea.y);
+        rect = CGRectIsValidated(largeRect) ? largeRect : rect;
 
         if (CGRectContainsPoint(rect, point)) {
             CGPoint relativePoint = CGPointMake(point.x - CGRectGetMinX(rect), point.y - CGRectGetMinY(rect));
@@ -306,17 +375,6 @@ TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_Delegate);
     return NO;
 }
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.tmui_isClickEffect) {
-        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
-    }
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.tmui_isClickEffect) {
-        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
-    }
-}
 
 - (CGAffineTransform)transformForCoreText {
     return CGAffineTransformScale(CGAffineTransformMakeTranslation(0, self.bounds.size.height), 1.f, -1.f);
