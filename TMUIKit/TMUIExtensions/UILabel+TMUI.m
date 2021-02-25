@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "TMUICommonDefines.h"
 #import "NSAttributedString+TMUI.h"
+#import "TMUIAssociatedObjectDefine.h"
 
 @interface TMAttrTextModel : NSObject
 @property (nonatomic, copy) NSString *str;
@@ -108,77 +109,42 @@
 
 @end
 
+@interface UILabel (TMUI_AttributeAction)
+
+@property(nonatomic, strong) NSMutableArray *tmui_attributeStrings;
+@property(nonatomic, strong) NSMutableDictionary *tmui_effectDic;
+@property(nonatomic, assign) BOOL tmui_isClickAction;
+@property(nonatomic, assign) BOOL tmui_isClickEffect;
+@property(nonatomic, copy) void (^tmui_clickBlock)(NSString *, NSRange, NSInteger);
+
+@end
 
 
 @implementation UILabel (TMUI_AttributeAction)
 
 #pragma mark - AssociatedObjects
-- (NSMutableArray *)attributeStrings {
-    return objc_getAssociatedObject(self, _cmd);
-}
 
-- (void)setAttributeStrings:(NSMutableArray *)attributeStrings {
-    objc_setAssociatedObject(self, @selector(attributeStrings), attributeStrings, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+// MARK: Publick Properties
+TMUISynthesizeBOOLProperty(tmui_enabledClickEffect, setTmui_enabledClickEffect);
 
-- (NSMutableDictionary *)effectDic {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setEffectDic:(NSMutableDictionary *)effectDic {
-    objc_setAssociatedObject(self, @selector(effectDic), effectDic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)isClickAction {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
-}
-
-- (void)setIsClickAction:(BOOL)isClickAction {
-    objc_setAssociatedObject(self, @selector(isClickAction), @(isClickAction), OBJC_ASSOCIATION_ASSIGN);
-}
-
-- (void (^)(NSString *, NSRange, NSInteger))clickBlock {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setClickBlock:(void (^)(NSString *, NSRange, NSInteger))clickBlock {
-    objc_setAssociatedObject(self, @selector(clickBlock), clickBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
-- (id<TMUIAttrTextDelegate>)delegate {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (BOOL)enabledClickEffect {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
-}
-
-- (void)setEnabledClickEffect:(BOOL)enabledClickEffect {
-    objc_setAssociatedObject(self, @selector(enabledClickEffect), @(enabledClickEffect), OBJC_ASSOCIATION_ASSIGN);
-    //    self.isClickEffect = enabledClickEffect;
-}
-
-- (UIColor *)clickEffectColor {
+- (UIColor *)tmui_clickEffectColor {
     UIColor *obj = objc_getAssociatedObject(self, _cmd);
     if(obj == nil) {obj = [UIColor lightGrayColor];}
     return obj;
 }
 
-- (void)setClickEffectColor:(UIColor *)clickEffectColor {
-    objc_setAssociatedObject(self, @selector(clickEffectColor), clickEffectColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setTmui_clickEffectColor:(UIColor *)clickEffectColor {
+    objc_setAssociatedObject(self, @selector(tmui_clickEffectColor), clickEffectColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (BOOL)isClickEffect {
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
-}
+// MARK: Private Properties
+TMUISynthesizeIdStrongProperty(tmui_attributeStrings, setTmui_attributeStrings);
+TMUISynthesizeIdStrongProperty(tmui_effectDic, setTmui_effectDic);
+TMUISynthesizeBOOLProperty(tmui_isClickAction, setTmui_isClickAction);
+TMUISynthesizeBOOLProperty(tmui_isClickEffect, setTmui_isClickEffect);
+TMUISynthesizeIdCopyProperty(tmui_clickBlock, setTmui_clickBlock);
+TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_Delegate);
 
-- (void)setIsClickEffect:(BOOL)isClickEffect {
-    objc_setAssociatedObject(self, @selector(isClickEffect), @(isClickEffect), OBJC_ASSOCIATION_ASSIGN);
-}
-
-- (void)setDelegate:(id<TMUIAttrTextDelegate>)delegate {
-    objc_setAssociatedObject(self, @selector(delegate), delegate, OBJC_ASSOCIATION_ASSIGN);
-}
 
 #pragma mark - mainFunction
 - (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings clickAction:(void (^)(NSString *string, NSRange range, NSInteger index))clickAction {
@@ -199,22 +165,22 @@
 
 - (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings attributes:(nullable NSDictionary *)attributes delegate:(nullable id<TMUIAttrTextDelegate>)delegate clickAction:(nullable void (^)(NSString * _Nonnull, NSRange, NSInteger))clickAction{
     [self attrTextRangesWithStrings:strings attributes:attributes];
-    if (self.clickBlock != clickAction) {
-        self.clickBlock = clickAction;
+    if (self.tmui_clickBlock != clickAction) {
+        self.tmui_clickBlock = clickAction;
     }
-    if ([self delegate] != delegate) {
-        [self setDelegate:delegate];
+    if ([self tmui_delegate] != delegate) {
+        [self setTmui_Delegate:delegate];
     }
 }
 
 #pragma mark - touchAction
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.isClickAction) {
+    if (!self.tmui_isClickAction) {
         return;
     }
 
-    if (objc_getAssociatedObject(self, @selector(enabledClickEffect))) {
-        self.isClickEffect = self.enabledClickEffect;
+    if (objc_getAssociatedObject(self, @selector(tmui_enabledClickEffect))) {
+        self.tmui_isClickEffect = self.tmui_enabledClickEffect;
     }
 
     UITouch *touch = [touches anyObject];
@@ -225,15 +191,15 @@
     [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         
-        if (strongSelf.clickBlock) {
-            strongSelf.clickBlock (string , range , index);
+        if (strongSelf.tmui_clickBlock) {
+            strongSelf.tmui_clickBlock (string , range , index);
         }
 
-        if ([strongSelf delegate] && [[strongSelf delegate] respondsToSelector:@selector(didClickAttrText:range:index:)]) {
-            [[strongSelf delegate] didClickAttrText:string range:range index:index];
+        if ([strongSelf tmui_delegate] && [[strongSelf tmui_delegate] respondsToSelector:@selector(didClickAttrText:range:index:)]) {
+            [[strongSelf tmui_delegate] didClickAttrText:string range:range index:index];
         }
 
-        if (strongSelf.isClickEffect) {
+        if (strongSelf.tmui_isClickEffect) {
             [strongSelf saveEffectDicWithRange:range];
             [strongSelf clickEffectWithStatus:YES];
         }
@@ -241,7 +207,7 @@
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    if((self.isClickAction) && ([self attrTextFrameWithTouchPoint:point result:nil])) {
+    if((self.tmui_isClickAction) && ([self attrTextFrameWithTouchPoint:point result:nil])) {
         return self;
     }
     return [super hitTest:point withEvent:event];
@@ -318,9 +284,9 @@
                 index = index - 1;
             }
 
-            NSInteger link_count = self.attributeStrings.count;
+            NSInteger link_count = self.tmui_attributeStrings.count;
             for (int j = 0; j < link_count; j++) {
-                TMAttrTextModel *model = self.attributeStrings[j];
+                TMAttrTextModel *model = self.tmui_attributeStrings[j];
                 NSRange link_range = model.range;
                 if (NSLocationInRange(index, link_range)) {
                     if (resultBlock) {
@@ -341,13 +307,13 @@
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.isClickEffect) {
+    if (self.tmui_isClickEffect) {
         [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
     }
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (self.isClickEffect) {
+    if (self.tmui_isClickEffect) {
         [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
     }
 }
@@ -385,16 +351,16 @@
 
 #pragma mark - clickEffect
 - (void)clickEffectWithStatus:(BOOL)status {
-    if (self.isClickEffect) {
+    if (self.tmui_isClickEffect) {
         NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
-        NSMutableAttributedString *subAtt = [[NSMutableAttributedString alloc] initWithAttributedString:[[self.effectDic allValues] firstObject]];
-        NSRange range = NSRangeFromString([[self.effectDic allKeys] firstObject]);
+        NSMutableAttributedString *subAtt = [[NSMutableAttributedString alloc] initWithAttributedString:[[self.tmui_effectDic allValues] firstObject]];
+        NSRange range = NSRangeFromString([[self.tmui_effectDic allKeys] firstObject]);
         //TMUI: 处理因换行符导致range越界问题
         if (range.location > attStr.length - 1 - range.length) {
             range.location = attStr.length - 1 - range.length;
         }
         if (status) {
-            [subAtt addAttribute:NSBackgroundColorAttributeName value:self.clickEffectColor range:NSMakeRange(0, subAtt.string.length)];
+            [subAtt addAttribute:NSBackgroundColorAttributeName value:self.tmui_clickEffectColor range:NSMakeRange(0, subAtt.string.length)];
             [attStr replaceCharactersInRange:range withAttributedString:subAtt];
         }else {
             [attStr replaceCharactersInRange:range withAttributedString:subAtt];
@@ -404,22 +370,22 @@
 }
 
 - (void)saveEffectDicWithRange:(NSRange)range {
-    self.effectDic = [NSMutableDictionary dictionary];
+    self.tmui_effectDic = [NSMutableDictionary dictionary];
     NSAttributedString *subAttribute = [self.attributedText attributedSubstringFromRange:range];
-    [self.effectDic setObject:subAttribute forKey:NSStringFromRange(range)];
+    [self.tmui_effectDic setObject:subAttribute forKey:NSStringFromRange(range)];
 }
 
 #pragma mark - getRange
 - (void)attrTextRangesWithStrings:(NSArray <NSString *> *)strings attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes{
     if (self.attributedText == nil) {
-        self.isClickAction = NO;
+        self.tmui_isClickAction = NO;
         return;
     }
 
-    self.isClickAction = YES;
-    self.isClickEffect = YES;
+    self.tmui_isClickAction = YES;
+    self.tmui_isClickEffect = YES;
     __block  NSString *totalStr = self.attributedText.string;
-    self.attributeStrings = [NSMutableArray array];
+    self.tmui_attributeStrings = [NSMutableArray array];
 
     __weak __typeof(self)weakSelf = self;
     [strings enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -435,7 +401,7 @@
             TMAttrTextModel *model = [[TMAttrTextModel alloc]init];
             model.range = range;
             model.str = obj;
-            [strongSelf.attributeStrings addObject:model];
+            [strongSelf.tmui_attributeStrings addObject:model];
         }
     }];
 }

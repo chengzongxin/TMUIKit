@@ -71,12 +71,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  是否打开点击效果，默认是打开
  */
-@property (nonatomic, assign) BOOL enabledClickEffect;
+@property (nonatomic, assign) BOOL tmui_enabledClickEffect;
 
 /**
  *  点击效果颜色 默认lightGrayColor
  */
-@property (nonatomic, strong) UIColor *clickEffectColor;
+@property (nonatomic, strong) UIColor *tmui_clickEffectColor;
 
 /**
  * 给文本添加Block点击事件回调
