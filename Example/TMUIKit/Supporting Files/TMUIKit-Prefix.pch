@@ -16,4 +16,5 @@
 #import <TMUIKit.h>
 #import <Masonry.h>
 #import <ReactiveObjC.h>
+#import <ChainUI.h>
 #endif

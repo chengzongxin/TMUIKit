@@ -38,13 +38,6 @@
                       @"class":@"UIViewTMUI3ViewController"
                   }
           ]},
-        @{@"sections":@"UIButton+TMUI",
-          @"rows":@[
-                  @{
-                      @"rowTitle":@"设置图片位置、图文间距、扩大点击区域",
-                      @"class":@"UIButtonTMUIViewController"
-                  }
-          ]},
         @{@"sections":@"UILable+TMUI",
           @"rows":@[
                   @{
@@ -52,14 +45,21 @@
                       @"class":@"UILabelTMUIViewController"
                   }
           ]},
+        @{@"sections":@"UIButton+TMUI",
+          @"rows":@[
+                  @{
+                      @"rowTitle":@"设置图片位置、图文间距、扩大点击区域",
+                      @"class":@"UIButtonTMUIViewController"
+                  }
+          ]},
+        @{@"sections":@"UIViewController+TMUI",
+          @"rows":@[
+                  @{
+                      @"rowTitle":@"获取最上层vc、全局设置导航栏显示隐藏、导航控制器中上一个viewcontroller、导航控制器中下一个viewcontroller",
+                      @"class":@"UIViewControllerTMUIViewController"
+                  }
+          ]},
     ];
-    
-    
-//    _datas = @[
-//        @{@"title":@"分类:UIView+TMUI",@"class":@"UIViewTMUIViewController"},
-//        @{@"title":@"分类:UIButton+TMUI",@"class":@"UIButtonTMUIViewController"},
-//        @{@"title":@"分类:UILable+TMUI",@"class":@"UILabelTMUIViewController"}
-//    ];
     
     [self.view addSubview:self.tableView];
     

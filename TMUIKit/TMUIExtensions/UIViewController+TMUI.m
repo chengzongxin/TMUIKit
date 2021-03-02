@@ -59,7 +59,7 @@
 
 
 #pragma mark -  获取当前最顶层的ViewController
-+ (UIViewController *)tmui_topViewControllerget {
+- (UIViewController *)tmui_topViewController {
     UIViewController *result = nil;
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal) {
@@ -85,7 +85,7 @@
     return result;
 }
 
-+ (UIViewController*)topVC:(UIViewController*)VC {
+- (UIViewController*)topVC:(UIViewController*)VC {
     if([VC isKindOfClass:[UINavigationController class]]) {
         return [self topVC:[(UINavigationController*)VC topViewController]];
     }
@@ -99,6 +99,47 @@
 
 
 @implementation UIViewController (TMUI_Alert)
+
+
+- (void)tmui_showAlertViewWithTitle:(NSString *)title
+                       message:(NSString *)message
+             cancelButtonTitle:(NSString *)cancelButtonTitle
+              buttonIndexBlock:(void (^)(NSInteger))block
+             otherButtonTitles:(NSString *)otherButtonTitles, ...
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    NSInteger index = 0;
+    if (cancelButtonTitle) {
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (block) {
+                block(index);
+            }
+        }];
+        [alertController addAction:cancelAction];
+        index ++;
+    }
+    
+    if (otherButtonTitles)
+    {
+        va_list args;//定义一个指向个数可变的参数列表指针
+        va_start(args, otherButtonTitles);//得到第一个可变参数地址
+        for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString *))
+        {
+            UIAlertAction *action = [UIAlertAction actionWithTitle:arg style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (block) {
+                    block(index);
+                }
+            }];
+            [alertController addAction:action];
+            index ++;
+        }
+        va_end(args);//置空指针
+    }
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 /**
  弹出UIAlertController
  

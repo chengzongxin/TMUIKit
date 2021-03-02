@@ -28,8 +28,8 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 - (UIViewController*)tmui_previousViewController;
 // 导航控制器中下一个viewcontroller
 - (UIViewController*)tmui_nextViewController;
-#pragma mark -  获取当前最顶层的ViewController
-+ (UIViewController *)tmui_topViewControllerget;
+// 获取当前最顶层的ViewController
+- (UIViewController *)tmui_topViewController;
 
 
 // 导航栏返回按钮方法
@@ -40,6 +40,19 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 
 
 @interface UIViewController (TMUI_Alert)
+
+/**
+ * show alert with number of button
+ * arguments: string button
+ * Usages: [tmui_xxx:title ...cancelButton:@"cancel",buttonBlock:^{(index){ xxx },otherButton:@"button1",@"button2"]
+ */
+
+- (void)tmui_showAlertViewWithTitle:(NSString *)title
+                            message:(NSString *)message
+                  cancelButtonTitle:(NSString *)cancelButtonTitle
+                   buttonIndexBlock:(void(^)(NSInteger buttonIndex))block
+                  otherButtonTitles:(NSString *)otherButtonTitles, ...;
+
 /**
  弹出UIAlertController
  

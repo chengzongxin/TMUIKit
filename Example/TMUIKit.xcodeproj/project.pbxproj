@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		16E8FFFD25EE3EB3005D8E4B /* Docs */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 16E8FFFE25EE3EB3005D8E4B /* Build configuration list for PBXAggregateTarget "Docs" */;
+			buildPhases = (
+				16E8000425EE3EC9005D8E4B /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Docs;
+			productName = Docs;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860AD25C01D5E00F31337 /* TMPageRootViewController.m */; };
 		160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B225C01D8100F31337 /* Table3ViewController.m */; };
@@ -34,6 +48,7 @@
 		16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507225BC02390047618E /* TMUITextFieldViewController.m */; };
 		16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507725BC02410047618E /* TMUITextViewViewController.m */; };
 		16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */; };
+		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
 		16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */; };
 		16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFF025EE2621005D8E4B /* AppStoreCell.m */; };
@@ -171,6 +186,8 @@
 		16C6507725BC02410047618E /* TMUITextViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITextViewViewController.m; sourceTree = "<group>"; };
 		16C650C525BC1DF00047618E /* UILabelTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabelTMUIViewController.h; sourceTree = "<group>"; };
 		16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILabelTMUIViewController.m; sourceTree = "<group>"; };
+		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
+		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
 		16E8FFEA25EE25F9005D8E4B /* ChainUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainUIViewController.h; sourceTree = "<group>"; };
 		16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainUIViewController.m; sourceTree = "<group>"; };
 		16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreViewController.m; sourceTree = "<group>"; };
@@ -430,6 +447,8 @@
 				163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */,
 				16C650C525BC1DF00047618E /* UILabelTMUIViewController.h */,
 				16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */,
+				16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */,
+				16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */,
 			);
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
@@ -679,6 +698,10 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = chengzongxin;
 				TargetAttributes = {
+					16E8FFFD25EE3EB3005D8E4B = {
+						CreatedOnToolsVersion = 12.3;
+						ProvisioningStyle = Automatic;
+					};
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = 5XB293ZE6R;
 					};
@@ -717,6 +740,7 @@
 			targets = (
 				6003F589195388D20070C39A /* TMUIKit_Example */,
 				6003F5AD195388D20070C39A /* TMUIKit_Tests */,
+				16E8FFFD25EE3EB3005D8E4B /* Docs */,
 			);
 		};
 /* End PBXProject section */
@@ -796,6 +820,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		16E8000425EE3EC9005D8E4B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# shell script goes here\n\nmkdir -p headerDoc\n\n# ./Doc 为项目相对路径目录，根据实际情况修改\n\nfind ./Docs -name \\*.h -print | xargs headerdoc2html -j -o headerDoc\n\ngatherheaderdoc headerDoc\n";
 		};
 		50D5BA5C61224A1B2402313F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -877,6 +918,7 @@
 				16BA204725C1096000E6F5C8 /* NSString+TSize.m in Sources */,
 				16BA203B25C1096000E6F5C8 /* UINib+TLoadNib.m in Sources */,
 				3B806CCB25CA789100B78CD1 /* NSString+Attribute.m in Sources */,
+				16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */,
 				163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */,
 				3B806CB225CA758900B78CD1 /* NSString+Verify.m in Sources */,
 				16566E4125E796C000B79029 /* TMChainUIViewController.m in Sources */,
@@ -969,6 +1011,22 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		16E8000025EE3EB3005D8E4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		16E8FFFF25EE3EB3005D8E4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1127,6 +1185,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		16E8FFFE25EE3EB3005D8E4B /* Build configuration list for PBXAggregateTarget "Docs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16E8FFFF25EE3EB3005D8E4B /* Debug */,
+				16E8000025EE3EB3005D8E4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6003F585195388D10070C39A /* Build configuration list for PBXProject "TMUIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
