@@ -134,7 +134,7 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
 - (void)cui_setUserInteractionEnabled:(BOOL)userInteractionEnabled {
     [self cui_setUserInteractionEnabled:userInteractionEnabled];
     
-    if (userInteractionEnabled && ![self cui_containLinkGesture]) {
+    if (userInteractionEnabled && ![self cui_containLinkGesture] && self.nerLinkHandler) {
         id reg = [[CUILinkGestureRegcognizer alloc] initWithTarget:self action:@selector(cui_handleLinkGesture:)];
         [self addGestureRecognizer:reg];
     }

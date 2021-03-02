@@ -44,7 +44,6 @@
 
 - (CUIChainableUILabelCallbackBlock)onLink {
     CUI_CALLBACK_BLOCK(
-                       self.userInteractionEnabled = YES;
                        
                        if (CUI_IS_BLOCK(object)) {
                            self.nerLinkHandler = object;
@@ -56,6 +55,7 @@
                                [weakTarget performSelector:action withObject:text withObject:rangeValue];
                            };
                        }
+                       self.userInteractionEnabled = YES;
                        );
 }
 
