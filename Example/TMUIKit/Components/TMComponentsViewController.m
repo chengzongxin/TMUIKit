@@ -22,7 +22,8 @@
     [super viewDidLoad];
     
     _datas = @[
-        @{@"title":@"TMPageViewController",@"class":@"TMPageRootViewController"}
+        @{@"title":@"TMPageViewController",@"class":@"TMPageRootViewController"},
+        @{@"title":@"ChainUI",@"class":@"ChainUIViewController"}
     ];
     
     [self.view addSubview:self.tableView];

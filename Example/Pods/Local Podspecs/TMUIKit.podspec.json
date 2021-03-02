@@ -209,6 +209,45 @@
         {
           "name": "TMShowBigImageController",
           "source_files": "TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}"
+        },
+        {
+          "name": "ChainUI",
+          "public_header_files": "TMUIKit/TMUIComponents/ChainUI/*.h",
+          "source_files": "TMUIKit/TMUIComponents/ChainUI/*.{h,m}",
+          "frameworks": [
+            "Foundation",
+            "UIKit",
+            "CoreGraphics"
+          ],
+          "subspecs": [
+            {
+              "name": "Private",
+              "source_files": "TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}",
+              "public_header_files": "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
+            },
+            {
+              "name": "Public",
+              "source_files": "TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}",
+              "public_header_files": "TMUIKit/TMUIComponents/ChainUI/Public/*.h",
+              "dependencies": {
+                "TMUIKit/TMUIComponents/ChainUI/Private": [
+
+                ]
+              }
+            },
+            {
+              "name": "Chainable",
+              "source_files": "TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}",
+              "dependencies": {
+                "TMUIKit/TMUIComponents/ChainUI/Public": [
+
+                ],
+                "TMUIKit/TMUIComponents/ChainUI/Private": [
+
+                ]
+              }
+            }
+          ]
         }
       ]
     }

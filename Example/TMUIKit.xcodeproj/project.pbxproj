@@ -34,6 +34,10 @@
 		16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507225BC02390047618E /* TMUITextFieldViewController.m */; };
 		16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507725BC02410047618E /* TMUITextViewViewController.m */; };
 		16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */; };
+		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
+		16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */; };
+		16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFF025EE2621005D8E4B /* AppStoreCell.m */; };
+		16E8FFFA25EE281E005D8E4B /* appList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16E8FFF925EE281E005D8E4B /* appList.plist */; };
 		16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFDA25BA7BCD00A3273D /* TMBaseViewController.m */; };
 		16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFE125BAAD7D00A3273D /* UISegmentedControl+associateObject.m */; };
 		16EABFE725BAAE7C00A3273D /* UISlider+associateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFE625BAAE7C00A3273D /* UISlider+associateObject.m */; };
@@ -96,13 +100,6 @@
 			remoteGlobalIDString = 16EAC38225BADAFA00A3273D;
 			remoteInfo = MTFY;
 		};
-		16566E3925E795D400B79029 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 16566E3525E795D400B79029 /* NerdyUIExample.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84F72E741E1BB3D300930622;
-			remoteInfo = NerdyUIExample;
-		};
 		6003F5B3195388D20070C39A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6003F582195388D10070C39A /* Project object */;
@@ -147,7 +144,6 @@
 		16566E1F25E795D300B79029 /* qmuidemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = qmuidemo.xcodeproj; path = "../../TMUIKit_AssociateProject/QMUIDemo_iOS-master/qmuidemo.xcodeproj"; sourceTree = "<group>"; };
 		16566E2925E795D300B79029 /* YYCategories.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YYCategories.xcodeproj; path = "../../TMUIKit_AssociateProject/YYCategories-master/Framework/YYCategories.xcodeproj"; sourceTree = "<group>"; };
 		16566E2F25E795D300B79029 /* MTFY.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTFY.xcodeproj; path = ../../TMUIKit_AssociateProject/MTFY/MTFY.xcodeproj; sourceTree = "<group>"; };
-		16566E3525E795D400B79029 /* NerdyUIExample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NerdyUIExample.xcodeproj; path = "../../TMUIKit_AssociateProject/NerdyUI-master-2/NerdyUIExample/NerdyUIExample.xcodeproj"; sourceTree = "<group>"; };
 		16566E3F25E796C000B79029 /* TMChainUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMChainUIViewController.h; sourceTree = "<group>"; };
 		16566E4025E796C000B79029 /* TMChainUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMChainUIViewController.m; sourceTree = "<group>"; };
 		16945FD325B7C4DD0056AE74 /* TMUIButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIButtonViewController.h; sourceTree = "<group>"; };
@@ -175,6 +171,13 @@
 		16C6507725BC02410047618E /* TMUITextViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITextViewViewController.m; sourceTree = "<group>"; };
 		16C650C525BC1DF00047618E /* UILabelTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabelTMUIViewController.h; sourceTree = "<group>"; };
 		16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILabelTMUIViewController.m; sourceTree = "<group>"; };
+		16E8FFEA25EE25F9005D8E4B /* ChainUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainUIViewController.h; sourceTree = "<group>"; };
+		16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainUIViewController.m; sourceTree = "<group>"; };
+		16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreViewController.m; sourceTree = "<group>"; };
+		16E8FFF025EE2621005D8E4B /* AppStoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreCell.m; sourceTree = "<group>"; };
+		16E8FFF125EE2622005D8E4B /* AppStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreViewController.h; sourceTree = "<group>"; };
+		16E8FFF225EE2622005D8E4B /* AppStoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStoreCell.h; sourceTree = "<group>"; };
+		16E8FFF925EE281E005D8E4B /* appList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appList.plist; sourceTree = "<group>"; };
 		16EABFD925BA7BCD00A3273D /* TMBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMBaseViewController.h; sourceTree = "<group>"; };
 		16EABFDA25BA7BCD00A3273D /* TMBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMBaseViewController.m; sourceTree = "<group>"; };
 		16EABFE025BAAD7D00A3273D /* UISegmentedControl+associateObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+associateObject.h"; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 			children = (
 				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+				16E8FFE325EE25B2005D8E4B /* ChainUI */,
 				160860A625C01D1800F31337 /* TMPageViewController */,
 			);
 			path = Components;
@@ -366,7 +370,6 @@
 		16566E1E25E795C300B79029 /* TMUIKit_AssociateProject */ = {
 			isa = PBXGroup;
 			children = (
-				16566E3525E795D400B79029 /* NerdyUIExample.xcodeproj */,
 				16566E2925E795D300B79029 /* YYCategories.xcodeproj */,
 				16566E1F25E795D300B79029 /* qmuidemo.xcodeproj */,
 				16566E2F25E795D300B79029 /* MTFY.xcodeproj */,
@@ -395,14 +398,6 @@
 			isa = PBXGroup;
 			children = (
 				16566E3425E795D300B79029 /* MTFY.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		16566E3625E795D400B79029 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				16566E3A25E795D400B79029 /* NerdyUIExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -495,6 +490,20 @@
 				16BA202925C1096000E6F5C8 /* ALAssetsLibrary+TCategory.m */,
 			);
 			path = ALAssetsLibrary;
+			sourceTree = "<group>";
+		};
+		16E8FFE325EE25B2005D8E4B /* ChainUI */ = {
+			isa = PBXGroup;
+			children = (
+				16E8FFF925EE281E005D8E4B /* appList.plist */,
+				16E8FFEA25EE25F9005D8E4B /* ChainUIViewController.h */,
+				16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */,
+				16E8FFF225EE2622005D8E4B /* AppStoreCell.h */,
+				16E8FFF025EE2621005D8E4B /* AppStoreCell.m */,
+				16E8FFF125EE2622005D8E4B /* AppStoreViewController.h */,
+				16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */,
+			);
+			path = ChainUI;
 			sourceTree = "<group>";
 		};
 		16EABFD825BA7BB200A3273D /* Base */ = {
@@ -696,10 +705,6 @@
 					ProjectRef = 16566E2F25E795D300B79029 /* MTFY.xcodeproj */;
 				},
 				{
-					ProductGroup = 16566E3625E795D400B79029 /* Products */;
-					ProjectRef = 16566E3525E795D400B79029 /* NerdyUIExample.xcodeproj */;
-				},
-				{
 					ProductGroup = 16566E2025E795D300B79029 /* Products */;
 					ProjectRef = 16566E1F25E795D300B79029 /* qmuidemo.xcodeproj */;
 				},
@@ -745,13 +750,6 @@
 			remoteRef = 16566E3325E795D300B79029 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		16566E3A25E795D400B79029 /* NerdyUIExample.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = NerdyUIExample.app;
-			remoteRef = 16566E3925E795D400B79029 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -763,6 +761,7 @@
 				3B7BE7A925E5FD15001DA085 /* AttributeTextVC.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				16E8FFFA25EE281E005D8E4B /* appList.plist in Resources */,
 				3B806CC125CA75CC00B78CD1 /* VerifyViewController.xib in Resources */,
 				16455E0A25B6EDEC00BBBEC2 /* Main.storyboard in Resources */,
 				3B806CC325CA75CC00B78CD1 /* MD5VC.xib in Resources */,
@@ -900,14 +899,17 @@
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
 				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
+				16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
+				16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */,
 				16BA204225C1096000E6F5C8 /* UITextView+Placeholder.m in Sources */,
 				1625BA4A25E63778005686D0 /* UIViewTMUI3ViewController.m in Sources */,
 				16BA204D25C1096000E6F5C8 /* ALAssetsLibrary+TCategory.m in Sources */,
 				16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */,
 				16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */,
 				160860BF25C01D8100F31337 /* TableViewController.m in Sources */,
+				16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */,
 				3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */,
 				16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */,
 			);

@@ -181,6 +181,26 @@ Pod::Spec.new do |s|
       ss.subspec 'TMShowBigImageController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
       end
+      
+      ss.subspec 'ChainUI' do |sss|
+        sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
+        sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
+        sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+        sss.subspec 'Private' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
+          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
+        end
+        sss.subspec 'Public' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
+          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
+          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+        end
+        sss.subspec 'Chainable' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
+          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
+          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+        end
+      end
   end
   
   s.dependency "Masonry", "~> 1.1.0"

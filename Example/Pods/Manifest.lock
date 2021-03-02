@@ -11,6 +11,7 @@ PODS:
     - TMUIKit/TMUIWidgets (= 0.9.5)
   - TMUIKit/TMUIComponents (0.9.5):
     - Masonry (~> 1.1.0)
+    - TMUIKit/TMUIComponents/ChainUI (= 0.9.5)
     - TMUIKit/TMUIComponents/TMActionSheet (= 0.9.5)
     - TMUIKit/TMUIComponents/TMContentAlert (= 0.9.5)
     - TMUIKit/TMUIComponents/TMContentPicker (= 0.9.5)
@@ -20,6 +21,32 @@ PODS:
     - TMUIKit/TMUIComponents/TMShowBigImageController (= 0.9.5)
     - TMUIKit/TMUIComponents/TMToast (= 0.9.5)
     - TMUIKit/TMUIComponents/TMUIPageViewController (= 0.9.5)
+    - TMUIKit/TMUICore
+    - TMUIKit/TMUIDefines
+    - TMUIKit/TMUIExtensions
+  - TMUIKit/TMUIComponents/ChainUI (0.9.5):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUIComponents/ChainUI/Chainable (= 0.9.5)
+    - TMUIKit/TMUIComponents/ChainUI/Private (= 0.9.5)
+    - TMUIKit/TMUIComponents/ChainUI/Public (= 0.9.5)
+    - TMUIKit/TMUICore
+    - TMUIKit/TMUIDefines
+    - TMUIKit/TMUIExtensions
+  - TMUIKit/TMUIComponents/ChainUI/Chainable (0.9.5):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUIComponents/ChainUI/Private
+    - TMUIKit/TMUIComponents/ChainUI/Public
+    - TMUIKit/TMUICore
+    - TMUIKit/TMUIDefines
+    - TMUIKit/TMUIExtensions
+  - TMUIKit/TMUIComponents/ChainUI/Private (0.9.5):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUICore
+    - TMUIKit/TMUIDefines
+    - TMUIKit/TMUIExtensions
+  - TMUIKit/TMUIComponents/ChainUI/Public (0.9.5):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUIComponents/ChainUI/Private
     - TMUIKit/TMUICore
     - TMUIKit/TMUIDefines
     - TMUIKit/TMUIExtensions
@@ -171,7 +198,7 @@ SPEC CHECKSUMS:
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  TMUIKit: 3ace5bb12c3443a8c894102c8a391a0682104ff0
+  TMUIKit: 8f8a70cf503cefaafbac8fac60f6ad54600a009f
 
 PODFILE CHECKSUM: 3311888867740602f7e0ae2f500038e5f3a8a593
 
