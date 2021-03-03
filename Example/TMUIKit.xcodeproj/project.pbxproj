@@ -48,6 +48,7 @@
 		16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507225BC02390047618E /* TMUITextFieldViewController.m */; };
 		16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507725BC02410047618E /* TMUITextViewViewController.m */; };
 		16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */; };
+		16CDF22625EF6B0D00C02C98 /* UITextFieldTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
 		16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */; };
@@ -186,6 +187,8 @@
 		16C6507725BC02410047618E /* TMUITextViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITextViewViewController.m; sourceTree = "<group>"; };
 		16C650C525BC1DF00047618E /* UILabelTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UILabelTMUIViewController.h; sourceTree = "<group>"; };
 		16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILabelTMUIViewController.m; sourceTree = "<group>"; };
+		16CDF22425EF6B0D00C02C98 /* UITextFieldTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITextFieldTMUIViewController.h; sourceTree = "<group>"; };
+		16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITextFieldTMUIViewController.m; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
 		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
 		16E8FFEA25EE25F9005D8E4B /* ChainUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainUIViewController.h; sourceTree = "<group>"; };
@@ -449,6 +452,8 @@
 				16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */,
 				16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */,
 				16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */,
+				16CDF22425EF6B0D00C02C98 /* UITextFieldTMUIViewController.h */,
+				16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */,
 			);
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
@@ -934,6 +939,7 @@
 				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
 				16C389C125E5EEA3003E107D /* UIViewTMUI2ViewController.m in Sources */,
 				16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */,
+				16CDF22625EF6B0D00C02C98 /* UITextFieldTMUIViewController.m in Sources */,
 				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
 				3B806CC425CA75CC00B78CD1 /* VerifyViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,

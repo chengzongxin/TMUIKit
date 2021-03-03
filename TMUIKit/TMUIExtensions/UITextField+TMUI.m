@@ -7,8 +7,11 @@
 
 #import "UITextField+TMUI.h"
 #import <objc/runtime.h>
-
+#import "TMUIAssociatedObjectDefine.h"
 @implementation UITextField (TMUI)
+
+TMUISynthesizeIdCopyProperty(tmui_textLimitBlock, setTmui_textLimitBlock);
+TMUISynthesizeIdCopyProperty(tmui_textChangeBlock, setTmui_textChangeBlock);
 
 - (void)tmui_setColor:(nullable UIColor *)color font:(nullable UIFont *)font {
     self.textColor = color;
@@ -44,7 +47,10 @@
             }
             self.text = [toBeginString substringWithRange:NSMakeRange(0, tempLength)];
         }
+        !self.tmui_textLimitBlock ?: self.tmui_textLimitBlock(self.text,self);
+        return;
     }
+    !self.tmui_textChangeBlock ?: self.tmui_textChangeBlock(self.text,self);
 }
 
 #pragma mark - placeHolder

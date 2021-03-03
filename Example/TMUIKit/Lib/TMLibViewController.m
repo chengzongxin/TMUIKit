@@ -59,6 +59,13 @@
                       @"class":@"UIViewControllerTMUIViewController"
                   }
           ]},
+        @{@"sections":@"UITextField+TMUI",
+          @"rows":@[
+                  @{
+                      @"rowTitle":@"设置最大文本输入长度、设置 placeHolder 颜色和字体、文本回调",
+                      @"class":@"UITextFieldTMUIViewController"
+                  }
+          ]},
     ];
     
     [self.view addSubview:self.tableView];
