@@ -43,19 +43,19 @@
         switch (index) {
             case 1:{
                 [view tmui_addSingerTapWithBlock:^{
-                    [self tmui_showAlertSureWithTitle:titles[index] message:@"click" sure:nil];
+//                    [self tmui_showAlertSureWithTitle:titles[index] message:@"click" sure:nil];
                 }];
             }
                 break;
             case 2:{
                 [view tmui_addDoubleTapWithBlock:^{
-                    [self tmui_showAlertSureWithTitle:titles[index] message:@"click" sure:nil];
+//                    [self tmui_showAlertSureWithTitle:titles[index] message:@"click" sure:nil];
                 }];
             }
                 break;
             case 3:{
                 [view tmui_addLongPressGestureWithMinimumPressDuration:0.5 stateBegin:^{
-                    [self tmui_showAlertSureWithTitle:titles[index] message:@"click" sure:nil];
+//                    [self tmui_showAlertSureWithTitle:titles[index] message:@"click" sure:nil];
                 } stateEnd:nil];
             }
                 break;
