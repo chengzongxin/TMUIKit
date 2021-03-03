@@ -49,6 +49,8 @@
 		16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507725BC02410047618E /* TMUITextViewViewController.m */; };
 		16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */; };
 		16CDF22625EF6B0D00C02C98 /* UITextFieldTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */; };
+		16CDF23125EF839B00C02C98 /* UIImageTMUIViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */; };
+		16CDF23725EF8E7B00C02C98 /* UIImageTMUIViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
 		16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */; };
@@ -189,6 +191,10 @@
 		16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UILabelTMUIViewController.m; sourceTree = "<group>"; };
 		16CDF22425EF6B0D00C02C98 /* UITextFieldTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITextFieldTMUIViewController.h; sourceTree = "<group>"; };
 		16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UITextFieldTMUIViewController.m; sourceTree = "<group>"; };
+		16CDF22F25EF839B00C02C98 /* UIImageTMUIViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIImageTMUIViewController1.h; sourceTree = "<group>"; };
+		16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIImageTMUIViewController1.m; sourceTree = "<group>"; };
+		16CDF23525EF8E7B00C02C98 /* UIImageTMUIViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIImageTMUIViewController2.h; sourceTree = "<group>"; };
+		16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIImageTMUIViewController2.m; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
 		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
 		16E8FFEA25EE25F9005D8E4B /* ChainUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainUIViewController.h; sourceTree = "<group>"; };
@@ -454,6 +460,10 @@
 				16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */,
 				16CDF22425EF6B0D00C02C98 /* UITextFieldTMUIViewController.h */,
 				16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */,
+				16CDF22F25EF839B00C02C98 /* UIImageTMUIViewController1.h */,
+				16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */,
+				16CDF23525EF8E7B00C02C98 /* UIImageTMUIViewController2.h */,
+				16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */,
 			);
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
@@ -932,6 +942,7 @@
 				3B447C5E25CAACAD002965E6 /* NSFileManager+TMUI.m in Sources */,
 				160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */,
 				16BA204625C1096000E6F5C8 /* NSString+TCategory.m in Sources */,
+				16CDF23125EF839B00C02C98 /* UIImageTMUIViewController1.m in Sources */,
 				16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */,
 				3B806CB125CA758900B78CD1 /* NSString+MD5.m in Sources */,
 				160860C025C01D8100F31337 /* Table1ViewController.m in Sources */,
@@ -949,6 +960,7 @@
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
 				16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				16CDF23725EF8E7B00C02C98 /* UIImageTMUIViewController2.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
 				16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */,
 				16BA204225C1096000E6F5C8 /* UITextView+Placeholder.m in Sources */,

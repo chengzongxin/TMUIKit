@@ -79,6 +79,13 @@ static NSMutableDictionary *cui_styleDict = nil;
         
         SEL sel = NSSelectorFromString(key);
         
+        if ([key isEqualToString:@"color"] && [item isKindOfClass:UILabel.class]) {
+            id block = [item performSelector:NSSelectorFromString(@"txtColor") withObject:nil];
+            if (CUI_IS_BLOCK(block)) {
+                ((CUIObjectBlock)block)(object);
+            }
+        }
+        
         if ([key isEqualToString:@"layer.borderWidth"]) {
             if ([item isKindOfClass:UIView.class]) {
                 [item setValue:object forKeyPath:key];

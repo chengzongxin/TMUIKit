@@ -40,11 +40,11 @@
     t1.tmui_maximumTextLength = 20;
     [t1 tmui_setPlaceholderColor:UIColor.orangeColor font:Fnt(12)];
     t1.tmui_textLimitBlock = ^(NSString * _Nonnull text, UITextField * _Nonnull textField) {
-        id a3 = AttStr(@"超过限制");
+        id a3 = AttStr(@"超过限制").color(@"#FF0000");
         l3.str(a3);
     };
     t1.tmui_textChangeBlock = ^(NSString * _Nonnull text, UITextField * _Nonnull textField) {
-        id a3 = AttStr(@"未超过限制");
+        id a3 = AttStr(@"未超过限制").color(@"#000000");;
         l3.str(a3);
         id a4 = AttStr(@"输入文字:",text).styles(s2);
         l4.str(a4);

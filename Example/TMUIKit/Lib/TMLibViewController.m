@@ -66,6 +66,17 @@
                       @"class":@"UITextFieldTMUIViewController"
                   }
           ]},
+        @{@"sections":@"UIImage+TMUI",
+          @"rows":@[
+                  @{
+                      @"rowTitle":@"设置图片外观",
+                      @"class":@"UIImageTMUIViewController1"
+                  },
+                  @{
+                      @"rowTitle":@"图片创建相关",
+                      @"class":@"UIImageTMUIViewController2"
+                  }
+          ]},
     ];
     
     [self.view addSubview:self.tableView];
