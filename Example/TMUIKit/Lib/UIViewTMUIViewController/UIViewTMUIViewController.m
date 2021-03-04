@@ -41,7 +41,6 @@
     }
     // 圆角
     [self addSegmentedWithTop:320 labelText:@"设置圆角" titles:titles click:^(NSInteger index) {
-//        [view tmui_cornerDirect:index radius:20];
         [view tmui_cornerRadius:(index+1)*5];
     }];
     // 阴影
@@ -54,7 +53,7 @@
     }];
     // 边框
     [self addSegmentedWithTop:470 labelText:@"设置边框" titles:titles click:^(NSInteger index) {
-        [view tmui_border:UIColor.tmui_randomColor width:index type:index];
+        [view tmui_border:UIColor.tmui_randomColor width:10 type:index];
     }];
 }
 

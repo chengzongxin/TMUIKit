@@ -41,7 +41,7 @@
                     Row.str(@"TMUITextView").fnt(18).detailStr(@"TextView设置placeholder、内容长度限制、inset、高度自适应").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUITextViewViewController.class];
                         }),
-                    ).title(@"TMUIWidgets")
+                    ).title(@"TMUI Widgets")
             ).embedIn(self.view);
 }
 
