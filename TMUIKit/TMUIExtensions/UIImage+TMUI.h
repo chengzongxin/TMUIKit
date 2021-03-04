@@ -29,6 +29,18 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
 @interface UIImage (TMUI)
 
 /**
+ * 从MainBundle中获取image
+ * arguments: image name
+ */
+
++ (UIImage *)tmui_imageInBundleWithName:(NSString *)imageName;
+
+/**
+ * 从指定budle中获取image
+ * arguments: bundle name ，image name
+ */
++ (UIImage *)tmui_imageInBundle:(NSString * _Nullable)bundleName imageName:(NSString *)imageName;
+/**
  用于绘制一张图并以 UIImage 的形式返回
 
  @param size 要绘制的图片的 size，宽或高均不能为 0
@@ -163,16 +175,27 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
 
 @end
 
-@interface UIImage (TMUI_Compression)
-
-+ (NSData *)tmui_compressImage:(UIImage *)image dataLen:(NSInteger)dataLen ;
-
-@end
-
 
 #define kDefaultImgQuality 0.5
 
 @interface UIImage (TMUI_Scale)
+
+/**
+ * image data
+ */
+
+- (NSData *)tmui_imageData;
+/**
+ * image data length
+ */
+
+- (NSInteger)tmui_dataLength;
+
+/**
+ * fix image orientation
+ */
+
+- (UIImage *)tmui_fixOrientation;
 
 /**
  *  缩放到指定大小，也就是指定的size(非等比)
@@ -181,7 +204,7 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 缩放后的图片
  */
-- (UIImage*)tmui_resizedInRect:(CGRect)thumbRect;
+- (UIImage *)tmui_resizedInRect:(CGRect)thumbRect;
 
 
 /**
@@ -240,8 +263,8 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *
  *  @return 压缩后的数据
  */
-- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio;
-- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen;
+- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio;
+- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen;
 
 @end
 

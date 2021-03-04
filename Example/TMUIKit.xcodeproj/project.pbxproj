@@ -36,6 +36,7 @@
 		16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4725B6F3FB00BBBEC2 /* TMLibViewController.m */; };
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
 		16566E4125E796C000B79029 /* TMChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16566E4025E796C000B79029 /* TMChainUIViewController.m */; };
+		1687279D25F0C55700A05529 /* xueUIwang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1687279725F0C55700A05529 /* xueUIwang@3x.png */; };
 		16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */; };
 		1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */; };
 		16BA203B25C1096000E6F5C8 /* UINib+TLoadNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA1FF925C1096000E6F5C8 /* UINib+TLoadNib.m */; };
@@ -164,6 +165,7 @@
 		16566E2F25E795D300B79029 /* MTFY.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTFY.xcodeproj; path = ../../TMUIKit_AssociateProject/MTFY/MTFY.xcodeproj; sourceTree = "<group>"; };
 		16566E3F25E796C000B79029 /* TMChainUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMChainUIViewController.h; sourceTree = "<group>"; };
 		16566E4025E796C000B79029 /* TMChainUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMChainUIViewController.m; sourceTree = "<group>"; };
+		1687279725F0C55700A05529 /* xueUIwang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xueUIwang@3x.png"; sourceTree = "<group>"; };
 		16945FD325B7C4DD0056AE74 /* TMUIButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIButtonViewController.h; sourceTree = "<group>"; };
 		16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIButtonViewController.m; sourceTree = "<group>"; };
 		1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUIViewController.h; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */,
 				16CDF23525EF8E7B00C02C98 /* UIImageTMUIViewController2.h */,
 				16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */,
+				1687279725F0C55700A05529 /* xueUIwang@3x.png */,
 			);
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				1687279D25F0C55700A05529 /* xueUIwang@3x.png in Resources */,
 				3B7BE7A925E5FD15001DA085 /* AttributeTextVC.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,

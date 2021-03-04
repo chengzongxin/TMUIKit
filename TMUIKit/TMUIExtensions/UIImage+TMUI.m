@@ -20,6 +20,139 @@
 
 @implementation UIImage (TMUI)
 
++ (UIImage *)tmui_imageInBundleWithName:(NSString *)imageName{
+    return [self tmui_imageInBundle:nil imageName:imageName];
+}
+
++ (UIImage *)tmui_imageInBundle:( NSString * _Nullable)bundleName imageName:(NSString *)imageName{
+    if (![imageName isKindOfClass:[NSString class]] || imageName.length<1) {
+        return nil;
+    }
+    
+    NSString *imgPath = [self pathForResourceWithBundleName:bundleName
+                                                            fileName:[self fullImgNameWithName:imageName]];
+    UIImage *img = [UIImage imageWithContentsOfFile:imgPath];
+    if (!img && imageName.length>0) {
+        if ([[UIScreen mainScreen]scale]>2) {// 没有3x图片使用2x图片代替
+            imgPath = [self pathForResourceWithBundleName:bundleName
+                                                          fileName:[NSString stringWithFormat:@"%@@2x.png",imageName]];
+            img = [UIImage imageWithContentsOfFile:imgPath];
+            return img;
+        }
+    }
+    return img;
+}
+
++ (NSString *)fullImgNameWithName:(NSString *)imageName {
+    if (![imageName isKindOfClass:[NSString class]] || imageName.length<1) {
+        return @"";
+    }
+    if ([imageName rangeOfString:@"."].length>0) {
+        return imageName;
+    }
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        if ([[UIScreen mainScreen]respondsToSelector:@selector(scale)] && [[UIScreen mainScreen]scale] == 2) {
+            return [NSString stringWithFormat:@"%@@2x.png",imageName];
+        }else{
+            return [NSString stringWithFormat:@"%@.png",imageName];
+        }
+    } else {
+        NSInteger scale = (NSInteger)[[UIScreen mainScreen]scale];
+        if (scale<2) {//iphone端不考虑1x的图片
+            scale = 2;
+        }
+        return [NSString stringWithFormat:@"%@@%@x.png",imageName,@(scale)];
+    }
+}
+
++ (NSString *)pathForResourceWithBundleName:(NSString *)strBundleName fileName:(NSString *)fileName {
+    NSBundle *bundle = strBundleName ? [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:strBundleName withExtension:@"bundle"]] : NSBundle.mainBundle;
+    NSString *filePath = [bundle pathForResource:fileName ofType:@""];
+    
+    if (!filePath) {
+        NSLog(@"%@",[NSString stringWithFormat:@"#no resource for fileName:%@ Bundle:%@",fileName,[bundle description]]);
+    }
+    return filePath;
+}
+
+
+- (UIImage *)tmui_fixOrientation {
+    // No-op if the orientation is already correct
+    if (self.imageOrientation == UIImageOrientationUp) return self;
+    
+    // We need to calculate the proper transformation to make the image upright.
+    // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    
+    switch (self.imageOrientation) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.width, self.size.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.width, 0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;
+            
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, self.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+            
+        default:
+            break;
+    }
+    
+    switch (self.imageOrientation) {
+        case UIImageOrientationUpMirrored:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.width, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+            
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, self.size.height, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+            
+        default:
+            break;
+    }
+    
+    // Now we draw the underlying CGImage into a new context, applying the transform
+    // calculated above.
+    CGContextRef ctx = CGBitmapContextCreate(NULL, self.size.width, self.size.height,
+                                             CGImageGetBitsPerComponent(self.CGImage), 0,
+                                             CGImageGetColorSpace(self.CGImage),
+                                             CGImageGetBitmapInfo(self.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (self.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            // Grr...
+            CGContextDrawImage(ctx, CGRectMake(0, 0, self.size.height, self.size.width), self.CGImage);
+            break;
+            
+        default:
+            CGContextDrawImage(ctx, CGRectMake(0, 0, self.size.width, self.size.height), self.CGImage);
+            break;
+    }
+    
+    // And now we just create a new UIImage from the drawing context
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
+}
+
 
 + (nullable UIImage *)tmui_imageWithSize:(CGSize)size opaque:(BOOL)opaque scale:(CGFloat)scale actions:(void (^)(CGContextRef contextRef))actionBlock {
     if (!actionBlock || CGSizeEqualToSize(size, CGSizeZero)) {
@@ -352,95 +485,15 @@
 
 
 
-@implementation UIImage (TMUI_Compression)
-
-+ (NSData *)tmui_compressImage:(UIImage *)image dataLen:(NSInteger)dataLen  {
-    
-    double size;
-    if (dataLen == 0) {
-        NSData *imageData = UIImageJPEGRepresentation(image, 1);
-        dataLen = imageData.length;
-    }
-    NSLog(@"image data size before compressed == %f Kb(w:%f-h:%f)",dataLen/1024.0, image.size.width, image.size.height);
-    
-    int fixelW = (int)image.size.width;
-    int fixelH = (int)image.size.height;
-    int thumbW = fixelW % 2  == 1 ? fixelW + 1 : fixelW;
-    int thumbH = fixelH % 2  == 1 ? fixelH + 1 : fixelH;
-    
-    int longSide = MAX(thumbW, thumbH);
-    int shortSide = MIN(thumbW, thumbH);
-    
-    int tLongSide = longSide;
-    int tShortSide = shortSide;
-    
-    double scale = ((double)shortSide/longSide);
-    
-    if (scale <= 1 && scale > 0.5625) {
-        if (longSide < 1664) {
-            if (dataLen/1024.0 < 150) {
-                return UIImageJPEGRepresentation(image, 1);;
-            }
-            tLongSide = longSide / 1;
-            tShortSide = shortSide / 1;
-            size = (tLongSide * tShortSide) / pow(1664, 2) * 150;
-            size = MAX(60, size);
-        }
-        else if (longSide >= 1664 && longSide < 4990) {
-            tLongSide = longSide / 2;
-            tShortSide = shortSide / 2;
-            size = (tLongSide * tShortSide) / pow(2495, 2) * 300;
-            size = MAX(60, size);
-        }
-        else if (longSide >= 4990 && longSide < 10240) {
-            tLongSide = longSide / 4;
-            tShortSide = shortSide / 4;
-            size = (tLongSide * tShortSide) / pow(2560, 2) * 300;
-            size = MAX(100, size);
-        }
-        else {
-            int multiple = fixelH / 1280 == 0 ? 1 : fixelH / 1280;
-            tLongSide = longSide / multiple;
-            tShortSide = shortSide / multiple;
-            size = (tLongSide * tShortSide) / pow(2560, 2) * 300;
-            size = MAX(100, size);
-        }
-    }
-    else if (scale <= 0.5625 && scale > 0.5) {
-        if (longSide < 1280 && dataLen/1024 < 200) {
-            return UIImageJPEGRepresentation(image, 1);;
-        }
-        int multiple = fixelH / 1280 == 0 ? 1 : fixelH / 1280;
-        tLongSide = longSide / multiple;
-        tShortSide = shortSide / multiple;
-        size = (tLongSide * tShortSide) / (1440.0 * 2560.0) * 200;
-        size = MAX(100, size);
-    }
-    else {
-        if (longSide < 1280 && dataLen/1024 < 200) {
-            return UIImageJPEGRepresentation(image, 1);;
-        }
-        int multiple = (int)ceil(fixelH / (1280.0 / scale));
-        tLongSide = longSide / multiple;
-        tShortSide = shortSide / multiple;
-        size = (tLongSide * tShortSide) / (1280 * 1280/scale) * 500;
-        size = MAX(100, size);
-    }
-    return [self compressWithImage:image thumbW:fixelW > fixelH ? tLongSide : tShortSide thumbH:fixelH > fixelW ? tLongSide : tShortSide size:size*3];
-}
-
-+ (NSData *)compressWithImage:(UIImage *)image thumbW:(int)width thumbH:(int)height size:(double)size {
-    UIImage *thumbImage = [image tmui_imageCompressFitTargetSize:CGSizeMake(width, height)];
-    NSData *imageData = UIImageJPEGRepresentation(thumbImage, 0.95);
-    NSLog(@"image data size after compressed ==%f kb == %f(w:%d-h:%d)",imageData.length/1024.0, size, width, height);
-    return imageData;
-}
-
-@end
-
-
 @implementation UIImage (TMUI_Scale)
 
+- (NSData *)tmui_imageData{
+    return UIImageJPEGRepresentation(self, 1.0);
+}
+
+- (NSInteger)tmui_dataLength{
+    return [self tmui_imageData].length;
+}
 
 /**
  *  缩放到指定大小，也就是指定的size(非等比)
@@ -672,11 +725,11 @@
  *
  *  @return 压缩后的图片
  */
-- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen {
-    return [self tmui_resizedToMaxDataLen:maxDataLen aspectRatio:0];
+- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen {
+    return [self tmui_compressToMaxDataLen:maxDataLen aspectRatio:0];
 }
 
-- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio {
+- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio {
     CGFloat compression = 1.0;
     CGFloat scale = 1.0;
     CGFloat imgW = self.size.width * self.scale ? : 1;  //防止为0

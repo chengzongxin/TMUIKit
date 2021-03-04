@@ -35,7 +35,7 @@
     CGSize imgSize = CGSizeMake(30, 30);
     Style(@"img_small").fixWH(imgSize);
     
-    id l1 = Label.str(@"shape image").styles(@"h1");
+    id l1 = Label.str(@"Shape image").styles(@"h1");
     CUIStack *horStack = HorStack().gap(20);
     for (int i = 0; i < 7; i++) {
         id i1 = [UIImage tmui_imageWithShape:i size:imgSize tintColor:UIColor.tmui_randomColor];
@@ -58,26 +58,16 @@
     Style(@"img_demo").fixWH(150,100).aspectFit;
     
     UIImage *img = Img(@"angel");
-    NSData *imageData = UIImageJPEGRepresentation(img, 1);
     
     id a1 = AttStr(AttStr(@"Origin img\n").styles(@"h1"),
-           AttStr(Str(@"data length %zd",imageData.length)).styles(@"h2"));
+           AttStr(Str(@"data length %zd",img.tmui_dataLength)).styles(@"h2"));
     id l1 = Label.str(a1).multiline;
     
     id iv1 = ImageView.img(img).styles(@"img_demo");
-    // compress image
-    NSData *imgData = [UIImage tmui_compressImage:img dataLen:0];
-    UIImage *compressImg = [UIImage imageWithData:imgData];
-    
-    id a2 = AttStr(AttStr(@"Compress img\n").styles(@"h1"),
-           AttStr(Str(@"data length %zd",imgData.length)).styles(@"h2"));
-    id l2 = Label.str(a2).multiline;
-    id iv2 = ImageView.img(compressImg).styles(@"img_demo");
-    
-    // resized max 100000 image
-    NSData *maxData = [img tmui_resizedToMaxDataLen:100000];
+    // compress to max data len 100000 image
+    NSData *maxData = [img tmui_compressToMaxDataLen:100000];
     UIImage *maxImg = [UIImage imageWithData:maxData];
-    id a3 = AttStr(AttStr(@"Resized to max date lenrh 100000 bytes \n").styles(@"h1"),
+    id a3 = AttStr(AttStr(@"Resized to max date length < 100000 bytes \n").styles(@"h1"),
            AttStr(Str(@"data length %zd",maxData.length)).styles(@"h2"));
     id l3 = Label.str(a3).multiline;
     id iv3 = ImageView.img(maxImg).styles(@"img_demo");
@@ -90,8 +80,12 @@
     id l4 = Label.str(a4).multiline;
     id iv4 = ImageView.img(subImg).styles(@"img_demo");
     
+    id a5 = AttStr(AttStr(@"image in bundle").styles(@"h1"));
+    id l5 = Label.str(a5).multiline;
+    UIImage *bundleImg = [UIImage tmui_imageInBundleWithName:@"xueUIwang"];
+    id iv5 = ImageView.img(bundleImg).styles(@"img_demo");
     
-    _stack.addChild(l1,iv1,l2,iv2,l3,iv3,l4,iv4);
+    _stack.addChild(l1,iv1,l3,iv3,l4,iv4,l5,iv5);
 }
 
 -(void)viewDidAppear:(BOOL)animated{
