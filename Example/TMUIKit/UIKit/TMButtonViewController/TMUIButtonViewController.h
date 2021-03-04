@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TMBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TMUIButtonViewController : UIViewController
+@interface TMUIButtonViewController : TMBaseViewController
 
 @end
 

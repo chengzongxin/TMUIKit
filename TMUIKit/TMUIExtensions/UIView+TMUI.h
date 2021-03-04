@@ -70,6 +70,8 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
 - (void)tmui_cornerDirect:(UIRectCorner)direct radius:(int)radius;
 
 
+- (void)tmui_cornerRadius:(CGFloat)cornerRadius;
+
 /**
  设置View和View的阴影圆角
  @note 不可和圆角效果同时设置

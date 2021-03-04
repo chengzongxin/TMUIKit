@@ -227,10 +227,15 @@ TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
 }
 
 
+- (void)tmui_cornerRadius:(CGFloat)cornerRadius{
+    self.layer.cornerRadius = cornerRadius;
+}
+
 - (void)tmui_shadowColor:(UIColor *)color
                  opacity:(float)opacity
               offsetSize:(CGSize)offset
                   corner:(int)corner{
+    self.layer.masksToBounds = NO;
     self.layer.shadowColor   = color.CGColor;//设置阴影的透明度
     self.layer.shadowOpacity = opacity;//设置阴影的透明度
     self.layer.shadowOffset  = offset;//设置阴影的偏移距离

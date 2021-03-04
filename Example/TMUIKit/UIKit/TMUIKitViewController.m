@@ -7,71 +7,43 @@
 //
 
 #import "TMUIKitViewController.h"
-#import <TMUIKit.h>
-#import <Masonry.h>
+#import "TMUIButtonViewController.h"
+#import "TMUILabelViewController.h"
+#import "TMUITextFieldViewController.h"
+#import "TMUITextViewViewController.h"
 
-@interface TMUIKitViewController ()<UITableViewDelegate,UITableViewDataSource>
-
-@property (nonatomic, strong) UITableView *tableView;
-
-@property (nonatomic, strong) NSArray *datas;
+@interface TMUIKitViewController ()
 
 @end
 
 @implementation TMUIKitViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    _datas = @[
-        @{@"title":@"TMUIButton",@"class":@"TMUIButtonViewController"},
-        @{@"title":@"TMUILabel",@"class":@"TMUILabelViewController"},
-        @{@"title":@"TMUITextField",@"class":@"TMUITextFieldViewController"},
-        @{@"title":@"TMUITextView",@"class":@"TMUITextViewViewController"},
-//        @{@"title":@"ChainUI",@"class":@"TMChainUIViewController"}
-    ];
-    
-    [self.view addSubview:self.tableView];
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _datas.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"cell";
-    NSDictionary *dict = _datas[indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    cell.textLabel.text = dict[@"title"];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dict = _datas[indexPath.row];
-    Class class = NSClassFromString(dict[@"class"]);
-    NSString *title = dict[@"title"];
-    UIViewController *vc = [[class alloc] init];
-    vc.title = title;
+- (void)push:(Class)vcClass{
+    UIViewController *vc = [[vcClass alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
-- (UITableView *)tableView{
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-    }
-    return _tableView;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    GroupTV(
+            Section(
+                    Row.str(@"TMUIButton").fnt(18).detailStr(@"设置图片、文字位置、图文间距").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUIButtonViewController.class];
+                        }),
+                    Row.str(@"TMUILabel").fnt(18).detailStr(@"设置Label内容inset、设置复制").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUILabelViewController.class];
+                        }),
+                    Row.str(@"TMUITextField").fnt(18).detailStr(@"设置TextField内容Inset、clearButton位置、限制文本长度").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUITextFieldViewController.class];
+                        }),
+                    Row.str(@"TMUITextView").fnt(18).detailStr(@"TextView设置placeholder、内容长度限制、inset、高度自适应").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUITextViewViewController.class];
+                        }),
+                    ).title(@"TMUIWidgets")
+            ).embedIn(self.view);
 }
+
 
 @end
