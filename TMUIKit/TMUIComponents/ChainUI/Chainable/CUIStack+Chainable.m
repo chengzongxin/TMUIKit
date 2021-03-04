@@ -13,6 +13,16 @@
     CUI_FLOAT_BLOCK(self.spacing = value);
 }
 
+- (CUIChainableCUIStackObjectBlock)addChild{
+    CUI_OBJECT_BLOCK(
+                     if ([value isKindOfClass:NSArray.class]) {
+                        for (UIView *item in value) {
+                            [self addArrangedSubview:item];
+                        }
+                    }
+                     );
+}
+
 - (instancetype)topAlignment {
     self.alignment = CUIStackAlignmentTop;
     return self;

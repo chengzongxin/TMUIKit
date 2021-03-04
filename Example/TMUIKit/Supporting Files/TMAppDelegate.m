@@ -8,10 +8,24 @@
 
 #import "TMAppDelegate.h"
 
+@interface TMAppDelegate ()
+
+@property (nonatomic, strong) CUIStyle *h1;
+@property (nonatomic, strong) CUIStyle *h2;
+//@property (nonatomic, strong) CUIStyle *img_icon;
+//@property (nonatomic, strong) CUIStyle *img_small;
+//@property (nonatomic, strong) CUIStyle *img_big;
+
+@end
+
 @implementation TMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    _h1 = Style(@"h1").fnt(14).color(Color(@"black")).multiline;
+    _h2 = Style(@"h2").fnt(12).color(Color(@"gray")).multiline;
+    
 #if DEBUG
     // iOS
     [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];

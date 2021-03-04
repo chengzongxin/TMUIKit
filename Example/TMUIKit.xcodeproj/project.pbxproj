@@ -718,7 +718,7 @@
 						ProvisioningStyle = Automatic;
 					};
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = 5XB293ZE6R;
+						DevelopmentTeam = ARGK844GXV;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -1123,7 +1123,7 @@
 			baseConfigurationReference = F3C0677E9362D3549CF5BF9B /* Pods-TMUIKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5XB293ZE6R;
+				DEVELOPMENT_TEAM = ARGK844GXV;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMUIKit/Supporting Files/TMUIKit-Prefix.pch";
 				INFOPLIST_FILE = "TMUIKit/Supporting Files/TMUIKit-Info.plist";
@@ -1141,7 +1141,7 @@
 			baseConfigurationReference = D0348311BFA52F2FA55C0FFA /* Pods-TMUIKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5XB293ZE6R;
+				DEVELOPMENT_TEAM = ARGK844GXV;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMUIKit/Supporting Files/TMUIKit-Prefix.pch";
 				INFOPLIST_FILE = "TMUIKit/Supporting Files/TMUIKit-Info.plist";

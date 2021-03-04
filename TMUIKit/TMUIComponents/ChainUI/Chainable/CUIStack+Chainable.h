@@ -55,6 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
 CUI_STACK_PROP(Float)       gap;
 
 /**
+ * Add Subviews.
+ * It can take one or more arguments.
+ * Usages: addChild(subview), addChild(subview1, subview2, subview3, ...)
+ */
+CUI_STACK_PROP(Object)      addChild;
+
+/**
  * Align items.
  
  * For HStack, the valid alignments are:

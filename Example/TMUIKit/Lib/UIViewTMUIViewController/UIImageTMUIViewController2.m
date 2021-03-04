@@ -10,6 +10,8 @@
 
 @interface UIImageTMUIViewController2 ()
 
+@property (nonatomic, strong) CUIStack *stack;
+
 @end
 
 @implementation UIImageTMUIViewController2
@@ -17,85 +19,69 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.bgColor(@"white");
+    self.view.bgColor(@"white").border(2, @"red");
     
-    // Shape Image
-    id s1 = Style().fnt(20).color(Color(@"red")).fixWidth(200);
-    id s3 = Style().fixWH(50,30);
-    // TMUIImageShapeOval
-    id l1 = Label.str(@"shape image").styles(s1);
-    id i1 = [UIImage tmui_imageWithShape:TMUIImageShapeOval size:CGSizeMake(50, 50) tintColor:UIColor.tmui_randomColor];
-    UIImageView *iv1 = ImageView.img(i1).aspectFit.styles(s3);
-    // TMUIImageShapeTriangle
-    id i2 = [UIImage tmui_imageWithShape:TMUIImageShapeTriangle size:CGSizeMake(50, 50) tintColor:UIColor.tmui_randomColor];
-    UIImageView *iv2 = ImageView.img(i2).aspectFit.styles(s3);
-    // TMUIImageShapeDisclosureIndicator
-    id i3 = [UIImage tmui_imageWithShape:TMUIImageShapeDisclosureIndicator size:CGSizeMake(50, 50) tintColor:UIColor.tmui_randomColor];
-    UIImageView *iv3 = ImageView.img(i3).aspectFit.styles(s3);
+    // embedin scrollview will not vertival huge view
+    id scrollView = [UIScrollView new].embedIn(self.view);
+    _stack = VerStack().gap(10).embedIn(scrollView, 20, 20, 80);
     
-    id i4 = [UIImage tmui_imageWithShape:TMUIImageShapeCheckmark size:CGSizeMake(50, 50) tintColor:UIColor.tmui_randomColor];
-    UIImageView *iv4 = ImageView.img(i4).aspectFit.styles(s3);
+    [self section1];
     
-    id i5 = [UIImage tmui_imageWithShape:TMUIImageShapeDetailButtonImage size:CGSizeMake(50, 50) tintColor:UIColor.tmui_randomColor];
-    UIImageView *iv5 = ImageView.img(i5).aspectFit.styles(s3);
+    [self section2];
+}
+
+- (void)section1{
+    // MARK: Secion1 Shape Image
+    CGSize imgSize = CGSizeMake(30, 30);
+    Style(@"img_small").fixWH(imgSize);
     
-    id i6 = [UIImage tmui_imageWithShape:TMUIImageShapeNavBack size:CGSizeMake(50, 50) tintColor:UIColor.tmui_randomColor];
-    UIImageView *iv6 = ImageView.img(i6).aspectFit.styles(s3);
-    
-    id i7 = [UIImage tmui_imageWithShape:TMUIImageShapeNavClose size:CGSizeMake(50, 50) tintColor:UIColor.tmui_randomColor];
-    UIImageView *iv7 = ImageView.img(i7).aspectFit.styles(s3);
+    id l1 = Label.str(@"shape image").styles(@"h1");
+    CUIStack *horStack = HorStack().gap(20);
+    for (int i = 0; i < 7; i++) {
+        id i1 = [UIImage tmui_imageWithShape:i size:imgSize tintColor:UIColor.tmui_randomColor];
+        UIImageView *iv1 = ImageView.img(i1).aspectFit.styles(@"img_small");
+        horStack.addChild(iv1);
+    }
     
     // image with color
-    id i8 = [UIImage tmui_imageWithColor:UIColor.tmui_randomColor size:CGSizeMake(50, 50) cornerRadius:10];
-    UIImageView *iv8 = ImageView.img(i8).aspectFit.styles(s3);
+    id i8 = [UIImage tmui_imageWithColor:UIColor.tmui_randomColor size:imgSize cornerRadius:5];
+    UIImageView *iv8 = ImageView.img(i8).aspectFit.styles(@"img_small");
+    horStack.addChild(iv8);
     
-    // snap scrren
-    id l2 = Label.str(@"snap screen").styles(s1);
-    id i9 = [UIImage tmui_imageWithView:self.view afterScreenUpdates:YES];
-    UIImageView *iv9 = ImageView.img(i9).aspectFit.styles(s3);
+    _stack.addChild(l1,horStack);
+}
+
+- (void)section2{
+    // MARK: Secion2 compress Image
     
-    id l3 = Label.str(@"snap screen2").styles(s1);
+    UIImage *img = Img(@"angel");
+    NSData *imageData = UIImageJPEGRepresentation(img, 1);
+    NSInteger dataLen = imageData.length;
     
-    id scrollView = [UIScrollView new].embedIn(self.view);
-    VerStack(l1,
-             HorStack(iv1,iv2,iv3,iv4,iv5,iv6,iv7,iv8),
-             l2,
-             iv9,
-             l3
-             ).embedIn(scrollView, 20, 20, 80).gap(30);
+    id l1 = Label.str(@"compress image origin data len %zd",dataLen).styles(@"h1");
+    Style(@"small_image").fixWH(50,50);
     
     
-//    UIView *vv1 = View.bgColor(@"random").embedIn(self.view).makeCons(^{
-////        make.top.left.right.bottom.constants(100,100,-100,-100);
-//        make.top.left.constants(100,100);
-//    }).fixWH(100,100);
-//
-//    NSLog(@"%@",vv1.constraints);
-//
-//    UIView *vv2 = View.bgColor(@"random").embedIn(self.view).makeCons(^{
-//        make.top.left.width.height.constants(300,100,100,100);
-//    });
-//
-//    NSLog(@"%@",vv2.constraints);
-//
-//    UIView *vv3 = View.bgColor(@"random").embedIn(self.view);
-//    [vv3 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(100);
-//        make.top.mas_equalTo(500);
-//        make.size.mas_equalTo(CGSizeMake(100, 100));
-//    }];
-//
-//    NSLog(@"%@",vv3.constraints);
-//
-//    NSLog(@"%@",self.view.constraints);
+    id iv1 = ImageView.img(img).aspectFit.fixWH(100,50);
+    
+    _stack.addChild(l1,iv1);
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    id s3 = Style().fixWH(50,30);
+    
+    // MARK: Secion3 compress Image
+    id a2 = AttStr(AttStr(@"snap screen\n").styles(@"h1"),
+           AttStr(@"Note: Screenshots can only be taken after display").styles(@"h2"));
+    id l2 = Label.str(a2).multiline;
+
     id i9 = [UIImage tmui_imageWithView:self.view afterScreenUpdates:YES];
-    ImageView.img(i9).aspectFit.styles(s3).embedIn(self.view, 300,0,0,0);
+    id iv9 = ImageView.img(i9).aspectFit.fixWH(200,300);
+
+    _stack.addChild(l2,iv9);
+
 }
 
 
 @end
+ 
