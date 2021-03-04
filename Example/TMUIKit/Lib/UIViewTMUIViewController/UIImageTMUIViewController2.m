@@ -53,18 +53,45 @@
 
 - (void)section2{
     // MARK: Secion2 compress Image
+    // calculate img
+    
+    Style(@"img_demo").fixWH(150,100).aspectFit;
     
     UIImage *img = Img(@"angel");
     NSData *imageData = UIImageJPEGRepresentation(img, 1);
-    NSInteger dataLen = imageData.length;
     
-    id l1 = Label.str(@"compress image origin data len %zd",dataLen).styles(@"h1");
-    Style(@"small_image").fixWH(50,50);
+    id a1 = AttStr(AttStr(@"Origin img\n").styles(@"h1"),
+           AttStr(Str(@"data length %zd",imageData.length)).styles(@"h2"));
+    id l1 = Label.str(a1).multiline;
+    
+    id iv1 = ImageView.img(img).styles(@"img_demo");
+    // compress image
+    NSData *imgData = [UIImage tmui_compressImage:img dataLen:0];
+    UIImage *compressImg = [UIImage imageWithData:imgData];
+    
+    id a2 = AttStr(AttStr(@"Compress img\n").styles(@"h1"),
+           AttStr(Str(@"data length %zd",imgData.length)).styles(@"h2"));
+    id l2 = Label.str(a2).multiline;
+    id iv2 = ImageView.img(compressImg).styles(@"img_demo");
+    
+    // resized max 100000 image
+    NSData *maxData = [img tmui_resizedToMaxDataLen:100000];
+    UIImage *maxImg = [UIImage imageWithData:maxData];
+    id a3 = AttStr(AttStr(@"Resized to max date lenrh 100000 bytes \n").styles(@"h1"),
+           AttStr(Str(@"data length %zd",maxData.length)).styles(@"h2"));
+    id l3 = Label.str(a3).multiline;
+    id iv3 = ImageView.img(maxImg).styles(@"img_demo");
+    
+    // sub image
+    CGRect subRect = CGRectMake(img.size.width / 2 - 200, img.size.height / 2 - 200, 800, 800);
+    UIImage *subImg = [img tmui_getSubImage:subRect]; // or img.subImg(subRect);
+    id a4 = AttStr(AttStr(@"get sub img\n").styles(@"h1"),
+           AttStr(Str(@"sub img rect %@",Str(subRect))).styles(@"h2"));
+    id l4 = Label.str(a4).multiline;
+    id iv4 = ImageView.img(subImg).styles(@"img_demo");
     
     
-    id iv1 = ImageView.img(img).aspectFit.fixWH(100,50);
-    
-    _stack.addChild(l1,iv1);
+    _stack.addChild(l1,iv1,l2,iv2,l3,iv3,l4,iv4);
 }
 
 -(void)viewDidAppear:(BOOL)animated{

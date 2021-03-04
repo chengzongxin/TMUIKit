@@ -73,7 +73,7 @@
                       @"class":@"UIImageTMUIViewController1"
                   },
                   @{
-                      @"rowTitle":@"图片创建相关",
+                      @"rowTitle":@"图片创建、压缩、裁剪",
                       @"class":@"UIImageTMUIViewController2"
                   }
           ]},
