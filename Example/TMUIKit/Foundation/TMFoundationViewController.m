@@ -30,7 +30,10 @@
           @{@"title":@"NSString+Attribute",@"desc":@"富文本",@"class":@"AttributeTextVC"},
         @{@"title":@"NSString+Size",@"desc":@"size计算"}],
     },
-    @{@"title":@"NSArray"},
+    @{@"title":@"NSArray",
+      @"sectionTitles":
+        @[@{@"title":@"NSArray+TMUI",@"desc":@"Crash avoid",@"class":@"NSArrayTMUIViewController"}],
+    },
     @{@"title":@"NSDictionary"},
     @{@"title":@"NSDate"}
     ];

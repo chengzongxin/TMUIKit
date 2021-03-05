@@ -52,6 +52,7 @@
 		16CDF23125EF839B00C02C98 /* UIImageTMUIViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */; };
 		16CDF23725EF8E7B00C02C98 /* UIImageTMUIViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
+		16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
 		16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */; };
 		16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFF025EE2621005D8E4B /* AppStoreCell.m */; };
@@ -196,6 +197,8 @@
 		16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIImageTMUIViewController2.m; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
 		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
+		16E82E7625F222EE00B8142E /* NSArrayTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSArrayTMUIViewController.h; sourceTree = "<group>"; };
+		16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSArrayTMUIViewController.m; sourceTree = "<group>"; };
 		16E8FFEA25EE25F9005D8E4B /* ChainUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainUIViewController.h; sourceTree = "<group>"; };
 		16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainUIViewController.m; sourceTree = "<group>"; };
 		16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStoreViewController.m; sourceTree = "<group>"; };
@@ -524,6 +527,15 @@
 			path = ALAssetsLibrary;
 			sourceTree = "<group>";
 		};
+		16E82E6A25F222B100B8142E /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				16E82E7625F222EE00B8142E /* NSArrayTMUIViewController.h */,
+				16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */,
+			);
+			path = NSArray;
+			sourceTree = "<group>";
+		};
 		16E8FFE325EE25B2005D8E4B /* ChainUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +579,7 @@
 			children = (
 				3B806CBE25CA75CC00B78CD1 /* TMFoundationViewController.h */,
 				3B806CB825CA75CB00B78CD1 /* TMFoundationViewController.m */,
+				16E82E6A25F222B100B8142E /* NSArray */,
 				3B806CBA25CA75CB00B78CD1 /* MD5VC.h */,
 				3B806CBB25CA75CB00B78CD1 /* MD5VC.m */,
 				3B806CBD25CA75CC00B78CD1 /* MD5VC.xib */,
@@ -951,6 +964,7 @@
 				16CDF22625EF6B0D00C02C98 /* UITextFieldTMUIViewController.m in Sources */,
 				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
 				3B806CC425CA75CC00B78CD1 /* VerifyViewController.m in Sources */,
+				16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
