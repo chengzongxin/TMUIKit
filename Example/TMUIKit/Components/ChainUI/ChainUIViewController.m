@@ -232,6 +232,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.bgColor(@"white");
+    
     [self demo1];
 }
 

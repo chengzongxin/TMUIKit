@@ -7,66 +7,35 @@
 //
 
 #import "TMComponentsViewController.h"
+#import "TMPageRootViewController.h"
+#import "ChainUIViewController.h"
 
-@interface TMComponentsViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *tableView;
-
-@property (nonatomic, strong) NSArray *datas;
+@interface TMComponentsViewController ()
 
 @end
 
 @implementation TMComponentsViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    _datas = @[
-        @{@"title":@"TMPageViewController",@"class":@"TMPageRootViewController"},
-        @{@"title":@"ChainUI",@"class":@"ChainUIViewController"}
-    ];
-    
-    [self.view addSubview:self.tableView];
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _datas.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"cell";
-    NSDictionary *dict = _datas[indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    cell.textLabel.text = dict[@"title"];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *dict = _datas[indexPath.row];
-    Class class = NSClassFromString(dict[@"class"]);
-    NSString *title = dict[@"title"];
-    UIViewController *vc = [[class alloc] init];
-    vc.title = title;
+- (void)push:(Class)vcClass{
+    UIViewController *vc = [[vcClass alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
-- (UITableView *)tableView{
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-    }
-    return _tableView;
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    GroupTV(
+            Section(
+                    Row.str(@"TMPageViewController").fnt(18).detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMPageRootViewController.class];
+                        }),
+                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:ChainUIViewController.class];
+                        }),
+                    ).title(@"TMUI Components")
+            ).embedIn(self.view);
 }
 
 @end
