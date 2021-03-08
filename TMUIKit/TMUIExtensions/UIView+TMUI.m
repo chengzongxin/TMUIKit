@@ -229,6 +229,9 @@ TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
 
 - (void)tmui_cornerRadius:(CGFloat)cornerRadius{
     self.layer.cornerRadius = cornerRadius;
+    if (self.tmui_gradientLayer) {
+        self.tmui_gradientLayer.cornerRadius = self.layer.cornerRadius;
+    }
 }
 
 - (void)tmui_shadowColor:(UIColor *)color

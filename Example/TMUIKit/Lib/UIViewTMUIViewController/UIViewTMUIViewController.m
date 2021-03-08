@@ -48,12 +48,61 @@
         [view tmui_shadowColor:UIColor.tmui_randomColor opacity:1.0 offsetSize:CGSizeMake(index, index) corner:index*1.0];
     }];
     // 渐变
-    [self addSegmentedWithTop:420 labelText:@"设置渐变" titles:titles click:^(NSInteger index) {
-        [view tmui_gradientWithColors:@[UIColor.tmui_randomColor,UIColor.tmui_randomColor] gradientType:index];
+    /*
+     TMUIGradientTypeLeftToRight,
+     TMUIGradientTypeTopLeftToBottomRight,
+     TMUIGradientTypeTopToBottom,
+     TMUIGradientTypeTopRightToBottomLeft,
+     TMUIGradientTypeBottomRightToTopLeft,
+     TMUIGradientTypeBottomLeftToTopRight,
+     */
+    [self addSegmentedWithTop:420 labelText:@"设置渐变" titles:@[@"左-右",@"左上-右下",@"上-下",@"右上-左下"] click:^(NSInteger index) {
+        TMUIGradientType type = TMUIGradientTypeLeftToRight;
+        switch (index) {
+            case 0:
+                type = TMUIGradientTypeLeftToRight;
+                break;
+            case 1:
+                type = TMUIGradientTypeTopLeftToBottomRight;
+                break;
+            case 2:
+                type = TMUIGradientTypeTopToBottom;
+                break;
+            case 3:
+                type = TMUIGradientTypeTopRightToBottomLeft;
+                break;
+        }
+        [view tmui_gradientWithColors:@[UIColor.tmui_randomColor,UIColor.tmui_randomColor] gradientType:type];
     }];
     // 边框
-    [self addSegmentedWithTop:470 labelText:@"设置边框" titles:titles click:^(NSInteger index) {
-        [view tmui_border:UIColor.tmui_randomColor width:10 type:index];
+    /*
+     UIRectEdgeNone   = 0,
+     UIRectEdgeTop    = 1 << 0,
+     UIRectEdgeLeft   = 1 << 1,
+     UIRectEdgeBottom = 1 << 2,
+     UIRectEdgeRight  = 1 << 3,
+     UIRectEdgeAll    = UIRectEdgeTop | UIRectEdgeLeft | UIRectEdgeBottom | UIRectEdgeRight
+     */
+    [self addSegmentedWithTop:470 labelText:@"设置边框" titles:@[@"全部",@"左",@"右",@"上",@"下"] click:^(NSInteger index) {
+        UIRectEdge type = UIRectEdgeNone;
+        switch (index) {
+            case 0:
+                type = UIRectEdgeAll;
+                break;
+            case 1:
+                type = UIRectEdgeLeft;
+                break;
+            case 2:
+                type = UIRectEdgeRight;
+                break;
+            case 3:
+                type = UIRectEdgeTop;
+                break;
+            case 4:
+                type = UIRectEdgeBottom;
+                break;
+        }
+        [view tmui_border:UIColor.tmui_randomColor width:10 type:type];
     }];
 }
 
@@ -76,6 +125,8 @@
     // 圆角
     [self addSegmentedWithTop:750 labelText:@"设置半圆角" titles:titles click:^(NSInteger index) {
         [view tmui_cornerDirect:index radius:50];
+        view.layer.shadowPath = [view.layer.mask path];
+        [view tmui_shadowColor:UIColor.tmui_randomColor opacity:1 offsetSize:CGSizeMake(10, 10) corner:50];
     }];
 }
 

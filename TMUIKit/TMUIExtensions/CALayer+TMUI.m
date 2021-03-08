@@ -272,14 +272,6 @@
     self.transform = d;
 }
 
-- (UIViewContentMode)contentMode {
-//    return YYCAGravityToUIViewContentMode(self.contentsGravity);
-    return 0;
-}
-
-- (void)setContentMode:(UIViewContentMode)contentMode {
-//    self.contentsGravity = YYUIViewContentModeToCAGravity(contentMode);
-}
 
 - (void)tmui_addFadeAnimationWithDuration:(NSTimeInterval)duration curve:(UIViewAnimationCurve)curve {
     if (duration <= 0) return;

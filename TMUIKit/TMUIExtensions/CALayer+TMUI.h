@@ -68,11 +68,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat transformDepth;
 
 /**
- Wrapper for `contentsGravity` property.
- */
-@property (nonatomic) UIViewContentMode contentMode;
-
-/**
  Add a fade animation to layer's contents when the contents is changed.
  
  @param duration Animation duration

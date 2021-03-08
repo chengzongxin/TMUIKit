@@ -12,86 +12,86 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDate (TMUI)
 
 //创建单例
-+ (NSDateFormatter *)sharedDateFormatter;
++ (NSDateFormatter *)tmui_sharedDateFormatter;
 
 /// 获取年
-+ (NSInteger)year:(NSString *)dateStr;
++ (NSInteger)tmui_year:(NSString *)dateStr;
 /// 获取月
-+ (NSInteger)month:(NSString *)dateStr;
++ (NSInteger)tmui_month:(NSString *)dateStr;
 /// 获取星期
-+ (NSInteger)week:(NSString *)dateStr;
++ (NSInteger)tmui_week:(NSString *)dateStr;
 /// 获取星期 中文 日
-+ (NSString *)getWeekFromDate:(NSDate *)date;
++ (NSString *)tmui_getWeekFromDate:(NSDate *)date;
 /// 获取星期 中文 周日
-+ (NSString *)getChineseWeekFrom:(NSString *)dateStr;
++ (NSString *)tmui_getChineseWeekFrom:(NSString *)dateStr;
 /// 获取日
-+ (NSInteger)day:(NSString *)dateStr;
++ (NSInteger)tmui_day:(NSString *)dateStr;
 /// 获取月共有多少天
-+ (NSInteger)daysInMonth:(NSString *)dateStr;
++ (NSInteger)tmui_daysInMonth:(NSString *)dateStr;
 
 /// 获取当前日期 2018-01-01
-+ (NSString *)currentDay;
++ (NSString *)tmui_currentDay;
 /// 获取当前小时 00:00
-+ (NSString *)currentHour;
++ (NSString *)tmui_currentHour;
 /// 获取下月最后一天
-+ (NSString *)nextMonthLastDay;
++ (NSString *)tmui_nextMonthLastDay;
 
 /// 判断是否是今天
-+ (BOOL)isToday:(NSString *)dateStr;
++ (BOOL)tmui_isToday:(NSString *)dateStr;
 /// 判断是否是明天
-+ (BOOL)isTomorrow:(NSString *)dateStr;
++ (BOOL)tmui_isTomorrow:(NSString *)dateStr;
 /// 判断是否是后天
-+ (BOOL)isAfterTomorrow:(NSString *)dateStr;
++ (BOOL)tmui_isAfterTomorrow:(NSString *)dateStr;
 /// 判断是否是过去的时间
-+ (BOOL)isHistoryTime:(NSString *)dateStr;
++ (BOOL)tmui_isHistoryTime:(NSString *)dateStr;
 
 /// 从时间戳获取具体时间 格式:6:00
-+ (NSString *)hourStringWithInterval:(NSTimeInterval)timeInterval;
++ (NSString *)tmui_hourStringWithInterval:(NSTimeInterval)timeInterval;
 /// 从时间戳获取具体小时 格式:6
-+ (NSString *)hourTagWithInterval:(NSTimeInterval)timeInterval;
++ (NSString *)tmui_hourTagWithInterval:(NSTimeInterval)timeInterval;
 /// 从毫秒级时间戳获取具体小时 格式:600
-+ (NSString *)hourNumberWithInterval:(NSTimeInterval)timeInterval;
++ (NSString *)tmui_hourNumberWithInterval:(NSTimeInterval)timeInterval;
 /// 从时间戳获取具体日期 格式:2018-03-05
-+ (NSString *)timeStringWithInterval:(NSTimeInterval)timeInterval;
++ (NSString *)tmui_timeStringWithInterval:(NSTimeInterval)timeInterval;
 /// 从具体日期获取时间戳 毫秒
-+ (NSTimeInterval)timeIntervalFromDateString:(NSString *)dateStr;
++ (NSTimeInterval)tmui_timeIntervalFromDateString:(NSString *)dateStr;
 
 /// 获取当前天的后几天的星期
-+ (NSString *)getWeekAfterDay:(NSInteger)day;
++ (NSString *)tmui_getWeekAfterDay:(NSInteger)day;
 /// 获取当前天的后几天的日
-+ (NSString *)getDayAfterDay:(NSInteger)day;
++ (NSString *)tmui_getDayAfterDay:(NSInteger)day;
 /// 获取当前月的后几月
-+ (NSString *)getMonthAfterMonth:(NSInteger)Month;
++ (NSString *)tmui_getMonthAfterMonth:(NSInteger)Month;
 
 //NSString转NSDate
-+ (NSDate *)dateFromString:(NSString *)dateString formatter:(NSString *)formatter;
++ (NSDate *)tmui_dateFromString:(NSString *)dateString formatter:(NSString *)formatter;
 //NSDate转NSString
-+ (NSString *)stringFromDate:(NSDate *)date formatter:(NSString *)formatter;
++ (NSString *)tmui_stringFromDate:(NSDate *)date formatter:(NSString *)formatter;
 //通过数字返回星期几
-+ (NSString *)getWeekStringFromInteger:(NSInteger)week;
++ (NSString *)tmui_getWeekStringFromInteger:(NSInteger)week;
 
 //计算这个月有多少天
-- (NSUInteger)numberOfDaysInCurrentMonth;
+- (NSUInteger)tmui_numberOfDaysInCurrentMonth;
 //获取这个月有多少周
-- (NSUInteger)numberOfWeeksInCurrentMonth;
+- (NSUInteger)tmui_numberOfWeeksInCurrentMonth;
 //计算这个月的第一天是礼拜几
-- (NSUInteger)weeklyOrdinality;
+- (NSUInteger)tmui_weeklyOrdinality;
 //计算这个月最开始的一天
-- (NSDate *)firstDayOfCurrentMonth;
+- (NSDate *)tmui_firstDayOfCurrentMonth;
 //获取这个月的最后一天
-- (NSDate *)lastDayOfCurrentMonth;
+- (NSDate *)tmui_lastDayOfCurrentMonth;
 //获取年月日对象
-- (NSDateComponents *)YMDComponents;
+- (NSDateComponents *)tmui_YMDComponents;
 //获取当前日期是周几的数字：//周日是“1”，周一是“2”...
--(NSInteger)getWeekIntValue;
+- (NSInteger)tmui_getWeekIntValue;
 //是否是今年
-- (BOOL)isThisYear;
+- (BOOL)tmui_isThisYear;
 
 ///格式化消息的时间
-+(NSString*)formatMessageDateFromInterval:(long long)interval;
++ (NSString *)tmui_formatMessageDateFromInterval:(long long)interval;
 
 ///格式化直播预告时间
-+(NSString*)formatLivePreviewDateFromInterval:(NSTimeInterval)timeInterval isShowHour:(BOOL *)isShowHour;
++ (NSString *)tmui_formatLivePreviewDateFromInterval:(NSTimeInterval)timeInterval isShowHour:(BOOL *)isShowHour;
 
 @end
 
@@ -121,13 +121,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSDate (TMUI_Extensions)
 
-- (NSDate *)dayInThePreviousMonth;
-- (NSDate *)dayInTheFollowingMonth;
-- (NSDate *)dayInTheFollowingMonth:(NSInteger)month;//获取当前日期之后的几个月
-- (NSDate *)dayInTheFollowingDay:(NSInteger)day;//获取当前日期之后的几个天
-+ (NSInteger)getDayNumbertoDay:(NSDate *)today beforDay:(NSDate *)beforday;
+- (NSDate *)tmui_dayInThePreviousMonth;
+- (NSDate *)tmui_dayInTheFollowingMonth;
+- (NSDate *)tmui_dayInTheFollowingMonth:(NSInteger)month;//获取当前日期之后的几个月
+- (NSDate *)tmui_dayInTheFollowingDay:(NSInteger)day;//获取当前日期之后的几个天
++ (NSInteger)tmui_getDayNumbertoDay:(NSDate *)today beforDay:(NSDate *)beforday;
 //判断日期是今天,明天,后天,周几
-- (NSString *)compareIfTodayWithDate;
+- (NSString *)tmui_compareIfTodayWithDate;
 
 @end
 
