@@ -19,14 +19,27 @@
     
     self.view.bgColor(@"white");
     
-    id l1 = Label.str(@"处理了__NSArray0、__NSSingleObjectArrayI、__NSArrayI、__NSArrayM几种情况的数组越界访问").fixWidth(self.view.width - 40).styles(@"h1").multiline;
-    
-    id scrollView = [UIScrollView new].embedIn(self.view);
-    VerStack(l1).gap(10).embedIn(scrollView, 20, 20, 80);
-    
+    id l1 = Label.str(@"1.处理了__NSArray0、__NSSingleObjectArrayI、__NSArrayI、__NSArrayM几种情况的数组越界访问").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    // demo
     [self beyondBoundsAccess];
     
     [self addNullObject];
+    
+    id l2 = Label.str(@"2.map、filter、reduce等高阶函数").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    // demo2
+    [self higherOrderFunctions];
+    
+    id l3 = Label.str(@"3.不可变数组增删改操作").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    // demo3
+    [self addAndRemove];
+    
+    id l4 = Label.str(@"4.打乱，逆置").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    // demo3
+    [self reverse];
+    
+    
+    VerStack(l1,l2,l3,l4,CUISpring).gap(30).embedIn(self.view, 100, 20, 80);
+    
     
 }
 
@@ -127,6 +140,57 @@
         [array insertObject:str atIndex:5];
         
     }
+}
+
+- (void)higherOrderFunctions{
+    NSArray *arr = @[@1,@2,@3];
+    
+    NSArray *ma = [arr tmui_map:^id _Nonnull(NSNumber   *item) {
+        return @(item.integerValue + 10);
+    }];
+    
+    NSLog(@"%@",ma);
+    
+    NSArray *fa = [arr tmui_filter:^BOOL(NSNumber   *item) {
+        return item.integerValue + 10 > 11;
+    }];
+    
+    NSLog(@"%@",fa);
+    
+    id redu0 = [@[@"a", @"hello", @"greeting"] tmui_reduce:^id _Nonnull(id  _Nonnull accumulator, id  _Nonnull item) {
+        return [NSString stringWithFormat:@"%@%@", accumulator, item];
+    } initial:@""];
+    
+    NSLog(@"redu 0 = %@",redu0);
+    
+    id redu = @[@"a", @"hello", @"greeting"].reduce(@0, ^(NSNumber *totalLength, NSString *text) {
+       return [totalLength integerValue] + text.length;
+    });
+    
+    NSLog(@"redu 1 = %@",redu);
+}
+
+- (void)addAndRemove{
+    id a1 = [@[@1,@2] tmui_arrayByAddObject:@3];
+    Log(a1);
+    
+    id a2 = [@[@1,@2] tmui_arrayByRemovingObject:@2];
+    Log(a2);
+    
+    id a3 = [@[@1,@2] tmui_arrayByInsertObject:@3 atIndex:1];
+    Log(a3);
+    
+    id a4 = [@[@1,@2] tmui_arrayByRemovingLastObject];
+    Log(a4);
+}
+
+
+- (void)reverse{
+    id a1 = [@[@1,@2,@3,@4] tmui_reverse];
+    Log(a1);
+    
+    id a2 = [@[@1,@2,@3,@4] tmui_shuffle];
+    Log(a2);
 }
 
 @end

@@ -25,7 +25,7 @@
 }
 
 - (NSArray<NSString *> *)tmui_toTrimmedArray {
-    return [[self tmui_toArray] tmui_filterWithBlock:^BOOL(NSString *item) {
+    return [[self tmui_toArray] tmui_filter:^BOOL(NSString *item) {
         return item.tmui_trim.length > 0;
     }];
 }

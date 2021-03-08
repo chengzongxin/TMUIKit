@@ -123,7 +123,7 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayM);
     return mutableResult;
 }
 
-- (NSArray *)tmui_filterWithBlock:(BOOL (NS_NOESCAPE^)(id _Nonnull))block {
+- (NSArray *)tmui_filter:(BOOL (NS_NOESCAPE^)(id _Nonnull))block {
     if (!block) {
         return self;
     }
@@ -138,7 +138,7 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayM);
     return [result copy];
 }
 
-- (NSArray *)tmui_mapWithBlock:(id (NS_NOESCAPE^)(id item))block {
+- (NSArray *)tmui_map:(id (NS_NOESCAPE^)(id item))block {
     if (!block) {
         return self;
     }
@@ -148,6 +148,25 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayM);
         [result addObject:block(self[i])];
     }
     return [result copy];
+}
+
+- (id)tmui_reduce:(id(NS_NOESCAPE^)(id accumulator, id item))handle initial:(id)initial {
+    if (!handle || !self || !initial) return self;
+    if (self.count <1) return initial;
+    
+    id value = initial;
+    for (id obj in self) {
+        value = handle(value, obj);
+    }
+    return value;
+}
+
+- (void)tmui_forEach:(void(NS_NOESCAPE^)(id))handle {
+    if (!handle || !self) return;
+    
+    for (id obj in self) {
+        handle(obj);
+    }
 }
 
 @end
@@ -166,6 +185,16 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayM);
     NSMutableArray *result = [NSMutableArray array];
     [result addObjectsFromArray:self];
     [result addObject:object];
+    return result;
+}
+
+- (NSArray *)tmui_arrayByInsertObject:(id)object atIndex:(NSInteger)idx {
+    if (!object || idx > self.count - 1 || idx < 0) {
+        return self;
+    }
+    NSMutableArray *result = [NSMutableArray array];
+    [result addObjectsFromArray:self];
+    [result insertObject:object atIndex:idx];
     return result;
 }
 
@@ -206,4 +235,22 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayM);
     return nil;
 }
 
+- (NSArray *)tmui_reverse {
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self];
+    NSUInteger count = self.count;
+    int mid = floor(count / 2.0);
+    for (NSUInteger i = 0; i < mid; i++) {
+        [array exchangeObjectAtIndex:i withObjectAtIndex:(count - (i + 1))];
+    }
+    return array;
+}
+
+- (NSArray *)tmui_shuffle {
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self];
+    for (NSUInteger i = self.count; i > 1; i--) {
+        [array exchangeObjectAtIndex:(i - 1)
+                  withObjectAtIndex:arc4random_uniform((u_int32_t)i)];
+    }
+    return array;
+}
 @end

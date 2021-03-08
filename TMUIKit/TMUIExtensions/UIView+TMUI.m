@@ -332,7 +332,7 @@ TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
     gradientLayer.endPoint = CGPointMake(endX, endY);
     
     //设置颜色数组
-    colors = [colors tmui_mapWithBlock:^id _Nonnull(UIColor * _Nonnull item) {
+    colors = [colors tmui_map:^id _Nonnull(UIColor * _Nonnull item) {
         return (__bridge id)item.CGColor;
     }];
     gradientLayer.colors = colors;

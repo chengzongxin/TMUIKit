@@ -32,7 +32,7 @@
     },
     @{@"title":@"NSArray",
       @"sectionTitles":
-        @[@{@"title":@"NSArray+TMUI",@"desc":@"Crash avoid",@"class":@"NSArrayTMUIViewController"}],
+        @[@{@"title":@"NSArray+TMUI",@"desc":@"Crash avoid、高阶函数、不可变数组增删改查、打乱、逆置",@"class":@"NSArrayTMUIViewController"}],
     },
     @{@"title":@"NSDictionary"},
     @{@"title":@"NSDate"}
