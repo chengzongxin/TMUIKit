@@ -9,6 +9,7 @@
 #define TMAssociatedPropertyMacro_h
 
 #import "TMUIWeakObjectContainer.h"
+#import "TMUICommonDefines.h"
 #import <objc/runtime.h>
 
 //针对在类型里添加属性的相关便捷宏定义
@@ -152,6 +153,7 @@ NS_INLINE id _Nullable _tmui_associatedWeakObj(id _Nonnull self, SEL _Nonnull se
 #pragma mark - Meta Marcos
 
 #define _TMUISynthesizeId(_getterName, _setterName, _policy) \
+_Pragma("clang diagnostic push") _Pragma(ClangWarningConcat("-Wmismatched-parameter-types")) _Pragma(ClangWarningConcat("-Wmismatched-return-types"))\
 - (void)_setterName:(id)_getterName {\
     objc_setAssociatedObject(self, @selector(_getterName), _getterName, OBJC_ASSOCIATION_##_policy##_NONATOMIC);\
 }\
@@ -159,8 +161,10 @@ NS_INLINE id _Nullable _tmui_associatedWeakObj(id _Nonnull self, SEL _Nonnull se
 - (id)_getterName {\
     return objc_getAssociatedObject(self, @selector(_getterName));\
 }\
+_Pragma("clang diagnostic pop")
 
 #define _TMUISynthesizeWeakId(_getterName, _setterName) \
+_Pragma("clang diagnostic push") _Pragma(ClangWarningConcat("-Wmismatched-parameter-types")) _Pragma(ClangWarningConcat("-Wmismatched-return-types"))\
 - (void)_setterName:(id)_getterName {\
     objc_setAssociatedObject(self, @selector(_getterName), [[TMUIWeakObjectContainer alloc] initWithObject:_getterName], OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
 }\
@@ -168,8 +172,10 @@ NS_INLINE id _Nullable _tmui_associatedWeakObj(id _Nonnull self, SEL _Nonnull se
 - (id)_getterName {\
     return (TMUIWeakObjectContainer *)objc_getAssociatedObject(self, @selector(_getterName));\
 }\
+_Pragma("clang diagnostic pop")
 
 #define _TMUISynthesizeNonObject(_getterName, _setterName, _type, valueInitializer, valueGetter) \
+_Pragma("clang diagnostic push") _Pragma(ClangWarningConcat("-Wmismatched-parameter-types")) _Pragma(ClangWarningConcat("-Wmismatched-return-types"))\
 - (void)_setterName:(_type)_getterName {\
     objc_setAssociatedObject(self, @selector(_getterName), [NSNumber valueInitializer:_getterName], OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
 }\
@@ -177,7 +183,7 @@ NS_INLINE id _Nullable _tmui_associatedWeakObj(id _Nonnull self, SEL _Nonnull se
 - (_type)_getterName {\
     return [(NSNumber *)objc_getAssociatedObject(self, @selector(_getterName)) valueGetter];\
 }\
-
+_Pragma("clang diagnostic pop")
 
 
 

@@ -292,6 +292,14 @@ AddAccessibilityHint(NSObject *obj, NSString *hint) {
  @return 对应的 setter selector
  */
 
+#define SETTER_METHOD1(getter) \
+{NSString *getterString = NSStringFromSelector(getter);\
+    NSMutableString *setterString = [[NSMutableString alloc] initWithString:@"set"];\
+    [setterString appendString:getterString.tmui_capitalizedString];\
+    [setterString appendString:@":"];\
+    SEL setter = NSSelectorFromString(setterString);\
+return setter;}\
+
 #define SETTER_METHOD(getter) \
 - (SEL)setterWithGetter1:(SEL)getter{\
     NSString *getterString = NSStringFromSelector(getter);\
