@@ -8,7 +8,8 @@
 #import "UIView+TMUI.h"
 #import <objc/runtime.h>
 #import "TMUIWeakObjectContainer.h"
-#import "TMUIDefines.h"
+#import "TMUICoreGraphicsDefines.h"
+#import "TMUIAssociatedPropertyDefines.h"
 #import "UIImage+TMUI.h"
 #import "UIColor+TMUI.h"
 #import "NSArray+TMUI.h"

@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <math.h>
 #import <sys/utsname.h>
-#import "TMUIAssociatedObjectDefine.h"
+#import "TMUIAssociatedPropertyDefines.h"
 #import "NSObject+TMUI.h"
 
 

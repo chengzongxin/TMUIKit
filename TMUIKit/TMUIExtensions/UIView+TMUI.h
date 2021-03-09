@@ -232,7 +232,7 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
 /**
  当前的 view 是否是某个 UIViewController.view
  */
-//@property(nonatomic, assign) BOOL tmui_isControllerRootView;
+@property(nonatomic, assign) BOOL tmui_isControllerRootView;
 
 /**
  获取当前 view 所在的 UIViewController，会递归查找 superview，因此注意使用场景不要有过于频繁的调用

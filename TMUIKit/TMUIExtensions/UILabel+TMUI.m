@@ -11,7 +11,8 @@
 #import <Foundation/Foundation.h>
 #import "TMUICommonDefines.h"
 #import "NSAttributedString+TMUI.h"
-#import "TMUIAssociatedObjectDefine.h"
+//#import "TMUIAssociatedObjectDefine.h"
+#import <TMUIAssociatedPropertyDefines.h>
 
 @interface TMAttrTextModel : NSObject
 @property (nonatomic, copy) NSString *str;

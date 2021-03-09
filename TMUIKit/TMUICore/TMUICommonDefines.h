@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "TMCoreGraphicsDefines.h"
+#import "TMUICoreGraphicsDefines.h"
 #import "TMUIKitDefines.h"
 #import "NSString+TMUI.h"
 
@@ -291,6 +291,17 @@ AddAccessibilityHint(NSObject *obj, NSString *hint) {
  @param getter 目标 getter selector
  @return 对应的 setter selector
  */
+
+#define SETTER_METHOD(getter) \
+- (SEL)setterWithGetter1:(SEL)getter{\
+    NSString *getterString = NSStringFromSelector(getter);\
+    NSMutableString *setterString = [[NSMutableString alloc] initWithString:@"set"];\
+    [setterString appendString:getterString.tmui_capitalizedString];\
+    [setterString appendString:@":"];\
+    SEL setter = NSSelectorFromString(setterString);\
+    return setter;\
+}
+
 CG_INLINE SEL
 setterWithGetter(SEL getter) {
     NSString *getterString = NSStringFromSelector(getter);

@@ -10,11 +10,11 @@
 #import <Foundation/Foundation.h>
 #import "NSObject+TMUI.h"
 #import "TMUICommonDefines.h"
-//#import "NSMethodSignature+QMUI.h"
+//#import "NSMethodSignature+TMUI.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /// 以高级语言的方式描述一个 objc_property_t 的各种属性，请使用 `+descriptorWithProperty` 生成对象后直接读取对象的各种值。
-@interface QMUIPropertyDescriptor : NSObject
+@interface TMUIPropertyDescriptor : NSObject
 
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, assign) SEL getter;
@@ -111,7 +111,7 @@ OverrideImplementation(Class targetClass, SEL targetSelector, id (^implementatio
             result = imp;
         } else {
             // 如果 superclass 里依然没有实现，则会返回一个 objc_msgForward 从而触发消息转发的流程
-            // https://github.com/Tencent/QMUI_iOS/issues/776
+            // https://github.com/Tencent/TMUI_iOS/issues/776
             Class superclass = class_getSuperclass(targetClass);
             result = class_getMethodImplementation(superclass, targetSelector);
         }
@@ -255,7 +255,7 @@ ExtendImplementationOfVoidMethodWithoutArguments(Class targetClass, SEL targetSe
  
  @see https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html#//apple_ref/doc/uid/TP40008048-CH100-SW1
  */
-#define _QMUITypeEncodingDetectorGenerator(_TypeInFunctionName, _typeForEncode) \
+#define _TMUITypeEncodingDetectorGenerator(_TypeInFunctionName, _typeForEncode) \
     CG_INLINE BOOL is##_TypeInFunctionName##TypeEncoding(const char *typeEncoding) {\
         return strncmp(@encode(_typeForEncode), typeEncoding, strlen(@encode(_typeForEncode))) == 0;\
     }\
@@ -263,27 +263,27 @@ ExtendImplementationOfVoidMethodWithoutArguments(Class targetClass, SEL targetSe
         return is##_TypeInFunctionName##TypeEncoding(ivar_getTypeEncoding(ivar));\
     }
 
-_QMUITypeEncodingDetectorGenerator(Char, char)
-_QMUITypeEncodingDetectorGenerator(Int, int)
-_QMUITypeEncodingDetectorGenerator(Short, short)
-_QMUITypeEncodingDetectorGenerator(Long, long)
-_QMUITypeEncodingDetectorGenerator(LongLong, long long)
-_QMUITypeEncodingDetectorGenerator(NSInteger, NSInteger)
-_QMUITypeEncodingDetectorGenerator(UnsignedChar, unsigned char)
-_QMUITypeEncodingDetectorGenerator(UnsignedInt, unsigned int)
-_QMUITypeEncodingDetectorGenerator(UnsignedShort, unsigned short)
-_QMUITypeEncodingDetectorGenerator(UnsignedLong, unsigned long)
-_QMUITypeEncodingDetectorGenerator(UnsignedLongLong, unsigned long long)
-_QMUITypeEncodingDetectorGenerator(NSUInteger, NSUInteger)
-_QMUITypeEncodingDetectorGenerator(Float, float)
-_QMUITypeEncodingDetectorGenerator(Double, double)
-_QMUITypeEncodingDetectorGenerator(CGFloat, CGFloat)
-_QMUITypeEncodingDetectorGenerator(BOOL, BOOL)
-_QMUITypeEncodingDetectorGenerator(Void, void)
-_QMUITypeEncodingDetectorGenerator(Character, char *)
-_QMUITypeEncodingDetectorGenerator(Object, id)
-_QMUITypeEncodingDetectorGenerator(Class, Class)
-_QMUITypeEncodingDetectorGenerator(Selector, SEL)
+_TMUITypeEncodingDetectorGenerator(Char, char)
+_TMUITypeEncodingDetectorGenerator(Int, int)
+_TMUITypeEncodingDetectorGenerator(Short, short)
+_TMUITypeEncodingDetectorGenerator(Long, long)
+_TMUITypeEncodingDetectorGenerator(LongLong, long long)
+_TMUITypeEncodingDetectorGenerator(NSInteger, NSInteger)
+_TMUITypeEncodingDetectorGenerator(UnsignedChar, unsigned char)
+_TMUITypeEncodingDetectorGenerator(UnsignedInt, unsigned int)
+_TMUITypeEncodingDetectorGenerator(UnsignedShort, unsigned short)
+_TMUITypeEncodingDetectorGenerator(UnsignedLong, unsigned long)
+_TMUITypeEncodingDetectorGenerator(UnsignedLongLong, unsigned long long)
+_TMUITypeEncodingDetectorGenerator(NSUInteger, NSUInteger)
+_TMUITypeEncodingDetectorGenerator(Float, float)
+_TMUITypeEncodingDetectorGenerator(Double, double)
+_TMUITypeEncodingDetectorGenerator(CGFloat, CGFloat)
+_TMUITypeEncodingDetectorGenerator(BOOL, BOOL)
+_TMUITypeEncodingDetectorGenerator(Void, void)
+_TMUITypeEncodingDetectorGenerator(Character, char *)
+_TMUITypeEncodingDetectorGenerator(Object, id)
+_TMUITypeEncodingDetectorGenerator(Class, Class)
+_TMUITypeEncodingDetectorGenerator(Selector, SEL)
 
 //CG_INLINE char getCharIvarValue(id object, Ivar ivar) {
 //    ptrdiff_t ivarOffset = ivar_getOffset(ivar);
@@ -292,7 +292,7 @@ _QMUITypeEncodingDetectorGenerator(Selector, SEL)
 //    return value;
 //}
 
-#define _QMUIGetIvarValueGenerator(_TypeInFunctionName, _typeForEncode) \
+#define _TMUIGetIvarValueGenerator(_TypeInFunctionName, _typeForEncode) \
     CG_INLINE _typeForEncode get##_TypeInFunctionName##IvarValue(id object, Ivar ivar) {\
         ptrdiff_t ivarOffset = ivar_getOffset(ivar);\
         unsigned char * bytes = (unsigned char *)(__bridge void *)object;\
@@ -300,21 +300,21 @@ _QMUITypeEncodingDetectorGenerator(Selector, SEL)
         return value;\
     }
 
-_QMUIGetIvarValueGenerator(Char, char)
-_QMUIGetIvarValueGenerator(Int, int)
-_QMUIGetIvarValueGenerator(Short, short)
-_QMUIGetIvarValueGenerator(Long, long)
-_QMUIGetIvarValueGenerator(LongLong, long long)
-_QMUIGetIvarValueGenerator(UnsignedChar, unsigned char)
-_QMUIGetIvarValueGenerator(UnsignedInt, unsigned int)
-_QMUIGetIvarValueGenerator(UnsignedShort, unsigned short)
-_QMUIGetIvarValueGenerator(UnsignedLong, unsigned long)
-_QMUIGetIvarValueGenerator(UnsignedLongLong, unsigned long long)
-_QMUIGetIvarValueGenerator(Float, float)
-_QMUIGetIvarValueGenerator(Double, double)
-_QMUIGetIvarValueGenerator(BOOL, BOOL)
-_QMUIGetIvarValueGenerator(Character, char *)
-_QMUIGetIvarValueGenerator(Selector, SEL)
+_TMUIGetIvarValueGenerator(Char, char)
+_TMUIGetIvarValueGenerator(Int, int)
+_TMUIGetIvarValueGenerator(Short, short)
+_TMUIGetIvarValueGenerator(Long, long)
+_TMUIGetIvarValueGenerator(LongLong, long long)
+_TMUIGetIvarValueGenerator(UnsignedChar, unsigned char)
+_TMUIGetIvarValueGenerator(UnsignedInt, unsigned int)
+_TMUIGetIvarValueGenerator(UnsignedShort, unsigned short)
+_TMUIGetIvarValueGenerator(UnsignedLong, unsigned long)
+_TMUIGetIvarValueGenerator(UnsignedLongLong, unsigned long long)
+_TMUIGetIvarValueGenerator(Float, float)
+_TMUIGetIvarValueGenerator(Double, double)
+_TMUIGetIvarValueGenerator(BOOL, BOOL)
+_TMUIGetIvarValueGenerator(Character, char *)
+_TMUIGetIvarValueGenerator(Selector, SEL)
 
 CG_INLINE id getObjectIvarValue(id object, Ivar ivar) {
     return object_getIvar(object, ivar);

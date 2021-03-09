@@ -7,7 +7,7 @@
 
 #import "UITextField+TMUI.h"
 #import <objc/runtime.h>
-#import "TMUIAssociatedObjectDefine.h"
+#import "TMUIAssociatedPropertyDefines.h"
 @implementation UITextField (TMUI)
 
 TMUISynthesizeIdCopyProperty(tmui_textLimitBlock, setTmui_textLimitBlock);

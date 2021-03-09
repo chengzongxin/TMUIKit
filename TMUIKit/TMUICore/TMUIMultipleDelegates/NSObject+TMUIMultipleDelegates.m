@@ -9,7 +9,7 @@
 #import "TMUIMultipleDelegates.h"
 #import "TMUICore.h"
 #import "NSString+TMUI.h"
-#import "TMUIAssociatedObjectDefine.h"
+#import <TMUIAssociatedPropertyDefines.h>
 #import "TMUIRuntime.h"
 #import "TMUICommonDefines.h"
 
@@ -58,7 +58,7 @@ static char kAssociatedObjectKey_tmuiMultipleDelegatesEnabled;
     NSString *delegateGetterKey = NSStringFromSelector(getter);
     if (!self.tmuimd_delegates[delegateGetterKey]) {
         objc_property_t prop = class_getProperty(self.class, delegateGetterKey.UTF8String);
-        QMUIPropertyDescriptor *property = [QMUIPropertyDescriptor descriptorWithProperty:prop];
+        TMUIPropertyDescriptor *property = [TMUIPropertyDescriptor descriptorWithProperty:prop];
         if (property.isStrong) {
             // strong property
             TMUIMultipleDelegates *strongDelegates = [TMUIMultipleDelegates strongDelegates];

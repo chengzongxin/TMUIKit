@@ -7,7 +7,7 @@
 
 #import "TMUIButton.h"
 #import "TMUICommonDefines.h"
-#import "TMCoreGraphicsDefines.h"
+#import "TMUICoreGraphicsDefines.h"
 
 @interface TMUIButton ()
 

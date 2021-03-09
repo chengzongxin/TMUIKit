@@ -53,16 +53,16 @@ Pod::Spec.new do |s|
     end
   end
   
-  #TMUIDefines 宏定义
-  s.subspec 'TMUIDefines' do |ss|
-    #引入TMUIDefines中所有资源文件
-    ss.source_files = 'TMUIKit/TMUIDefines/**/*'
-    #公开TMUIDefines模块中的头文件
-    ss.public_header_files = 'TMUIKit/TMUIDefines/*.h'
-    #依赖的三方库，pod库或者可以是自身的subspec
-    ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-    ss.dependency 'TMUIKit/TMUICore'
-  end
+#  #TMUIDefines 宏定义
+#  s.subspec 'TMUIDefines' do |ss|
+#    #引入TMUIDefines中所有资源文件
+#    ss.source_files = 'TMUIKit/TMUIDefines/**/*'
+#    #公开TMUIDefines模块中的头文件
+#    ss.public_header_files = 'TMUIKit/TMUIDefines/*.h'
+#    #依赖的三方库，pod库或者可以是自身的subspec
+#    ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+#    ss.dependency 'TMUIKit/TMUICore'
+#  end
   
   
   #TMUIExtensions 分类
@@ -74,7 +74,7 @@ Pod::Spec.new do |s|
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
     ss.dependency 'TMUIKit/TMUICore'
-    ss.dependency 'TMUIKit/TMUIDefines'
+#    ss.dependency 'TMUIKit/TMUIDefines'
   end
   
   #TMUIWidgets 基类控件
@@ -85,7 +85,7 @@ Pod::Spec.new do |s|
     ss.public_header_files = 'TMUIKit/TMUIWidgets/*.h'
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.dependency 'TMUIKit/TMUICore'
-    ss.dependency 'TMUIKit/TMUIDefines'
+#    ss.dependency 'TMUIKit/TMUIDefines'
     ss.dependency 'TMUIKit/TMUIExtensions'
     # TMUIButton
     ss.subspec 'TMUIButton' do |sss|
@@ -108,7 +108,7 @@ Pod::Spec.new do |s|
   #TMUIComponents 组件
   s.subspec 'TMUIComponents' do |ss|
       ss.dependency 'TMUIKit/TMUICore'
-      ss.dependency 'TMUIKit/TMUIDefines'
+#      ss.dependency 'TMUIKit/TMUIDefines'
       ss.dependency 'TMUIKit/TMUIExtensions'
       ss.source_files = 'TMUIKit/TMUIComponents/TMUIComponents.h'
       

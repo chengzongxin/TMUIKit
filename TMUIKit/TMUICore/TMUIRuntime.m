@@ -9,10 +9,10 @@
 #include <mach-o/getsect.h>
 #include <mach-o/dyld.h>
 
-@implementation QMUIPropertyDescriptor
+@implementation TMUIPropertyDescriptor
 
 + (instancetype)descriptorWithProperty:(objc_property_t)property {
-    QMUIPropertyDescriptor *descriptor = [[self alloc] init];
+    TMUIPropertyDescriptor *descriptor = [[self alloc] init];
     NSString *propertyName = [NSString stringWithUTF8String:property_getName(property)];
     descriptor.name = propertyName;
     
@@ -72,7 +72,7 @@
     
     // type
     char *type = property_copyAttributeValue(property, "T");
-    descriptor.type = [QMUIPropertyDescriptor typeWithEncodeString:[NSString stringWithUTF8String:type]];
+    descriptor.type = [TMUIPropertyDescriptor typeWithEncodeString:[NSString stringWithUTF8String:type]];
     if (type != NULL) {
         free(type);
     }
