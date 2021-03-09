@@ -111,7 +111,7 @@ _Pragma("clang diagnostic pop")
 #define TMUISynthesizeNSUIntegerProperty(_getterName, _setterName) _TMUISynthesizeNonObject(_getterName, _setterName, NSUInteger, numberWithUnsignedInteger, unsignedIntegerValue)
 
 /// @property(nonatomic, assign) CGFloat xxx
-#define TMUISynthesizeCGFloatProperty(_getterName, _setterName) _TMUISynthesizeNonObject(_getterName, _setterName, CGFloat, numberWithDouble, TMUI_CGFloatValue)
+#define TMUISynthesizeCGFloatProperty(_getterName, _setterName) _TMUISynthesizeNonObject(_getterName, _setterName, CGFloat, numberWithDouble, doubleValue)
 
 /// @property(nonatomic, assign) CGPoint xxx
 #define TMUISynthesizeCGPointProperty(_getterName, _setterName) _TMUISynthesizeNonObject(_getterName, _setterName, CGPoint, valueWithCGPoint, CGPointValue)

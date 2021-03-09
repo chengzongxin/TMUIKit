@@ -114,4 +114,22 @@ UIEdgeInsetsGetVerticalValue(UIEdgeInsets insets) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif /* TMCoreGraphicsDefines_h */
