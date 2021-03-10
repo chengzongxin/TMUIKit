@@ -55,6 +55,7 @@
 		16D1518A25F852020087BF7F /* UIViewController+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1518925F852020087BF7F /* UIViewController+Base.m */; };
 		16D1519025F865180087BF7F /* TMUICoreViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1518F25F865180087BF7F /* TMUICoreViewController2.m */; };
 		16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1519525F866A50087BF7F /* TMUICoreViewController3.m */; };
+		16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1519B25F8980B0087BF7F /* GroupTVTool.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
@@ -207,6 +208,8 @@
 		16D1518F25F865180087BF7F /* TMUICoreViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController2.m; sourceTree = "<group>"; };
 		16D1519425F866A50087BF7F /* TMUICoreViewController3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController3.h; sourceTree = "<group>"; };
 		16D1519525F866A50087BF7F /* TMUICoreViewController3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController3.m; sourceTree = "<group>"; };
+		16D1519A25F8980B0087BF7F /* GroupTVTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupTVTool.h; sourceTree = "<group>"; };
+		16D1519B25F8980B0087BF7F /* GroupTVTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupTVTool.m; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
 		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
 		16E82E7625F222EE00B8142E /* NSArrayTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSArrayTMUIViewController.h; sourceTree = "<group>"; };
@@ -579,6 +582,8 @@
 				16EABFE125BAAD7D00A3273D /* UISegmentedControl+associateObject.m */,
 				16EABFE525BAAE7C00A3273D /* UISlider+associateObject.h */,
 				16EABFE625BAAE7C00A3273D /* UISlider+associateObject.m */,
+				16D1519A25F8980B0087BF7F /* GroupTVTool.h */,
+				16D1519B25F8980B0087BF7F /* GroupTVTool.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1007,6 +1012,7 @@
 				16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */,
 				3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */,
 				16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */,
+				16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */,
 				16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
