@@ -56,6 +56,7 @@
 		16D1519025F865180087BF7F /* TMUICoreViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1518F25F865180087BF7F /* TMUICoreViewController2.m */; };
 		16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1519525F866A50087BF7F /* TMUICoreViewController3.m */; };
 		16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1519B25F8980B0087BF7F /* GroupTVTool.m */; };
+		16D151A125F8A9BE0087BF7F /* snk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 16D151A025F8A9BE0087BF7F /* snk.jpg */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
@@ -210,6 +211,7 @@
 		16D1519525F866A50087BF7F /* TMUICoreViewController3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController3.m; sourceTree = "<group>"; };
 		16D1519A25F8980B0087BF7F /* GroupTVTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupTVTool.h; sourceTree = "<group>"; };
 		16D1519B25F8980B0087BF7F /* GroupTVTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupTVTool.m; sourceTree = "<group>"; };
+		16D151A025F8A9BE0087BF7F /* snk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = snk.jpg; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
 		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
 		16E82E7625F222EE00B8142E /* NSArrayTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSArrayTMUIViewController.h; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 				16EABFE625BAAE7C00A3273D /* UISlider+associateObject.m */,
 				16D1519A25F8980B0087BF7F /* GroupTVTool.h */,
 				16D1519B25F8980B0087BF7F /* GroupTVTool.m */,
+				16D151A025F8A9BE0087BF7F /* snk.jpg */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -836,6 +839,7 @@
 				1687279D25F0C55700A05529 /* xueUIwang@3x.png in Resources */,
 				3B7BE7A925E5FD15001DA085 /* AttributeTextVC.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				16D151A125F8A9BE0087BF7F /* snk.jpg in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				16E8FFFA25EE281E005D8E4B /* appList.plist in Resources */,
 				3B806CC125CA75CC00B78CD1 /* VerifyViewController.xib in Resources */,
