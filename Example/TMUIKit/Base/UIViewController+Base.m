@@ -20,9 +20,9 @@
 //            selfObject.view.backgroundColor = UIColor.redColor;
 //        });
         
-//        ExtendImplementationOfVoidMethodWithSingleArgument([self class], @selector(viewWillAppear:), BOOL, ^(UIViewController *selfObject, BOOL animate) {
-//            selfObject.view.backgroundColor = UIColor.redColor;
-//        });
+        ExtendImplementationOfVoidMethodWithSingleArgument([self class], @selector(viewWillAppear:), BOOL, ^(UIViewController *selfObject, BOOL animate) {
+            selfObject.navigationItem.title = NSStringFromClass(selfObject.class);
+        });
     });
 }
 

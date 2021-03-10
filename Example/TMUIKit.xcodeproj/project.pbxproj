@@ -371,7 +371,8 @@
 			children = (
 				16455E3C25B6F3E400BBBEC2 /* TMUIKitViewController.h */,
 				16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */,
-				16945FD225B7C4D10056AE74 /* TMButtonViewController */,
+				16945FD225B7C4D10056AE74 /* TMUIWidgetsVC */,
+				1646635225F8AEFA00B0125B /* TMUICategoryVC */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -410,6 +411,31 @@
 			path = InjectionIIIHelper;
 			sourceTree = "<group>";
 		};
+		1646635225F8AEFA00B0125B /* TMUICategoryVC */ = {
+			isa = PBXGroup;
+			children = (
+				1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */,
+				1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */,
+				16C389BF25E5EEA3003E107D /* UIViewTMUI2ViewController.h */,
+				16C389C025E5EEA3003E107D /* UIViewTMUI2ViewController.m */,
+				1625BA4825E63778005686D0 /* UIViewTMUI3ViewController.h */,
+				1625BA4925E63778005686D0 /* UIViewTMUI3ViewController.m */,
+				163444A825BA70910091D4EF /* UIButtonTMUIViewController.h */,
+				163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */,
+				16C650C525BC1DF00047618E /* UILabelTMUIViewController.h */,
+				16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */,
+				16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */,
+				16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */,
+				16CDF22425EF6B0D00C02C98 /* UITextFieldTMUIViewController.h */,
+				16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */,
+				16CDF22F25EF839B00C02C98 /* UIImageTMUIViewController1.h */,
+				16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */,
+				16CDF23525EF8E7B00C02C98 /* UIImageTMUIViewController2.h */,
+				16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */,
+			);
+			path = TMUICategoryVC;
+			sourceTree = "<group>";
+		};
 		16566E1E25E795C300B79029 /* TMUIKit_AssociateProject */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,7 +471,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		16945FD225B7C4D10056AE74 /* TMButtonViewController */ = {
+		16945FD225B7C4D10056AE74 /* TMUIWidgetsVC */ = {
 			isa = PBXGroup;
 			children = (
 				16945FD325B7C4DD0056AE74 /* TMUIButtonViewController.h */,
@@ -457,7 +483,7 @@
 				16C6507625BC02410047618E /* TMUITextViewViewController.h */,
 				16C6507725BC02410047618E /* TMUITextViewViewController.m */,
 			);
-			path = TMButtonViewController;
+			path = TMUIWidgetsVC;
 			sourceTree = "<group>";
 		};
 		1694602825B7DC770056AE74 /* UIViewTMUIViewController */ = {
@@ -469,25 +495,6 @@
 				16D1518F25F865180087BF7F /* TMUICoreViewController2.m */,
 				16D1519425F866A50087BF7F /* TMUICoreViewController3.h */,
 				16D1519525F866A50087BF7F /* TMUICoreViewController3.m */,
-				1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */,
-				1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */,
-				16C389BF25E5EEA3003E107D /* UIViewTMUI2ViewController.h */,
-				16C389C025E5EEA3003E107D /* UIViewTMUI2ViewController.m */,
-				1625BA4825E63778005686D0 /* UIViewTMUI3ViewController.h */,
-				1625BA4925E63778005686D0 /* UIViewTMUI3ViewController.m */,
-				163444A825BA70910091D4EF /* UIButtonTMUIViewController.h */,
-				163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */,
-				16C650C525BC1DF00047618E /* UILabelTMUIViewController.h */,
-				16C650C625BC1DF00047618E /* UILabelTMUIViewController.m */,
-				16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */,
-				16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */,
-				16CDF22425EF6B0D00C02C98 /* UITextFieldTMUIViewController.h */,
-				16CDF22525EF6B0D00C02C98 /* UITextFieldTMUIViewController.m */,
-				16CDF22F25EF839B00C02C98 /* UIImageTMUIViewController1.h */,
-				16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */,
-				16CDF23525EF8E7B00C02C98 /* UIImageTMUIViewController2.h */,
-				16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */,
-				1687279725F0C55700A05529 /* xueUIwang@3x.png */,
 			);
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
@@ -587,6 +594,7 @@
 				16D1519A25F8980B0087BF7F /* GroupTVTool.h */,
 				16D1519B25F8980B0087BF7F /* GroupTVTool.m */,
 				16D151A025F8A9BE0087BF7F /* snk.jpg */,
+				1687279725F0C55700A05529 /* xueUIwang@3x.png */,
 			);
 			path = Base;
 			sourceTree = "<group>";
