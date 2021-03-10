@@ -27,7 +27,9 @@
                                     CUI_STRING_FORMAT(__VA_ARGS__):\
                                     CUI_STRING_VALUE(__VA_ARGS__);})
 
-
+#define DebugStr(...)                ({id _prefix_ = CUI_LOG_PREFIX(__VA_ARGS__); \
+                                    id _str_ = Str(__VA_ARGS__);\
+                                    Str(@"%@%@", _prefix_, _str_);})
 /**
  * Logging a single value or Logging with format string.
  * Log use Str() internally, so it can take any kind of arguments that Str() supported.
