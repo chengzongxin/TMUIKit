@@ -23,8 +23,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    _h1 = Style(@"h1").fnt(14).color(Color(@"black")).lineGap(5).multiline;
-    _h2 = Style(@"h2").fnt(12).color(Color(@"gray")).lineGap(8).multiline;
+    _h1 = Style(@"h1").fnt(16).color(Color(@"black")).lineGap(10).multiline;
+    _h2 = Style(@"h2").fnt(12).color(Color(@"gray")).lineGap(15).multiline;
     
 #if DEBUG
     // iOS

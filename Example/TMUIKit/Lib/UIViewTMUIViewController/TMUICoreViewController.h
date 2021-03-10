@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TMUICoreViewController : UIViewController
 
+TMAssociatedPropertyStrongType(NSString, method1);
+
+@property (nonatomic, strong) NSString *method2;
+
 @end
 
 NS_ASSUME_NONNULL_END

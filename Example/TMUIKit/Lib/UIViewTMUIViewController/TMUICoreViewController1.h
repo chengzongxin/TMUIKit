@@ -1,5 +1,5 @@
 //
-//  UIViewController+Base.h
+//  TMUICoreViewController.h
 //  TMUIKit_Example
 //
 //  Created by Joe.cheng on 2021/3/10.
@@ -10,9 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIViewController (Base)
-
-@property (nonatomic, copy) NSString *demoInstructions;
+@interface TMUICoreViewController1 : UIViewController
 
 @end
 

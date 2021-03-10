@@ -20,7 +20,7 @@
     
     self.view.bgColor(@"white");
     
-    id l1 = Label.str(@"常用方法的快速调用，例如读取图片、创建字体对象、创建颜色等").styles(@"h1");
+    id l1 = Label.str(self.demoInstructions).styles(@"h1");
     
     id a2 = AttStr(AttStr(@"图片加载2：\n").styles(@"h1"),
            AttStr(@"(不会被系统缓存，用于不被复用的图片，特别是大图)").styles(@"h2"));

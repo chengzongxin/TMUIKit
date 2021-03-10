@@ -19,8 +19,8 @@
     
     self.view.bgColor(@"white");
     
-    id l3 = Label.str(@"布局相关的宏，例如快速获取状态栏、导航栏的高度，为不同的屏幕大小使用不同的值，代表 1px 的宏等").styles(@"h1");
-    id a4 = AttStr(
+    id l1 = Label.str(self.demoInstructions).styles(@"h1");
+    id a2 = AttStr(
                    AttStr(Str(@"IS_LANDSCAPE = %.1f\n",IS_LANDSCAPE)),
                    AttStr(Str(@"IS_DEVICE_LANDSCAPE = %.1f\n",IS_DEVICE_LANDSCAPE)),
                    AttStr(Str(@"SCREEN_WIDTH = %.1f\n",SCREEN_WIDTH)),
@@ -35,9 +35,9 @@
                    AttStr(Str(@"NavigationContentTop = %.1f\n",NavigationContentTop)),
                    AttStr(Str(@"NavigationContentTopConstant = %.1f\n",NavigationContentTopConstant)),
                    AttStr(Str(@"SafeAreaInsetsConstantForDeviceWithNotch = %.1f\n",SafeAreaInsetsConstantForDeviceWithNotch)),).styles(@"h2").match(@" \\d+(\\.\\d+)?").color(@"red");
-    id l4 = Label.str(a4).multiline;
+    id l2 = Label.str(a2).multiline;
     
-    VerStack(l3,l4,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
+    VerStack(l1,l2,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
 }
 
 

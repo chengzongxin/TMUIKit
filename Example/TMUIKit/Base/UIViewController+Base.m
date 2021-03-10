@@ -11,6 +11,8 @@
 @implementation UIViewController (Base)
 
 
+TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
+
 + (void)load{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
