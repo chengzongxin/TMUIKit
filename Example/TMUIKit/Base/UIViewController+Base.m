@@ -20,8 +20,24 @@
 //            selfObject.view.backgroundColor = UIColor.redColor;
 //        });
         
-        ExtendImplementationOfVoidMethodWithSingleArgument([self class], @selector(viewWillAppear:), BOOL, ^(UIViewController *selfObject, BOOL animate) {
-            selfObject.navigationItem.title = NSStringFromClass(selfObject.class);
+//        ExtendImplementationOfVoidMethodWithSingleArgument([self class], @selector(viewWillAppear:), BOOL, ^(UIViewController *selfObject, BOOL animate) {
+//            selfObject.navigationItem.title = NSStringFromClass(selfObject.class);
+//        });
+        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+        
+        ExtendImplementationOfVoidMethodWithoutArguments([self class], @selector(viewDidLoad), ^(UIViewController *selfObject) {
+            TMUILabel *label = [[TMUILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
+            label.text = NSStringFromClass(selfObject.class);
+            label.font = UIFontMedium(18);
+            label.textAlignment = NSTextAlignmentCenter;
+            selfObject.navigationItem.titleView = label;
+            // set
+            label.canPerformCopyAction = YES;
+            label.didCopyBlock = ^(TMUILabel * _Nonnull label, NSString * _Nonnull stringCopied) {
+                NSLog(@"%@",stringCopied);
+                [TMToast toast:stringCopied];
+            };
+            
         });
     });
 }

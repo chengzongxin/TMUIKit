@@ -44,7 +44,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5c2-Vp-K6S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="432" y="790"/>
+            <point key="canvasLocation" x="461" y="471"/>
         </scene>
         <!--Lib View Controller-->
         <scene sceneID="cKn-YG-eHf">
@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAt-Qw-IJJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1183" y="790"/>
+            <point key="canvasLocation" x="1212" y="470"/>
         </scene>
         <!--UIKit-->
         <scene sceneID="GVV-7C-nbu">
@@ -77,7 +77,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FtR-e6-fNi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="432" y="-564"/>
+            <point key="canvasLocation" x="503" y="-879"/>
         </scene>
         <!--Kit View Controller-->
         <scene sceneID="cvy-ID-nf1">
@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8c-Yi-3wt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="-565"/>
+            <point key="canvasLocation" x="1212" y="-879"/>
         </scene>
         <!--Components-->
         <scene sceneID="DH4-1E-6wF">
@@ -110,7 +110,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Elf-eK-52C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="462" y="112"/>
+            <point key="canvasLocation" x="490" y="-202"/>
         </scene>
         <!--Components View Controller-->
         <scene sceneID="yBI-6k-qu4">
@@ -126,13 +126,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcs-qS-9cP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1184" y="112"/>
+            <point key="canvasLocation" x="1212" y="-202"/>
         </scene>
-        <!--Foundation-->
+        <!--Foundataion-->
         <scene sceneID="yc3-xC-bMy">
             <objects>
                 <navigationController id="0Ao-1e-T68" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Foundation" id="x6c-ah-gud"/>
+                    <tabBarItem key="tabBarItem" title="Foundataion" image="icon_tabbar_foundation" selectedImage="icon_tabbar_foundation" id="x6c-ah-gud"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6vV-b4-JRR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -143,7 +143,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tyY-Qg-56U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1242" y="-100"/>
+            <point key="canvasLocation" x="461" y="1188"/>
         </scene>
         <!--Foundation View Controller-->
         <scene sceneID="6kI-xH-crL">
@@ -159,12 +159,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5rE-2F-SqU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-771" y="-773"/>
+            <point key="canvasLocation" x="1212" y="1188"/>
         </scene>
     </scenes>
     <resources>
         <image name="icon_tabbar_component" width="24" height="24"/>
         <image name="icon_tabbar_component_selected" width="24" height="24"/>
+        <image name="icon_tabbar_foundation" width="72" height="72"/>
         <image name="icon_tabbar_lab" width="24" height="24"/>
         <image name="icon_tabbar_lab_selected" width="24" height="24"/>
         <image name="icon_tabbar_uikit" width="24" height="24"/>
