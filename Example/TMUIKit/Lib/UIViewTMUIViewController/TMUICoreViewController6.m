@@ -14,6 +14,27 @@
 
 @implementation TMUICoreViewController6
 
+- (void)viewDidLoad1 {
+    [super viewDidLoad];
+    
+    self.view.bgColor(@"white");
+    
+    
+    UIScrollView *scrollView = (UIScrollView *)[UIScrollView new].embedIn(self.view);
+    scrollView.contentSize = self.view.bounds.size;
+    id l1 = Label.str(@"此demo中，滚动scrollView和输入textField将会在VC和TMAppDelegate同时回调此demo中，滚动scrollView和输入textField将会在VC和TMAppDelegate同时回调").styles(h1);
+    VerStack(l1).gap(10).embedIn(scrollView,20,20,20).fixWidth(self.view.width - 40);
+//    VerStack(l1,CUISpring).gap(10).addTo(scrollView).makeCons(^{
+//        make.top.left.constants(20);
+//        make.width.constants(self.view.width - 40);
+//        make.height.constants(self.view.height);
+//    });
+    
+//    NSLayoutConstraint *c = [NSLayoutConstraint constraintWithItem:v1 attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:scrollView attribute:NSLayoutAttributeTrailing multiplier:1 constant:-20];
+//    [v1 addConstraint:c];
+//    c.active = YES;
+//    [NSLayoutConstraint activateConstraints:@[c]];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,9 +58,10 @@
     scrollView.delegate = (id<UIScrollViewDelegate>)UIApplication.sharedApplication.delegate;  // AppDelegate
     
     id v1 = View.bgColor(@"white").fixWH(100,1000);
-    
-    VerStack(l1,l2,tf,v1).gap(10).embedIn(scrollView,20,20,20);
+    // 嵌套在scrollview中的right约束会失效，需要View内部指定width约束
+    VerStack(l1,l2,tf,v1).gap(10).embedIn(scrollView,20,20,20).fixWidth(SCREEN_WIDTH - 40);
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     Log(self);
     Log(scrollView.contentOffset);
