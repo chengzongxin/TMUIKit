@@ -14,7 +14,7 @@ NSString *const h2 = @"h2";
 NSString *const h3 = @"h3";
 NSString *const body = @"body";
 
-@interface TMAppDelegate ()
+@interface TMAppDelegate ()<UITextFieldDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) CUIStyle *h1;
 @property (nonatomic, strong) CUIStyle *h2;
@@ -27,6 +27,17 @@ NSString *const body = @"body";
 @end
 
 @implementation TMAppDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    Log(self);
+    Log(scrollView.contentOffset);
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    Log(self);
+    Log(string);
+    return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

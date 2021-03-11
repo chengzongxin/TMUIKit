@@ -53,6 +53,9 @@
                            ROW_CREATE(@"TMUIRuntime",
                                       @"运行时相关的函数，例如 swizzle 方法替换、动态添加方法等",
                                       @"TMUICoreViewController5"),
+                           ROW_CREATE(@"TMUIMultipleDelegates",
+                                      @"让对象支持多个delegate、支持自定义的delegate",
+                                      @"TMUICoreViewController6"),
                            ).title(@"TMUI Core"),
             ).embedIn(self.view);
     

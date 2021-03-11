@@ -27,7 +27,7 @@ TMUISynthesizeIdStrongProperty(method2, setMethod2);
 }
 
 - (NSString *)method3{
-    TMUIWeakObjectContainer *container = objc_getAssociatedObject(self, @selector(tmui_emptyView));
+    TMUIWeakObjectContainer *container = objc_getAssociatedObject(self, @selector(method3));
     return container.object ?: nil;
 }
 
@@ -50,11 +50,12 @@ TMUISynthesizeIdStrongProperty(method2, setMethod2);
                    AttStr(@"方式三：TMUIWeakObjectContainer使用弱引用容器类，避免关联对象释放产生野指针crash。\n").styles(h3),
                    AttStr(@"@property (nonatomic, nullable, weak) NSString *method3;\n").styles(body),
                    AttStr(@"- (void)setMethod3:(NSString *)method3{\n\
-                          TMUIWeakObjectContainer *container = [TMUIWeakObjectContainer containerWithObject:method3];\
-                          objc_setAssociatedObject(self, @selector(method3), container,\ OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
+                          TMUIWeakObjectContainer *container = [TMUIWeakObjectContainer containerWithObject:method3];\n\
+                          objc_setAssociatedObject(self, @selector(method3), container,\
+                          OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
                       }\
-                      - (NSString *)method3{\
-                          TMUIWeakObjectContainer *container = objc_getAssociatedObject(self,\ @selector(tmui_emptyView));\
+                      - (NSString *)method3{\n\
+                          TMUIWeakObjectContainer *container = objc_getAssociatedObject(self,@selector(method3));\
                           return container.object ?: nil;\
                       };\n").styles(body),
                    );
