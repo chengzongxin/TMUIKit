@@ -8,10 +8,16 @@
 
 #import "TMAppDelegate.h"
 
+
+NSString *const h1 = @"h1";
+NSString *const h2 = @"h2";
+NSString *const body = @"body";
+
 @interface TMAppDelegate ()
 
 @property (nonatomic, strong) CUIStyle *h1;
 @property (nonatomic, strong) CUIStyle *h2;
+@property (nonatomic, strong) CUIStyle *body;
 //@property (nonatomic, strong) CUIStyle *img_icon;
 //@property (nonatomic, strong) CUIStyle *img_small;
 //@property (nonatomic, strong) CUIStyle *img_big;
@@ -23,8 +29,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    _h1 = Style(@"h1").fnt(16).color(Color(@"black")).lineGap(10).multiline;
-    _h2 = Style(@"h2").fnt(12).color(Color(@"gray")).lineGap(15).multiline;
+    _h1 = Style(h1).fnt(@16).color(Color(@"black")).lineGap(10).multiline;
+    _h2 = Style(h2).fnt(@12).color(Color(@"black")).lineGap(10).multiline;
+    _body = Style(body).fnt(12).color(Color(@"gray")).lineGap(15).multiline;
     
 #if DEBUG
     // iOS

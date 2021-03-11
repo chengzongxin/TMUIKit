@@ -19,26 +19,26 @@
     
     self.view.bgColor(@"white");
     
-    id l1 = Label.str(@"1.处理了__NSArray0、__NSSingleObjectArrayI、__NSArrayI、__NSArrayM几种情况的数组越界访问").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    id l1 = Label.str(@"1.处理了__NSArray0、__NSSingleObjectArrayI、__NSArrayI、__NSArrayM几种情况的数组越界访问").fixWidth(self.view.width - 40).styles(h1).multiline;
     // demo
     [self beyondBoundsAccess];
     
     [self addNullObject];
     
-    id l2 = Label.str(@"2.map、filter、reduce等高阶函数").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    id l2 = Label.str(@"2.map、filter、reduce等高阶函数").fixWidth(self.view.width - 40).styles(h1).multiline;
     // demo2
     [self higherOrderFunctions];
     
-    id l3 = Label.str(@"3.不可变数组增删改操作").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    id l3 = Label.str(@"3.不可变数组增删改操作").fixWidth(self.view.width - 40).styles(h1).multiline;
     // demo3
     [self addAndRemove];
     
-    id l4 = Label.str(@"4.打乱，逆置").fixWidth(self.view.width - 40).styles(@"h1").multiline;
+    id l4 = Label.str(@"4.打乱，逆置").fixWidth(self.view.width - 40).styles(h1).multiline;
     // demo3
     [self reverse];
     
     
-    VerStack(l1,l2,l3,l4,CUISpring).gap(30).embedIn(self.view, 100, 20, 80);
+    VerStack(l1,l2,l3,l4,CUISpring).gap(30).embedIn(self.view, tmui_navigationBarHeight()+20, 20, 80);
     
     
 }

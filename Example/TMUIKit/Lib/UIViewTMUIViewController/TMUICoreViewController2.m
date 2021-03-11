@@ -19,7 +19,7 @@
     
     self.view.bgColor(@"white");
     
-    id l1 = Label.str(self.demoInstructions).styles(@"h1");
+    id l1 = Label.str(self.demoInstructions).styles(h1);
     id a2 = AttStr(
                    AttStr(Str(@"IS_LANDSCAPE = %.1f\n",IS_LANDSCAPE)),
                    AttStr(Str(@"IS_DEVICE_LANDSCAPE = %.1f\n",IS_DEVICE_LANDSCAPE)),
@@ -34,7 +34,7 @@
                    AttStr(Str(@"NavigationBarHeight = %.1f\n",NavigationBarHeight)),
                    AttStr(Str(@"NavigationContentTop = %.1f\n",NavigationContentTop)),
                    AttStr(Str(@"NavigationContentTopConstant = %.1f\n",NavigationContentTopConstant)),
-                   AttStr(Str(@"SafeAreaInsetsConstantForDeviceWithNotch = %.1f\n",SafeAreaInsetsConstantForDeviceWithNotch)),).styles(@"h2").match(@" \\d+(\\.\\d+)?").color(@"red");
+                   AttStr(Str(@"SafeAreaInsetsConstantForDeviceWithNotch = %.1f\n",SafeAreaInsetsConstantForDeviceWithNotch)),).styles(body).match(@" \\d+(\\.\\d+)?").color(@"red");
     id l2 = Label.str(a2).multiline;
     
     VerStack(l1,l2,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);

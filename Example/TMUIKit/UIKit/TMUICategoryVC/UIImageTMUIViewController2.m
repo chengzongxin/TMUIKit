@@ -35,7 +35,7 @@
     CGSize imgSize = CGSizeMake(30, 30);
     Style(@"img_small").fixWH(imgSize);
     
-    id l1 = Label.str(@"Shape image").styles(@"h1");
+    id l1 = Label.str(@"Shape image").styles(h1);
     CUIStack *horStack = HorStack().gap(20);
     for (int i = 0; i < 7; i++) {
         id i1 = [UIImage tmui_imageWithShape:i size:imgSize tintColor:UIColor.tmui_randomColor];
@@ -59,28 +59,28 @@
     
     UIImage *img = Img(@"angel");
     
-    id a1 = AttStr(AttStr(@"Origin img\n").styles(@"h1"),
-           AttStr(Str(@"data length %zd",img.tmui_dataLength)).styles(@"h2"));
+    id a1 = AttStr(AttStr(@"Origin img\n").styles(h1),
+           AttStr(Str(@"data length %zd",img.tmui_dataLength)).styles(body));
     id l1 = Label.str(a1).multiline;
     
     id iv1 = ImageView.img(img).styles(@"img_demo");
     // compress to max data len 100000 image
     NSData *maxData = [img tmui_compressToMaxDataLen:100000];
     UIImage *maxImg = [UIImage imageWithData:maxData];
-    id a3 = AttStr(AttStr(@"Resized to max date length < 100000 bytes \n").styles(@"h1"),
-           AttStr(Str(@"data length %zd",maxData.length)).styles(@"h2"));
+    id a3 = AttStr(AttStr(@"Resized to max date length < 100000 bytes \n").styles(h1),
+           AttStr(Str(@"data length %zd",maxData.length)).styles(body));
     id l3 = Label.str(a3).multiline;
     id iv3 = ImageView.img(maxImg).styles(@"img_demo");
     
     // sub image
     CGRect subRect = CGRectMake(img.size.width / 2 - 200, img.size.height / 2 - 200, 800, 800);
     UIImage *subImg = [img tmui_getSubImage:subRect]; // or img.subImg(subRect);
-    id a4 = AttStr(AttStr(@"get sub img\n").styles(@"h1"),
-           AttStr(Str(@"sub img rect %@",Str(subRect))).styles(@"h2"));
+    id a4 = AttStr(AttStr(@"get sub img\n").styles(h1),
+           AttStr(Str(@"sub img rect %@",Str(subRect))).styles(body));
     id l4 = Label.str(a4).multiline;
     id iv4 = ImageView.img(subImg).styles(@"img_demo");
     
-    id a5 = AttStr(AttStr(@"image in bundle").styles(@"h1"));
+    id a5 = AttStr(AttStr(@"image in bundle").styles(h1));
     id l5 = Label.str(a5).multiline;
     UIImage *bundleImg = [UIImage tmui_imageInBundleWithName:@"xueUIwang"];
     id iv5 = ImageView.img(bundleImg).styles(@"img_demo");
@@ -92,8 +92,8 @@
     [super viewDidAppear:animated];
     
     // MARK: Secion3 compress Image
-    id a2 = AttStr(AttStr(@"snap screen\n").styles(@"h1"),
-           AttStr(@"Note: Screenshots can only be taken after display").styles(@"h2"));
+    id a2 = AttStr(AttStr(@"snap screen\n").styles(h1),
+           AttStr(@"Note: Screenshots can only be taken after display").styles(body));
     id l2 = Label.str(a2).multiline;
 
     id i9 = [UIImage tmui_imageWithView:self.view afterScreenUpdates:YES];

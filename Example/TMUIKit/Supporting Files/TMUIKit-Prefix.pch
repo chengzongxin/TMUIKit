@@ -18,6 +18,7 @@
 #import <ReactiveObjC.h>
 #import <ChainUI.h>
 #import "GroupTVTool.h"
+#import "TMAppDelegate.h"
 
 //// create GroupTV
 //#define ROW_ONE_CREATE(title,classVC) Row.str(title).fnt(15).subtitleStyle.cellHeightAuto.onClick(^{\

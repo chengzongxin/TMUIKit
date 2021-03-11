@@ -26,7 +26,7 @@ TMUISynthesizeIdStrongProperty(method2, setMethod2);
     
     self.view.bgColor(@"white");
     
-    id l1 = Label.str(self.demoInstructions).styles(@"h1");
+    id l1 = Label.str(self.demoInstructions).styles(h1);
     
     id a2 = AttStr(
                    AttStr(@"提供两种方式快捷关联对象\n"),
@@ -36,7 +36,7 @@ TMUISynthesizeIdStrongProperty(method2, setMethod2);
                    AttStr(@"方式二：包含各种数据类型可供选择,id,weak,copy,基本类型等。\n"),
                    AttStr(@"@property (nonatomic, strong) NSString *method2;\n"),
                    AttStr(@"TMUISynthesizeIdStrongProperty(method2, setMethod2);\n"),
-                   ).styles(@"h2");
+                   ).styles(body);
     id l2 = Label.str(a2).multiline;
     
     VerStack(l1,l2,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(30);

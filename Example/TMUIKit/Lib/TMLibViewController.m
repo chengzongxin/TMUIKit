@@ -50,6 +50,9 @@
                            ROW_CREATE(@"TMUICoreGraphicsDefines",
                                       @"布局相关的函数，例如浮点数的像素取整计算、CGPoint、CGRect、UIEdgeIntents 的便捷操作等。",
                                       @"TMUICoreViewController4"),
+                           ROW_CREATE(@"TMUIRuntime",
+                                      @"运行时相关的函数，例如 swizzle 方法替换、动态添加方法等",
+                                      @"TMUICoreViewController5"),
                            ).title(@"TMUI Core"),
             ).embedIn(self.view);
     

@@ -20,10 +20,10 @@
     
     self.view.bgColor(@"white");
     
-    id l1 = Label.str(self.demoInstructions).styles(@"h1");
+    id l1 = Label.str(self.demoInstructions).styles(h1);
     
-    id a2 = AttStr(AttStr(@"图片加载2：\n").styles(@"h1"),
-           AttStr(@"(不会被系统缓存，用于不被复用的图片，特别是大图)").styles(@"h2"));
+    id a2 = AttStr(AttStr(@"图片加载2：\n").styles(h2),
+           AttStr(@"(不会被系统缓存，用于不被复用的图片，特别是大图)").styles(body));
     
     
     VerStack(l1,
@@ -33,7 +33,7 @@
              Label.str(@"123456789ABCDEFG").fnt(UIFontMedium(20)).txtColor(UIColorHexString(@"2FAA0F")),
              Label.str(@"123456789ABCDEFG").fnt(UIFontBold(20)).txtColor(UIColorHexString(@"1F550F")),
              @30,
-             Label.str(@"图片加载1："),
+             Label.str(@"图片加载1：").styles(h2),
              ImageView.img(UIImageMake(@"angel")).fixWH(150,100),
              @30,
              Label.str(a2).multiline,

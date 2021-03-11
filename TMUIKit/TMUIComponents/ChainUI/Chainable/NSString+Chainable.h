@@ -30,6 +30,8 @@
 #define DebugStr(...)                ({id _prefix_ = CUI_LOG_PREFIX(__VA_ARGS__); \
                                     id _str_ = Str(__VA_ARGS__);\
                                     Str(@"%@%@", _prefix_, _str_);})
+
+#define DebugStrN(...)              DebugStr(__VA_ARGS__).a(@"\n")
 /**
  * Logging a single value or Logging with format string.
  * Log use Str() internally, so it can take any kind of arguments that Str() supported.

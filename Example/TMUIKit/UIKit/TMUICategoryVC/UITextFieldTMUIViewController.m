@@ -20,13 +20,13 @@
     
     self.view.bgColor(UIColor.whiteColor);
     
-    id a1 = AttStr(AttStr(@"设置最大文本输入长度 20\n").styles(@"h1"),
-                   AttStr(@"tmui_maximumTextLength").styles(@"h2"));
+    id a1 = AttStr(AttStr(@"设置最大文本输入长度 20\n").styles(h1),
+                   AttStr(@"tmui_maximumTextLength").styles(body));
                    
     id l1 = Label.str(a1).multiline;
     
-    id a2 = AttStr(AttStr(@"设置 placeHolder 颜色和字体\n").styles(@"h1"),
-                   AttStr(@"tmui_setPlaceholderColor").styles(@"h2"));
+    id a2 = AttStr(AttStr(@"设置 placeHolder 颜色和字体\n").styles(h1),
+                   AttStr(@"tmui_setPlaceholderColor").styles(body));
     
     id l2 = Label.str(a2).multiline;
     
@@ -45,7 +45,7 @@
     t1.tmui_textChangeBlock = ^(NSString * _Nonnull text, UITextField * _Nonnull textField) {
         id a3 = AttStr(@"未超过限制").color(@"#000000");;
         l3.str(a3);
-        id a4 = AttStr(@"输入文字:",text).styles(@"h2");
+        id a4 = AttStr(@"输入文字:",text).styles(body);
         l4.str(a4);
     };
     id scrollView = UIScrollView.new.embedIn(self.view);
