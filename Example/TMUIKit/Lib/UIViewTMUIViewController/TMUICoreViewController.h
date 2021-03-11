@@ -16,6 +16,8 @@ TMAssociatedPropertyStrongType(NSString, method1);
 
 @property (nonatomic, strong) NSString *method2;
 
+@property (nonatomic, nullable, weak) NSString *method3;
+
 @end
 
 NS_ASSUME_NONNULL_END

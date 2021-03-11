@@ -16,10 +16,20 @@
 
 @implementation TMUICoreViewController
 
-
+// method 1
 TMAssociatedPropertyStrongTypeSetterGetter(NSString, method1);
-
+// method 2
 TMUISynthesizeIdStrongProperty(method2, setMethod2);
+// method 3
+- (void)setMethod3:(NSString *)method3{
+    TMUIWeakObjectContainer *container = [TMUIWeakObjectContainer containerWithObject:method3];
+    objc_setAssociatedObject(self, @selector(method3), container, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSString *)method3{
+    TMUIWeakObjectContainer *container = objc_getAssociatedObject(self, @selector(tmui_emptyView));
+    return container.object ?: nil;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,18 +38,30 @@ TMUISynthesizeIdStrongProperty(method2, setMethod2);
     
     id l1 = Label.str(self.demoInstructions).styles(h1);
     
-    id a2 = AttStr(
-                   AttStr(@"提供两种方式快捷关联对象\n"),
-                   AttStr(@"方式一：需要传入var类型\n"),
-                   AttStr(@"TMAssociatedPropertyStrongType(NSString, method1);\n"),
-                   AttStr(@"TMAssociatedPropertyStrongTypeSetterGetter(NSString, method1);\n\n"),
-                   AttStr(@"方式二：包含各种数据类型可供选择,id,weak,copy,基本类型等。\n"),
-                   AttStr(@"@property (nonatomic, strong) NSString *method2;\n"),
-                   AttStr(@"TMUISynthesizeIdStrongProperty(method2, setMethod2);\n"),
-                   ).styles(body);
-    id l2 = Label.str(a2).multiline;
+    id l2 = Label.str(@"提供三种方式快捷关联对象").styles(h2);
     
-    VerStack(l1,l2,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(30);
+    id a3 = AttStr(
+                   AttStr(@"方式一：需要传入var类型\n").styles(h3),
+                   AttStr(@"TMAssociatedPropertyStrongType(NSString, method1);\n").styles(body),
+                   AttStr(@"TMAssociatedPropertyStrongTypeSetterGetter(NSString, method1);\n\n").styles(body),
+                   AttStr(@"方式二：包含各种数据类型可供选择,id,weak,copy,基本类型等。\n").styles(h3),
+                   AttStr(@"@property (nonatomic, strong) NSString *method2;\n").styles(body),
+                   AttStr(@"TMUISynthesizeIdStrongProperty(method2, setMethod2);\n\n").styles(body),
+                   AttStr(@"方式三：TMUIWeakObjectContainer使用弱引用容器类，避免关联对象释放产生野指针crash。\n").styles(h3),
+                   AttStr(@"@property (nonatomic, nullable, weak) NSString *method3;\n").styles(body),
+                   AttStr(@"- (void)setMethod3:(NSString *)method3{\n\
+                          TMUIWeakObjectContainer *container = [TMUIWeakObjectContainer containerWithObject:method3];\
+                          objc_setAssociatedObject(self, @selector(method3), container,\ OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
+                      }\
+                      - (NSString *)method3{\
+                          TMUIWeakObjectContainer *container = objc_getAssociatedObject(self,\ @selector(tmui_emptyView));\
+                          return container.object ?: nil;\
+                      };\n").styles(body),
+                   );
+    id l3 = Label.str(a3).multiline;
+    
+    
+    VerStack(l1,l2,l3,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(30);
     
     
     self.method1 = @"method111111";
