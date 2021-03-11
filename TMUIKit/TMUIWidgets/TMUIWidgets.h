@@ -12,5 +12,6 @@
 #import "TMUILabel.h"
 #import "TMUITextField.h"
 #import "TMUITextView.h"
+#import "TMUISlider.h"
 
 #endif /* TMUIWidgets_h */

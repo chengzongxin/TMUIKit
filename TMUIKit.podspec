@@ -103,6 +103,10 @@ Pod::Spec.new do |s|
     ss.subspec 'TMUITextView' do |sss|
       sss.source_files = 'TMUIKit/TMUIWidgets/TMUITextView'
     end
+    # TMUISlider
+    ss.subspec 'TMUISlider' do |sss|
+      sss.source_files = 'TMUIKit/TMUIWidgets/TMUISlider'
+    end
   end
   
   #TMUIComponents 组件

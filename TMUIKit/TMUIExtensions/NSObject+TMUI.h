@@ -165,7 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param key ivar 属性名，支持下划线或不带下划线
  @return key 对应的 value，如果该 key 原本是非对象的值，会被用 NSNumber、NSValue 包裹后返回
  */
-//- (nullable id)tmui_valueForKey:(NSString *)key;
+- (nullable id)tmui_valueForKey:(NSString *)key;
 
 /**
  iOS 13 下系统禁止通过 KVC 访问私有 API，因此提供这种方式在遇到 access prohibited 的异常时可以取代 setValue:forKey: 使用。
@@ -181,7 +181,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param key ivar 属性名，支持下划线或不带下划线
  @return key 对应的 value，如果该 key 原本是非对象的值，会被用 NSNumber、NSValue 包裹后返回
  */
-//- (void)tmui_setValue:(nullable id)value forKey:(NSString *)key;
+- (void)tmui_setValue:(nullable id)value forKey:(NSString *)key;
 
 /**
  检查给定的 key 是否可以用于当前对象的 valueForKey: 调用。

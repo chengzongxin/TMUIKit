@@ -27,6 +27,7 @@
                            ROW_CREATE(@"TMUILabel",@"设置Label内容inset、设置复制", @"TMUILabelViewController"),
                            ROW_CREATE(@"TMUITextField",@"设置TextField内容Inset、clearButton位置、限制文本长度", @"TMUITextFieldViewController"),
                            ROW_CREATE(@"TMUITextView",@"TextView设置placeholder、内容长度限制、inset、高度自适应", @"TMUITextViewViewController"),
+                           ROW_CREATE(@"TMUISlider",@"修改背后导轨的高度、修改圆点的大小、修改圆点的阴影样式", @"TMUISliderViewController"),
                            ).title(@"TMUI Widget"),
             SECTION_CREATE(
                            ROW_CREATE(@"设置圆角、阴影、渐变、边框", @"UIViewTMUIViewController"),

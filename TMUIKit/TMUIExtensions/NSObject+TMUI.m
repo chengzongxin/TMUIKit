@@ -250,30 +250,30 @@
 
 @implementation NSObject (TMUI_KeyValueCoding)
 
-//- (id)tmui_valueForKey:(NSString *)key {
-//    if (@available(iOS 13.0, *)) {
-//        if ([self isKindOfClass:[UIView class]] && TMUICMIActivated && !IgnoreKVCAccessProhibited) {
-//            BeginIgnoreUIKVCAccessProhibited
-//            id value = [self valueForKey:key];
-//            EndIgnoreUIKVCAccessProhibited
-//            return value;
-//        }
-//    }
-//    return [self valueForKey:key];
-//}
-//
-//- (void)tmui_setValue:(id)value forKey:(NSString *)key {
-//    if (@available(iOS 13.0, *)) {
-//        if ([self isKindOfClass:[UIView class]] && TMUICMIActivated && !IgnoreKVCAccessProhibited) {
-//            BeginIgnoreUIKVCAccessProhibited
-//            [self setValue:value forKey:key];
-//            EndIgnoreUIKVCAccessProhibited
-//            return;
-//        }
-//    }
-//    
-//    [self setValue:value forKey:key];
-//}
+- (id)tmui_valueForKey:(NSString *)key {
+    if (@available(iOS 13.0, *)) {
+        if ([self isKindOfClass:[UIView class]]) {
+            BeginIgnoreUIKVCAccessProhibited
+            id value = [self valueForKey:key];
+            EndIgnoreUIKVCAccessProhibited
+            return value;
+        }
+    }
+    return [self valueForKey:key];
+}
+
+- (void)tmui_setValue:(id)value forKey:(NSString *)key {
+    if (@available(iOS 13.0, *)) {
+        if ([self isKindOfClass:[UIView class]]) {
+            BeginIgnoreUIKVCAccessProhibited
+            [self setValue:value forKey:key];
+            EndIgnoreUIKVCAccessProhibited
+            return;
+        }
+    }
+    
+    [self setValue:value forKey:key];
+}
 
 - (BOOL)tmui_canGetValueForKey:(NSString *)key {
     NSArray<NSString *> *getters = @[

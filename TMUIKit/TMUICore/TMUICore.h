@@ -8,9 +8,9 @@
 #ifndef TMUICore_h
 #define TMUICore_h
 
-//#if __has_include("TMUIAssociatedPropertyDefines.h")
+#if __has_include("TMUIAssociatedPropertyDefines.h")
 #import "TMUIAssociatedPropertyDefines.h"
-//#endif
+#endif
 
 #if __has_include("TMUICommonDefines.h")
 #import "TMUICommonDefines.h"

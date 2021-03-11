@@ -85,6 +85,10 @@
         {
           "name": "TMUITextView",
           "source_files": "TMUIKit/TMUIWidgets/TMUITextView"
+        },
+        {
+          "name": "TMUISlider",
+          "source_files": "TMUIKit/TMUIWidgets/TMUISlider"
         }
       ]
     },
