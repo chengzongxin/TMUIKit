@@ -67,11 +67,13 @@ TMUISynthesizeIdStrongProperty(method2, setMethod2);
     
     self.method1 = @"method111111";
     self.method2 = @"method222222";
+    self.method3 = @"method333333";
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     Log(self.method1);
     Log(self.method2);
+    Log(self.method3);
 }
 
 

@@ -66,7 +66,7 @@
                    ).styles(body).lineGap(8).match(@" \\d+(\\.\\d+)?").color(@"red");
     id l3 = Label.str(a3).multiline;
     
-    id l4 = Label.str(@"是否重写父类方法:").styles(h2);
+    id l4 = Label.str(@"判断是否重写父类方法:").styles(h2);
     
     id l5 = Label.str(DebugStr(HasOverrideSuperclassMethod(self.class, @selector(viewDidLoad)))).styles(body).fnt(11);
     
@@ -78,9 +78,6 @@
     id l9 = Label.str(@"\n判断Ivar 是哪种类型、获取Ivar的值").styles(h2);
     
     VerStack(l1,l2,l3,l4,l5,l6,l7,l8,l9,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
-    
-//    qmui_enumrateIvarsUsingBlock
-    
     
 }
 
