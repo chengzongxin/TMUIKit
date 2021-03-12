@@ -26,6 +26,13 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
 /// 相当于 initWithFrame:CGRectMake(0, 0, size.width, size.height)
 /// @param size  初始化时的 size
 - (instancetype)tmui_initWithSize:(CGSize)size;
+/**
+ 在 iOS 11 及之后的版本，此属性将返回系统已有的 self.safeAreaInsets。在之前的版本此属性返回 UIEdgeInsetsZero
+ */
+@property(nonatomic, assign, readonly) UIEdgeInsets tmui_safeAreaInsets;
+
+/// 响应区域需要改变的大小，负值表示往外扩大，正值表示往内缩小
+@property(nonatomic,assign) UIEdgeInsets tmui_outsideEdge;
 
 /// 移除当前所有 subviews
 - (void)tmui_removeAllSubviews;
@@ -299,5 +306,18 @@ typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
 + (instancetype)tmui_loadNibViewWithName:(NSString *)name;
 
 @end
+
+
+@interface UIView (TMUI_Runtime)
+
+/**
+ *  判断当前类是否有重写某个指定的 UIView 的方法
+ *  @param selector 要判断的方法
+ *  @return YES 表示当前类重写了指定的方法，NO 表示没有重写，使用的是 UIView 默认的实现
+ */
+- (BOOL)tmui_hasOverrideUIKitMethod:(SEL)selector;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

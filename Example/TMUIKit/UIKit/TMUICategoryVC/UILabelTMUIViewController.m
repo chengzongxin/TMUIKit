@@ -83,11 +83,14 @@
 
     // NSString 计算
     CGSize size1 = [label.text tmui_sizeForFont:label.font
-                                          size:CGSizeMake(self.view.width, HUGE)
+                                          size:CGSizeMake(self.view.width - 40, HUGE)
                                     lineHeight:label.tmui_attributeTextLineHeight
                                           mode:label.lineBreakMode];
     // NSAttributionStirng 计算
-    CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width];
+    CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width - 40];
+    
+    // label max
+    CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
     
     [label mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(size2);
@@ -96,7 +99,7 @@
     _demo1lbl = label;
     
     
-    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@，富文本尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
 }
 
@@ -150,8 +153,10 @@
     label.tmui_enlargeClickArea = CGPointMake(-5, -5);
     _demo2lbl = label;
     
+    // label max
+    CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
     
-    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@，富文本尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
     
     
@@ -211,7 +216,9 @@
         make.size.mas_equalTo(CGSizeMake(size1.width, size2.height));
     }];
     
-    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@，富文本尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2)] color:UIColor.grayColor font:UIFont(14)];
+    CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
+    
+    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
 }
 

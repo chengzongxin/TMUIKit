@@ -129,7 +129,7 @@ typedef id(^CUIcallback)(id,id);
 CUI_VIEW_PROPS(UIView)
 
 //CUI_PROP(v, Callback) =>
-@property(nonatomic, readonly) CUIcallback onLongPress;
+//@property(nonatomic, readonly) CUIcallback onLongPress;
 
 //@property (nonatomic, readonly) id onLongPress(self, ({ id __self = self; __weak typeof(self) self = __self; __self = self; x; }) )
 

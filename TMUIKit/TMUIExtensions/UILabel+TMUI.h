@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 返回段落行高
 - (CGFloat)tmui_attributeTextLineHeight;
 
+
+/// 计算Label的size 含有Image的富文本需要额外加上图片尺寸
+/// @param width label占据屏幕宽度
+- (CGSize)tmui_sizeWithWidth:(CGFloat)width;
+
 @end
 
 @interface UILabel (TMUI_AttributeText)

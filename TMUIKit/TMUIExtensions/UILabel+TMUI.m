@@ -13,6 +13,7 @@
 #import "NSAttributedString+TMUI.h"
 //#import "TMUIAssociatedObjectDefine.h"
 #import <TMUIAssociatedPropertyDefines.h>
+#import "UIView+TMUI.h"
 
 @interface TMAttrTextModel : NSObject
 @property (nonatomic, copy) NSString *str;
@@ -35,6 +36,21 @@
 
 - (CGFloat)tmui_attributeTextLineHeight{
     return [(NSMutableParagraphStyle *)[self.attributedText attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:nil] lineSpacing];
+}
+
+- (CGSize)tmui_sizeWithWidth:(CGFloat)width{
+    if (width == 0) {
+        width = self.width;
+    }
+    // NSString 计算
+    CGSize size1 = [self.text tmui_sizeForFont:self.font
+                                          size:CGSizeMake(width, HUGE)
+                                    lineHeight:self.tmui_attributeTextLineHeight
+                                          mode:self.lineBreakMode];
+    // NSAttributionStirng 计算
+    CGSize size2 = [self.attributedText tmui_sizeForWidth:width];
+    
+    return CGSizeMake(MAX(size1.width, size2.width), MAX(size1.height, size2.height));
 }
 
 @end

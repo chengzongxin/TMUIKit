@@ -13,6 +13,8 @@
 #import "UIImage+TMUI.h"
 #import "UIColor+TMUI.h"
 #import "NSArray+TMUI.h"
+#import "TMUIHelper.h"
+#import "TMUIRuntime.h"
 
 @implementation UIView (TMUI)
 
@@ -22,6 +24,44 @@
 
 - (instancetype)tmui_initWithSize:(CGSize)size{
     return [self initWithFrame:CGRectMakeWithSize(size)];
+}
+
+- (UIEdgeInsets)tmui_safeAreaInsets {
+    if (@available(iOS 11.0, *)) {
+        return self.safeAreaInsets;
+    }
+    return UIEdgeInsetsZero;
+}
+
+
+static char kAssociatedObjectKey_outsideEdge;
+- (void)setTmui_outsideEdge:(UIEdgeInsets)tmui_outsideEdge {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_outsideEdge, @(tmui_outsideEdge), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if (!UIEdgeInsetsEqualToEdgeInsets(tmui_outsideEdge, UIEdgeInsetsZero)) {
+        [TMUIHelper executeBlock:^{
+            OverrideImplementation([UIView class], @selector(pointInside:withEvent:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+                return ^BOOL(UIControl *selfObject, CGPoint point, UIEvent *event) {
+                    
+                    if (!UIEdgeInsetsEqualToEdgeInsets(selfObject.tmui_outsideEdge, UIEdgeInsetsZero)) {
+                        CGRect rect = UIEdgeInsetsInsetRect(selfObject.bounds, selfObject.tmui_outsideEdge);
+                        BOOL result = CGRectContainsPoint(rect, point);
+                        return result;
+                    }
+                    
+                    // call super
+                    BOOL (*originSelectorIMP)(id, SEL, CGPoint, UIEvent *);
+                    originSelectorIMP = (BOOL (*)(id, SEL, CGPoint, UIEvent *))originalIMPProvider();
+                    BOOL result = originSelectorIMP(selfObject, originCMD, point, event);
+                    return result;
+                };
+            });
+        } oncePerIdentifier:@"UIView (TMUI) outsideEdge"];
+    }
+}
+
+- (UIEdgeInsets)tmui_outsideEdge {
+    return [((NSNumber *)objc_getAssociatedObject(self, &kAssociatedObjectKey_outsideEdge)) UIEdgeInsetsValue];
 }
 
 - (void)tmui_removeAllSubviews{
@@ -631,7 +671,7 @@ static const char *tmui_p_swipeGestureKey;
 
 
 
-@implementation UIView (QMUI_ViewController)
+@implementation UIView (TMUI_ViewController)
 
 - (UIViewController *)tmui_viewController {
     return [[self class] tmui_viewControllerOfView:self];
@@ -668,7 +708,7 @@ TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootVi
     
     return NO;
 //    UIViewController *viewController = self.tmui_viewController;
-//    return viewController.qmui_visibleState >= QMUIViewControllerWillAppear && viewController.qmui_visibleState < QMUIViewControllerWillDisappear;
+//    return viewController.tmui_visibleState >= TMUIViewControllerWillAppear && viewController.tmui_visibleState < TMUIViewControllerWillDisappear;
 }
 
 //static char kAssociatedObjectKey_viewController;
@@ -830,6 +870,57 @@ TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootVi
     UIView *view =  [nibView objectAtIndex:0];
     view.frame = frame;
     return view;
+}
+
+@end
+
+
+@implementation UIView (TMUI_Runtime)
+
+- (BOOL)tmui_hasOverrideUIKitMethod:(SEL)selector {
+    // 排序依照 Xcode Interface Builder 里的控件排序，但保证子类在父类前面
+    NSMutableArray<Class> *viewSuperclasses = [[NSMutableArray alloc] initWithObjects:
+                                               [UIStackView class],
+                                               [UILabel class],
+                                               [UIButton class],
+                                               [UISegmentedControl class],
+                                               [UITextField class],
+                                               [UISlider class],
+                                               [UISwitch class],
+                                               [UIActivityIndicatorView class],
+                                               [UIProgressView class],
+                                               [UIPageControl class],
+                                               [UIStepper class],
+                                               [UITableView class],
+                                               [UITableViewCell class],
+                                               [UIImageView class],
+                                               [UICollectionView class],
+                                               [UICollectionViewCell class],
+                                               [UICollectionReusableView class],
+                                               [UITextView class],
+                                               [UIScrollView class],
+                                               [UIDatePicker class],
+                                               [UIPickerView class],
+                                               [UIVisualEffectView class],
+                                               // Apple 不再接受使用了 UIWebView 的 App 提交，所以这里去掉 UIWebView
+                                               // https://github.com/Tencent/QMUI_iOS/issues/741
+//                                               [UIWebView class],
+                                               [UIWindow class],
+                                               [UINavigationBar class],
+                                               [UIToolbar class],
+                                               [UITabBar class],
+                                               [UISearchBar class],
+                                               [UIControl class],
+                                               [UIView class],
+                                               nil];
+    
+    for (NSInteger i = 0, l = viewSuperclasses.count; i < l; i++) {
+        Class superclass = viewSuperclasses[i];
+        if ([self tmui_hasOverrideMethod:selector ofSuperclass:superclass]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end

@@ -34,6 +34,11 @@
     }];
     
     NSArray *titles = @[@"none",@"点击",@"双击",@"长按"];
+    
+    [self addSliderWithTop:470 labelText:@"扩大点击区域" slide:^(float padding) {
+        view.tmui_outsideEdge = UIEdgeInsetsMake(-padding, -padding, -padding, -padding);
+    }];
+    
     // 圆角
     [self addSegmentedWithTop:520 labelText:@"手势类型" titles:titles click:^(NSInteger index) {
         
