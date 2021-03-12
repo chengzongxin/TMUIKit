@@ -20,19 +20,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIButton *btn = [UIButton tmui_button];
+    UIButton *btn = Button.styles(button);
     btn.tmui_image = [UIImage imageNamed:@"icon_moreOperation_shareWeibo"];
     btn.tmui_text = @"yyds";
     
 //    btn.frame = CGRectMake(100, 100, 100, 100);
-    btn.center = self.view.center;
-    btn.backgroundColor = UIColor.grayColor;
+//    btn.center = self.view.center;
+//    btn.backgroundColor = UIColor.grayColor;
     [self.view addSubview:btn];
     
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.centerY.mas_equalTo(self.view).offset(-100);
-        make.width.mas_equalTo(100);
+        make.width.mas_equalTo(300);
         make.height.mas_equalTo(100);
     }];
     
