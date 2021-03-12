@@ -28,5 +28,6 @@
 #import "UITableView+TMUI.h"
 #import "UICollectionView+TMUI.h"
 #import "UIBarButtonItem+TMUI.h"
+#import "CALayer+TMUI.h"
 
 #endif /* TMUIExtensions_h */

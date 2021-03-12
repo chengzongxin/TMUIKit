@@ -178,13 +178,25 @@ static char kAssociatedObjectKey_pause;
 }
 
 - (void)tmui_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius {
+    [self tmui_setLayerShadow:color offset:offset alpha:1 radius:radius spread:0];
+}
+
+- (void)tmui_setLayerShadow:(UIColor *)color offset:(CGSize)offset alpha:(float)alpha radius:(CGFloat)radius spread:(CGFloat)spread{
     self.shadowColor = color.CGColor;
+    self.shadowOpacity = alpha;
     self.shadowOffset = offset;
     self.shadowRadius = radius;
-    self.shadowOpacity = 1;
     self.shouldRasterize = YES;
     self.rasterizationScale = [UIScreen mainScreen].scale;
+    if (spread == 0){
+        self.shadowPath = nil;
+    } else {
+        CGFloat dx = -spread;
+        CGRect rect = CGRectInset(self.bounds, dx, dx);
+        self.shadowPath = [UIBezierPath bezierPathWithRect:rect].CGPath;
+    }
 }
+
 
 - (void)tmui_removeAllSublayers {
     while (self.sublayers.count) {
@@ -445,22 +457,6 @@ static char kAssociatedObjectKey_pause;
 
 - (void)removePreviousFadeAnimation {
     [self removeAnimationForKey:@"tmui.fade"];
-}
-
-
-
-- (void)tmui_applyShadow:(UIColor *)color alpha:(float)alpha x:(CGFloat)x y:(CGFloat)y blue:(CGFloat)blur spread:(CGFloat)spread{
-    self.shadowColor = color.CGColor;
-    self.shadowOpacity = alpha;
-    self.shadowOffset = CGSizeMake(x, y);
-    self.shadowRadius = blur / 2.0;
-    if (spread == 0){
-        self.shadowPath = nil;
-    } else {
-        CGFloat dx = -spread;
-        CGRect rect = CGRectInset(self.bounds, dx, dx);
-        self.shadowPath = [UIBezierPath bezierPathWithRect:rect].CGPath;
-    }
 }
 
 

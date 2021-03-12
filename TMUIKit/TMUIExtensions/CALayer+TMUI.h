@@ -77,7 +77,18 @@ NS_ASSUME_NONNULL_BEGIN
  @param offset Shadow offset
  @param radius Shadow radius
  */
-- (void)tmui_setLayerShadow:(UIColor*)color offset:(CGSize)offset radius:(CGFloat)radius;
+- (void)tmui_setLayerShadow:(UIColor *)color offset:(CGSize)offset radius:(CGFloat)radius;
+
+/**
+ Shortcut to set the layer's shadow
+ 
+ @param color  Shadow Color
+ @param offset Shadow offset
+ @param alpha  Shadow Color alpha
+ @param radius Shadow radius
+ @param spread Shadow spread distance
+ */
+- (void)tmui_setLayerShadow:(UIColor *)color offset:(CGSize)offset alpha:(float)alpha radius:(CGFloat)radius spread:(CGFloat)spread;
 
 /**
  Remove all sublayers.
@@ -123,17 +134,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)tmui_addFadeAnimationWithDuration:(NSTimeInterval)duration curve:(UIViewAnimationCurve)curve;
 
-/**
- 设置阴影,投影范围
-
- @param color 阴影颜色
- @param alpha 阴影透明度
- @param x x偏移
- @param y y偏移
- @param blur 模糊
- @param spread 延伸
- */
-- (void)tmui_applyShadow:(UIColor *)color alpha:(float)alpha x:(CGFloat)x y:(CGFloat)y blue:(CGFloat)blur spread:(CGFloat)spread;
 
 @end
 

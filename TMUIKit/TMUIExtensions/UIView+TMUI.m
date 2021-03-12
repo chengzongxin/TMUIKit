@@ -15,6 +15,7 @@
 #import "NSArray+TMUI.h"
 #import "TMUIHelper.h"
 #import "TMUIRuntime.h"
+#import "CALayer+TMUI.h"
 
 @implementation UIView (TMUI)
 
@@ -279,11 +280,12 @@ TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
                  opacity:(float)opacity
               offsetSize:(CGSize)offset
                   corner:(int)corner{
-    self.layer.masksToBounds = NO;
-    self.layer.shadowColor   = color.CGColor;//设置阴影的透明度
-    self.layer.shadowOpacity = opacity;//设置阴影的透明度
-    self.layer.shadowOffset  = offset;//设置阴影的偏移距离
-    self.layer.shadowRadius  = corner;//设置阴影的圆角
+//    self.layer.masksToBounds = NO;
+//    self.layer.shadowColor   = color.CGColor;//设置阴影的透明度
+//    self.layer.shadowOpacity = opacity;//设置阴影的透明度
+//    self.layer.shadowOffset  = offset;//设置阴影的偏移距离
+//    self.layer.shadowRadius  = corner;//设置阴影的圆角
+    [self.layer tmui_setLayerShadow:color offset:offset alpha:opacity radius:corner spread:0];
 }
 
 - (void)tmui_borderColor:(UIColor *)borderColor
