@@ -11,19 +11,29 @@
 
 #### TMUILabel
 
-- 设置Label内容inset、设置复制
+- 控制label内容的padding
+- 设置是否需要长按复制的功能
 
 #### TMUITextField
 
-- 设置TextField内容Inset、clearButton位置、限制文本长度
+- 自定义 placeholderColor
+- 支持限制输入的文字的长度、超过时回调
+- 设置TextField内容Inset
+- clearButton位置偏移
 
 #### TMUITextView
 
-- TextView设置placeholder、内容长度限制、inset、高度自适应
+- 支持 placeholder 并支持更改 placeholderColor；若使用了富文本文字，则 placeholder 的样式也会跟随文字的样式（除了 placeholder 颜色）
+- 支持在文字发生变化时计算内容高度并通知 delegate
+- 支持限制输入框最大高度，一般配合第 2 点使用
+- 支持限制输入的文本的最大长度，默认不限制
+- 修正系统 UITextView 在输入时自然换行的时候，contentOffset 的滚动位置没有考虑 textContainerInset.bottom
 
 #### TMUISlider
 
-- 修改背后导轨的高度、修改圆点的大小、修改圆点的阴影样式
+- 修改背后导轨的高度
+- 修改圆点的大小
+- 修改圆点的阴影样式
 
 
 

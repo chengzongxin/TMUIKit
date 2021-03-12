@@ -13,12 +13,18 @@
 @property(nonatomic, assign) CGFloat textViewMinimumHeight;
 
 @property(nonatomic, strong) UILabel *tipsLabel;
+
+@property (nonatomic, strong) UILabel *l1;
 @end
 
 @implementation TMUITextViewViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _l1 = Label.str(self.demoInstructions.subReplace(@"、",@"\n")).styles(body).lineGap(5).addTo(self.view).makeCons(^{
+        make.top.left.right.constants(NavigationContentTop+20,20,-20);
+    });
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.textViewMinimumHeight = 96;
@@ -36,15 +42,15 @@
 //    self.textView.backgroundColor = UIColor.qd_backgroundColorLighten;
     // 限制可输入的字符长度
     self.textView.maximumTextLength = 1000;
-    
+
     // 限制输入框自增高的最大高度
     self.textView.maximumHeight = 500;
-    
+
     self.textView.layer.borderWidth = 1;
     self.textView.layer.borderColor = UIColor.tmui_randomColor.CGColor;
     self.textView.layer.cornerRadius = 4;
     [self.view addSubview:self.textView];
-    
+
     self.tipsLabel = [[UILabel alloc] init];
     self.tipsLabel.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最长不超过 %@ 个文字，可尝试输入 emoji、粘贴一大段文字。\n会自动监听回车键，触发发送逻辑。", @(self.textView.maximumTextLength)] attributes:@{NSFontAttributeName: UIFont(12), NSForegroundColorAttributeName: UIColor.tmui_randomColor, NSParagraphStyleAttributeName: [NSMutableParagraphStyle tmui_paragraphStyleWithLineHeight:16]}];
     self.tipsLabel.numberOfLines = 0;
@@ -54,7 +60,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     if (@available(iOS 11.0, *)) {
-        UIEdgeInsets padding = UIEdgeInsetsMake(tmui_navigationBarHeight() + 16, 16 + self.view.safeAreaInsets.left, 16 + self.view.safeAreaInsets.bottom, 16 + self.view.safeAreaInsets.right);
+        UIEdgeInsets padding = UIEdgeInsetsMake(_l1.maxY + 16, 16 + self.view.safeAreaInsets.left, 16 + self.view.safeAreaInsets.bottom, 16 + self.view.safeAreaInsets.right);
         CGFloat contentWidth = CGRectGetWidth(self.view.bounds) - UIEdgeInsetsGetHorizontalValue(padding);
         
         CGSize textViewSize = [self.textView sizeThatFits:CGSizeMake(contentWidth, CGFLOAT_MAX)];

@@ -21,7 +21,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.view.bgColor(@"white");
+    Label.str(self.demoInstructions).styles(h2).lineGap(5).addTo(self.view).makeCons(^{
+        make.top.left.right.constants(NavigationContentTop+20,20,-20);
+    });
     
     self.slider = [[TMUISlider alloc] init];
     self.slider.value = .3;
@@ -60,7 +62,7 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    UIEdgeInsets padding = UIEdgeInsetsMake(24 + tmui_navigationBarHeight(), 24, 24, 24);
+    UIEdgeInsets padding = UIEdgeInsetsMake(64 + tmui_navigationBarHeight(), 24, 24, 24);
     
     self.label1.frame = CGRectSetXY(self.label1.frame, padding.left, padding.top);
     
