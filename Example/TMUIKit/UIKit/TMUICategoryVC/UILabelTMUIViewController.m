@@ -149,7 +149,7 @@
         [TMToast toast:[NSString stringWithFormat:@"你点击了%@",string]];
     }];
     label.tmui_enabledClickEffect = YES;
-    label.tmui_clickEffectColor = UIColor.redColor;
+    label.tmui_clickEffectColor = UIColor.tmui_randomColor;
     label.tmui_enlargeClickArea = CGPointMake(-5, -5);
     _demo2lbl = label;
     

@@ -15,6 +15,39 @@
 #import <TMUIAssociatedPropertyDefines.h>
 #import "UIView+TMUI.h"
 
+
+@interface TMUILinkGestureRegcognizer : UIGestureRecognizer <UIGestureRecognizerDelegate>
+@end
+
+@implementation TMUILinkGestureRegcognizer
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    self.state = UIGestureRecognizerStateBegan;
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    self.state = UIGestureRecognizerStateChanged;
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    self.state = UIGestureRecognizerStateEnded;
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    self.state = UIGestureRecognizerStateCancelled;
+}
+
+- (BOOL)canPreventGestureRecognizer:(UIGestureRecognizer *)preventedGestureRecognizer {
+    return NO;
+}
+
+- (BOOL)canBePreventedByGestureRecognizer:(UIGestureRecognizer *)preventingGestureRecognizer {
+    return NO;
+}
+
+@end
+
+
 @interface TMAttrTextModel : NSObject
 @property (nonatomic, copy) NSString *str;
 @property (nonatomic, assign) NSRange range;
@@ -184,12 +217,66 @@ TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_delegate);
 - (void)tmui_clickAttrTextWithStrings:(NSArray<NSString *> *)strings attributes:(nullable NSDictionary *)attributes delegate:(nullable id<TMUIAttrTextDelegate>)delegate clickAction:(nullable void (^)(NSString * _Nonnull, NSRange, NSInteger))clickAction{
     [self tmui_removeAttributeAction];
     self.userInteractionEnabled = YES;
+    
+    id reg = [[TMUILinkGestureRegcognizer alloc] initWithTarget:self action:@selector(tmui_handleLinkGesture:)];
+    [self addGestureRecognizer:reg];
+    
     [self attrTextRangesWithStrings:strings attributes:attributes];
     if (self.tmui_clickBlock != clickAction) {
         self.tmui_clickBlock = clickAction;
     }
     if ([self tmui_delegate] != delegate) {
         [self setTmui_delegate:delegate];
+    }
+}
+
+- (void)tmui_handleLinkGesture:(UIPanGestureRecognizer *)reg {
+    if (reg.state == UIGestureRecognizerStateBegan) {
+        if (!self.tmui_isClickAction) {
+            return;
+        }
+
+        if (objc_getAssociatedObject(self, @selector(tmui_enabledClickEffect))) {
+            self.tmui_isClickEffect = self.tmui_enabledClickEffect;
+        }
+
+        CGPoint point = [reg locationInView:self];
+
+        __weak __typeof(self)weakSelf = self;
+        [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            
+            if (strongSelf.tmui_clickBlock) {
+                strongSelf.tmui_clickBlock (string , range , index);
+            }
+
+            if ([strongSelf tmui_delegate] && [[strongSelf tmui_delegate] respondsToSelector:@selector(didClickAttrText:range:index:)]) {
+                [[strongSelf tmui_delegate] didClickAttrText:string range:range index:index];
+            }
+
+            if (strongSelf.tmui_isClickEffect) {
+                [strongSelf saveEffectDicWithRange:range];
+                [strongSelf clickEffectWithStatus:YES];
+            }
+        }];
+        
+        
+    } else if (reg.state == UIGestureRecognizerStateChanged) {
+
+    } else if (reg.state == UIGestureRecognizerStateEnded || reg.state == UIGestureRecognizerStateCancelled) {
+        
+        if (!self.tmui_isClickAction) {
+            return;
+        }
+        if (self.tmui_isClickEffect) {
+            [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
+        }
+
+        CGPoint point = [reg locationInView:self];
+
+        [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+        }];
+        
     }
 }
 
@@ -202,102 +289,117 @@ TMUISynthesizeIdWeakProperty(tmui_delegate, setTmui_delegate);
     self.tmui_delegate = nil;
     self.tmui_attributeStrings = [NSMutableArray array];
     self.tmui_effectDic = nil;
+    [self removeLinkGes];
+}
+
+- (void)removeLinkGes{
+    NSMutableArray *gesArr = [NSMutableArray array];
+    for (UIGestureRecognizer *ges in self.gestureRecognizers) {
+        if ([ges isKindOfClass:TMUILinkGestureRegcognizer.class]) {
+            [gesArr addObject:ges];;
+        }
+    }
+    
+    for (UIGestureRecognizer *ges in gesArr) {
+        [self removeGestureRecognizer:ges];
+    }
+    
 }
 
 #pragma mark - touchAction
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.tmui_isClickAction) {
-        [super touchesBegan:touches withEvent:event];
-        return;
-    }
-
-    if (objc_getAssociatedObject(self, @selector(tmui_enabledClickEffect))) {
-        self.tmui_isClickEffect = self.tmui_enabledClickEffect;
-    }
-
-    UITouch *touch = [touches anyObject];
-
-    CGPoint point = [touch locationInView:self];
-
-    __weak __typeof(self)weakSelf = self;
-    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        
-        if (strongSelf.tmui_clickBlock) {
-            strongSelf.tmui_clickBlock (string , range , index);
-        }
-
-        if ([strongSelf tmui_delegate] && [[strongSelf tmui_delegate] respondsToSelector:@selector(didClickAttrText:range:index:)]) {
-            [[strongSelf tmui_delegate] didClickAttrText:string range:range index:index];
-        }
-
-        if (strongSelf.tmui_isClickEffect) {
-            [strongSelf saveEffectDicWithRange:range];
-            [strongSelf clickEffectWithStatus:YES];
-        }
-    }];
-    
-    if (!ret) {
-        [super touchesBegan:touches withEvent:event];
-    }
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.tmui_isClickAction) {
-        [super touchesEnded:touches withEvent:event];
-        return;
-    }
-    if (self.tmui_isClickEffect) {
-        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
-    }
-    UITouch *touch = [touches anyObject];
-
-    CGPoint point = [touch locationInView:self];
-
-    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
-    }];
-    
-    if (!ret) {
-        [super touchesEnded:touches withEvent:event];
-    }
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if (!self.tmui_isClickAction) {
-        [super touchesEnded:touches withEvent:event];
-        return;
-    }
-    if (self.tmui_isClickEffect) {
-        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
-    }
-    UITouch *touch = [touches anyObject];
-
-    CGPoint point = [touch locationInView:self];
-
-    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
-    }];
-    
-    if (!ret) {
-        [super touchesCancelled:touches withEvent:event];
-    }
-}
-
-
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *subview;
-    if (self.subviews.count) {
-        subview = [super hitTest:point withEvent:event];
-    }
-    // 有subview时返回subview， 不拦截subview事件
-    if (subview) {
-        return subview;
-    }
-    
-    if((self.tmui_isClickAction) && ([self attrTextFrameWithTouchPoint:point result:nil])) {
-        return self;
-    }
-    return [super hitTest:point withEvent:event];
-}
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    if (!self.tmui_isClickAction) {
+//        [super touchesBegan:touches withEvent:event];
+//        return;
+//    }
+//
+//    if (objc_getAssociatedObject(self, @selector(tmui_enabledClickEffect))) {
+//        self.tmui_isClickEffect = self.tmui_enabledClickEffect;
+//    }
+//
+//    UITouch *touch = [touches anyObject];
+//
+//    CGPoint point = [touch locationInView:self];
+//
+//    __weak __typeof(self)weakSelf = self;
+//    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//
+//        if (strongSelf.tmui_clickBlock) {
+//            strongSelf.tmui_clickBlock (string , range , index);
+//        }
+//
+//        if ([strongSelf tmui_delegate] && [[strongSelf tmui_delegate] respondsToSelector:@selector(didClickAttrText:range:index:)]) {
+//            [[strongSelf tmui_delegate] didClickAttrText:string range:range index:index];
+//        }
+//
+//        if (strongSelf.tmui_isClickEffect) {
+//            [strongSelf saveEffectDicWithRange:range];
+//            [strongSelf clickEffectWithStatus:YES];
+//        }
+//    }];
+//
+//    if (!ret) {
+//        [super touchesBegan:touches withEvent:event];
+//    }
+//}
+//
+//- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    if (!self.tmui_isClickAction) {
+//        [super touchesEnded:touches withEvent:event];
+//        return;
+//    }
+//    if (self.tmui_isClickEffect) {
+//        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
+//    }
+//    UITouch *touch = [touches anyObject];
+//
+//    CGPoint point = [touch locationInView:self];
+//
+//    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+//    }];
+//
+//    if (!ret) {
+//        [super touchesEnded:touches withEvent:event];
+//    }
+//}
+//
+//- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    if (!self.tmui_isClickAction) {
+//        [super touchesEnded:touches withEvent:event];
+//        return;
+//    }
+//    if (self.tmui_isClickEffect) {
+//        [self performSelectorOnMainThread:@selector(clickEffectWithStatus:) withObject:nil waitUntilDone:NO];
+//    }
+//    UITouch *touch = [touches anyObject];
+//
+//    CGPoint point = [touch locationInView:self];
+//
+//    BOOL ret = [self attrTextFrameWithTouchPoint:point result:^(NSString *string, NSRange range, NSInteger index) {
+//    }];
+//
+//    if (!ret) {
+//        [super touchesCancelled:touches withEvent:event];
+//    }
+//}
+//
+//
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    UIView *subview;
+//    if (self.subviews.count) {
+//        subview = [super hitTest:point withEvent:event];
+//    }
+//    // 有subview时返回subview， 不拦截subview事件
+//    if (subview) {
+//        return subview;
+//    }
+//
+//    if((self.tmui_isClickAction) && ([self attrTextFrameWithTouchPoint:point result:nil])) {
+//        return self;
+//    }
+//    return [super hitTest:point withEvent:event];
+//}
 
 #pragma mark - getClickFrame
 - (BOOL)attrTextFrameWithTouchPoint:(CGPoint)point result:(void (^) (NSString *string , NSRange range , NSInteger index))resultBlock {
