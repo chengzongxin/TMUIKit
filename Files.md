@@ -57,22 +57,27 @@
 
 #### UIButton+TMUI
 
-- 设置图片位置、图文间距、扩大点击区域
+- 便捷的通用设置方法
+- 设置图片位置、图文间距
+- 扩大点击区域
 
 #### UIViewController+TMUI
 
 - 获取最上层vc、全局设置导航栏显示隐藏、导航控制器中上一个viewcontroller、导航控制器中下一个viewcontroller
+- 提供可自定义个数的Alert、sheet弹窗
 
 #### UITextField+TMUI
 
-- 设置最大文本输入长度、设置 placeHolder 颜色和字体、文本回调
+- 设置 placeHolder 颜色和字体
+- 设置最大文本输入长度
+- 文本输入回调、超出限制回调
 
 #### UIImage+TMUI
 
-- 设置图片外观
-- 图片创建、压缩、裁剪
-
-
+- 从bundle获取图片、提供几种常用图片、颜色创建图片等
+- 以block回调形式，给定上下文绘制图片
+- 设置图片外观、置灰、转向、透明度
+- 图片压缩、裁剪尺寸等
 
 
 

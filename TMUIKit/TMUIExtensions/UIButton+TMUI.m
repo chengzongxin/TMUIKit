@@ -114,6 +114,25 @@
     return btn;
 }
 
+- (void)setTmui_click:(void (^)(void))tmui_click{
+    self.userInteractionEnabled = YES;
+    objc_setAssociatedObject(self, @selector(tmui_click), tmui_click, OBJC_ASSOCIATION_COPY);
+    [self addTarget:self action:@selector(tmui_clickHandle:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void (^)(void))tmui_click{
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+
+- (void)tmui_clickHandle:(UIButton *)button {
+    void(^action)(void) =  objc_getAssociatedObject(self, @selector(tmui_click));
+    if (action) {
+        action();
+    }
+}
+
+
 @end
 
 

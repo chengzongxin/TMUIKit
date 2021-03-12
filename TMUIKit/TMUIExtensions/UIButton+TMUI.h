@@ -47,6 +47,9 @@ typedef NS_ENUM(NSInteger, TMUIButtonImageTitleStyle) {
 /// 只提供属性生成Set和Get方法，访问或者设置按钮图片，不生成成员变量
 @property (nonatomic, strong) UIImage *tmui_image;
 
+/// 按钮点击
+@property(nonatomic, copy) void (^tmui_click)(void) ;
+
 /// 快速的绑定事件
 - (void)tmui_addTarget:(nullable id)target action:(nonnull SEL)sel;
 

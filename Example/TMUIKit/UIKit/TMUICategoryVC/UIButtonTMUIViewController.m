@@ -36,9 +36,10 @@
         make.height.mas_equalTo(100);
     }];
     
-    [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
-        NSLog(@"click button");
-    }];
+    btn.tmui_click = ^{
+        NSLog(@"tmui_click");
+    };
+    
     
     [btn tmui_buttonImageTitleWithStyle:TMUIButtonImageTitleStyleLeft padding:0];
     
