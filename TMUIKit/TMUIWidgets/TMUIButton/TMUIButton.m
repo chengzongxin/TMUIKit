@@ -8,35 +8,130 @@
 #import "TMUIButton.h"
 #import "TMUICommonDefines.h"
 #import "TMUICoreGraphicsDefines.h"
+#import "CALayer+TMUI.h"
 
 @interface TMUIButton ()
 
+@property(nonatomic, strong) CALayer *highlightedBackgroundLayer;
+@property(nonatomic, strong) UIColor *originBorderColor;
 
 @end
 
 @implementation TMUIButton
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        NSLog(@"tmbutton new");
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+//        self.tintColor = ButtonTintColor;
+        if (!self.adjustsTitleTintColorAutomatically) {
+            [self setTitleColor:self.tintColor forState:UIControlStateNormal];
+        }
+        
+        // iOS7以后的button，sizeToFit后默认会自带一个上下的contentInsets，为了保证按钮大小即为内容大小，这里直接去掉，改为一个最小的值。
+        self.contentEdgeInsets = UIEdgeInsetsMake(CGFLOAT_MIN, 0, CGFLOAT_MIN, 0);
+        
+        [self didInitialize];
     }
     return self;
 }
 
-// 系统访问 self.imageView 会触发 layout，而私有方法 _imageView 则是简单地访问 imageView，所以在 QMUIButton layoutSubviews 里应该用这个方法
-// https://github.com/Tencent/QMUI_iOS/issues/1051
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self didInitialize];
+    }
+    return self;
+}
+
+- (void)didInitialize {
+    self.adjustsTitleTintColorAutomatically = NO;
+    self.adjustsImageTintColorAutomatically = NO;
+    
+    // 默认接管highlighted和disabled的表现，去掉系统默认的表现
+    self.adjustsImageWhenHighlighted = NO;
+    self.adjustsImageWhenDisabled = NO;
+    self.adjustsButtonWhenHighlighted = YES;
+    self.adjustsButtonWhenDisabled = YES;
+    self.adjustsButtonAlpha = 0.6;
+    // 图片默认在按钮左边，与系统UIButton保持一致
+    self.imagePosition = TMUIButtonImagePositionLeft;
+}
+
+// 系统访问 self.imageView 会触发 layout，而私有方法 _imageView 则是简单地访问 imageView，所以在 TMUIButton layoutSubviews 里应该用这个方法
+// https://github.com/Tencent/TMUI_iOS/issues/1051
 - (UIImageView *)_tmui_imageView {
     BeginIgnorePerformSelectorLeaksWarning
     return [self performSelector:NSSelectorFromString(@"_imageView")];
     EndIgnorePerformSelectorLeaksWarning
 }
 
-- (void)setImagePosition:(TMUIButtonImagePosition)imagePosition{
-    _imagePosition = imagePosition;
-    // 这个会标记视图，使得runloop的下一个周期调用layoutSubviews。
-    [self setNeedsLayout];
+- (CGSize)sizeThatFits:(CGSize)size {
+    // 如果调用 sizeToFit，那么传进来的 size 就是当前按钮的 size，此时的计算不要去限制宽高
+    if (CGSizeEqualToSize(self.bounds.size, size)) {
+        size = CGSizeMax;
+    }
+    
+    BOOL isImageViewShowing = !!self.currentImage;
+    BOOL isTitleLabelShowing = !!self.currentTitle || self.currentAttributedTitle;
+    CGSize imageTotalSize = CGSizeZero;// 包含 imageEdgeInsets 那些空间
+    CGSize titleTotalSize = CGSizeZero;// 包含 titleEdgeInsets 那些空间
+    CGFloat spacingBetweenImageAndTitle = flat(isImageViewShowing && isTitleLabelShowing ? self.spacingBetweenImageAndTitle : 0);// 如果图片或文字某一者没显示，则这个 spacing 不考虑进布局
+    UIEdgeInsets contentEdgeInsets = UIEdgeInsetsRemoveFloatMin(self.contentEdgeInsets);
+    CGSize resultSize = CGSizeZero;
+    CGSize contentLimitSize = CGSizeMake(size.width - UIEdgeInsetsGetHorizontalValue(contentEdgeInsets), size.height - UIEdgeInsetsGetVerticalValue(contentEdgeInsets));
+    
+    switch (self.imagePosition) {
+        case TMUIButtonImagePositionTop:
+        case TMUIButtonImagePositionBottom: {
+            // 图片和文字上下排版时，宽度以文字或图片的最大宽度为最终宽度
+            if (isImageViewShowing) {
+                CGFloat imageLimitWidth = contentLimitSize.width - UIEdgeInsetsGetHorizontalValue(self.imageEdgeInsets);
+                CGSize imageSize = self.imageView.image ? [self.imageView sizeThatFits:CGSizeMake(imageLimitWidth, CGFLOAT_MAX)] : self.currentImage.size;
+                imageSize.width = MIN(imageSize.width, imageLimitWidth);// TMUIButton sizeThatFits 时 self._imageView 为 nil 但 self.imageView 有值，而开启了 Bold Text 时，系统的 self.imageView sizeThatFits 返回值会比没开启 BoldText 时多 1pt（不知道为什么文字加粗与否会影响 imageView...），从而保证开启 Bold Text 后文字依然能完整展示出来，所以这里应该用 self.imageView 而不是 self._imageView
+                imageTotalSize = CGSizeMake(imageSize.width + UIEdgeInsetsGetHorizontalValue(self.imageEdgeInsets), imageSize.height + UIEdgeInsetsGetVerticalValue(self.imageEdgeInsets));
+            }
+            
+            if (isTitleLabelShowing) {
+                CGSize titleLimitSize = CGSizeMake(contentLimitSize.width - UIEdgeInsetsGetHorizontalValue(self.titleEdgeInsets), contentLimitSize.height - imageTotalSize.height - spacingBetweenImageAndTitle - UIEdgeInsetsGetVerticalValue(self.titleEdgeInsets));
+                CGSize titleSize = [self.titleLabel sizeThatFits:titleLimitSize];
+                titleSize.height = MIN(titleSize.height, titleLimitSize.height);
+                titleTotalSize = CGSizeMake(titleSize.width + UIEdgeInsetsGetHorizontalValue(self.titleEdgeInsets), titleSize.height + UIEdgeInsetsGetVerticalValue(self.titleEdgeInsets));
+            }
+            
+            resultSize.width = UIEdgeInsetsGetHorizontalValue(contentEdgeInsets);
+            resultSize.width += MAX(imageTotalSize.width, titleTotalSize.width);
+            resultSize.height = UIEdgeInsetsGetVerticalValue(contentEdgeInsets) + imageTotalSize.height + spacingBetweenImageAndTitle + titleTotalSize.height;
+        }
+            break;
+            
+        case TMUIButtonImagePositionLeft:
+        case TMUIButtonImagePositionRight: {
+            // 图片和文字水平排版时，高度以文字或图片的最大高度为最终高度
+            // 注意这里有一个和系统不一致的行为：当 titleLabel 为多行时，系统的 sizeThatFits: 计算结果固定是单行的，所以当 TMUIButtonImagePositionLeft 并且titleLabel 多行的情况下，TMUIButton 计算的结果与系统不一致
+            
+            if (isImageViewShowing) {
+                CGFloat imageLimitHeight = contentLimitSize.height - UIEdgeInsetsGetVerticalValue(self.imageEdgeInsets);
+                CGSize imageSize = self.imageView.image ? [self.imageView sizeThatFits:CGSizeMake(CGFLOAT_MAX, imageLimitHeight)] : self.currentImage.size;
+                imageSize.height = MIN(imageSize.height, imageLimitHeight);// TMUIButton sizeThatFits 时 self._imageView 为 nil 但 self.imageView 有值，而开启了 Bold Text 时，系统的 self.imageView sizeThatFits 返回值会比没开启 BoldText 时多 1pt（不知道为什么文字加粗与否会影响 imageView...），从而保证开启 Bold Text 后文字依然能完整展示出来，所以这里应该用 self.imageView 而不是 self._imageView
+                imageTotalSize = CGSizeMake(imageSize.width + UIEdgeInsetsGetHorizontalValue(self.imageEdgeInsets), imageSize.height + UIEdgeInsetsGetVerticalValue(self.imageEdgeInsets));
+            }
+            
+            if (isTitleLabelShowing) {
+                CGSize titleLimitSize = CGSizeMake(contentLimitSize.width - UIEdgeInsetsGetHorizontalValue(self.titleEdgeInsets) - imageTotalSize.width - spacingBetweenImageAndTitle, contentLimitSize.height - UIEdgeInsetsGetVerticalValue(self.titleEdgeInsets));
+                CGSize titleSize = [self.titleLabel sizeThatFits:titleLimitSize];
+                titleSize.height = MIN(titleSize.height, titleLimitSize.height);
+                titleTotalSize = CGSizeMake(titleSize.width + UIEdgeInsetsGetHorizontalValue(self.titleEdgeInsets), titleSize.height + UIEdgeInsetsGetVerticalValue(self.titleEdgeInsets));
+            }
+            
+            resultSize.width = UIEdgeInsetsGetHorizontalValue(contentEdgeInsets) + imageTotalSize.width + spacingBetweenImageAndTitle + titleTotalSize.width;
+            resultSize.height = UIEdgeInsetsGetVerticalValue(contentEdgeInsets);
+            resultSize.height += MAX(imageTotalSize.height, titleTotalSize.height);
+        }
+            break;
+    }
+    return resultSize;
+}
+
+- (CGSize)intrinsicContentSize {
+    return [self sizeThatFits:CGSizeMax];
 }
 
 - (void)layoutSubviews {
@@ -52,11 +147,10 @@
     CGSize titleLimitSize = CGSizeZero;
     CGSize imageTotalSize = CGSizeZero;// 包含 imageEdgeInsets 那些空间
     CGSize titleTotalSize = CGSizeZero;// 包含 titleEdgeInsets 那些空间
-    CGFloat spacingBetweenImageAndTitle = ceil(isImageViewShowing && isTitleLabelShowing ? self.spacingBetweenImageAndTitle : 0);// 如果图片或文字某一者没显示，则这个 spacing 不考虑进布局
+    CGFloat spacingBetweenImageAndTitle = flat(isImageViewShowing && isTitleLabelShowing ? self.spacingBetweenImageAndTitle : 0);// 如果图片或文字某一者没显示，则这个 spacing 不考虑进布局
     CGRect imageFrame = CGRectZero;
     CGRect titleFrame = CGRectZero;
-//    UIEdgeInsets contentEdgeInsets = UIEdgeInsetsRemoveFloatMin(self.contentEdgeInsets);
-    UIEdgeInsets contentEdgeInsets = self.contentEdgeInsets;
+    UIEdgeInsets contentEdgeInsets = UIEdgeInsetsRemoveFloatMin(self.contentEdgeInsets);
     CGSize contentSize = CGSizeMake(CGRectGetWidth(self.bounds) - UIEdgeInsetsGetHorizontalValue(contentEdgeInsets), CGRectGetHeight(self.bounds) - UIEdgeInsetsGetVerticalValue(contentEdgeInsets));
     
     // 图片的布局原则都是尽量完整展示，所以不管 imagePosition 的值是什么，这个计算过程都是相同的
@@ -70,7 +164,7 @@
     }
     
     // UIButton 如果本身大小为 (0,0)，此时设置一个 imageEdgeInsets 会让 imageView 的 bounds 错误，导致后续 imageView 的 subviews 布局时会产生偏移，因此这里做一次保护
-    // https://github.com/Tencent/QMUI_iOS/issues/1012
+    // https://github.com/Tencent/TMUI_iOS/issues/1012
     void (^makesureBoundsPositive)(UIView *) = ^void(UIView *view) {
         CGRect bounds = view.bounds;
         if (CGRectGetMinX(bounds) < 0 || CGRectGetMinY(bounds) < 0) {
@@ -347,4 +441,150 @@
     [self setNeedsLayout];
 }
 
+- (void)setImagePosition:(TMUIButtonImagePosition)imagePosition {
+    _imagePosition = imagePosition;
+    
+    [self setNeedsLayout];
+}
+
+- (void)setHighlightedBackgroundColor:(UIColor *)highlightedBackgroundColor {
+    _highlightedBackgroundColor = highlightedBackgroundColor;
+    if (_highlightedBackgroundColor) {
+        // 只要开启了highlightedBackgroundColor，就默认不需要alpha的高亮
+        self.adjustsButtonWhenHighlighted = NO;
+    }
+}
+
+- (void)setHighlightedBorderColor:(UIColor *)highlightedBorderColor {
+    _highlightedBorderColor = highlightedBorderColor;
+    if (_highlightedBorderColor) {
+        // 只要开启了highlightedBorderColor，就默认不需要alpha的高亮
+        self.adjustsButtonWhenHighlighted = NO;
+    }
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
+    
+    if (highlighted && !self.originBorderColor) {
+        // 手指按在按钮上会不断触发setHighlighted:，所以这里做了保护，设置过一次就不用再设置了
+        self.originBorderColor = [UIColor colorWithCGColor:self.layer.borderColor];
+    }
+    
+    // 渲染背景色
+    if (self.highlightedBackgroundColor || self.highlightedBorderColor) {
+        [self adjustsButtonHighlighted];
+    }
+    // 如果此时是disabled，则disabled的样式优先
+    if (!self.enabled) {
+        return;
+    }
+    // 自定义highlighted样式
+    if (self.adjustsButtonWhenHighlighted) {
+        if (highlighted) {
+            self.alpha = self.adjustsButtonAlpha;
+        } else {
+            self.alpha = 1;
+        }
+    }
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    [super setEnabled:enabled];
+    if (!enabled && self.adjustsButtonWhenDisabled) {
+        self.alpha = self.adjustsButtonAlpha;
+    } else {
+        self.alpha = 1;
+    }
+}
+
+- (void)adjustsButtonHighlighted {
+    if (self.highlightedBackgroundColor) {
+        if (!self.highlightedBackgroundLayer) {
+            self.highlightedBackgroundLayer = [CALayer layer];
+            [self.highlightedBackgroundLayer tmui_removeDefaultAnimations];
+            [self.layer insertSublayer:self.highlightedBackgroundLayer atIndex:0];
+        }
+        self.highlightedBackgroundLayer.frame = self.bounds;
+        self.highlightedBackgroundLayer.cornerRadius = self.layer.cornerRadius;
+        self.highlightedBackgroundLayer.backgroundColor = self.highlighted ? self.highlightedBackgroundColor.CGColor : UIColor.clearColor.CGColor;
+    }
+    
+    if (self.highlightedBorderColor) {
+        self.layer.borderColor = self.highlighted ? self.highlightedBorderColor.CGColor : self.originBorderColor.CGColor;
+    }
+}
+
+- (void)setAdjustsTitleTintColorAutomatically:(BOOL)adjustsTitleTintColorAutomatically {
+    _adjustsTitleTintColorAutomatically = adjustsTitleTintColorAutomatically;
+    [self updateTitleColorIfNeeded];
+}
+
+- (void)updateTitleColorIfNeeded {
+    if (self.adjustsTitleTintColorAutomatically && self.currentTitleColor) {
+        [self setTitleColor:self.tintColor forState:UIControlStateNormal];
+    }
+    if (self.adjustsTitleTintColorAutomatically && self.currentAttributedTitle) {
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.currentAttributedTitle];
+        [attributedString addAttribute:NSForegroundColorAttributeName value:self.tintColor range:NSMakeRange(0, attributedString.length)];
+        [self setAttributedTitle:attributedString forState:UIControlStateNormal];
+    }
+}
+
+- (void)setAdjustsImageTintColorAutomatically:(BOOL)adjustsImageTintColorAutomatically {
+    BOOL valueDifference = _adjustsImageTintColorAutomatically != adjustsImageTintColorAutomatically;
+    _adjustsImageTintColorAutomatically = adjustsImageTintColorAutomatically;
+    
+    if (valueDifference) {
+        [self updateImageRenderingModeIfNeeded];
+    }
+}
+
+- (void)updateImageRenderingModeIfNeeded {
+    if (self.currentImage) {
+        NSArray<NSNumber *> *states = @[@(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateSelected), @(UIControlStateSelected|UIControlStateHighlighted), @(UIControlStateDisabled)];
+        
+        for (NSNumber *number in states) {
+            UIImage *image = [self imageForState:number.unsignedIntegerValue];
+            if (!image) {
+                return;
+            }
+            
+            if (self.adjustsImageTintColorAutomatically) {
+                // 这里的 setImage: 操作不需要使用 renderingMode 对 image 重新处理，而是放到重写的 setImage:forState 里去做就行了
+                [self setImage:image forState:[number unsignedIntegerValue]];
+            } else {
+                // 如果不需要用template的模式渲染，并且之前是使用template的，则把renderingMode改回Original
+                [self setImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:[number unsignedIntegerValue]];
+            }
+        }
+    }
+}
+
+- (void)setImage:(UIImage *)image forState:(UIControlState)state {
+    if (self.adjustsImageTintColorAutomatically) {
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }
+    
+    [super setImage:image forState:state];
+}
+
+- (void)tintColorDidChange {
+    [super tintColorDidChange];
+    
+    [self updateTitleColorIfNeeded];
+    
+    if (self.adjustsImageTintColorAutomatically) {
+        [self updateImageRenderingModeIfNeeded];
+    }
+}
+
+- (void)setTintColorAdjustsTitleAndImage:(UIColor *)tintColorAdjustsTitleAndImage {
+    _tintColorAdjustsTitleAndImage = tintColorAdjustsTitleAndImage;
+    if (tintColorAdjustsTitleAndImage) {
+        self.tintColor = tintColorAdjustsTitleAndImage;
+        self.adjustsTitleTintColorAutomatically = YES;
+        self.adjustsImageTintColorAutomatically = YES;
+    }
+}
 @end

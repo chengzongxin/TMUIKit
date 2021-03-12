@@ -380,6 +380,25 @@ NSLog(@"dealloc: %@", NSStringFromClass(self.class));   \
     return _##propertyName; \
 }   \
 
+#pragma mark - 单例
+// .h
+#define SHARED_INSTANCE_FOR_HEADER \
+\
++ (instancetype)sharedInstance;
+// .m
+#define SHARED_INSTANCE_FOR_CLASS \
++ (instancetype)sharedInstance {\
+    static dispatch_once_t onceToken;\
+    static id instance = nil;\
+    dispatch_once(&onceToken, ^{\
+        instance = [[super allocWithZone:NULL] init];\
+    });\
+    return instance;\
+}\
++ (id)allocWithZone:(struct _NSZone *)zone {\
+    return [self sharedInstance];\
+}
+
 
 #pragma mark - Clang
 
@@ -398,8 +417,6 @@ NSLog(@"dealloc: %@", NSStringFromClass(self.class));   \
 
 #define BeginIgnoreDeprecatedWarning BeginIgnoreClangWarning(-Wdeprecated-declarations)
 #define EndIgnoreDeprecatedWarning EndIgnoreClangWarning
-
-#pragma mark - CGFloat
 
 
 #endif /* TMUICommonDefines_h */

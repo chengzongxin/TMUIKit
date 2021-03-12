@@ -25,7 +25,7 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 //        ExtendImplementationOfVoidMethodWithSingleArgument([self class], @selector(viewWillAppear:), BOOL, ^(UIViewController *selfObject, BOOL animate) {
 //            selfObject.navigationItem.title = NSStringFromClass(selfObject.class);
 //        });
-        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+        
         
         ExtendImplementationOfVoidMethodWithoutArguments([self class], @selector(viewDidLoad), ^(UIViewController *selfObject) {
             TMUILabel *label = [[TMUILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
@@ -61,8 +61,18 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 
 @implementation UINavigationController (Base)
 
-//- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    viewController.view.backgroundColor = UIColor.whiteColor;
-//}
++ (void)load{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+        
+        ExchangeImplementations([self class], @selector(pushViewController:animated:), @selector(tmui_pushViewController:animated:));
+    });
+}
+
+- (void)tmui_pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    [self tmui_pushViewController:viewController animated:animated];
+    viewController.view.backgroundColor = UIColor.whiteColor;
+}
 
 @end

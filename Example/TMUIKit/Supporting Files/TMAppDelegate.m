@@ -7,22 +7,9 @@
 //
 
 #import "TMAppDelegate.h"
-
-
-NSString *const h1 = @"h1";
-NSString *const h2 = @"h2";
-NSString *const h3 = @"h3";
-NSString *const body = @"body";
-
+#import "TMUIConfiguration.h"
 @interface TMAppDelegate ()<UITextFieldDelegate,UIScrollViewDelegate>
 
-@property (nonatomic, strong) CUIStyle *h1;
-@property (nonatomic, strong) CUIStyle *h2;
-@property (nonatomic, strong) CUIStyle *h3;
-@property (nonatomic, strong) CUIStyle *body;
-//@property (nonatomic, strong) CUIStyle *img_icon;
-//@property (nonatomic, strong) CUIStyle *img_small;
-//@property (nonatomic, strong) CUIStyle *img_big;
 
 @end
 
@@ -41,11 +28,10 @@ NSString *const body = @"body";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    _h1 = Style(h1).fnt(@16).color(Color(@"black")).lineGap(10).multiline;
-    _h2 = Style(h2).fnt(@12).color(Color(@"black")).lineGap(10).multiline;
-    _h3 = Style(h3).fnt(12).color(Color(@"black")).lineGap(10).multiline;
-    _body = Style(body).fnt(12).color(Color(@"gray")).lineGap(15).multiline;
+    id t2 = [[TMUIConfiguration alloc] init];
+    id t1 = TMUIConfiguration.sharedInstance;
+    Log(t1);
+    Log(t2);
     
 #if DEBUG
     // iOS

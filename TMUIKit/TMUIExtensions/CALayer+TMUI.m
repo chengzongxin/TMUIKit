@@ -6,9 +6,150 @@
 //
 
 #import "CALayer+TMUI.h"
+#import "TMUICore.h"
+#import "UIView+TMUI.h"
+
+@interface CALayer ()
+
+@property(nonatomic, assign) float tmui_speedBeforePause;
+
+@end
+
 
 @implementation CALayer (TMUI)
 
+TMUISynthesizeFloatProperty(tmui_speedBeforePause, setTmui_speedBeforePause)
+
+
+- (BOOL)tmui_isRootLayerOfView {
+    return [self.delegate isKindOfClass:[UIView class]] && ((UIView *)self.delegate).layer == self;
+}
+
+static char kAssociatedObjectKey_pause;
+- (void)setTmui_pause:(BOOL)tmui_pause {
+    if (tmui_pause == self.tmui_pause) {
+        return;
+    }
+    if (tmui_pause) {
+        self.tmui_speedBeforePause = self.speed;
+        CFTimeInterval pausedTime = [self convertTime:CACurrentMediaTime() fromLayer:nil];
+        self.speed = 0;
+        self.timeOffset = pausedTime;
+    } else {
+        CFTimeInterval pausedTime = self.timeOffset;
+        self.speed = self.tmui_speedBeforePause;
+        self.timeOffset = 0;
+        self.beginTime = 0;
+        CFTimeInterval timeSincePause = [self convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        self.beginTime = timeSincePause;
+    }
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_pause, @(tmui_pause), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)tmui_pause {
+    return [((NSNumber *)objc_getAssociatedObject(self, &kAssociatedObjectKey_pause)) boolValue];
+}
+
+- (void)tmui_sendSublayerToBack:(CALayer *)sublayer {
+    [self insertSublayer:sublayer atIndex:0];
+}
+
+- (void)tmui_bringSublayerToFront:(CALayer *)sublayer {
+    [self insertSublayer:sublayer atIndex:(unsigned)self.sublayers.count];
+}
+
+- (void)tmui_removeDefaultAnimations {
+    NSMutableDictionary<NSString *, id<CAAction>> *actions = @{NSStringFromSelector(@selector(bounds)): [NSNull null],
+                                                               NSStringFromSelector(@selector(position)): [NSNull null],
+                                                               NSStringFromSelector(@selector(zPosition)): [NSNull null],
+                                                               NSStringFromSelector(@selector(anchorPoint)): [NSNull null],
+                                                               NSStringFromSelector(@selector(anchorPointZ)): [NSNull null],
+                                                               NSStringFromSelector(@selector(transform)): [NSNull null],
+                                                               BeginIgnoreClangWarning(-Wundeclared-selector)
+                                                               NSStringFromSelector(@selector(hidden)): [NSNull null],
+                                                               NSStringFromSelector(@selector(doubleSided)): [NSNull null],
+                                                               EndIgnoreClangWarning
+                                                               NSStringFromSelector(@selector(sublayerTransform)): [NSNull null],
+                                                               NSStringFromSelector(@selector(masksToBounds)): [NSNull null],
+                                                               NSStringFromSelector(@selector(contents)): [NSNull null],
+                                                               NSStringFromSelector(@selector(contentsRect)): [NSNull null],
+                                                               NSStringFromSelector(@selector(contentsScale)): [NSNull null],
+                                                               NSStringFromSelector(@selector(contentsCenter)): [NSNull null],
+                                                               NSStringFromSelector(@selector(minificationFilterBias)): [NSNull null],
+                                                               NSStringFromSelector(@selector(backgroundColor)): [NSNull null],
+                                                               NSStringFromSelector(@selector(cornerRadius)): [NSNull null],
+                                                               NSStringFromSelector(@selector(borderWidth)): [NSNull null],
+                                                               NSStringFromSelector(@selector(borderColor)): [NSNull null],
+                                                               NSStringFromSelector(@selector(opacity)): [NSNull null],
+                                                               NSStringFromSelector(@selector(compositingFilter)): [NSNull null],
+                                                               NSStringFromSelector(@selector(filters)): [NSNull null],
+                                                               NSStringFromSelector(@selector(backgroundFilters)): [NSNull null],
+                                                               NSStringFromSelector(@selector(shouldRasterize)): [NSNull null],
+                                                               NSStringFromSelector(@selector(rasterizationScale)): [NSNull null],
+                                                               NSStringFromSelector(@selector(shadowColor)): [NSNull null],
+                                                               NSStringFromSelector(@selector(shadowOpacity)): [NSNull null],
+                                                               NSStringFromSelector(@selector(shadowOffset)): [NSNull null],
+                                                               NSStringFromSelector(@selector(shadowRadius)): [NSNull null],
+                                                               NSStringFromSelector(@selector(shadowPath)): [NSNull null]}.mutableCopy;
+    
+    if (@available(iOS 11.0, *)) {
+        [actions addEntriesFromDictionary:@{NSStringFromSelector(@selector(maskedCorners)): [NSNull null]}];
+    }
+    
+    if ([self isKindOfClass:[CAShapeLayer class]]) {
+        [actions addEntriesFromDictionary:@{NSStringFromSelector(@selector(path)): [NSNull null],
+                                            NSStringFromSelector(@selector(fillColor)): [NSNull null],
+                                            NSStringFromSelector(@selector(strokeColor)): [NSNull null],
+                                            NSStringFromSelector(@selector(strokeStart)): [NSNull null],
+                                            NSStringFromSelector(@selector(strokeEnd)): [NSNull null],
+                                            NSStringFromSelector(@selector(lineWidth)): [NSNull null],
+                                            NSStringFromSelector(@selector(miterLimit)): [NSNull null],
+                                            NSStringFromSelector(@selector(lineDashPhase)): [NSNull null]}];
+    }
+    
+    if ([self isKindOfClass:[CAGradientLayer class]]) {
+        [actions addEntriesFromDictionary:@{NSStringFromSelector(@selector(colors)): [NSNull null],
+                                            NSStringFromSelector(@selector(locations)): [NSNull null],
+                                            NSStringFromSelector(@selector(startPoint)): [NSNull null],
+                                            NSStringFromSelector(@selector(endPoint)): [NSNull null]}];
+    }
+    
+    self.actions = actions;
+}
+
++ (void)tmui_performWithoutAnimation:(void (NS_NOESCAPE ^)(void))actionsWithoutAnimation {
+    if (!actionsWithoutAnimation) return;
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    actionsWithoutAnimation();
+    [CATransaction commit];
+}
+
++ (CAShapeLayer *)tmui_separatorDashLayerWithLineLength:(NSInteger)lineLength
+                                            lineSpacing:(NSInteger)lineSpacing
+                                              lineWidth:(CGFloat)lineWidth
+                                              lineColor:(CGColorRef)lineColor
+                                           isHorizontal:(BOOL)isHorizontal {
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.fillColor = UIColor.clearColor.CGColor;
+    layer.strokeColor = lineColor;
+    layer.lineWidth = lineWidth;
+    layer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInteger:lineLength], [NSNumber numberWithInteger:lineSpacing], nil];
+    layer.masksToBounds = YES;
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    if (isHorizontal) {
+        CGPathMoveToPoint(path, NULL, 0, lineWidth / 2);
+        CGPathAddLineToPoint(path, NULL, SCREEN_WIDTH, lineWidth / 2);
+    } else {
+        CGPathMoveToPoint(path, NULL, lineWidth / 2, 0);
+        CGPathAddLineToPoint(path, NULL, lineWidth / 2, SCREEN_HEIGHT);
+    }
+    layer.path = path;
+    CGPathRelease(path);
+    
+    return layer;
+}
 
 - (UIImage *)tmui_snapshotImage {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
