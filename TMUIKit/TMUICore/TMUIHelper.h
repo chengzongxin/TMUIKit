@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  记录手动旋转方向前的设备方向，当值不为 UIDeviceOrientationUnknown 时表示设备方向有经过了手动调整。默认值为 UIDeviceOrientationUnknown。
- *  @see [QMUIHelper rotateToDeviceOrientation]
+ *  @see [TMUIHelper rotateToDeviceOrientation]
  */
 @property(nonatomic, assign) UIDeviceOrientation orientationBeforeChangingByHelper;
 

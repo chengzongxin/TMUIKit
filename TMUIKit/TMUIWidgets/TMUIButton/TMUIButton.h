@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, TMUIButtonImagePosition) {
  *  4. 支持点击时改变边框颜色（highlightedBorderColor）
  *  5. 支持设置图片相对于 titleLabel 的位置（imagePosition）
  *  6. 支持设置图片和 titleLabel 之间的间距，无需自行调整 titleEdgeInests、imageEdgeInsets（spacingBetweenImageAndTitle）
- *  @warning QMUIButton 重新定义了 UIButton.titleEdgeInests、imageEdgeInsets、contentEdgeInsets 这三者的布局逻辑，sizeThatFits: 里会把 titleEdgeInests 和 imageEdgeInsets 也考虑在内（UIButton 不会），以使这三个接口的使用更符合直觉。
+ *  @warning TMUIButton 重新定义了 UIButton.titleEdgeInests、imageEdgeInsets、contentEdgeInsets 这三者的布局逻辑，sizeThatFits: 里会把 titleEdgeInests 和 imageEdgeInsets 也考虑在内（UIButton 不会），以使这三个接口的使用更符合直觉。
  */
 @interface TMUIButton : UIButton
 

@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 /**
- * `QMUILabel`支持通过`contentEdgeInsets`属性来实现类似padding的效果。
+ * `TMUILabel`支持通过`contentEdgeInsets`属性来实现类似padding的效果。
  *
  * 同时通过将`canPerformCopyAction`置为`YES`来开启长按复制文本的功能，复制 item 的文案可通过 menuItemTitleForCopyAction 修改，长按时label的背景色默认为`highlightedBackgroundColor`
  */

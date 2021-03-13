@@ -9,7 +9,7 @@
 #import "NSObject+TMUIMultipleDelegates.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/// 存放多个 delegate 指针的容器，必须搭配其他控件使用，一般不需要你自己 init。作用是让某个 class 支持同时存在多个 delegate。更多说明请查看 NSObject (QMUIMultipleDelegates) 的注释。
+/// 存放多个 delegate 指针的容器，必须搭配其他控件使用，一般不需要你自己 init。作用是让某个 class 支持同时存在多个 delegate。更多说明请查看 NSObject (TMUIMultipleDelegates) 的注释。
 @interface TMUIMultipleDelegates : NSObject
 
 + (instancetype)weakDelegates;
