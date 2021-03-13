@@ -65,7 +65,7 @@
                                       @"CALayerTMUIViewController"),
                            ).title(@"CALayer+TMUI"),
             SECTION_CREATE(
-                           ROW_CREATE(@"frame、tranform属性快速访问、修改、移除默认动画、不带动画修改layer属性",
+                           ROW_CREATE(@"支持用 block 的形式添加对 animationDidStart 和 animationDidStop 的监听，无需自行设置 delegate",
                                       @"CAAnimationTMUIViewController"),
                            ).title(@"CAAnimation+TMUI"),
             ).embedIn(self.view);

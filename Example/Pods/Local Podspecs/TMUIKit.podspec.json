@@ -55,7 +55,17 @@
         "TMUIKit/TMUICore": [
 
         ]
-      }
+      },
+      "subspecs": [
+        {
+          "name": "UIKit",
+          "source_files": "TMUIKit/TMUIExtensions/UIKit"
+        },
+        {
+          "name": "CoreFoundation",
+          "source_files": "TMUIKit/TMUIExtensions/CoreFoundation"
+        }
+      ]
     },
     {
       "name": "TMUIWidgets",

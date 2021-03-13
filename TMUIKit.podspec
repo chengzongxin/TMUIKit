@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '0.9.5'
+  s.version          = '1.0.0'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -75,6 +75,12 @@ Pod::Spec.new do |s|
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
     ss.dependency 'TMUIKit/TMUICore'
 #    ss.dependency 'TMUIKit/TMUIDefines'
+    ss.subspec 'UIKit' do |sss|
+      sss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
+    end
+    ss.subspec 'CoreFoundation' do |sss|
+      sss.source_files = 'TMUIKit/TMUIExtensions/CoreFoundation'
+    end
   end
   
   #TMUIWidgets 基类控件
