@@ -95,6 +95,10 @@
 - 生成虚线、添加阴影效果
 - 截屏
 
+#### CAAnimation+TMUI
+
+- 支持用 block 的形式添加对 animationDidStart 和 animationDidStop 的监听，无需自行设置 delegate
+
 #### UIBarButtonItem+TMUI
 
 - UIBarButtonItem便捷构造文本、图文、高亮、禁用等状态

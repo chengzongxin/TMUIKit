@@ -64,6 +64,10 @@
                            ROW_CREATE(@"frame、tranform属性快速访问、修改、移除默认动画、不带动画修改layer属性",
                                       @"CALayerTMUIViewController"),
                            ).title(@"CALayer+TMUI"),
+            SECTION_CREATE(
+                           ROW_CREATE(@"frame、tranform属性快速访问、修改、移除默认动画、不带动画修改layer属性",
+                                      @"CAAnimationTMUIViewController"),
+                           ).title(@"CAAnimation+TMUI"),
             ).embedIn(self.view);
 }
 

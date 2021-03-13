@@ -29,5 +29,6 @@
 #import "UICollectionView+TMUI.h"
 #import "UIBarButtonItem+TMUI.h"
 #import "CALayer+TMUI.h"
+#import "CAAnimation+TMUI.h"
 
 #endif /* TMUIExtensions_h */

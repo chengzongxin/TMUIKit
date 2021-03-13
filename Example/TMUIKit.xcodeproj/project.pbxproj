@@ -41,6 +41,7 @@
 		1687279D25F0C55700A05529 /* xueUIwang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1687279725F0C55700A05529 /* xueUIwang@3x.png */; };
 		16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */; };
 		1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */; };
+		169EB2E925FCA2A4008E3F07 /* CAAnimationTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */; };
 		16B30B3F25FB014800785EDD /* TMUIConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B30B3E25FB014800785EDD /* TMUIConfiguration.m */; };
 		16B540E625FB73320019808F /* CALayerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B540E525FB73320019808F /* CALayerTMUIViewController.m */; };
 		16BA203B25C1096000E6F5C8 /* UINib+TLoadNib.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA1FF925C1096000E6F5C8 /* UINib+TLoadNib.m */; };
@@ -187,6 +188,8 @@
 		16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIButtonViewController.m; sourceTree = "<group>"; };
 		1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUIViewController.h; sourceTree = "<group>"; };
 		1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUIViewController.m; sourceTree = "<group>"; };
+		169EB2E725FCA2A4008E3F07 /* CAAnimationTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAAnimationTMUIViewController.h; sourceTree = "<group>"; };
+		169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAAnimationTMUIViewController.m; sourceTree = "<group>"; };
 		16B30B3D25FB014800785EDD /* TMUIConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIConfiguration.h; sourceTree = "<group>"; };
 		16B30B3E25FB014800785EDD /* TMUIConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIConfiguration.m; sourceTree = "<group>"; };
 		16B540E425FB73320019808F /* CALayerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CALayerTMUIViewController.h; sourceTree = "<group>"; };
@@ -455,6 +458,8 @@
 				16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */,
 				16B540E425FB73320019808F /* CALayerTMUIViewController.h */,
 				16B540E525FB73320019808F /* CALayerTMUIViewController.m */,
+				169EB2E725FCA2A4008E3F07 /* CAAnimationTMUIViewController.h */,
+				169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */,
 			);
 			path = TMUICategoryVC;
 			sourceTree = "<group>";
@@ -1052,6 +1057,7 @@
 				1611E2F625FA12DF003D4357 /* TMUISliderViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16B30B3F25FB014800785EDD /* TMUIConfiguration.m in Sources */,
+				169EB2E925FCA2A4008E3F07 /* CAAnimationTMUIViewController.m in Sources */,
 				164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */,
 				16CDF23725EF8E7B00C02C98 /* UIImageTMUIViewController2.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
