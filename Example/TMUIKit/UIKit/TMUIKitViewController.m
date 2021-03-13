@@ -41,7 +41,7 @@
                            ).title(@"TMUI Widget"),
             SECTION_CREATE(
                            ROW_CREATE(@"设置圆角、阴影、渐变、边框", @"UIViewTMUIViewController"),
-                           ROW_CREATE(@"快速添加各种手势事件", @"UIViewTMUI2ViewController"),
+                           ROW_CREATE(@"快速添加各种手势事件、坐标系转换", @"UIViewTMUI2ViewController"),
                            ROW_CREATE(@"创建动画", @"UIViewTMUI3ViewController"),
                            ).title(@"UIView+TMUI"),
             SECTION_CREATE(

@@ -1,4 +1,8 @@
-## TMUI Widgets
+[TOC]
+
+
+
+# TMUI Widgets
 
 #### TMUIButton
 
@@ -39,13 +43,16 @@
 
 
 
-## TMUI Extensions
+# TMUI Extensions
+
+## UIKit
 
 #### UIView+TMUI
 
 - Frame 属性快速访问
 - 设置圆角、阴影、渐变、边框等外观
 - 快速添加各种手势事件、扩大响应范围
+- 坐标系转换
 - 创建各种简单的动画效果
 - 截屏
 - xib便捷创建
@@ -88,27 +95,114 @@
 - 生成虚线、添加阴影效果
 - 截屏
 
+#### UIBarButtonItem+TMUI
+
+- UIBarButtonItem便捷构造文本、图文、高亮、禁用等状态
+
+#### UICollectionView+TMUI
+
+- 便捷注册类或者NIB的Cell，header
+
+#### UIColor+TMUI
+
+- 根据十六进制生成颜色
+- 获取指定色值（r、g、b、a）
+- 将颜色A变化到颜色B，可通过progress控制变化的程度
+- 产生一个随机色
+
+#### UITableView+TMUI
+
+- 便捷注册类或者NIB的Cell
+- 便捷获取Cell
 
 
-## TMUIComponents
 
-#### TMPageViewController
+## CoreFoundation
 
-- 简单代理实现滑动吸顶header，动态tab子VC
+#### NSArray+TMUI
 
-## ChainUI
+- 处理了```__NSArray0、__NSSingleObjectArrayI、__NSArrayI、__NSArrayM```几种情况的数组越界访问
+- map、filter、reduce等高阶函数
+- 不可变数组增删改操作
+- 打乱，逆置
 
-- 链式UI
+#### NSAttributedString
+
+- 快速创建文字、图片、占位富文本
+- 获取富文本尺寸
+
+#### NSBundle+TMUI
+
+- 获取Bundle文件、快捷获取bundle图片
+
+#### NSDate+TMUI
+
+- 根据指定日期获取年、月、日
+- 日期判断（今天、明天。。。）
+- NSString和NSDate互转等
+
+#### NSDictionary+TMUI
+
+- 不可变字典增、删
+
+#### NSMutableParagraphStyle+TMUI
+
+- 段落便捷构造
+
+#### NSObject+TMUI
+
+- 判断指定的类是否有重写某个父类的指定方法
+- 对 super 发送消息
+- performSelector方法调用
+- 遍历指定 class 的所有成员变量、属性
+- 遍历指定的某个类的实例方法、
+- 遍历某个 protocol 里的所有方法
+- KVC安全访问
+- 给对象绑定上另一个对象以供后续取出使用（关联对象另一种形式）
+- 对象调试、打印所有属性、方法、变量列表
+
+#### NSString+TMUI
+
+- 字符串转数组
+- 字符串截取空白字符
+- 字符串转md5
+- URL转码
+- 中文、emoji长度处理
+- 针对单个字符处理、部分字符正则操作
+- 字符串拼接、int、float转NSString
+- 字符串尺寸计算
+
+#### NSURL+TMUI
+
+- 获取当前 query 的参数列表
+- 获取query中key对应value
+
+
+
+# TMUIComponents
+
+#### TMUIPageViewController
+
+- 数据源驱动代理设计模式
+- 内部支持滑动吸顶header
+- 支持自定义tabs
+- 支持动态tabs刷新子VC和header
+
+#### ChainUI
+
+- 链式UI、一切对象都可以用''`.`语法''一直'"`.`"'下去，点到你停不下来
+
+- 清晰、明了的语法、简洁的API
+- 三大核心组件，Styles，CUIStack、GroupTV，进一步提升开发效率
+- 丰富的宏定义，为后期拓展保驾护航
 
 
 
 
 
+# TMUICore
 
-
-## TMUICore
-
-#### TMAssociatedPropertyMacro
+#### TMUIAssociatedPropertyDefines
 
 - 针对在类型里添加属性的相关便捷宏定义,提供三种方式快捷关联对象
 - 方式一：需要传入var类型
@@ -128,13 +222,13 @@
 
 - 主题元素相关：颜色、字体、图片的创建UIKit库里基础对象的便捷宏
 
-#### TMCoreGraphicsDefines
+#### TMUICoreGraphicsDefines
 
 - 屏幕适配相关的内联函数，例如数获取状态栏、导航栏的高度等
 - 布局相关的函数，例如浮点数的像素取整计算、CGPoint、CGRect、UIEdgeIntents 的便捷操作等。
 - 结构体操作（CGPoint、CGSize、CGRect、UIEdgeInset）、安全检查、isNan，isInfi等，以免出现crash。
 
-#### TMInitMacro
+#### TMUIInitMacro
 
 - UIView及NSObject的子类实现相关init方法时提取相关重复代码定义宏
 

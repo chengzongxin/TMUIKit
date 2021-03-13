@@ -47,6 +47,7 @@
     
     [c2 tmui_setLayerShadow:Color(@"black") offset:CGSizeMake(10, 10) alpha:1 radius:5 spread:0];
     
+    
     b1.onClick(^{
         c1.transformTranslationX = 100;
         c2.transformTranslationX = 100;
@@ -57,7 +58,6 @@
         c2.transformScaleY = 1.2;
         c1.transformScaleZ = 1.2;
         c2.transformScaleZ = 1.2;
-        
     });
     
     b2.onClick(^{
