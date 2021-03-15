@@ -1,27 +1,39 @@
 //
 //  TMUIExtensions.h
-//  Pods
+//  TMUIKit
 //
-//  Created by nigel.ning on 2020/4/14.
+//  Created by Joe.cheng on 2021/1/20.
 //
 
 #ifndef TMUIExtensions_h
 #define TMUIExtensions_h
 
-
-#if __has_include("UIView+TMUI.h")
 #import "UIView+TMUI.h"
-#endif
-
-#if __has_include("UIImage+TMUI.h")
-#import "UIImage+TMUI.h"
-#endif
-
-
-#if __has_include("UIColor+TMUI.h")
 #import "UIColor+TMUI.h"
-#endif
-
-
+#import "UIImage+TMUI.h"
+#import "UIView+TMUI.h"
+#import "NSBundle+TMUI.h"
+#import "UIButton+TMUI.h"
+#import "UILabel+TMUI.h"
+#import "UITextField+TMUI.h"
+#import "UITextView+TMUI.h"
+#import "UIViewController+TMUI.h"
+#import "NSString+TMUI.h"
+#import "NSArray+TMUI.h"
+#import "NSMutableParagraphStyle+TMUI.h"
+#import "NSAttributedString+TMUI.h"
+#import "NSDate+TMUI.h"
+#import "NSDictionary+TMUI.h"
+#import "NSURL+TMUI.h"
+#import "UITableView+TMUI.h"
+#import "UICollectionView+TMUI.h"
+#import "UIBarButtonItem+TMUI.h"
+#import "CALayer+TMUI.h"
+#import "CAAnimation+TMUI.h"
+#import "NSFileManager+TMUI.h"
+#import "ALAssetsLibrary+TMUI.h"
+#import "NSString+Attribute.h"
+#import "NSString+MD5.h"
+#import "NSString+Verify.h"
 
 #endif /* TMUIExtensions_h */

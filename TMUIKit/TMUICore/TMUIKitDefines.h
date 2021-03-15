@@ -14,25 +14,17 @@
 
 /// !!!: 此UIKit库扩展的一些宏定义均以相关UIKit里的类名作开头
 
-#pragma mark - UIEdgeInsets
-
-/// 获取UIEdgeInsets在水平方向上的值
-NS_INLINE CGFloat
-UIEdgeInsetsGetHorizontalValue(UIEdgeInsets insets) {
-    return insets.left + insets.right;
-}
-
-/// 获取UIEdgeInsets在垂直方向上的值
-NS_INLINE CGFloat
-UIEdgeInsetsGetVerticalValue(UIEdgeInsets insets) {
-    return insets.top + insets.bottom;
-}
 
 
 #pragma mark - 创建UIKit库里基础对象的便捷宏
 
 ///MARK: UIImage
 #define UIImageMake(imgName)      [UIImage imageNamed:imgName]
+
+
+/// 使用文件名(不带后缀名，仅限png)创建一个UIImage对象，不会被系统缓存，用于不被复用的图片，特别是大图
+#define UIImageMakeWithFile(name) UIImageMakeWithFileAndSuffix(name, @"png")
+#define UIImageMakeWithFileAndSuffix(name, suffix) [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@", [[NSBundle mainBundle] resourcePath], name, suffix]]
 
 /// 使用文件名(不带后缀名，仅限png)创建一个UIImage对象，不会被系统缓存，用于不被复用的图片，特别是大图
 #define UIImageMakeWithFile(name) UIImageMakeWithFileAndSuffix(name, @"png")
@@ -41,6 +33,10 @@ UIEdgeInsetsGetVerticalValue(UIEdgeInsets insets) {
 ///MARK: UIColor
 #define UIColorRGB(r, g, b)       [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define UIColorRGBA(r, g, b, a)   [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
+/// UIColor 相关的宏，用于快速创建一个 UIColor 对象，更多创建的宏可查看 UIColor+TMUI.h
+/// UIColorHexString(hexStr)
+#define UIColorMake(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#define UIColorMakeWithRGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
 
 ///MARK: UIFont
 #define UIFont(size)              UIFontRegular(size)
@@ -57,6 +53,12 @@ UIEdgeInsetsGetVerticalValue(UIEdgeInsets insets) {
 #define UIFontBlack(size)         TMUIFontWeight(size, UIFontWeightBlack)
 
 #define TMUIFontWeight(size_, weight_) [UIFont systemFontOfSize:size_ weight:weight_]
+/// 字体相关的宏，用于快速创建一个字体对象，更多创建宏可查看 UIFont+TMUI.h
+#define UIFontMake(size) [UIFont systemFontOfSize:size]
+#define UIFontItalicMake(size) [UIFont italicSystemFontOfSize:size] /// 斜体只对数字和字母有效，中文无效
+#define UIFontBoldMake(size) [UIFont boldSystemFontOfSize:size]
+#define UIFontBoldWithFont(_font) [UIFont boldSystemFontOfSize:_font.pointSize]
+
 
 
 #endif /* TMUIKitDefines_h */

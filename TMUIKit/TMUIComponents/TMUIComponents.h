@@ -1,13 +1,12 @@
 //
 //  TMUIComponents.h
-//  Pods
+//  TMUIKit
 //
-//  Created by nigel.ning on 2020/4/14.
+//  Created by Joe.cheng on 2021/1/20.
 //
 
 #ifndef TMUIComponents_h
 #define TMUIComponents_h
-
 
 #if __has_include("TMContentAlert.h")
 #import "TMContentAlert.h"
@@ -47,6 +46,18 @@
 
 #if __has_include("TMSearchKit.h")
 #import "TMSearchKit.h"
+#endif
+
+#if __has_include("TMPageViewController.h")
+#import "TMPageViewController.h"
+#endif
+
+#if __has_include("TMShowBigImageViewController.h")
+#import "TMShowBigImageViewController.h"
+#endif
+
+#if __has_include("ChainUI.h")
+#import "ChainUI.h"
 #endif
 
 
