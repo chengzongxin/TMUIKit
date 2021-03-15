@@ -43,11 +43,19 @@ TMUIKit is available under the MIT license. See the LICENSE file for more info.
 
 #### TMUIWidgets
 
-- TMUIKit基本控件，一般对应每一个UIKit中的基类，使用需要继承`TMUIWidgets`中的基类使用。
+- TMUIKit基本控件，一般对应每一个UIKit中的基类，使用需要继承`TMUIWidgets`中的基类使用
+
+#### TMUIComponents
+
+- TMUIKit组件库，一般为项目中的常用组件收纳此处
 
 
 
-【功能列表】TMUIkit所有文件以及功能列表说明
+
+
+## Usage
+
+【功能列表】TMUIkit所有文件以及功能列表说明，具体使用代码参考`Example`工程示例
 
 [MARKDOWN版（Files & FeatureList.md）](Files & FeatureList.md)
 
@@ -55,10 +63,9 @@ TMUIKit is available under the MIT license. See the LICENSE file for more info.
 
 
 
+## Reference
+
 【腾讯文档】Category整理——UIKit&CoreFoundation
 https://docs.qq.com/sheet/DWHFQalhsT2pHcENn
 
 
-
-
-test
