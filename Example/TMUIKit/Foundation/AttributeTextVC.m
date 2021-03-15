@@ -7,7 +7,6 @@
 //
 
 #import "AttributeTextVC.h"
-#import "NSString+TSize.h"
 
 @interface AttributeTextVC ()
 @property (weak, nonatomic) IBOutlet UILabel *label;

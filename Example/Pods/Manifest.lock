@@ -128,6 +128,10 @@ PODS:
   - TMUIKit/TMUIExtensions/CoreFoundation (1.0.0):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUICore
+    - TMUIKit/TMUIExtensions/CoreFoundation/NSString (= 1.0.0)
+  - TMUIKit/TMUIExtensions/CoreFoundation/NSString (1.0.0):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMUICore
   - TMUIKit/TMUIExtensions/UIKit (1.0.0):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUICore
@@ -180,7 +184,7 @@ SPEC CHECKSUMS:
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  TMUIKit: 9c2ecdcb2fad70acd18ff0924498b76687fbb3e5
+  TMUIKit: e0f49d2c533a6debc2a6726000566157c42b409d
 
 PODFILE CHECKSUM: 3311888867740602f7e0ae2f500038e5f3a8a593
 

@@ -205,6 +205,54 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width;
 
+
+//////  follow from NSString + TSize
+/**
+ * 获取字符串显示的高度
+ */
+- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w;
+/**
+ *  获取字符串的宽高（在指定的宽度下）
+ *
+ *  @param ft 字体
+ *  @param w  指定宽
+ *
+ *  @return 字符串大大小
+ */
+- (CGSize)tmui_sizeWithFont:(UIFont *)ft width:(CGFloat)w;
+
+/**
+ *  获取字符串的高度，可限制行数
+ *
+ *  @param ft      字体
+ *  @param w       宽度
+ *  @param lineNum 限制行数，0表示不限制
+ *
+ *  @return 字符串高度
+ */
+- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w maxLine:(NSUInteger)lineNum;
+
+
+/**
+ * 获取给定size的换行符
+ */
++ (NSString *)tmui_strOfLineForSize:(CGSize)s withFont:(UIFont *)ft;
+
+
+/**
+ * 获取给定width的空格符
+ */
++ (NSString *)tmui_strOfSpaceForWidth:(CGFloat)width withFont:(UIFont *)ft;
+
+/**计算文本行数*/
+- (NSInteger)tmui_numberOfLinesWithFont:(UIFont *)font
+                    contrainstedToWidth:(CGFloat)width;
+
+/**每一行文本高度*/
+- (CGFloat)tmui_lineHeightWithFont:(UIFont *)font
+               contrainstedToWidth:(CGFloat)width;
+
+
 @end
 
 
@@ -217,6 +265,87 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly, copy) NSCharacterSet *tmui_URLUserInputQueryAllowedCharacterSet;
 
 @end
+
+
+
+@interface NSString (TMUI_TCategory)
+
+// 不区分大小写查找文字，并添加颜色
+- (NSMutableAttributedString *)tmui_attributeWithRangeOfString:(NSString *)aString color:(UIColor *)color;
+
+/**
+ *  去掉空格后字符串的长度
+ *
+ *  @return 去掉字符串后的字符串
+ */
+- (NSString *)tmui_trimSpace;
+
+/**
+ *  替换掉空格后字符串的长度
+ *
+ */
+- (NSString *)tmui_trimAllSpace;
+
+/**
+ *  字符串字节长度(默认一个汉字两个字符：kCFStringEncodingUTF16)
+ *
+ *  @return 长度
+ */
+- (NSUInteger)tmui_lenght;
+/**
+ *  字符串字节长度
+ *
+ *  @param encoding NSStringEncoding
+ *
+ *  @return 长度
+ */
+- (NSUInteger)tmui_lenghtForNSStringEncoding:(CFStringEncoding)encoding;
+
+/**
+ *  将Unicode字符装成汉字
+ *
+ *  @param unicodeStr unicode字符
+ *
+ *  @return 返回汉字
+ */
++ (NSString *)tmui_replaceUnicode:(NSString *)unicodeStr;
+
+/**
+ *  是否为数字或字母
+ *
+ */
+- (BOOL)tmui_isalnum;
+
+/**
+ *  是否包含标点符号
+ *
+ */
+- (BOOL)tmui_haspunct;
+
+/**
+ *  是否包含Emoji
+ *
+ */
+- (BOOL)tmui_containsEmoji;
+
+/**
+ *  手机号码格式字符串 （中间四位换成*）
+ *
+ */
+- (NSString *)tmui_mobileFormat;
+
+/**
+ * 根据给定的评论、点赞、收藏默认字符返回经过格式化处理的字符串
+ * 格式化规则如下:
+ * 0 : defaultTextde
+ * 10000 : 1W
+ * 10999 : 1W
+ * 11234 : 1.1W
+ */
++ (NSString *)tmui_formatTextFromDefault:(NSString *)defaultText number:(NSNumber *)number;
+
+@end
+
 
 
 NS_ASSUME_NONNULL_END

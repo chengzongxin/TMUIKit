@@ -7,7 +7,7 @@
 //
 
 #import "NSString+Attribute.h"
-#import "NSString+TSize.h"
+#import "NSString+TMUI.h"
 
 @implementation NSString (Attribute)
 

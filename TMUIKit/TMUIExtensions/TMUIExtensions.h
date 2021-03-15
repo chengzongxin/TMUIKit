@@ -30,5 +30,10 @@
 #import "UIBarButtonItem+TMUI.h"
 #import "CALayer+TMUI.h"
 #import "CAAnimation+TMUI.h"
+#import "NSFileManager+TMUI.h"
+#import "ALAssetsLibrary+TMUI.h"
+#import "NSString+Attribute.h"
+#import "NSString+MD5.h"
+#import "NSString+Verify.h"
 
 #endif /* TMUIExtensions_h */

@@ -63,7 +63,13 @@
         },
         {
           "name": "CoreFoundation",
-          "source_files": "TMUIKit/TMUIExtensions/CoreFoundation"
+          "source_files": "TMUIKit/TMUIExtensions/CoreFoundation",
+          "subspecs": [
+            {
+              "name": "NSString",
+              "source_files": "TMUIKit/TMUIExtensions/CoreFoundation/NSString"
+            }
+          ]
         }
       ]
     },

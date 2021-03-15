@@ -8,6 +8,8 @@
 #import "NSString+TMUI.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "NSArray+TMUI.h"
+#import "TMUICommonDefines.h"
+#import <objc/runtime.h>
 
 @implementation NSString (TMUI)
 
@@ -294,7 +296,7 @@
 
 
 @implementation NSString (TMUI_Drawing)
-
+BeginIgnoreDeprecatedWarning
 
 - (CGSize)tmui_sizeForFont:(UIFont *)font size:(CGSize)size lineHeight:(CGFloat)lineHeight mode:(NSLineBreakMode)lineBreakMode {
     CGSize result;
@@ -313,10 +315,7 @@
                                       attributes:attr context:nil];
         result = rect.size;
     } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         result = [self sizeWithFont:font constrainedToSize:size lineBreakMode:lineBreakMode];
-#pragma clang diagnostic pop
     }
     return CGSizeMake(ceilf(result.width), ceilf(result.height));
 }
@@ -332,8 +331,102 @@
 }
 
 
-@end
+// 获取字符串显示的高度
+- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w {
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
+        CGSize size = [self boundingRectWithSize:CGSizeMake(w, 100000)
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{NSFontAttributeName:ft}
+                                         context:nil].size;
+        return ceilf(size.height);
+    } else {
+        CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, 100000)];
+        return ceilf(s.height);
+    }
+}
 
+- (CGSize)tmui_sizeWithFont:(UIFont *)ft width:(CGFloat)w {
+    CGSize ceilfSize;
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
+        CGSize size = [self boundingRectWithSize:CGSizeMake(w, 100000)
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{NSFontAttributeName:ft}
+                                         context:nil].size;
+        ceilfSize = CGSizeMake(ceilf(size.width), ceilf(size.height));
+    } else {
+        CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, 100000)];
+        ceilfSize = CGSizeMake(ceilf(s.width), ceilf(s.height));
+    }
+    return ceilfSize;
+}
+
+- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w maxLine:(NSUInteger)lineNum {
+    CGFloat heightOfAll = [self tmui_heightWithFont:ft width:w];
+    CGFloat heightOfMax = CGFLOAT_MAX;
+    if (lineNum != 0) {
+        NSString *strTem = @"a";
+        for (int i=0; i<lineNum-1; i++) {
+            strTem = [strTem stringByAppendingString:@"\na"];
+        }
+        heightOfMax = [strTem tmui_heightWithFont:ft width:w];
+    }
+    return ceilf(MIN(heightOfAll, heightOfMax));
+}
+
+// 获取给定size的换行符
++ (NSString *)tmui_strOfLineForSize:(CGSize)s withFont:(UIFont *)ft {
+    NSString *str = @"";
+    CGFloat h = [@"\n\n\n\n\n\n\n\n\n\n" tmui_heightWithFont:ft width:300];
+    for (int i=0; i<ceilf(s.height*10/h); i++) {
+        str = [str stringByAppendingString:@"\n"];
+    }
+    return str;
+}
+
++ (NSString *)tmui_strOfSpaceForWidth:(CGFloat)width withFont:(UIFont *)ft {
+    if (width<=0) {
+        return @"";
+    }
+    NSString *str = @" ";
+    
+    CGFloat w = [str sizeWithFont:ft].width;
+    NSUInteger num = ceilf(width/w);
+    for (int i=1; i<num; i++) {
+        str = [str stringByAppendingString:@" "];
+    }
+    return str;
+}
+
+- (NSInteger)tmui_numberOfLinesWithFont:(UIFont *)font contrainstedToWidth:(CGFloat)width
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGFLOAT_MAX)];
+    label.text = self;
+    label.numberOfLines = 0;
+    label.font = font?:[UIFont systemFontOfSize:17];
+    [label sizeToFit];
+    CGFloat height = CGRectGetHeight(label.frame);
+    CGFloat lineH = [self tmui_lineHeightWithFont:font contrainstedToWidth:width];
+    if (lineH>0) {
+        NSInteger lines = height/lineH;
+        return lines;
+    }
+    return 0;
+}
+
+- (CGFloat)tmui_lineHeightWithFont:(UIFont *)font contrainstedToWidth:(CGFloat)width
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGFLOAT_MAX)];
+    label.text = @"o";
+    label.numberOfLines = 0;
+    label.font = font?:[UIFont systemFontOfSize:17];
+    [label sizeToFit];
+    CGFloat height = CGRectGetHeight(label.frame);
+    return height;
+}
+
+
+@end
+EndIgnoreDeprecatedWarning
 
 @implementation NSCharacterSet (TMUI)
 
@@ -341,6 +434,150 @@
     NSMutableCharacterSet *set = [NSCharacterSet URLQueryAllowedCharacterSet].mutableCopy;
     [set removeCharactersInString:@"#&="];
     return set.copy;
+}
+
+@end
+
+
+
+@implementation NSString (TMUI_TCategory)
+
+- (NSMutableAttributedString *)tmui_attributeWithRangeOfString:(NSString *)aString color:(UIColor *)color {
+    NSRange range = [self rangeOfString:aString options:NSCaseInsensitiveSearch];
+    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:self];
+    [attribute addAttribute:NSForegroundColorAttributeName value:color range:range];
+    return attribute;
+}
+
+- (NSString *)tmui_trimSpace {
+   return  [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+- (NSString *)tmui_trimAllSpace {
+    return [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+}
+
+- (NSUInteger)tmui_lenght {
+    return [self tmui_lenghtForNSStringEncoding:kCFStringEncodingUTF16];
+}
+
+- (NSUInteger)tmui_lenghtForNSStringEncoding:(CFStringEncoding)encoding {
+    NSUInteger len = 0;
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(encoding);
+    len = [self lengthOfBytesUsingEncoding:enc];
+    return len;
+}
+
++ (NSString *)tmui_replaceUnicode:(NSString *)unicodeStr {
+    if (![unicodeStr isKindOfClass:[NSString class]] || unicodeStr.length<1) {
+        return @"";
+    }
+    NSString *tempStr1 = [unicodeStr stringByReplacingOccurrencesOfString:@"\\u"withString:@"\\U"];
+    NSString *tempStr2 = [tempStr1 stringByReplacingOccurrencesOfString:@"\""withString:@"\\\""];
+    NSString *tempStr3 = [[@"\""stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *returnStr = [NSPropertyListSerialization propertyListWithData:tempData
+                                                                    options:NSPropertyListImmutable
+                                                                     format:nil
+                                                                      error:nil];
+    return [returnStr stringByReplacingOccurrencesOfString:@"\\r\\n"withString:@"\n"];
+}
+
+- (BOOL)tmui_isalnum {
+    unichar c;
+    for (int i=0; i<self.length; i++) {
+        c=[self characterAtIndex:i];
+        if (!isalnum(c)) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (BOOL)tmui_haspunct {
+    unichar c;
+    for (int i=0; i<self.length; i++) {
+        c=[self characterAtIndex:i];
+        if (ispunct(c)) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)tmui_containsEmoji {
+    __block BOOL returnValue = NO;
+    [self enumerateSubstringsInRange:NSMakeRange(0, [self length])
+                             options:NSStringEnumerationByComposedCharacterSequences
+                          usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                              const unichar hs = [substring characterAtIndex:0];
+                              if (0xd800 <= hs && hs <= 0xdbff) {
+                                  if (substring.length > 1) {
+                                      const unichar ls = [substring characterAtIndex:1];
+                                      const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+                                      if (0x1d000 <= uc && uc <= 0x1f77f) {
+                                          returnValue = YES;
+                                      }
+                                  }
+                              } else if (substring.length > 1) {
+                                  const unichar ls = [substring characterAtIndex:1];
+                                  if (ls == 0x20e3) {
+                                      returnValue = YES;
+                                  }
+                              } else {
+                                  if (0x2100 <= hs && hs <= 0x27ff) {
+                                      returnValue = YES;
+                                  } else if (0x2B05 <= hs && hs <= 0x2b07) {
+                                      returnValue = YES;
+                                  } else if (0x2934 <= hs && hs <= 0x2935) {
+                                      returnValue = YES;
+                                  } else if (0x3297 <= hs && hs <= 0x3299) {
+                                      returnValue = YES;
+                                  } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50) {
+                                      returnValue = YES;
+                                  }
+                              }
+                          }];
+    return returnValue;
+}
+
+-(NSString *)tmui_mobileFormat{
+    if (self.length<7) {
+        return self;
+    }
+    return [self stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+}
+
+
++ (BOOL)resolveInstanceMethod:(SEL)sel {
+    NSString *selName = NSStringFromSelector(sel);
+    if ([selName isEqualToString:@"containsString:"]) {
+        return class_addMethod(self, sel, (IMP)tmui_containsString, "i@:@");
+    }
+    return [super resolveInstanceMethod:sel];
+}
+
+int tmui_containsString(NSString *self, SEL _cmd, NSString *aString) {
+    return [self rangeOfString:aString].length > 0;
+}
+
+#pragma mark - 格式化评论、点赞、收藏数
++ (NSString *)tmui_formatTextFromDefault:(NSString *)defaultText number:(NSNumber *)number {
+    NSString * formatText = nil;
+    if ([number respondsToSelector:@selector(integerValue)]) {
+        if (!number.integerValue) {
+            formatText = defaultText;
+        } else if (number.integerValue >= 10000) {
+            CGFloat floatValue = number.floatValue/1000.0f;
+            CGFloat resultValue = floatValue + 0.5f;
+            formatText = [NSString stringWithFormat:@"%.1fW", floorf(resultValue)/10.0f];
+        } else {
+            formatText = [NSString stringWithFormat:@"%@", number];
+        }
+    } else {
+        formatText = defaultText;
+    }
+    return formatText;
 }
 
 @end

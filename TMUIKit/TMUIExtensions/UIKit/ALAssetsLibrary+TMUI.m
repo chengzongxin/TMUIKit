@@ -1,16 +1,15 @@
 //
-//  ALAssetsLibrary+TCategory.m
-//  TBasicLib
+//  ALAssetsLibrary+TMUI.m
+//  TMUIKit
 //
-//  Created by kevin.huang on 14-10-9.
-//  Copyright (c) 2014年 binxun. All rights reserved.
+//  Created by Joe.cheng on 2021/3/15.
 //
 
-#import "ALAssetsLibrary+TCategory.h"
+#import "ALAssetsLibrary+TMUI.h"
 
-@implementation ALAssetsLibrary (TCategory)
+@implementation ALAssetsLibrary (TMUI)
 
-- (void)saveImage:(UIImage*)image toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock {
+- (void)tmui_saveImage:(UIImage*)image toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock {
     [self writeImageToSavedPhotosAlbum:image.CGImage
                            orientation:(ALAssetOrientation)image.imageOrientation
                        completionBlock:^(NSURL* assetURL, NSError* error) {
@@ -18,11 +17,11 @@
             completionBlock(error);
             return;
         }
-        [self addAssetURL:assetURL toAlbum:albumName withCompletionBlock:completionBlock];
+        [self tmui_addAssetURL:assetURL toAlbum:albumName withCompletionBlock:completionBlock];
     }];
 }
 
-- (void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock {
+- (void)tmui_addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock {
     __block BOOL albumWasFound = NO;
     [self enumerateGroupsWithTypes:ALAssetsGroupAlbum usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         
