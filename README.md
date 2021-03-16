@@ -39,7 +39,7 @@ TMUIKit is available under the MIT license. See the LICENSE file for more info.
 
 #### TMUIExtension
 
-- TMUIKit主要核心功能、提供便捷、高效的`Category`，无需继承，即插即用。包含`UIKit`和`CoreFoundation`两大部分
+- TMUIKit主要核心功能、提供便捷、高效的`Category`，无需继承，即插即用。包含`UIKit`和`Foundation`两大部分
 
 #### TMUIWidgets
 
@@ -65,7 +65,7 @@ TMUIKit is available under the MIT license. See the LICENSE file for more info.
 
 ## Reference
 
-【腾讯文档】Category整理——UIKit&CoreFoundation
+【腾讯文档】Category整理——UIKit&Foundation
 https://docs.qq.com/sheet/DWHFQalhsT2pHcENn
 
 

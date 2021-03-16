@@ -128,11 +128,11 @@
             </objects>
             <point key="canvasLocation" x="1212" y="-202"/>
         </scene>
-        <!--Foundataion-->
+        <!--Foundation-->
         <scene sceneID="yc3-xC-bMy">
             <objects>
                 <navigationController id="0Ao-1e-T68" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Foundataion" image="icon_tabbar_foundation" selectedImage="icon_tabbar_foundation" id="x6c-ah-gud"/>
+                    <tabBarItem key="tabBarItem" title="Foundation" image="icon_tabbar_foundation" selectedImage="icon_tabbar_foundation" id="x6c-ah-gud"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6vV-b4-JRR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

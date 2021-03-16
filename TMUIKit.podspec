@@ -82,11 +82,11 @@ Pod::Spec.new do |s|
     ss.subspec 'UIKit' do |sss|
       sss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
     end
-    ss.subspec 'CoreFoundation' do |sss|
-      sss.source_files = 'TMUIKit/TMUIExtensions/CoreFoundation'
+    ss.subspec 'Foundation' do |sss|
+      sss.source_files = 'TMUIKit/TMUIExtensions/Foundation'
       # NSString
       sss.subspec 'NSString' do |ssss|
-        ssss.source_files = 'TMUIKit/TMUIExtensions/CoreFoundation/NSString'
+        ssss.source_files = 'TMUIKit/TMUIExtensions/Foundation/NSString'
       end
     end
   end
