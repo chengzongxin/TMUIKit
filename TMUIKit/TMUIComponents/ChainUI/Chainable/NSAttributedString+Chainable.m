@@ -61,8 +61,8 @@
 
 - (CUIChainableNSMutableAttributedStringObjectBlock)match {
     CUI_OBJECT_BLOCK(
-                     if (!self.nerIsJustSettingEffectedRanges) {
-                         [self.nerEffectedRanges removeAllIndexes];
+                     if (!self.cuiIsJustSettingEffectedRanges) {
+                         [self.cuiEffectedRanges removeAllIndexes];
                      }
                      
                      NSRegularExpression *exp = nil;
@@ -74,24 +74,24 @@
                      
                      NSArray *matches = [exp matchesInString:self.string options:0 range:[self.string cui_fullRange]];
                      for (NSTextCheckingResult *result in matches) {
-                         [self.nerEffectedRanges addIndexesInRange:result.range];
+                         [self.cuiEffectedRanges addIndexesInRange:result.range];
                      }
                      
-                     self.nerIsJustSettingEffectedRanges = YES;
+                     self.cuiIsJustSettingEffectedRanges = YES;
                      );
 }
 
 - (CUIChainableNSMutableAttributedStringTwoIntBlock)range {
     CUI_TWO_INT_BLOCK(
-                      if (!self.nerIsJustSettingEffectedRanges) {
-                          [self.nerEffectedRanges removeAllIndexes];
+                      if (!self.cuiIsJustSettingEffectedRanges) {
+                          [self.cuiEffectedRanges removeAllIndexes];
                       }
                       
                       if (value1 < 0) {
                           value1 = self.string.length + value1;
                       }
-                      [self.nerEffectedRanges addIndexesInRange:NSMakeRange(value1, value2)];
-                      self.nerIsJustSettingEffectedRanges = YES;
+                      [self.cuiEffectedRanges addIndexesInRange:NSMakeRange(value1, value2)];
+                      self.cuiIsJustSettingEffectedRanges = YES;
                       );
 }
 
@@ -137,7 +137,7 @@
 }
 
 - (instancetype)ifNotExists {
-    self.nerAddAttributeIfNotExists = YES;
+    self.cuiAddAttributeIfNotExists = YES;
     return self;
 }
 

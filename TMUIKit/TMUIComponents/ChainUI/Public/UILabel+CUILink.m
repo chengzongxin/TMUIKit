@@ -80,33 +80,33 @@
 
 @interface UILabel (CUILinkPrivate)
 
-@property (nonatomic, assign) CGPoint nerTouchBeginPoint;
-@property (nonatomic, strong) CUILinkInfo *nerSelectedLinkInfo;
-@property (nonatomic, strong) NSMutableArray *nerSelectedLayers;
+@property (nonatomic, assign) CGPoint cuiTouchBeginPoint;
+@property (nonatomic, strong) CUILinkInfo *cuiSelectedLinkInfo;
+@property (nonatomic, strong) NSMutableArray *cuiSelectedLayers;
 
 @end
 
 
 @implementation UILabel (CUILink)
 
-CUI_SYNTHESIZE_FLOAT(nerLineGap, setNerLineGap, [self cui_updateAttributedString]);
+CUI_SYNTHESIZE_FLOAT(cuiLineGap, setCuiLineGap, [self cui_updateAttributedString]);
 
-CUI_SYNTHESIZE(nerLinkSelectedColor, setNerLinkSelectedColor);
-CUI_SYNTHESIZE(nerSelectedLinkInfo, setNerSelectedLinkInfo);
-CUI_SYNTHESIZE(nerSelectedLayers, setNerSelectedLayers);
+CUI_SYNTHESIZE(cuiLinkSelectedColor, setCuiLinkSelectedColor);
+CUI_SYNTHESIZE(cuiSelectedLinkInfo, setCuiSelectedLinkInfo);
+CUI_SYNTHESIZE(cuiSelectedLayers, setCuiSelectedLayers);
 
-CUI_SYNTHESIZE_FLOAT(nerLinkSelectedBorderRadius, setNerLinkSelectedBorderRadius);
-CUI_SYNTHESIZE_STRUCT(nerTouchBeginPoint, setNerTouchBeginPoint, CGPoint);
-CUI_SYNTHESIZE_BLOCK(nerLinkHandler, setNerLinkHandler, CUILinkHandler);
+CUI_SYNTHESIZE_FLOAT(cuiLinkSelectedBorderRadius, setCuiLinkSelectedBorderRadius);
+CUI_SYNTHESIZE_STRUCT(cuiTouchBeginPoint, setCuiTouchBeginPoint, CGPoint);
+CUI_SYNTHESIZE_BLOCK(cuiLinkHandler, setCuiLinkHandler, CUILinkHandler);
 
-static char *nerPrivateTextStorageKey;
-static UIColor *nerPrivateDefaultLinkSelectedBackgroundColor = nil;
-static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
+static char *cuiPrivateTextStorageKey;
+static UIColor *cuiPrivateDefaultLinkSelectedBackgroundColor = nil;
+static CGFloat cuiPrivateDefaultLinkSelectedBorderRadius = 0;
 
 
 + (void)setDefaultLinkSelectedBackgroundColor:(UIColor *)color borderRadius:(CGFloat)borderRadius {
-    nerPrivateDefaultLinkSelectedBackgroundColor = color;
-    nerPrivateDefaultLinkSelectedBorderRadius = borderRadius;
+    cuiPrivateDefaultLinkSelectedBackgroundColor = color;
+    cuiPrivateDefaultLinkSelectedBorderRadius = borderRadius;
 }
 
 + (void)load {
@@ -118,7 +118,7 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
 - (void)cui_updateAttributedString {
     if (self.attributedText.string.length) {
         NSMutableAttributedString *att = [self.attributedText mutableCopy];
-        [att cui_setParagraphStyleValue:@(self.nerLineGap) forKey:@"lineSpacing"];
+        [att cui_setParagraphStyleValue:@(self.cuiLineGap) forKey:@"lineSpacing"];
         self.attributedText = att;
     }
 }
@@ -126,7 +126,7 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
 - (void)cui_setText:(NSString *)text {
     [self cui_setText:text];
     
-    if (self.nerLineGap > 0) {
+    if (self.cuiLineGap > 0) {
         [self cui_updateAttributedString];
     }
 }
@@ -134,13 +134,13 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
 - (void)cui_setUserInteractionEnabled:(BOOL)userInteractionEnabled {
     [self cui_setUserInteractionEnabled:userInteractionEnabled];
     
-    if (userInteractionEnabled && ![self cui_containLinkGesture] && self.nerLinkHandler) {
+    if (userInteractionEnabled && ![self cui_containLinkGesture] && self.cuiLinkHandler) {
         id reg = [[CUILinkGestureRegcognizer alloc] initWithTarget:self action:@selector(cui_handleLinkGesture:)];
         [self addGestureRecognizer:reg];
     }
 }
 
-- (NSLayoutManager *)nerLayoutManager {
+- (NSLayoutManager *)cuiLayoutManager {
     NSLayoutManager *layoutManager = objc_getAssociatedObject(self, _cmd);
     
     if (!layoutManager) {
@@ -156,7 +156,7 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
         [layoutManager addTextContainer:textContainer];
         
         objc_setAssociatedObject(self, _cmd, layoutManager, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        objc_setAssociatedObject(self, nerPrivateTextStorageKey, textStorage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, cuiPrivateTextStorageKey, textStorage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
@@ -177,8 +177,8 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
 }
 
 - (void)cui_addHighlightedLayersForLinkInfo:(CUILinkInfo *)info {
-    if (!self.nerSelectedLayers) {
-        self.nerSelectedLayers = [NSMutableArray array];
+    if (!self.cuiSelectedLayers) {
+        self.cuiSelectedLayers = [NSMutableArray array];
     }
     
     for (NSValue *rectValue in info.boundingRects) {
@@ -194,11 +194,11 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
     CALayer *layer = [CALayer new];
     layer.frame = rect;
     
-    UIColor *color = self.nerLinkSelectedColor?: nerPrivateDefaultLinkSelectedBackgroundColor;
-    CGFloat borderRadius = nerPrivateDefaultLinkSelectedBorderRadius;
+    UIColor *color = self.cuiLinkSelectedColor?: cuiPrivateDefaultLinkSelectedBackgroundColor;
+    CGFloat borderRadius = cuiPrivateDefaultLinkSelectedBorderRadius;
     
-    if (objc_getAssociatedObject(self, @selector(nerLinkSelectedBorderRadius))) {
-        borderRadius = self.nerLinkSelectedBorderRadius;
+    if (objc_getAssociatedObject(self, @selector(cuiLinkSelectedBorderRadius))) {
+        borderRadius = self.cuiLinkSelectedBorderRadius;
     }
     
     if (CGColorGetAlpha(color.CGColor) == 1) {
@@ -209,26 +209,26 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
         
     layer.cornerRadius = borderRadius;
     layer.backgroundColor = color.CGColor;
-    [self.nerSelectedLayers addObject:layer];
+    [self.cuiSelectedLayers addObject:layer];
 }
 
 - (void)removeHighlightedViews {
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(cui_addHighlightedLayersForLinkInfo:)
-                                               object:self.nerSelectedLinkInfo];
+                                               object:self.cuiSelectedLinkInfo];
     
-    for (CALayer *layer in self.nerSelectedLayers) {
+    for (CALayer *layer in self.cuiSelectedLayers) {
         [layer removeFromSuperlayer];
     }
     
-    [self.nerSelectedLayers removeAllObjects];
-    self.nerSelectedLayers = nil;
-    self.nerSelectedLinkInfo = nil;
+    [self.cuiSelectedLayers removeAllObjects];
+    self.cuiSelectedLayers = nil;
+    self.cuiSelectedLinkInfo = nil;
 }
 
 
 - (NSArray *)boundingRectsForTextInRange:(NSRange)range yOffset:(CGFloat)yOffset {
-    NSLayoutManager *layoutManager = self.nerLayoutManager;
+    NSLayoutManager *layoutManager = self.cuiLayoutManager;
     NSTextContainer *textContainer = layoutManager.textContainers.firstObject;
     CGRect textRect = [layoutManager usedRectForTextContainer:textContainer];
     
@@ -264,7 +264,7 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
 }
 
 - (CGFloat)calculateTextYOffset {
-    NSLayoutManager *layoutManager = self.nerLayoutManager;
+    NSLayoutManager *layoutManager = self.cuiLayoutManager;
     NSTextContainer *textContainer = layoutManager.textContainers.firstObject;
     
     NSRange textRange = [layoutManager glyphRangeForTextContainer:textContainer];
@@ -292,23 +292,23 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
         [self cui_handleTouchBegin:reg];
         
     } else if (reg.state == UIGestureRecognizerStateChanged) {
-        if (!self.nerSelectedLinkInfo) return;
+        if (!self.cuiSelectedLinkInfo) return;
         
         CGPoint point = [reg locationInView:self];
-        if ([self.nerSelectedLinkInfo shouldCancelTouchAtPoint:point]) {
+        if ([self.cuiSelectedLinkInfo shouldCancelTouchAtPoint:point]) {
             [self removeHighlightedViews];
         }
     } else if (reg.state == UIGestureRecognizerStateEnded || reg.state == UIGestureRecognizerStateCancelled) {
-        if (self.nerSelectedLinkInfo) {
-            CUILinkHandler handler = self.nerLinkHandler;
-            if (handler) handler(self.nerSelectedLinkInfo.text, self.nerSelectedLinkInfo.range);
+        if (self.cuiSelectedLinkInfo) {
+            CUILinkHandler handler = self.cuiLinkHandler;
+            if (handler) handler(self.cuiSelectedLinkInfo.text, self.cuiSelectedLinkInfo.range);
             [self removeHighlightedViews];
         }
     }
 }
 
 - (void)cui_handleTouchBegin:(UIGestureRecognizer *)reg {
-    self.nerTouchBeginPoint = [reg locationInView:self];
+    self.cuiTouchBeginPoint = [reg locationInView:self];
     
     __block CGFloat textYOffset = -1;
     
@@ -333,8 +333,8 @@ static CGFloat nerPrivateDefaultLinkSelectedBorderRadius = 0;
                                  }];
     
     for (CUILinkInfo *info in linkInfos) {
-        if ([info containsPoint:self.nerTouchBeginPoint]) {
-            self.nerSelectedLinkInfo = info;
+        if ([info containsPoint:self.cuiTouchBeginPoint]) {
+            self.cuiSelectedLinkInfo = info;
             [self performSelector:@selector(cui_addHighlightedLayersForLinkInfo:) withObject:info afterDelay:0.05];
         }
     }

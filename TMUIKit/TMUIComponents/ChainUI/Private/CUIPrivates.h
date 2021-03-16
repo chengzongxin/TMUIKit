@@ -50,9 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableAttributedString (CUIPrivate)
 
-@property (nonatomic, assign) BOOL nerAddAttributeIfNotExists;
-@property (nonatomic, assign) BOOL nerIsJustSettingEffectedRanges;
-@property (nonatomic, strong) NSMutableIndexSet *nerEffectedRanges;
+@property (nonatomic, assign) BOOL cuiAddAttributeIfNotExists;
+@property (nonatomic, assign) BOOL cuiIsJustSettingEffectedRanges;
+@property (nonatomic, strong) NSMutableIndexSet *cuiEffectedRanges;
 
 + (instancetype)cui_attributedStringWithSubstrings:(NSArray *)substrings;
 
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (CUIPriavte)
 
-@property (nonatomic, assign) UIEdgeInsets nerTouchInsets;
+@property (nonatomic, assign) UIEdgeInsets cuiTouchInsets;
 
 - (CGSize)cui_fittingSize;
 - (UIImage *)cui_snapShot;
@@ -90,8 +90,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIButton (CUIPriavte)
 
-@property (nonatomic, assign) CGFloat nerGap;
-@property (nonatomic, assign) UIEdgeInsets nerInsets;
+@property (nonatomic, assign) CGFloat cuiGap;
+@property (nonatomic, assign) UIEdgeInsets cuiInsets;
 
 + (instancetype)cui_littleHigherHuggingAndResistanceButton;
 - (instancetype)cui_reverseButton;
@@ -103,10 +103,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextField (CUIPriavte)
 
-@property (nonatomic, assign) NSInteger nerMaxLength;
-@property (nonatomic, assign) UIEdgeInsets nerContentEdgeInsets;
-@property (nonatomic, strong) CUIObjectBlock nerTextChangeBlock;
-@property (nonatomic, strong) CUIObjectBlock nerEndOnExitBlock;
+@property (nonatomic, assign) NSInteger cuiMaxLength;
+@property (nonatomic, assign) UIEdgeInsets cuiContentEdgeInsets;
+@property (nonatomic, strong) CUIObjectBlock cuiTextChangeBlock;
+@property (nonatomic, strong) CUIObjectBlock cuiEndOnExitBlock;
 
 
 + (instancetype)cui_autoEnableReturnKeyTextField;
@@ -117,8 +117,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITextView (CUIPriavte)
 
-@property (nonatomic, assign) NSInteger nerMaxLength;
-@property (nonatomic, strong) CUIObjectBlock nerTextChangeBlock;
+@property (nonatomic, assign) NSInteger cuiMaxLength;
+@property (nonatomic, strong) CUIObjectBlock cuiTextChangeBlock;
 
 - (void)cui_setPlaceholderText:(id)stringObject;
 
@@ -128,8 +128,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UISlider (CUIPrivate)
 
-@property (nonatomic, strong) NSNumber *nerTrackHeight;
-@property (nonatomic, assign) UIEdgeInsets nerThumbInsets;
+@property (nonatomic, strong) NSNumber *cuiTrackHeight;
+@property (nonatomic, assign) UIEdgeInsets cuiThumbInsets;
 
 @end
 
@@ -153,7 +153,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIVisualEffectView (CUIPriavte)
 
-@property (nonatomic, strong) UIVisualEffectView *nerVibrancyEffectView;
+@property (nonatomic, strong) UIVisualEffectView *cuiVibrancyEffectView;
 
 - (void)cui_addVibrancyChild:(id)object;
 

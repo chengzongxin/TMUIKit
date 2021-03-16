@@ -26,13 +26,13 @@
 
 @interface UIView (CUIStack)
 
-@property (nonatomic, strong) NSNumber *nerAttachSpace;
+@property (nonatomic, strong) NSNumber *cuiAttachSpace;
 
 @end
 
 @implementation UIView (CUIStack)
 
-CUI_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
+CUI_SYNTHESIZE(cuiAttachSpace, setCuiAttachSpace);
 
 @end
 
@@ -126,7 +126,7 @@ CUI_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
             [self attachSpaceDidChangeForViewAtIndex:-1];
         } else {
             UIView *previousView = self.arrangedSubviews[index - 1];
-            previousView.nerAttachSpace = @(spacing);
+            previousView.cuiAttachSpace = @(spacing);
             [self attachSpaceDidChangeForViewAtIndex:index - 1];
         }
         
@@ -167,7 +167,7 @@ CUI_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
         [self removeAndDeactivateConstraintsForViewAtIndex:index];
         [self.arrangedSubviews removeObjectAtIndex:index];
         [subview removeObserver:self forKeyPath:@"hidden" context:NULL];
-        subview.nerAttachSpace = nil;
+        subview.cuiAttachSpace = nil;
     }
     
     [super willRemoveSubview:subview];
@@ -207,8 +207,8 @@ CUI_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
 - (void)spacingDidChange {
     for (NSLayoutConstraint *c in self.spacingConstraints) {
         if (c.firstItem != self && c.secondItem != self) {
-            if ([c.firstItem nerAttachSpace]) {
-                c.constant = -[[c.firstItem nerAttachSpace] floatValue];
+            if ([c.firstItem cuiAttachSpace]) {
+                c.constant = -[[c.firstItem cuiAttachSpace] floatValue];
             } else {
                 c.constant = -self.spacing;
             }
@@ -474,8 +474,8 @@ CUI_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
     CGFloat spacing = 0;
     if (item1 == self && self.headAttachSpace) {
         spacing = -[self.headAttachSpace floatValue];
-    } else if (item1.nerAttachSpace) {
-        spacing = -[item1.nerAttachSpace floatValue];
+    } else if (item1.cuiAttachSpace) {
+        spacing = -[item1.cuiAttachSpace floatValue];
     } else if (item1 != self && item2 != self) {
         spacing = -self.spacing;
     }
@@ -532,8 +532,8 @@ CUI_SYNTHESIZE(nerAttachSpace, setNerAttachSpace);
             if (item1 == self && self.headAttachSpace) {
                 c.constant = -[self.headAttachSpace floatValue];
                 break;
-            } else if (item1.nerAttachSpace) {
-                c.constant = -[item1.nerAttachSpace floatValue];
+            } else if (item1.cuiAttachSpace) {
+                c.constant = -[item1.cuiAttachSpace floatValue];
                 break;
             }
         }

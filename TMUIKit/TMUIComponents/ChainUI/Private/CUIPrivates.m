@@ -172,9 +172,9 @@
 
 @implementation NSMutableAttributedString (CUIPrivate)
 
-CUI_SYNTHESIZE_BOOL(nerAddAttributeIfNotExists, setNerAddAttributeIfNotExists);
-CUI_SYNTHESIZE_BOOL(nerIsJustSettingEffectedRanges, setNerIsJustSettingEffectedRanges);
-CUI_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
+CUI_SYNTHESIZE_BOOL(cuiAddAttributeIfNotExists, setCuiAddAttributeIfNotExists);
+CUI_SYNTHESIZE_BOOL(cuiIsJustSettingEffectedRanges, setCuiIsJustSettingEffectedRanges);
+CUI_SYNTHESIZE(cuiEffectedRanges, setCuiEffectedRanges);
 
 - (NSArray *)cui_complementaryRangesWithRanges:(NSArray *)ranges inRange:(NSRange)inRange {
     NSMutableArray *targets = [NSMutableArray array];
@@ -257,9 +257,9 @@ CUI_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
 }
 
 - (void)cui_applyAttribute:(NSString *)name withValue:(id)value {
-    self.nerIsJustSettingEffectedRanges = NO;
+    self.cuiIsJustSettingEffectedRanges = NO;
     
-    [self.nerEffectedRanges enumerateRangesUsingBlock:^(NSRange range, BOOL * _Nonnull stop) {
+    [self.cuiEffectedRanges enumerateRangesUsingBlock:^(NSRange range, BOOL * _Nonnull stop) {
         if ([name isEqualToString:CUILinkAttributeName]) {
             [self addAttribute:name value:value range:range];
             
@@ -270,7 +270,7 @@ CUI_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
 //            }
             
         } else {
-            if (self.nerAddAttributeIfNotExists) {
+            if (self.cuiAddAttributeIfNotExists) {
                 [self cui_addAttributeIfNotExist:name value:value range:range];
             } else {
                 [self addAttribute:name value:value range:range];
@@ -281,7 +281,7 @@ CUI_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
 
 + (instancetype)cui_attributedStringWithString:(NSString *)string {
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:string];
-    att.nerEffectedRanges = [NSMutableIndexSet indexSetWithIndexesInRange:[string cui_fullRange]];
+    att.cuiEffectedRanges = [NSMutableIndexSet indexSetWithIndexesInRange:[string cui_fullRange]];
     return att;
 }
 
@@ -313,7 +313,7 @@ CUI_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
         }
     }
     
-    att.nerEffectedRanges = [NSMutableIndexSet indexSetWithIndexesInRange:[att.string cui_fullRange]];
+    att.cuiEffectedRanges = [NSMutableIndexSet indexSetWithIndexesInRange:[att.string cui_fullRange]];
     return att;
 }
 
@@ -324,14 +324,14 @@ CUI_SYNTHESIZE(nerEffectedRanges, setNerEffectedRanges);
 
 @implementation UIView (CUIPriavte)
 
-CUI_SYNTHESIZE_STRUCT(nerTouchInsets, setNerTouchInsets, UIEdgeInsets);
+CUI_SYNTHESIZE_STRUCT(cuiTouchInsets, setCuiTouchInsets, UIEdgeInsets);
 
 + (void)load {
     [self cui_swizzleMethod:@selector(pointInside:withEvent:) withMethod:@selector(cui_pointInside:withEvent:)];
 }
 
 - (BOOL)cui_pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    UIEdgeInsets touchInsets = self.nerTouchInsets;
+    UIEdgeInsets touchInsets = self.cuiTouchInsets;
     CGRect rect = UIEdgeInsetsInsetRect(self.bounds, touchInsets);
     return CGRectContainsPoint(rect, point);
 }
@@ -412,8 +412,8 @@ CUI_SYNTHESIZE_STRUCT(nerTouchInsets, setNerTouchInsets, UIEdgeInsets);
 
 @implementation UIButton (CUIPriavte)
 
-CUI_SYNTHESIZE_FLOAT(nerGap, setNerGap);
-CUI_SYNTHESIZE_STRUCT(nerInsets, setNerInsets, UIEdgeInsets);
+CUI_SYNTHESIZE_FLOAT(cuiGap, setCuiGap);
+CUI_SYNTHESIZE_STRUCT(cuiInsets, setCuiInsets, UIEdgeInsets);
 
 - (instancetype)cui_reverseButton {
     if (CGAffineTransformEqualToTransform(self.transform, CGAffineTransformIdentity)) {
@@ -446,10 +446,10 @@ CUI_SYNTHESIZE_STRUCT(nerInsets, setNerInsets, UIEdgeInsets);
 
 @implementation UITextField (CUIPriavte)
 
-CUI_SYNTHESIZE_INT(nerMaxLength, setNerMaxLength, if (nerMaxLength > 0) [self cui_watchTextChange]);
-CUI_SYNTHESIZE_STRUCT(nerContentEdgeInsets, setNerContentEdgeInsets, UIEdgeInsets, [self setNeedsDisplay]; [self invalidateIntrinsicContentSize]);
-CUI_SYNTHESIZE_BLOCK(nerTextChangeBlock, setNerTextChangeBlock, CUIObjectBlock, if (nerTextChangeBlock) [self cui_watchTextChange]);
-CUI_SYNTHESIZE_BLOCK(nerEndOnExitBlock, setNerEndOnExitBlock, CUIObjectBlock, if (nerEndOnExitBlock) [self cui_watchEndOnExit]);
+CUI_SYNTHESIZE_INT(cuiMaxLength, setCuiMaxLength, if (cuiMaxLength > 0) [self cui_watchTextChange]);
+CUI_SYNTHESIZE_STRUCT(cuiContentEdgeInsets, setCuiContentEdgeInsets, UIEdgeInsets, [self setNeedsDisplay]; [self invalidateIntrinsicContentSize]);
+CUI_SYNTHESIZE_BLOCK(cuiTextChangeBlock, setCuiTextChangeBlock, CUIObjectBlock, if (cuiTextChangeBlock) [self cui_watchTextChange]);
+CUI_SYNTHESIZE_BLOCK(cuiEndOnExitBlock, setCuiEndOnExitBlock, CUIObjectBlock, if (cuiEndOnExitBlock) [self cui_watchEndOnExit]);
 
 + (void)load {
     [self cui_swizzleMethod:@selector(textRectForBounds:) withMethod:@selector(cui_textRectForBounds:)];
@@ -458,12 +458,12 @@ CUI_SYNTHESIZE_BLOCK(nerEndOnExitBlock, setNerEndOnExitBlock, CUIObjectBlock, if
 
 - (CGRect)cui_textRectForBounds:(CGRect)bounds {
     CGRect rect = [self cui_textRectForBounds:bounds];
-    return UIEdgeInsetsInsetRect(rect, [self nerContentEdgeInsets]);
+    return UIEdgeInsetsInsetRect(rect, [self cuiContentEdgeInsets]);
 }
 
 - (CGRect)cui_editingRectForBounds:(CGRect)bounds {
     CGRect rect = [self cui_editingRectForBounds:bounds];
-    return UIEdgeInsetsInsetRect(rect, [self nerContentEdgeInsets]);
+    return UIEdgeInsetsInsetRect(rect, [self cuiContentEdgeInsets]);
 }
 
 - (void)cui_watchTextChange {
@@ -477,14 +477,14 @@ CUI_SYNTHESIZE_BLOCK(nerEndOnExitBlock, setNerEndOnExitBlock, CUIObjectBlock, if
 }
 
 - (void)cui_textDidEndOnExit {
-    void (^callback)(id, id) = (id)self.nerEndOnExitBlock;
+    void (^callback)(id, id) = (id)self.cuiEndOnExitBlock;
     if (callback) callback(self.text, self);
 }
 
 - (void)cui_textDidChange {
-    BOOL hasMarked = [CUIUtils limitTextInput:self withLength:self.nerMaxLength];
+    BOOL hasMarked = [CUIUtils limitTextInput:self withLength:self.cuiMaxLength];
     if (!hasMarked) {
-        void (^callback)(id, id) = (id)self.nerTextChangeBlock;
+        void (^callback)(id, id) = (id)self.cuiTextChangeBlock;
         if (callback) callback(self.text, self);
     }
 }
@@ -503,8 +503,8 @@ CUI_SYNTHESIZE_BLOCK(nerEndOnExitBlock, setNerEndOnExitBlock, CUIObjectBlock, if
 @implementation UITextView (CUIPriavte)
 
 #define CUI_PLACEHOLDER_TAG 98789
-CUI_SYNTHESIZE_INT(nerMaxLength, setNerMaxLength, if (nerMaxLength > 0) [self cui_watchTextChange]);
-CUI_SYNTHESIZE_BLOCK(nerTextChangeBlock, setNerTextChangeBlock, CUIObjectBlock, if (nerTextChangeBlock) [self cui_watchTextChange]);
+CUI_SYNTHESIZE_INT(cuiMaxLength, setCuiMaxLength, if (cuiMaxLength > 0) [self cui_watchTextChange]);
+CUI_SYNTHESIZE_BLOCK(cuiTextChangeBlock, setCuiTextChangeBlock, CUIObjectBlock, if (cuiTextChangeBlock) [self cui_watchTextChange]);
 
 + (void)load {
     [self cui_swizzleMethod:NSSelectorFromString(@"dealloc") withMethod:@selector(cui_textViewDealloc)];
@@ -544,11 +544,11 @@ CUI_SYNTHESIZE_BLOCK(nerTextChangeBlock, setNerTextChangeBlock, CUIObjectBlock, 
 }
 
 - (void)cui_textDidChange {
-    BOOL hasMarked = [CUIUtils limitTextInput:self withLength:self.nerMaxLength];
+    BOOL hasMarked = [CUIUtils limitTextInput:self withLength:self.cuiMaxLength];
     [self cui_updatePlaceholderLabel];
     
     if (!hasMarked) {
-        void (^callback)(id, id) = (id)self.nerTextChangeBlock;
+        void (^callback)(id, id) = (id)self.cuiTextChangeBlock;
         if (callback) callback(self.text, self);
     }
 }
@@ -658,8 +658,8 @@ CUI_SYNTHESIZE_BLOCK(nerTextChangeBlock, setNerTextChangeBlock, CUIObjectBlock, 
 
 @implementation UISlider (CUIPriavte)
 
-CUI_SYNTHESIZE(nerTrackHeight, setNerTrackHeight);
-CUI_SYNTHESIZE_STRUCT(nerThumbInsets, setNerThumbInsets, UIEdgeInsets);
+CUI_SYNTHESIZE(cuiTrackHeight, setCuiTrackHeight);
+CUI_SYNTHESIZE_STRUCT(cuiThumbInsets, setCuiThumbInsets, UIEdgeInsets);
 
 + (void)load {
     [self cui_swizzleMethod:@selector(trackRectForBounds:) withMethod:@selector(cui_trackRectForBounds:)];
@@ -668,14 +668,14 @@ CUI_SYNTHESIZE_STRUCT(nerThumbInsets, setNerThumbInsets, UIEdgeInsets);
 
 - (CGRect)cui_trackRectForBounds:(CGRect)bounds {
     CGRect rect = [self cui_trackRectForBounds:bounds];
-    if (self.nerTrackHeight) {
-        rect.size.height = [self.nerTrackHeight floatValue];
+    if (self.cuiTrackHeight) {
+        rect.size.height = [self.cuiTrackHeight floatValue];
     }
     return rect;
 }
 
 - (CGRect)cui_thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value {
-    UIEdgeInsets insets = self.nerThumbInsets;
+    UIEdgeInsets insets = self.cuiThumbInsets;
     rect.origin.x -= insets.left;
     rect.origin.y -= insets.top;
     rect.size.width += insets.left + insets.right;
@@ -734,13 +734,13 @@ CUI_SYNTHESIZE_STRUCT(nerThumbInsets, setNerThumbInsets, UIEdgeInsets);
     [self cui_swizzleMethod:@selector(setEffect:) withMethod:@selector(cui_setEffect:)];
 }
 
-CUI_SYNTHESIZE(nerVibrancyEffectView, setNerVibrancyEffectView);
+CUI_SYNTHESIZE(cuiVibrancyEffectView, setCuiVibrancyEffectView);
 
 - (void)cui_setEffect:(UIVisualEffect *)effect {
     [self cui_setEffect:effect];
     
     if ([effect isKindOfClass:UIBlurEffect.class]) {
-        UIVisualEffectView *vibrancyView = self.nerVibrancyEffectView;
+        UIVisualEffectView *vibrancyView = self.cuiVibrancyEffectView;
         
         if (vibrancyView) {
             vibrancyView.effect = [UIVibrancyEffect effectForBlurEffect:(id)effect];
@@ -750,7 +750,7 @@ CUI_SYNTHESIZE(nerVibrancyEffectView, setNerVibrancyEffectView);
 
 - (void)cui_addVibrancyChild:(id)object {
     if ([self.effect isKindOfClass:UIBlurEffect.class]) {
-        UIVisualEffectView *vibrancyView = self.nerVibrancyEffectView;
+        UIVisualEffectView *vibrancyView = self.cuiVibrancyEffectView;
         
         if (!vibrancyView) {
             vibrancyView = [UIVisualEffectView new];
@@ -760,7 +760,7 @@ CUI_SYNTHESIZE(nerVibrancyEffectView, setNerVibrancyEffectView);
             vibrancyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             [self.contentView insertSubview:vibrancyView atIndex:0];
             
-            self.nerVibrancyEffectView = vibrancyView;
+            self.cuiVibrancyEffectView = vibrancyView;
         }
         
         [vibrancyView cui_addChild:object];

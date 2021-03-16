@@ -35,7 +35,7 @@
 }
 
 - (CUIChainableUILabelFloatBlock)lineGap {
-    CUI_FLOAT_BLOCK(self.nerLineGap = value);
+    CUI_FLOAT_BLOCK(self.cuiLineGap = value);
 }
 
 - (CUIChainableUILabelFloatBlock)preferWidth {
@@ -46,10 +46,10 @@
     CUI_CALLBACK_BLOCK(
                        
                        if (CUI_IS_BLOCK(object)) {
-                           self.nerLinkHandler = object;
+                           self.cuiLinkHandler = object;
                            
                        } else {
-                           self.nerLinkHandler = ^(id text, NSRange range) {
+                           self.cuiLinkHandler = ^(id text, NSRange range) {
                                id rangeValue = [NSValue valueWithRange:range];
                                SEL action = NSSelectorFromString(object);
                                [weakTarget performSelector:action withObject:text withObject:rangeValue];

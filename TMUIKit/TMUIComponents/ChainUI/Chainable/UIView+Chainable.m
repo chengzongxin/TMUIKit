@@ -78,7 +78,7 @@
 }
 
 - (CUIChainableUIViewInsetsBlock)touchInsets {
-    CUI_INSETS_BLOCK(self.nerTouchInsets = value);
+    CUI_INSETS_BLOCK(self.cuiTouchInsets = value);
 }
 
 - (CUIChainableUIViewCallbackBlock)onClick {

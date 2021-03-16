@@ -40,15 +40,15 @@
 }
 
 - (CUIChainableUITextViewIntBlock)maxLength {
-    CUI_INT_BLOCK(self.nerMaxLength = value);
+    CUI_INT_BLOCK(self.cuiMaxLength = value);
 }
 
 - (CUIChainableUITextViewCallbackBlock)onChange {
     CUI_CALLBACK_BLOCK(
                        if (CUI_IS_BLOCK(object)) {
-                           self.nerTextChangeBlock = object;
+                           self.cuiTextChangeBlock = object;
                        } else {
-                           self.nerTextChangeBlock = ^(id text) {
+                           self.cuiTextChangeBlock = ^(id text) {
                                SEL action = NSSelectorFromString(object);
                                [weakTarget performSelector:action withObject:weakSelf];
                            };

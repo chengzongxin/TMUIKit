@@ -32,19 +32,19 @@
 }
 
 - (CUIChainableUITextFieldIntBlock)maxLength {
-    CUI_INT_BLOCK(self.nerMaxLength = value);
+    CUI_INT_BLOCK(self.cuiMaxLength = value);
 }
 
 - (CUIChainableUITextFieldInsetsBlock)insets {
-    CUI_INSETS_BLOCK(self.nerContentEdgeInsets = value);
+    CUI_INSETS_BLOCK(self.cuiContentEdgeInsets = value);
 }
 
 - (CUIChainableUITextFieldCallbackBlock)onChange {
     CUI_CALLBACK_BLOCK(
                        if (CUI_IS_BLOCK(object)) {
-                           self.nerTextChangeBlock = object;
+                           self.cuiTextChangeBlock = object;
                        } else {
-                           self.nerTextChangeBlock = ^(id text) {
+                           self.cuiTextChangeBlock = ^(id text) {
                                SEL action = NSSelectorFromString(object);
                                [weakTarget performSelector:action withObject:weakSelf];
                            };
@@ -55,9 +55,9 @@
 - (CUIChainableUITextFieldCallbackBlock)onFinish {
     CUI_CALLBACK_BLOCK(
                        if (CUI_IS_BLOCK(object)) {
-                           self.nerEndOnExitBlock = object;
+                           self.cuiEndOnExitBlock = object;
                        } else {
-                           self.nerEndOnExitBlock = ^(id text) {
+                           self.cuiEndOnExitBlock = ^(id text) {
                                SEL action = NSSelectorFromString(object);
                                [weakTarget performSelector:action withObject:weakSelf];
                            };
