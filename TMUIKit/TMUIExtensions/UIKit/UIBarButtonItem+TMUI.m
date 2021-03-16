@@ -7,6 +7,34 @@
 
 #import "UIBarButtonItem+TMUI.h"
 #import "UIButton+TMUI.h"
+#import <objc/runtime.h>
+
+
+@interface _TMUIBarButtonItemBlockTarget : NSObject
+
+@property (nonatomic, copy) void (^block)(id sender);
+
+- (id)initWithBlock:(void (^)(id sender))block;
+- (void)invoke:(id)sender;
+
+@end
+
+@implementation _TMUIBarButtonItemBlockTarget
+
+- (id)initWithBlock:(void (^)(id sender))block{
+    self = [super init];
+    if (self) {
+        _block = [block copy];
+    }
+    return self;
+}
+
+- (void)invoke:(id)sender {
+    if (self.block) self.block(sender);
+}
+
+@end
+
 
 @implementation UIBarButtonItem (TMUI)
 
@@ -86,4 +114,23 @@
 + (instancetype)tmui_itemWithIcon:(NSString *)icon disableIcon:(NSString *)disableIcon target:(id)target action:(SEL)action{
     return [[self alloc] tmui_initWithIcon:icon disableIcon:disableIcon target:target action:action];
 }
+
+
+//static const int block_key;
+
+- (void)setTmui_actionBlock:(void (^)(id sender))block {
+    _TMUIBarButtonItemBlockTarget *target = [[_TMUIBarButtonItemBlockTarget alloc] initWithBlock:block];
+    objc_setAssociatedObject(self, @selector(tmui_actionBlock), target, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    [self setTarget:target];
+    [self setAction:@selector(invoke:)];
+}
+
+- (void (^)(id))tmui_actionBlock {
+    _TMUIBarButtonItemBlockTarget *target = objc_getAssociatedObject(self, _cmd);
+    return target.block;
+}
+
+
 @end
+
