@@ -65,6 +65,9 @@ NSString *const TMDatePickerTitle = @"选择日期";
 - (void)loadContentPickerView {
     self.datePickerView = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, TMUI_SCREEN_WIDTH, 216)];
     self.datePickerView.datePickerMode = self.dateMode;
+    if (@available(iOS 13.4, *)) {
+        self.datePickerView.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
     self.contentView = self.datePickerView;
 }
 
