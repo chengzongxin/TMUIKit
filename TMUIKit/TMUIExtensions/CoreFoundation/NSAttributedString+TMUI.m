@@ -69,7 +69,7 @@
 }
 
 // 获取设置行间距的NSAttributedString的高度
--(CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh {
+- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh {
     CGFloat height = [self tmui_heightWithMaxWidth:w];
     if (height < ft.pointSize*2+lh) {
         height = ft.lineHeight;

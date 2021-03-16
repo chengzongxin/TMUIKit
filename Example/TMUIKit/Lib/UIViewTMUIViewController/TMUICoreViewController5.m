@@ -16,7 +16,7 @@
     return [TMUIHelper executeBlock:^{
         ExchangeImplementationsInTwoClasses(UIViewController.class, @selector(viewDidLoad),self.class, @selector(tm5_viewDidLoad));
         ExchangeImplementationsInTwoClasses(UIViewController.class, @selector(viewDidLoad),self.class, @selector(tm6_viewDidLoad));
-    } oncePerIdentifier:Str(self.class)];
+    } oncePerIdentifier:Str(self.class).a(@"swizzViewDidLoad")];
 }
 
 - (void)tm5_viewDidLoad{
@@ -103,10 +103,21 @@
     });
     
     id l8 = Label.str(@"\n用 block 重写某个 class 的指定方法:OverrideImplementation").styles(h2);
-    
+    id b2 = Button.styles(button).str(@"点击重写%@的viewDidLayoutSubviews方法",Str(self.class)).fixHeight(44).fnt(12).onClick(^{
+        BOOL isSuccess = [TMUIHelper executeBlock:^{
+            [TMToast toast:Str(@"方法重写成功")];
+            ExtendImplementationOfVoidMethodWithoutArguments(self.class, @selector(viewDidLayoutSubviews), ^(__kindof UIViewController * _Nonnull selfObject) {
+                Log(@"invoke viewDidLayoutSubviews");
+                
+            });
+        } oncePerIdentifier:Str(self.class).a(@"viewDidLayoutSubviews")];
+        
+        [TMToast toast:Str(@"方法重写%@！",isSuccess?@"成功":@"失败")];
+    });
+        
     id l9 = Label.str(@"\n判断Ivar 是哪种类型、获取Ivar的值").styles(h2);
     
-    VerStack(l1,l2,l3,l4,l5,l6,l7,b1,l8,l9,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
+    VerStack(l1,l2,l3,l4,l5,l6,l7,b1,l8,b2,l9,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
     
 }
 
