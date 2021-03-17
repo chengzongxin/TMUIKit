@@ -12,16 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UILabel (CUILink)
 
-@property (nonatomic, assign)   CGFloat nerLineGap;
-@property (nonatomic, strong)   CUILinkHandler nerLinkHandler;
-@property (nonatomic, readonly) NSLayoutManager *nerLayoutManager;
+@property (nonatomic, assign)   CGFloat cuiLineGap;
+@property (nonatomic, strong)   CUILinkHandler cuiLinkHandler;
+@property (nonatomic, readonly) NSLayoutManager *cuiLayoutManager;
 
 
 /**
  * Setting link selection style
  */
-@property (nonatomic, strong)   UIColor *nerLinkSelectedColor;
-@property (nonatomic, assign)   CGFloat nerLinkSelectedBorderRadius;
+@property (nonatomic, strong)   UIColor *cuiLinkSelectedColor;
+@property (nonatomic, assign)   CGFloat cuiLinkSelectedBorderRadius;
 
 + (void)setDefaultLinkSelectedBackgroundColor:(UIColor *)color borderRadius:(CGFloat)borderRadius;
 @end

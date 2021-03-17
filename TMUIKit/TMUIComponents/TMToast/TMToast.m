@@ -10,7 +10,6 @@
 #import <TMUICommonDefines.h>
 #import <TMUIKitDefines.h>
 #import <UIColor+TMUI.h>
-#import <TMUIExtensions.h>
 
 @interface TMToastView : UIView
 @property (nonatomic, strong)UIVisualEffectView *effectView;

@@ -9,6 +9,31 @@
 #import "TMUICoreViewController5.h"
 
 
+@implementation UIViewController (swizzViewDidLoad)
+
+
+- (BOOL)swizzViewDidLoad{
+    return [TMUIHelper executeBlock:^{
+        ExchangeImplementationsInTwoClasses(UIViewController.class, @selector(viewDidLoad),self.class, @selector(tm5_viewDidLoad));
+        ExchangeImplementationsInTwoClasses(UIViewController.class, @selector(viewDidLoad),self.class, @selector(tm6_viewDidLoad));
+    } oncePerIdentifier:Str(self.class).a(@"swizzViewDidLoad")];
+}
+
+- (void)tm5_viewDidLoad{
+    [self tm5_viewDidLoad];
+    
+    Log(@"执行交换方法tm5_viewDidLoad  current = %s",_cmd);
+}
+
+- (void)tm6_viewDidLoad{
+    [self tm6_viewDidLoad];
+    
+    Log(@"执行交换方法tm6_viewDidLoad  current = %s",_cmd);
+}
+
+@end
+
+
 @interface TMUICoreViewController5 ()
 
 @property (nonatomic, strong) NSString *czx;
@@ -32,8 +57,6 @@
     __block objc_property_t property_czx;
     // get prop 1
     [self tmui_enumratePropertiesUsingBlock:^(objc_property_t  _Nonnull property, NSString * _Nonnull propertyName) {
-        Log(property);
-        Log(propertyName);
         property_czx = [propertyName isEqualToString:@"czx"] ? property : property_czx;
     }];
     
@@ -72,13 +95,33 @@
     
     id l6 = Label.str(DebugStr(HasOverrideSuperclassMethod(self.class, @selector(viewWillAppear:)))).styles(body).fnt(11);
     
-    id l7 = Label.str(@"\n交换两个类的方法:ExchangeImplementations").styles(h2);
-    id l8 = Label.str(@"\n用 block 重写某个 class 的指定方法:OverrideImplementation").styles(h2);
+    id l7 = Label.str(@"\n交换两个类的方法:ExchangeImplementations(并且只交换一次)").styles(h2);
     
+    id b1 = Button.styles(button).str(@"点击交换viewDidLoad方法").fixWH(300,44).onClick(^{
+        BOOL isSuccess = [self swizzViewDidLoad];
+        [TMToast toast:Str(@"方法交换%@！",isSuccess?@"成功":@"失败")];
+    });
+    
+    id l8 = Label.str(@"\n用 block 重写某个 class 的指定方法:OverrideImplementation").styles(h2);
+    id b2 = Button.styles(button).str(@"点击重写%@的viewDidLayoutSubviews方法",Str(self.class)).fixHeight(44).fnt(12).onClick(^{
+        BOOL isSuccess = [TMUIHelper executeBlock:^{
+            [TMToast toast:Str(@"方法重写成功")];
+            ExtendImplementationOfVoidMethodWithoutArguments(self.class, @selector(viewDidLayoutSubviews), ^(__kindof UIViewController * _Nonnull selfObject) {
+                Log(@"invoke viewDidLayoutSubviews");
+                
+            });
+        } oncePerIdentifier:Str(self.class).a(@"viewDidLayoutSubviews")];
+        
+        [TMToast toast:Str(@"方法重写%@！",isSuccess?@"成功":@"失败")];
+    });
+        
     id l9 = Label.str(@"\n判断Ivar 是哪种类型、获取Ivar的值").styles(h2);
     
-    VerStack(l1,l2,l3,l4,l5,l6,l7,l8,l9,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
+    VerStack(l1,l2,l3,l4,l5,l6,l7,b1,l8,b2,l9,CUISpring).embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
     
 }
 
+
+
 @end
+

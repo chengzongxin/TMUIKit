@@ -67,11 +67,11 @@
 }
 
 - (CUIChainableUISliderFloatBlock)trackHeight {
-    CUI_FLOAT_BLOCK(self.nerTrackHeight = @(value));
+    CUI_FLOAT_BLOCK(self.cuiTrackHeight = @(value));
 }
 
 - (CUIChainableUISliderInsetsBlock)thumbInsets {
-    CUI_INSETS_BLOCK(self.nerThumbInsets = value);
+    CUI_INSETS_BLOCK(self.cuiThumbInsets = value);
 }
 
 - (CUIChainableUISliderCallbackBlock)onChange {

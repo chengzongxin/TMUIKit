@@ -1,13 +1,23 @@
 PODS:
   - LookinServer (1.0.0)
   - Masonry (1.1.0)
+  - OpenSSL-Universal (1.0.2.20):
+    - OpenSSL-Universal/Static (= 1.0.2.20)
+  - OpenSSL-Universal/Static (1.0.2.20)
   - ReactiveObjC (3.1.1)
   - TMUIKit (1.0.0):
     - Masonry (~> 1.1.0)
+    - TMUIKit/TMTools (= 1.0.0)
     - TMUIKit/TMUIComponents (= 1.0.0)
     - TMUIKit/TMUICore (= 1.0.0)
     - TMUIKit/TMUIExtensions (= 1.0.0)
     - TMUIKit/TMUIWidgets (= 1.0.0)
+  - TMUIKit/TMTools (1.0.0):
+    - Masonry (~> 1.1.0)
+    - TMUIKit/TMTools/TMRsaTool (= 1.0.0)
+  - TMUIKit/TMTools/TMRsaTool (1.0.0):
+    - Masonry (~> 1.1.0)
+    - OpenSSL-Universal (~> 1.0.2.20)
   - TMUIKit/TMUIComponents (1.0.0):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUIComponents/ChainUI (= 1.0.0)
@@ -123,13 +133,13 @@ PODS:
   - TMUIKit/TMUIExtensions (1.0.0):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUICore
-    - TMUIKit/TMUIExtensions/CoreFoundation (= 1.0.0)
+    - TMUIKit/TMUIExtensions/Foundation (= 1.0.0)
     - TMUIKit/TMUIExtensions/UIKit (= 1.0.0)
-  - TMUIKit/TMUIExtensions/CoreFoundation (1.0.0):
+  - TMUIKit/TMUIExtensions/Foundation (1.0.0):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUICore
-    - TMUIKit/TMUIExtensions/CoreFoundation/NSString (= 1.0.0)
-  - TMUIKit/TMUIExtensions/CoreFoundation/NSString (1.0.0):
+    - TMUIKit/TMUIExtensions/Foundation/NSString (= 1.0.0)
+  - TMUIKit/TMUIExtensions/Foundation/NSString (1.0.0):
     - Masonry (~> 1.1.0)
     - TMUIKit/TMUICore
   - TMUIKit/TMUIExtensions/UIKit (1.0.0):
@@ -174,6 +184,7 @@ SPEC REPOS:
   trunk:
     - LookinServer
     - Masonry
+    - OpenSSL-Universal
     - ReactiveObjC
 
 EXTERNAL SOURCES:
@@ -183,9 +194,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
-  TMUIKit: e0f49d2c533a6debc2a6726000566157c42b409d
+  TMUIKit: bfe48b5d16a5cc110c4174871a99312a456beb65
 
-PODFILE CHECKSUM: 3311888867740602f7e0ae2f500038e5f3a8a593
+PODFILE CHECKSUM: 1d0af1f55598e13486bb42fd1aa22091d55e4ba6
 
 COCOAPODS: 1.10.0

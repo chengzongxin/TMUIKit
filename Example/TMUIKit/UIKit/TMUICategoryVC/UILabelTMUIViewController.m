@@ -74,7 +74,7 @@
     [label tmui_setAttributesLineSingle];
     // 设置可交互文字
     NSDictionary *linkAttr = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(20),NSForegroundColorAttributeName:UIColor.orangeColor};
-    [label tmui_clickAttrTextWithStrings:@[@"春眠",@"啼鸟",@"风雨声",@"花落知多少"] attributes:linkAttr clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
+    [label tmui_clickAttrTextWithStrings:@[@"不觉",@"啼鸟",@"风雨声",@"花落知多少"] attributes:linkAttr clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
         [TMToast toast:[NSString stringWithFormat:@"你点击了%@",string]];
     }];
     label.tmui_enabledClickEffect = YES;
@@ -82,12 +82,17 @@
 
 
     // NSString 计算
-    CGSize size1 = [label.text tmui_sizeForFont:label.font
+    CGSize size1 = [label.text tmui_sizeForFont:UIFont(20)
                                           size:CGSizeMake(self.view.width - 40, HUGE)
                                     lineHeight:label.tmui_attributeTextLineHeight
                                           mode:label.lineBreakMode];
     // NSAttributionStirng 计算
     CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width - 40];
+    
+//    [self.view layoutIfNeeded];
+//    View.bgColor(Color(@"random,0.5")).addTo(self.view).makeCons(^{
+//        make.left.top.width.height.constants(label.left,label.top,size2.width,size2.height);
+//    });
     
     // label max
     CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
@@ -99,7 +104,7 @@
     _demo1lbl = label;
     
     
-    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸(字体按照最大字体20计算) = %@,富文本尺寸（自动计算） = %@,label尺寸（取max） = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
 }
 

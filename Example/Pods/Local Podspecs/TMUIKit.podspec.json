@@ -2,8 +2,8 @@
   "name": "TMUIKit",
   "version": "1.0.0",
   "summary": "TMUIKit 是个UI库，包含UI，组件，宏，库工具等。",
-  "description": "'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'",
   "homepage": "https://github.com/chengzongxin/TMUIKit",
+  "description": "'TMUIKit iOS 是一个致力于提高项目 UI 开发效率的组件库，为工程提供一些通用的UI基础库及功能组件库以及一些通用的工具库。\n旨在帮助快速高效的构建工程的基础设计元素，以及统一维护基础元素的版本兼容性处理，助于提高开发效率和项目质量。'",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -16,8 +16,9 @@
     "tag": "1.0.0"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "8.2"
   },
+  "requires_arc": true,
   "source_files": "TMUIKit/TMUIKit.h",
   "public_header_files": "TMUIKit/TMUIKit.h",
   "dependencies": {
@@ -62,12 +63,12 @@
           "source_files": "TMUIKit/TMUIExtensions/UIKit"
         },
         {
-          "name": "CoreFoundation",
-          "source_files": "TMUIKit/TMUIExtensions/CoreFoundation",
+          "name": "Foundation",
+          "source_files": "TMUIKit/TMUIExtensions/Foundation",
           "subspecs": [
             {
               "name": "NSString",
-              "source_files": "TMUIKit/TMUIExtensions/CoreFoundation/NSString"
+              "source_files": "TMUIKit/TMUIExtensions/Foundation/NSString"
             }
           ]
         }
@@ -244,6 +245,21 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "TMTools",
+      "subspecs": [
+        {
+          "name": "TMRsaTool",
+          "frameworks": "Foundation",
+          "dependencies": {
+            "OpenSSL-Universal": [
+              "~> 1.0.2.20"
+            ]
+          },
+          "source_files": "TMUIKit/TMTools/TMRsaTool/*.{h,m}"
         }
       ]
     }

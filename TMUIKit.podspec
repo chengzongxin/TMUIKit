@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-  'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
+  'TMUIKit iOS 是一个致力于提高项目 UI 开发效率的组件库，为工程提供一些通用的UI基础库及功能组件库以及一些通用的工具库。
+  旨在帮助快速高效的构建工程的基础设计元素，以及统一维护基础元素的版本兼容性处理，助于提高开发效率和项目质量。'
                        DESC
 
   s.homepage         = 'https://github.com/chengzongxin/TMUIKit'
@@ -28,7 +29,9 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+#  s.ios.deployment_target = '9.0'
+  s.platform     = :ios, "8.2"
+  s.requires_arc = true
   
   # s.resource_bundles = {
   #   'TMUIKit' => ['TMUIKit/Assets/*.png']
@@ -38,6 +41,7 @@ Pod::Spec.new do |s|
   #头文件~TMUIKit.h 在最外层
   s.source_files = 'TMUIKit/TMUIKit.h'
   s.public_header_files = 'TMUIKit/TMUIKit.h'
+  s.dependency "Masonry", "~> 1.1.0"
   
   #TMUICore 内部方法
   s.subspec 'TMUICore' do |ss|
@@ -78,11 +82,11 @@ Pod::Spec.new do |s|
     ss.subspec 'UIKit' do |sss|
       sss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
     end
-    ss.subspec 'CoreFoundation' do |sss|
-      sss.source_files = 'TMUIKit/TMUIExtensions/CoreFoundation'
+    ss.subspec 'Foundation' do |sss|
+      sss.source_files = 'TMUIKit/TMUIExtensions/Foundation'
       # NSString
       sss.subspec 'NSString' do |ssss|
-        ssss.source_files = 'TMUIKit/TMUIExtensions/CoreFoundation/NSString'
+        ssss.source_files = 'TMUIKit/TMUIExtensions/Foundation/NSString'
       end
     end
   end
@@ -215,7 +219,18 @@ Pod::Spec.new do |s|
           ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
         end
       end
+      
+      
   end
   
-  s.dependency "Masonry", "~> 1.1.0"
+  
+  #tools
+  s.subspec 'TMTools' do |ss|
+    ss.subspec 'TMRsaTool' do |sss|
+      sss.frameworks = 'Foundation'
+      sss.dependency 'OpenSSL-Universal', '~> 1.0.2.20' #openssl库的集成，涉及rsa加密功能, pod install 此库20多MB，下载稍慢，耐心等待一会即可
+      sss.source_files = 'TMUIKit/TMTools/TMRsaTool/*.{h,m}'
+    end
+  end
+  
 end

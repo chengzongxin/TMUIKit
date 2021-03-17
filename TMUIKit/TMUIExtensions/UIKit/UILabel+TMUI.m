@@ -11,7 +11,6 @@
 #import <Foundation/Foundation.h>
 #import "TMUICommonDefines.h"
 #import "NSAttributedString+TMUI.h"
-//#import "TMUIAssociatedObjectDefine.h"
 #import <TMUIAssociatedPropertyDefines.h>
 #import "UIView+TMUI.h"
 

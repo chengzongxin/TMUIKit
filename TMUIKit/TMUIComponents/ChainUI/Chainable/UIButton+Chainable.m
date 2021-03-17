@@ -88,12 +88,12 @@
 
 - (CUIChainableUIButtonFloatBlock)gap {
     CUI_FLOAT_BLOCK(
-                    self.nerGap = value;
+                    self.cuiGap = value;
                     CGFloat halfGap = value / 2;
                     [self setTitleEdgeInsets:UIEdgeInsetsMake(0, halfGap, 0, -halfGap)];
                     [self setImageEdgeInsets:UIEdgeInsetsMake(0, -halfGap, 0, halfGap)];
                     
-                    UIEdgeInsets insets = self.nerInsets;
+                    UIEdgeInsets insets = self.cuiInsets;
                     insets.left += halfGap;
                     insets.right += halfGap;
                     self.contentEdgeInsets = insets;
@@ -102,8 +102,8 @@
 
 - (CUIChainableUIButtonInsetsBlock)insets {
     CUI_INSETS_BLOCK(
-                     CGFloat halfGap = self.nerGap / 2;
-                     self.nerInsets = value;
+                     CGFloat halfGap = self.cuiGap / 2;
+                     self.cuiInsets = value;
                      
                      UIEdgeInsets insets = value;
                      insets.left += halfGap;

@@ -296,7 +296,7 @@ setterWithGetter(SEL getter) {
  *  @return YES,为空；NO,不为空
  */
 NS_INLINE BOOL
-k_IsBlankString(NSString *string){
+tmui_isNullString(NSString *string){
     if (string == nil) {
         return YES;
     }

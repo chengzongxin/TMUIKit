@@ -12,14 +12,14 @@
 
 @interface UIView (CUIConstraintPrivate)
 
-@property (nonatomic, readonly) NSHashTable *nerMadeConstraints;
+@property (nonatomic, readonly) NSHashTable *cuiMadeConstraints;
 
 @end
 
 
 @implementation UIView (CUIConstraintPrivate)
 
-- (NSHashTable *)nerMadeConstraints {
+- (NSHashTable *)cuiMadeConstraints {
     NSHashTable *constraints = objc_getAssociatedObject(self, _cmd);
     if (!constraints) {
         constraints = [NSHashTable weakObjectsHashTable];
@@ -29,7 +29,7 @@
 }
 
 - (NSLayoutConstraint *)cui_madeConstraintSimilarTo:(NSLayoutConstraint *)c2 {
-    for (NSLayoutConstraint *c1 in self.nerMadeConstraints) {
+    for (NSLayoutConstraint *c1 in self.cuiMadeConstraints) {
         if (c1.firstItem == c2.firstItem &&
             c1.secondItem == c2.secondItem &&
             c1.firstAttribute == c2.firstAttribute &&
@@ -44,13 +44,13 @@
 
 - (void)cui_addMadeConstraints:(NSArray *)constraints {
     for (NSLayoutConstraint *c in constraints) {
-        [self.nerMadeConstraints addObject:c];
+        [self.cuiMadeConstraints addObject:c];
     }
 }
 
 - (void)cui_removeAllMadeConstraints {
-    for (NSLayoutConstraint *c in self.nerMadeConstraints) { c.active = NO; }
-    [self.nerMadeConstraints removeAllObjects];
+    for (NSLayoutConstraint *c in self.cuiMadeConstraints) { c.active = NO; }
+    [self.cuiMadeConstraints removeAllObjects];
 }
 
 @end
@@ -249,7 +249,7 @@
 @interface CUIConstraintMaker ()
 
 @property (nonatomic, strong) UIView *firstItem;
-@property (nonatomic, strong) NSMutableArray *nerConstraints;
+@property (nonatomic, strong) NSMutableArray *cuiConstraints;
 
 @end
 
@@ -258,19 +258,19 @@
 
 
 - (void)makeConstraints:(id)null {
-    for (CUIConstraint *c in self.nerConstraints) {
+    for (CUIConstraint *c in self.cuiConstraints) {
         [c makeConstraints:nil];
     }
 }
 
 - (void)remakeConstraints:(id)null {
-    for (CUIConstraint *c in self.nerConstraints) {
+    for (CUIConstraint *c in self.cuiConstraints) {
         [c remakeConstraints:nil];
     }
 }
 
 - (void)updateConstraints:(id)null {
-    for (CUIConstraint *c in self.nerConstraints) {
+    for (CUIConstraint *c in self.cuiConstraints) {
         [c updateConstraints:nil];
     }
 }
@@ -278,14 +278,14 @@
 - (CUIConstraint *)makeCUIConstraintWithAttribute:(NSLayoutAttribute)attribute {
     CUIConstraint *c = [[CUIConstraint alloc] initWithFirstItem:self.firstItem];
     [c addLayoutAttribute:attribute];
-    [self.nerConstraints addObject:c];
+    [self.cuiConstraints addObject:c];
     return c;
 }
 
 - (instancetype)initWithFirstItem:(UIView *)firstItem {
     self = [super init];
     self.firstItem = firstItem;
-    self.nerConstraints = [NSMutableArray array];
+    self.cuiConstraints = [NSMutableArray array];
     return self;
 }
 
