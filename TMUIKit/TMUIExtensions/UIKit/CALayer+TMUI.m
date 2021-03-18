@@ -19,11 +19,111 @@
 @implementation CALayer (TMUI)
 
 TMUISynthesizeFloatProperty(tmui_speedBeforePause, setTmui_speedBeforePause)
+TMUISynthesizeCGFloatProperty(tmui_originCornerRadius, setTmui_originCornerRadius)
 
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        // 由于其他方法需要通过调用 tmuilayer_setCornerRadius: 来执行 swizzle 前的实现，所以这里暂时用 ExchangeImplementations
+        ExchangeImplementations([CALayer class], @selector(setCornerRadius:), @selector(tmuilayer_setCornerRadius:));
+        
+        ExtendImplementationOfNonVoidMethodWithoutArguments([CALayer class], @selector(init), CALayer *, ^CALayer *(CALayer *selfObject, CALayer *originReturnValue) {
+            selfObject.tmui_speedBeforePause = selfObject.speed;
+            selfObject.tmui_maskedCorners = TMUILayerAllCorner;
+            return originReturnValue;
+        });
+        
+        OverrideImplementation([CALayer class], @selector(setBounds:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(CALayer *selfObject, CGRect bounds) {
+                
+                // 对非法的 bounds，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
+                if (CGRectIsNaN(bounds)) {
+                    NSLog(@"CALayer (TMUI) %@ setBounds:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(bounds), [NSThread callStackSymbols]);
+                    if (TMUICMIActivated && !ShouldPrintTMUIWarnLogToConsole) {
+                        NSAssert(NO, @"CALayer setBounds: 出现 NaN");
+                    }
+                    if (!IS_DEBUG) {
+                        bounds = CGRectSafeValue(bounds);
+                    }
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGRect);
+                originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, bounds);
+            };
+        });
+        
+        OverrideImplementation([CALayer class], @selector(setPosition:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(CALayer *selfObject, CGPoint position) {
+                
+                // 对非法的 position，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
+                if (isnan(position.x) || isnan(position.y)) {
+                    NSLog(@"CALayer (TMUI) %@ setPosition:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGPoint(position), [NSThread callStackSymbols]);
+                    if (TMUICMIActivated && !ShouldPrintTMUIWarnLogToConsole) {
+                        NSAssert(NO, @"CALayer setPosition: 出现 NaN");
+                    }
+                    if (!IS_DEBUG) {
+                        position = CGPointMake(CGFloatSafeValue(position.x), CGFloatSafeValue(position.y));
+                    }
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGPoint);
+                originSelectorIMP = (void (*)(id, SEL, CGPoint))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, position);
+            };
+        });
+    });
+}
 
 - (BOOL)tmui_isRootLayerOfView {
     return [self.delegate isKindOfClass:[UIView class]] && ((UIView *)self.delegate).layer == self;
 }
+
+
+- (void)tmuilayer_setCornerRadius:(CGFloat)cornerRadius {
+    BOOL cornerRadiusChanged = flat(self.tmui_originCornerRadius) != flat(cornerRadius);// flat 处理，避免浮点精度问题
+    self.tmui_originCornerRadius = cornerRadius;
+    if (@available(iOS 11, *)) {
+        [self tmuilayer_setCornerRadius:cornerRadius];
+    } else {
+        if (self.tmui_maskedCorners && ![self hasFourCornerRadius]) {
+            [self tmuilayer_setCornerRadius:0];
+        } else {
+            [self tmuilayer_setCornerRadius:cornerRadius];
+        }
+        if (cornerRadiusChanged) {
+            // 需要刷新mask
+            if ([NSThread isMainThread]) {
+                [self setNeedsLayout];
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setNeedsLayout];
+                });
+            }
+        }
+    }
+    if (cornerRadiusChanged) {
+        // 需要刷新border
+        if ([self.delegate respondsToSelector:@selector(layoutSublayersOfLayer:)]) {
+            UIView *view = (UIView *)self.delegate;
+            if (view.tmui_borderPosition > 0 && view.tmui_borderWidth > 0) {
+                [view.tmui_borderLayer setNeedsLayout];// 直接调用 layer 的 setNeedsLayout，没有线程限制，如果通过 view 调用则需要在主线程才行
+            }
+        }
+    }
+}
+
+
+- (BOOL)hasFourCornerRadius {
+    return (self.tmui_maskedCorners & TMUILayerMinXMinYCorner) == TMUILayerMinXMinYCorner &&
+           (self.tmui_maskedCorners & TMUILayerMaxXMinYCorner) == TMUILayerMaxXMinYCorner &&
+           (self.tmui_maskedCorners & TMUILayerMinXMaxYCorner) == TMUILayerMinXMaxYCorner &&
+           (self.tmui_maskedCorners & TMUILayerMaxXMaxYCorner) == TMUILayerMaxXMaxYCorner;
+}
+
 
 static char kAssociatedObjectKey_pause;
 - (void)setTmui_pause:(BOOL)tmui_pause {
@@ -53,6 +153,44 @@ static char kAssociatedObjectKey_pause;
 - (void)tmui_sendSublayerToBack:(CALayer *)sublayer {
     [self insertSublayer:sublayer atIndex:0];
 }
+
+
+static char kAssociatedObjectKey_maskedCorners;
+- (void)setTmui_maskedCorners:(TMUICornerMask)tmui_maskedCorners {
+    BOOL maskedCornersChanged = tmui_maskedCorners != self.tmui_maskedCorners;
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_maskedCorners, @(tmui_maskedCorners), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (@available(iOS 11, *)) {
+        self.maskedCorners = (CACornerMask)tmui_maskedCorners;
+    } else {
+        if (tmui_maskedCorners && ![self hasFourCornerRadius]) {
+            [self tmuilayer_setCornerRadius:0];
+        }
+        if (maskedCornersChanged) {
+            // 需要刷新mask
+            if ([NSThread isMainThread]) {
+                [self setNeedsLayout];
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setNeedsLayout];
+                });
+            }
+        }
+    }
+    if (maskedCornersChanged) {
+        // 需要刷新border
+        if ([self.delegate respondsToSelector:@selector(layoutSublayersOfLayer:)]) {
+            UIView *view = (UIView *)self.delegate;
+            if (view.tmui_borderPosition > 0 && view.tmui_borderWidth > 0) {
+                [view.tmui_borderLayer setNeedsLayout];// 直接调用 layer 的 setNeedsLayout，没有线程限制，如果通过 view 调用则需要在主线程才行
+            }
+        }
+    }
+}
+
+- (TMUICornerMask)tmui_maskedCorners {
+    return [objc_getAssociatedObject(self, &kAssociatedObjectKey_maskedCorners) unsignedIntegerValue];
+}
+
 
 - (void)tmui_bringSublayerToFront:(CALayer *)sublayer {
     [self insertSublayer:sublayer atIndex:(unsigned)self.sublayers.count];

@@ -35,5 +35,8 @@
 #import "NSString+Attribute.h"
 #import "NSString+MD5.h"
 #import "NSString+Verify.h"
+#import "UITableView+TMUI.h"
+#import "UITableViewCell+TMUI.h"
+#import "UIView+TMUIBorder.h"
 
 #endif /* TMUIExtensions_h */

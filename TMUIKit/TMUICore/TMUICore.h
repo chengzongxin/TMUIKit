@@ -45,4 +45,15 @@
 #import "NSObject+TMUIMultipleDelegates.h"
 #endif
 
+#if __has_include("TMUIConfiguration.h")
+#import "TMUIConfiguration.h"
+#endif
+
+
+#if __has_include("TMUIConfigurationMacros.h")
+#import "TMUIConfigurationMacros.h"
+#endif
+
+
+
 #endif /* TMUICore_h */

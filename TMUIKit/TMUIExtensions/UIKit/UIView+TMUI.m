@@ -230,6 +230,51 @@ static char kAssociatedObjectKey_outsideEdge;
     self.frame = frame;
 }
 
+
+- (CGFloat)extendToTop {
+    return self.top;
+}
+
+- (void)setExtendToTop:(CGFloat)extendToTop {
+    self.height = self.bottom - extendToTop;
+    self.top = extendToTop;
+}
+
+- (CGFloat)extendToLeft {
+    return self.left;
+}
+
+- (void)setExtendToLeft:(CGFloat)extendToLeft {
+    self.width = self.right - extendToLeft;
+    self.left = extendToLeft;
+}
+
+- (CGFloat)extendToBottom {
+    return self.bottom;
+}
+
+- (void)setExtendToBottom:(CGFloat)extendToBottom {
+    self.height = extendToBottom - self.top;
+    self.bottom = extendToBottom;
+}
+
+- (CGFloat)extendToRight {
+    return self.right;
+}
+
+- (void)setExtendToRight:(CGFloat)extendToRight {
+    self.width = extendToRight - self.left;
+    self.right = extendToRight;
+}
+
+- (CGFloat)leftWhenCenterInSuperview {
+    return CGFloatGetCenter(CGRectGetWidth(self.superview.bounds), CGRectGetWidth(self.frame));
+}
+
+- (CGFloat)topWhenCenterInSuperview {
+    return CGFloatGetCenter(CGRectGetHeight(self.superview.bounds), CGRectGetHeight(self.frame));
+}
+
 @end
 
 @implementation UIView (TMUI_Coordinate)

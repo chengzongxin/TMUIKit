@@ -7,6 +7,8 @@
 #ifndef TMUIKit_h
 #define TMUIKit_h
 
+static NSString * const TMUI_VERSION = @"1.0.0";
+
 #import "TMUICore.h"
 #import "TMUIComponents.h"
 #import "TMUIExtensions.h"
