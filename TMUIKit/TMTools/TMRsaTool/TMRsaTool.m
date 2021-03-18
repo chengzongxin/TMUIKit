@@ -74,8 +74,8 @@ typedef NS_ENUM(NSInteger, RSA_PADDING_TYPE) {
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:&error];
     if ([jsonData length] > 0 && error == nil){
-        //[jsonData base64EncodedString];
-        NSString *ret = [jsonData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        //[jsonData base64EncodedString];末尾不需要自动添加换行符-对应系统base64方法options参数传0即可
+        NSString *ret = [jsonData base64EncodedStringWithOptions:0];
         return ret;
     }
     return nil;
@@ -131,8 +131,8 @@ typedef NS_ENUM(NSInteger, RSA_PADDING_TYPE) {
         free(encData);
         encData = NULL;
                 
-        //ret = [returnData base64EncodedString];
-        NSString *ret = [returnData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        //ret = [returnData base64EncodedString]; 末尾不需要自动添加换行符-对应系统base64方法options参数传0即可
+        NSString *ret = [returnData base64EncodedStringWithOptions:0];
         return ret;
     }
     
