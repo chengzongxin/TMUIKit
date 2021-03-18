@@ -17,7 +17,7 @@ extern NSString * _Nonnull const button;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TMUIConfiguration : NSObject
+@interface TMUIExampleConfiguration : NSObject
 
 SHARED_INSTANCE_FOR_HEADER
 

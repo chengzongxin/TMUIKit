@@ -6,7 +6,7 @@
 //  Copyright © 2021 chengzongxin. All rights reserved.
 //
 
-#import "TMUIConfiguration.h"
+#import "TMUIExampleConfiguration.h"
 
 
 NSString *const h1 = @"h1";
@@ -15,7 +15,7 @@ NSString *const h3 = @"h3";
 NSString *const body = @"body";
 NSString *const button = @"button";
 
-@interface TMUIConfiguration ()
+@interface TMUIExampleConfiguration ()
 // 强持有，避免样式被释放
 @property (nonatomic, strong) CUIStyle *h1;
 @property (nonatomic, strong) CUIStyle *h2;
@@ -25,7 +25,7 @@ NSString *const button = @"button";
 
 @end
 
-@implementation TMUIConfiguration
+@implementation TMUIExampleConfiguration
 
 SHARED_INSTANCE_FOR_CLASS
 

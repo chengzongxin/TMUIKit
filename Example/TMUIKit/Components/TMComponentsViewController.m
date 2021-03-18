@@ -9,6 +9,7 @@
 #import "TMComponentsViewController.h"
 #import "TMPageRootViewController.h"
 #import "ChainUIViewController.h"
+#import "TMUITableViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -32,6 +33,9 @@
                         }),
                     Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:ChainUIViewController.class];
+                        }),
+                    Row.str(@"TMUITableView").fnt(18).detailStr(@"多样式UITableView").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUITableViewController.class];
                         }),
                     ).title(@"TMUI Components")
             ).embedIn(self.view);

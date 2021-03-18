@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+TMUIBorder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,6 +57,25 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
 @property (assign, nonatomic) CGFloat   width;
 @property (assign, nonatomic) CGFloat   height;
 @property (assign, nonatomic) CGSize    size;
+
+
+/// 保持其他三个边缘的位置不变的情况下，将顶边缘拓展到某个指定的位置，注意高度会跟随变化。
+@property(nonatomic, assign) CGFloat extendToTop;
+
+/// 保持其他三个边缘的位置不变的情况下，将左边缘拓展到某个指定的位置，注意宽度会跟随变化。
+@property(nonatomic, assign) CGFloat extendToLeft;
+
+/// 保持其他三个边缘的位置不变的情况下，将底边缘拓展到某个指定的位置，注意高度会跟随变化。
+@property(nonatomic, assign) CGFloat extendToBottom;
+
+/// 保持其他三个边缘的位置不变的情况下，将右边缘拓展到某个指定的位置，注意宽度会跟随变化。
+@property(nonatomic, assign) CGFloat extendToRight;
+
+/// 获取当前 view 在 superview 内水平居中时的 left
+@property(nonatomic, assign, readonly) CGFloat leftWhenCenterInSuperview;
+
+/// 获取当前 view 在 superview 内垂直居中时的 top
+@property(nonatomic, assign, readonly) CGFloat topWhenCenterInSuperview;
 
 
 @end

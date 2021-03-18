@@ -10,6 +10,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+#define CGContextInspectSize(size) [TMUIHelper inspectContextSize:size]
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,13 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
     TMUIImageShapeNavClose              // 导航栏的关闭icon
 };
 
+typedef NS_OPTIONS(NSInteger, TMUIImageBorderPosition) {
+    TMUIImageBorderPositionAll      = 0,
+    TMUIImageBorderPositionTop      = 1 << 0,
+    TMUIImageBorderPositionLeft     = 1 << 1,
+    TMUIImageBorderPositionBottom   = 1 << 2,
+    TMUIImageBorderPositionRight    = 1 << 3,
+};
 
 /**扩展UIImage方法*/
 @interface UIImage (TMUI)
@@ -147,6 +155,56 @@ typedef NS_ENUM(NSInteger, TMUIImageShape) {
  *  @param tintColor 图片颜色
  */
 + (nullable UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size tintColor:(nullable UIColor *)tintColor;
+
+/**
+ *  创建一个指定大小和颜色的形状图片
+ *  @param shape 图片形状
+ *  @param size 图片大小
+ *  @param lineWidth 路径大小，不会影响最终size
+ *  @param tintColor 图片颜色
+ */
++ (nullable UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size lineWidth:(CGFloat)lineWidth tintColor:(nullable UIColor *)tintColor;
+
+
+/**
+ *  创建一个带边框路径，没有背景色的路径图片，border的路径为path
+ *
+ *  @param strokeColor  border的颜色
+ *  @param path         border的路径
+ *  @param addClip      是否要调path的addClip
+ *
+ *  @return 带border的UIImage
+ */
++ (nullable UIImage *)tmui_imageWithStrokeColor:(nullable UIColor *)strokeColor size:(CGSize)size path:(nullable UIBezierPath *)path addClip:(BOOL)addClip;
+
+/**
+ *  创建一个带边框路径，没有背景色的路径图片，border的路径为strokeColor、cornerRadius和lineWidth所创建的path
+ *
+ *  @param strokeColor  border的颜色
+ *  @param lineWidth    border的宽度
+ *  @param cornerRadius border的圆角
+ *
+ *  @return 带border的UIImage
+ */
++ (nullable UIImage *)tmui_imageWithStrokeColor:(nullable UIColor *)strokeColor size:(CGSize)size lineWidth:(CGFloat)lineWidth cornerRadius:(CGFloat)cornerRadius;
+
+/**
+ *  创建一个带边框路径，没有背景色的路径图片（可以是任意一条边，也可以是多条组合；只能创建矩形的border，不能添加圆角）
+ *
+ *  @param strokeColor        路径的颜色
+ *  @param size               图片的大小
+ *  @param lineWidth          路径的大小
+ *  @param borderPosition     图片的路径位置，上左下右
+ *
+ *  @return 带路径，没有背景色的UIImage
+ */
++ (nullable UIImage *)tmui_imageWithStrokeColor:(nullable UIColor *)strokeColor size:(CGSize)size lineWidth:(CGFloat)lineWidth borderPosition:(TMUIImageBorderPosition)borderPosition;
+/**
+ *  创建一个指定大小和颜色的形状图片
+ *  @param shape 图片形状
+ *  @param size 图片大小
+ *  @param tintColor 图片颜色
+ */
 
 #pragma mark - 截图
 

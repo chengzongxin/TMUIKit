@@ -60,5 +60,10 @@
 #import "ChainUI.h"
 #endif
 
+#if __has_include("TMUITableView.h")
+#import "TMUITableView.h"
+#endif
+
+
 
 #endif /* TMUIComponents_h */
