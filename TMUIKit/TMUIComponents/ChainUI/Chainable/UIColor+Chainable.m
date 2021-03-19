@@ -7,6 +7,8 @@
 
 #import "UIColor+Chainable.h"
 #import "CUIPrivates.h"
+
+
 @implementation UIColor (Chainable)
 
 - (CUIChainableUIColorFloatBlock)opacity {

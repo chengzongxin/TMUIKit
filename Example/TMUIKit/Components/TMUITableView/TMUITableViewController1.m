@@ -79,7 +79,7 @@
         cell.detailTextLabel.text = @"accessoryEdgeInsets, accessoryEdgeInsets, accessoryEdgeInsets, accessoryEdgeInsets, accessoryEdgeInsets, accessoryEdgeInsets";
         cell.accessoryEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 32);
     }
-    [cell updateCellAppearanceWithIndexPath:indexPath];
+//    [cell updateCellAppearanceWithIndexPath:indexPath];
     return cell;
 }
 

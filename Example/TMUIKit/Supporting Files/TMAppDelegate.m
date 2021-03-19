@@ -7,7 +7,7 @@
 //
 
 #import "TMAppDelegate.h"
-#import "TMUIConfiguration.h"
+#import "TMUIExampleConfiguration.h"
 @interface TMAppDelegate ()<UITextFieldDelegate,UIScrollViewDelegate>
 
 
@@ -28,8 +28,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    id t2 = [[TMUIConfiguration alloc] init];
-    id t1 = TMUIConfiguration.sharedInstance;
+    id t2 = [[TMUIExampleConfiguration alloc] init];
+    id t1 = TMUIExampleConfiguration.sharedInstance;
     Log(t1);
     Log(t2);
     
