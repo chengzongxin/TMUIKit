@@ -132,6 +132,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = UIColor.tmui_randomColor;
+    [self.tableView registerClass:TMUITableViewHeaderFooterView.class forHeaderFooterViewReuseIdentifier:@"headerViewID"];
     [self.view addSubview:self.tableView];
 }
 

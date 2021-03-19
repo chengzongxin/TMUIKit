@@ -41,7 +41,6 @@
              CUISpring)
     .embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
     
-    
 }
 
 @end

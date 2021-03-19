@@ -140,7 +140,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:segmentedControl.selectedSegmentIndex];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.backgroundColor = UIColor.tmui_randomColor;
+    self.tableView.backgroundColor = UIColorHexString(@"EEEEEE");
     [self.view addSubview:self.tableView];
 }
 

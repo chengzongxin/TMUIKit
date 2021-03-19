@@ -64,6 +64,7 @@
 		16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1519525F866A50087BF7F /* TMUICoreViewController3.m */; };
 		16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D1519B25F8980B0087BF7F /* GroupTVTool.m */; };
 		16D151A125F8A9BE0087BF7F /* snk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 16D151A025F8A9BE0087BF7F /* snk.jpg */; };
+		16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D41A79260438A300CC6A41 /* ChainUIViewController1.m */; };
 		16D89D7625F9E6D5004FD70F /* TMUICoreViewController6.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */; };
@@ -199,6 +200,8 @@
 		16D1519A25F8980B0087BF7F /* GroupTVTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupTVTool.h; sourceTree = "<group>"; };
 		16D1519B25F8980B0087BF7F /* GroupTVTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupTVTool.m; sourceTree = "<group>"; };
 		16D151A025F8A9BE0087BF7F /* snk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = snk.jpg; sourceTree = "<group>"; };
+		16D41A78260438A300CC6A41 /* ChainUIViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainUIViewController1.h; sourceTree = "<group>"; };
+		16D41A79260438A300CC6A41 /* ChainUIViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainUIViewController1.m; sourceTree = "<group>"; };
 		16D89D7425F9E6D5004FD70F /* TMUICoreViewController6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController6.h; sourceTree = "<group>"; };
 		16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController6.m; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
@@ -500,6 +503,8 @@
 				16E8FFF025EE2621005D8E4B /* AppStoreCell.m */,
 				16E8FFF125EE2622005D8E4B /* AppStoreViewController.h */,
 				16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */,
+				16D41A78260438A300CC6A41 /* ChainUIViewController1.h */,
+				16D41A79260438A300CC6A41 /* ChainUIViewController1.m */,
 			);
 			path = ChainUI;
 			sourceTree = "<group>";
@@ -909,6 +914,7 @@
 				3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */,
 				16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */,
 				16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */,
+				16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */,
 				16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

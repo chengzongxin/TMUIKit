@@ -29,7 +29,17 @@ NS_ASSUME_NONNULL_BEGIN
            Color(@"#F00,0.5"),
            Color(@"random,0.5")
  */
-#define Color(x)    [CUIUtils colorWithColorObject:x]
+//#define Color(x)    [CUIUtils colorWithColorObject:x]
+UIColor * CUIColorRepresentationOfValueOBJ(const char *type, const void *value);
+UIColor * CUIColorWithObject(id object);
+
+
+#define CUI_COLOR_VALUE_OBJ(x, ...)        ({ typeof(x) _ix_ = (x); CUIColorRepresentationOfValueOBJ(@encode(typeof(x)), &_ix_); })
+
+#define Color(...)         \
+({CUI_IS_INT(__VA_ARGS__)? \
+CUIColorWithObject((__bridge NSString *)CFSTR(#__VA_ARGS__)):\
+CUI_COLOR_VALUE_OBJ(__VA_ARGS__);})
 
 @interface UIColor (Chainable)
 

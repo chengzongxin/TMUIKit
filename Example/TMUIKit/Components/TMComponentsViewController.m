@@ -9,6 +9,7 @@
 #import "TMComponentsViewController.h"
 #import "TMPageRootViewController.h"
 #import "ChainUIViewController.h"
+#import "ChainUIViewController1.h"
 #import "TMUITableViewController.h"
 
 @interface TMComponentsViewController ()
@@ -31,13 +32,20 @@
                     Row.str(@"TMPageViewController").fnt(18).detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMPageRootViewController.class];
                         }),
-                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI").subtitleStyle.cellHeightAuto.onClick(^{
-                            [self push:ChainUIViewController.class];
-                        }),
+                    
                     Row.str(@"TMUITableView").fnt(18).detailStr(@"多样式UITableView").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUITableViewController.class];
                         }),
-                    ).title(@"TMUI Components")
+                    ).title(@"TMUI Components"),
+            Section(
+                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI功能Demo").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:ChainUIViewController.class];
+                        }),
+                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI常用方法").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:ChainUIViewController1.class];
+                        }),
+                    ).title(@"TMUI ChainUI"),
+            
             ).embedIn(self.view);
 }
 
