@@ -9,6 +9,12 @@
 #import "CUITypeConverter.h"
 NS_ASSUME_NONNULL_BEGIN
 
+UIColor * CUIColorRepresentationOfValueOBJ(const char *type, const void *value);
+UIColor * CUIColorWithObject(id object);
+
+
+#define CUI_COLOR_VALUE_OBJ(x, ...)        ({ typeof(x) _ix_ = (x); CUIColorRepresentationOfValueOBJ(@encode(typeof(x)), &_ix_); })
+
 @interface CUIUtils : NSObject
 
 + (UIColor *)colorWithColorObject:(id)object;

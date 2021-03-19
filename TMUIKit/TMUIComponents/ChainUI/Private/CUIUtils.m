@@ -10,9 +10,8 @@
 #import "CUIStyle.h"
 #import "CUIPrivates.h"
 
-@implementation CUIUtils
-
-+ (UIColor *)colorWithColorObject:(id)object {
+// INT类型，供Color宏使用
+UIColor * CUIColorWithObject(id object){
     if ([object isKindOfClass:[UIColor class]]) {
         return object;
         
@@ -59,9 +58,10 @@
             }
             
             if (isHex) {
-                int result = sscanf([object UTF8String], "%2x%2x%2x", &r, &g, &b);     //#FFFFFF
+                int a = 100;
+                int result = sscanf([object UTF8String], "%2x%2x%2x%2d", &r, &g, &b, &a);     //#FFFFFF
                 
-                if (result != 3) {
+                if (result != 3 ||  result != 4) {
                     result = sscanf([object UTF8String], "%1x%1x%1x", &r, &g, &b);     //#FFF
                     
                     //convert #FFF to #FFFFFF
@@ -70,6 +70,8 @@
                     }
                 }
                 isRGBColor = (result == 3);
+                
+                alpha = a / 100.0;
                 
             } else {
                 int result = sscanf([object UTF8String], "%d,%d,%d", &r, &g, &b);       //rgb
@@ -86,6 +88,18 @@
     }
     
     return nil;
+}
+
+// OBJ类型，供Color宏使用
+UIColor * CUIColorRepresentationOfValueOBJ(const char *type, const void *value){
+    id object = *(__strong id *)value;
+    return CUIColorWithObject(object);
+}
+
+@implementation CUIUtils
+
++ (UIColor *)colorWithColorObject:(id)object {
+    return CUIColorWithObject(object);
 }
 
 + (UIFont *)fontWithFontObject:(id)object {

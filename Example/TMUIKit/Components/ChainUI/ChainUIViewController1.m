@@ -17,18 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    Color([UIColor greenColor]); // UIExtendedSRGBColorSpace
-    Color(@"red,0.5");
-    Color(@"255,0,0,1");
-    Color(@"#F00,0.5");
-    Color(@"random,0.5");
-    Color(0xAABBCC);
-    
+    Color(0xFF990010);
     id l1 = Label.str(@"this is title").styles(h1);
     
     
     /*
+     Color(0x00FFFF50)
      Color([UIColor redColor]),
                Color(@"red"),
                Color(@"red,0.5"),
@@ -52,7 +46,9 @@
              Label.str(@"255,0,0,1").txtColor(Color(@"255,200,0,1")),
              Label.str(@"#F00,0.5").txtColor(Color(@"#A00,0.5")),
              Label.str(@"random,0.5").txtColor(Color(@"random,0.5")),
-             Label.str(@"0xFF00FF").txtColor(Color(0xFF00FF)),
+             Label.str(@"0x00FFFF").txtColor(Color(@"0x00FFFF")),
+             Label.str(@"0x00FFFF").txtColor(Color(0x00FFFF50)),
+             Label.str(@"0x00FFFF").txtColor(Color(0x00FFFF)),
              CUISpring)
     .embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
     
