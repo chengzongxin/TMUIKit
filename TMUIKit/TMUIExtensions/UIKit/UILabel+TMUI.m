@@ -85,6 +85,12 @@
     return CGSizeMake(MAX(size1.width, size2.width), MAX(size1.height, size2.height));
 }
 
+- (void)tmui_calculateHeightAfterSetAppearance {
+    self.text = @"测";
+    [self sizeToFit];
+    self.text = nil;
+}
+
 @end
 
 

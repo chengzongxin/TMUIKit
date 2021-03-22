@@ -24,6 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param width label占据屏幕宽度
 - (CGSize)tmui_sizeWithWidth:(CGFloat)width;
 
+/**
+ * 在UILabel的样式（如字体）设置完后，将label的text设置为一个测试字符，再调用sizeToFit，从而令label的高度适应字体
+ * @warning 会setText:，因此确保在配置完样式后、设置text之前调用
+ */
+- (void)tmui_calculateHeightAfterSetAppearance;
+
 @end
 
 @interface UILabel (TMUI_AttributeText)

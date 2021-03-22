@@ -8,9 +8,18 @@
 
 #import "TMUITableViewController4.h"
 
+
+
+@interface TMUITableViewInsetDebugPanelView : UIView
+
+- (void)renderWithTableView:(UITableView *)tableView;
+@end
+
+
 @interface TMUITableViewController4 ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic, strong) UISegmentedControl *segmentedTitleView;
 @property (nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) TMUITableViewInsetDebugPanelView *debugView;
 @end
 
 @implementation TMUITableViewController4
@@ -21,7 +30,26 @@
     [self setupNavigationItems];
     
     [self handleTableViewStyleChanged:0];
+    
+    self.debugView = [[TMUITableViewInsetDebugPanelView alloc] init];
+    [self.view addSubview:self.debugView];
 }
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    UIEdgeInsets margins = UIEdgeInsetsZero;
+    CGFloat debugViewWidth = fmin(self.view.width, [TMUIHelper screenSizeFor55Inch].width) - UIEdgeInsetsGetHorizontalValue(margins);
+    CGFloat debugViewHeight = 126;
+    CGFloat debugViewMinX = CGFloatGetCenter(self.view.width, debugViewWidth);
+    self.debugView.frame = CGRectMake(debugViewMinX, self.view.height - margins.bottom - debugViewHeight, debugViewWidth, debugViewHeight);
+}
+
+#pragma mark - <UIScrollViewDelegate>
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.debugView renderWithTableView:self.tableView];
+}
+
 
 
 #pragma mark - <UITableViewDataSource, UITableViewDelegate>
@@ -94,12 +122,7 @@
 - (void)handleButtonEvent:(UIView *)view {
     // 通过这个方法获取到点击的按钮所处的 sectionHeader，可兼容 sectionHeader 停靠在列表顶部的场景
     NSInteger sectionIndexForView = [self.tableView tmui_indexForSectionHeaderAtView:view];
-    [TMToast toast:@(sectionIndexForView).stringValue];
-//    if (sectionIndexForView != -1) {
-//        [QMUITips showWithText:[NSString stringWithFormat:@"点击了 section%@ 上的按钮", @(sectionIndexForView)] inView:self.view hideAfterDelay:1.2];
-//    } else {
-//        [QMUITips showError:@"无法定位被点击的按钮所处的 section" inView:self.view hideAfterDelay:1.2];
-//    }
+    [TMToast toast:Str(@"点击了第%d个section",sectionIndexForView)];
 }
 
 
@@ -147,6 +170,114 @@
     button.layer.cornerRadius = 4;
     button.highlightedBorderColor = [button.backgroundColor tmui_transitionToColor:UIColor.tmui_randomColor progress:.9];// 高亮时的边框颜色
     return button;
+}
+
+@end
+
+
+@interface TMUITableViewInsetDebugPanelView ()
+
+// 可视范围内的 sectionHeader 列表
+@property(nonatomic, strong) UILabel *visibleHeadersLabel;
+@property(nonatomic, strong) UILabel *visibleHeadersValue;
+
+// 当前 pinned 的那个 section 序号
+@property(nonatomic, strong) UILabel *pinnedHeaderLabel;
+@property(nonatomic, strong) UILabel *pinnedHeaderValue;
+
+// 某个指定的 section 的 pinned 状态
+@property(nonatomic, strong) UILabel *headerPinnedLabel;
+@property(nonatomic, strong) UILabel *headerPinnedValue;
+@end
+
+@implementation TMUITableViewInsetDebugPanelView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        self.userInteractionEnabled = NO;
+        self.backgroundColor = UIColorMakeWithRGBA(0, 0, 0, .7);
+        
+        self.visibleHeadersLabel = [self generateTitleLabel];
+        self.visibleHeadersLabel.text = @"可视的 sectionHeaders";
+        self.visibleHeadersValue = [self generateValueLabel];
+        
+        self.pinnedHeaderLabel = [self generateTitleLabel];
+        self.pinnedHeaderLabel.text = @"正在 pinned（悬浮）的 header";
+        self.pinnedHeaderValue = [self generateValueLabel];
+        
+        self.headerPinnedLabel = [self generateTitleLabel];
+        self.headerPinnedLabel.text = @"section0 和 section1 的 pinned";
+        self.headerPinnedValue = [self generateValueLabel];
+    }
+    return self;
+}
+
+- (UILabel *)generateTitleLabel {
+    UILabel *label = [[UILabel alloc] tmui_initWithFont:UIFontMake(12) textColor:UIColorWhite];
+    [label tmui_calculateHeightAfterSetAppearance];
+    [self addSubview:label];
+    return label;
+}
+
+- (UILabel *)generateValueLabel {
+    UILabel *label = [[UILabel alloc] tmui_initWithFont:UIFontMake(12) textColor:UIColorWhite];
+    label.textAlignment = NSTextAlignmentRight;
+    [label tmui_calculateHeightAfterSetAppearance];
+    [self addSubview:label];
+    return label;
+}
+
+- (void)renderWithTableView:(UITableView *)tableView {
+    self.visibleHeadersValue.text = [tableView.tmui_indexForVisibleSectionHeaders componentsJoinedByString:@", "];
+    
+    NSInteger indexOfPinnedSectionHeader = tableView.tmui_indexOfPinnedSectionHeader;
+    NSString *pinnedHeaderString = [NSString tmui_stringWithNSInteger:indexOfPinnedSectionHeader];
+    self.pinnedHeaderValue.text = pinnedHeaderString;
+    self.pinnedHeaderValue.textColor = indexOfPinnedSectionHeader == -1 ? UIColorRed : UIColorWhite;
+    
+    BOOL isSectionHeader0Pinned = [tableView tmui_isHeaderPinnedForSection:0];
+    BOOL isSectionHeader1Pinned = [tableView tmui_isHeaderPinnedForSection:1];
+    NSMutableAttributedString *headerPinnedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0: %@ | 1: %@", StringFromBOOL(isSectionHeader0Pinned), StringFromBOOL(isSectionHeader1Pinned)] attributes:@{NSFontAttributeName: self.pinnedHeaderValue.font, NSForegroundColorAttributeName: UIColorWhite}];
+    
+    NSRange range0 = isSectionHeader0Pinned ? NSMakeRange(3, 3) : NSMakeRange(3, 2);
+    NSRange range1 = isSectionHeader1Pinned ? NSMakeRange(headerPinnedString.length - 3, 3) : NSMakeRange(headerPinnedString.length - 2, 2);
+    [headerPinnedString addAttribute:NSForegroundColorAttributeName value:isSectionHeader0Pinned ? UIColorGreen : UIColorRed range:range0];
+    [headerPinnedString addAttribute:NSForegroundColorAttributeName value:isSectionHeader1Pinned ? UIColorGreen : UIColorRed range:range1];
+    self.headerPinnedValue.attributedText = headerPinnedString;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    UIEdgeInsets padding = UIEdgeInsetsConcat(UIEdgeInsetsMake(24, 24, 24, 24), self.tmui_safeAreaInsets);
+    NSArray<UILabel *> *leftLabels = @[self.visibleHeadersLabel, self.pinnedHeaderLabel, self.headerPinnedLabel];
+    NSArray<UILabel *> *rightLabels = @[self.visibleHeadersValue, self.pinnedHeaderValue, self.headerPinnedValue];
+    
+    CGFloat contentWidth = self.width - UIEdgeInsetsGetHorizontalValue(padding);
+    CGFloat labelHorizontalSpacing = 16;
+    CGFloat labelVerticalSpacing = 16;
+    CGFloat minY = padding.top;
+    
+    // 左边的 label
+    CGFloat leftLabelWidth = flat((contentWidth - labelHorizontalSpacing) * 3 / 5);
+    for (NSInteger i = 0; i < leftLabels.count; i++) {
+        UILabel *label = leftLabels[i];
+        label.frame = CGRectFlatMake(padding.left, minY, leftLabelWidth, label.height);
+        minY = label.bottom + labelVerticalSpacing;
+    }
+    
+    // 右边的 label
+    minY = padding.top;
+    CGFloat rightLabelMinX = leftLabels.firstObject.right + labelHorizontalSpacing;
+    CGFloat rightLabelWidth = flat(contentWidth - leftLabelWidth - labelHorizontalSpacing);
+    for (NSInteger i = 0; i < rightLabels.count; i++) {
+        UILabel *label = rightLabels[i];
+        label.frame = CGRectFlatMake(rightLabelMinX, minY, rightLabelWidth, label.height);
+        minY = label.bottom + labelVerticalSpacing;
+    }
+    
+    self.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:self.layer.cornerRadius].CGPath;
 }
 
 @end
