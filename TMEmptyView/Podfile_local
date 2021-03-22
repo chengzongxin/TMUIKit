@@ -1,0 +1,8 @@
+
+plugin 'cocoapods-imy-bin'
+use_binaries!
+
+#需要替换Podfile里面的组件才写到这里
+target 'TMEmptyView-Demo' do
+	pod 'TMEmptyView', '1.0.0'
+end

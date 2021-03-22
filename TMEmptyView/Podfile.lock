@@ -1,0 +1,44 @@
+PODS:
+  - Masonry (1.1.0)
+  - TBasicLib (0.8.67):
+    - TBasicLib/CommonConstant (= 0.8.67)
+    - TBasicLib/CommonDefine (= 0.8.67)
+    - TBasicLib/CommonInline (= 0.8.67)
+    - TBasicLib/CommonTool (= 0.8.67)
+  - TBasicLib/CommonConstant (0.8.67)
+  - TBasicLib/CommonDefine (0.8.67)
+  - TBasicLib/CommonInline (0.8.67)
+  - TBasicLib/CommonTool (0.8.67)
+  - TMEmptyView (1.0.0):
+    - Masonry (= 1.1.0)
+    - TBasicLib (= 0.8.67)
+    - TMEmptyView/Content (= 1.0.0)
+    - TMEmptyView/Resources (= 1.0.0)
+  - TMEmptyView/Content (1.0.0):
+    - Masonry (= 1.1.0)
+    - TBasicLib (= 0.8.67)
+  - TMEmptyView/Resources (1.0.0):
+    - Masonry (= 1.1.0)
+    - TBasicLib (= 0.8.67)
+
+DEPENDENCIES:
+  - TMEmptyView (from `TMEmptyView.podspec`)
+
+SPEC REPOS:
+  "git@repo.we.com:ios/tspecsrepo.git":
+    - TBasicLib
+  https://github.com/CocoaPods/Specs.git:
+    - Masonry
+
+EXTERNAL SOURCES:
+  TMEmptyView:
+    :path: TMEmptyView.podspec
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  TBasicLib: d18a686ee29aed5de5ce3468698f26f6ca289c65
+  TMEmptyView: d8efe3ede3171c0c17bd88ce6e000ebb1ab24e10
+
+PODFILE CHECKSUM: 1655396e8e661d72500f77a2828ce0c04f510bda
+
+COCOAPODS: 1.10.1
