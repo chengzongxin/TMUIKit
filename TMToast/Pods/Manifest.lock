@@ -1,0 +1,40 @@
+PODS:
+  - Masonry (1.1.0)
+  - TBasicLib (0.8.67):
+    - TBasicLib/CommonConstant (= 0.8.67)
+    - TBasicLib/CommonDefine (= 0.8.67)
+    - TBasicLib/CommonInline (= 0.8.67)
+    - TBasicLib/CommonTool (= 0.8.67)
+  - TBasicLib/CommonConstant (0.8.67)
+  - TBasicLib/CommonDefine (0.8.67)
+  - TBasicLib/CommonInline (0.8.67)
+  - TBasicLib/CommonTool (0.8.67)
+  - TMToast (1.0.0):
+    - Masonry (= 1.1.0)
+    - TBasicLib (= 0.8.67)
+    - TMToast/Resources (= 1.0.0)
+  - TMToast/Resources (1.0.0):
+    - Masonry (= 1.1.0)
+    - TBasicLib (= 0.8.67)
+
+DEPENDENCIES:
+  - TMToast (from `TMToast.podspec`)
+
+SPEC REPOS:
+  "git@repo.we.com:ios/tspecsrepo.git":
+    - TBasicLib
+  https://github.com/CocoaPods/Specs.git:
+    - Masonry
+
+EXTERNAL SOURCES:
+  TMToast:
+    :path: TMToast.podspec
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  TBasicLib: d18a686ee29aed5de5ce3468698f26f6ca289c65
+  TMToast: 813a68291370d7a5f3a8fdc148b5811a90fc627f
+
+PODFILE CHECKSUM: c0e65881e6b178e93af6ec757559aa5708f63d8c
+
+COCOAPODS: 1.10.1

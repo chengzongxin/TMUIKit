@@ -1,0 +1,39 @@
+{
+  "name": "TMToast",
+  "version": "1.0.0",
+  "summary": "实现toast弹出视图",
+  "description": "基于TMUIKit库抽离实现",
+  "homepage": "http://repo.we.com/tubroker/tmuikit",
+  "license": "MIT",
+  "authors": {
+    "jerry.jiang": "jerry.jiang@corp.to8to.com"
+  },
+  "source": {
+    "git": "http://repo.we.com/ios/tbtrepo.git",
+    "commit": "9cd963a9"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "TMToastAssets": [
+      "Pod/Assets/**"
+    ]
+  },
+  "dependencies": {
+    "Masonry": [
+      "1.1.0"
+    ],
+    "TBasicLib": [
+      "0.8.67"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Resources",
+      "source_files": "Pod/Assets/*.png"
+    }
+  ]
+}

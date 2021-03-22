@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A24146F26032ABD00E64E2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A24146E26032ABD00E64E2F /* AppDelegate.m */; };
+		0A24147226032ABD00E64E2F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A24147126032ABD00E64E2F /* ViewController.m */; };
+		0A24147526032ABD00E64E2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A24147326032ABD00E64E2F /* Main.storyboard */; };
+		0A24147726032ABF00E64E2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A24147626032ABF00E64E2F /* Assets.xcassets */; };
+		0A24147A26032ABF00E64E2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A24147826032ABF00E64E2F /* LaunchScreen.storyboard */; };
+		0A24147D26032ABF00E64E2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A24147C26032ABF00E64E2F /* main.m */; };
+		45121F0D6F146A114F82E8B0 /* libPods-TMToast-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 211DD4DC7B17CCCEA11E5AC8 /* libPods-TMToast-Demo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A24146A26032ABD00E64E2F /* TMToast-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMToast-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A24146D26032ABD00E64E2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0A24146E26032ABD00E64E2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0A24147026032ABD00E64E2F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		0A24147126032ABD00E64E2F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0A24147426032ABD00E64E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0A24147626032ABF00E64E2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0A24147926032ABF00E64E2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0A24147B26032ABF00E64E2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A24147C26032ABF00E64E2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		211DD4DC7B17CCCEA11E5AC8 /* libPods-TMToast-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TMToast-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24FB4E7BF4FAD94D8D29DFBA /* Pods-TMToast-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMToast-Demo.debug.xcconfig"; path = "Target Support Files/Pods-TMToast-Demo/Pods-TMToast-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		85516C69D448B19CD4B1A5B7 /* Pods-TMToast-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMToast-Demo.release.xcconfig"; path = "Target Support Files/Pods-TMToast-Demo/Pods-TMToast-Demo.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0A24146726032ABD00E64E2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45121F0D6F146A114F82E8B0 /* libPods-TMToast-Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A24146126032ABD00E64E2F = {
+			isa = PBXGroup;
+			children = (
+				0A24146C26032ABD00E64E2F /* TMToast-Demo */,
+				0A24146B26032ABD00E64E2F /* Products */,
+				CFAB2CDDC42CD2AEE5CFB235 /* Pods */,
+				31C2A62817A8BDE1299F8AFA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0A24146B26032ABD00E64E2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A24146A26032ABD00E64E2F /* TMToast-Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0A24146C26032ABD00E64E2F /* TMToast-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				0A24146D26032ABD00E64E2F /* AppDelegate.h */,
+				0A24146E26032ABD00E64E2F /* AppDelegate.m */,
+				0A24147026032ABD00E64E2F /* ViewController.h */,
+				0A24147126032ABD00E64E2F /* ViewController.m */,
+				0A24147326032ABD00E64E2F /* Main.storyboard */,
+				0A24147626032ABF00E64E2F /* Assets.xcassets */,
+				0A24147826032ABF00E64E2F /* LaunchScreen.storyboard */,
+				0A24147B26032ABF00E64E2F /* Info.plist */,
+				0A24147C26032ABF00E64E2F /* main.m */,
+			);
+			path = "TMToast-Demo";
+			sourceTree = "<group>";
+		};
+		31C2A62817A8BDE1299F8AFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				211DD4DC7B17CCCEA11E5AC8 /* libPods-TMToast-Demo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CFAB2CDDC42CD2AEE5CFB235 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				24FB4E7BF4FAD94D8D29DFBA /* Pods-TMToast-Demo.debug.xcconfig */,
+				85516C69D448B19CD4B1A5B7 /* Pods-TMToast-Demo.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0A24146926032ABD00E64E2F /* TMToast-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A24148026032ABF00E64E2F /* Build configuration list for PBXNativeTarget "TMToast-Demo" */;
+			buildPhases = (
+				DCE264AC42CA081DC67F6A37 /* [CP] Check Pods Manifest.lock */,
+				0A24146626032ABD00E64E2F /* Sources */,
+				0A24146726032ABD00E64E2F /* Frameworks */,
+				0A24146826032ABD00E64E2F /* Resources */,
+				09FEF54943005B1BB45ABD4C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TMToast-Demo";
+			productName = "TMToast-Demo";
+			productReference = 0A24146A26032ABD00E64E2F /* TMToast-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A24146226032ABD00E64E2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = to8to;
+				TargetAttributes = {
+					0A24146926032ABD00E64E2F = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 0A24146526032ABD00E64E2F /* Build configuration list for PBXProject "TMToast-Demo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0A24146126032ABD00E64E2F;
+			productRefGroup = 0A24146B26032ABD00E64E2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0A24146926032ABD00E64E2F /* TMToast-Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0A24146826032ABD00E64E2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A24147A26032ABF00E64E2F /* LaunchScreen.storyboard in Resources */,
+				0A24147726032ABF00E64E2F /* Assets.xcassets in Resources */,
+				0A24147526032ABD00E64E2F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		09FEF54943005B1BB45ABD4C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TMToast-Demo/Pods-TMToast-Demo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TMToast-Demo/Pods-TMToast-Demo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMToast-Demo/Pods-TMToast-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCE264AC42CA081DC67F6A37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TMToast-Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0A24146626032ABD00E64E2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A24147226032ABD00E64E2F /* ViewController.m in Sources */,
+				0A24147D26032ABF00E64E2F /* main.m in Sources */,
+				0A24146F26032ABD00E64E2F /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0A24147326032ABD00E64E2F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A24147426032ABD00E64E2F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0A24147826032ABF00E64E2F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A24147926032ABF00E64E2F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0A24147E26032ABF00E64E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0A24147F26032ABF00E64E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0A24148126032ABF00E64E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24FB4E7BF4FAD94D8D29DFBA /* Pods-TMToast-Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SM5GN8GTPY;
+				INFOPLIST_FILE = "TMToast-Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tubatu.TMToast-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0A24148226032ABF00E64E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85516C69D448B19CD4B1A5B7 /* Pods-TMToast-Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SM5GN8GTPY;
+				INFOPLIST_FILE = "TMToast-Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tubatu.TMToast-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A24146526032ABD00E64E2F /* Build configuration list for PBXProject "TMToast-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A24147E26032ABF00E64E2F /* Debug */,
+				0A24147F26032ABF00E64E2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A24148026032ABF00E64E2F /* Build configuration list for PBXNativeTarget "TMToast-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A24148126032ABF00E64E2F /* Debug */,
+				0A24148226032ABF00E64E2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0A24146226032ABD00E64E2F /* Project object */;
+}
