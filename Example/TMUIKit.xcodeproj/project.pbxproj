@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1602D6F4260ADD2B00B11DC6 /* TMUIAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1602D6F3260ADD2B00B11DC6 /* TMUIAlertViewController.m */; };
 		160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860AD25C01D5E00F31337 /* TMPageRootViewController.m */; };
 		160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B225C01D8100F31337 /* Table3ViewController.m */; };
 		160860BD25C01D8100F31337 /* Table2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B425C01D8100F31337 /* Table2ViewController.m */; };
@@ -113,6 +114,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1602D6F2260ADD2B00B11DC6 /* TMUIAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIAlertViewController.h; sourceTree = "<group>"; };
+		1602D6F3260ADD2B00B11DC6 /* TMUIAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIAlertViewController.m; sourceTree = "<group>"; };
 		160860AC25C01D5E00F31337 /* TMPageRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMPageRootViewController.h; sourceTree = "<group>"; };
 		160860AD25C01D5E00F31337 /* TMPageRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMPageRootViewController.m; sourceTree = "<group>"; };
 		160860B225C01D8100F31337 /* Table3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Table3ViewController.m; sourceTree = "<group>"; };
@@ -290,6 +293,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1602D6F1260ADCE900B11DC6 /* TMUIAlert */ = {
+			isa = PBXGroup;
+			children = (
+				1602D6F2260ADD2B00B11DC6 /* TMUIAlertViewController.h */,
+				1602D6F3260ADD2B00B11DC6 /* TMUIAlertViewController.m */,
+			);
+			path = TMUIAlert;
+			sourceTree = "<group>";
+		};
 		160860A625C01D1800F31337 /* TMPageViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +348,7 @@
 			children = (
 				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+				1602D6F1260ADCE900B11DC6 /* TMUIAlert */,
 				16E8FFE325EE25B2005D8E4B /* ChainUI */,
 				160860A625C01D1800F31337 /* TMPageViewController */,
 				16812AF82603224B00AECD14 /* TMUITableView */,
@@ -869,6 +882,7 @@
 				163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */,
 				160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */,
 				160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */,
+				1602D6F4260ADD2B00B11DC6 /* TMUIAlertViewController.m in Sources */,
 				16812BDD260357A600AECD14 /* TMUITableViewController3.m in Sources */,
 				160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */,
 				16F1BDD625F9A758000709CF /* TMUICoreViewController5.m in Sources */,
