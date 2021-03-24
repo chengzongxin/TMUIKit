@@ -473,3 +473,5 @@ CUI_ALL_VIEW_PROPS(CUIStaticTableView);
 #define onLink(x)       onLink(self, ({ id __self = self; __weak typeof(self) self = __self; self; x; }) )
 #define onChange(x)     onChange(self, ({ id __self = self; __weak typeof(self) self = __self; __self = self; x; }) )
 #define onFinish(x)     onFinish(self, ({ id __self = self; __weak typeof(self) self = __self; self; x; }) )
+
+#define SEL_STRING(x)      NSStringFromSelector(@selector(x))

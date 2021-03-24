@@ -11,6 +11,7 @@
 #import "ChainUIViewController.h"
 #import "ChainUIViewController1.h"
 #import "TMUITableViewController.h"
+#import "TMUIAlertViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -37,6 +38,11 @@
                             [self push:TMUITableViewController.class];
                         }),
                     ).title(@"TMUI Components"),
+            Section(
+                    Row.str(@"TMContentAlert").fnt(18).detailStr(@"TMContentAlert").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUIAlertViewController.class];
+                        }),
+                    ).title(@"TMUI Alert"),
             Section(
                     Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI功能Demo").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:ChainUIViewController.class];

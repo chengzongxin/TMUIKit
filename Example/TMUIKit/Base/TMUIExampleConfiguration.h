@@ -21,6 +21,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 SHARED_INSTANCE_FOR_HEADER
 
+@property (nonatomic, strong, readonly) CUIStyle *h1;
+@property (nonatomic, strong, readonly) CUIStyle *h2;
+@property (nonatomic, strong, readonly) CUIStyle *h3;
+@property (nonatomic, strong, readonly) CUIStyle *body;
+@property (nonatomic, strong, readonly) CUIStyle *button;
+
 @end
 
 NS_ASSUME_NONNULL_END
