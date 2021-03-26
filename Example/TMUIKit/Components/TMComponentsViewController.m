@@ -12,6 +12,8 @@
 #import "ChainUIViewController1.h"
 #import "TMUITableViewController.h"
 #import "TMUIAlertViewController.h"
+#import "TMPopoverViewController.h"
+#import "ChainStyleConfigViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -42,6 +44,9 @@
                     Row.str(@"TMContentAlert").fnt(18).detailStr(@"TMContentAlert").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUIAlertViewController.class];
                         }),
+                    Row.str(@"TMPopoverView").fnt(18).detailStr(@"弹窗popover view").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMPopoverViewController.class];
+                        }),
                     ).title(@"TMUI Alert"),
             Section(
                     Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI功能Demo").subtitleStyle.cellHeightAuto.onClick(^{
@@ -49,6 +54,9 @@
                         }),
                     Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI常用方法").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:ChainUIViewController1.class];
+                        }),
+                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式Style全局配置").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:ChainStyleConfigViewController.class];
                         }),
                     ).title(@"TMUI ChainUI"),
             
