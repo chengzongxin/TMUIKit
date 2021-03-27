@@ -12,6 +12,8 @@
 #import "TMUITableViewController3.h"
 #import "TMUITableViewController4.h"
 #import "TMUITableViewController5.h"
+#import "TMUITableViewController6.h"
+#import "TMUITableViewController7.h"
 
 @interface TMUITableViewController ()
 
@@ -46,6 +48,12 @@
                         }),
                     Row.str(@"TMUITableViewController5").fnt(18).detailStr(@"Inset Group 自适应高度").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUITableViewController5.class];
+                        }),
+                    Row.str(@"TMUITableViewController6").fnt(18).detailStr(@"缓存行高").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUITableViewController6.class];
+                        }),
+                    Row.str(@"TMUITableViewController7").fnt(18).detailStr(@"自定义cell 缓存行高 autolayout布局").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUITableViewController7.class];
                         }),
                     ).title(@"TableView Components")
             ).embedIn(self.view);
