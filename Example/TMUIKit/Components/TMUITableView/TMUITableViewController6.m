@@ -7,8 +7,6 @@
 //
 
 #import "TMUITableViewController6.h"
-#import "TMUICellHeightCache.h"
-#import "TMUIOrderedDictionary.h"
 
 static NSString * const kCellIdentifier = @"cell";
 

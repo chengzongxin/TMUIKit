@@ -7,7 +7,7 @@
 //
 
 #import "TMUICellHeightCache.h"
-//#import "TMUITableViewProtocols.h"
+#import "TMUITableViewProtocols.h"
 #import "TMUICore.h"
 #import "UIScrollView+TMUI.h"
 #import "UITableView+TMUI.h"

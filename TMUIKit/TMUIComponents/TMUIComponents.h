@@ -64,6 +64,15 @@
 #import "TMUITableView.h"
 #endif
 
+#if __has_include("TMUICellHeightCache.h")
+#import "TMUICellHeightCache.h"
+#endif
+
+#if __has_include("TMUIOrderedDictionary.h")
+#import "TMUIOrderedDictionary.h"
+#endif
+
+
 
 
 #endif /* TMUIComponents_h */

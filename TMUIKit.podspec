@@ -229,6 +229,11 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
       end
       
+      # TMUICellHeightCache
+      ss.subspec 'TMUICellHeightCache' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUICellHeightCache/*.{h,m}'
+      end
+      
       
   end
   
