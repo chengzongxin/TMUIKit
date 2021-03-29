@@ -47,8 +47,8 @@
     _v1 = v1;
     
     
-    self.v1.tmui_updatesIndicatorColor = UIColor.redColor;
-    self.v1.tmui_updatesIndicatorSize = CGSizeMake(5, 5);
+//    self.v1.tmui_updatesIndicatorColor = UIColor.redColor;
+//    self.v1.tmui_updatesIndicatorSize = CGSizeMake(5, 5);
     self.v1.tmui_shouldShowUpdatesIndicator = YES;
     
     
@@ -66,25 +66,25 @@
     _v2 = v2;
     
     
-    self.v2.tmui_badgeBackgroundColor = UIColor.redColor;
+//    self.v2.tmui_badgeBackgroundColor = UIColor.redColor;
     self.v2.tmui_badgeInteger = 5;
-    self.v2.tmui_badgeTextColor = UIColor.whiteColor;
+//    self.v2.tmui_badgeTextColor = UIColor.whiteColor;
 }
 
 - (void)barbuttonBadge{
     
     
     UIBarButtonItem *item1 = [UIBarButtonItem tmui_itemWithTitle:@"item" color:UIColor.tmui_randomColor font:Fnt(15) target:self action:@selector(clickRightItem:)];
-    item1.tmui_updatesIndicatorColor = UIColor.redColor;
-    item1.tmui_updatesIndicatorSize = CGSizeMake(5, 5);
-    item1.tmui_updatesIndicatorOffset = CGPointMake(0, 5);
+//    item1.tmui_updatesIndicatorColor = UIColor.redColor;
+//    item1.tmui_updatesIndicatorSize = CGSizeMake(5, 5);
+//    item1.tmui_updatesIndicatorOffset = CGPointMake(0, 5);
     self.navigationItem.rightBarButtonItem = item1;
     
     UIBarButtonItem *item2 = [UIBarButtonItem tmui_itemWithTitle:@"item" color:UIColor.tmui_randomColor font:Fnt(15) target:self action:@selector(clickRightItem:)];
-    item2.tmui_badgeBackgroundColor = UIColor.redColor;
-    item2.tmui_badgeOffset = CGPointMake(0, 12);
-    item2.tmui_badgeFont = Fnt(10);
-    item2.tmui_badgeTextColor = UIColor.whiteColor;
+//    item2.tmui_badgeBackgroundColor = UIColor.redColor;
+//    item2.tmui_badgeOffset = CGPointMake(0, 12);
+//    item2.tmui_badgeFont = Fnt(10);
+//    item2.tmui_badgeTextColor = UIColor.whiteColor;
     self.navigationItem.rightBarButtonItem = item2;
     
     item1.tmui_shouldShowUpdatesIndicator = YES;
@@ -122,15 +122,15 @@
     self.tabBar = [[UITabBar alloc] init];
     
     UITabBarItem *item1 = [self tabBarItemWithTitle:@"tmuiKit" image:[UIImageMake(@"icon_tabbar_uikit") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"icon_tabbar_uikit_selected") tag:0];
-    item1.tmui_updatesIndicatorSize = CGSizeMake(5, 5);
-    item1.tmui_updatesIndicatorColor = UIColor.redColor;
+//    item1.tmui_updatesIndicatorSize = CGSizeMake(5, 5);
+//    item1.tmui_updatesIndicatorColor = UIColor.redColor;
     item1.tmui_shouldShowUpdatesIndicator = YES;
     
     UITabBarItem *item2 = [self tabBarItemWithTitle:@"Components" image:[UIImageMake(@"icon_tabbar_component") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"icon_tabbar_component_selected") tag:1];
     item2.tmui_badgeString = @"99+";// 支持字符串
-    item2.tmui_badgeTextColor = UIColor.whiteColor;
-    item2.tmui_badgeBackgroundColor = UIColor.redColor;
-    item2.tmui_badgeFont = Fnt(10);
+//    item2.tmui_badgeTextColor = UIColor.whiteColor;
+//    item2.tmui_badgeBackgroundColor = UIColor.redColor;
+//    item2.tmui_badgeFont = Fnt(10);
     
     UITabBarItem *item3 = [self tabBarItemWithTitle:@"Lab" image:[UIImageMake(@"icon_tabbar_lab") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"icon_tabbar_lab_selected") tag:2];
     
