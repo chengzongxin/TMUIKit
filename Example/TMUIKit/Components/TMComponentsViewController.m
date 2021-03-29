@@ -14,6 +14,7 @@
 #import "TMUIAlertViewController.h"
 #import "TMPopoverViewController.h"
 #import "ChainStyleConfigViewController.h"
+#import "TMUIBadgeViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -38,6 +39,9 @@
                     
                     Row.str(@"TMUITableView").fnt(18).detailStr(@"多样式UITableView").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUITableViewController.class];
+                        }),
+                    Row.str(@"TMUIBadge").fnt(18).detailStr(@"一行代码添加badge").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUIBadgeViewController.class];
                         }),
                     ).title(@"TMUI Components"),
             Section(

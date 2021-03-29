@@ -73,6 +73,11 @@
 #endif
 
 
+// Bagde
+#import "TMUIBadgeProtocol.h"
+#import "UIBarItem+TMUIBadge.h"
+#import "UIView+TMUIBadge.h"
+
 
 
 #endif /* TMUIComponents_h */

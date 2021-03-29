@@ -234,6 +234,11 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUICellHeightCache/*.{h,m}'
       end
       
+      # TMUIBadge
+      ss.subspec 'TMUIBadge' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
+      end
+      
       
   end
   

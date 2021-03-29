@@ -74,6 +74,7 @@
 		16D151A125F8A9BE0087BF7F /* snk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 16D151A025F8A9BE0087BF7F /* snk.jpg */; };
 		16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D41A79260438A300CC6A41 /* ChainUIViewController1.m */; };
 		16D89D7625F9E6D5004FD70F /* TMUICoreViewController6.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */; };
+		16E4A57E261178E9005879A5 /* TMUIBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
@@ -227,6 +228,8 @@
 		16D41A79260438A300CC6A41 /* ChainUIViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainUIViewController1.m; sourceTree = "<group>"; };
 		16D89D7425F9E6D5004FD70F /* TMUICoreViewController6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController6.h; sourceTree = "<group>"; };
 		16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController6.m; sourceTree = "<group>"; };
+		16E4A57C261178E9005879A5 /* TMUIBadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIBadgeViewController.h; sourceTree = "<group>"; };
+		16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIBadgeViewController.m; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
 		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
 		16E82E7625F222EE00B8142E /* NSArrayTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSArrayTMUIViewController.h; sourceTree = "<group>"; };
@@ -384,6 +387,7 @@
 				16E8FFE325EE25B2005D8E4B /* ChainUI */,
 				160860A625C01D1800F31337 /* TMPageViewController */,
 				16812AF82603224B00AECD14 /* TMUITableView */,
+				16E4A57B261178CC005879A5 /* TMUIBadge */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -542,6 +546,15 @@
 				1699517C260F026100944BCA /* VC7Cell.xib */,
 			);
 			path = VC7Cell;
+			sourceTree = "<group>";
+		};
+		16E4A57B261178CC005879A5 /* TMUIBadge */ = {
+			isa = PBXGroup;
+			children = (
+				16E4A57C261178E9005879A5 /* TMUIBadgeViewController.h */,
+				16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */,
+			);
+			path = TMUIBadge;
 			sourceTree = "<group>";
 		};
 		16E82E6A25F222B100B8142E /* NSArray */ = {
@@ -944,6 +957,7 @@
 				3B806CC025CA75CC00B78CD1 /* TMFoundationViewController.m in Sources */,
 				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
 				16C389C125E5EEA3003E107D /* UIViewTMUI2ViewController.m in Sources */,
+				16E4A57E261178E9005879A5 /* TMUIBadgeViewController.m in Sources */,
 				16D89D7625F9E6D5004FD70F /* TMUICoreViewController6.m in Sources */,
 				16B540E625FB73320019808F /* CALayerTMUIViewController.m in Sources */,
 				16812BD6260351AC00AECD14 /* TMUITableViewController2.m in Sources */,
