@@ -28,6 +28,17 @@ static NSMutableDictionary *cui_styleDict = nil;
 
 - (void)setObjectValue:(id)value forKey:(NSString *)key {
     if (value && key) {
+        
+        NSDictionary *hasDict;
+        for (NSDictionary *dict in self.chainableProperties) {
+            if ([dict[@"key"] isEqualToString:key]) {
+                hasDict = dict;
+            }
+        }
+        if (hasDict) {
+            [self.chainableProperties removeObject:hasDict];
+        }
+        
         [self.chainableProperties addObject:@{@"key": key, @"value": value}];
     }
 }

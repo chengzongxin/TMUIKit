@@ -32,6 +32,9 @@
 		1611E2F625FA12DF003D4357 /* TMUISliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1611E2F525FA12DF003D4357 /* TMUISliderViewController.m */; };
 		1625BA4A25E63778005686D0 /* UIViewTMUI3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1625BA4925E63778005686D0 /* UIViewTMUI3ViewController.m */; };
 		163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */; };
+		16402B56260C1D1C00B4ADBF /* TMPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B55260C1D1C00B4ADBF /* TMPopoverViewController.m */; };
+		16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B5E260C1D4E00B4ADBF /* TMMyPopoverViewController.m */; };
+		16402B66260C28E300B4ADBF /* ChainStyleConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B65260C28E300B4ADBF /* ChainStyleConfigViewController.m */; };
 		16455E0A25B6EDEC00BBBEC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16455E0825B6EDEC00BBBEC2 /* Main.storyboard */; };
 		16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */; };
 		16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */; };
@@ -48,9 +51,14 @@
 		1687279D25F0C55700A05529 /* xueUIwang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1687279725F0C55700A05529 /* xueUIwang@3x.png */; };
 		16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */; };
 		1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */; };
+		16995175260F01D100944BCA /* TMUITableViewController7.m in Sources */ = {isa = PBXBuildFile; fileRef = 16995174260F01D100944BCA /* TMUITableViewController7.m */; };
+		1699517D260F026100944BCA /* VC7Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1699517B260F026100944BCA /* VC7Cell.m */; };
+		1699517E260F026100944BCA /* VC7Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1699517C260F026100944BCA /* VC7Cell.xib */; };
 		169EB2E925FCA2A4008E3F07 /* CAAnimationTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */; };
+		169FA7282611E39B00363F75 /* TDThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 169FA7272611E39B00363F75 /* TDThemeManager.m */; };
 		16B30B3F25FB014800785EDD /* TMUIExampleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B30B3E25FB014800785EDD /* TMUIExampleConfiguration.m */; };
 		16B540E625FB73320019808F /* CALayerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B540E525FB73320019808F /* CALayerTMUIViewController.m */; };
+		16BE3770260DEF2F0088D59D /* TMUITableViewController6.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE376F260DEF2F0088D59D /* TMUITableViewController6.m */; };
 		16C389C125E5EEA3003E107D /* UIViewTMUI2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C389C025E5EEA3003E107D /* UIViewTMUI2ViewController.m */; };
 		16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6506825BC02300047618E /* TMUILabelViewController.m */; };
 		16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C6507225BC02390047618E /* TMUITextFieldViewController.m */; };
@@ -67,6 +75,9 @@
 		16D151A125F8A9BE0087BF7F /* snk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 16D151A025F8A9BE0087BF7F /* snk.jpg */; };
 		16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D41A79260438A300CC6A41 /* ChainUIViewController1.m */; };
 		16D89D7625F9E6D5004FD70F /* TMUICoreViewController6.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */; };
+		16E4A57E261178E9005879A5 /* TMUIBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */; };
+		16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A6722611DE30005879A5 /* TMUIConfigurationTemplate.m */; };
+		16E4A6852611E137005879A5 /* TDCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A6842611E137005879A5 /* TDCommonUI.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
@@ -140,6 +151,12 @@
 		1625BA4925E63778005686D0 /* UIViewTMUI3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUI3ViewController.m; sourceTree = "<group>"; };
 		163444A825BA70910091D4EF /* UIButtonTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIButtonTMUIViewController.h; sourceTree = "<group>"; };
 		163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIButtonTMUIViewController.m; sourceTree = "<group>"; };
+		16402B54260C1D1C00B4ADBF /* TMPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMPopoverViewController.h; sourceTree = "<group>"; };
+		16402B55260C1D1C00B4ADBF /* TMPopoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMPopoverViewController.m; sourceTree = "<group>"; };
+		16402B5D260C1D4E00B4ADBF /* TMMyPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMMyPopoverViewController.h; sourceTree = "<group>"; };
+		16402B5E260C1D4E00B4ADBF /* TMMyPopoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMMyPopoverViewController.m; sourceTree = "<group>"; };
+		16402B64260C28E300B4ADBF /* ChainStyleConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChainStyleConfigViewController.h; sourceTree = "<group>"; };
+		16402B65260C28E300B4ADBF /* ChainStyleConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainStyleConfigViewController.m; sourceTree = "<group>"; };
 		16455E0925B6EDEC00BBBEC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16455E3C25B6F3E400BBBEC2 /* TMUIKitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIKitViewController.h; sourceTree = "<group>"; };
 		16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIKitViewController.m; sourceTree = "<group>"; };
@@ -170,12 +187,21 @@
 		16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIButtonViewController.m; sourceTree = "<group>"; };
 		1694602925B7DC870056AE74 /* UIViewTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUIViewController.h; sourceTree = "<group>"; };
 		1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUIViewController.m; sourceTree = "<group>"; };
+		16995173260F01D100944BCA /* TMUITableViewController7.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController7.h; sourceTree = "<group>"; };
+		16995174260F01D100944BCA /* TMUITableViewController7.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITableViewController7.m; sourceTree = "<group>"; };
+		1699517A260F026100944BCA /* VC7Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VC7Cell.h; sourceTree = "<group>"; };
+		1699517B260F026100944BCA /* VC7Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VC7Cell.m; sourceTree = "<group>"; };
+		1699517C260F026100944BCA /* VC7Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VC7Cell.xib; sourceTree = "<group>"; };
 		169EB2E725FCA2A4008E3F07 /* CAAnimationTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAAnimationTMUIViewController.h; sourceTree = "<group>"; };
 		169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAAnimationTMUIViewController.m; sourceTree = "<group>"; };
+		169FA7262611E39B00363F75 /* TDThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDThemeManager.h; sourceTree = "<group>"; };
+		169FA7272611E39B00363F75 /* TDThemeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDThemeManager.m; sourceTree = "<group>"; };
 		16B30B3D25FB014800785EDD /* TMUIExampleConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIExampleConfiguration.h; sourceTree = "<group>"; };
 		16B30B3E25FB014800785EDD /* TMUIExampleConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIExampleConfiguration.m; sourceTree = "<group>"; };
 		16B540E425FB73320019808F /* CALayerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CALayerTMUIViewController.h; sourceTree = "<group>"; };
 		16B540E525FB73320019808F /* CALayerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CALayerTMUIViewController.m; sourceTree = "<group>"; };
+		16BE376E260DEF2F0088D59D /* TMUITableViewController6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController6.h; sourceTree = "<group>"; };
+		16BE376F260DEF2F0088D59D /* TMUITableViewController6.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITableViewController6.m; sourceTree = "<group>"; };
 		16C389BF25E5EEA3003E107D /* UIViewTMUI2ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUI2ViewController.h; sourceTree = "<group>"; };
 		16C389C025E5EEA3003E107D /* UIViewTMUI2ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUI2ViewController.m; sourceTree = "<group>"; };
 		16C6506725BC02300047618E /* TMUILabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUILabelViewController.h; sourceTree = "<group>"; };
@@ -207,6 +233,13 @@
 		16D41A79260438A300CC6A41 /* ChainUIViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainUIViewController1.m; sourceTree = "<group>"; };
 		16D89D7425F9E6D5004FD70F /* TMUICoreViewController6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController6.h; sourceTree = "<group>"; };
 		16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController6.m; sourceTree = "<group>"; };
+		16E4A57C261178E9005879A5 /* TMUIBadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIBadgeViewController.h; sourceTree = "<group>"; };
+		16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIBadgeViewController.m; sourceTree = "<group>"; };
+		16E4A6712611DE30005879A5 /* TMUIConfigurationTemplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIConfigurationTemplate.h; sourceTree = "<group>"; };
+		16E4A6722611DE30005879A5 /* TMUIConfigurationTemplate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIConfigurationTemplate.m; sourceTree = "<group>"; };
+		16E4A67C2611E07E005879A5 /* TDThemeProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDThemeProtocol.h; sourceTree = "<group>"; };
+		16E4A6832611E137005879A5 /* TDCommonUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDCommonUI.h; sourceTree = "<group>"; };
+		16E4A6842611E137005879A5 /* TDCommonUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDCommonUI.m; sourceTree = "<group>"; };
 		16E8002625EE449F005D8E4B /* UIViewControllerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewControllerTMUIViewController.h; sourceTree = "<group>"; };
 		16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerTMUIViewController.m; sourceTree = "<group>"; };
 		16E82E7625F222EE00B8142E /* NSArrayTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSArrayTMUIViewController.h; sourceTree = "<group>"; };
@@ -343,15 +376,28 @@
 			path = CommonDefine;
 			sourceTree = "<group>";
 		};
+		16402B53260C1D0A00B4ADBF /* TMPopoverView */ = {
+			isa = PBXGroup;
+			children = (
+				16402B54260C1D1C00B4ADBF /* TMPopoverViewController.h */,
+				16402B55260C1D1C00B4ADBF /* TMPopoverViewController.m */,
+				16402B5D260C1D4E00B4ADBF /* TMMyPopoverViewController.h */,
+				16402B5E260C1D4E00B4ADBF /* TMMyPopoverViewController.m */,
+			);
+			path = TMPopoverView;
+			sourceTree = "<group>";
+		};
 		16455E3925B6F3C600BBBEC2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+				16402B53260C1D0A00B4ADBF /* TMPopoverView */,
 				1602D6F1260ADCE900B11DC6 /* TMUIAlert */,
 				16E8FFE325EE25B2005D8E4B /* ChainUI */,
 				160860A625C01D1800F31337 /* TMPageViewController */,
 				16812AF82603224B00AECD14 /* TMUITableView */,
+				16E4A57B261178CC005879A5 /* TMUIBadge */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -455,6 +501,11 @@
 				16812BE22603597F00AECD14 /* TMUITableViewController4.m */,
 				16812BE726035CE300AECD14 /* TMUITableViewController5.h */,
 				16812BE826035CE300AECD14 /* TMUITableViewController5.m */,
+				16BE376E260DEF2F0088D59D /* TMUITableViewController6.h */,
+				16BE376F260DEF2F0088D59D /* TMUITableViewController6.m */,
+				16995173260F01D100944BCA /* TMUITableViewController7.h */,
+				16995174260F01D100944BCA /* TMUITableViewController7.m */,
+				16995179260F023C00944BCA /* VC7Cell */,
 			);
 			path = TMUITableView;
 			sourceTree = "<group>";
@@ -497,6 +548,41 @@
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
 		};
+		16995179260F023C00944BCA /* VC7Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1699517A260F026100944BCA /* VC7Cell.h */,
+				1699517B260F026100944BCA /* VC7Cell.m */,
+				1699517C260F026100944BCA /* VC7Cell.xib */,
+			);
+			path = VC7Cell;
+			sourceTree = "<group>";
+		};
+		16E4A57B261178CC005879A5 /* TMUIBadge */ = {
+			isa = PBXGroup;
+			children = (
+				16E4A57C261178E9005879A5 /* TMUIBadgeViewController.h */,
+				16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */,
+			);
+			path = TMUIBadge;
+			sourceTree = "<group>";
+		};
+		16E4A6772611DEC8005879A5 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				16B30B3D25FB014800785EDD /* TMUIExampleConfiguration.h */,
+				16B30B3E25FB014800785EDD /* TMUIExampleConfiguration.m */,
+				16E4A6712611DE30005879A5 /* TMUIConfigurationTemplate.h */,
+				16E4A6722611DE30005879A5 /* TMUIConfigurationTemplate.m */,
+				16E4A67C2611E07E005879A5 /* TDThemeProtocol.h */,
+				16E4A6832611E137005879A5 /* TDCommonUI.h */,
+				16E4A6842611E137005879A5 /* TDCommonUI.m */,
+				169FA7262611E39B00363F75 /* TDThemeManager.h */,
+				169FA7272611E39B00363F75 /* TDThemeManager.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		16E82E6A25F222B100B8142E /* NSArray */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +604,8 @@
 				16E8FFEF25EE2621005D8E4B /* AppStoreViewController.m */,
 				16D41A78260438A300CC6A41 /* ChainUIViewController1.h */,
 				16D41A79260438A300CC6A41 /* ChainUIViewController1.m */,
+				16402B64260C28E300B4ADBF /* ChainStyleConfigViewController.h */,
+				16402B65260C28E300B4ADBF /* ChainStyleConfigViewController.m */,
 			);
 			path = ChainUI;
 			sourceTree = "<group>";
@@ -527,8 +615,6 @@
 			children = (
 				16EABFD925BA7BCD00A3273D /* TMBaseViewController.h */,
 				16EABFDA25BA7BCD00A3273D /* TMBaseViewController.m */,
-				16B30B3D25FB014800785EDD /* TMUIExampleConfiguration.h */,
-				16B30B3E25FB014800785EDD /* TMUIExampleConfiguration.m */,
 				16D1518825F852020087BF7F /* UIViewController+Base.h */,
 				16D1518925F852020087BF7F /* UIViewController+Base.m */,
 				16EABFE025BAAD7D00A3273D /* UISegmentedControl+associateObject.h */,
@@ -614,6 +700,7 @@
 				16455E3925B6F3C600BBBEC2 /* Components */,
 				16455E3A25B6F3C600BBBEC2 /* Lib */,
 				3B806CB725CA75BE00B78CD1 /* Foundation */,
+				16E4A6772611DEC8005879A5 /* Config */,
 				16EABFD825BA7BB200A3273D /* Base */,
 				16455E5825B6FBC000BBBEC2 /* Other */,
 				16455E4F25B6F51F00BBBEC2 /* Supporting Files */,
@@ -744,6 +831,7 @@
 				1687279D25F0C55700A05529 /* xueUIwang@3x.png in Resources */,
 				3B7BE7A925E5FD15001DA085 /* AttributeTextVC.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				1699517E260F026100944BCA /* VC7Cell.xib in Resources */,
 				16D151A125F8A9BE0087BF7F /* snk.jpg in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				16E8FFFA25EE281E005D8E4B /* appList.plist in Resources */,
@@ -894,14 +982,17 @@
 				3B806CC025CA75CC00B78CD1 /* TMFoundationViewController.m in Sources */,
 				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
 				16C389C125E5EEA3003E107D /* UIViewTMUI2ViewController.m in Sources */,
+				16E4A57E261178E9005879A5 /* TMUIBadgeViewController.m in Sources */,
 				16D89D7625F9E6D5004FD70F /* TMUICoreViewController6.m in Sources */,
 				16B540E625FB73320019808F /* CALayerTMUIViewController.m in Sources */,
 				16812BD6260351AC00AECD14 /* TMUITableViewController2.m in Sources */,
 				16D1517C25F8501F0087BF7F /* TMUICoreViewController1.m in Sources */,
 				16C6506925BC02300047618E /* TMUILabelViewController.m in Sources */,
 				16CDF22625EF6B0D00C02C98 /* UITextFieldTMUIViewController.m in Sources */,
+				169FA7282611E39B00363F75 /* TDThemeManager.m in Sources */,
 				1646639825F8C9A600B0125B /* TMUICoreViewController.m in Sources */,
 				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
+				16402B66260C28E300B4ADBF /* ChainStyleConfigViewController.m in Sources */,
 				3B806CC425CA75CC00B78CD1 /* VerifyViewController.m in Sources */,
 				16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
@@ -909,15 +1000,21 @@
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
 				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
+				16402B56260C1D1C00B4ADBF /* TMPopoverViewController.m in Sources */,
 				16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */,
+				16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */,
+				1699517D260F026100944BCA /* VC7Cell.m in Sources */,
+				16BE3770260DEF2F0088D59D /* TMUITableViewController6.m in Sources */,
 				1611E2F625FA12DF003D4357 /* TMUISliderViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16B30B3F25FB014800785EDD /* TMUIExampleConfiguration.m in Sources */,
 				169EB2E925FCA2A4008E3F07 /* CAAnimationTMUIViewController.m in Sources */,
 				164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */,
 				16CDF23725EF8E7B00C02C98 /* UIImageTMUIViewController2.m in Sources */,
+				16995175260F01D100944BCA /* TMUITableViewController7.m in Sources */,
 				16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */,
 				16812AFB2603225F00AECD14 /* TMUITableViewController.m in Sources */,
+				16E4A6852611E137005879A5 /* TDCommonUI.m in Sources */,
 				16D1518A25F852020087BF7F /* UIViewController+Base.m in Sources */,
 				16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */,
 				1625BA4A25E63778005686D0 /* UIViewTMUI3ViewController.m in Sources */,
@@ -926,6 +1023,7 @@
 				160860BF25C01D8100F31337 /* TableViewController.m in Sources */,
 				16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */,
 				3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */,
+				16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */,
 				16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */,
 				16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */,
 				16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */,

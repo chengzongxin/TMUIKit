@@ -64,6 +64,24 @@
 #import "TMUITableView.h"
 #endif
 
+#if __has_include("TMUICellHeightCache.h")
+#import "TMUICellHeightCache.h"
+#endif
+
+#if __has_include("TMUIOrderedDictionary.h")
+#import "TMUIOrderedDictionary.h"
+#endif
+
+#if __has_include("NSObject+TMUIMultipleDelegates.h")
+#import "NSObject+TMUIMultipleDelegates.h"
+#endif
+
+
+// Bagde
+#import "TMUIBadgeProtocol.h"
+#import "UIBarItem+TMUIBadge.h"
+#import "UIView+TMUIBadge.h"
+
 
 
 #endif /* TMUIComponents_h */

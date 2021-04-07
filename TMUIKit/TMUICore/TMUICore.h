@@ -41,10 +41,6 @@
 #endif
 
 
-#if __has_include("NSObject+TMUIMultipleDelegates.h")
-#import "NSObject+TMUIMultipleDelegates.h"
-#endif
-
 #if __has_include("TMUIConfiguration.h")
 #import "TMUIConfiguration.h"
 #endif

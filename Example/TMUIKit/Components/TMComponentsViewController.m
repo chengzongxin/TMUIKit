@@ -12,6 +12,10 @@
 #import "ChainUIViewController1.h"
 #import "TMUITableViewController.h"
 #import "TMUIAlertViewController.h"
+#import "TMPopoverViewController.h"
+#import "ChainStyleConfigViewController.h"
+#import "TMUIBadgeViewController.h"
+#import "TMUICoreViewController6.h"
 
 @interface TMComponentsViewController ()
 
@@ -37,10 +41,19 @@
                     Row.str(@"TMUITableView").fnt(18).detailStr(@"多样式UITableView").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUITableViewController.class];
                         }),
+                    Row.str(@"TMUIBadge").fnt(18).detailStr(@"一行代码添加badge").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUIBadgeViewController.class];
+                        }),
+                    Row.str(@"TMUIMultipleDelegates").fnt(18).detailStr(@"让对象支持多个delegate、支持自定义的delegate").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUICoreViewController6.class];
+                        }),
                     ).title(@"TMUI Components"),
             Section(
                     Row.str(@"TMContentAlert").fnt(18).detailStr(@"TMContentAlert").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUIAlertViewController.class];
+                        }),
+                    Row.str(@"TMPopoverView").fnt(18).detailStr(@"弹窗popover view").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMPopoverViewController.class];
                         }),
                     ).title(@"TMUI Alert"),
             Section(
@@ -49,6 +62,9 @@
                         }),
                     Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI常用方法").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:ChainUIViewController1.class];
+                        }),
+                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式Style全局配置").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:ChainStyleConfigViewController.class];
                         }),
                     ).title(@"TMUI ChainUI"),
             

@@ -38,6 +38,15 @@
 
 @implementation UIBarButtonItem (TMUI)
 
+- (instancetype)tmui_initWithTitle:(NSString *)title target:(id)target action:(SEL)action{
+    return [self tmui_initWithTitle:title color:UIColor.blackColor font:[UIFont systemFontOfSize:16] target:target action:action];
+}
+
++ (instancetype)tmui_itemWithTitle:(NSString *)title target:(id)target action:(SEL)action{
+    return [[self alloc] tmui_initWithTitle:title target:target action:action];
+}
+
+
 - (instancetype)tmui_initWithIcon:(NSString *)icon highlightedIcon:(NSString *)highlighted target:(id)target action:(SEL)action{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *img = [UIImage imageNamed:icon];
@@ -115,6 +124,15 @@
     return [[self alloc] tmui_initWithIcon:icon disableIcon:disableIcon target:target action:action];
 }
 
++ (instancetype)tmui_fixedSpaceItemWithWidth:(CGFloat)width {
+    UIBarButtonItem *item = [[self alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
+    item.width = width;
+    return item;
+}
+
++ (instancetype)tmui_flexibleSpaceItem {
+    return [[self alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+}
 
 //static const int block_key;
 

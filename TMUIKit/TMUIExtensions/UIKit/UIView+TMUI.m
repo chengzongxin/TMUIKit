@@ -1029,7 +1029,7 @@ TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootVi
                                                [UIPickerView class],
                                                [UIVisualEffectView class],
                                                // Apple 不再接受使用了 UIWebView 的 App 提交，所以这里去掉 UIWebView
-                                               // https://github.com/Tencent/QMUI_iOS/issues/741
+                                               // https://github.com/Tencent/TMUI_iOS/issues/741
 //                                               [UIWebView class],
                                                [UIWindow class],
                                                [UINavigationBar class],
@@ -1050,3 +1050,96 @@ TMUISynthesizeBOOLProperty(tmui_isControllerRootView, setTmui_isControllerRootVi
 }
 
 @end
+
+
+
+@implementation UIView (TMUI_Debug)
+
+TMUISynthesizeBOOLProperty(tmui_needsDifferentDebugColor, setTmui_needsDifferentDebugColor)
+TMUISynthesizeBOOLProperty(tmui_hasDebugColor, setTmui_hasDebugColor)
+
+static char kAssociatedObjectKey_shouldShowDebugColor;
+- (void)setTmui_shouldShowDebugColor:(BOOL)tmui_shouldShowDebugColor {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_shouldShowDebugColor, @(tmui_shouldShowDebugColor), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (tmui_shouldShowDebugColor) {
+        [TMUIHelper executeBlock:^{
+            ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(layoutSubviews), ^(UIView *selfObject) {
+                if (selfObject.tmui_shouldShowDebugColor) {
+                    selfObject.tmui_hasDebugColor = YES;
+                    selfObject.backgroundColor = [selfObject debugColor];
+                    [selfObject renderColorWithSubviews:selfObject.subviews];
+                }
+            });
+        } oncePerIdentifier:@"UIView (TMUIDebug) shouldShowDebugColor"];
+        
+        [self setNeedsLayout];
+    }
+}
+- (BOOL)tmui_shouldShowDebugColor {
+    BOOL flag = [objc_getAssociatedObject(self, &kAssociatedObjectKey_shouldShowDebugColor) boolValue];
+    return flag;
+}
+
+static char kAssociatedObjectKey_layoutSubviewsBlock;
+- (void)setTmui_layoutSubviewsBlock:(void (^)(__kindof UIView * _Nonnull))tmui_layoutSubviewsBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock, tmui_layoutSubviewsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    Class viewClass = self.class;
+    [TMUIHelper executeBlock:^{
+        ExtendImplementationOfVoidMethodWithoutArguments(viewClass, @selector(layoutSubviews), ^(__kindof UIView *selfObject) {
+            if (selfObject.tmui_layoutSubviewsBlock && [selfObject isMemberOfClass:viewClass]) {
+                selfObject.tmui_layoutSubviewsBlock(selfObject);
+            }
+        });
+    } oncePerIdentifier:[NSString stringWithFormat:@"UIView %@-%@", NSStringFromClass(viewClass), NSStringFromSelector(@selector(layoutSubviews))]];
+}
+
+- (void (^)(UIView * _Nonnull))tmui_layoutSubviewsBlock {
+    return objc_getAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock);
+}
+
+static char kAssociatedObjectKey_sizeThatFitsBlock;
+- (void)setTmui_sizeThatFitsBlock:(CGSize (^)(__kindof UIView * _Nonnull, CGSize, CGSize))tmui_sizeThatFitsBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_sizeThatFitsBlock, tmui_sizeThatFitsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    
+    if (!tmui_sizeThatFitsBlock) return;
+    
+    // Extend 每个实例对象的类是为了保证比子类的 sizeThatFits 逻辑要更晚调用
+    Class viewClass = self.class;
+    [TMUIHelper executeBlock:^{
+        ExtendImplementationOfNonVoidMethodWithSingleArgument(viewClass, @selector(sizeThatFits:), CGSize, CGSize, ^CGSize(UIView *selfObject, CGSize firstArgv, CGSize originReturnValue) {
+            if (selfObject.tmui_sizeThatFitsBlock && [selfObject isMemberOfClass:viewClass]) {
+                originReturnValue = selfObject.tmui_sizeThatFitsBlock(selfObject, firstArgv, originReturnValue);
+            }
+            return originReturnValue;
+        });
+    } oncePerIdentifier:[NSString stringWithFormat:@"UIView %@-%@", NSStringFromClass(viewClass), NSStringFromSelector(@selector(sizeThatFits:))]];
+}
+
+- (CGSize (^)(__kindof UIView * _Nonnull, CGSize, CGSize))tmui_sizeThatFitsBlock {
+    return objc_getAssociatedObject(self, &kAssociatedObjectKey_sizeThatFitsBlock);
+}
+
+- (void)renderColorWithSubviews:(NSArray *)subviews {
+    for (UIView *view in subviews) {
+        if ([view isKindOfClass:[UIStackView class]]) {
+            UIStackView *stackView = (UIStackView *)view;
+            [self renderColorWithSubviews:stackView.arrangedSubviews];
+        }
+        view.tmui_hasDebugColor = YES;
+        view.tmui_shouldShowDebugColor = self.tmui_shouldShowDebugColor;
+        view.tmui_needsDifferentDebugColor = self.tmui_needsDifferentDebugColor;
+        view.backgroundColor = [self debugColor];
+    }
+}
+
+- (UIColor *)debugColor {
+    if (!self.tmui_needsDifferentDebugColor) {
+        return UIColor.redColor;
+    } else {
+        return [[UIColor tmui_randomColor] colorWithAlphaComponent:.3];
+    }
+}
+
+@end
+
+
