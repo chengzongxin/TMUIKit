@@ -9,7 +9,7 @@
 #import "NSString+TMUI.h"
 #import "TMUICommonDefines.h"
 #import "UITextView+TMUI.h"
-#import "TMUICore.h"
+#import "TMUIComponents.h"
 
 /// 系统 textView 默认的字号大小，用于 placeholder 默认的文字大小。实测得到，请勿修改。
 const CGFloat kSystemTextViewDefaultFontPointSize = 12.0f;

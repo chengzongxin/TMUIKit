@@ -72,6 +72,10 @@
 #import "TMUIOrderedDictionary.h"
 #endif
 
+#if __has_include("NSObject+TMUIMultipleDelegates.h")
+#import "NSObject+TMUIMultipleDelegates.h"
+#endif
+
 
 // Bagde
 #import "TMUIBadgeProtocol.h"

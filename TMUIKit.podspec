@@ -54,10 +54,6 @@ Pod::Spec.new do |s|
     ss.public_header_files = 'TMUIKit/TMUICore/*.h'
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-    # TMUITextField
-    ss.subspec 'TMUIMultipleDelegates' do |sss|
-      sss.source_files = 'TMUIKit/TMUICore/TMUIMultipleDelegates'
-    end
   end
   
 #  #TMUIDefines 宏定义
@@ -132,6 +128,11 @@ Pod::Spec.new do |s|
 #      ss.dependency 'TMUIKit/TMUIDefines'
       ss.dependency 'TMUIKit/TMUIExtensions'
       ss.source_files = 'TMUIKit/TMUIComponents/TMUIComponents.h'
+      
+      # TMUIMultipleDelegates
+      ss.subspec 'TMUIMultipleDelegates' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIMultipleDelegates/*.{h,m}'
+      end
       
       ss.subspec 'TMContentAlert' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMContentAlert/*.{h,m}'

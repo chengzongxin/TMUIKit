@@ -15,6 +15,7 @@
 #import "TMPopoverViewController.h"
 #import "ChainStyleConfigViewController.h"
 #import "TMUIBadgeViewController.h"
+#import "TMUICoreViewController6.h"
 
 @interface TMComponentsViewController ()
 
@@ -42,6 +43,9 @@
                         }),
                     Row.str(@"TMUIBadge").fnt(18).detailStr(@"一行代码添加badge").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUIBadgeViewController.class];
+                        }),
+                    Row.str(@"TMUIMultipleDelegates").fnt(18).detailStr(@"让对象支持多个delegate、支持自定义的delegate").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMUICoreViewController6.class];
                         }),
                     ).title(@"TMUI Components"),
             Section(
