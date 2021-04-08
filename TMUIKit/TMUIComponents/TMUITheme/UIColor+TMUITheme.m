@@ -46,7 +46,7 @@
                 }
             }];
             if (unrecognizedSelectors.count > 0) {
-//                TMUILogWarn(NSStringFromClass(self), @"%@ 还需要实现以下方法：%@", NSStringFromClass(self), unrecognizedSelectors);
+                NSLog(@"%@ 还需要实现以下方法：%@", NSStringFromClass(self), unrecognizedSelectors);
             }
         }
 #endif

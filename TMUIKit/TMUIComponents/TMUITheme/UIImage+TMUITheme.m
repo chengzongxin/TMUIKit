@@ -117,7 +117,7 @@ static IMP tmui_getMsgForwardIMP(NSObject *self, SEL selector) {
     // 在 dealloc 的时候 UIImage 会调用 _isNamed 是用于判断 image 对象是否由 [UIImage imageNamed:] 创建的，并根据这个结果决定是否缓存 image，但是 TMUIThemeImage 仅仅是一个容器，真正的缓存工作会在 tmui_rawImage 的 dealloc 执行，所以可以忽略这个方法的调用
     NSArray *ignoreSelectorNames = @[@"_isNamed"];
     if (![ignoreSelectorNames containsObject:NSStringFromSelector(aSelector)]) {
-//        TMUILogWarn(@"UIImage+TMUITheme", @"TMUIThemeImage 试图执行 %@ 方法，但是 tmui_rawImage 为 nil", NSStringFromSelector(aSelector));
+        NSLog(@"TMUIThemeImage 试图执行 %@ 方法，但是 tmui_rawImage 为 nil", NSStringFromSelector(aSelector));
     }
     return [TMUIAvoidExceptionProxy proxy];
 }

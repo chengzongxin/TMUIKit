@@ -43,7 +43,7 @@ TMUISynthesizeBOOLProperty(tmui_tintColorCustomized, setTmui_tintColorCustomized
 }
 
 - (void)TMUISymbolicUIViewBecomeFirstResponderWithoutKeyWindow {
-//    TMUILogWarn(@"UIView (TMUI)", @"尝试让一个处于非 keyWindow 上的 %@ becomeFirstResponder，可能导致界面显示异常，请添加 '%@' 的 Symbolic Breakpoint 以捕捉此类信息\n%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
+    NSLog(@"尝试让一个处于非 keyWindow 上的 %@ becomeFirstResponder，可能导致界面显示异常，请添加 '%@' 的 Symbolic Breakpoint 以捕捉此类信息\n%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
 }
 
 
