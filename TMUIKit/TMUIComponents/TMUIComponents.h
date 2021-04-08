@@ -76,12 +76,17 @@
 #import "NSObject+TMUIMultipleDelegates.h"
 #endif
 
+#if __has_include("TMUITheme.h")
 #import "TMUITheme.h"
+#endif
+
 
 // Bagde
+#if __has_include("TMUIBadgeProtocol.h")
 #import "TMUIBadgeProtocol.h"
 #import "UIBarItem+TMUIBadge.h"
 #import "UIView+TMUIBadge.h"
+#endif
 
 
 
