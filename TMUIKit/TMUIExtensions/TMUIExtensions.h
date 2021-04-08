@@ -38,5 +38,6 @@
 #import "UITableView+TMUI.h"
 #import "UITableViewCell+TMUI.h"
 #import "UIView+TMUIBorder.h"
+#import "NSMethodSignature+TMUI.h"
 
 #endif /* TMUIExtensions_h */

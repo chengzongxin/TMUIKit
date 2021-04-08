@@ -59,6 +59,8 @@ typedef NS_OPTIONS(NSInteger, TMUIImageBorderPosition) {
  */
 + (nullable UIImage *)tmui_imageWithSize:(CGSize)size opaque:(BOOL)opaque scale:(CGFloat)scale actions:(void (^)(CGContextRef contextRef))actionBlock;
 
+/// 当前图片是否是可拉伸/平铺的，也即通过 resizableImageWithCapInsets: 处理过的图片
+@property(nonatomic, assign, readonly) BOOL tmui_resizable;
 
 /**
  *  获取当前图片的均色，原理是将图片绘制到1px*1px的矩形内，再从当前区域取色，得到图片的均色。

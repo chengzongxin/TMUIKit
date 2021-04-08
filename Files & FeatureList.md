@@ -192,6 +192,16 @@
 - 支持自定义tabs
 - 支持动态tabs刷新子VC和header
 
+#### TMUITableView
+
+- 
+
+#### TMUIMultipleDelegates
+
+- 让对象支持多个delegate、支持自定义的delegate
+
+
+
 #### ChainUI
 
 - 链式UI、一切对象都可以用''`.`语法''一直'"`.`"'下去，点到你停不下来
@@ -259,10 +269,6 @@
 
 - 弱持有对象容器，避免强引用的同时，也避免野指针crash。
 - 适用定时器、弱关联属性
-
-#### TMUIMultipleDelegates
-
-- 让对象支持多个delegate、支持自定义的delegate
 
 
 

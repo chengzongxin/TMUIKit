@@ -295,15 +295,14 @@ static UIImage *disclosureIndicatorImageDark;
 
 // TMUI 2.3.0 版本里，配置表新增这个方法，返回 YES 表示在 App 启动时要自动应用这份配置表。仅当你的 App 里存在多份配置表时，才需要把除默认配置表之外的其他配置表的返回值改为 NO。
 - (BOOL)shouldApplyTemplateAutomatically {
-//    [TMUIThemeManagerCenter.defaultThemeManager addThemeIdentifier:self.themeName theme:self];
-//
-//    NSString *selectedThemeIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:QDSelectedThemeIdentifier];
-//    BOOL result = [selectedThemeIdentifier isEqualToString:self.themeName] || (!selectedThemeIdentifier && !TMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier);
-//    if (result) {
-//        TMUIThemeManagerCenter.defaultThemeManager.currentTheme = self;
-//    }
-//    return result;
-    return YES;
+    [TMUIThemeManagerCenter.defaultThemeManager addThemeIdentifier:self.themeName theme:self];
+
+    NSString *selectedThemeIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:TDSelectedThemeIdentifier];
+    BOOL result = [selectedThemeIdentifier isEqualToString:self.themeName] || (!selectedThemeIdentifier && !TMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier);
+    if (result) {
+        TMUIThemeManagerCenter.defaultThemeManager.currentTheme = self;
+    }
+    return result;
 }
 
 #pragma mark - <TDThemeProtocol>
@@ -321,7 +320,7 @@ static UIImage *disclosureIndicatorImageDark;
 }
 
 - (UIColor *)themeTintColor {
-    return UIColorTheme6;
+    return UIColorTheme0;
 }
 
 - (UIColor *)themeTitleTextColor {
@@ -353,7 +352,7 @@ static UIImage *disclosureIndicatorImageDark;
 }
 
 - (NSString *)themeName {
-    return QDThemeIdentifierDefault;
+    return TDThemeIdentifierDefault;
 }
 
 @end

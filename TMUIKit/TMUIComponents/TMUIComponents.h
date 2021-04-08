@@ -76,6 +76,7 @@
 #import "NSObject+TMUIMultipleDelegates.h"
 #endif
 
+#import "TMUITheme.h"
 
 // Bagde
 #import "TMUIBadgeProtocol.h"

@@ -6,6 +6,7 @@
 //
 
 #import "UIColor+TMUI.h"
+#import "TMUICore.h"
 
 @implementation UIColor (TMUI)
 
@@ -138,6 +139,55 @@
     CGFloat green = ( arc4random() % 255 / 255.0 );
     CGFloat blue = ( arc4random() % 255 / 255.0 );
     return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+}
+
+@end
+
+
+
+NSString *const TMUICGColorOriginalColorBindKey = @"TMUICGColorOriginalColorBindKey";
+
+@implementation UIColor (TMUI_DynamicColor)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (@available(iOS 13.0, *)) {
+            ExtendImplementationOfNonVoidMethodWithoutArguments([UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull trait) {
+                return [UIColor clearColor];
+            }].class, @selector(CGColor), CGColorRef, ^CGColorRef(UIColor *selfObject, CGColorRef originReturnValue) {
+                if (selfObject.tmui_isDynamicColor) {
+                    UIColor *color = [UIColor colorWithCGColor:originReturnValue];
+                    originReturnValue = color.CGColor;
+                    [(__bridge id)(originReturnValue) tmui_bindObject:selfObject forKey:TMUICGColorOriginalColorBindKey];
+                }
+                return originReturnValue;
+            });
+        }
+    });
+}
+
+- (BOOL)tmui_isDynamicColor {
+    if ([self respondsToSelector:@selector(_isDynamic)]) {
+        return self._isDynamic;
+    }
+    return NO;
+}
+
+- (BOOL)tmui_isTMUIDynamicColor {
+    return NO;
+}
+
+- (UIColor *)tmui_rawColor {
+    if (self.tmui_isDynamicColor) {
+        if (@available(iOS 13.0, *)) {
+            if ([self respondsToSelector:@selector(resolvedColorWithTraitCollection:)]) {
+                UIColor *color = [self resolvedColorWithTraitCollection:UITraitCollection.currentTraitCollection];
+                return color.tmui_rawColor;
+            }
+        }
+    }
+    return self;
 }
 
 @end

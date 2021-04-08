@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define UIColorDarkGray8 UIColorMake(78, 80, 84)
 #define UIColorDarkGray9 UIColorMake(58, 60, 64)
 
+#define UIColorTheme0 UIColorHexString(@"29D181") // T8T Green
 #define UIColorTheme1 UIColorMake(239, 83, 98) // Grapefruit
 #define UIColorTheme2 UIColorMake(254, 109, 75) // Bittersweet
 #define UIColorTheme3 UIColorMake(255, 207, 71) // Sunflower

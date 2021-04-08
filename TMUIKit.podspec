@@ -120,6 +120,10 @@ Pod::Spec.new do |s|
     ss.subspec 'TMUISlider' do |sss|
       sss.source_files = 'TMUIKit/TMUIWidgets/TMUISlider'
     end
+    # TMUISegmentedControl
+    ss.subspec 'TMUISegmentedControl' do |sss|
+      sss.source_files = 'TMUIKit/TMUIWidgets/TMUISegmentedControl'
+    end
   end
   
   #TMUIComponents 组件
@@ -239,7 +243,10 @@ Pod::Spec.new do |s|
       ss.subspec 'TMUIBadge' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
       end
-      
+      # TMUITheme
+      ss.subspec 'TMUITheme' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
+      end
       
   end
   

@@ -88,6 +88,13 @@
     return imageOut;
 }
 
+- (BOOL)tmui_resizable {
+    BOOL result;
+    [self tmui_performSelector:NSSelectorFromString(@"_isResizable") withPrimitiveReturnValue:&result];
+    return result;
+}
+
+
 - (UIColor *)tmui_averageColor {
     unsigned char rgba[4] = {};
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();

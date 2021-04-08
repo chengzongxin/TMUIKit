@@ -43,6 +43,7 @@
                            ROW_CREATE(@"设置圆角、阴影、渐变、边框", @"UIViewTMUIViewController"),
                            ROW_CREATE(@"快速添加各种手势事件、坐标系转换", @"UIViewTMUI2ViewController"),
                            ROW_CREATE(@"创建动画", @"UIViewTMUI3ViewController"),
+                           ROW_CREATE(@"UIView+TMUIBorder",@"设置边框", @"UIViewTMUI4ViewController"),
                            ).title(@"UIView+TMUI"),
             SECTION_CREATE(
                            ROW_CREATE(@"设置富文本属性、计算文本size、富文本超链接", @"UILabelTMUIViewController"),

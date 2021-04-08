@@ -18,6 +18,34 @@
 #import "CALayer+TMUI.h"
 
 @implementation UIView (TMUI)
+TMUISynthesizeBOOLProperty(tmui_tintColorCustomized, setTmui_tintColorCustomized)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], @selector(setTintColor:), UIColor *, ^(UIView *selfObject, UIColor *tintColor) {
+            selfObject.tmui_tintColorCustomized = !!tintColor;
+        });
+        
+        // 这个私有方法在 view 被调用 becomeFirstResponder 并且处于 window 上时，才会被调用，所以比 becomeFirstResponder 更适合用来检测
+        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], NSSelectorFromString(@"_didChangeToFirstResponder:"), id, ^(UIView *selfObject, id firstArgv) {
+            if (selfObject == firstArgv && [selfObject conformsToProtocol:@protocol(UITextInput)]) {
+                // 像 TMUIModalPresentationViewController 那种以 window 的形式展示浮层，浮层里的输入框 becomeFirstResponder 的场景，[window makeKeyAndVisible] 被调用后，就会立即走到这里，但此时该 window 尚不是 keyWindow，所以这里延迟到下一个 runloop 里再去判断
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (IS_DEBUG && ![selfObject isKindOfClass:[UIWindow class]] && selfObject.window && !selfObject.window.keyWindow) {
+                        [selfObject TMUISymbolicUIViewBecomeFirstResponderWithoutKeyWindow];
+                    }
+                });
+            }
+        });
+    });
+}
+
+- (void)TMUISymbolicUIViewBecomeFirstResponderWithoutKeyWindow {
+//    TMUILogWarn(@"UIView (TMUI)", @"尝试让一个处于非 keyWindow 上的 %@ becomeFirstResponder，可能导致界面显示异常，请添加 '%@' 的 Symbolic Breakpoint 以捕捉此类信息\n%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
+}
+
 
 + (instancetype)tmui_view{
     return [[self alloc] init];
@@ -274,6 +302,100 @@ static char kAssociatedObjectKey_outsideEdge;
 - (CGFloat)topWhenCenterInSuperview {
     return CGFloatGetCenter(CGRectGetHeight(self.superview.bounds), CGRectGetHeight(self.frame));
 }
+
+
+- (CGFloat)tmui_top {
+    return CGRectGetMinY(self.frame);
+}
+
+- (void)setTmui_top:(CGFloat)top {
+    self.frame = CGRectSetY(self.frame, top);
+}
+
+- (CGFloat)tmui_left {
+    return CGRectGetMinX(self.frame);
+}
+
+- (void)setTmui_left:(CGFloat)left {
+    self.frame = CGRectSetX(self.frame, left);
+}
+
+- (CGFloat)tmui_bottom {
+    return CGRectGetMaxY(self.frame);
+}
+
+- (void)setTmui_bottom:(CGFloat)bottom {
+    self.frame = CGRectSetY(self.frame, bottom - CGRectGetHeight(self.frame));
+}
+
+- (CGFloat)tmui_right {
+    return CGRectGetMaxX(self.frame);
+}
+
+- (void)setTmui_right:(CGFloat)right {
+    self.frame = CGRectSetX(self.frame, right - CGRectGetWidth(self.frame));
+}
+
+- (CGFloat)tmui_width {
+    return CGRectGetWidth(self.frame);
+}
+
+- (void)setTmui_width:(CGFloat)width {
+    self.frame = CGRectSetWidth(self.frame, width);
+}
+
+- (CGFloat)tmui_height {
+    return CGRectGetHeight(self.frame);
+}
+
+- (void)setTmui_height:(CGFloat)height {
+    self.frame = CGRectSetHeight(self.frame, height);
+}
+
+- (CGFloat)tmui_extendToTop {
+    return self.tmui_top;
+}
+
+- (void)setTmui_extendToTop:(CGFloat)tmui_extendToTop {
+    self.tmui_height = self.tmui_bottom - tmui_extendToTop;
+    self.tmui_top = tmui_extendToTop;
+}
+
+- (CGFloat)tmui_extendToLeft {
+    return self.tmui_left;
+}
+
+- (void)setTmui_extendToLeft:(CGFloat)tmui_extendToLeft {
+    self.tmui_width = self.tmui_right - tmui_extendToLeft;
+    self.tmui_left = tmui_extendToLeft;
+}
+
+- (CGFloat)tmui_extendToBottom {
+    return self.tmui_bottom;
+}
+
+- (void)setTmui_extendToBottom:(CGFloat)tmui_extendToBottom {
+    self.tmui_height = tmui_extendToBottom - self.tmui_top;
+    self.tmui_bottom = tmui_extendToBottom;
+}
+
+- (CGFloat)tmui_extendToRight {
+    return self.tmui_right;
+}
+
+- (void)setTmui_extendToRight:(CGFloat)tmui_extendToRight {
+    self.tmui_width = tmui_extendToRight - self.tmui_left;
+    self.tmui_right = tmui_extendToRight;
+}
+
+- (CGFloat)tmui_leftWhenCenterInSuperview {
+    return CGFloatGetCenter(CGRectGetWidth(self.superview.bounds), CGRectGetWidth(self.frame));
+}
+
+- (CGFloat)tmui_topWhenCenterInSuperview {
+    return CGFloatGetCenter(CGRectGetHeight(self.superview.bounds), CGRectGetHeight(self.frame));
+}
+
 
 @end
 

@@ -32,6 +32,11 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
  */
 @property(nonatomic, assign, readonly) UIEdgeInsets tmui_safeAreaInsets;
 
+/**
+ 有修改过 tintColor，则不会再受 superview.tintColor 的影响
+ */
+@property(nonatomic, assign, readonly) BOOL tmui_tintColorCustomized;
+
 /// 响应区域需要改变的大小，负值表示往外扩大，正值表示往内缩小
 @property(nonatomic,assign) UIEdgeInsets tmui_outsideEdge;
 
@@ -77,6 +82,42 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
 /// 获取当前 view 在 superview 内垂直居中时的 top
 @property(nonatomic, assign, readonly) CGFloat topWhenCenterInSuperview;
 
+
+/// 等价于 CGRectGetMinY(frame)
+@property(nonatomic, assign) CGFloat tmui_top;
+
+/// 等价于 CGRectGetMinX(frame)
+@property(nonatomic, assign) CGFloat tmui_left;
+
+/// 等价于 CGRectGetMaxY(frame)
+@property(nonatomic, assign) CGFloat tmui_bottom;
+
+/// 等价于 CGRectGetMaxX(frame)
+@property(nonatomic, assign) CGFloat tmui_right;
+
+/// 等价于 CGRectGetWidth(frame)
+@property(nonatomic, assign) CGFloat tmui_width;
+
+/// 等价于 CGRectGetHeight(frame)
+@property(nonatomic, assign) CGFloat tmui_height;
+
+/// 保持其他三个边缘的位置不变的情况下，将顶边缘拓展到某个指定的位置，注意高度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToTop;
+
+/// 保持其他三个边缘的位置不变的情况下，将左边缘拓展到某个指定的位置，注意宽度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToLeft;
+
+/// 保持其他三个边缘的位置不变的情况下，将底边缘拓展到某个指定的位置，注意高度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToBottom;
+
+/// 保持其他三个边缘的位置不变的情况下，将右边缘拓展到某个指定的位置，注意宽度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToRight;
+
+/// 获取当前 view 在 superview 内水平居中时的 left
+@property(nonatomic, assign, readonly) CGFloat tmui_leftWhenCenterInSuperview;
+
+/// 获取当前 view 在 superview 内垂直居中时的 top
+@property(nonatomic, assign, readonly) CGFloat tmui_topWhenCenterInSuperview;
 
 @end
 
