@@ -19,7 +19,8 @@
 
 @implementation UIView (TMUI)
 TMUISynthesizeBOOLProperty(tmui_tintColorCustomized, setTmui_tintColorCustomized)
-
+TMUISynthesizeIdCopyProperty(tmui_frameWillChangeBlock, setTmui_frameWillChangeBlock)
+TMUISynthesizeIdCopyProperty(tmui_frameDidChangeBlock, setTmui_frameDidChangeBlock)
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -91,6 +92,43 @@ static char kAssociatedObjectKey_outsideEdge;
 
 - (UIEdgeInsets)tmui_outsideEdge {
     return [((NSNumber *)objc_getAssociatedObject(self, &kAssociatedObjectKey_outsideEdge)) UIEdgeInsetsValue];
+}
+
+
+static char kAssociatedObjectKey_tintColorDidChangeBlock;
+- (void)setTmui_tintColorDidChangeBlock:(void (^)(__kindof UIView * _Nonnull))tmui_tintColorDidChangeBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock, tmui_tintColorDidChangeBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    if (tmui_tintColorDidChangeBlock) {
+        [TMUIHelper executeBlock:^{
+            ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(tintColorDidChange), ^(UIView *selfObject) {
+                if (selfObject.tmui_tintColorDidChangeBlock) {
+                    selfObject.tmui_tintColorDidChangeBlock(selfObject);
+                }
+            });
+        } oncePerIdentifier:@"UIView (TMUI) tintColorDidChangeBlock"];
+    }
+}
+
+- (void (^)(__kindof UIView * _Nonnull))tmui_tintColorDidChangeBlock {
+    return (void (^)(__kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock);
+}
+
+static char kAssociatedObjectKey_hitTestBlock;
+- (void)setTmui_hitTestBlock:(__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))tmui_hitTestBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock, tmui_hitTestBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    [TMUIHelper executeBlock:^{
+        ExtendImplementationOfNonVoidMethodWithTwoArguments([UIView class], @selector(hitTest:withEvent:), CGPoint, UIEvent *, UIView *, ^UIView *(UIView *selfObject, CGPoint point, UIEvent *event, UIView *originReturnValue) {
+            if (selfObject.tmui_hitTestBlock) {
+                UIView *view = selfObject.tmui_hitTestBlock(point, event, originReturnValue);
+                return view;
+            }
+            return originReturnValue;
+        });
+    } oncePerIdentifier:@"UIView (TMUI) hitTestBlock"];
+}
+
+- (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))tmui_hitTestBlock {
+    return (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock);
 }
 
 - (void)tmui_removeAllSubviews{
@@ -396,6 +434,124 @@ static char kAssociatedObjectKey_outsideEdge;
     return CGFloatGetCenter(CGRectGetHeight(self.superview.bounds), CGRectGetHeight(self.frame));
 }
 
+
+@end
+
+
+const CGFloat TMUIViewSelfSizingHeight = INFINITY;
+
+@implementation UIView (TMUI_Block)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        OverrideImplementation([UIView class], @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIView *selfObject, CGRect frame) {
+                
+                // TMUIViewSelfSizingHeight 的功能
+                if (frame.size.width > 0 && isinf(frame.size.height)) {
+                    CGFloat height = flat([selfObject sizeThatFits:CGSizeMake(CGRectGetWidth(frame), CGFLOAT_MAX)].height);
+                    frame = CGRectSetHeight(frame, height);
+                }
+                
+                // 对非法的 frame，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
+                if (CGRectIsNaN(frame)) {
+                    NSLog(@"%@ setFrame:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(frame), [NSThread callStackSymbols]);
+//                    if (TMUICMIActivated && !ShouldPrintTMUIWarnLogToConsole) {
+//                        NSAssert(NO, @"UIView setFrame: 出现 NaN");
+//                    }
+                    if (!IS_DEBUG) {
+                        frame = CGRectSafeValue(frame);
+                    }
+                }
+                
+                CGRect precedingFrame = selfObject.frame;
+                BOOL valueChange = !CGRectEqualToRect(frame, precedingFrame);
+                if (selfObject.tmui_frameWillChangeBlock && valueChange) {
+                    frame = selfObject.tmui_frameWillChangeBlock(selfObject, frame);
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGRect);
+                originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, frame);
+                
+                if (selfObject.tmui_frameDidChangeBlock && valueChange) {
+                    selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
+                }
+            };
+        });
+        
+        OverrideImplementation([UIView class], @selector(setBounds:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIView *selfObject, CGRect bounds) {
+                
+                CGRect precedingFrame = selfObject.frame;
+                CGRect precedingBounds = selfObject.bounds;
+                BOOL valueChange = !CGSizeEqualToSize(bounds.size, precedingBounds.size);// bounds 只有 size 发生变化才会影响 frame
+                if (selfObject.tmui_frameWillChangeBlock && valueChange) {
+                    CGRect followingFrame = CGRectMake(CGRectGetMinX(precedingFrame) + CGFloatGetCenter(CGRectGetWidth(bounds), CGRectGetWidth(precedingFrame)), CGRectGetMinY(precedingFrame) + CGFloatGetCenter(CGRectGetHeight(bounds), CGRectGetHeight(precedingFrame)), bounds.size.width, bounds.size.height);
+                    followingFrame = selfObject.tmui_frameWillChangeBlock(selfObject, followingFrame);
+                    bounds = CGRectSetSize(bounds, followingFrame.size);
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGRect);
+                originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, bounds);
+                
+                if (selfObject.tmui_frameDidChangeBlock && valueChange) {
+                    selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
+                }
+            };
+        });
+        
+        OverrideImplementation([UIView class], @selector(setCenter:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIView *selfObject, CGPoint center) {
+                
+                CGRect precedingFrame = selfObject.frame;
+                CGPoint precedingCenter = selfObject.center;
+                BOOL valueChange = !CGPointEqualToPoint(center, precedingCenter);
+                if (selfObject.tmui_frameWillChangeBlock && valueChange) {
+                    CGRect followingFrame = CGRectSetXY(precedingFrame, center.x - CGRectGetWidth(selfObject.frame) / 2, center.y - CGRectGetHeight(selfObject.frame) / 2);
+                    followingFrame = selfObject.tmui_frameWillChangeBlock(selfObject, followingFrame);
+                    center = CGPointMake(CGRectGetMidX(followingFrame), CGRectGetMidY(followingFrame));
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGPoint);
+                originSelectorIMP = (void (*)(id, SEL, CGPoint))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, center);
+                
+                if (selfObject.tmui_frameDidChangeBlock && valueChange) {
+                    selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
+                }
+            };
+        });
+        
+        OverrideImplementation([UIView class], @selector(setTransform:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIView *selfObject, CGAffineTransform transform) {
+                
+                CGRect precedingFrame = selfObject.frame;
+                CGAffineTransform precedingTransform = selfObject.transform;
+                BOOL valueChange = !CGAffineTransformEqualToTransform(transform, precedingTransform);
+                if (selfObject.tmui_frameWillChangeBlock && valueChange) {
+                    CGRect followingFrame = CGRectApplyAffineTransformWithAnchorPoint(precedingFrame, transform, selfObject.layer.anchorPoint);
+                    selfObject.tmui_frameWillChangeBlock(selfObject, followingFrame);// 对于 CGAffineTransform，无法根据修改后的 rect 来算出新的 transform，所以就不修改 transform 的值了
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGAffineTransform);
+                originSelectorIMP = (void (*)(id, SEL, CGAffineTransform))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, transform);
+                
+                if (selfObject.tmui_frameDidChangeBlock && valueChange) {
+                    selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
+                }
+            };
+        });
+    });
+}
 
 @end
 

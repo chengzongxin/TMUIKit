@@ -16,6 +16,7 @@
 #import "ChainStyleConfigViewController.h"
 #import "TMUIBadgeViewController.h"
 #import "TMUICoreViewController6.h"
+#import "TDThemeViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -34,6 +35,9 @@
     
     GroupTV(
             Section(
+                    Row.str(@"TMUITheme").fnt(18).detailStr(@"主题管理").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TDThemeViewController.class];
+                        }),
                     Row.str(@"TMPageViewController").fnt(18).detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMPageRootViewController.class];
                         }),

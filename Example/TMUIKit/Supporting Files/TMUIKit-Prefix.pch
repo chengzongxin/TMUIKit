@@ -19,6 +19,7 @@
 #import <ChainUI.h>
 #import "TMAppDelegate.h"
 #import "TMUIExampleConfiguration.h"
+#import "TDCommonUI.h"
 
 //// create GroupTV
 //#define ROW_ONE_CREATE(title,classVC) Row.str(title).fnt(15).subtitleStyle.cellHeightAuto.onClick(^{\

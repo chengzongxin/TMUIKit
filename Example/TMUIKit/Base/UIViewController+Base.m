@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+Base.h"
-
+#import "TDThemeManager.h"
 
 
 @implementation UIResponder (hideKeyboard)
@@ -126,7 +126,8 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 
 - (void)tmui_pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     [self tmui_pushViewController:viewController animated:animated];
-    viewController.view.backgroundColor = UIColor.whiteColor;
+    viewController.view.backgroundColor = UIColor.td_backgroundColor;
+    
 }
 
 @end

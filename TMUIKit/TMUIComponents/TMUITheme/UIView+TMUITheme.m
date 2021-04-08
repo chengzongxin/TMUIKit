@@ -152,7 +152,7 @@ TMUISynthesizeIdCopyProperty(tmui_themeDidChangeBlock, setTmui_themeDidChangeBlo
                 }
             }
             
-//            [self performSelector:setter withObject:value];
+            [self performSelector:setter withObject:value];
         }
         EndIgnorePerformSelectorLeaksWarning
     }];

@@ -10,6 +10,10 @@
 #import "TMUIExampleConfiguration.h"
 #import "TDThemeManager.h"
 #import "TMUIConfigurationTemplate.h"
+#import "TMUIConfigurationTemplateGrapefruit.h"
+#import "TMUIConfigurationTemplateGrass.h"
+#import "TMUIConfigurationTemplatePinkRose.h"
+#import "TMUIConfigurationTemplateDark.h"
 
 NSString *const TDSelectedThemeIdentifier = @"selectedThemeIdentifier";
 NSString *const TDThemeIdentifierDefault = @"Default";
@@ -65,10 +69,10 @@ NSString *const TDThemeIdentifierDark = @"Dark";
     // 2. 然后设置主题的生成器
     TMUIThemeManagerCenter.defaultThemeManager.themeGenerator = ^__kindof NSObject * _Nonnull(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:TDThemeIdentifierDefault]) return TMUIConfigurationTemplate.new;
-//        if ([identifier isEqualToString:TDThemeIdentifierGrapefruit]) return TMUIConfigurationTemplateGrapefruit.new;
-//        if ([identifier isEqualToString:TDThemeIdentifierGrass]) return TMUIConfigurationTemplateGrass.new;
-//        if ([identifier isEqualToString:TDThemeIdentifierPinkRose]) return TMUIConfigurationTemplatePinkRose.new;
-//        if ([identifier isEqualToString:TDThemeIdentifierDark]) return TMUIConfigurationTemplateDark.new;
+        if ([identifier isEqualToString:TDThemeIdentifierGrapefruit]) return TMUIConfigurationTemplateGrapefruit.new;
+        if ([identifier isEqualToString:TDThemeIdentifierGrass]) return TMUIConfigurationTemplateGrass.new;
+        if ([identifier isEqualToString:TDThemeIdentifierPinkRose]) return TMUIConfigurationTemplatePinkRose.new;
+        if ([identifier isEqualToString:TDThemeIdentifierDark]) return TMUIConfigurationTemplateDark.new;
         return nil;
     };
     
