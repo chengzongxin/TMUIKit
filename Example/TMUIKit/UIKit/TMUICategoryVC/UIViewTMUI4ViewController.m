@@ -58,7 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.targetView = [[UIView alloc] tmui_initWithSize:CGSizeMake(100, 100)];
-    self.targetView.backgroundColor = [UIColor.qd_tintColor colorWithAlphaComponent:.3];
+    self.targetView.backgroundColor = [UIColor.td_tintColor colorWithAlphaComponent:.3];
     [self.view addSubview:self.targetView];
     
     self.scrollView = [[UIScrollView alloc] init];
@@ -154,7 +154,7 @@
 }
 
 - (TMUILabel *)generateTitleLabelWithText:(NSString *)text {
-    TMUILabel *label = [[TMUILabel alloc] tmui_initWithFont:UIFontMake(14) textColor:UIColor.qd_mainTextColor];
+    TMUILabel *label = [[TMUILabel alloc] tmui_initWithFont:UIFontMake(14) textColor:UIColor.td_mainTextColor];
     label.text = text;
     [label sizeToFit];
     [self.scrollView addSubview:label];
@@ -163,7 +163,7 @@
 
 - (TMUISegmentedControl *)generateSegmentedControlWithItems:(NSArray<NSString *> *)items {
     TMUISegmentedControl *segmentedControl = [[TMUISegmentedControl alloc] initWithItems:items];
-    segmentedControl.tintColor = UIColor.qd_tintColor;
+    segmentedControl.tintColor = UIColor.td_tintColor;
     segmentedControl.frame = CGRectSetWidth(segmentedControl.frame, 240);// 统一按照最长的来就行啦
     segmentedControl.transform = CGAffineTransformMakeScale(.8, .8);
 //    segmentedControl.tmui_automaticallyAdjustTouchHighlightedInScrollView = YES;
@@ -182,7 +182,7 @@
     button.imagePosition = TMUIButtonImagePositionRight;
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     button.titleLabel.font = UIFontMake(12);
-    [button setTitleColor:UIColor.qd_descriptionTextColor forState:UIControlStateNormal];
+    [button setTitleColor:UIColor.td_descriptionTextColor forState:UIControlStateNormal];
     button.highlightedBackgroundColor = TableViewCellSelectedBackgroundColor;
 //    button.tmui_automaticallyAdjustTouchHighlightedInScrollView = YES;
     [self.scrollView addSubview:button];
@@ -197,7 +197,7 @@
     textField.layer.borderWidth = PixelOne;
     textField.layer.borderColor = UIColorSeparator.CGColor;
     textField.textAlignment = NSTextAlignmentCenter;
-    textField.textColor = UIColor.qd_tintColor;
+    textField.textColor = UIColor.td_tintColor;
     [self.scrollView addSubview:textField];
     [textField addTarget:self action:@selector(handleTextFieldChangedEvent:) forControlEvents:UIControlEventEditingChanged];
     return textField;
@@ -293,10 +293,10 @@
         UIColor *borderColor = nil;
         switch (segmentedControl.selectedSegmentIndex) {
             case 0:
-                borderColor = [UIColor.qd_tintColor colorWithAlphaComponent:.5];
+                borderColor = [UIColor.td_tintColor colorWithAlphaComponent:.5];
                 break;
             case 1:
-                borderColor = UIColor.qd_tintColor;
+                borderColor = UIColor.td_tintColor;
                 break;
             case 2:
                 borderColor = [UIColor blackColor];

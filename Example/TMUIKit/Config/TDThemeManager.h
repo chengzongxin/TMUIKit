@@ -17,26 +17,26 @@
 
 @interface UIColor (TDTheme)
 
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_backgroundColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_backgroundColorLighten;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_backgroundColorHighlighted;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_tintColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_titleTextColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_mainTextColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_descriptionTextColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_placeholderColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_codeColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_separatorColor;
-@property(class, nonatomic, strong, readonly) UIColor * _Nullable qd_gridItemTintColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_backgroundColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_backgroundColorLighten;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_backgroundColorHighlighted;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_tintColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_titleTextColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_mainTextColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_descriptionTextColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_placeholderColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_codeColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_separatorColor;
+@property(class, nonatomic, strong, readonly) UIColor * _Nullable td_gridItemTintColor;
 @end
 
 @interface UIImage (TDTheme)
 
-@property(class, nonatomic, strong, readonly) UIImage * _Nullable qd_searchBarTextFieldBackgroundImage;
-@property(class, nonatomic, strong, readonly) UIImage * _Nullable qd_searchBarBackgroundImage;
+@property(class, nonatomic, strong, readonly) UIImage * _Nullable td_searchBarTextFieldBackgroundImage;
+@property(class, nonatomic, strong, readonly) UIImage * _Nullable td_searchBarBackgroundImage;
 @end
 
 @interface UIVisualEffect (TDTheme)
 
-@property(class, nonatomic, strong, readonly) UIVisualEffect * _Nullable qd_standardBlurEffect;
+@property(class, nonatomic, strong, readonly) UIVisualEffect * _Nullable td_standardBlurEffect;
 @end
