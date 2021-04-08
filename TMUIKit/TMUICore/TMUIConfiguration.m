@@ -667,7 +667,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 - (void)setTabBarItemTitleColorSelected:(UIColor *)tabBarItemTitleColorSelected {
     _tabBarItemTitleColorSelected = tabBarItemTitleColorSelected;
-    
+
     if (@available(iOS 13.0, *)) {
         [self.tabBarAppearance tmui_applyItemAppearanceWithBlock:^(UITabBarItemAppearance * _Nonnull itemAppearance) {
             NSMutableDictionary<NSAttributedStringKey, id> *attributes = itemAppearance.selected.titleTextAttributes.mutableCopy;
