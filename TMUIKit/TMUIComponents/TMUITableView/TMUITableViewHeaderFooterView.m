@@ -50,9 +50,9 @@
 }
 
 - (void)updateAppearance {
-//    if (!TMUICMIActivated || (!self.parentTableView && !self.qmui_tableView) || self.type == TMUITableViewHeaderFooterViewTypeUnknow) return;
+//    if (!TMUICMIActivated || (!self.parentTableView && !self.tmui_tableView) || self.type == TMUITableViewHeaderFooterViewTypeUnknow) return;
 //
-//    UITableViewStyle style = (self.parentTableView ?: self.qmui_tableView).qmui_style;
+//    UITableViewStyle style = (self.parentTableView ?: self.tmui_tableView).tmui_style;
 //
 //    if (self.type == TMUITableViewHeaderFooterViewTypeHeader) {
 //        self.titleLabel.font = PreferredValueForTableViewStyle(style, TableViewSectionHeaderFont, TableViewGroupedSectionHeaderFont, TableViewInsetGroupedSectionHeaderFont);

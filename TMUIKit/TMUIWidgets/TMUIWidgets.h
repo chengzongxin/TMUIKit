@@ -13,5 +13,6 @@
 #import "TMUITextField.h"
 #import "TMUITextView.h"
 #import "TMUISlider.h"
+#import "TMUISegmentedControl.h"
 
 #endif /* TMUIWidgets_h */

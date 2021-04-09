@@ -7,7 +7,7 @@
 //
 
 #import "TMUIExampleConfiguration.h"
-
+#import "TDThemeManager.h"
 
 NSString *const h1 = @"h1";
 NSString *const h2 = @"h2";
@@ -40,11 +40,12 @@ SHARED_INSTANCE_FOR_CLASS
 }
 
 - (void)didInitialize {
-    _h1 = Style(h1).fnt(@16).color(@"black").lineGap(10).multiline;
-    _h2 = Style(h2).fnt(@12).color(@"black").lineGap(10).multiline;
-    _h3 = Style(h3).fnt(12).color(@"black").lineGap(10).multiline;
-    _body = Style(body).fnt(12).color(Color(@"93,100,110")).lineGap(15).multiline;
-    _button = Style(button).bgColor(@"#178BFB").fnt(@15).color(@"white").borderRadius(4);
+    
+    _h1 = Style(h1).fnt(@16).color(UIColor.td_tintColor).lineGap(10).multiline;
+    _h2 = Style(h2).fnt(@12).color(UIColor.td_titleTextColor).lineGap(10).multiline;
+    _h3 = Style(h3).fnt(12).color(UIColor.td_descriptionTextColor).lineGap(10).multiline;
+    _body = Style(body).fnt(12).color(UIColor.td_mainTextColor).lineGap(15).multiline;
+    _button = Style(button).bgColor(UIColor.td_tintColor).fnt(@15).color(@"white").borderRadius(4);
 }
 
 @end

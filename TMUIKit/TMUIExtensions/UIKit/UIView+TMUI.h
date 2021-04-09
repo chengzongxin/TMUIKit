@@ -32,6 +32,11 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
  */
 @property(nonatomic, assign, readonly) UIEdgeInsets tmui_safeAreaInsets;
 
+/**
+ 有修改过 tintColor，则不会再受 superview.tintColor 的影响
+ */
+@property(nonatomic, assign, readonly) BOOL tmui_tintColorCustomized;
+
 /// 响应区域需要改变的大小，负值表示往外扩大，正值表示往内缩小
 @property(nonatomic,assign) UIEdgeInsets tmui_outsideEdge;
 
@@ -77,6 +82,93 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
 /// 获取当前 view 在 superview 内垂直居中时的 top
 @property(nonatomic, assign, readonly) CGFloat topWhenCenterInSuperview;
 
+
+/// 等价于 CGRectGetMinY(frame)
+@property(nonatomic, assign) CGFloat tmui_top;
+
+/// 等价于 CGRectGetMinX(frame)
+@property(nonatomic, assign) CGFloat tmui_left;
+
+/// 等价于 CGRectGetMaxY(frame)
+@property(nonatomic, assign) CGFloat tmui_bottom;
+
+/// 等价于 CGRectGetMaxX(frame)
+@property(nonatomic, assign) CGFloat tmui_right;
+
+/// 等价于 CGRectGetWidth(frame)
+@property(nonatomic, assign) CGFloat tmui_width;
+
+/// 等价于 CGRectGetHeight(frame)
+@property(nonatomic, assign) CGFloat tmui_height;
+
+/// 保持其他三个边缘的位置不变的情况下，将顶边缘拓展到某个指定的位置，注意高度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToTop;
+
+/// 保持其他三个边缘的位置不变的情况下，将左边缘拓展到某个指定的位置，注意宽度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToLeft;
+
+/// 保持其他三个边缘的位置不变的情况下，将底边缘拓展到某个指定的位置，注意高度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToBottom;
+
+/// 保持其他三个边缘的位置不变的情况下，将右边缘拓展到某个指定的位置，注意宽度会跟随变化。
+@property(nonatomic, assign) CGFloat tmui_extendToRight;
+
+/// 获取当前 view 在 superview 内水平居中时的 left
+@property(nonatomic, assign, readonly) CGFloat tmui_leftWhenCenterInSuperview;
+
+/// 获取当前 view 在 superview 内垂直居中时的 top
+@property(nonatomic, assign, readonly) CGFloat tmui_topWhenCenterInSuperview;
+
+@end
+
+
+extern const CGFloat TMUIViewSelfSizingHeight;
+
+@interface UIView (TMUI_Block)
+
+/**
+ 在 UIView 的 frame 变化前会调用这个 block，变化途径包括 setFrame:、setBounds:、setCenter:、setTransform:，你可以通过返回一个 rect 来达到修改 frame 的目的，最终执行 [super setFrame:] 时会使用这个 block 的返回值（除了 setTransform: 导致的 frame 变化）。
+ @param view 当前的 view 本身，方便使用，省去 weak 操作
+ @param followingFrame setFrame: 的参数 frame，也即即将被修改为的 rect 值
+ @return 将会真正被使用的 frame 值
+ @note 仅当 followingFrame 和 self.frame 值不相等时才会被调用
+ */
+@property(nullable, nonatomic, copy) CGRect (^tmui_frameWillChangeBlock)(__kindof UIView *view, CGRect followingFrame);
+
+/**
+ 在 UIView 的 frame 变化后会调用这个 block，变化途径包括 setFrame:、setBounds:、setCenter:、setTransform:，可用于监听布局的变化，或者在不方便重写 layoutSubviews 时使用这个 block 代替。
+ @param view 当前的 view 本身，方便使用，省去 weak 操作
+ @param precedingFrame 修改前的 frame 值
+ */
+@property(nullable, nonatomic, copy) void (^tmui_frameDidChangeBlock)(__kindof UIView *view, CGRect precedingFrame);
+
+/**
+ 在 - [UIView layoutSubviews] 调用后就调用的 block
+ @param view 当前的 view 本身，方便使用，省去 weak 操作
+ */
+@property(nullable, nonatomic, copy) void (^tmui_layoutSubviewsBlock)(__kindof UIView *view);
+
+/**
+ 在 UIView 的 sizeThatFits: 调用后就调用的 block，可返回一个修改后的值来作为原方法的返回值
+ @param view 当前的 view 本身，方便使用，省去 weak 操作
+ @param size sizeThatFits: 方法被调用时传进来的参数 size
+ @param superResult 原本的 sizeThatFits: 方法的返回值
+ */
+@property(nullable, nonatomic, copy) CGSize (^tmui_sizeThatFitsBlock)(__kindof UIView *view, CGSize size, CGSize superResult);
+
+/**
+ 当 tintColorDidChange 被调用的时候会调用这个 block，就不用重写方法了
+ @param view 当前的 view 本身，方便使用，省去 weak 操作
+ */
+@property(nullable, nonatomic, copy) void (^tmui_tintColorDidChangeBlock)(__kindof UIView *view);
+
+/**
+ 当 hitTest:withEvent: 被调用时会调用这个 block，就不用重写方法了
+ @param point 事件产生的 point
+ @param event 事件
+ @param super 的返回结果
+ */
+@property(nullable, nonatomic, copy) __kindof UIView * (^tmui_hitTestBlock)(CGPoint point, UIEvent *event, __kindof UIView *originalView);
 
 @end
 
@@ -386,53 +478,53 @@ typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
 @end
 
 
-@interface UIView (TMUI_Block)
-
-/**
- 在 UIView 的 frame 变化前会调用这个 block，变化途径包括 setFrame:、setBounds:、setCenter:、setTransform:，你可以通过返回一个 rect 来达到修改 frame 的目的，最终执行 [super setFrame:] 时会使用这个 block 的返回值（除了 setTransform: 导致的 frame 变化）。
- @param view 当前的 view 本身，方便使用，省去 weak 操作
- @param followingFrame setFrame: 的参数 frame，也即即将被修改为的 rect 值
- @return 将会真正被使用的 frame 值
- @note 仅当 followingFrame 和 self.frame 值不相等时才会被调用
- */
-@property(nullable, nonatomic, copy) CGRect (^tmui_frameWillChangeBlock)(__kindof UIView *view, CGRect followingFrame);
-
-/**
- 在 UIView 的 frame 变化后会调用这个 block，变化途径包括 setFrame:、setBounds:、setCenter:、setTransform:，可用于监听布局的变化，或者在不方便重写 layoutSubviews 时使用这个 block 代替。
- @param view 当前的 view 本身，方便使用，省去 weak 操作
- @param precedingFrame 修改前的 frame 值
- */
-@property(nullable, nonatomic, copy) void (^tmui_frameDidChangeBlock)(__kindof UIView *view, CGRect precedingFrame);
-
-/**
- 在 - [UIView layoutSubviews] 调用后就调用的 block
- @param view 当前的 view 本身，方便使用，省去 weak 操作
- */
-@property(nullable, nonatomic, copy) void (^tmui_layoutSubviewsBlock)(__kindof UIView *view);
-
-/**
- 在 UIView 的 sizeThatFits: 调用后就调用的 block，可返回一个修改后的值来作为原方法的返回值
- @param view 当前的 view 本身，方便使用，省去 weak 操作
- @param size sizeThatFits: 方法被调用时传进来的参数 size
- @param superResult 原本的 sizeThatFits: 方法的返回值
- */
-@property(nullable, nonatomic, copy) CGSize (^tmui_sizeThatFitsBlock)(__kindof UIView *view, CGSize size, CGSize superResult);
-
-/**
- 当 tintColorDidChange 被调用的时候会调用这个 block，就不用重写方法了
- @param view 当前的 view 本身，方便使用，省去 weak 操作
- */
-@property(nullable, nonatomic, copy) void (^tmui_tintColorDidChangeBlock)(__kindof UIView *view);
-
-/**
- 当 hitTest:withEvent: 被调用时会调用这个 block，就不用重写方法了
- @param point 事件产生的 point
- @param event 事件
- @param super 的返回结果
- */
-@property(nullable, nonatomic, copy) __kindof UIView * (^tmui_hitTestBlock)(CGPoint point, UIEvent *event, __kindof UIView *originalView);
-
-@end
+//@interface UIView (TMUI_Block)
+//
+///**
+// 在 UIView 的 frame 变化前会调用这个 block，变化途径包括 setFrame:、setBounds:、setCenter:、setTransform:，你可以通过返回一个 rect 来达到修改 frame 的目的，最终执行 [super setFrame:] 时会使用这个 block 的返回值（除了 setTransform: 导致的 frame 变化）。
+// @param view 当前的 view 本身，方便使用，省去 weak 操作
+// @param followingFrame setFrame: 的参数 frame，也即即将被修改为的 rect 值
+// @return 将会真正被使用的 frame 值
+// @note 仅当 followingFrame 和 self.frame 值不相等时才会被调用
+// */
+//@property(nullable, nonatomic, copy) CGRect (^tmui_frameWillChangeBlock)(__kindof UIView *view, CGRect followingFrame);
+//
+///**
+// 在 UIView 的 frame 变化后会调用这个 block，变化途径包括 setFrame:、setBounds:、setCenter:、setTransform:，可用于监听布局的变化，或者在不方便重写 layoutSubviews 时使用这个 block 代替。
+// @param view 当前的 view 本身，方便使用，省去 weak 操作
+// @param precedingFrame 修改前的 frame 值
+// */
+//@property(nullable, nonatomic, copy) void (^tmui_frameDidChangeBlock)(__kindof UIView *view, CGRect precedingFrame);
+//
+///**
+// 在 - [UIView layoutSubviews] 调用后就调用的 block
+// @param view 当前的 view 本身，方便使用，省去 weak 操作
+// */
+//@property(nullable, nonatomic, copy) void (^tmui_layoutSubviewsBlock)(__kindof UIView *view);
+//
+///**
+// 在 UIView 的 sizeThatFits: 调用后就调用的 block，可返回一个修改后的值来作为原方法的返回值
+// @param view 当前的 view 本身，方便使用，省去 weak 操作
+// @param size sizeThatFits: 方法被调用时传进来的参数 size
+// @param superResult 原本的 sizeThatFits: 方法的返回值
+// */
+//@property(nullable, nonatomic, copy) CGSize (^tmui_sizeThatFitsBlock)(__kindof UIView *view, CGSize size, CGSize superResult);
+//
+///**
+// 当 tintColorDidChange 被调用的时候会调用这个 block，就不用重写方法了
+// @param view 当前的 view 本身，方便使用，省去 weak 操作
+// */
+//@property(nullable, nonatomic, copy) void (^tmui_tintColorDidChangeBlock)(__kindof UIView *view);
+//
+///**
+// 当 hitTest:withEvent: 被调用时会调用这个 block，就不用重写方法了
+// @param point 事件产生的 point
+// @param event 事件
+// @param super 的返回结果
+// */
+//@property(nullable, nonatomic, copy) __kindof UIView * (^tmui_hitTestBlock)(CGPoint point, UIEvent *event, __kindof UIView *originalView);
+//
+//@end
 
 
 

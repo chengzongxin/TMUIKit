@@ -39,7 +39,7 @@
                                        NSParagraphStyleAttributeName: [NSMutableParagraphStyle tmui_paragraphStyleWithLineHeight:30],
                                        NSForegroundColorAttributeName: self.textView.textColor
     };
-//    self.textView.backgroundColor = UIColor.qd_backgroundColorLighten;
+//    self.textView.backgroundColor = UIColor.td_backgroundColorLighten;
     // 限制可输入的字符长度
     self.textView.maximumTextLength = 1000;
 

@@ -8,6 +8,7 @@
 #import "CALayer+TMUI.h"
 #import "TMUICore.h"
 #import "UIView+TMUI.h"
+#import "UIColor+TMUI.h"
 
 @interface CALayer ()
 
@@ -598,5 +599,123 @@ static char kAssociatedObjectKey_maskedCorners;
 }
 
 
+
+@end
+
+
+
+@interface CAShapeLayer (TMUI_DynamicColor)
+
+@property(nonatomic, strong) UIColor *qcl_originalFillColor;
+@property(nonatomic, strong) UIColor *qcl_originalStrokeColor;
+
+@end
+
+@implementation CAShapeLayer (TMUI_DynamicColor)
+
+TMUISynthesizeIdStrongProperty(qcl_originalFillColor, setQcl_originalFillColor)
+TMUISynthesizeIdStrongProperty(qcl_originalStrokeColor, setQcl_originalStrokeColor)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        OverrideImplementation([CAShapeLayer class], @selector(setFillColor:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(CAShapeLayer *selfObject, CGColorRef color) {
+                
+                UIColor *originalColor = [(__bridge id)(color) tmui_getBoundObjectForKey:TMUICGColorOriginalColorBindKey];
+                selfObject.qcl_originalFillColor = originalColor;
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGColorRef);
+                originSelectorIMP = (void (*)(id, SEL, CGColorRef))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, color);
+            };
+        });
+        
+        OverrideImplementation([CAShapeLayer class], @selector(setStrokeColor:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(CAShapeLayer *selfObject, CGColorRef color) {
+                
+                UIColor *originalColor = [(__bridge id)(color) tmui_getBoundObjectForKey:TMUICGColorOriginalColorBindKey];
+                selfObject.qcl_originalStrokeColor = originalColor;
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, CGColorRef);
+                originSelectorIMP = (void (*)(id, SEL, CGColorRef))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, color);
+            };
+        });
+    });
+}
+
+- (void)tmui_setNeedsUpdateDynamicStyle {
+    [super tmui_setNeedsUpdateDynamicStyle];
+    
+    if (self.qcl_originalFillColor) {
+        self.fillColor = self.qcl_originalFillColor.CGColor;
+    }
+    
+    if (self.qcl_originalStrokeColor) {
+        self.strokeColor = self.qcl_originalStrokeColor.CGColor;
+    }
+}
+
+@end
+
+@interface CAGradientLayer (TMUI_DynamicColor)
+
+@property(nonatomic, strong) NSArray <UIColor *>* qcl_originalColors;
+
+@end
+
+@implementation CAGradientLayer (TMUI_DynamicColor)
+
+TMUISynthesizeIdStrongProperty(qcl_originalColors, setQcl_originalColors)
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        OverrideImplementation([CAGradientLayer class], @selector(setColors:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(CAGradientLayer *selfObject, NSArray *colors) {
+                
+           
+                void (*originSelectorIMP)(id, SEL, NSArray *);
+                originSelectorIMP = (void (*)(id, SEL, NSArray *))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, colors);
+                
+                
+                __block BOOL hasDynamicColor = NO;
+                NSMutableArray *originalColors = [NSMutableArray array];
+                [colors enumerateObjectsUsingBlock:^(id color, NSUInteger idx, BOOL * _Nonnull stop) {
+                    UIColor *originalColor = [color tmui_getBoundObjectForKey:TMUICGColorOriginalColorBindKey];
+                    if (originalColor) {
+                        hasDynamicColor = YES;
+                        [originalColors addObject:originalColor];
+                    } else {
+                        [originalColors addObject:[UIColor colorWithCGColor:(__bridge CGColorRef _Nonnull)(color)]];
+                    }
+                }];
+                
+                if (hasDynamicColor) {
+                    selfObject.qcl_originalColors = originalColors;
+                } else {
+                    selfObject.qcl_originalColors = nil;
+                }
+                
+            };
+        });
+    });
+}
+
+- (void)tmui_setNeedsUpdateDynamicStyle {
+    [super tmui_setNeedsUpdateDynamicStyle];
+    
+    if (self.qcl_originalColors) {
+        NSMutableArray *colors = [NSMutableArray array];
+        [self.qcl_originalColors enumerateObjectsUsingBlock:^(UIColor * _Nonnull color, NSUInteger idx, BOOL * _Nonnull stop) {
+            [colors addObject:(__bridge id _Nonnull)(color.CGColor)];
+        }];
+        self.colors = colors;
+    }
+}
 
 @end

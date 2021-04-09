@@ -44,7 +44,8 @@ typedef NS_ENUM(NSUInteger, TMUIViewBorderLocation) {
 @property(nullable, nonatomic, strong) IBInspectable UIColor *tmui_borderColor;
 
 /// 虚线 : dashPhase默认是0，且当dashPattern设置了才有效
-/// tmui_dashPhase 表示虚线起始的偏移，tmui_dashPattern 可以传一个数组，表示“lineWidth，lineSpacing，lineWidth，lineSt
+/// tmui_dashPhase 表示虚线起始的偏移，tmui_dashPattern 可以传一个数组，表示“lineWidth，lineSpacing，lineWidth，lineSpacing...”的顺序，至少传 2 个。
+@property(nonatomic, assign) CGFloat tmui_dashPhase;
 @property(nullable, nonatomic, copy) NSArray<NSNumber *> *tmui_dashPattern;
 
 /// border的layer

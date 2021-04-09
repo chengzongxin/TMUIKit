@@ -157,4 +157,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface CALayer (TMUI_DynamicColor)
+
+/// 如果 layer 的 backgroundColor、borderColor、shadowColor 是使用 dynamic color（UIDynamicProviderColor、TMUIThemeColor 等）生成的，则调用这个方法可以重新设置一遍这些属性，从而更新颜色
+/// iOS 13 系统设置里的界面样式变化（Dark Mode），以及 TMUIThemeManager 触发的主题变化，都会自动调用 layer 的这个方法，业务无需关心。
+- (void)tmui_setNeedsUpdateDynamicStyle NS_REQUIRES_SUPER;
+@end
+
+
 NS_ASSUME_NONNULL_END
