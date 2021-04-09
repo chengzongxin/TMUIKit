@@ -54,6 +54,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)tmui_alpha;
 
 /**
+ *  获取当前 UIColor 对象里的 hue（色相），注意 hue 的值是一个角度，所以0和1（0°和360°）是等价的，用 return 值去做判断时要特别注意。
+ */
+@property(nonatomic, assign, readonly) CGFloat tmui_hue;
+
+/**
+ *  获取当前 UIColor 对象里的 saturation（饱和度）
+ */
+@property(nonatomic, assign, readonly) CGFloat tmui_saturation;
+
+/**
+ *  获取当前 UIColor 对象里的 brightness（亮度）
+ */
+@property(nonatomic, assign, readonly) CGFloat tmui_brightness;
+
+/**
+ *  将当前UIColor对象剥离掉alpha通道后得到的色值。相当于把当前颜色的半透明值强制设为1.0后返回
+ *
+ *  @return alpha通道为1.0，其他rgb通道与原UIColor对象一致的新UIColor对象
+ */
+- (nullable UIColor *)tmui_colorWithoutAlpha;
+/**
  *  将自身变化到某个目标颜色，可通过参数progress控制变化的程度，最终得到一个纯色
  *  @param toColor 目标颜色
  *  @param progress 变化程度，取值范围0.0f~1.0f
@@ -75,6 +96,18 @@ NS_ASSUME_NONNULL_BEGIN
  *  @link http://stackoverflow.com/questions/5893261/how-to-get-inverse-color-from-uicolor @/link
  */
 - (UIColor *)tmui_inverseColor;
+
+/**
+ 获取两个颜色之间的差异程度，0表示相同，值越大表示差距越大，例如纯白和纯黑会返回 86，如果遇到异常情况（例如传进来的 color 为 nil，则会返回 CGFLOAT_MAX）。
+ 原理是将两个颜色摆放在 HSB(HSV) 模型内，取两个点之间的距离。由于 HSB(HSV) 没有 alpha 的概念，所以色值相同半透明程度不同的两个颜色会返回 0，也即相等。
+ */
+- (CGFloat)tmui_distanceBetweenColor:(UIColor *)color;
+
+/**
+ *  计算两个颜色叠加之后的最终色（注意区分前景色后景色的顺序）<br/>
+ *  @link http://stackoverflow.com/questions/10781953/determine-rgba-colour-received-by-combining-two-colours @/link
+ */
++ (UIColor *)tmui_colorWithBackendColor:(UIColor *)backendColor frontColor:(UIColor *)frontColor;
 
 /**
  *  将颜色A变化到颜色B，可通过progress控制变化的程度

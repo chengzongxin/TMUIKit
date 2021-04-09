@@ -150,12 +150,12 @@ static UIImage *disclosureIndicatorImageDark;
     TMUICMI.searchBarBackgroundImage = UIImage.td_searchBarBackgroundImage;     // SearchBarBackgroundImage : 搜索框的背景图，如果需要设置底部分隔线的颜色也请绘制到图片里
     TMUICMI.searchBarTintColor = UIColor.td_tintColor;                          // SearchBarTintColor : TMUISearchBar 的 tintColor，也即上面的操作控件的主题色
     TMUICMI.searchBarTextColor = UIColor.td_titleTextColor;                                  // SearchBarTextColor : TMUISearchBar 里的文本框的文字颜色
-//    TMUICMI.searchBarPlaceholderColor = [UIColor tmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> *theme) {
-//        if ([identifier isEqualToString:TDThemeIdentifierDark]) {
-//            return theme.themePlaceholderColor;
-//        }
-//        return UIColorMake(136, 136, 143);
-//    }];             // SearchBarPlaceholderColor : TMUISearchBar 里的文本框的 placeholder 颜色
+    TMUICMI.searchBarPlaceholderColor = [UIColor tmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> *theme) {
+        if ([identifier isEqualToString:TDThemeIdentifierDark]) {
+            return theme.themePlaceholderColor;
+        }
+        return UIColorMake(136, 136, 143);
+    }];             // SearchBarPlaceholderColor : TMUISearchBar 里的文本框的 placeholder 颜色
     TMUICMI.searchBarFont = UIFontMake(15);                                                // SearchBarFont : TMUISearchBar 里的文本框的文字字体及 placeholder 的字体
     TMUICMI.searchBarSearchIconImage = nil;                                     // SearchBarSearchIconImage : TMUISearchBar 里的放大镜 icon
     TMUICMI.searchBarClearIconImage = nil;                                      // SearchBarClearIconImage : TMUISearchBar 里的文本框输入文字时右边的清空按钮的图片
@@ -176,9 +176,9 @@ static UIImage *disclosureIndicatorImageDark;
     TMUICMI.tableViewCellBackgroundColor = UIColorForBackground;                 // TableViewCellBackgroundColor : TMUITableViewCell 的背景色
     TMUICMI.tableViewCellSelectedBackgroundColor = UIColor.td_backgroundColorHighlighted;  // TableViewCellSelectedBackgroundColor : TMUITableViewCell 点击时的背景色
     TMUICMI.tableViewCellWarningBackgroundColor = UIColorYellow;                // TableViewCellWarningBackgroundColor : TMUITableViewCell 用于表示警告时的背景色，备用
-//    TMUICMI.tableViewCellDisclosureIndicatorImage = [UIImage tmui_imageWithThemeProvider:^UIImage * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> * _Nullable theme) {
-//        return [identifier isEqualToString:TDThemeIdentifierDark] ? disclosureIndicatorImageDark : disclosureIndicatorImage;
-//    }];    // TableViewCellDisclosureIndicatorImage : TMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDisclosureIndicator 时的箭头的图片
+    TMUICMI.tableViewCellDisclosureIndicatorImage = [UIImage tmui_imageWithThemeProvider:^UIImage * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> * _Nullable theme) {
+        return [identifier isEqualToString:TDThemeIdentifierDark] ? disclosureIndicatorImageDark : disclosureIndicatorImage;
+    }];    // TableViewCellDisclosureIndicatorImage : TMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDisclosureIndicator 时的箭头的图片
     TMUICMI.tableViewCellCheckmarkImage = [UIImage tmui_imageWithShape:TMUIImageShapeCheckmark size:CGSizeMake(15, 12) tintColor:UIColor.td_tintColor];  // TableViewCellCheckmarkImage : TMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryCheckmark 时的打钩的图片
     TMUICMI.tableViewCellDetailButtonImage = [UIImage tmui_imageWithShape:TMUIImageShapeDetailButtonImage size:CGSizeMake(20, 20) tintColor:UIColor.td_tintColor]; // TableViewCellDetailButtonImage : TMUITableViewCell 当 accessoryType 为 UITableViewCellAccessoryDetailButton 或 UITableViewCellAccessoryDetailDisclosureButton 时右边的 i 按钮图片
     TMUICMI.tableViewCellSpacingBetweenDetailButtonAndDisclosureIndicator = 12; // TableViewCellSpacingBetweenDetailButtonAndDisclosureIndicator : 列表 cell 右边的 i 按钮和向右箭头之间的间距（仅当两者都使用了自定义图片并且同时显示时才生效）
@@ -196,12 +196,12 @@ static UIImage *disclosureIndicatorImageDark;
     
 #pragma mark - Grouped TableView
     
-//    TMUICMI.tableViewGroupedBackgroundColor = [UIColor tmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> * _Nullable theme) {
-//        if ([identifier isEqualToString:TDThemeIdentifierDark]) {
-//            return TMUICMI.tableViewBackgroundColor;
-//        }
-//        return UIColorMake(246, 246, 246);
-//    }];       // TableViewGroupedBackgroundColor : Grouped 类型的 TMUITableView 的背景色
+    TMUICMI.tableViewGroupedBackgroundColor = [UIColor tmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> * _Nullable theme) {
+        if ([identifier isEqualToString:TDThemeIdentifierDark]) {
+            return TMUICMI.tableViewBackgroundColor;
+        }
+        return UIColorMake(246, 246, 246);
+    }];       // TableViewGroupedBackgroundColor : Grouped 类型的 TMUITableView 的背景色
     TMUICMI.tableViewGroupedSeparatorColor = TableViewSeparatorColor;                                   // TableViewGroupedSeparatorColor : Grouped 类型的 TMUITableView 分隔线颜色
     TMUICMI.tableViewGroupedCellTitleLabelColor = TableViewCellTitleLabelColor;                         // TableViewGroupedCellTitleLabelColor : Grouped 类型的 TMUITableView cell 里的标题颜色
     TMUICMI.tableViewGroupedCellDetailLabelColor = TableViewCellDetailLabelColor;                       // TableViewGroupedCellDetailLabelColor : Grouped 类型的 TMUITableView cell 里的副标题颜色
