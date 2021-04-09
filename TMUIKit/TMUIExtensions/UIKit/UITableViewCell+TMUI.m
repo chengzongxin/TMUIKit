@@ -41,6 +41,7 @@ TMUISynthesizeIdCopyProperty(tmui_setSelectedBlock, setTmui_setSelectedBlock)
                 
                 // 系统虽然有私有 API - (UITableViewCellStyle)style; 可以用，但该方法在 init 内得到的永远是 0，只有 init 执行完成后才可以得到正确的值，所以这里只能自己记录
                 result.tmui_style = firstArgv;
+//                [selfObject tmui_styledAsTMUITableViewCell];
                 return result;
             };
         });
