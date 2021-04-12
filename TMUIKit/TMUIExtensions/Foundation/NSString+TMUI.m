@@ -56,6 +56,22 @@
             result[12], result[13], result[14], result[15]];
 }
 
+- (NSString *)tmui_md5_upper {
+    return [[self tmui_md5] uppercaseString];
+}
+
+- (NSString *)tmui_md5_16bit {
+    NSString *byte_32 = [self tmui_md5];
+    if (byte_32.length>16) {
+        return [byte_32 substringToIndex:16];
+    }
+    return byte_32;
+}
+
+- (NSString *)tmui_md5_16bit_upper {
+    return [[self tmui_md5_16bit] uppercaseString];
+}
+
 - (NSString *)tmui_stringByEncodingUserInputQuery {
     return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet tmui_URLUserInputQueryAllowedCharacterSet]];
 }
@@ -581,3 +597,97 @@ int tmui_containsString(NSString *self, SEL _cmd, NSString *aString) {
 }
 
 @end
+
+@implementation NSString (Verify)
+
++ (BOOL)tmui_isEmpty:(NSString *)string
+{
+    if (!string) {
+        return YES;
+    } else if (![string isKindOfClass:[NSString class]]) {
+        return YES;
+    } else if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] == 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)tmui_isPureInt
+{
+    NSScanner* scan = [NSScanner scannerWithString:self];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
+}
+
+- (BOOL)tmui_isMobileNumber
+{
+    NSString *Regex = @"^(1[3-9])\\d{9}$";
+    NSPredicate *mobileTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", Regex];
+    BOOL ret = [mobileTest evaluateWithObject:self];
+    return ret;
+}
+
+- (BOOL)tmui_containsSubstring:(NSString *)string
+{
+    return [self tmui_containsSubstring:string ignoreCase:NO];
+}
+
+- (BOOL)tmui_containsSubstring:(NSString *)string ignoreCase:(BOOL)ignore
+{
+    if (!string || ![string isKindOfClass:[NSString class]]) {
+        return NO;
+    }
+    if (!ignore) {
+        return [self rangeOfString:string].location != NSNotFound;
+    }
+    return [[self uppercaseString] rangeOfString:[string uppercaseString]].location != NSNotFound;
+}
+
+@end
+
+@implementation NSString (Attribute)
+
+- (NSMutableAttributedString *)tmui_convertToAttributedStringWithFont:(UIFont *)font textColor:(UIColor *)color
+{
+    if (!font) {
+        font = [UIFont systemFontOfSize:16];
+    }
+    if (!color) {
+        color = [UIColor colorWithRed:17/255.f green:17/255.f blue:17/255.f alpha:1];
+    }
+    NSMutableAttributedString *mStr = [[NSMutableAttributedString alloc] initWithString:self attributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:color}];
+    return mStr;
+}
+
+- (NSMutableAttributedString *)tmui_attributedStringFormatLineWithFont:(UIFont *)font
+                                                                 color:(UIColor *)color
+                                                              maxWidth:(CGFloat)maxWidth
+                                                           lineSpacing:(CGFloat)spacing
+                                                             alignment:(NSTextAlignment)alignment{
+    if (!font) {
+        font = [UIFont systemFontOfSize:16];
+    }
+    if (!color) {
+        color = [UIColor colorWithRed:17/255.f green:17/255.f blue:17/255.f alpha:1];
+    }
+    
+    if (self == nil || self.length == 0) {
+        return [[NSMutableAttributedString alloc] initWithString:@"" attributes:nil];;
+    }
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineBreakMode = NSLineBreakByWordWrapping;
+    style.lineSpacing = spacing;
+    style.alignment = alignment;
+    NSDictionary * attributes = @{NSFontAttributeName:font, NSForegroundColorAttributeName:color, NSParagraphStyleAttributeName:style};
+    NSInteger line = [self tmui_numberOfLinesWithFont:font contrainstedToWidth:maxWidth];
+    if (line == 1){
+        //单行的时候去掉行间距
+        style.lineSpacing = 0;
+    }
+    style.lineBreakMode = NSLineBreakByTruncatingTail;
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:self attributes:attributes];
+    return [attributedString mutableCopy];
+}
+
+@end
+

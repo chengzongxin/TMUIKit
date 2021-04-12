@@ -28,8 +28,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// 将文字中的换行符替换为空格
 @property(readonly, copy) NSString *tmui_trimLineBreakCharacter;
 
-/// 把该字符串转换为对应的 md5
+/// 把该字符串转换为对应的 md5（32位小写）
 @property(readonly, copy) NSString *tmui_md5;
+
+/// 32位 大写
+@property(readonly, copy) NSString *tmui_md5_upper;
+
+/// 16位 小写
+@property(readonly, copy) NSString *tmui_md5_16bit;
+
+/// 16位 大写
+@property(readonly, copy) NSString *tmui_md5_16bit_upper;
 
 /// 返回一个符合 query value 要求的编码后的字符串，例如&、#、=等字符均会被变为 %xxx 的编码
 /// @see `NSCharacterSet (TMUI) tmui_URLUserInputQueryAllowedCharacterSet`
@@ -346,6 +355,39 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSString (Verify)
 
+/**判空 使用+方法 因为如果使用-方法，类型不对或者空对象，根本不会执行该方法
+空对象、类型不对、纯空格或者长度为0，都是YES*/
++ (BOOL)tmui_isEmpty:(NSString *)string;
+
+/**整数*/
+- (BOOL)tmui_isPureInt;
+
+/**电话号码，11位*/
+- (BOOL)tmui_isMobileNumber;
+
+/**包含子串，iOS8以前没有containsString这个API；
+默认不忽略大小写*/
+- (BOOL)tmui_containsSubstring:(NSString *)string;
+
+/**包含子串，ignoreCase：是否忽略大小写*/
+- (BOOL)tmui_containsSubstring:(NSString *)string ignoreCase:(BOOL)ignore;
+
+@end
+
+@interface NSString (Attribute)
+
+/**转化为富文本*/
+- (NSMutableAttributedString *)tmui_convertToAttributedStringWithFont:(UIFont *)font
+                                                            textColor:(UIColor *)color;
+/**转化为富文本，支持设置行间距*/
+- (NSMutableAttributedString *)tmui_attributedStringFormatLineWithFont:(UIFont *)font
+                                                                 color:(UIColor *)color
+                                                              maxWidth:(CGFloat)maxWidth
+                                                           lineSpacing:(CGFloat)spacing
+                                                             alignment:(NSTextAlignment)alignment;
+
+@end
 
 NS_ASSUME_NONNULL_END

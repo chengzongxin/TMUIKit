@@ -7,7 +7,7 @@
 //
 
 #import "MD5VC.h"
-#import "NSString+MD5.h"
+#import "NSString+TMUI.h"
 
 @interface MD5VC ()
 @property (weak, nonatomic) IBOutlet UITextField *tf1;
@@ -35,16 +35,16 @@
 }
 */
 - (IBAction)buton_1_click:(id)sender {
-    _tf2.text = [_tf1.text tmui_getMd5_16Bit];
+    _tf2.text = [_tf1.text tmui_md5_16bit];
 }
 - (IBAction)buton_2_click:(id)sender {
-    _tf3.text = [_tf1.text tmui_getMd5_16Bit_upperString];
+    _tf3.text = [_tf1.text tmui_md5_16bit_upper];
 }
 - (IBAction)buton_3_click:(id)sender {
-    _tf4.text = [_tf1.text tmui_getMd5_32Bit];
+    _tf4.text = [_tf1.text tmui_md5];
 }
 - (IBAction)buton_4_click:(id)sender {
-    _tf5.text = [_tf1.text tmui_getMd5_32Bit_upperString];
+    _tf5.text = [_tf1.text tmui_md5_upper];
 }
 
 @end

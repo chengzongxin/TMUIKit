@@ -7,9 +7,10 @@
 //
 
 #import "VerifyViewController.h"
-#import "NSString+Verify.h"
+//#import "NSString+Verify.h"
 #import "NSFileManager+TMUI.h"
 #import "NSString+TMUI.h"
+#import <NSArray+TMUI.h>
 
 @interface VerifyViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tf;
@@ -66,6 +67,17 @@
     NSLog(@"doc: %@",[[NSFileManager defaultManager] tmui_sandboxDocDir]);
     
     NSLog(@"");
+    
+    NSString *str = [@"" tmui_md5];
+    NSLog(@"");
+    
+    /** Usages: */
+    NSArray *numbers = @[@3,@2,@10];
+    id result = [numbers tmui_reduce:^id _Nonnull(NSNumber *obj1, NSNumber *obj2) {
+      return @(obj1.intValue + obj2.intValue);
+    } initial:@2];
+        
+    NSLog(@"%@", result);
 }
 
 /*
