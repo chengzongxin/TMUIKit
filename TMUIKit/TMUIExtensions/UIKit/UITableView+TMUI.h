@@ -43,7 +43,8 @@ typedef NS_OPTIONS(NSInteger, TMUITableViewCellPosition) {
 //将index转换成NSIndexPath
 - (NSIndexPath *)tmui_indexPathOfIndex:(NSUInteger)index;
 
-
+/// 将当前tableView按照TMUI统一定义的宏来渲染外观
+- (void)tmui_styledAsTMUITableView;
 /**
  *  获取某个 view 在 tableView 里的 indexPath
  *

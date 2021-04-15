@@ -9,7 +9,7 @@
 #import "TMUICore.h"
 #import "UIView+TMUI.h"
 #import "UITableView+TMUI.h"
-//#import "UITableViewHeaderFooterView+TMUI.h"
+#import "UITableViewHeaderFooterView+TMUI.h"
 
 @implementation TMUITableViewHeaderFooterView
 
@@ -50,23 +50,23 @@
 }
 
 - (void)updateAppearance {
-//    if (!TMUICMIActivated || (!self.parentTableView && !self.tmui_tableView) || self.type == TMUITableViewHeaderFooterViewTypeUnknow) return;
-//
-//    UITableViewStyle style = (self.parentTableView ?: self.tmui_tableView).tmui_style;
-//
-//    if (self.type == TMUITableViewHeaderFooterViewTypeHeader) {
-//        self.titleLabel.font = PreferredValueForTableViewStyle(style, TableViewSectionHeaderFont, TableViewGroupedSectionHeaderFont, TableViewInsetGroupedSectionHeaderFont);
-//        self.titleLabel.textColor = PreferredValueForTableViewStyle(style, TableViewSectionHeaderTextColor, TableViewGroupedSectionHeaderTextColor, TableViewInsetGroupedSectionHeaderTextColor);
-//        self.contentEdgeInsets = PreferredValueForTableViewStyle(style, TableViewSectionHeaderContentInset, TableViewGroupedSectionHeaderContentInset, TableViewInsetGroupedSectionHeaderContentInset);
-//        self.accessoryViewMargins = PreferredValueForTableViewStyle(style, TableViewSectionHeaderAccessoryMargins, TableViewGroupedSectionHeaderAccessoryMargins, TableViewInsetGroupedSectionHeaderAccessoryMargins);
-//        self.backgroundView.backgroundColor = PreferredValueForTableViewStyle(style, TableViewSectionHeaderBackgroundColor, UIColorClear, UIColorClear);
-//    } else {
-//        self.titleLabel.font = PreferredValueForTableViewStyle(style, TableViewSectionFooterFont, TableViewGroupedSectionFooterFont, TableViewInsetGroupedSectionFooterFont);
-//        self.titleLabel.textColor = PreferredValueForTableViewStyle(style, TableViewSectionFooterTextColor, TableViewGroupedSectionFooterTextColor, TableViewInsetGroupedSectionFooterTextColor);
-//        self.contentEdgeInsets = PreferredValueForTableViewStyle(style, TableViewSectionFooterContentInset, TableViewGroupedSectionFooterContentInset, TableViewInsetGroupedSectionFooterContentInset);
-//        self.accessoryViewMargins = PreferredValueForTableViewStyle(style, TableViewSectionFooterAccessoryMargins, TableViewGroupedSectionFooterAccessoryMargins, TableViewInsetGroupedSectionFooterAccessoryMargins);
-//        self.backgroundView.backgroundColor = PreferredValueForTableViewStyle(style, TableViewSectionFooterBackgroundColor, UIColorClear, UIColorClear);
-//    }
+    if (!TMUICMIActivated || (!self.parentTableView && !self.tmui_tableView) || self.type == TMUITableViewHeaderFooterViewTypeUnknow) return;
+
+    UITableViewStyle style = (self.parentTableView ?: self.tmui_tableView).tmui_style;
+
+    if (self.type == TMUITableViewHeaderFooterViewTypeHeader) {
+        self.titleLabel.font = PreferredValueForTableViewStyle(style, TableViewSectionHeaderFont, TableViewGroupedSectionHeaderFont, TableViewInsetGroupedSectionHeaderFont);
+        self.titleLabel.textColor = PreferredValueForTableViewStyle(style, TableViewSectionHeaderTextColor, TableViewGroupedSectionHeaderTextColor, TableViewInsetGroupedSectionHeaderTextColor);
+        self.contentEdgeInsets = PreferredValueForTableViewStyle(style, TableViewSectionHeaderContentInset, TableViewGroupedSectionHeaderContentInset, TableViewInsetGroupedSectionHeaderContentInset);
+        self.accessoryViewMargins = PreferredValueForTableViewStyle(style, TableViewSectionHeaderAccessoryMargins, TableViewGroupedSectionHeaderAccessoryMargins, TableViewInsetGroupedSectionHeaderAccessoryMargins);
+        self.backgroundView.backgroundColor = PreferredValueForTableViewStyle(style, TableViewSectionHeaderBackgroundColor, UIColorClear, UIColorClear);
+    } else {
+        self.titleLabel.font = PreferredValueForTableViewStyle(style, TableViewSectionFooterFont, TableViewGroupedSectionFooterFont, TableViewInsetGroupedSectionFooterFont);
+        self.titleLabel.textColor = PreferredValueForTableViewStyle(style, TableViewSectionFooterTextColor, TableViewGroupedSectionFooterTextColor, TableViewInsetGroupedSectionFooterTextColor);
+        self.contentEdgeInsets = PreferredValueForTableViewStyle(style, TableViewSectionFooterContentInset, TableViewGroupedSectionFooterContentInset, TableViewInsetGroupedSectionFooterContentInset);
+        self.accessoryViewMargins = PreferredValueForTableViewStyle(style, TableViewSectionFooterAccessoryMargins, TableViewGroupedSectionFooterAccessoryMargins, TableViewInsetGroupedSectionFooterAccessoryMargins);
+        self.backgroundView.backgroundColor = PreferredValueForTableViewStyle(style, TableViewSectionFooterBackgroundColor, UIColorClear, UIColorClear);
+    }
 }
 
 - (void)layoutSubviews {

@@ -154,7 +154,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:segmentedControl.selectedSegmentIndex];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.backgroundColor = UIColor.tmui_randomColor;
+//    self.tableView.backgroundColor = UIColor.tmui_randomColor;
     [self.tableView registerClass:TMUITableViewHeaderFooterView.class forHeaderFooterViewReuseIdentifier:@"headerViewID"];
     [self.view addSubview:self.tableView];
 }
