@@ -83,10 +83,10 @@
 		16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D41A79260438A300CC6A41 /* ChainUIViewController1.m */; };
 		16D89D7625F9E6D5004FD70F /* TMUICoreViewController6.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */; };
 		16E4A57E261178E9005879A5 /* TMUIBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */; };
+		16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A6722611DE30005879A5 /* TMUIConfigurationTemplate.m */; };
 		16E4A6852611E137005879A5 /* TDCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A6842611E137005879A5 /* TDCommonUI.m */; };
 		16E66917261FF2CD00028DC8 /* TDUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E66916261FF2CD00028DC8 /* TDUIHelper.m */; };
 		16E75B10261ED8290087C3B5 /* UIViewTMUI4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E75B0F261ED8290087C3B5 /* UIViewTMUI4ViewController.m */; };
-		16E75D112626D9C600202401 /* TMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A6722611DE30005879A5 /* TMUIConfigurationTemplate.m */; };
 		16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8002725EE449F005D8E4B /* UIViewControllerTMUIViewController.m */; };
 		16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E82E7725F222EE00B8142E /* NSArrayTMUIViewController.m */; };
 		16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E8FFEB25EE25F9005D8E4B /* ChainUIViewController.m */; };
@@ -1030,7 +1030,6 @@
 				168572A2261F16C4007A0E6D /* TDThemeExampleView.m in Sources */,
 				16F1BDD625F9A758000709CF /* TMUICoreViewController5.m in Sources */,
 				16E66917261FF2CD00028DC8 /* TDUIHelper.m in Sources */,
-				16E75D112626D9C600202401 /* TMUIConfigurationTemplate.m in Sources */,
 				16CDF23125EF839B00C02C98 /* UIImageTMUIViewController1.m in Sources */,
 				16812BE32603597F00AECD14 /* TMUITableViewController4.m in Sources */,
 				16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */,
@@ -1085,6 +1084,7 @@
 				160860BF25C01D8100F31337 /* TableViewController.m in Sources */,
 				16E8FFEC25EE25F9005D8E4B /* ChainUIViewController.m in Sources */,
 				3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */,
+				16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */,
 				16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */,
 				16857296261F121B007A0E6D /* TMUIConfigurationTemplateGrass.m in Sources */,
 				16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */,

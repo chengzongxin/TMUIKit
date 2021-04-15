@@ -31,4 +31,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSDictionary (Safe)
+
+//key可以是number类型
+- (id)tmui_objectForKey:(id)aKey;
+
+/** 安全返回NSString */
+- (NSString *)tmui_stringForKey:(id)key;
+
+/** 安全返回NSArray */
+- (NSArray *)tmui_arrayForKey:(id)key;
+
+/** 安全返回NSDictionary */
+- (NSDictionary *)tmui_dictionaryForKey:(id)key;
+
+@end
+
 NS_ASSUME_NONNULL_END

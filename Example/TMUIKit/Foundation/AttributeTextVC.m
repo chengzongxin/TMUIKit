@@ -24,7 +24,13 @@
     NSInteger lines = [text tmui_numberOfLinesWithFont:[UIFont systemFontOfSize:17] contrainstedToWidth:300];
 //    NSLog(@"");
     
-    _label.text = text;
+    _label.attributedText = [text tmui_attributedStringFormatLineWithFont:[UIFont systemFontOfSize:16] color:[UIColor redColor] maxWidth:self.view.frame.size.width-79-35 lineSpacing:6 alignment:NSTextAlignmentLeft];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    NSLog(@"label frame: %@",NSStringFromCGRect(_label.frame));
 }
 
 /*

@@ -7,12 +7,17 @@
 //
 
 #import "VerifyViewController.h"
-#import "NSString+Verify.h"
+//#import "NSString+Verify.h"
 #import "NSFileManager+TMUI.h"
 #import "NSString+TMUI.h"
+#import <NSArray+TMUI.h>
+#import <objc/runtime.h>
+#import <NSDictionary+TMUI.h>
+#import <NSMutableDictionary+TMUI.h>
 
 @interface VerifyViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tf;
+@property (nonatomic, copy) NSMutableArray *mArr;
 
 @end
 
@@ -66,6 +71,108 @@
     NSLog(@"doc: %@",[[NSFileManager defaultManager] tmui_sandboxDocDir]);
     
     NSLog(@"");
+    
+    NSString *str = [@"" tmui_md5];
+    NSLog(@"");
+    
+    /** Usages: */
+    NSArray *numbers = @[@3,@2,@10];
+    id result = [numbers tmui_reduce:^id _Nonnull(NSNumber *obj1, NSNumber *obj2) {
+      return @(obj1.intValue + obj2.intValue);
+    } initial:@2];
+        
+    NSLog(@"%@", result);
+    
+//    NSArray *lst = @[@1,@2,@3,@4,@5];
+//    id obj = [lst objectAtIndexedSubscript:0];
+//    NSLog(@"");
+//    obj = [lst objectAtIndexedSubscript:10];
+//    NSLog(@"");
+    
+    NSArray *p = [NSArray alloc];//__NSPlaceholderArray
+    NSArray *o = @[];//__NSArray0
+    NSArray *s = @[@0];//__NSSingleObjectArrayI
+    NSArray *i = @[@2,@3];//__NSArrayI
+    NSMutableArray *m = @[@4,@5].mutableCopy;//__NSArrayM
+    
+    Class cls1 = NSClassFromString(@"__NSCFArray"); //super NSMutableArray
+    Class cls2 = NSClassFromString(@"__NSFrozenArrayM");//super NSArray
+    
+    NSLog(@"");
+    [self subClasses:NSClassFromString(@"NSArray")];//30
+    [self subClasses:NSClassFromString(@"NSMutableArray")];
+    [self subClasses:NSClassFromString(@"NSString")];//22
+    /*_UITextAttributeDictionary,
+     WebElementDictionary,
+     FigFlatToNSDictionaryWrapper,
+     CTFeatureSetting,
+     CNWrappedDictionary,
+     _PASLPDictionary,
+     _PFResultObject,
+     NSOwnedDictionaryProxy,
+     NSDistributedObjectsStatistics,
+     NSSimpleAttributeDictionary,
+     NSFileAttributes,
+     NSAttributeDictionary,
+     NSKeyValueChangeDictionary,
+     __NSSingleEntryDictionaryI,
+     __NSFrozenDictionaryM,
+     __NSDictionaryI,
+     _NSConstantDictionary,
+     NSMutableDictionary,
+     NSConstantDictionary,
+     __NSDictionary0*/
+    [self subClasses:NSClassFromString(@"NSDictionary")];//20
+    /*MLProbabilityDictionary,
+     NSKnownKeysDictionary,
+     NSDirInfo,
+     NSRTFD,
+     NSSharedKeyDictionary,
+     _UITextAttributeDictionaryImplI,
+     _UIMutableTextAttributeDictionary,
+     _NSNestedDictionary,
+     __NSDictionaryM,
+     __NSCFDictionary,
+     __NSPlaceholderDictionary*/
+    [self subClasses:NSClassFromString(@"NSMutableDictionary")];
+    
+    NSObject *obj = nil;
+    NSDictionary *dict = @{@"1":@1,@"2":@2,@"3":obj};
+    NSLog(@"");
+    
+    NSMutableDictionary *mDict = @{}.mutableCopy;
+    [mDict setObject:@"1" forKey:@"222"];
+    [mDict setObject:nil forKey:@"222"];
+    [mDict setObject:@"1" forKey:nil];
+    
+    [mDict setObject:@"v" forKeyedSubscript:@"1"];
+    [mDict setObject:nil forKeyedSubscript:@"1"];
+    [mDict setObject:@"l" forKeyedSubscript:nil];
+    
+//    [mDict ];
+    
+    NSLog(@"");
+}
+
+- (NSArray <NSString *> *)subClasses:(Class)superClass
+{
+    int numClasses;
+    Class *classes = NULL;
+    numClasses = objc_getClassList(NULL,0);
+    NSMutableArray *lst = @[].mutableCopy;
+    if (numClasses >0 )
+    {
+        classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
+        numClasses = objc_getClassList(classes, numClasses);
+        for (int i = 0; i < numClasses; i++) {
+            if (class_getSuperclass(classes[i]) == superClass){
+                NSLog(@"%@", NSStringFromClass(classes[i]));
+                [lst addObject:NSStringFromClass(classes[i])];
+            }
+        }
+        free(classes);
+    }
+    return lst;
 }
 
 /*
@@ -74,7 +181,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // Pass the selected object to the new view controller.chun
 }
 */
 

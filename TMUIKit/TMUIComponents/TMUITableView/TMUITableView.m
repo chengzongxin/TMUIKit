@@ -30,7 +30,7 @@
 }
 
 - (void)didInitialize {
-    [self tmui_styledAsTMUITableView];
+//    [self qmui_styledAsTMUITableView];
 }
 
 - (void)dealloc {

@@ -34,6 +34,7 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArray0);
 TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSSingleObjectArrayI);
 TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayI);
 TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayM);
+TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSFrozenArrayM);
 
 #pragma clang diagnostic pop
 
@@ -44,13 +45,16 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSArrayM);
     dispatch_once(&onceToken, ^{
         
         // MARK: 访问越界处理
-        NSArray *classes = @[@"NSArray",@"__NSArray0",@"__NSSingleObjectArrayI",@"__NSArrayI",@"__NSArrayM"];
+        NSArray *classes = @[@"NSArray",@"__NSArray0",@"__NSSingleObjectArrayI",@"__NSArrayI",@"__NSArrayM",@"__NSFrozenArrayM",@"__NSCFArray"];
         for (NSString *cls in classes) {
             Class class = NSClassFromString(cls);
             NSString *objectAtIndexStr = [NSString stringWithFormat:@"tmui_%@_objectAtIndex:",cls];
             NSString *objectAtIndexedSubscriptStr = [NSString stringWithFormat:@"tmui_%@_objectAtIndexedSubscript:",cls];
             
-            ExchangeImplementations(class, @selector(objectAtIndex:), NSSelectorFromString(objectAtIndexStr));
+            if (![cls isEqualToString:@"__NSCFArray"]) {
+                //__NSCFArray的这个方法不交换 会导致启动时crash
+                ExchangeImplementations(class, @selector(objectAtIndex:), NSSelectorFromString(objectAtIndexStr));
+            }
             ExchangeImplementations(class, @selector(objectAtIndexedSubscript:), NSSelectorFromString(objectAtIndexedSubscriptStr));
         }
         
