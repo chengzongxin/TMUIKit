@@ -89,9 +89,9 @@
 //            return [UISearchBar tmui_generateBackgroundImageWithColor:theme.themeBackgroundColor borderColor:nil];
 //        }];
 //
-//        self.td_standardBlueEffect = [UIVisualEffect tmui_effectWithThemeProvider:^UIVisualEffect * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> * _Nullable theme) {
-//            return [UIBlurEffect effectWithStyle:[identifier isEqualToString:TDThemeIdentifierDark] ? UIBlurEffectStyleDark : UIBlurEffectStyleLight];
-//        }];
+        self.td_standardBlueEffect = [UIVisualEffect tmui_effectWithThemeProvider:^UIVisualEffect * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, NSObject<TDThemeProtocol> * _Nullable theme) {
+            return [UIBlurEffect effectWithStyle:[identifier isEqualToString:TDThemeIdentifierDark] ? UIBlurEffectStyleDark : UIBlurEffectStyleLight];
+        }];
     }
     return self;
 }
