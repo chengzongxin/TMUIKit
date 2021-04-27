@@ -52,5 +52,13 @@
              CUISpring)
     .embedIn(self.view, NavigationContentTop + 20,20,0).gap(10);
     
+    
+    
+    NSArray *result = @[@1,@2,@3].forEach((NSNumber *)^(NSNumber *num) {
+        NSLog(@"%@",num);
+        return @(num.intValue+10);
+    });
+    
+    NSLog(@"%@",result);
 }
 @end
