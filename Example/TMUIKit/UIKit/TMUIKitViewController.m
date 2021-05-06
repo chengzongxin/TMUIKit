@@ -38,6 +38,9 @@
                            ROW_CREATE(@"TMUISlider",
                                       @"修改背后导轨的高度、修改圆点的大小、修改圆点的阴影样式",
                                       @"TMUISliderViewController"),
+                           ROW_CREATE(@"TMUISegmentedControl",
+                                      @"修改背后导轨的高度、修改圆点的大小、修改圆点的阴影样式",
+                                      @"TMUISegmentedControlViewController"),
                            ).title(@"TMUI Widget"),
             SECTION_CREATE(
                            ROW_CREATE(@"设置圆角、阴影、渐变、边框", @"UIViewTMUIViewController"),

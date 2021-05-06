@@ -29,6 +29,7 @@
 		160860BF25C01D8100F31337 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B925C01D8100F31337 /* TableViewController.m */; };
 		160860C025C01D8100F31337 /* Table1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860BA25C01D8100F31337 /* Table1ViewController.m */; };
 		160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860D425C01E3200F31337 /* THKSegmentControl.m */; };
+		1610720626381E5E00456D73 /* TMUISegmentedControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1610720526381E5E00456D73 /* TMUISegmentedControlViewController.m */; };
 		1611E2F625FA12DF003D4357 /* TMUISliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1611E2F525FA12DF003D4357 /* TMUISliderViewController.m */; };
 		1625BA4A25E63778005686D0 /* UIViewTMUI3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1625BA4925E63778005686D0 /* UIViewTMUI3ViewController.m */; };
 		163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */; };
@@ -154,6 +155,8 @@
 		160860EF25C01F1D00F31337 /* THKCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKCommonDefine.h; sourceTree = "<group>"; };
 		160860F025C01F1D00F31337 /* Define_SetValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_SetValues.h; sourceTree = "<group>"; };
 		160860F525C01F1D00F31337 /* Define_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_Block.h; sourceTree = "<group>"; };
+		1610720426381E5E00456D73 /* TMUISegmentedControlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUISegmentedControlViewController.h; sourceTree = "<group>"; };
+		1610720526381E5E00456D73 /* TMUISegmentedControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUISegmentedControlViewController.m; sourceTree = "<group>"; };
 		1611E2F425FA12DF003D4357 /* TMUISliderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUISliderViewController.h; sourceTree = "<group>"; };
 		1611E2F525FA12DF003D4357 /* TMUISliderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUISliderViewController.m; sourceTree = "<group>"; };
 		1625BA4825E63778005686D0 /* UIViewTMUI3ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUI3ViewController.h; sourceTree = "<group>"; };
@@ -566,6 +569,8 @@
 				16C6507725BC02410047618E /* TMUITextViewViewController.m */,
 				1611E2F425FA12DF003D4357 /* TMUISliderViewController.h */,
 				1611E2F525FA12DF003D4357 /* TMUISliderViewController.m */,
+				1610720426381E5E00456D73 /* TMUISegmentedControlViewController.h */,
+				1610720526381E5E00456D73 /* TMUISegmentedControlViewController.m */,
 			);
 			path = TMUIWidgetsVC;
 			sourceTree = "<group>";
@@ -1065,6 +1070,7 @@
 				16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */,
 				1699517D260F026100944BCA /* VC7Cell.m in Sources */,
 				16BE3770260DEF2F0088D59D /* TMUITableViewController6.m in Sources */,
+				1610720626381E5E00456D73 /* TMUISegmentedControlViewController.m in Sources */,
 				1611E2F625FA12DF003D4357 /* TMUISliderViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16B30B3F25FB014800785EDD /* TMUIExampleConfiguration.m in Sources */,
