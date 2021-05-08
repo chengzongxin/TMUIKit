@@ -73,7 +73,7 @@
 
 
 
-# TMUI Widgets
+# TMUIWidgets
 
 #### TMUIButton
 
@@ -120,7 +120,7 @@
 
 
 
-# TMUI Extensions
+# TMUIExtensions
 
 ## UIKit
 
@@ -262,16 +262,32 @@
 
 # TMUIComponents
 
+#### TMUITheme
+
+- 主题管理组件，可添加自定义的主题对象，并为每个对象指定一个专门的 identifier，当主题发生变化时，会遍历 UIViewController 和 UIView，调用每个 viewController 和每个可视 view 的 tmui_themeDidChangeByManager:identifier:theme: 方法，在里面由业务去自行根据当前主题设置不同的外观（color、image 等）
+
+#### TMUIAppearance
+
+- UIKit 仅提供了对 UIView 默认的 UIAppearance 支持，如果你是一个继承自 NSObject 的对象，想要使用 UIAppearance 能力，按 UIKit 公开的 API 是无法实现的，而 TMUIAppearance 对这种场景提供了支持。
+
+#### TMUIModalPresentationViewController
+
+- 一个提供通用的弹出浮层功能的控件，可以将任意`UIView`或`UIViewController`以浮层的形式显示出来并自动布局。
+- 支持 3 种方式显示浮层、3种显示动画、appearance全局配置
+- 新起一个 `UIWindow` 盖在当前界面上（推荐）
+- 使用系统 `presentViewController` 接口来显示，支持界面切换
+- 将浮层作为一个 subview 添加到 `superview` 上
+
+#### TMUITableView
+
+- 
+
 #### TMUIPageViewController
 
 - 数据源驱动代理设计模式
 - 内部支持滑动吸顶header
 - 支持自定义tabs
 - 支持动态tabs刷新子VC和header
-
-#### TMUITableView
-
-- 
 
 #### TMUIMultipleDelegates
 

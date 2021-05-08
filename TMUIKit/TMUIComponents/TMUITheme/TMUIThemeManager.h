@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 当主题发生变化时发出这个通知，会先于 UIViewController/UIView 的 qmui_themeDidChangeByManager:identifier:theme:
+/// 当主题发生变化时发出这个通知，会先于 UIViewController/UIView 的 tmui_themeDidChangeByManager:identifier:theme:
 extern NSNotificationName const TMUIThemeDidChangeNotification;
 
 /**
- 主题管理组件，可添加自定义的主题对象，并为每个对象指定一个专门的 identifier，当主题发生变化时，会遍历 UIViewController 和 UIView，调用每个 viewController 和每个可视 view 的 qmui_themeDidChangeByManager:identifier:theme: 方法，在里面由业务去自行根据当前主题设置不同的外观（color、image 等）。借助 TMUIThemeManagerCenter，可实现一个项目里同时存在多个维度的主题（例如全局维度存在 light/dark 2套主题，局部的某个界面存在 white/yellow/green/black 4套主题），各自互不影响，如果业务项目只需要一个维度的主题，则全都使用 TMUIThemeManagerCenter.defaultThemeManager 来获取 TMUIThemeManager 即可，如果业务有多维度主题的需求，可使用 +[TMUIThemeManagerCenter themeManagerWithName:] 生成不同的 TMUIThemeManager。
+ 主题管理组件，可添加自定义的主题对象，并为每个对象指定一个专门的 identifier，当主题发生变化时，会遍历 UIViewController 和 UIView，调用每个 viewController 和每个可视 view 的 tmui_themeDidChangeByManager:identifier:theme: 方法，在里面由业务去自行根据当前主题设置不同的外观（color、image 等）。借助 TMUIThemeManagerCenter，可实现一个项目里同时存在多个维度的主题（例如全局维度存在 light/dark 2套主题，局部的某个界面存在 white/yellow/green/black 4套主题），各自互不影响，如果业务项目只需要一个维度的主题，则全都使用 TMUIThemeManagerCenter.defaultThemeManager 来获取 TMUIThemeManager 即可，如果业务有多维度主题的需求，可使用 +[TMUIThemeManagerCenter themeManagerWithName:] 生成不同的 TMUIThemeManager。
  
  详细文档请查看 GitHub Wiki
  @link https://github.com/Tencent/TMUI_iOS/wiki/%E4%BD%BF%E7%94%A8-TMUITheme-%E5%AE%9E%E7%8E%B0%E6%8D%A2%E8%82%A4%E5%B9%B6%E9%80%82%E9%85%8D-iOS-13-Dark-Mode
@@ -31,14 +31,14 @@ extern NSNotificationName const TMUIThemeDidChangeNotification;
  
  关于 App 界面响应主题变化的方式：
  组件支持三种层面来响应主题变化：
- 1. UIView 层面，如果是颜色（UIColor/CGColor）变化，请使用 [UIColor qmui_colorWithThemeProvider:] 方法来创建 UIColor，以及获取该 color 对应的 CGColor，建议每个颜色对应一个 @property，然后使用 [UIView qmui_registerThemeColorProperties:] 来注册这些需要在主题变化时自动刷新样式的 property，这样的好处是对设置颜色的时机没有要求，在 init 时就设置也没问题，不需要因为实现换肤而大量修改业务原有代码。如果是非 NSObject 的变化（例如  enum/struct 或者业务代码逻辑），可重写 [UIView qmui_themeDidChangeByManager:identifier:theme:]，在里面根据当前主题做代码逻辑上的区分。
- 2. UIViewController 层面，仅支持重写 [UIViewController qmui_themeDidChangeByManager:identifier:theme:] 方法来实现换肤。
+ 1. UIView 层面，如果是颜色（UIColor/CGColor）变化，请使用 [UIColor tmui_colorWithThemeProvider:] 方法来创建 UIColor，以及获取该 color 对应的 CGColor，建议每个颜色对应一个 @property，然后使用 [UIView tmui_registerThemeColorProperties:] 来注册这些需要在主题变化时自动刷新样式的 property，这样的好处是对设置颜色的时机没有要求，在 init 时就设置也没问题，不需要因为实现换肤而大量修改业务原有代码。如果是非 NSObject 的变化（例如  enum/struct 或者业务代码逻辑），可重写 [UIView tmui_themeDidChangeByManager:identifier:theme:]，在里面根据当前主题做代码逻辑上的区分。
+ 2. UIViewController 层面，仅支持重写 [UIViewController tmui_themeDidChangeByManager:identifier:theme:] 方法来实现换肤。
  3. NSObject 层面，可通过监听 TMUIThemeDidChangeNotification 通知，在回调里处理主题切换事件（例如将当前选择的主题持久化记录下来，下次 App 启动直接应用）。
  
  标准场景下的使用流程：
  1. App 启动时，按需初始化 theme 对象并注册到 TMUIThemeManager 里。
  2. 根据当前用户的选择记录（例如 NSUserDefaults），通过 currentThemeIdentifier/currentTheme 指定当前的主题。
- 3. 对需要响应主题变化的界面，检查其中的所有 UIColor、CGColor 的代码，将颜色换成使用 [UIColor qmui_colorWithThemeProvider:] 创建，如果该颜色对应一个 property，则使用 [UIView qmui_registerThemeColorProperties:] 注册这个 property，如果不对应 property，则请在 qmui_themeDidChangeByManager:identifier:theme: 里重新设置该颜色。
+ 3. 对需要响应主题变化的界面，检查其中的所有 UIColor、CGColor 的代码，将颜色换成使用 [UIColor tmui_colorWithThemeProvider:] 创建，如果该颜色对应一个 property，则使用 [UIView tmui_registerThemeColorProperties:] 注册这个 property，如果不对应 property，则请在 tmui_themeDidChangeByManager:identifier:theme: 里重新设置该颜色。
  4. 通过 TMUIThemeDidChangeNotification 监听主题的变化，将其持久化存储以便下次启动时应用。
  5. 若需要响应 iOS 13 的 Dark Mode，参考 respondsSystemStyleAutomatically、identifierForTrait 的注释。
  */
