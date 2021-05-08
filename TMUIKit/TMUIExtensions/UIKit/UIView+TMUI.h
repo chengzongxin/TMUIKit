@@ -43,6 +43,11 @@ typedef NS_ENUM(NSUInteger, TMUIGradientType) {
 /// 移除当前所有 subviews
 - (void)tmui_removeAllSubviews;
 
+/**
+ 将要设置的 frame 用 CGRectApplyAffineTransformWithAnchorPoint 处理后再设置
+ */
+@property(nonatomic, assign) CGRect tmui_frameApplyTransform;
+
 @end
 
 @interface UIView (TMUI_Layout)

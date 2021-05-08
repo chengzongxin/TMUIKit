@@ -248,6 +248,16 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
       end
       
+      # TMUITheme
+      ss.subspec 'TMUIAppearance' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
+      end
+      
+      # TMUITheme
+      ss.subspec 'TMUIModalPresentationViewController' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
+      end
+      
   end
   
   

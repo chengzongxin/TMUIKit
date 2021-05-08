@@ -12,6 +12,7 @@
 #import <sys/utsname.h>
 #import "TMUIAssociatedPropertyDefines.h"
 #import "NSObject+TMUI.h"
+#import "UIViewController+TMUI.h"
 
 
 NSString *const kTMUIResourcesBundleName = @"TMUIResources";
@@ -916,6 +917,18 @@ static NSMutableSet<NSString *> *executedIdentifiers;
         @(UIViewContentModeBottomRight):        kCAGravityTopRight
     };
     return relationship[@(contentMode)] ?: kCAGravityCenter;
+}
+
+@end
+
+
+
+@implementation TMUIHelper (ViewController)
+
++ (nullable UIViewController *)visibleViewController {
+    UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+//    UIViewController *visibleViewController = [rootViewController tmui_visibleViewControllerIfExist];
+    return [rootViewController tmui_topViewController];
 }
 
 @end

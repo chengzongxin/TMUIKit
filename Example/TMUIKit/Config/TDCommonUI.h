@@ -53,7 +53,7 @@ extern NSString *const QDThemeIdentifierPinkRose;
 extern NSString *const QDThemeIdentifierDark;
 
 #define CodeFontMake(_pointSize) [UIFont fontWithName:@"Menlo" size:_pointSize]
-#define CodeAttributes(_fontSize) @{NSFontAttributeName: CodeFontMake(_fontSize), NSForegroundColorAttributeName: QDThemeManager.currentTheme.themeCodeColor}
+#define CodeAttributes(_fontSize) @{NSFontAttributeName: CodeFontMake(_fontSize), NSForegroundColorAttributeName: TDThemeManager.currentTheme.themeCodeColor}
 
 #define IsUITest NSProcessInfo.processInfo.environment[@"isUITest"].boolValue
 

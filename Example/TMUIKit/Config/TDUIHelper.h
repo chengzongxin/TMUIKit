@@ -19,5 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)navigationBarBackgroundImageWithThemeColor:(UIColor *)color;
 @end
 
+@interface NSString (Code)
+
+- (void)enumerateCodeStringUsingBlock:(void (^)(NSString *codeString, NSRange codeRange))block;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

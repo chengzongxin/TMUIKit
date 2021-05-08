@@ -9,6 +9,7 @@
 #import "UIViewController+Base.h"
 #import "TDThemeManager.h"
 
+static NSString * const kShowByUser = @"kShowByUser";
 
 @implementation UIResponder (hideKeyboard)
 
@@ -37,38 +38,27 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 + (void)load{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-//        ExchangeImplementations([self class], @selector(viewDidLoad), @selector(tmui_viewDidLoad));
-        
-//        ExtendImplementationOfVoidMethodWithSingleArgument([UIViewController class], @selector(viewWillAppear:), ^(UIViewController *selfObject) {
-//            selfObject.view.backgroundColor = UIColor.redColor;
-//        });
-        
-//        ExtendImplementationOfVoidMethodWithSingleArgument([self class], @selector(viewWillAppear:), BOOL, ^(UIViewController *selfObject, BOOL animate) {
-//            selfObject.navigationItem.title = NSStringFromClass(selfObject.class);
-//        });
-        
-        
+        // 全局配置
         ExtendImplementationOfVoidMethodWithoutArguments([self class], @selector(viewDidLoad), ^(UIViewController *selfObject) {
-            
-            if (!HasOverrideSuperclassMethod(selfObject.class, @selector(viewDidLoad))) {
-                return;
+            if ([selfObject tmui_getBoundBOOLForKey:kShowByUser]) {
+                selfObject.view.backgroundColor = UIColor.td_backgroundColor;
+                selfObject.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:NavBarBackIndicatorImage style:UIBarButtonItemStylePlain target:selfObject action:@selector(popLastViewController)];
+                // 标题可复制
+                TMUILabel *label = [[TMUILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
+                label.text = NSStringFromClass(selfObject.class);
+                label.font = NavBarTitleFont;
+                label.textAlignment = NSTextAlignmentCenter;
+                label.textColor = NavBarTitleColor;
+                selfObject.navigationItem.titleView = label;
+                // set
+                label.canPerformCopyAction = YES;
+                label.didCopyBlock = ^(TMUILabel * _Nonnull label, NSString * _Nonnull stringCopied) {
+                    NSLog(@"%@",stringCopied);
+                    [TMToast toast:stringCopied];
+                };
             }
-            
-            
-            
-            // 标题可复制
-            TMUILabel *label = [[TMUILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
-            label.text = NSStringFromClass(selfObject.class);
-            label.font = UIFontMedium(18);
-            label.textAlignment = NSTextAlignmentCenter;
-            selfObject.navigationItem.titleView = label;
-            // set
-            label.canPerformCopyAction = YES;
-            label.didCopyBlock = ^(TMUILabel * _Nonnull label, NSString * _Nonnull stringCopied) {
-                NSLog(@"%@",stringCopied);
-                [TMToast toast:stringCopied];
-            };
         });
+        
         // 必须分类先添加方法，才能替换重写
 //        ExtendImplementationOfVoidMethodWithTwoArguments(self, @selector(touchesBegan:withEvent:), NSSet<UITouch *> *, UIEvent *, ^(UIViewController *selfObject, NSSet<UITouch *> *touches, UIEvent *event) {
 //
@@ -77,6 +67,10 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
         ExchangeImplementations(self, @selector(touchesBegan:withEvent:), @selector(base_touchesBegan:withEvent:));
         
     });
+}
+
+- (void)popLastViewController{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -126,8 +120,28 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 
 - (void)tmui_pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     [self tmui_pushViewController:viewController animated:animated];
-    viewController.view.backgroundColor = UIColor.td_backgroundColor;
-    
+    [viewController tmui_bindBOOL:YES forKey:kShowByUser];
 }
+
+@end
+
+@interface UITabBarController (Base)
+
+@end
+
+@implementation UITabBarController (Base)
+
++ (void)load{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+        ExtendImplementationOfVoidMethodWithoutArguments(self, @selector(awakeFromNib), ^(__kindof UITabBarController * _Nonnull selfObject) {
+            for (UINavigationController *nav in selfObject.childViewControllers) {
+                [nav.topViewController tmui_bindBOOL:YES forKey:kShowByUser];
+            }
+        });
+    });
+}
+
 
 @end
