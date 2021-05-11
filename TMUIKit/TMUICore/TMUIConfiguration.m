@@ -369,6 +369,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     UINavigationBar.tmui_appearanceConfigured.barStyle = navBarStyle;
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.barStyle = navBarStyle;
+        [navigationController.navigationBar setNeedsLayout];
     }];
 }
 
@@ -536,6 +537,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         UITabBar.tmui_appearanceConfigured.standardAppearance = self.tabBarAppearance;
         [self.appearanceUpdatingTabBarControllers enumerateObjectsUsingBlock:^(UITabBarController * _Nonnull tabBarController, NSUInteger idx, BOOL * _Nonnull stop) {
             tabBarController.tabBar.standardAppearance = self.tabBarAppearance;
+            [tabBarController.tabBar setNeedsLayout];
         }];
     }
 }
