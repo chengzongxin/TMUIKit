@@ -18,8 +18,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.bgColor(@"white");
-    
     NSArray *items = @[@"1",@"2",@"3",@"4"];
     // DEMO 1
     id l1 = Label.str(@"TMUI : TMUISegmentedControl").styles(h1);

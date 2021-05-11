@@ -179,17 +179,17 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     self.buttonDisabledAlpha = self.controlDisabledAlpha;
     self.buttonTintColor = self.blueColor;
     
-    self.ghostButtonColorBlue = self.blueColor;
-    self.ghostButtonColorRed = self.redColor;
-    self.ghostButtonColorGreen = self.greenColor;
-    self.ghostButtonColorGray = self.grayColor;
-    self.ghostButtonColorWhite = self.whiteColor;
-    
-    self.fillButtonColorBlue = self.blueColor;
-    self.fillButtonColorRed = self.redColor;
-    self.fillButtonColorGreen = self.greenColor;
-    self.fillButtonColorGray = self.grayColor;
-    self.fillButtonColorWhite = self.whiteColor;
+//    self.ghostButtonColorBlue = self.blueColor;
+//    self.ghostButtonColorRed = self.redColor;
+//    self.ghostButtonColorGreen = self.greenColor;
+//    self.ghostButtonColorGray = self.grayColor;
+//    self.ghostButtonColorWhite = self.whiteColor;
+//
+//    self.fillButtonColorBlue = self.blueColor;
+//    self.fillButtonColorRed = self.redColor;
+//    self.fillButtonColorGreen = self.greenColor;
+//    self.fillButtonColorGray = self.grayColor;
+//    self.fillButtonColorWhite = self.whiteColor;
     
     #pragma mark - UITextField & UITextView
     

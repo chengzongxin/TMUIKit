@@ -71,16 +71,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) CGFloat            buttonHighlightedAlpha;
 @property(nonatomic, assign) CGFloat            buttonDisabledAlpha;
 @property(nonatomic, strong, nullable)  UIColor *buttonTintColor;
-@property(nonatomic, strong) UIColor            *ghostButtonColorBlue;
-@property(nonatomic, strong) UIColor            *ghostButtonColorRed;
-@property(nonatomic, strong) UIColor            *ghostButtonColorGreen;
-@property(nonatomic, strong) UIColor            *ghostButtonColorGray;
-@property(nonatomic, strong) UIColor            *ghostButtonColorWhite;
-@property(nonatomic, strong) UIColor            *fillButtonColorBlue;
-@property(nonatomic, strong) UIColor            *fillButtonColorRed;
-@property(nonatomic, strong) UIColor            *fillButtonColorGreen;
-@property(nonatomic, strong) UIColor            *fillButtonColorGray;
-@property(nonatomic, strong) UIColor            *fillButtonColorWhite;
 
 #pragma mark - UITextField & UITextView
 

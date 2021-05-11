@@ -19,7 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.whiteColor;
 }
 
 - (UISegmentedControl *)addSegmentedWithLabelText:(NSString *)lbltext titles:(NSArray<NSString *> *)titles click:(void (^)(NSInteger))clickBlock{

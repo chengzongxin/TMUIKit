@@ -280,7 +280,17 @@
 
 #### TMUITableView
 
-- 
+- UITableView 简单自定义,基于系统的UITableViewCell，可自由控制ImageView，TextLabel，DetailLabel，AccessorImageView基本元素，以及分割线缩进
+- 包含3种TableView样式，plain，group，insetGroup,兼容各个系统版本，简单自定义的TMUITableViewHeaderFooterView
+- 缓存行高，优化性能，只需要在cell内部计算一次（实现`sizeThatFits`方法计算高度），外部自动调用缓存，无须再使用类方法计算高度，支持动态更新cell高度
+
+#### TMUIBadge
+
+- 用于在`View`、`UIBarButtonItem`、`UITabBarItem` 上显示未读数（badge）和未读红点（updatesIndicator），且对设置的时机无要求，不用担心 `valueForKey:@"view"` 返回 nil 的情况。
+
+#### TMUIMultiDelegates
+
+- 对于系统的协议一般只能设置一个代理，这个组件支持同时设置多个代理回调，并且支持自定义的协议实现多代理
 
 #### TMUIPageViewController
 
@@ -289,16 +299,22 @@
 - 支持自定义tabs
 - 支持动态tabs刷新子VC和header
 
-#### TMUIMultipleDelegates
+#### TMContentPicker
 
-- 让对象支持多个delegate、支持自定义的delegate
+- 包含多种业务场景下选择器
+- 单列选择器`TMNormalPicker`
+- 多列选择器`TMMultiDataPicker`
+- 多种格式的时间选择器`TMDatePicker`
+- 自定义数据选择器`TMCityPicker`
 
+#### TMPopoverView
+
+- 提供类似系统UIPopoverController的显示效果的视图类
 
 
 #### ChainUI
 
 - 链式UI、一切对象都可以用''`.`语法''一直'"`.`"'下去，点到你停不下来
-
 - 清晰、明了的语法、简洁的API
 - 三大核心组件，Styles，CUIStack、GroupTV，进一步提升开发效率
 - 丰富的宏定义，为后期拓展保驾护航
