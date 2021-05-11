@@ -319,6 +319,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 - (void)setNavBarTintColor:(UIColor *)navBarTintColor {
     _navBarTintColor = navBarTintColor;
     // tintColor 并没有声明 UI_APPEARANCE_SELECTOR，所以暂不使用 appearance 的方式去修改（虽然 appearance 方式实测是生效的）
+    UINavigationBar.tmui_appearanceConfigured.tintColor = navBarTintColor;
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.tintColor = _navBarTintColor;
     }];

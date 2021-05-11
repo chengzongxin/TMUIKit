@@ -42,9 +42,6 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
         ExtendImplementationOfVoidMethodWithoutArguments([self class], @selector(viewDidLoad), ^(UIViewController *selfObject) {
             if ([selfObject tmui_getBoundBOOLForKey:kShowByUser]) {
                 selfObject.view.backgroundColor = UIColor.td_backgroundColor;
-                if (selfObject.navigationController.viewControllers.count > 1) {
-                    selfObject.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:NavBarBackIndicatorImage style:UIBarButtonItemStylePlain target:selfObject action:@selector(popLastViewController)];
-                }
                 // 标题可复制
                 TMUILabel *label = [[TMUILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
                 label.text = NSStringFromClass(selfObject.class);
