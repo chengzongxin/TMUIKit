@@ -88,6 +88,13 @@
 #import "UIView+TMUIBadge.h"
 #endif
 
+#if __has_include("TMUIAppearance.h")
+#import "TMUIAppearance.h"
+#endif
+
+#if __has_include("TMUIModalPresentationViewController.h")
+#import "TMUIModalPresentationViewController.h"
+#endif
 
 
 #endif /* TMUIComponents_h */

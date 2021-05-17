@@ -131,6 +131,14 @@ static char kAssociatedObjectKey_hitTestBlock;
     return (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock);
 }
 
+- (void)setTmui_frameApplyTransform:(CGRect)tmui_frameApplyTransform {
+    self.frame = CGRectApplyAffineTransformWithAnchorPoint(tmui_frameApplyTransform, self.transform, self.layer.anchorPoint);
+}
+
+- (CGRect)tmui_frameApplyTransform {
+    return self.frame;
+}
+
 - (void)tmui_removeAllSubviews{
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }

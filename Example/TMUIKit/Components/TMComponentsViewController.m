@@ -17,6 +17,7 @@
 #import "TMUIBadgeViewController.h"
 #import "TMUICoreViewController6.h"
 #import "TDThemeViewController.h"
+#import "TDModalPresentationViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -38,10 +39,9 @@
                     Row.str(@"TMUITheme").fnt(18).detailStr(@"主题管理").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TDThemeViewController.class];
                         }),
-                    Row.str(@"TMPageViewController").fnt(18).detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").subtitleStyle.cellHeightAuto.onClick(^{
-                            [self push:TMPageRootViewController.class];
+                    Row.str(@"TMUIModalPresentationViewController").fnt(18).detailStr(@"各种自定义弹窗").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TDModalPresentationViewController.class];
                         }),
-                    
                     Row.str(@"TMUITableView").fnt(18).detailStr(@"多样式UITableView").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUITableViewController.class];
                         }),
@@ -50,6 +50,9 @@
                         }),
                     Row.str(@"TMUIMultipleDelegates").fnt(18).detailStr(@"让对象支持多个delegate、支持自定义的delegate").subtitleStyle.cellHeightAuto.onClick(^{
                             [self push:TMUICoreViewController6.class];
+                        }),
+                    Row.str(@"TMPageViewController").fnt(18).detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").subtitleStyle.cellHeightAuto.onClick(^{
+                            [self push:TMPageRootViewController.class];
                         }),
                     ).title(@"TMUI Components"),
             Section(

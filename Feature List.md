@@ -2,7 +2,86 @@
 
 
 
-# TMUI Widgets
+# TMUICore
+
+#### TMUIAssociatedPropertyDefines
+
+- 针对在类型里添加属性的相关便捷宏定义,提供三种方式快捷关联对象
+- 方式一：需要传入var类型
+- 方式二：包含各种数据类型可供选择,id,weak,copy,基本类型等。
+- 方式三：TMUIWeakObjectContainer使用弱引用容器类，避免关联对象释放产生野指针crash。
+
+#### TMUICommonDefines
+
+- 设备相关的宏，例如区分当前设备是 iPhone、iPad 或是模拟器，获取当前设备的横竖屏状态、屏幕信息等。
+- 编译相关的宏，例如判断是否处于 `DEBUG` 模式，当前编译环境使用的 SDK 版本，忽略某些常见的 warning 等。
+- 布局相关的宏，例如快速获取状态栏、导航栏的高度，为不同的屏幕大小使用不同的值，代表 1px 的宏等。
+- 数学计算相关的宏，例如角度换算等。
+- 根据给定的 getter selector 获取对应的 setter selector、判断字符串是否为空等。
+- 单例、懒加载、TMUI_weakify、TMUI_strongify
+
+#### TMUIConfiguration（主题组件）
+
+<!-- 逻辑实现：第一次使用TMUICMI(基本在启动时)，TMUIConfiguration遍历所有（TMUIConfigurationTemplate）模板配置文件，通过`shouldApplyTemplateAutomatically`找到指定的配置文件（一般结合用户偏好存储上次使用的主题），之后调用（applyConfigurationTemplate）应用配置，在这个方法内为全局单例TMUIConfiguration每个属性赋值，并且这个过程只执行一次，之后就会应用这个配置表来为全局app的定制模板样式 -->
+
+- 维护项目全局 UI 配置的单例，通过业务项目自己的 `TMUIConfigurationTemplate` 来为这个单例赋值，而业务代码里则通过 `TMUIConfigurationMacros.h` 文件里的宏来使用这些值。
+- `TMUIConfigurationTemplate`实现`TMUIConfigurationTemplateProtocol`，实现相关协议`applyConfigurationTemplate`应用配置，`shouldApplyTemplateAutomatically`指定某个具体配置文件
+
+#### TMUIConfigurationMacros（主题组件）
+
+- 作为`TMUIConfiguration`的单例接口，提供一系列方便书写的宏，以便在代码里读取配置表的各种属性。
+
+#### TMUICoreGraphicsDefines
+
+- 屏幕适配相关的内联函数，例如数获取状态栏、导航栏的高度等
+- 布局相关的函数，例如浮点数的像素取整计算、CGPoint、CGRect、UIEdgeIntents 的便捷操作等。
+- 结构体操作（CGPoint、CGSize、CGRect、UIEdgeInset）、安全检查、isNan，isInfi等，以免出现crash。
+
+#### TMUIHelper
+
+- 私有类，内部具体实现设备信息获取方法，给外部提供宏访问通道接口
+- 用一个 identifier 标记某一段 block，使其对应该 identifier 只会被运行一次
+- 对设备键盘的管理，包括获取全局键盘显示状态、记录最后一次键盘的高度、从键盘事件的 `NSNotification` 对象中快速获取相关的信息。
+- 对设备的听筒/扬声器的管理。
+- 获取设备信息，包括设备类型、屏幕尺寸等。
+- 管理设备的状态栏及当前 window 的 `dimmend` 状态(置灰)。
+
+#### TMUIInitMacro
+
+- UIView及NSObject的子类实现相关init方法时提取相关重复代码定义宏
+
+#### TMUIKitDefines
+
+- 主题元素相关：颜色、字体、图片的创建UIKit库里基础对象的便捷宏
+
+#### TMUIRuntime
+
+- 运行时相关的函数，例如 swizzle 方法替换、动态添加方法等
+- 获取类的某个属性信息、值
+- 判断是否重写父类方法
+- 交换两个类的方法、单个类的方法（会先判断原有方法是否存在，以免调用空方法crash）
+- 用 block 重写某个 class 的指定方法，自定义实现细节
+- 用 block 重写某个 class 的某个的方法，会自动在调用 block 之前先调用该方法原本的实现
+- 判断Ivar 是哪种类型、获取Ivar的值
+
+#### TMUIWeakObjectContainer
+
+- 弱持有对象容器，避免强引用的同时，也避免野指针crash。
+- 适用定时器、弱关联属性
+
+#### TMUIConfiguration
+
+- 维护项目全局 UI 配置的单例，通过业务项目自己的 `TMUIConfigurationTemplate` 来为这个单例赋值，而业务代码里则通过 `TMUIConfigurationMacros.h` 文件里的宏来使用这些值。
+
+#### TMUIConfigurationMacros
+
+- 提供一系列方便书写的宏，以便在代码里读取配置表的各种属性。
+
+#### TMUIConfigurationTemplate
+提供一份模板用于为 `TMUIConfiguration` 单例赋值，业务项目应该将 `TMUIConfigurationTemplate` 文件复制到业务项目里或继承该类，修改赋值后调用 `applyConfigurationTemplate` 方法以生效。
+
+
+# TMUIWidgets
 
 #### TMUIButton
 
@@ -39,11 +118,17 @@
 - 修改圆点的大小
 - 修改圆点的阴影样式
 
+#### TMUISegmentedControl
+
+- TMUISegmentedControl，继承自 UISegmentedControl
+
+- 如果需要更大程度地修改样式，比如说字体大小，选中的 segment 的文字颜色等等
+
+- TMUISegmentedControl 也同样支持使用图片来做样式。
 
 
 
-
-# TMUI Extensions
+# TMUIExtensions
 
 ## UIKit
 
@@ -185,6 +270,36 @@
 
 # TMUIComponents
 
+#### TMUITheme
+
+- 主题管理组件，可添加自定义的主题对象，并为每个对象指定一个专门的 identifier，当主题发生变化时，会遍历 UIViewController 和 UIView，调用每个 viewController 和每个可视 view 的 tmui_themeDidChangeByManager:identifier:theme: 方法，在里面由业务去自行根据当前主题设置不同的外观（color、image 等）
+
+#### TMUIAppearance
+
+- UIKit 仅提供了对 UIView 默认的 UIAppearance 支持，如果你是一个继承自 NSObject 的对象，想要使用 UIAppearance 能力，按 UIKit 公开的 API 是无法实现的，而 TMUIAppearance 对这种场景提供了支持。
+
+#### TMUIModalPresentationViewController
+
+- 一个提供通用的弹出浮层功能的控件，可以将任意`UIView`或`UIViewController`以浮层的形式显示出来并自动布局。
+- 支持 3 种方式显示浮层、3种显示动画、appearance全局配置
+- 新起一个 `UIWindow` 盖在当前界面上（推荐）
+- 使用系统 `presentViewController` 接口来显示，支持界面切换
+- 将浮层作为一个 subview 添加到 `superview` 上
+
+#### TMUITableView
+
+- UITableView 简单自定义,基于系统的UITableViewCell，可自由控制ImageView，TextLabel，DetailLabel，AccessorImageView基本元素，以及分割线缩进
+- 包含3种TableView样式，plain，group，insetGroup,兼容各个系统版本，简单自定义的TMUITableViewHeaderFooterView
+- 缓存行高，优化性能，只需要在cell内部计算一次（实现`sizeThatFits`方法计算高度），外部自动调用缓存，无须再使用类方法计算高度，支持动态更新cell高度
+
+#### TMUIBadge
+
+- 用于在`View`、`UIBarButtonItem`、`UITabBarItem` 上显示未读数（badge）和未读红点（updatesIndicator），且对设置的时机无要求，不用担心 `valueForKey:@"view"` 返回 nil 的情况。
+
+#### TMUIMultiDelegates
+
+- 对于系统的协议一般只能设置一个代理，这个组件支持同时设置多个代理回调，并且支持自定义的协议实现多代理
+
 #### TMUIPageViewController
 
 - 数据源驱动代理设计模式
@@ -192,83 +307,25 @@
 - 支持自定义tabs
 - 支持动态tabs刷新子VC和header
 
-#### TMUITableView
+#### TMContentPicker
 
-- 
+- 包含多种业务场景下选择器
+- 单列选择器`TMNormalPicker`
+- 多列选择器`TMMultiDataPicker`
+- 多种格式的时间选择器`TMDatePicker`
+- 自定义数据选择器`TMCityPicker`
 
-#### TMUIMultipleDelegates
+#### TMPopoverView
 
-- 让对象支持多个delegate、支持自定义的delegate
-
+- 提供类似系统UIPopoverController的显示效果的视图类
 
 
 #### ChainUI
 
 - 链式UI、一切对象都可以用''`.`语法''一直'"`.`"'下去，点到你停不下来
-
 - 清晰、明了的语法、简洁的API
 - 三大核心组件，Styles，CUIStack、GroupTV，进一步提升开发效率
 - 丰富的宏定义，为后期拓展保驾护航
-
-
-
-
-
-# TMUICore
-
-#### TMUIAssociatedPropertyDefines
-
-- 针对在类型里添加属性的相关便捷宏定义,提供三种方式快捷关联对象
-- 方式一：需要传入var类型
-- 方式二：包含各种数据类型可供选择,id,weak,copy,基本类型等。
-- 方式三：TMUIWeakObjectContainer使用弱引用容器类，避免关联对象释放产生野指针crash。
-
-#### TMUICommonDefines
-
-- 设备相关的宏，例如区分当前设备是 iPhone、iPad 或是模拟器，获取当前设备的横竖屏状态、屏幕信息等。
-- 编译相关的宏，例如判断是否处于 `DEBUG` 模式，当前编译环境使用的 SDK 版本，忽略某些常见的 warning 等。
-- 布局相关的宏，例如快速获取状态栏、导航栏的高度，为不同的屏幕大小使用不同的值，代表 1px 的宏等。
-- 数学计算相关的宏，例如角度换算等。
-- 根据给定的 getter selector 获取对应的 setter selector、判断字符串是否为空等。
-- 单例、懒加载、TMUI_weakify、TMUI_strongify
-
-#### TMUIKitDefines
-
-- 主题元素相关：颜色、字体、图片的创建UIKit库里基础对象的便捷宏
-
-#### TMUICoreGraphicsDefines
-
-- 屏幕适配相关的内联函数，例如数获取状态栏、导航栏的高度等
-- 布局相关的函数，例如浮点数的像素取整计算、CGPoint、CGRect、UIEdgeIntents 的便捷操作等。
-- 结构体操作（CGPoint、CGSize、CGRect、UIEdgeInset）、安全检查、isNan，isInfi等，以免出现crash。
-
-#### TMUIInitMacro
-
-- UIView及NSObject的子类实现相关init方法时提取相关重复代码定义宏
-
-#### TMUIHelper
-
-- 私有类，内部具体实现设备信息获取方法，给外部提供宏访问通道接口
-- 用一个 identifier 标记某一段 block，使其对应该 identifier 只会被运行一次
-- 对设备键盘的管理，包括获取全局键盘显示状态、记录最后一次键盘的高度、从键盘事件的 `NSNotification` 对象中快速获取相关的信息。
-- 对设备的听筒/扬声器的管理。
-- 获取设备信息，包括设备类型、屏幕尺寸等。
-- 管理设备的状态栏及当前 window 的 `dimmend` 状态(置灰)。
-
-#### TMUIRuntime
-
-- 运行时相关的函数，例如 swizzle 方法替换、动态添加方法等
-- 获取类的某个属性信息、值
-- 判断是否重写父类方法
-- 交换两个类的方法、单个类的方法（会先判断原有方法是否存在，以免调用空方法crash）
-- 用 block 重写某个 class 的指定方法，自定义实现细节
-- 用 block 重写某个 class 的某个的方法，会自动在调用 block 之前先调用该方法原本的实现
-- 判断Ivar 是哪种类型、获取Ivar的值
-
-#### TMUIWeakObjectContainer
-
-- 弱持有对象容器，避免强引用的同时，也避免野指针crash。
-- 适用定时器、弱关联属性
 
 
 

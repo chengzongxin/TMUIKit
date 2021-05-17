@@ -27,8 +27,8 @@
     
     self.slider = [[TMUISlider alloc] init];
     self.slider.value = .3;
-    self.slider.minimumTrackTintColor = UIColor.tmui_randomColor;
-    self.slider.maximumTrackTintColor = UIColor.tmui_randomColor;
+    self.slider.minimumTrackTintColor = UIColor.td_tintColor;
+    self.slider.maximumTrackTintColor = UIColor.td_separatorColor;
     self.slider.trackHeight = 1;// 支持修改背后导轨的高度
     self.slider.thumbColor = self.slider.minimumTrackTintColor;
     self.slider.thumbSize = CGSizeMake(20, 20);// 支持修改拖拽圆点的大小

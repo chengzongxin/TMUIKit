@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-/// 所有主题均应实现这个协议，规定了 QMUI Demo 里常用的几个关键外观属性
+/// 所有主题均应实现这个协议，规定了 TMUI Demo 里常用的几个关键外观属性
 @protocol TDThemeProtocol <TMUIConfigurationTemplateProtocol>
 
 @required

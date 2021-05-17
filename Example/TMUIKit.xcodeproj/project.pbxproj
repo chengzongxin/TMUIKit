@@ -29,8 +29,11 @@
 		160860BF25C01D8100F31337 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860B925C01D8100F31337 /* TableViewController.m */; };
 		160860C025C01D8100F31337 /* Table1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860BA25C01D8100F31337 /* Table1ViewController.m */; };
 		160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 160860D425C01E3200F31337 /* THKSegmentControl.m */; };
+		1610720626381E5E00456D73 /* TMUISegmentedControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1610720526381E5E00456D73 /* TMUISegmentedControlViewController.m */; };
 		1611E2F625FA12DF003D4357 /* TMUISliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1611E2F525FA12DF003D4357 /* TMUISliderViewController.m */; };
 		1625BA4A25E63778005686D0 /* UIViewTMUI3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1625BA4925E63778005686D0 /* UIViewTMUI3ViewController.m */; };
+		1632A13926454A320074424D /* TDModalPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1632A13826454A320074424D /* TDModalPresentationViewController.m */; };
+		16331EE4264664A6006FB17D /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 16331EE3264664A6006FB17D /* UIImageEffects.m */; };
 		163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */; };
 		16402B56260C1D1C00B4ADBF /* TMPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B55260C1D1C00B4ADBF /* TMPopoverViewController.m */; };
 		16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B5E260C1D4E00B4ADBF /* TMMyPopoverViewController.m */; };
@@ -42,6 +45,7 @@
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
 		1646639825F8C9A600B0125B /* TMUICoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1646639725F8C9A600B0125B /* TMUICoreViewController.m */; };
 		164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 164663A025F8D14300B0125B /* TMUICoreViewController4.m */; };
+		1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671EEFF264D0D4D00673A91 /* TDTestViewController.m */; };
 		16812AFB2603225F00AECD14 /* TMUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812AFA2603225F00AECD14 /* TMUITableViewController.m */; };
 		16812B012603292C00AECD14 /* TMUITableViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812B002603292C00AECD14 /* TMUITableViewController1.m */; };
 		16812BD6260351AC00AECD14 /* TMUITableViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812BD5260351AC00AECD14 /* TMUITableViewController2.m */; };
@@ -154,10 +158,16 @@
 		160860EF25C01F1D00F31337 /* THKCommonDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THKCommonDefine.h; sourceTree = "<group>"; };
 		160860F025C01F1D00F31337 /* Define_SetValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_SetValues.h; sourceTree = "<group>"; };
 		160860F525C01F1D00F31337 /* Define_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define_Block.h; sourceTree = "<group>"; };
+		1610720426381E5E00456D73 /* TMUISegmentedControlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUISegmentedControlViewController.h; sourceTree = "<group>"; };
+		1610720526381E5E00456D73 /* TMUISegmentedControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUISegmentedControlViewController.m; sourceTree = "<group>"; };
 		1611E2F425FA12DF003D4357 /* TMUISliderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUISliderViewController.h; sourceTree = "<group>"; };
 		1611E2F525FA12DF003D4357 /* TMUISliderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUISliderViewController.m; sourceTree = "<group>"; };
 		1625BA4825E63778005686D0 /* UIViewTMUI3ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIViewTMUI3ViewController.h; sourceTree = "<group>"; };
 		1625BA4925E63778005686D0 /* UIViewTMUI3ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIViewTMUI3ViewController.m; sourceTree = "<group>"; };
+		1632A13726454A320074424D /* TDModalPresentationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDModalPresentationViewController.h; sourceTree = "<group>"; };
+		1632A13826454A320074424D /* TDModalPresentationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDModalPresentationViewController.m; sourceTree = "<group>"; };
+		16331EE2264664A6006FB17D /* UIImageEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIImageEffects.h; sourceTree = "<group>"; };
+		16331EE3264664A6006FB17D /* UIImageEffects.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 		163444A825BA70910091D4EF /* UIButtonTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIButtonTMUIViewController.h; sourceTree = "<group>"; };
 		163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIButtonTMUIViewController.m; sourceTree = "<group>"; };
 		16402B54260C1D1C00B4ADBF /* TMPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMPopoverViewController.h; sourceTree = "<group>"; };
@@ -179,6 +189,8 @@
 		1646639725F8C9A600B0125B /* TMUICoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController.m; sourceTree = "<group>"; };
 		1646639F25F8D14300B0125B /* TMUICoreViewController4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController4.h; sourceTree = "<group>"; };
 		164663A025F8D14300B0125B /* TMUICoreViewController4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController4.m; sourceTree = "<group>"; };
+		1671EEFE264D0D4D00673A91 /* TDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDTestViewController.h; sourceTree = "<group>"; };
+		1671EEFF264D0D4D00673A91 /* TDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDTestViewController.m; sourceTree = "<group>"; };
 		16812AF92603225F00AECD14 /* TMUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController.h; sourceTree = "<group>"; };
 		16812AFA2603225F00AECD14 /* TMUITableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITableViewController.m; sourceTree = "<group>"; };
 		16812AFF2603292C00AECD14 /* TMUITableViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController1.h; sourceTree = "<group>"; };
@@ -403,6 +415,17 @@
 			path = CommonDefine;
 			sourceTree = "<group>";
 		};
+		1632A136264549FD0074424D /* TDModalPresentationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1632A13726454A320074424D /* TDModalPresentationViewController.h */,
+				1632A13826454A320074424D /* TDModalPresentationViewController.m */,
+				16331EE2264664A6006FB17D /* UIImageEffects.h */,
+				16331EE3264664A6006FB17D /* UIImageEffects.m */,
+			);
+			path = TDModalPresentationViewController;
+			sourceTree = "<group>";
+		};
 		16402B53260C1D0A00B4ADBF /* TMPopoverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +442,7 @@
 			children = (
 				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+				1632A136264549FD0074424D /* TDModalPresentationViewController */,
 				1685727E261F10CE007A0E6D /* TDTheme */,
 				16402B53260C1D0A00B4ADBF /* TMPopoverView */,
 				1602D6F1260ADCE900B11DC6 /* TMUIAlert */,
@@ -549,6 +573,8 @@
 				168572A0261F16C4007A0E6D /* TDThemeExampleView.m */,
 				168572A9261F174E007A0E6D /* TMUIFloatLayoutView.h */,
 				168572AA261F174E007A0E6D /* TMUIFloatLayoutView.m */,
+				1671EEFE264D0D4D00673A91 /* TDTestViewController.h */,
+				1671EEFF264D0D4D00673A91 /* TDTestViewController.m */,
 			);
 			path = TDTheme;
 			sourceTree = "<group>";
@@ -566,6 +592,8 @@
 				16C6507725BC02410047618E /* TMUITextViewViewController.m */,
 				1611E2F425FA12DF003D4357 /* TMUISliderViewController.h */,
 				1611E2F525FA12DF003D4357 /* TMUISliderViewController.m */,
+				1610720426381E5E00456D73 /* TMUISegmentedControlViewController.h */,
+				1610720526381E5E00456D73 /* TMUISegmentedControlViewController.m */,
 			);
 			path = TMUIWidgetsVC;
 			sourceTree = "<group>";
@@ -1023,6 +1051,7 @@
 				163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */,
 				160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */,
 				160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */,
+				16331EE4264664A6006FB17D /* UIImageEffects.m in Sources */,
 				1602D6F4260ADD2B00B11DC6 /* TMUIAlertViewController.m in Sources */,
 				16812BDD260357A600AECD14 /* TMUITableViewController3.m in Sources */,
 				160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */,
@@ -1031,6 +1060,7 @@
 				16F1BDD625F9A758000709CF /* TMUICoreViewController5.m in Sources */,
 				16E66917261FF2CD00028DC8 /* TDUIHelper.m in Sources */,
 				16CDF23125EF839B00C02C98 /* UIImageTMUIViewController1.m in Sources */,
+				1632A13926454A320074424D /* TDModalPresentationViewController.m in Sources */,
 				16812BE32603597F00AECD14 /* TMUITableViewController4.m in Sources */,
 				16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */,
 				16812BE926035CE300AECD14 /* TMUITableViewController5.m in Sources */,
@@ -1065,6 +1095,7 @@
 				16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */,
 				1699517D260F026100944BCA /* VC7Cell.m in Sources */,
 				16BE3770260DEF2F0088D59D /* TMUITableViewController6.m in Sources */,
+				1610720626381E5E00456D73 /* TMUISegmentedControlViewController.m in Sources */,
 				1611E2F625FA12DF003D4357 /* TMUISliderViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				16B30B3F25FB014800785EDD /* TMUIExampleConfiguration.m in Sources */,
@@ -1086,6 +1117,7 @@
 				3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */,
 				16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */,
 				16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */,
+				1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */,
 				16857296261F121B007A0E6D /* TMUIConfigurationTemplateGrass.m in Sources */,
 				16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */,
 				16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */,

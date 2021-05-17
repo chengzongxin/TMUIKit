@@ -32,8 +32,8 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
-  s.platform     = :ios, "8.2"
-#  s.platform     = :ios, "9.0" # 暂时设置为9.0，太多warning 2021-03-18 17:05:11
+#  s.platform     = :ios, "8.2"
+  s.platform     = :ios, "9.0" # 暂时设置为9.0，太多warning
   s.requires_arc = true
   
   # s.resource_bundles = {
@@ -246,6 +246,16 @@ Pod::Spec.new do |s|
       # TMUITheme
       ss.subspec 'TMUITheme' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
+      end
+      
+      # TMUITheme
+      ss.subspec 'TMUIAppearance' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
+      end
+      
+      # TMUITheme
+      ss.subspec 'TMUIModalPresentationViewController' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
       end
       
   end

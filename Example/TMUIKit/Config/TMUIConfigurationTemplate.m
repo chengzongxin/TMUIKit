@@ -62,17 +62,17 @@ static UIImage *disclosureIndicatorImageDark;
     TMUICMI.buttonDisabledAlpha = UIControlDisabledAlpha;                       // ButtonDisabledAlpha : TMUIButton 在 disabled 时的 alpha，不影响系统的 UIButton
     TMUICMI.buttonTintColor = UIColor.td_tintColor;                              // ButtonTintColor : TMUIButton 默认的 tintColor，不影响系统的 UIButton
     
-    TMUICMI.ghostButtonColorBlue = UIColorBlue;                                 // GhostButtonColorBlue : TMUIGhostButtonColorBlue 的颜色
-    TMUICMI.ghostButtonColorRed = UIColorRed;                                   // GhostButtonColorRed : TMUIGhostButtonColorRed 的颜色
-    TMUICMI.ghostButtonColorGreen = UIColorGreen;                               // GhostButtonColorGreen : TMUIGhostButtonColorGreen 的颜色
-    TMUICMI.ghostButtonColorGray = UIColorGray;                                 // GhostButtonColorGray : TMUIGhostButtonColorGray 的颜色
-    TMUICMI.ghostButtonColorWhite = UIColorWhite;                               // GhostButtonColorWhite : TMUIGhostButtonColorWhite 的颜色
-    
-    TMUICMI.fillButtonColorBlue = UIColorBlue;                                  // FillButtonColorBlue : TMUIFillButtonColorBlue 的颜色
-    TMUICMI.fillButtonColorRed = UIColorRed;                                    // FillButtonColorRed : TMUIFillButtonColorRed 的颜色
-    TMUICMI.fillButtonColorGreen = UIColorGreen;                                // FillButtonColorGreen : TMUIFillButtonColorGreen 的颜色
-    TMUICMI.fillButtonColorGray = UIColorGray;                                  // FillButtonColorGray : TMUIFillButtonColorGray 的颜色
-    TMUICMI.fillButtonColorWhite = UIColorWhite;                                // FillButtonColorWhite : TMUIFillButtonColorWhite 的颜色
+//    TMUICMI.ghostButtonColorBlue = UIColorBlue;                                 // GhostButtonColorBlue : TMUIGhostButtonColorBlue 的颜色
+//    TMUICMI.ghostButtonColorRed = UIColorRed;                                   // GhostButtonColorRed : TMUIGhostButtonColorRed 的颜色
+//    TMUICMI.ghostButtonColorGreen = UIColorGreen;                               // GhostButtonColorGreen : TMUIGhostButtonColorGreen 的颜色
+//    TMUICMI.ghostButtonColorGray = UIColorGray;                                 // GhostButtonColorGray : TMUIGhostButtonColorGray 的颜色
+//    TMUICMI.ghostButtonColorWhite = UIColorWhite;                               // GhostButtonColorWhite : TMUIGhostButtonColorWhite 的颜色
+//    
+//    TMUICMI.fillButtonColorBlue = UIColorBlue;                                  // FillButtonColorBlue : TMUIFillButtonColorBlue 的颜色
+//    TMUICMI.fillButtonColorRed = UIColorRed;                                    // FillButtonColorRed : TMUIFillButtonColorRed 的颜色
+//    TMUICMI.fillButtonColorGreen = UIColorGreen;                                // FillButtonColorGreen : TMUIFillButtonColorGreen 的颜色
+//    TMUICMI.fillButtonColorGray = UIColorGray;                                  // FillButtonColorGray : TMUIFillButtonColorGray 的颜色
+//    TMUICMI.fillButtonColorWhite = UIColorWhite;                                // FillButtonColorWhite : TMUIFillButtonColorWhite 的颜色
     
     
 #pragma mark - TextInput
@@ -94,7 +94,7 @@ static UIImage *disclosureIndicatorImageDark;
     TMUICMI.navBarDisabledAlpha = 0.2f;                                         // NavBarDisabledAlpha : TMUINavigationButton 在 disabled 时的 alpha
     TMUICMI.navBarButtonFont = UIFontMake(17);                                  // NavBarButtonFont : TMUINavigationButtonTypeNormal 的字体（由于系统存在一些 bug，这个属性默认不对 UIBarButtonItem 生效）
     TMUICMI.navBarButtonFontBold = UIFontBoldMake(17);                          // NavBarButtonFontBold : TMUINavigationButtonTypeBold 的字体
-    TMUICMI.navBarBackgroundImage = [UIImageMake(@"navigationbar_background") resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];   // NavBarBackgroundImage : UINavigationBar 的背景图，注意 navigationBar 的高度会受多个因素（是否全面屏、是否使用了 navigationItem.prompt、是否将 UISearchBar 作为 titleView）的影响，要检查各种情况是否都显示正常。
+    TMUICMI.navBarBackgroundImage = [TDUIHelper navigationBarBackgroundImageWithThemeColor:UIColor.td_tintColor];   // NavBarBackgroundImage : UINavigationBar 的背景图，注意 navigationBar 的高度会受多个因素（是否全面屏、是否使用了 navigationItem.prompt、是否将 UISearchBar 作为 titleView）的影响，要检查各种情况是否都显示正常。
     TMUICMI.navBarShadowImage = nil;                                            // NavBarShadowImage : UINavigationBar.shadowImage，也即导航栏底部那条分隔线，配合 NavBarShadowImageColor 使用。
     TMUICMI.navBarShadowImageColor = UIColorClear;                              // NavBarShadowImageColor : UINavigationBar.shadowImage 的颜色，如果为 nil，则使用 NavBarShadowImage 的值，如果 NavBarShadowImage 也为 nil，则使用系统默认的分隔线。如果不为 nil，而 NavBarShadowImage 为 nil，则自动创建一张 1px 高的图并将其设置为 NavBarShadowImageColor 的颜色然后设置上去，如果 NavBarShadowImage 不为 nil 且 renderingMode 不为 UIImageRenderingModeAlwaysOriginal，则将 NavBarShadowImage 设置为 NavBarShadowImageColor 的颜色然后设置上去。
     TMUICMI.navBarBarTintColor = nil;                                           // NavBarBarTintColor : UINavigationBar.barTintColor，也即背景色

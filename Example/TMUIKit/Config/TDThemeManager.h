@@ -9,7 +9,7 @@
 #import "TDThemeManager.h"
 #import "TDThemeProtocol.h"
 
-/// 简单对 QMUIThemeManager 做一层业务的封装，省去类型转换的工作量
+/// 简单对 TMUIThemeManager 做一层业务的封装，省去类型转换的工作量
 @interface TDThemeManager : NSObject
 
 @property(class, nonatomic, readonly, nullable) NSObject<TDThemeProtocol> * currentTheme;

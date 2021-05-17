@@ -15,7 +15,7 @@
 #import "TDThemeExampleView.h"
 #import "TMUIFloatLayoutView.h"
 #import "TDThemeManager.h"
-
+#import "TDTestViewController.h"
 @interface TDThemeButton : TMUIButton
 - (instancetype)initWithFillColor:(UIColor *)fillColor titleTextColor:(UIColor *)textColor;
 - (instancetype)initWithFillColor:(UIColor *)fillColor titleTextColor:(UIColor *)textColor frame:(CGRect)frame;
@@ -41,8 +41,14 @@
 
 @implementation TDThemeViewController
 
+- (void)test{
+    [self.navigationController pushViewController:TDTestViewController.new animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] tmui_initWithTitle:@"TEST" color:UIColor.whiteColor font:UIFont(18) target:self action:@selector(test)];
     
     self.classes = @[
                      TMUIConfigurationTemplate.class,
@@ -53,7 +59,7 @@
     [self.classes enumerateObjectsUsingBlock:^(Class  _Nonnull class, NSUInteger idx, BOOL * _Nonnull stop) {
         BOOL hasInstance = NO;
         for (NSObject<TDThemeProtocol> *theme in TMUIThemeManagerCenter.defaultThemeManager.themes) {
-            if ([theme isKindOfClass:class]) {
+            if ([theme isMemberOfClass:class]) {
                 hasInstance = YES;
                 break;
             }

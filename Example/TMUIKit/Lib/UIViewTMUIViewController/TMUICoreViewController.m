@@ -34,8 +34,6 @@ TMUISynthesizeIdStrongProperty(method2, setMethod2);
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.bgColor(@"white");
-    
     id l1 = Label.str(self.demoInstructions).styles(h1);
     
     id l2 = Label.str(@"提供三种方式快捷关联对象").styles(h2);
