@@ -3,7 +3,7 @@
 
 
 # TMUICore
-
+<!-- TMUIKit核心模块，提供基础的设备宏、工具类、全局配置等 -->
 #### TMUIAssociatedPropertyDefines
 
 - 针对在类型里添加属性的相关便捷宏定义,提供三种方式快捷关联对象
@@ -22,14 +22,20 @@
 
 #### TMUIConfiguration（主题组件）
 
-<!-- 逻辑实现：第一次使用TMUICMI(基本在启动时)，TMUIConfiguration遍历所有（TMUIConfigurationTemplate）模板配置文件，通过`shouldApplyTemplateAutomatically`找到指定的配置文件（一般结合用户偏好存储上次使用的主题），之后调用（applyConfigurationTemplate）应用配置，在这个方法内为全局单例TMUIConfiguration每个属性赋值，并且这个过程只执行一次，之后就会应用这个配置表来为全局app的定制模板样式 -->
-
 - 维护项目全局 UI 配置的单例，通过业务项目自己的 `TMUIConfigurationTemplate` 来为这个单例赋值，而业务代码里则通过 `TMUIConfigurationMacros.h` 文件里的宏来使用这些值。
 - `TMUIConfigurationTemplate`实现`TMUIConfigurationTemplateProtocol`，实现相关协议`applyConfigurationTemplate`应用配置，`shouldApplyTemplateAutomatically`指定某个具体配置文件
+
+>  逻辑实现：第一次使用TMUICMI(基本在启动时)，TMUIConfiguration遍历所有（TMUIConfigurationTemplate）模板配置文件，通过`shouldApplyTemplateAutomatically`找到指定的配置文件（一般结合用户偏好存储上次使用的主题），之后调用（applyConfigurationTemplate）应用配置，在这个方法内为全局单例TMUIConfiguration每个属性赋值，并且这个过程只执行一次，之后就会应用这个配置表来为全局app的定制模板样式
+
 
 #### TMUIConfigurationMacros（主题组件）
 
 - 作为`TMUIConfiguration`的单例接口，提供一系列方便书写的宏，以便在代码里读取配置表的各种属性。
+
+
+#### TMUIConfigurationTemplate（主题组件）
+- 提供一份模板用于为 `TMUIConfiguration` 单例赋值，业务项目应该将 `TMUIConfigurationTemplate` 文件复制到业务项目里或继承该类，修改赋值后调用 `applyConfigurationTemplate` 方法以生效。
+
 
 #### TMUICoreGraphicsDefines
 
@@ -69,18 +75,14 @@
 - 弱持有对象容器，避免强引用的同时，也避免野指针crash。
 - 适用定时器、弱关联属性
 
-
-
-
-
 # TMUIWidgets
-
+<!-- TMUIKit基础模块，主要继承UIKit，扩展组件的自定义实现，实现更加强大的功能 -->
 #### TMUIButton
 
 - 支持让文字和图片自动跟随 tintColor 变化（系统的 UIButton 默认是不响应 tintColor 的）
--  highlighted、disabled 状态均通过改变整个按钮的alpha来表现，无需分别设置不同 state 下的 titleColor、image。
+- highlighted、disabled 状态均通过改变整个按钮的alpha来表现，无需分别设置不同 state 下的 titleColor、image。
 - 支持点击时改变背景色颜色（highlightedBackgroundColor）
--  支持点击时改变边框颜色（highlightedBorderColor）
+- 支持点击时改变边框颜色（highlightedBorderColor）
 - 支持设置图片相对于 titleLabel 的位置（imagePosition）
 - 支持设置图片和 titleLabel 之间的间距，无需自行调整 titleEdgeInests、imageEdgeInsets（spacingBetweenImageAndTitle）
 
@@ -121,18 +123,22 @@
 
 
 # TMUIExtensions
-
+<!-- TMUIKit主要部分，提供便捷、高效的分类,为TMUIComponent组件库和项目工程使用 -->
 ## UIKit
 
 #### UIView+TMUI
 
 - Frame 属性快速访问
+- 提供View 状态、尺寸的改变回调
 - 设置圆角、阴影、渐变、边框等外观
 - 快速添加各种手势事件、扩大响应范围
 - 坐标系转换
 - 创建各种简单的动画效果
 - 截屏
 - xib便捷创建
+
+#### UIView+TMUIBorder
+- UIView (TMUIBorder) 为 UIView 方便地显示某几个方向上的边框
 
 #### UILable+TMUI
 
@@ -258,6 +264,8 @@
 - 获取当前 query 的参数列表
 - 获取query中key对应value
 
+#### ALAssetsLibrary
+- 保存图片到指定相册
 
 
 # TMUIComponents
@@ -284,9 +292,21 @@
 - 包含3种TableView样式，plain，group，insetGroup,兼容各个系统版本，简单自定义的TMUITableViewHeaderFooterView
 - 缓存行高，优化性能，只需要在cell内部计算一次（实现`sizeThatFits`方法计算高度），外部自动调用缓存，无须再使用类方法计算高度，支持动态更新cell高度
 
+#### TMUICellHeightCache
+- 使用行高缓存组件，提高列表性能，组件提供自动缓存行高，在一个方法内部计算cell高度
+- 这套方式的好处是 tableView 能直接操作 cell 的实例，cell 无需增加额外的专门用于获取 cell 高度的方法。并且这套方式支持基本的高度缓存（可按 key 缓存或按 indexPath 缓存），若使用了缓存，请注意在适当的时机去更新缓存（例如某个 cell 的内容发生变化，可能 cell 的高度也会变化，则需要更新这个 cell 已被缓存起来的高度)
+
+#### TMUIMultipleDelegates
+- 让所有 NSObject 都支持多个 delegate，默认只支持属性名为 delegate 的 delegate（特别地，UITableView 和 UICollectionView 额外默认支持 dataSource）。
+
 #### TMUIBadge
 
 - 用于在`View`、`UIBarButtonItem`、`UITabBarItem` 上显示未读数（badge）和未读红点（updatesIndicator），且对设置的时机无要求，不用担心 `valueForKey:@"view"` 返回 nil 的情况。
+- 支持通过 `contentMode` 属性修改子 View 的对齐方式，目前仅支持 `UIViewContentModeLeft` 和 `UIViewContentModeRight`，默认为 `UIViewContentModeLeft`
+
+#### TMUIFloatLayoutView
+
+- 流式布局容器组件，相较于`UICollectionView`更加简便易用，结合`TMUISelfSizeing`可自适应高度，内部添加任意`View`，可以自动适应尺寸，如果要自定义每个`child`的尺寸，需要实现`sizeThatFit:`方法
 
 #### TMUIMultiDelegates
 
@@ -298,6 +318,9 @@
 - 内部支持滑动吸顶header
 - 支持自定义tabs
 - 支持动态tabs刷新子VC和header
+
+#### TMShowBigImageViewController
+- 大图浏览组件，提供基础的转场动画和大图切换功能
 
 #### TMContentPicker
 
@@ -320,6 +343,36 @@
 - 丰富的宏定义，为后期拓展保驾护航
 
 
+#### TMActionSheet
+- 封装actionSheet样式的自定义控件
+- 包含可自定义的title\message\actions
 
+#### TMContentAlert
+- 用于辅助一些内容视图的弹框视图进行展示的工具类
 
+#### TMContentPicker
+- 内容picker视图的基类，此基类提供通用最全的相关设置和回调
 
+#### TMCityPicker
+- 城市选择器
+
+#### TMDatePicker
+- 日期选择器
+
+#### TMMultiDataPicker
+- 多列数据选择器
+
+#### TMNormalPicker
+- 普通单一项的选择器，一般只有一列数据供选择
+
+#### TMEmptyView
+- 空态提示视图
+
+#### TMPopoverView
+- 提供类似系统UIPopoverController的显示效果的视图类
+
+#### TMSearchController
+- 模拟的假的导航条视图,高度及位置与真实导航条一致，用于在搜索状态时承载searchBar的显示，显示时search高度会自动调整为44高且底部对齐，左右会撑满
+
+#### TMToast
+- Toast组件

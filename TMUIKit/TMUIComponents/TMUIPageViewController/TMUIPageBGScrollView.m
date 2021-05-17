@@ -5,9 +5,9 @@
 //  Created by Joe.cheng on 2020/12/10.
 //
 
-#import "TMPageBGScrollView.h"
+#import "TMUIPageBGScrollView.h"
 
-@interface TMPageBGScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
+@interface TMUIPageBGScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 {
     BOOL _lock;
     BOOL _isObserving;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation TMPageBGScrollView
+@implementation TMUIPageBGScrollView
 
 
 static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;

@@ -45,6 +45,7 @@
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
 		1646639825F8C9A600B0125B /* TMUICoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1646639725F8C9A600B0125B /* TMUICoreViewController.m */; };
 		164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 164663A025F8D14300B0125B /* TMUICoreViewController4.m */; };
+		1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671EEFF264D0D4D00673A91 /* TDTestViewController.m */; };
 		16812AFB2603225F00AECD14 /* TMUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812AFA2603225F00AECD14 /* TMUITableViewController.m */; };
 		16812B012603292C00AECD14 /* TMUITableViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812B002603292C00AECD14 /* TMUITableViewController1.m */; };
 		16812BD6260351AC00AECD14 /* TMUITableViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812BD5260351AC00AECD14 /* TMUITableViewController2.m */; };
@@ -188,6 +189,8 @@
 		1646639725F8C9A600B0125B /* TMUICoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController.m; sourceTree = "<group>"; };
 		1646639F25F8D14300B0125B /* TMUICoreViewController4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController4.h; sourceTree = "<group>"; };
 		164663A025F8D14300B0125B /* TMUICoreViewController4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController4.m; sourceTree = "<group>"; };
+		1671EEFE264D0D4D00673A91 /* TDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDTestViewController.h; sourceTree = "<group>"; };
+		1671EEFF264D0D4D00673A91 /* TDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDTestViewController.m; sourceTree = "<group>"; };
 		16812AF92603225F00AECD14 /* TMUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController.h; sourceTree = "<group>"; };
 		16812AFA2603225F00AECD14 /* TMUITableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITableViewController.m; sourceTree = "<group>"; };
 		16812AFF2603292C00AECD14 /* TMUITableViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController1.h; sourceTree = "<group>"; };
@@ -570,6 +573,8 @@
 				168572A0261F16C4007A0E6D /* TDThemeExampleView.m */,
 				168572A9261F174E007A0E6D /* TMUIFloatLayoutView.h */,
 				168572AA261F174E007A0E6D /* TMUIFloatLayoutView.m */,
+				1671EEFE264D0D4D00673A91 /* TDTestViewController.h */,
+				1671EEFF264D0D4D00673A91 /* TDTestViewController.m */,
 			);
 			path = TDTheme;
 			sourceTree = "<group>";
@@ -1112,6 +1117,7 @@
 				3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */,
 				16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */,
 				16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */,
+				1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */,
 				16857296261F121B007A0E6D /* TMUIConfigurationTemplateGrass.m in Sources */,
 				16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */,
 				16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */,

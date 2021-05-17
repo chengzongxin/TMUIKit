@@ -19,13 +19,13 @@ NS_INLINE CGFloat kTNavigationBarHeight(){
     return navHeight;
 }
 
-#import "TMPageViewController.h"
+#import "TMUIPageViewController.h"
 #import "Masonry.h"
 
-@interface TMPageViewController () <UIScrollViewDelegate,UIPageViewControllerDataSource,UIPageViewControllerDelegate>
+@interface TMUIPageViewController () <UIScrollViewDelegate,UIPageViewControllerDataSource,UIPageViewControllerDelegate>
 
 // component
-@property (nonatomic, strong) TMPageBGScrollView *contentView;
+@property (nonatomic, strong) TMUIPageBGScrollView *contentView;
 @property (nonatomic, strong) UIView *tabSegmentControl;
 @property (nonatomic, strong) UIScrollView *contentScrollView;
 
@@ -43,7 +43,7 @@ NS_INLINE CGFloat kTNavigationBarHeight(){
 
 @end
 
-@implementation TMPageViewController
+@implementation TMUIPageViewController
 
 #pragma mark - Lifecycle (dealloc init viewDidLoad memoryWarning...)
 
@@ -353,9 +353,9 @@ NS_INLINE CGFloat kTNavigationBarHeight(){
 
 
 #pragma mark - Getters and Setters
-- (TMPageBGScrollView *)contentView {
+- (TMUIPageBGScrollView *)contentView {
     if (_contentView == nil) {
-        _contentView = [[TMPageBGScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        _contentView = [[TMUIPageBGScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
         _contentView.backgroundColor = [UIColor whiteColor];
         _contentView.showsHorizontalScrollIndicator = NO;
         _contentView.lockArea = kTNavigationBarHeight()+self.sliderBarHeight;
