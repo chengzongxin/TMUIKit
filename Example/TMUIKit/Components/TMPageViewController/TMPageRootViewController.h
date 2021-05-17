@@ -6,11 +6,11 @@
 //  Copyright © 2021 chengzongxin. All rights reserved.
 //
 
-#import "TMPageViewController.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TMPageRootViewController : TMPageViewController
+@interface TMPageRootViewController : TMUIPageViewController
 
 @end
 

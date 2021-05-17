@@ -48,8 +48,8 @@
 #import "TMSearchKit.h"
 #endif
 
-#if __has_include("TMPageViewController.h")
-#import "TMPageViewController.h"
+#if __has_include("TMUIPageViewController.h")
+#import "TMUIPageViewController.h"
 #endif
 
 #if __has_include("TMShowBigImageViewController.h")

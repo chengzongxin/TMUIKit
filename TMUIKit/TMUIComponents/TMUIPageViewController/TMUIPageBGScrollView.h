@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TMPageBGScrollView : UIScrollView
+@interface TMUIPageBGScrollView : UIScrollView
 @property (nonatomic, weak) id<UIScrollViewDelegate> t_delegate;
 
 @property (nonatomic, assign) CGFloat lockArea;

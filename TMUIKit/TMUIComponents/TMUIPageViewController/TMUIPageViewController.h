@@ -7,10 +7,10 @@
 
 #import <UIKit/UIKit.h>
 @class THKViewController;
-@class TMPageViewController;
-#import "TMPageBGScrollView.h"
+@class TMUIPageViewController;
+#import "TMUIPageBGScrollView.h"
 
-@protocol TMPageViewControllerDataSource <NSObject>
+@protocol TMUIPageViewControllerDataSource <NSObject>
 
 @required
 /// 返回所有的子VC
@@ -38,9 +38,9 @@
 
 @end
 
-@interface TMPageViewController : UIViewController <TMPageViewControllerDataSource,TMPageViewControllerDelegate>
+@interface TMUIPageViewController : UIViewController <TMUIPageViewControllerDataSource,TMPageViewControllerDelegate>
 /// 数据源方法，默认Self
-@property (nonatomic, weak) id<TMPageViewControllerDataSource> dataSource;
+@property (nonatomic, weak) id<TMUIPageViewControllerDataSource> dataSource;
 /// 代理方法，默认Self
 @property (nonatomic, weak) id<TMPageViewControllerDelegate> delegate;
 /// 当前被选中的indexVC
@@ -50,7 +50,7 @@
 
 /* 组件视图*/
 /// 总的背景ScrollView
-@property (nonatomic, strong, readonly) TMPageBGScrollView *contentView;
+@property (nonatomic, strong, readonly) TMUIPageBGScrollView *contentView;
 /// 滑动tab
 //@property (nonatomic, strong, readonly) THKSegmentControl *slideBar;
 /// 承载子VC的view的scrollView

@@ -9,6 +9,7 @@
 #import "TMShowImageAnimatorTransition.h"
 NS_ASSUME_NONNULL_BEGIN
 
+/// 大图浏览组件，提供基础的转场动画和大图切换功能
 @interface TMShowBigImageViewController : UIViewController
 
 /// 显示单张大图
