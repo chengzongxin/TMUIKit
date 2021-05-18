@@ -46,7 +46,7 @@ static NSString * const kCellIdentifier = @"cell";
                        nil];
     
 //    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithImage:UIImageMake(@"icon_nav_about") target:self action:@selector(handleDebugItemEvent)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"更新第二行数据" color:UIColor.tmui_randomColor font:UIFont(15) target:self action:@selector(handleRightBarButtonItem)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"更新第二行数据" target:self action:@selector(handleRightBarButtonItem)];
     
     [self.view addSubview:self.tableView];
 }

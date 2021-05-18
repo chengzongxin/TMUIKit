@@ -118,8 +118,9 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 }
 
 - (void)tmui_pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    [self tmui_pushViewController:viewController animated:animated];
     [viewController tmui_bindBOOL:YES forKey:kShowByUser];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self tmui_pushViewController:viewController animated:animated];
 }
 
 @end

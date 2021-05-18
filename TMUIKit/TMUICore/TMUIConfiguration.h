@@ -90,6 +90,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - NavigationBar
 
 @property(nonatomic, copy, nullable) NSArray<Class<UIAppearanceContainer>> *navBarContainerClasses;
+@property(nonatomic, strong, nullable) UIColor  *navBarItemLightColor;
+@property(nonatomic, strong, nullable) UIColor  *navBarItemThemeColor;
+@property(nonatomic, strong, nullable) UIColor  *navBarItemDarkColor;
+@property(nonatomic, strong, nullable) UIFont   *navBarItemFont;
 @property(nonatomic, assign) CGFloat            navBarHighlightedAlpha;
 @property(nonatomic, assign) CGFloat            navBarDisabledAlpha;
 @property(nonatomic, strong, nullable) UIFont   *navBarButtonFont;

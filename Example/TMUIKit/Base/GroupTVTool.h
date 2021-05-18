@@ -23,14 +23,12 @@ __VA_ARGS__\
 // Create (@"title",@"subtitle", @"vc")
 #define ROW_ONE_CREATE(title,classVC) Row.str(title).fnt(15).subtitleStyle.cellHeightAuto.onClick(^{\
 UIViewController *vc = [[NSClassFromString(classVC) alloc] init];\
-vc.hidesBottomBarWhenPushed = YES;\
 [self.navigationController pushViewController:vc animated:YES];\
 })
 
 // Create (@"title", @"vc")
 #define ROW_TWO_CREATE(title,subtitle,classVC) Row.str(title).fnt(18).detailStr(subtitle).subtitleStyle.cellHeightAuto.onClick(^{\
 UIViewController *vc = [[NSClassFromString(classVC) alloc] init];\
-vc.hidesBottomBarWhenPushed = YES;\
 [self.navigationController pushViewController:vc animated:YES];\
 })
 
@@ -48,13 +46,11 @@ va_end(argList);\
 if (arguments.count == 2) {\
     Row.str(arguments[0]).fnt(15).cellHeightAuto.onClick(^{\
         UIViewController *vc = [[NSClassFromString(arguments[1]) alloc] init];\
-        vc.hidesBottomBarWhenPushed = YES;\
         [self.navigationController pushViewController:vc animated:YES];\
     });\
 }else{\
     Row.str(arguments[0]).fnt(18).detailStr(arguments[1]).subtitleStyle.cellHeightAuto.onClick(^{\
         UIViewController *vc = [[NSClassFromString(arguments[2]) alloc] init];\
-        vc.hidesBottomBarWhenPushed = YES;\
         [self.navigationController pushViewController:vc animated:YES];\
     });\
 }

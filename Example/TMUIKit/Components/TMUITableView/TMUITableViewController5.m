@@ -27,7 +27,7 @@
     ];
     
 //    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithImage:UIImageMake(@"icon_nav_about") target:self action:@selector(handleDebugItemEvent)];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"切换间距" color:UIColor.tmui_randomColor font:UIFont(15) target:self action:@selector(handleDebugItemEvent)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"切换间距" target:self action:@selector(handleDebugItemEvent)];
     
     [self.view addSubview:self.tableView];
 }

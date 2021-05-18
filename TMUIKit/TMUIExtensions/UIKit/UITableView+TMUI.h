@@ -149,20 +149,31 @@ extern const UITableViewStyle TMUITableViewStyleInsetGrouped;
 @end
 
 
-@interface UITableView (TMUI_Nib)
-
-- (void)tmui_registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
-
-// 标签是NSStringFromClass([TCPIntroTableViewCell class]
-- (void)tmui_registerNibIdentifierNSStringFromClass:(Class)cellClass;
-
-@end
-
-
 @interface UITableView (TMUI_RegisterCell)
 
-// 注册名字为nibName的xib
-- (void)tmui_registerNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier;
+
+/// 注册nib和class同名的cell，并以类名作为identifier
+/// @param nibName nib文件
+- (void)tmui_registerCellWithNibName:(NSString *)nibName;
+
+
+/// 以类文件注册cell
+/// @param aClass cell类
+- (void)tmui_registerCellWithClass:(Class)aClass;
+
+/// 注册cell
+/// @param nibName nib文件
+/// @param identifier 复用标识
+- (void)tmui_registerCellWithNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier;
+
+///  注册header
+/// @param nibName nib文件
+- (void)tmui_registerSectionHeaderFooterWithNibName:(NSString *)nibName;
+
+
+/// 注册header
+/// @param aClass header类
+- (void)tmui_registerSectionHeaderFooterWithClass:(Class)aClass;
 
 // Cell的样式默认为UITableViewCellStyleDefault
 - (UITableViewCell *)tmui_dequeueReusableCellWithIdentifier:(NSString *)identifier

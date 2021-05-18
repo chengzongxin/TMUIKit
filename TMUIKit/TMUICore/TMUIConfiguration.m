@@ -196,7 +196,10 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     self.textFieldTextInsets = UIEdgeInsetsMake(0, 7, 0, 7);
     
     #pragma mark - NavigationBar
-    
+    self.navBarItemLightColor = self.whiteColor;
+    self.navBarItemThemeColor = UIColorMake(42, 209, 130);
+    self.navBarItemDarkColor = UIColorMake(11, 11, 11);
+    self.navBarItemFont = UIFontMake(16);
     self.navBarHighlightedAlpha = 0.2f;
     self.navBarDisabledAlpha = 0.2f;
     self.sizeNavBarBackIndicatorImageAutomatically = YES;

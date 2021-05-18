@@ -263,7 +263,7 @@ static NSString * const kSectionTitleForStyling = @"内容及动画";
     contentView.backgroundColor = UIColor.td_backgroundColorLighten;
     contentView.layer.cornerRadius = 6;
     contentView.layer.shadowColor = [UIColor tmui_colorWithThemeProvider:^UIColor * _Nonnull(__kindof TMUIThemeManager * _Nonnull manager, NSString * _Nullable identifier, __kindof NSObject * _Nullable theme) {
-        return [identifier isEqualToString:QDThemeIdentifierDark] ? UIColorWhite : UIColorBlack;
+        return [identifier isEqualToString:TDThemeIdentifierDark] ? UIColorWhite : UIColorBlack;
     }].CGColor;
     contentView.layer.shadowOpacity = .08;
     contentView.layer.shadowRadius = 15;
@@ -287,7 +287,7 @@ static NSString * const kSectionTitleForStyling = @"内容及动画";
     label.frame = CGRectMake(contentViewPadding.left, contentViewPadding.top, CGRectGetWidth(contentView.bounds) - UIEdgeInsetsGetHorizontalValue(contentViewPadding), TMUIViewSelfSizingHeight);
     
     UIImage *blurredBackgroundImage = [UIImage tmui_imageWithView:self.navigationController.view];
-    if ([TMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier isEqual:QDThemeIdentifierDark]) {
+    if ([TMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier isEqual:TDThemeIdentifierDark]) {
         blurredBackgroundImage = [UIImageEffects imageByApplyingDarkEffectToImage:blurredBackgroundImage];
     } else {
         blurredBackgroundImage = [UIImageEffects imageByApplyingExtraLightEffectToImage:blurredBackgroundImage];

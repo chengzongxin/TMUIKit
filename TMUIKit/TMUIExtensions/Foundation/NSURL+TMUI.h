@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)tmui_parameterValueForKey:(NSString *)key;
 
+- (instancetype)tmui_replaceParameterKey:(NSString *)key withValue:(NSString *)value;
+
 @end
 
 NS_ASSUME_NONNULL_END

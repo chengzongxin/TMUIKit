@@ -433,26 +433,32 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
 @end
 
 
-@implementation UITableView (TMUI_Nib)
-
-- (void)tmui_registerNibClass:(Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:[NSBundle bundleForClass:cellClass]];
-    [self registerNib:nib forCellReuseIdentifier:identifier];
-}
-
-- (void)tmui_registerNibIdentifierNSStringFromClass:(Class)cellClass {
-    [self tmui_registerNibClass:cellClass forCellWithReuseIdentifier:NSStringFromClass(cellClass)];
-}
-
-@end
-
-
 @implementation UITableView (TMUI_RegisterCell)
 
-- (void)tmui_registerNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier {
+- (void)tmui_registerCellWithNibName:(NSString *)nibName{
+    [self tmui_registerCellWithNibName:nibName forCellReuseIdentifier:nibName];
+}
+
+- (void)tmui_registerCellWithClass:(Class)aClass{
+    NSString *identifier = NSStringFromClass(aClass);
+    [self registerClass:aClass forCellReuseIdentifier:identifier];
+}
+
+- (void)tmui_registerCellWithNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier{
     UINib *nib = [UINib nibWithNibName:nibName bundle:[NSBundle bundleForClass:NSClassFromString(nibName)]];
     [self registerNib:nib forCellReuseIdentifier:identifier];
 }
+
+- (void)tmui_registerSectionHeaderFooterWithNibName:(NSString *)nibName{
+    UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+    [self registerNib:nib forHeaderFooterViewReuseIdentifier:nibName];
+}
+
+- (void)tmui_registerSectionHeaderFooterWithClass:(Class)aClass{
+    [self registerClass:aClass forHeaderFooterViewReuseIdentifier:NSStringFromClass(aClass)];
+}
+
+
 
 - (UITableViewCell *)tmui_dequeueReusableCellWithIdentifier:(NSString *)identifier
                                          initWithClass:(Class)cellClass

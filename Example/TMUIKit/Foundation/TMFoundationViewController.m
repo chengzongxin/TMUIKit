@@ -84,7 +84,6 @@
     NSString *title = dict[@"title"];
     UIViewController *vc = [[class alloc] init];
     vc.title = title;
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

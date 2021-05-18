@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UILabel (TMUI_AttributeText)
 
 
-/// 给label设置文本、行距
+/// 给label指定文本设置文本、行距
 /// @param text 文本
 /// @param lineSpacing 行距
 - (void)tmui_setAttributesText:(NSString *)text lineSpacing:(CGFloat)lineSpacing;
@@ -45,6 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param color 指定文本颜色
 /// @param font 指定文本字体
 - (void)tmui_setAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
+
+/// 给label追加text的颜色、字体，分段设置
+/// @param text 指定文本
+/// @param color 指定文本颜色
+/// @param font 指定文本字体
+- (void)tmui_appendAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
 
 /// 设置文字行间距,统一设置
 /// @param lineSpacing 行间距

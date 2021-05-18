@@ -67,6 +67,7 @@
 		1699517E260F026100944BCA /* VC7Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1699517C260F026100944BCA /* VC7Cell.xib */; };
 		169EB2E925FCA2A4008E3F07 /* CAAnimationTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */; };
 		169FA7282611E39B00363F75 /* TDThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 169FA7272611E39B00363F75 /* TDThemeManager.m */; };
+		16B05E8D2653ACAF00CC08A1 /* TDDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B05E8C2653ACAF00CC08A1 /* TDDebugViewController.m */; };
 		16B30B3F25FB014800785EDD /* TMUIExampleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B30B3E25FB014800785EDD /* TMUIExampleConfiguration.m */; };
 		16B540E625FB73320019808F /* CALayerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B540E525FB73320019808F /* CALayerTMUIViewController.m */; };
 		16BE3770260DEF2F0088D59D /* TMUITableViewController6.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BE376F260DEF2F0088D59D /* TMUITableViewController6.m */; };
@@ -100,6 +101,7 @@
 		16EABFDB25BA7BCD00A3273D /* TMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFDA25BA7BCD00A3273D /* TMBaseViewController.m */; };
 		16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFE125BAAD7D00A3273D /* UISegmentedControl+associateObject.m */; };
 		16EABFE725BAAE7C00A3273D /* UISlider+associateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFE625BAAE7C00A3273D /* UISlider+associateObject.m */; };
+		16EED01B26527299001FE514 /* UIBarButtonItemTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EED01A26527299001FE514 /* UIBarButtonItemTMUIViewController.m */; };
 		16F1BDD625F9A758000709CF /* TMUICoreViewController5.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F1BDD525F9A758000709CF /* TMUICoreViewController5.m */; };
 		23495E6D1C4E5EBA37EF54E7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C01E4ACDEFFA91DB088A365 /* SystemConfiguration.framework */; };
 		3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE7A625E5FD15001DA085 /* AttributeTextVC.m */; };
@@ -231,6 +233,8 @@
 		169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAAnimationTMUIViewController.m; sourceTree = "<group>"; };
 		169FA7262611E39B00363F75 /* TDThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDThemeManager.h; sourceTree = "<group>"; };
 		169FA7272611E39B00363F75 /* TDThemeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDThemeManager.m; sourceTree = "<group>"; };
+		16B05E8B2653ACAF00CC08A1 /* TDDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDDebugViewController.h; sourceTree = "<group>"; };
+		16B05E8C2653ACAF00CC08A1 /* TDDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDDebugViewController.m; sourceTree = "<group>"; };
 		16B30B3D25FB014800785EDD /* TMUIExampleConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIExampleConfiguration.h; sourceTree = "<group>"; };
 		16B30B3E25FB014800785EDD /* TMUIExampleConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIExampleConfiguration.m; sourceTree = "<group>"; };
 		16B540E425FB73320019808F /* CALayerTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CALayerTMUIViewController.h; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 		16EABFE125BAAD7D00A3273D /* UISegmentedControl+associateObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+associateObject.m"; sourceTree = "<group>"; };
 		16EABFE525BAAE7C00A3273D /* UISlider+associateObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UISlider+associateObject.h"; sourceTree = "<group>"; };
 		16EABFE625BAAE7C00A3273D /* UISlider+associateObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UISlider+associateObject.m"; sourceTree = "<group>"; };
+		16EED01926527299001FE514 /* UIBarButtonItemTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItemTMUIViewController.h; sourceTree = "<group>"; };
+		16EED01A26527299001FE514 /* UIBarButtonItemTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItemTMUIViewController.m; sourceTree = "<group>"; };
 		16F1BDD425F9A758000709CF /* TMUICoreViewController5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController5.h; sourceTree = "<group>"; };
 		16F1BDD525F9A758000709CF /* TMUICoreViewController5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController5.m; sourceTree = "<group>"; };
 		3B7BE7A525E5FD15001DA085 /* AttributeTextVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttributeTextVC.h; sourceTree = "<group>"; };
@@ -536,6 +542,8 @@
 				16B540E525FB73320019808F /* CALayerTMUIViewController.m */,
 				169EB2E725FCA2A4008E3F07 /* CAAnimationTMUIViewController.h */,
 				169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */,
+				16EED01926527299001FE514 /* UIBarButtonItemTMUIViewController.h */,
+				16EED01A26527299001FE514 /* UIBarButtonItemTMUIViewController.m */,
 			);
 			path = TMUICategoryVC;
 			sourceTree = "<group>";
@@ -706,6 +714,8 @@
 				16D1519B25F8980B0087BF7F /* GroupTVTool.m */,
 				16D151A025F8A9BE0087BF7F /* snk.jpg */,
 				1687279725F0C55700A05529 /* xueUIwang@3x.png */,
+				16B05E8B2653ACAF00CC08A1 /* TDDebugViewController.h */,
+				16B05E8C2653ACAF00CC08A1 /* TDDebugViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1084,11 +1094,13 @@
 				3B806CC425CA75CC00B78CD1 /* VerifyViewController.m in Sources */,
 				16E82E7825F222EE00B8142E /* NSArrayTMUIViewController.m in Sources */,
 				16455E4825B6F3FB00BBBEC2 /* TMLibViewController.m in Sources */,
+				16B05E8D2653ACAF00CC08A1 /* TDDebugViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
 				168572AB261F174E007A0E6D /* TMUIFloatLayoutView.m in Sources */,
 				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
+				16EED01B26527299001FE514 /* UIBarButtonItemTMUIViewController.m in Sources */,
 				1685728A261F11F1007A0E6D /* TMUIConfigurationTemplateGrapefruit.m in Sources */,
 				16402B56260C1D1C00B4ADBF /* TMPopoverViewController.m in Sources */,
 				16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */,

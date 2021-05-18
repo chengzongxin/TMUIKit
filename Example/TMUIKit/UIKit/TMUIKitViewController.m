@@ -7,10 +7,7 @@
 //
 
 #import "TMUIKitViewController.h"
-#import "TMUIButtonViewController.h"
-#import "TMUILabelViewController.h"
-#import "TMUITextFieldViewController.h"
-#import "TMUITextViewViewController.h"
+#import "TDDebugViewController.h"
 
 @interface TMUIKitViewController ()
 
@@ -20,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"DEBUG" titleColorStyle:UIBarButtonItem_TMUIColorStyleWhite target:self action:@selector(debug)];
     
     GroupTV(
             SECTION_CREATE(
@@ -49,31 +48,37 @@
                            ROW_CREATE(@"UIView+TMUIBorder",@"设置边框", @"UIViewTMUI4ViewController"),
                            ).title(@"UIView+TMUI"),
             SECTION_CREATE(
-                           ROW_CREATE(@"设置富文本属性、计算文本size、富文本超链接", @"UILabelTMUIViewController"),
-                           ).title(@"UILable+TMUI"),
-            SECTION_CREATE(
-                           ROW_CREATE(@"设置图片位置、图文间距、扩大点击区域", @"UIButtonTMUIViewController"),
-                           ).title(@"UIButton+TMUI"),
-            SECTION_CREATE(
-                           ROW_CREATE(@"获取最上层vc、全局设置导航栏显示隐藏、导航控制器中上一个viewcontroller、导航控制器中下一个viewcontroller",@"UIViewControllerTMUIViewController"),
-                           ).title(@"UIViewController+TMUI"),
-            SECTION_CREATE(
-                           ROW_CREATE(@"设置最大文本输入长度、设置 placeHolder 颜色和字体、文本回调",@"UITextFieldTMUIViewController"),
-                           ).title(@"UITextField+TMUI"),
+                           ROW_CREATE(@"UILable+TMUI",
+                                      @"设置富文本属性、计算文本size、富文本超链接",
+                                      @"UILabelTMUIViewController"),
+                           ROW_CREATE(@"UIButton+TMUI",
+                                      @"设置图片位置、图文间距、扩大点击区域",
+                                      @"UIButtonTMUIViewController"),
+                           ROW_CREATE(@"UIViewController+TMUI",
+                                      @"获取最上层vc、全局设置导航栏显示隐藏、导航控制器中上一个viewcontroller、导航控制器中下一个viewcontroller",
+                                      @"UIViewControllerTMUIViewController"),
+                           ROW_CREATE(@"UITextField+TMUI",
+                                      @"设置最大文本输入长度、设置 placeHolder 颜色和字体、文本回调",
+                                      @"UITextFieldTMUIViewController"),
+                           ROW_CREATE(@"CALayer+TMUI",
+                                      @"frame、tranform属性快速访问、修改、移除默认动画、不带动画修改layer属性",
+                                      @"CALayerTMUIViewController"),
+                           ROW_CREATE(@"CAAnimation+TMUI",
+                                      @"支持用 block 的形式添加对 animationDidStart 和 animationDidStop 的监听，无需自行设置 delegate",
+                                      @"CAAnimationTMUIViewController"),
+                           ROW_CREATE(@"UIBarButtonItem+TMUI",
+                                      @"全局配置的barButtonItem，快速创建使用",
+                                      @"UIBarButtonItemTMUIViewController"),
+                           ).title(@"UIKit+TMUI"),
             SECTION_CREATE(
                            ROW_CREATE(@"设置图片外观",@"UIImageTMUIViewController1"),
                            ROW_CREATE(@"图片创建、压缩、裁剪",@"UIImageTMUIViewController2"),
                            ).title(@"UIImage+TMUI"),
-            SECTION_CREATE(
-                           ROW_CREATE(@"frame、tranform属性快速访问、修改、移除默认动画、不带动画修改layer属性",
-                                      @"CALayerTMUIViewController"),
-                           ).title(@"CALayer+TMUI"),
-            SECTION_CREATE(
-                           ROW_CREATE(@"支持用 block 的形式添加对 animationDidStart 和 animationDidStop 的监听，无需自行设置 delegate",
-                                      @"CAAnimationTMUIViewController"),
-                           ).title(@"CAAnimation+TMUI"),
             ).embedIn(self.view);
 }
 
+- (void)debug{
+    [self.navigationController pushViewController:TDDebugViewController.new animated:YES];
+}
 
 @end

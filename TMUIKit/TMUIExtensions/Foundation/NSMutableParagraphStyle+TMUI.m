@@ -9,6 +9,12 @@
 
 @implementation NSMutableParagraphStyle (TMUI)
 
++ (instancetype)tmui_paragraphStyleWithLineSpacing:(CGFloat)lineSpacing{
+    NSMutableParagraphStyle *paragraphStyle = [[self alloc] init];
+    paragraphStyle.lineSpacing = lineSpacing;
+    return paragraphStyle;
+}
+
 + (instancetype)tmui_paragraphStyleWithLineHeight:(CGFloat)lineHeight {
     return [self tmui_paragraphStyleWithLineHeight:lineHeight lineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentLeft];
 }

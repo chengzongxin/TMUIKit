@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import "TMUICommonDefines.h"
 #import "NSAttributedString+TMUI.h"
+#import "NSMutableParagraphStyle+TMUI.h"
 #import <TMUIAssociatedPropertyDefines.h>
 #import "UIView+TMUI.h"
 
@@ -98,9 +99,11 @@
 @implementation UILabel (TMUI_AttributeText)
 
 - (void)tmui_setAttributesText:(NSString *)text lineSpacing:(CGFloat)lineSpacing{
-    CGFloat height = [NSAttributedString tmui_heightForAtsWithStr:text font:self.font width:self.frame.size.width lineH:lineSpacing];
-    self.attributedText = [NSAttributedString tmui_atsForStr:text lineHeight:(height<self.font.pointSize*2+lineSpacing)?0:lineSpacing];
-    self.numberOfLines = 0;
+    if (!tmui_isNullString(text)) {
+        NSAttributedString *attrStr = [NSAttributedString tmui_attributedStringWithStr:text lineSpacing:lineSpacing];
+        self.attributedText = attrStr;
+        self.numberOfLines = 0;
+    }
 }
 
 - (void)tmui_setAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{
@@ -113,6 +116,12 @@
         self.attributedText = mat;
     }else{
         // 没有，在后面追加
+        [self tmui_appendAttributesText:text color:color font:font];
+    }
+}
+
+- (void)tmui_appendAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{
+    if (!tmui_isNullString(text)) {
         NSRange range = NSMakeRange(0, text.length);
         NSMutableAttributedString *appendAtr = [[NSMutableAttributedString alloc] initWithString:text];
         [appendAtr addAttributes:@{NSForegroundColorAttributeName:color} range:range];

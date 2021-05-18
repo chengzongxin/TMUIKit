@@ -152,6 +152,24 @@
 - 设置图片位置、图文间距
 - 扩大点击区域
 
+#### UILabel+TMUI
+- 计算Label高度
+- 快捷设置富文本
+- 设置富文本点击事件
+
+#### UIScrollView+TMUI
+- ScrollView的位置及状态判断
+- ScrollView滑动
+
+#### UITableView+TMUI
+- tableView滑动、contentSize判断
+- cell的注册，获取
+
+#### UITableViewCell+TMUI
+- 获取tableView、accessView、style、在tableView中的位置
+- 方便的控制分割线、高亮状态、选中状态
+- 可以按照配置表统一配置
+
 #### UIViewController+TMUI
 
 - 获取最上层vc、全局设置导航栏显示隐藏、导航控制器中上一个viewcontroller、导航控制器中下一个viewcontroller
@@ -184,10 +202,12 @@
 
 #### UIBarButtonItem+TMUI
 
-- UIBarButtonItem便捷构造文本、图文、高亮、禁用等状态
+- UIBarButtonItem便捷构造文本、图文item
+- THKCreate继承而来，提供3种全局定制颜色
 
 #### UICollectionView+TMUI
 
+- 清除选择、获取可见cell
 - 便捷注册类或者NIB的Cell，header
 
 #### UIColor+TMUI
@@ -207,13 +227,16 @@
 ## Foundation
 
 #### NSArray+TMUI
-
 - 处理了```__NSArray0、__NSSingleObjectArrayI、__NSArrayI、__NSArrayM```几种情况的数组越界访问
 - map、filter、reduce等高阶函数
 - 不可变数组增删改操作
 - 打乱，逆置
 
-#### NSAttributedString
+
+#### NSMutableArray+TMUI
+- 可变字典安全、增、删、改
+
+#### NSAttributedString+TMUI
 
 - 快速创建文字、图片、占位富文本
 - 获取富文本尺寸
@@ -229,12 +252,17 @@
 - NSString和NSDate互转等
 
 #### NSDictionary+TMUI
-
 - 不可变字典增、删
 
-#### NSMutableParagraphStyle+TMUI
+#### NSMutableDictionary+TMUI
+- 可变字典安全增、删、改
 
+#### NSFileManager+TMUI
+- 沙盒文件管理、获取目录、创建文件等
+
+#### NSMutableParagraphStyle+TMUI
 - 段落便捷构造
+
 
 #### NSObject+TMUI
 
@@ -263,9 +291,14 @@
 
 - 获取当前 query 的参数列表
 - 获取query中key对应value
+- 替换value
 
 #### ALAssetsLibrary
 - 保存图片到指定相册
+
+#### NSTimer+TMUI
+- 定时器创建
+
 
 
 # TMUIComponents

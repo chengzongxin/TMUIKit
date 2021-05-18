@@ -54,4 +54,26 @@
     return value;
 }
 
+- (instancetype)tmui_replaceParameterKey:(NSString *)key withValue:(NSString *)value{
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"&#\n"];
+    
+    NSString *url = self.absoluteString;
+    NSRange range2 = [url rangeOfString:key];
+    if (range2.location != NSNotFound) {
+        NSString *subString = [url substringFromIndex:range2.location];
+        NSScanner *scanner = [NSScanner scannerWithString:subString];
+        
+        NSString *destString = nil;
+        BOOL res = [scanner scanUpToCharactersFromSet:set intoString:&destString];
+        if (res) {
+            url = [url stringByReplacingOccurrencesOfString:destString withString:[NSString stringWithFormat:@"%@=%@", key, value]];
+            return [NSURL URLWithString:url];
+        } else {
+            return self;
+        }
+    } else {
+        return self;
+    }
+}
+
 @end

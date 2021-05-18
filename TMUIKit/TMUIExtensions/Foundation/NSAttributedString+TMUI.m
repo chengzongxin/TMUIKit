@@ -6,6 +6,7 @@
 //
 
 #import "NSAttributedString+TMUI.h"
+#import "NSMutableParagraphStyle+TMUI.h"
 
 @implementation NSAttributedString (TMUI)
 
@@ -13,6 +14,12 @@
 //- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo {
 //    return self.string.tmui_lengthWhenCountingNonASCIICharacterAsTwo;
 //}
+
++ (instancetype)tmui_attributedStringWithStr:(NSString *)string lineSpacing:(CGFloat)lineSpacing{
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle tmui_paragraphStyleWithLineSpacing:lineSpacing];
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:string attributes:@{NSParagraphStyleAttributeName:paragraphStyle}];
+    return attrStr;
+}
 
 + (instancetype)tmui_attributedStringWithImage:(UIImage *)image {
     return [self tmui_attributedStringWithImage:image baselineOffset:0 leftMargin:0 rightMargin:0];
