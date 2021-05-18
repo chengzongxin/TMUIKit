@@ -22,7 +22,7 @@
 - (BOOL)shouldApplyTemplateAutomatically {
     [TMUIThemeManagerCenter.defaultThemeManager addThemeIdentifier:self.themeName theme:self];
     
-    NSString *selectedThemeIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:QDSelectedThemeIdentifier];
+    NSString *selectedThemeIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:TDSelectedThemeIdentifier];
     BOOL result = [selectedThemeIdentifier isEqualToString:self.themeName];
     if (result) {
         TMUIThemeManagerCenter.defaultThemeManager.currentTheme = self;
@@ -37,7 +37,7 @@
 }
 
 - (NSString *)themeName {
-    return QDThemeIdentifierGrass;
+    return TDThemeIdentifierGrass;
 }
 
 @end

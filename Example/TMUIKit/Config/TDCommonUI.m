@@ -10,16 +10,16 @@
 
 
 
-NSString *const QDSelectedThemeIdentifier = @"selectedThemeIdentifier";
-NSString *const QDThemeIdentifierDefault = @"Default";
-NSString *const QDThemeIdentifierGrapefruit = @"Grapefruit";
-NSString *const QDThemeIdentifierGrass = @"Grass";
-NSString *const QDThemeIdentifierPinkRose = @"Pink Rose";
-NSString *const QDThemeIdentifierDark = @"Dark";
+NSString *const TDSelectedThemeIdentifier = @"selectedThemeIdentifier";
+NSString *const TDThemeIdentifierDefault = @"Default";
+NSString *const TDThemeIdentifierGrapefruit = @"Grapefruit";
+NSString *const TDThemeIdentifierGrass = @"Grass";
+NSString *const TDThemeIdentifierPinkRose = @"Pink Rose";
+NSString *const TDThemeIdentifierDark = @"Dark";
 
-const CGFloat QDButtonSpacingHeight = 72;
+const CGFloat TDButtonSpacingHeight = 72;
 
-@implementation QDCommonUI
+@implementation TDCommonUI
 
 //+ (void)load {
 //    static dispatch_once_t onceToken;
@@ -34,7 +34,7 @@ const CGFloat QDButtonSpacingHeight = 72;
 //                TMUISearchController *result = originSelectorIMP(selfObject, originCMD, firstArgv);
 //                
 //                result.TMUI_preferredStatusBarStyleBlock = ^UIStatusBarStyle{
-//                    if ([TMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier isEqual:QDThemeIdentifierDark]) {
+//                    if ([TMUIThemeManagerCenter.defaultThemeManager.currentThemeIdentifier isEqual:TDThemeIdentifierDark]) {
 //                        return UIStatusBarStyleLightContent;
 //                    }
 //                    return TMUIStatusBarStyleDarkContent;
@@ -46,12 +46,12 @@ const CGFloat QDButtonSpacingHeight = 72;
 //}
 
 + (void)renderGlobalAppearances {
-//    [QDUIHelper customMoreOperationAppearance];
-//    [QDUIHelper customAlertControllerAppearance];
-//    [QDUIHelper customDialogViewControllerAppearance];
-//    [QDUIHelper customImagePickerAppearance];
-//    [QDUIHelper customEmotionViewAppearance];
-//    [QDUIHelper customPopupAppearance];
+//    [TDUIHelper customMoreOperationAppearance];
+//    [TDUIHelper customAlertControllerAppearance];
+//    [TDUIHelper customDialogViewControllerAppearance];
+//    [TDUIHelper customImagePickerAppearance];
+//    [TDUIHelper customEmotionViewAppearance];
+//    [TDUIHelper customPopupAppearance];
     
     UISearchBar *searchBar = [UISearchBar appearance];
     searchBar.searchTextPositionAdjustment = UIOffsetMake(4, 0);
@@ -62,12 +62,13 @@ const CGFloat QDButtonSpacingHeight = 72;
 
 @end
 
-@implementation QDCommonUI (ThemeColor)
+@implementation TDCommonUI (ThemeColor)
 
 static NSArray<UIColor *> *themeColors = nil;
 + (UIColor *)randomThemeColor {
     if (!themeColors) {
-        themeColors = @[UIColorTheme1,
+        themeColors = @[UIColorTheme0,
+                        UIColorTheme1,
                         UIColorTheme2,
                         UIColorTheme3,
                         UIColorTheme4,
@@ -83,7 +84,7 @@ static NSArray<UIColor *> *themeColors = nil;
 
 @end
 
-@implementation QDCommonUI (Layer)
+@implementation TDCommonUI (Layer)
 
 + (CALayer *)generateSeparatorLayer {
     CALayer *layer = [CALayer layer];

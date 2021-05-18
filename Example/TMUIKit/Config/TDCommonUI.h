@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define UIColorDarkGray8 UIColorMake(78, 80, 84)
 #define UIColorDarkGray9 UIColorMake(58, 60, 64)
 
-#define UIColorTheme0 UIColorHexString(@"29D181") // T8T Green
+#define UIColorTheme0 UIColorMake(42, 209, 130) // TBT Green
 #define UIColorTheme1 UIColorMake(239, 83, 98) // Grapefruit
 #define UIColorTheme2 UIColorMake(254, 109, 75) // Bittersweet
 #define UIColorTheme3 UIColorMake(255, 207, 71) // Sunflower
@@ -43,14 +43,14 @@ NS_ASSUME_NONNULL_BEGIN
 #define UIColorTheme7 UIColorMake(90, 154, 239) // Blue Jeans
 #define UIColorTheme8 UIColorMake(172, 143, 239) // Lavender
 #define UIColorTheme9 UIColorMake(238, 133, 193) // Pink Rose
-#define UIColorTheme10 UIColorMake(39, 192, 243) // Dark
+#define UIColorTheme10 UIColorMake(39, 192, 243) // Dark TX Blue
 
-extern NSString *const QDSelectedThemeIdentifier;
-extern NSString *const QDThemeIdentifierDefault;
-extern NSString *const QDThemeIdentifierGrapefruit;
-extern NSString *const QDThemeIdentifierGrass;
-extern NSString *const QDThemeIdentifierPinkRose;
-extern NSString *const QDThemeIdentifierDark;
+extern NSString *const TDSelectedThemeIdentifier;
+extern NSString *const TDThemeIdentifierDefault;
+extern NSString *const TDThemeIdentifierGrapefruit;
+extern NSString *const TDThemeIdentifierGrass;
+extern NSString *const TDThemeIdentifierPinkRose;
+extern NSString *const TDThemeIdentifierDark;
 
 #define CodeFontMake(_pointSize) [UIFont fontWithName:@"Menlo" size:_pointSize]
 #define CodeAttributes(_fontSize) @{NSFontAttributeName: CodeFontMake(_fontSize), NSForegroundColorAttributeName: TDThemeManager.currentTheme.themeCodeColor}
@@ -58,19 +58,19 @@ extern NSString *const QDThemeIdentifierDark;
 #define IsUITest NSProcessInfo.processInfo.environment[@"isUITest"].boolValue
 
 /// QMUIButton 系列 Demo 里的一行高度
-extern const CGFloat QDButtonSpacingHeight;
+extern const CGFloat TDButtonSpacingHeight;
 
-@interface QDCommonUI : NSObject
+@interface TDCommonUI : NSObject
 
 + (void)renderGlobalAppearances;
 @end
 
-@interface QDCommonUI (ThemeColor)
+@interface TDCommonUI (ThemeColor)
 
 + (UIColor *)randomThemeColor;
 @end
 
-@interface QDCommonUI (Layer)
+@interface TDCommonUI (Layer)
 
 + (CALayer *)generateSeparatorLayer;
 @end

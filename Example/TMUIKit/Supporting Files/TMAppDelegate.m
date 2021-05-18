@@ -15,13 +15,6 @@
 #import "TMUIConfigurationTemplatePinkRose.h"
 #import "TMUIConfigurationTemplateDark.h"
 
-NSString *const TDSelectedThemeIdentifier = @"selectedThemeIdentifier";
-NSString *const TDThemeIdentifierDefault = @"Default";
-NSString *const TDThemeIdentifierGrapefruit = @"Grapefruit";
-NSString *const TDThemeIdentifierGrass = @"Grass";
-NSString *const TDThemeIdentifierPinkRose = @"Pink Rose";
-NSString *const TDThemeIdentifierDark = @"Dark";
-
 
 @interface TMAppDelegate ()<UITextFieldDelegate,UIScrollViewDelegate>
 

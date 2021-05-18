@@ -48,7 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] tmui_initWithTitle:@"TEST" color:UIColor.whiteColor font:UIFont(18) target:self action:@selector(test)];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"TEST" titleColorStyle:UIBarButtonItem_TMUIColorStyleWhite target:self action:@selector(test)];
     
     self.classes = @[
                      TMUIConfigurationTemplate.class,

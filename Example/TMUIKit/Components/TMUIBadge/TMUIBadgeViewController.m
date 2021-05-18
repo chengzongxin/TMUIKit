@@ -74,13 +74,13 @@
 - (void)barbuttonBadge{
     
     
-    UIBarButtonItem *item1 = [UIBarButtonItem tmui_itemWithTitle:@"item" color:UIColor.tmui_randomColor font:Fnt(15) target:self action:@selector(clickRightItem:)];
+    UIBarButtonItem *item1 = [UIBarButtonItem tmui_itemWithTitle:@"item" target:self action:@selector(clickRightItem:)];
 //    item1.tmui_updatesIndicatorColor = UIColor.redColor;
 //    item1.tmui_updatesIndicatorSize = CGSizeMake(5, 5);
 //    item1.tmui_updatesIndicatorOffset = CGPointMake(0, 5);
     self.navigationItem.rightBarButtonItem = item1;
     
-    UIBarButtonItem *item2 = [UIBarButtonItem tmui_itemWithTitle:@"item" color:UIColor.tmui_randomColor font:Fnt(15) target:self action:@selector(clickRightItem:)];
+    UIBarButtonItem *item2 = [UIBarButtonItem tmui_itemWithTitle:@"item" target:self action:@selector(clickRightItem:)];
 //    item2.tmui_badgeBackgroundColor = UIColor.redColor;
 //    item2.tmui_badgeOffset = CGPointMake(0, 12);
 //    item2.tmui_badgeFont = Fnt(10);
@@ -101,9 +101,9 @@
         [UIBarButtonItem tmui_flexibleSpaceItem],
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:nil action:NULL],
         [UIBarButtonItem tmui_flexibleSpaceItem],
-        [UIBarButtonItem tmui_itemWithIcon:@"icon_tabbar_uikit" highlightedIcon:@"icon_tabbar_uikit" target:nil action:NULL],
+        [UIBarButtonItem tmui_itemWithImage:@"icon_tabbar_uikit" target:nil action:nil],
         [UIBarButtonItem tmui_flexibleSpaceItem],
-        [UIBarButtonItem tmui_itemWithTitle:@"ToolbarItem" color:UIColor.tmui_randomColor font:Fnt(10) target:nil action:NULL],
+        [UIBarButtonItem tmui_itemWithTitle:@"ToolbarItem" target:nil action:NULL],
         [UIBarButtonItem tmui_flexibleSpaceItem],
     ];
     [self.toolbar sizeToFit];

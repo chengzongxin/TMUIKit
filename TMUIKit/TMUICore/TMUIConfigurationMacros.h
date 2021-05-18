@@ -64,17 +64,17 @@
 #define ButtonDisabledAlpha             [TMUICMI buttonDisabledAlpha]              // 按钮Disabled状态的透明度
 #define ButtonTintColor                 [TMUICMI buttonTintColor]                  // 普通按钮的颜色
 
-#define GhostButtonColorBlue            [TMUICMI ghostButtonColorBlue]              // TMUIGhostButtonColorBlue的颜色
-#define GhostButtonColorRed             [TMUICMI ghostButtonColorRed]               // TMUIGhostButtonColorRed的颜色
-#define GhostButtonColorGreen           [TMUICMI ghostButtonColorGreen]             // TMUIGhostButtonColorGreen的颜色
-#define GhostButtonColorGray            [TMUICMI ghostButtonColorGray]              // TMUIGhostButtonColorGray的颜色
-#define GhostButtonColorWhite           [TMUICMI ghostButtonColorWhite]             // TMUIGhostButtonColorWhite的颜色
-
-#define FillButtonColorBlue             [TMUICMI fillButtonColorBlue]              // TMUIFillButtonColorBlue的颜色
-#define FillButtonColorRed              [TMUICMI fillButtonColorRed]               // TMUIFillButtonColorRed的颜色
-#define FillButtonColorGreen            [TMUICMI fillButtonColorGreen]             // TMUIFillButtonColorGreen的颜色
-#define FillButtonColorGray             [TMUICMI fillButtonColorGray]              // TMUIFillButtonColorGray的颜色
-#define FillButtonColorWhite            [TMUICMI fillButtonColorWhite]             // TMUIFillButtonColorWhite的颜色
+//#define GhostButtonColorBlue            [TMUICMI ghostButtonColorBlue]              // TMUIGhostButtonColorBlue的颜色
+//#define GhostButtonColorRed             [TMUICMI ghostButtonColorRed]               // TMUIGhostButtonColorRed的颜色
+//#define GhostButtonColorGreen           [TMUICMI ghostButtonColorGreen]             // TMUIGhostButtonColorGreen的颜色
+//#define GhostButtonColorGray            [TMUICMI ghostButtonColorGray]              // TMUIGhostButtonColorGray的颜色
+//#define GhostButtonColorWhite           [TMUICMI ghostButtonColorWhite]             // TMUIGhostButtonColorWhite的颜色
+//
+//#define FillButtonColorBlue             [TMUICMI fillButtonColorBlue]              // TMUIFillButtonColorBlue的颜色
+//#define FillButtonColorRed              [TMUICMI fillButtonColorRed]               // TMUIFillButtonColorRed的颜色
+//#define FillButtonColorGreen            [TMUICMI fillButtonColorGreen]             // TMUIFillButtonColorGreen的颜色
+//#define FillButtonColorGray             [TMUICMI fillButtonColorGray]              // TMUIFillButtonColorGray的颜色
+//#define FillButtonColorWhite            [TMUICMI fillButtonColorWhite]             // TMUIFillButtonColorWhite的颜色
 
 #pragma mark - TextInput
 #define TextFieldTextColor              [TMUICMI textFieldTextColor]               // TMUITextField、TMUITextView 的文字颜色
@@ -91,6 +91,10 @@
 #pragma mark - NavigationBar
 
 #define NavBarContainerClasses                          [TMUICMI navBarContainerClasses]
+#define NavBarItemLightColor                            [TMUICMI navBarItemLightColor]  /// item白色
+#define NavBarItemThemeColor                            [TMUICMI navBarItemThemeColor]  /// item 主题色
+#define NavBarItemDarkColor                             [TMUICMI navBarItemDarkColor]   /// item 黑色
+#define NavBarItemFont                                  [TMUICMI navBarItemFont]        /// item 字体
 #define NavBarHighlightedAlpha                          [TMUICMI navBarHighlightedAlpha]
 #define NavBarDisabledAlpha                             [TMUICMI navBarDisabledAlpha]
 #define NavBarButtonFont                                [TMUICMI navBarButtonFont]

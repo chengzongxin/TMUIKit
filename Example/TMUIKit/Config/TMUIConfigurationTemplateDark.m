@@ -53,7 +53,7 @@
 }
 
 - (UIColor *)themeTintColor {
-    return UIColorTheme10;
+    return UIColorTheme0;
 }
 
 - (UIColor *)themeTitleTextColor {
