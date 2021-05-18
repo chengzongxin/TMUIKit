@@ -23,46 +23,4 @@
 #import "TDUIHelper.h"
 #import "TDThemeManager.h"
 
-//// create GroupTV
-//#define ROW_ONE_CREATE(title,classVC) Row.str(title).fnt(15).subtitleStyle.cellHeightAuto.onClick(^{\
-//UIViewController *vc = [[NSClassFromString(classVC) alloc] init];\
-//vc.hidesBottomBarWhenPushed = YES;\
-//[self.navigationController pushViewController:vc animated:YES];\
-//})
-//
-//#define ROW_TWO_CREATE(title,subtitle,classVC) Row.str(title).fnt(18).detailStr(subtitle).subtitleStyle.cellHeightAuto.onClick(^{\
-//UIViewController *vc = [[NSClassFromString(classVC) alloc] init];\
-//vc.hidesBottomBarWhenPushed = YES;\
-//[self.navigationController pushViewController:vc animated:YES];\
-//})
-//
-//#define SECTION_CREATE(...) Section(\
-//__VA_ARGS__\
-//).footer(@0.01)
-//
-//
-//#define ROW_CREATE(...) \
-//id arg;\
-//NSMutableArray *arguments = [NSMutableArray array];\
-//va_list argList;\
-//va_start(argList, arg)\
-//id argument = 0;\
-//while ((argument = va_arg(argList, id))) {\
-//    [arguments addObject:argument];\
-//}\
-//va_end(argList);\
-//if (arguments.count == 2) {\
-//    Row.str(arguments[0]).fnt(18).cellHeightAuto.onClick(^{\
-//        UIViewController *vc = [[NSClassFromString(arguments[1]) alloc] init];\
-//        vc.hidesBottomBarWhenPushed = YES;\
-//        [self.navigationController pushViewController:vc animated:YES];\
-//    });\
-//}else{\
-//    Row.str(arguments[0]).fnt(18).detailStr(arguments[1]).subtitleStyle.cellHeightAuto.onClick(^{\
-//        UIViewController *vc = [[NSClassFromString(arguments[2]) alloc] init];\
-//        vc.hidesBottomBarWhenPushed = YES;\
-//        [self.navigationController pushViewController:vc animated:YES];\
-//    });\
-//}
-
 #endif

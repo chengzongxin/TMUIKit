@@ -12,6 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSAttributedString (TMUI)
 
 /**
+ * 设置行间距
+ */
++ (instancetype)tmui_attributedStringWithStr:(NSString *)str lineSpacing:(CGFloat)lineSpacing;
+
+
+/**
  *  按照中文 2 个字符、英文 1 个字符的方式来计算文本长度
  */
 //- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo;

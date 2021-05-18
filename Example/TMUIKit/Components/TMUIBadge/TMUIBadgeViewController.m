@@ -101,9 +101,11 @@
         [UIBarButtonItem tmui_flexibleSpaceItem],
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:nil action:NULL],
         [UIBarButtonItem tmui_flexibleSpaceItem],
-        [UIBarButtonItem tmui_itemWithImage:@"icon_tabbar_uikit" target:nil action:nil],
+        BeginIgnoreClangWarning(-Wnonnull)
+        [UIBarButtonItem tmui_itemWithImage:UIImageMake(@"icon_tabbar_uikit") target:nil action:nil],
         [UIBarButtonItem tmui_flexibleSpaceItem],
         [UIBarButtonItem tmui_itemWithTitle:@"ToolbarItem" target:nil action:NULL],
+        EndIgnoreClangWarning
         [UIBarButtonItem tmui_flexibleSpaceItem],
     ];
     [self.toolbar sizeToFit];

@@ -305,7 +305,7 @@ tmui_isNullString(NSString *string){
         return YES;
     }
     
-    if ([string isKindOfClass:[NSNull class]]) {
+    if (![string isKindOfClass:[NSString class]]) {
         return YES;
     }
     

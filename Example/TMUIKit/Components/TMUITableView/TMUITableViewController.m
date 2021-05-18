@@ -24,7 +24,6 @@
 
 - (void)push:(Class)vcClass{
     UIViewController *vc = [[vcClass alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

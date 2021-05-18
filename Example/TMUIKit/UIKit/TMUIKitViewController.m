@@ -7,10 +7,7 @@
 //
 
 #import "TMUIKitViewController.h"
-#import "TMUIButtonViewController.h"
-#import "TMUILabelViewController.h"
-#import "TMUITextFieldViewController.h"
-#import "TMUITextViewViewController.h"
+#import "TDDebugViewController.h"
 
 @interface TMUIKitViewController ()
 
@@ -20,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"DEBUG" titleColorStyle:UIBarButtonItem_TMUIColorStyleWhite target:self action:@selector(debug)];
     
     GroupTV(
             SECTION_CREATE(
@@ -78,5 +77,8 @@
             ).embedIn(self.view);
 }
 
+- (void)debug{
+    [self.navigationController pushViewController:TDDebugViewController.new animated:YES];
+}
 
 @end
