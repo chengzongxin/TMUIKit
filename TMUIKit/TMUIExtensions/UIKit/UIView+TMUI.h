@@ -149,7 +149,7 @@ extern const CGFloat TMUIViewSelfSizingHeight;
 
 /**
  在 - [UIView layoutSubviews] 调用后就调用的 block
- @param view 当前的 view 本身，方便使用，省去 weak 操作
+ @param view 当前的 view 本身，方便使                                                                                                                                                                                                                     用，省去 weak 操作
  */
 @property(nullable, nonatomic, copy) void (^tmui_layoutSubviewsBlock)(__kindof UIView *view);
 
@@ -531,6 +531,8 @@ typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
 //
 //@end
 
-
+@interface UIView (TBTCategorAdd)
+- (UIView *)tmui_subViewOfContainDescription:(NSString *)aString ;
+@end
 
 NS_ASSUME_NONNULL_END

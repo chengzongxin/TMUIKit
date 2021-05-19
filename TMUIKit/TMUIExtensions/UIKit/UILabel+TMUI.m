@@ -98,16 +98,16 @@
 
 @implementation UILabel (TMUI_AttributeText)
 
-- (void)tmui_setAttributesText:(NSString *)text lineSpacing:(CGFloat)lineSpacing{
-    if (!tmui_isNullString(text)) {
-        NSAttributedString *attrStr = [NSAttributedString tmui_attributedStringWithStr:text lineSpacing:lineSpacing];
-        self.attributedText = attrStr;
+- (void)tmui_setAttributesString:(NSString *)string lineSpacing:(CGFloat)lineSpacing{
+    if (tmui_isNullString(string)) return;
+    // 1行的时候，修正lineSpacing
+    CGFloat height = [NSAttributedString tmui_heightForString:string font:self.font width:self.width lineSpacing:lineSpacing];
+    self.attributedText = [NSAttributedString tmui_attributedStringWithString:string lineSpacing:(height<self.font.pointSize*2+lineSpacing)?0:lineSpacing];
         self.numberOfLines = 0;
-    }
 }
 
-- (void)tmui_setAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{
-    NSRange range = [[self.attributedText string] rangeOfString:text];
+- (void)tmui_setAttributesString:(NSString *)string color:(UIColor *)color font:(UIFont *)font{
+    NSRange range = [[self.attributedText string] rangeOfString:string];
     if(range.location != NSNotFound && range.length) {
         // 找到对应的字段
         NSMutableAttributedString *mat = [self.attributedText mutableCopy];
@@ -116,14 +116,14 @@
         self.attributedText = mat;
     }else{
         // 没有，在后面追加
-        [self tmui_appendAttributesText:text color:color font:font];
+        [self tmui_appendAttributesString:string color:color font:font];
     }
 }
 
-- (void)tmui_appendAttributesText:(NSString *)text color:(UIColor *)color font:(UIFont *)font{
-    if (!tmui_isNullString(text)) {
-        NSRange range = NSMakeRange(0, text.length);
-        NSMutableAttributedString *appendAtr = [[NSMutableAttributedString alloc] initWithString:text];
+- (void)tmui_appendAttributesString:(NSString *)string color:(UIColor *)color font:(UIFont *)font{
+    if (!tmui_isNullString(string)) {
+        NSRange range = NSMakeRange(0, string.length);
+        NSMutableAttributedString *appendAtr = [[NSMutableAttributedString alloc] initWithString:string];
         [appendAtr addAttributes:@{NSForegroundColorAttributeName:color} range:range];
         [appendAtr addAttributes:@{NSFontAttributeName:font} range:range];
         NSMutableAttributedString *mat = [self.attributedText mutableCopy] ?: [[NSMutableAttributedString alloc] init];
@@ -135,20 +135,20 @@
 - (void)tmui_setAttributeslineSpacing:(CGFloat)lineSpacing{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
-        NSMutableAttributedString *mat = [self.attributedText mutableCopy];
+        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
         paragraphStyle.lineSpacing = lineSpacing;
-        [mat addAttributes:@{NSParagraphStyleAttributeName:paragraphStyle} range:range];
-        self.attributedText = mat;
+        [mAttrStr addAttributes:@{NSParagraphStyleAttributeName:paragraphStyle} range:range];
+        self.attributedText = mAttrStr;
     }
 }
 
 - (void)tmui_setAttributesLineOffset:(CGFloat)lineOffset{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
-        NSMutableAttributedString *mat = [self.attributedText mutableCopy];
-        [mat addAttributes:@{NSBaselineOffsetAttributeName: @(lineOffset)} range:range];
-        self.attributedText = mat;
+        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
+        [mAttrStr addAttributes:@{NSBaselineOffsetAttributeName: @(lineOffset)} range:range];
+        self.attributedText = mAttrStr;
     }
 }
 
@@ -156,18 +156,18 @@
 - (void)tmui_setAttributesLineSingle{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
-        NSMutableAttributedString *mat = [self.attributedText mutableCopy];
-        [mat addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
-        self.attributedText = mat;
+        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
+        [mAttrStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
+        self.attributedText = mAttrStr;
     }
 }
 
 - (void)tmui_setAttributesUnderLink{
     NSRange range = NSMakeRange(0, [self.attributedText string].length);
     if(range.location != NSNotFound) {
-        NSMutableAttributedString *mat = [self.attributedText mutableCopy];
-        [mat addAttributes:@{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
-        self.attributedText = mat;
+        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
+        [mAttrStr addAttributes:@{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
+        self.attributedText = mAttrStr;
     }
 }
 

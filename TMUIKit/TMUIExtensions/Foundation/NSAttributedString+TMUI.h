@@ -11,17 +11,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSAttributedString (TMUI)
 
+#pragma mark - 文字富文本
 /**
  * 设置行间距
  */
-+ (instancetype)tmui_attributedStringWithStr:(NSString *)str lineSpacing:(CGFloat)lineSpacing;
++ (instancetype)tmui_attributedStringWithString:(NSString *)str lineSpacing:(CGFloat)lineSpacing;
+
++ (instancetype)tmui_attributedStringWithString:(NSString *)str font:(UIFont *)font color:(UIColor *)color;
+
++ (instancetype)tmui_attributedStringWithString:(NSString *)str font:(UIFont *)font color:(UIColor *)color lineSpacing:(CGFloat)lineSpacing;
 
 
-/**
- *  按照中文 2 个字符、英文 1 个字符的方式来计算文本长度
- */
-//- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo;
 
+#pragma mark - 图片富文本
 /**
  * @brief 创建一个包含图片的 attributedString
  * @param image 要用的图片
@@ -44,65 +46,92 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)tmui_attributedStringWithFixedSpace:(CGFloat)width;
 
-/**
- * 获取NSAttributedString显示的高度
- */
-- (CGFloat)tmui_heightWithMaxWidth:(CGFloat)width;
-
-
-/**
- * 设置行间距
- */
-+ (instancetype)tmui_atsForStr:(NSString *)str lineHeight:(CGFloat)h;
-
-/**
- * 设置行间距 是否用于计算
- */
-+ (instancetype)tmui_atsForStr:(NSString *)str lineHeight:(CGFloat)h forCompute:(BOOL)forCompute;
-
-
-/**
- * 获取设置行间距的NSAttributedString的高度
- */
-+ (CGFloat)tmui_heightForAtsWithStr:(NSString *)str font:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat )lh;
-
-- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh;
-
-/**
- *  获取指定字符串的高度
- *
- *  @param str     字符串
- *  @param ft      字体
- *  @param w       限制宽度
- *  @param lineGap 行高
- *  @param lineNum 限制行数，0表示不限制
- *
- *  @return 高度
- */
-+ (CGFloat)tmui_heightForAtsWithStr:(NSString *)str font:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lineGap maxLine:(NSUInteger)lineNum;
-
-/**
- *  获取字符串高度
- *
- *  @param ft      字体
- *  @param w       限制宽度
- *  @param lh      行高
- *  @param lineNum 限制行数，0表示不限制
- *
- *  @return 高度
- */
-- (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w lineH:(CGFloat)lh maxLine:(NSUInteger)lineNum;
-
 @end
 
 
-@interface NSAttributedString (TMUI_Drawing)
+@interface NSAttributedString (TMUI_Calculate)
+
+
+/**
+ *  按照中文 2 个字符、英文 1 个字符的方式来计算文本长度
+ */
+- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo;
+
+- (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing;
+
++ (CGFloat)tmui_heightForString:(NSString *)str font:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing;
+
++ (CGFloat)tmui_heightForString:(NSString *)str font:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing maxLine:(NSUInteger)maxLine;
 
 /// 计算富文本高度的方法
 /// @note 高度取决于富文本中最大的字体，计算高度时候最好传入最大的字体
 /// @param width 富文本容器宽度
 - (CGSize)tmui_sizeForWidth:(CGFloat)width;
 
+/**
+ * 获取NSAttributedString显示的高度
+ */
+- (CGFloat)tmui_heightForWidth:(CGFloat)width;
+
+
+@end
+
+
+
+
+
+@interface NSAttributedString (TMUI_Attributes)
+
+/**
+ The font of the text. (read-only)
+ 
+ @discussion Default is Helvetica (Neue) 12.
+ @discussion Get this property returns the first character's attribute.
+ @since CoreText:3.2  UIKit:6.0  YYKit:6.0
+ */
+//@property (nullable, nonatomic, strong, readonly) UIFont *tmui_font;
+//- (nullable UIFont *)tmui_fontAtIndex:(NSUInteger)index;
+//
+
+
+@end
+
+@interface NSMutableAttributedString (TMUI)
+
+/**
+ Sets the attributes to the entire text string.
+ 
+ @discussion The old attributes will be removed.
+ 
+ @param attributes  A dictionary containing the attributes to set, or nil to remove all attributes.
+ */
+- (void)tmui_setAttributes:(nullable NSDictionary<NSString *, id> *)attributes;
+
+/**
+ Sets an attribute with the given name and value to the entire text string.
+ 
+ @param name   A string specifying the attribute name.
+ @param value  The attribute value associated with name. Pass `nil` or `NSNull` to
+ remove the attribute.
+ */
+- (void)tmui_setAttribute:(NSString *)name value:(nullable id)value;
+
+/**
+ Sets an attribute with the given name and value to the characters in the specified range.
+ 
+ @param name   A string specifying the attribute name.
+ @param value  The attribute value associated with name. Pass `nil` or `NSNull` to
+ remove the attribute.
+ @param range  The range of characters to which the specified attribute/value pair applies.
+ */
+- (void)tmui_setAttribute:(NSString *)name value:(nullable id)value range:(NSRange)range;
+
+/**
+ Removes all attributes in the specified range.
+ 
+ @param range  The range of characters.
+ */
+- (void)tmui_removeAttributesInRange:(NSRange)range;
 @end
 
 
