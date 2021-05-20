@@ -350,13 +350,13 @@ BeginIgnoreDeprecatedWarning
 // 获取字符串显示的高度
 - (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w {
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
-        CGSize size = [self boundingRectWithSize:CGSizeMake(w, 100000)
+        CGSize size = [self boundingRectWithSize:CGSizeMake(w, HUGE)
                                          options:NSStringDrawingUsesLineFragmentOrigin
                                       attributes:@{NSFontAttributeName:ft}
                                          context:nil].size;
         return ceilf(size.height);
     } else {
-        CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, 100000)];
+        CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, HUGE)];
         return ceilf(s.height);
     }
 }
@@ -364,13 +364,13 @@ BeginIgnoreDeprecatedWarning
 - (CGSize)tmui_sizeWithFont:(UIFont *)ft width:(CGFloat)w {
     CGSize ceilfSize;
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
-        CGSize size = [self boundingRectWithSize:CGSizeMake(w, 100000)
+        CGSize size = [self boundingRectWithSize:CGSizeMake(w, HUGE)
                                          options:NSStringDrawingUsesLineFragmentOrigin
                                       attributes:@{NSFontAttributeName:ft}
                                          context:nil].size;
         ceilfSize = CGSizeMake(ceilf(size.width), ceilf(size.height));
     } else {
-        CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, 100000)];
+        CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, HUGE)];
         ceilfSize = CGSizeMake(ceilf(s.width), ceilf(s.height));
     }
     return ceilfSize;

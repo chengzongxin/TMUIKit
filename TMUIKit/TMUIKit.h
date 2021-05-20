@@ -7,6 +7,7 @@
 #ifndef TMUIKit_h
 #define TMUIKit_h
 
+#import <Foundation/Foundation.h>
 static NSString * const TMUI_VERSION = @"1.0.0";
 
 #import "TMUICore.h"
