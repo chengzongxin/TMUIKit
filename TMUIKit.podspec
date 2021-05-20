@@ -23,17 +23,15 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'http://repo.we.com/tubroker/tmuikit.git'
-#  s.homepage         = 'https://github.com/chengzongxin/TMUIKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chengzongxin' => 'joe.cheng@corp.to8to.com' }
-  s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => s.version.to_s }
-#  s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => s.version.to_s }
+  s.source           = { :git => './'}
+  # s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
-#  s.platform     = :ios, "8.2"
-  s.platform     = :ios, "9.0" # 暂时设置为9.0，太多warning
+  s.platform     = :ios, "9.0" 
   s.requires_arc = true
   
   # s.resource_bundles = {
@@ -55,18 +53,6 @@ Pod::Spec.new do |s|
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
   end
-  
-#  #TMUIDefines 宏定义
-#  s.subspec 'TMUIDefines' do |ss|
-#    #引入TMUIDefines中所有资源文件
-#    ss.source_files = 'TMUIKit/TMUIDefines/**/*'
-#    #公开TMUIDefines模块中的头文件
-#    ss.public_header_files = 'TMUIKit/TMUIDefines/*.h'
-#    #依赖的三方库，pod库或者可以是自身的subspec
-#    ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-#    ss.dependency 'TMUIKit/TMUICore'
-#  end
-  
   
   #TMUIExtensions 分类
   s.subspec 'TMUIExtensions' do |ss|

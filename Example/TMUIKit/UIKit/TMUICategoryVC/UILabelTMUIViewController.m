@@ -64,10 +64,10 @@
     // 行间距
     [label tmui_setAttributeslineSpacing:10];
     // 指定富文本
-    [label tmui_setAttributesText:@"春眠不觉晓，" color:UIColor.systemPinkColor font:UIFont(15)];
-    [label tmui_setAttributesText:@"处处闻啼鸟，" color:UIColor.greenColor font:UIFont(15)];
-    [label tmui_setAttributesText:@"夜来风雨声，" color:UIColor.systemPurpleColor font:UIFont(15)];
-    [label tmui_setAttributesText:@"花落知多少。" color:UIColor.systemPurpleColor font:UIFont(15)];
+    [label tmui_setAttributesString:@"春眠不觉晓，" color:UIColor.systemPinkColor font:UIFont(15)];
+    [label tmui_setAttributesString:@"处处闻啼鸟，" color:UIColor.greenColor font:UIFont(15)];
+    [label tmui_setAttributesString:@"夜来风雨声，" color:UIColor.systemPurpleColor font:UIFont(15)];
+    [label tmui_setAttributesString:@"花落知多少。" color:UIColor.systemPurpleColor font:UIFont(15)];
     // 垂直偏移
     [label tmui_setAttributesLineOffset:0];
     // 加横线
@@ -104,7 +104,7 @@
     _demo1lbl = label;
     
     
-    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸(字体按照最大字体20计算) = %@,富文本尺寸（自动计算） = %@,label尺寸（取max） = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributesString:[NSString stringWithFormat:@"\n文本尺寸(字体按照最大字体20计算) = %@,富文本尺寸（自动计算） = %@,label尺寸（取max） = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
 }
 
@@ -134,7 +134,7 @@
     }];
     
     [label tmui_setAttributeslineSpacing:10];
-    [label tmui_setAttributesText:label.text color:UIColor.tmui_randomColor font:UIFont(15)];
+    [label tmui_setAttributesString:label.text color:UIColor.tmui_randomColor font:UIFont(15)];
     
     
     CGSize size1 = [label.text tmui_sizeForFont:label.font
@@ -161,7 +161,7 @@
     // label max
     CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
     
-    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributesString:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
     
     
@@ -199,7 +199,7 @@
     // imageAttr (24x24 emotion_06)
     NSMutableAttributedString *imgAttr = [[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_06"]] mutableCopy];
     // textAttr
-    [imgAttr appendAttributedString:[NSAttributedString tmui_atsForStr:@"这是一个包含UIImage图像的富文本" lineHeight:10]];
+    [imgAttr appendAttributedString:[NSAttributedString tmui_attributedStringWithString:@"这是一个包含UIImage图像的富文本" lineSpacing:10]];
     // imageAttr
     [imgAttr appendAttributedString:[NSAttributedString tmui_attributedStringWithImage:[UIImage imageNamed:@"emotion_07"]]];
     
@@ -223,7 +223,7 @@
     
     CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
     
-    [tips tmui_setAttributesText:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
+    [tips tmui_setAttributesString:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
 }
 

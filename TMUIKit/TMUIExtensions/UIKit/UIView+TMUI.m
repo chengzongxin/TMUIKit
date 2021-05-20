@@ -1429,3 +1429,30 @@ static char kAssociatedObjectKey_sizeThatFitsBlock;
 @end
 
 
+@implementation UIView (TBTCategorAdd)
+
+- (UIView *)tmui_subViewOfContainDescription:(NSString *)aString {
+    if(![aString isKindOfClass:[NSString class]]){
+        return nil;
+    }
+    if (@available(iOS 13.0, *)) {
+        if ([@"UISearchBarTextField" isEqualToString:aString] && [self isKindOfClass:[UISearchBar class]]) {
+            return ((UISearchBar *)self).searchTextField;
+        }
+    }
+    UIView *aView = nil;
+    NSMutableArray *views = [self.subviews mutableCopy];
+    while (!aView && views.count>0) {
+        UIView *temp = [views firstObject];
+        if ([temp.description rangeOfString:aString].length>0) {
+            aView = temp;
+        }else{
+            [views addObjectsFromArray:temp.subviews];
+            [views removeObject:temp];
+        }
+    }
+    return aView;
+}
+
+
+@end
