@@ -26,8 +26,8 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chengzongxin' => 'joe.cheng@corp.to8to.com' }
-  s.source           = { :git => './'}
-  # s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => s.version.to_s }
+  # s.source           = { :git => './'}
+  s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
@@ -194,26 +194,26 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
       end
       
-      #ChainUI
-      ss.subspec 'ChainUI' do |sss|
-        sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
-        sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
-        sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-        sss.subspec 'Private' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
-          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
-        end
-        sss.subspec 'Public' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
-          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-        end
-        sss.subspec 'Chainable' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-        end
-      end
+      # #ChainUI
+      # ss.subspec 'ChainUI' do |sss|
+      #   sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
+      #   sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
+      #   sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+      #   sss.subspec 'Private' do |ssss|
+      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
+      #     ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
+      #   end
+      #   sss.subspec 'Public' do |ssss|
+      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
+      #     ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
+      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+      #   end
+      #   sss.subspec 'Chainable' do |ssss|
+      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
+      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
+      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+      #   end
+      # end
       
       # TMUITableView
       ss.subspec 'TMUITableView' do |sss|
