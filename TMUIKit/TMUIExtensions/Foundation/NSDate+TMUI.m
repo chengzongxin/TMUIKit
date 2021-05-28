@@ -10,130 +10,130 @@
 @implementation NSDate (TMUI)
 
 
-- (NSInteger)year {
+- (NSInteger)tmui_year {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self] year];
 }
 
-- (NSInteger)month {
+- (NSInteger)tmui_month {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitMonth fromDate:self] month];
 }
 
-- (NSInteger)day {
+- (NSInteger)tmui_day {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:self] day];
 }
 
-- (NSInteger)hour {
+- (NSInteger)tmui_hour {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitHour fromDate:self] hour];
 }
 
-- (NSInteger)minute {
+- (NSInteger)tmui_minute {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitMinute fromDate:self] minute];
 }
 
-- (NSInteger)second {
+- (NSInteger)tmui_second {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitSecond fromDate:self] second];
 }
 
-- (NSInteger)nanosecond {
+- (NSInteger)tmui_nanosecond {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitSecond fromDate:self] nanosecond];
 }
 
-- (NSInteger)weekday {
+- (NSInteger)tmui_weekday {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:self] weekday];
 }
 
-- (NSInteger)weekdayOrdinal {
+- (NSInteger)tmui_weekdayOrdinal {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekdayOrdinal fromDate:self] weekdayOrdinal];
 }
 
-- (NSInteger)weekOfMonth {
+- (NSInteger)tmui_weekOfMonth {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfMonth fromDate:self] weekOfMonth];
 }
 
-- (NSInteger)weekOfYear {
+- (NSInteger)tmui_weekOfYear {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfYear fromDate:self] weekOfYear];
 }
 
-- (NSInteger)yearForWeekOfYear {
+- (NSInteger)tmui_yearForWeekOfYear {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitYearForWeekOfYear fromDate:self] yearForWeekOfYear];
 }
 
-- (NSInteger)quarter {
+- (NSInteger)tmui_quarter {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitQuarter fromDate:self] quarter];
 }
 
-- (BOOL)isLeapMonth {
+- (BOOL)tmui_isLeapMonth {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitQuarter fromDate:self] isLeapMonth];
 }
 
-- (BOOL)isLeapYear {
-    NSUInteger year = self.year;
+- (BOOL)tmui_isLeapYear {
+    NSUInteger year = self.tmui_year;
     return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)));
 }
 
-- (BOOL)isToday {
+- (BOOL)tmui_isToday {
     if (fabs(self.timeIntervalSinceNow) >= 60 * 60 * 24) return NO;
-    return [NSDate new].day == self.day;
+    return [NSDate new].tmui_day == self.tmui_day;
 }
 
-- (BOOL)isYesterday {
-    NSDate *added = [self dateByAddingDays:1];
-    return [added isToday];
+- (BOOL)tmui_isYesterday {
+    NSDate *added = [self tmui_dateByAddingDays:1];
+    return [added tmui_isToday];
 }
 
-- (NSDate *)dateByAddingYears:(NSInteger)years {
+- (NSDate *)tmui_dateByAddingYears:(NSInteger)years {
     NSCalendar *calendar =  [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setYear:years];
     return [calendar dateByAddingComponents:components toDate:self options:0];
 }
 
-- (NSDate *)dateByAddingMonths:(NSInteger)months {
+- (NSDate *)tmui_dateByAddingMonths:(NSInteger)months {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setMonth:months];
     return [calendar dateByAddingComponents:components toDate:self options:0];
 }
 
-- (NSDate *)dateByAddingWeeks:(NSInteger)weeks {
+- (NSDate *)tmui_dateByAddingWeeks:(NSInteger)weeks {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setWeekOfYear:weeks];
     return [calendar dateByAddingComponents:components toDate:self options:0];
 }
 
-- (NSDate *)dateByAddingDays:(NSInteger)days {
+- (NSDate *)tmui_dateByAddingDays:(NSInteger)days {
     NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + 86400 * days;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-- (NSDate *)dateByAddingHours:(NSInteger)hours {
+- (NSDate *)tmui_dateByAddingHours:(NSInteger)hours {
     NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + 3600 * hours;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-- (NSDate *)dateByAddingMinutes:(NSInteger)minutes {
+- (NSDate *)tmui_dateByAddingMinutes:(NSInteger)minutes {
     NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + 60 * minutes;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-- (NSDate *)dateByAddingSeconds:(NSInteger)seconds {
+- (NSDate *)tmui_dateByAddingSeconds:(NSInteger)seconds {
     NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + seconds;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-- (NSString *)stringWithFormat:(NSString *)format {
+- (NSString *)tmui_stringWithFormat:(NSString *)format {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:format];
     [formatter setLocale:[NSLocale currentLocale]];
     return [formatter stringFromDate:self];
 }
 
-- (NSString *)stringWithFormat:(NSString *)format timeZone:(NSTimeZone *)timeZone locale:(NSLocale *)locale {
+- (NSString *)tmui_stringWithFormat:(NSString *)format timeZone:(NSTimeZone *)timeZone locale:(NSLocale *)locale {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:format];
     if (timeZone) [formatter setTimeZone:timeZone];
@@ -141,7 +141,7 @@
     return [formatter stringFromDate:self];
 }
 
-- (NSString *)stringWithISOFormat {
+- (NSString *)tmui_stringWithISOFormat {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -152,13 +152,13 @@
     return [formatter stringFromDate:self];
 }
 
-+ (NSDate *)dateWithString:(NSString *)dateString format:(NSString *)format {
++ (NSDate *)tmui_dateWithString:(NSString *)dateString format:(NSString *)format {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:format];
     return [formatter dateFromString:dateString];
 }
 
-+ (NSDate *)dateWithString:(NSString *)dateString format:(NSString *)format timeZone:(NSTimeZone *)timeZone locale:(NSLocale *)locale {
++ (NSDate *)tmui_dateWithString:(NSString *)dateString format:(NSString *)format timeZone:(NSTimeZone *)timeZone locale:(NSLocale *)locale {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:format];
     if (timeZone) [formatter setTimeZone:timeZone];
@@ -166,7 +166,7 @@
     return [formatter dateFromString:dateString];
 }
 
-+ (NSDate *)dateWithISOFormatString:(NSString *)dateString {
++ (NSDate *)tmui_dateWithISOFormatString:(NSString *)dateString {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
