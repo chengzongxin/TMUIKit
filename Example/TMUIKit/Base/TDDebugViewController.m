@@ -58,6 +58,22 @@
 //    [l1 tmui_setAttributeslineSpacing:5];
     VerStack(l1,l2,l3,CUISpring).gap(40).embedIn(self.view, NavigationContentTop+20, 20, 0);
     
+    
+    NSString *nilStr = nil;
+    NSString *nilStr2 = nil;
+    NSDictionary *dict = @{@"xxx":nilStr,
+                           @"xaaa":@"123123"
+    };
+    NSLog(@"%@",dict);
+    
+    NSMutableDictionary *mDict = dict.mutableCopy;
+    mDict[@"dsa"] = nilStr2;
+    [mDict setValue:nilStr2 forKey:@"asdaa"];
+    NSLog(@"%@",mDict);
+    mDict[@"dsa1"] = @"fdfsf";
+    [mDict setValue:@"fdsfdsfds" forKey:@"as11daa"];
+    NSLog(@"%@",mDict);
+    
 }
 
 

@@ -93,7 +93,7 @@
     NSString * currentYear = [self.dateFormatter stringFromDate:[NSDate date]];
     NSArray * yearsArray = [self years];
     NSInteger yearIndex = [yearsArray indexOfObject:currentYear];
-    NSInteger monthIndex = [[NSDate date] month] - 1;
+    NSInteger monthIndex = [[NSDate date] tmui_month] - 1;
     [TMCityPicker showPickerWithTitle:@"选择时间" provinceItemListBlock:^NSArray * _Nonnull{
         return yearsArray;
     } cityItemListAtProvinceBlock:^NSArray * _Nonnull(id  _Nonnull provinceItem, NSInteger provinceIndex) {
@@ -120,7 +120,7 @@
     while (i++ <= 2) {
         NSString * dateStr = [self.dateFormatter stringFromDate:date];
         [mutableArray insertObject:dateStr atIndex:0];
-        date = [date dateByAddingYears:-1];
+        date = [date tmui_dateByAddingYears:-1];
     }
     return mutableArray.copy;
 }
@@ -132,7 +132,7 @@
     }
     else if (index == count - 1) {
         NSMutableArray * mutableArray = [NSMutableArray arrayWithCapacity:12];
-        NSInteger month = [[NSDate date] month];
+        NSInteger month = [[NSDate date] tmui_month];
         do {
             NSString * monthStr = [NSString stringWithFormat:@"%zd月", month];
             [mutableArray insertObject:monthStr atIndex:0];
@@ -155,8 +155,8 @@
 //    TMDatePickerModeDate = 0,       ///< 年-月-日
 //    TMDatePickerModeTime,           ///< 时-分-秒
 //    TMDatePickerModeDateAndTime,    ///< 年-月-日-时-分-秒
-    [TMDatePicker showPickerWithTitle:@"日期选择样式：".a(mode+1) mode:mode limitMinDate:[NSDate.date dateByAddingYears:-3] limitMaxDate:NSDate.date currentDate:NSDate.date finishSelectBlock:^(NSDate * _Nonnull selectedDate) {
-        [TMToast toast:[selectedDate stringWithISOFormat]];
+    [TMDatePicker showPickerWithTitle:@"日期选择样式：".a(mode+1) mode:mode limitMinDate:[NSDate.date tmui_dateByAddingYears:-3] limitMaxDate:NSDate.date currentDate:NSDate.date finishSelectBlock:^(NSDate * _Nonnull selectedDate) {
+        [TMToast toast:[selectedDate tmui_stringWithISOFormat]];
     } fromViewController:self];
 }
 
