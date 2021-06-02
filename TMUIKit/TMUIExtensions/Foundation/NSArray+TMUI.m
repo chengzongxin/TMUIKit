@@ -40,31 +40,31 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSFrozenArrayM);
 
 
 // MARK: Crash Avoid
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        // MARK: 访问越界处理
-        NSArray *classes = @[@"NSArray",@"__NSArray0",@"__NSSingleObjectArrayI",@"__NSArrayI",@"__NSArrayM",@"__NSFrozenArrayM",@"__NSCFArray"];
-        for (NSString *cls in classes) {
-            Class class = NSClassFromString(cls);
-            NSString *objectAtIndexStr = [NSString stringWithFormat:@"tmui_%@_objectAtIndex:",cls];
-            NSString *objectAtIndexedSubscriptStr = [NSString stringWithFormat:@"tmui_%@_objectAtIndexedSubscript:",cls];
-            
-            if (![cls isEqualToString:@"__NSCFArray"]) {
-                //__NSCFArray的这个方法不交换 会导致启动时crash
-                ExchangeImplementations(class, @selector(objectAtIndex:), NSSelectorFromString(objectAtIndexStr));
-            }
-            ExchangeImplementations(class, @selector(objectAtIndexedSubscript:), NSSelectorFromString(objectAtIndexedSubscriptStr));
-        }
-        
-        // insert crash
-        ExchangeImplementations(NSClassFromString(@"__NSArrayM"), @selector(insertObject:atIndex:), @selector(tmui___NSArrayM_insertObject:atIndex:));
-        
-    });
-    
-    
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//
+//        // MARK: 访问越界处理
+//        NSArray *classes = @[@"NSArray",@"__NSArray0",@"__NSSingleObjectArrayI",@"__NSArrayI",@"__NSArrayM",@"__NSFrozenArrayM",@"__NSCFArray"];
+//        for (NSString *cls in classes) {
+//            Class class = NSClassFromString(cls);
+//            NSString *objectAtIndexStr = [NSString stringWithFormat:@"tmui_%@_objectAtIndex:",cls];
+//            NSString *objectAtIndexedSubscriptStr = [NSString stringWithFormat:@"tmui_%@_objectAtIndexedSubscript:",cls];
+//
+//            if (![cls isEqualToString:@"__NSCFArray"]) {
+//                //__NSCFArray的这个方法不交换 会导致启动时crash
+//                ExchangeImplementations(class, @selector(objectAtIndex:), NSSelectorFromString(objectAtIndexStr));
+//            }
+//            ExchangeImplementations(class, @selector(objectAtIndexedSubscript:), NSSelectorFromString(objectAtIndexedSubscriptStr));
+//        }
+//
+//        // insert crash
+//        ExchangeImplementations(NSClassFromString(@"__NSArrayM"), @selector(insertObject:atIndex:), @selector(tmui___NSArrayM_insertObject:atIndex:));
+//
+//    });
+//    
+//
+//}
 
 - (void)tmui___NSArrayM_insertObject:(id)object atIndex:(NSInteger)index{
     if (object && index <= self.count) {

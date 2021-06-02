@@ -10,11 +10,11 @@
 #import "TMUIRuntime.h"
 @implementation NSMutableArray (TMUI)
 
-+ (void)load
-{
-    ExchangeImplementations(self, @selector(setObject:atIndexedSubscript:), @selector(tmui_safeSetObject:atIndexedSubscript:));
-    ExchangeImplementations(self, @selector(addObjectsFromArray:), @selector(tmui_safeAddObjectsFromArray:));
-}
+//+ (void)load
+//{
+//    ExchangeImplementations(self, @selector(setObject:atIndexedSubscript:), @selector(tmui_safeSetObject:atIndexedSubscript:));
+//    ExchangeImplementations(self, @selector(addObjectsFromArray:), @selector(tmui_safeAddObjectsFromArray:));
+//}
 
 -(void)tmui_safeAddObjectsFromArray:(NSArray *)array{
     if (array && [array isKindOfClass:[NSArray class]]) {

@@ -74,6 +74,9 @@
     [mDict setValue:@"fdsfdsfds" forKey:@"as11daa"];
     NSLog(@"%@",mDict);
     
+    UIView *view = mDict[@"dsa"];
+    view.backgroundColor = UIColor.redColor;
+    Log(view);
 }
 
 

@@ -10,12 +10,12 @@
 
 @implementation NSDictionary (TMUI_NilSafe)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        ExchangeImplementations(objc_getClass("__NSPlaceholderDictionary"), @selector(initWithObjects:forKeys:count:), @selector(tmui___NSPlaceholderDictionary_initWithObjects:forKeys:count:));
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        ExchangeImplementations(objc_getClass("__NSPlaceholderDictionary"), @selector(initWithObjects:forKeys:count:), @selector(tmui___NSPlaceholderDictionary_initWithObjects:forKeys:count:));
+//    });
+//}
 
 // swizz 系统的@{}方法
 - (instancetype)tmui___NSPlaceholderDictionary_initWithObjects:(id *)objects forKeys:(id<NSCopying> *)keys count:(NSUInteger)count {
