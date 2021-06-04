@@ -8,7 +8,7 @@
 #define TMUIKit_h
 
 #import <Foundation/Foundation.h>
-static NSString * const TMUI_VERSION = @"1.0.0";
+static NSString * const TMUI_VERSION = @"1.0.3";  // 去掉不用组件，审查+load方法
 
 #import "TMUICore.h"
 #import "TMUIComponents.h"

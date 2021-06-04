@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '1.0.1'
+  s.version          = '1.1.0'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -186,74 +186,80 @@ Pod::Spec.new do |s|
         }
       end
       
-      ss.subspec 'TMUIPageViewController' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
-      end
-      
-      ss.subspec 'TMShowBigImageController' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
-      end
-      
-      # #ChainUI
-      # ss.subspec 'ChainUI' do |sss|
-      #   sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
-      #   sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
-      #   sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-      #   sss.subspec 'Private' do |ssss|
-      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
-      #     ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
-      #   end
-      #   sss.subspec 'Public' do |ssss|
-      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
-      #     ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
-      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-      #   end
-      #   sss.subspec 'Chainable' do |ssss|
-      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
-      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
-      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-      #   end
-      # end
-      
-      # TMUITableView
-      ss.subspec 'TMUITableView' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
-      end
-      
       # TMUICellHeightCache
       ss.subspec 'TMUICellHeightCache' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUICellHeightCache/*.{h,m}'
       end
       
-      # TMUIBadge
-      ss.subspec 'TMUIBadge' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
-      end
-      # TMUITheme
-      ss.subspec 'TMUITheme' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
-      end
       
-      # TMUITheme
-      ss.subspec 'TMUIAppearance' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
-      end
-      
-      # TMUITheme
-      ss.subspec 'TMUIModalPresentationViewController' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
-      end
-      
+      #### 以下组件暂不使用，先屏蔽
+#      # TMUITableView
+#      ss.subspec 'TMUITableView' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
+#      end
+#
+#      ss.subspec 'TMUIPageViewController' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
+#      end
+#
+#      ss.subspec 'TMShowBigImageController' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
+#      end
+#
+#      # TMUITheme
+#      ss.subspec 'TMUIModalPresentationViewController' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
+#      end
+#
+#
+#      # TMUIBadge
+#      ss.subspec 'TMUIBadge' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
+#      end
+#      # TMUITheme
+#      ss.subspec 'TMUITheme' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
+#      end
+#
+#      # TMUITheme
+#      ss.subspec 'TMUIAppearance' do |sss|
+#        sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
+#      end
+#
+#
+#
+#       #ChainUI
+#       ss.subspec 'ChainUI' do |sss|
+#         sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
+#         sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
+#         sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+#         sss.subspec 'Private' do |ssss|
+#           ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
+#           ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
+#         end
+#         sss.subspec 'Public' do |ssss|
+#           ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
+#           ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
+#           ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+#         end
+#         sss.subspec 'Chainable' do |ssss|
+#           ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
+#           ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
+#           ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+#         end
+#       end
+#
+
   end
   
   
-  #tools
-  s.subspec 'TMTools' do |ss|
-    ss.subspec 'TMRsaTool' do |sss|
-      sss.frameworks = 'Foundation'
-      sss.dependency 'OpenSSL-Universal', '~> 1.0.2.20' #openssl库的集成，涉及rsa加密功能, pod install 此库20多MB，下载稍慢，耐心等待一会即可
-      sss.source_files = 'TMUIKit/TMTools/TMRsaTool/*.{h,m}'
-    end
-  end
+ #tools
+ s.subspec 'TMTools' do |ss|
+   ss.subspec 'TMRsaTool' do |sss|
+     sss.frameworks = 'Foundation'
+     sss.dependency 'OpenSSL-Universal', '~> 1.0.2.20' #openssl库的集成，涉及rsa加密功能, pod install 此库20多MB，下载稍慢，耐心等待一会即可
+     sss.source_files = 'TMUIKit/TMTools/TMRsaTool/*.{h,m}'
+   end
+ end
   
 end

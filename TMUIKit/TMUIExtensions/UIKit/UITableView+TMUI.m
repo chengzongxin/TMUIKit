@@ -22,82 +22,82 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
 @implementation UITableView (TMUI)
 
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        OverrideImplementation([UITableView class], @selector(initWithFrame:style:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^UITableView *(UITableView *selfObject, CGRect firstArgv, UITableViewStyle secondArgv) {
-                
-                if (@available(iOS 13.0, *)) {
-                    // iOS 13 tmui_style 的 getter 直接返回 tableView.style，所以这里不需要给 tmui_style 赋值
-                } else {
-                    selfObject.tmui_style = secondArgv;
-                    if (secondArgv == TMUITableViewStyleInsetGrouped) {
-                        secondArgv = UITableViewStyleGrouped;
-                    }
-                }
-                
-                // call super
-                UITableView *(*originSelectorIMP)(id, SEL, CGRect, UITableViewStyle);
-                originSelectorIMP = (UITableView * (*)(id, SEL, CGRect, UITableViewStyle))originalIMPProvider();
-                UITableView *result = originSelectorIMP(selfObject, originCMD, firstArgv, secondArgv);
-                
-                // iOS 11 之后 estimatedRowHeight 如果值为 UITableViewAutomaticDimension，estimate 效果也会生效（iOS 11 以前要 > 0 才会生效）。
-                // 而当使用 estimate 效果时，会导致 contentSize 之类的计算不准确，所以这里给一个途径让项目可以方便地控制 UITableView（不包含子类，例如 UIPickerTableView）的 estimatedRowHeight 效果的开关，至于 TMUITableView 会在自己内部 init 时调用
-                // https://github.com/Tencent/TMUI_iOS/issues/313
-                if (TMUICMIActivated && [NSStringFromClass(selfObject.class) isEqualToString:@"UITableView"]) {
-                    [selfObject _tmui_configEstimatedRowHeight];
-                }
-                
-                return result;
-            };
-        });
-        
-        OverrideImplementation([UITableView class], @selector(sizeThatFits:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^CGSize(UITableView *selfObject, CGSize size) {
-                [selfObject alertEstimatedHeightUsageIfDetected];
-                
-                // call super
-                CGSize (*originSelectorIMP)(id, SEL, CGSize);
-                originSelectorIMP = (CGSize (*)(id, SEL, CGSize))originalIMPProvider();
-                CGSize result = originSelectorIMP(selfObject, originCMD, size);
-                
-                return result;
-            };
-        });
-        
-        OverrideImplementation([UITableView class], @selector(scrollToRowAtIndexPath:atScrollPosition:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^(UITableView *selfObject, NSIndexPath *indexPath, UITableViewScrollPosition scrollPosition, BOOL animated) {
-                
-                if (!indexPath) {
-                    return;
-                }
-                
-                BOOL isIndexPathLegal = YES;
-                NSInteger numberOfSections = [selfObject numberOfSections];
-                if (indexPath.section < 0 || indexPath.section >= numberOfSections) {
-                    isIndexPathLegal = NO;
-                } else if (indexPath.row != NSNotFound) {
-                    NSInteger rows = [selfObject numberOfRowsInSection:indexPath.section];
-                    isIndexPathLegal = indexPath.row >= 0 && indexPath.row < rows;
-                }
-                if (!isIndexPathLegal) {
-                    NSLog(@"UITableView (TMUI) %@ - target indexPath : %@ ，不合法的indexPath。\n%@", selfObject, indexPath, [NSThread callStackSymbols]);
-                    if (TMUICMIActivated && !ShouldPrintTMUIWarnLogToConsole) {
-                        NSAssert(NO, @"出现不合法的indexPath");
-                    }
-                    return;
-                }
-                
-                // call super
-                void (*originSelectorIMP)(id, SEL, NSIndexPath *, UITableViewScrollPosition, BOOL);
-                originSelectorIMP = (void (*)(id, SEL, NSIndexPath *, UITableViewScrollPosition, BOOL))originalIMPProvider();
-                originSelectorIMP(selfObject, originCMD, indexPath, scrollPosition, animated);
-            };
-        });
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//
+//        OverrideImplementation([UITableView class], @selector(initWithFrame:style:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^UITableView *(UITableView *selfObject, CGRect firstArgv, UITableViewStyle secondArgv) {
+//
+//                if (@available(iOS 13.0, *)) {
+//                    // iOS 13 tmui_style 的 getter 直接返回 tableView.style，所以这里不需要给 tmui_style 赋值
+//                } else {
+//                    selfObject.tmui_style = secondArgv;
+//                    if (secondArgv == TMUITableViewStyleInsetGrouped) {
+//                        secondArgv = UITableViewStyleGrouped;
+//                    }
+//                }
+//
+//                // call super
+//                UITableView *(*originSelectorIMP)(id, SEL, CGRect, UITableViewStyle);
+//                originSelectorIMP = (UITableView * (*)(id, SEL, CGRect, UITableViewStyle))originalIMPProvider();
+//                UITableView *result = originSelectorIMP(selfObject, originCMD, firstArgv, secondArgv);
+//
+//                // iOS 11 之后 estimatedRowHeight 如果值为 UITableViewAutomaticDimension，estimate 效果也会生效（iOS 11 以前要 > 0 才会生效）。
+//                // 而当使用 estimate 效果时，会导致 contentSize 之类的计算不准确，所以这里给一个途径让项目可以方便地控制 UITableView（不包含子类，例如 UIPickerTableView）的 estimatedRowHeight 效果的开关，至于 TMUITableView 会在自己内部 init 时调用
+//                // https://github.com/Tencent/TMUI_iOS/issues/313
+//                if (TMUICMIActivated && [NSStringFromClass(selfObject.class) isEqualToString:@"UITableView"]) {
+//                    [selfObject _tmui_configEstimatedRowHeight];
+//                }
+//
+//                return result;
+//            };
+//        });
+//
+//        OverrideImplementation([UITableView class], @selector(sizeThatFits:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^CGSize(UITableView *selfObject, CGSize size) {
+//                [selfObject alertEstimatedHeightUsageIfDetected];
+//
+//                // call super
+//                CGSize (*originSelectorIMP)(id, SEL, CGSize);
+//                originSelectorIMP = (CGSize (*)(id, SEL, CGSize))originalIMPProvider();
+//                CGSize result = originSelectorIMP(selfObject, originCMD, size);
+//
+//                return result;
+//            };
+//        });
+//
+//        OverrideImplementation([UITableView class], @selector(scrollToRowAtIndexPath:atScrollPosition:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^(UITableView *selfObject, NSIndexPath *indexPath, UITableViewScrollPosition scrollPosition, BOOL animated) {
+//
+//                if (!indexPath) {
+//                    return;
+//                }
+//
+//                BOOL isIndexPathLegal = YES;
+//                NSInteger numberOfSections = [selfObject numberOfSections];
+//                if (indexPath.section < 0 || indexPath.section >= numberOfSections) {
+//                    isIndexPathLegal = NO;
+//                } else if (indexPath.row != NSNotFound) {
+//                    NSInteger rows = [selfObject numberOfRowsInSection:indexPath.section];
+//                    isIndexPathLegal = indexPath.row >= 0 && indexPath.row < rows;
+//                }
+//                if (!isIndexPathLegal) {
+//                    NSLog(@"UITableView (TMUI) %@ - target indexPath : %@ ，不合法的indexPath。\n%@", selfObject, indexPath, [NSThread callStackSymbols]);
+//                    if (TMUICMIActivated && !ShouldPrintTMUIWarnLogToConsole) {
+//                        NSAssert(NO, @"出现不合法的indexPath");
+//                    }
+//                    return;
+//                }
+//
+//                // call super
+//                void (*originSelectorIMP)(id, SEL, NSIndexPath *, UITableViewScrollPosition, BOOL);
+//                originSelectorIMP = (void (*)(id, SEL, NSIndexPath *, UITableViewScrollPosition, BOOL))originalIMPProvider();
+//                originSelectorIMP(selfObject, originCMD, indexPath, scrollPosition, animated);
+//            };
+//        });
+//    });
+//}
 
 // 防止 release 版本滚动到不合法的 indexPath 会 crash
 - (void)tmui_scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animated {
