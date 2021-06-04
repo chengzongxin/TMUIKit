@@ -6,9 +6,22 @@
 //
 
 #import "TMRsaTool.h"
-#import <OpenSSL-Universal/openssl/rsa.h>
-#import <OpenSSL-Universal/openssl/pem.h>
-#import <OpenSSL-Universal/openssl/err.h>
+
+#if __has_include(<OpenSSL-Universal/openssl/rsa.h>) //use OpenSSL-Universal
+# import <OpenSSL-Universal/openssl/rsa.h>
+# import <OpenSSL-Universal/openssl/pem.h>
+# import <OpenSSL-Universal/openssl/err.h>
+#elif __has_include(<OpenSSL/rsa.h>) //use OpenSSL
+# import <OpenSSL/rsa.h>
+# import <OpenSSL/pem.h>
+# import <OpenSSL/err.h>
+#elif __has_include(<openssl/rsa.h>) //use 自己封装的openssl,对应版本为1.1.1g,与百度地图使用的openssl版本保持一致
+# import <openssl/rsa.h>
+# import <openssl/pem.h>
+# import <openssl/err.h>
+#else
+#error TMRsaTool need openssl which can be OpenSSL-Universal or OpenSSL or custom-openssl(version:1.1.1g)
+#endif
 
 typedef NS_ENUM(NSInteger, RSA_PADDING_TYPE) {
     RSA_PADDING_TYPE_NONE       = RSA_NO_PADDING,
