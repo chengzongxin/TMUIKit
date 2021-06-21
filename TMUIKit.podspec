@@ -246,14 +246,4 @@ Pod::Spec.new do |s|
       
   end
   
-  
-  #tools
-  s.subspec 'TMTools' do |ss|
-    ss.subspec 'TMRsaTool' do |sss|
-      sss.frameworks = 'Foundation'
-      sss.dependency 'OpenSSL-Universal', '~> 1.0.2.20' #openssl库的集成，涉及rsa加密功能, pod install 此库20多MB，下载稍慢，耐心等待一会即可
-      sss.source_files = 'TMUIKit/TMTools/TMRsaTool/*.{h,m}'
-    end
-  end
-  
 end
