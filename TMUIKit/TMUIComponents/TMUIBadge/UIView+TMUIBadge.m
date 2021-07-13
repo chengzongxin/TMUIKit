@@ -40,38 +40,38 @@
 
 TMUISynthesizeIdStrongProperty(tmuibdg_layoutSubviewsBlock, setTmuibdg_layoutSubviewsBlock)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 保证配置表里的默认值正确被设置
-        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithFrame:), CGRect, UIView *, ^UIView *(UIView *selfObject, CGRect firstArgv, UIView *originReturnValue) {
-            [selfObject tmuibdg_didInitialize];
-            return originReturnValue;
-        });
-        
-        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithCoder:), NSCoder *, UIView *, ^UIView *(UIView *selfObject, NSCoder *firstArgv, UIView *originReturnValue) {
-            [selfObject tmuibdg_didInitialize];
-            return originReturnValue;
-        });
-        
-        OverrideImplementation([UIView class], @selector(setTmui_layoutSubviewsBlock:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^(UIView *selfObject, void (^firstArgv)(__kindof UIView *aView)) {
-                
-                if (firstArgv && selfObject.tmuibdg_layoutSubviewsBlock && firstArgv != selfObject.tmuibdg_layoutSubviewsBlock) {
-                    firstArgv = ^void(__kindof UIView *aaView) {
-                        firstArgv(aaView);
-                        aaView.tmuibdg_layoutSubviewsBlock(aaView);
-                    };
-                }
-                
-                // call super
-                void (*originSelectorIMP)(id, SEL, void (^firstArgv)(__kindof UIView *aView));
-                originSelectorIMP = (void (*)(id, SEL, void (^firstArgv)(__kindof UIView *aView)))originalIMPProvider();
-                originSelectorIMP(selfObject, originCMD, firstArgv);
-            };
-        });
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        // 保证配置表里的默认值正确被设置
+//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithFrame:), CGRect, UIView *, ^UIView *(UIView *selfObject, CGRect firstArgv, UIView *originReturnValue) {
+//            [selfObject tmuibdg_didInitialize];
+//            return originReturnValue;
+//        });
+//        
+//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithCoder:), NSCoder *, UIView *, ^UIView *(UIView *selfObject, NSCoder *firstArgv, UIView *originReturnValue) {
+//            [selfObject tmuibdg_didInitialize];
+//            return originReturnValue;
+//        });
+//        
+//        OverrideImplementation([UIView class], @selector(setTmui_layoutSubviewsBlock:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^(UIView *selfObject, void (^firstArgv)(__kindof UIView *aView)) {
+//                
+//                if (firstArgv && selfObject.tmuibdg_layoutSubviewsBlock && firstArgv != selfObject.tmuibdg_layoutSubviewsBlock) {
+//                    firstArgv = ^void(__kindof UIView *aaView) {
+//                        firstArgv(aaView);
+//                        aaView.tmuibdg_layoutSubviewsBlock(aaView);
+//                    };
+//                }
+//                
+//                // call super
+//                void (*originSelectorIMP)(id, SEL, void (^firstArgv)(__kindof UIView *aView));
+//                originSelectorIMP = (void (*)(id, SEL, void (^firstArgv)(__kindof UIView *aView)))originalIMPProvider();
+//                originSelectorIMP(selfObject, originCMD, firstArgv);
+//            };
+//        });
+//    });
+//}
 
 - (void)tmuibdg_didInitialize {
     if (TMUICMIActivated) {

@@ -13,37 +13,37 @@
 
 @implementation UIBarItem (TMUIBadge)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // 保证配置表里的默认值正确被设置
-        ExtendImplementationOfNonVoidMethodWithoutArguments([UIBarItem class], @selector(init), __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, __kindof UIBarItem *originReturnValue) {
-            [selfObject tmuibaritem_didInitialize];
-            return originReturnValue;
-        });
-        
-        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIBarItem class], @selector(initWithCoder:), NSCoder *, __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, NSCoder *firstArgv, __kindof UIBarItem *originReturnValue) {
-            [selfObject tmuibaritem_didInitialize];
-            return originReturnValue;
-        });
-        
-        // UITabBarButton 在 layoutSubviews 时每次都重新让 imageView 和 label addSubview:，这会导致我们用 tmui_layoutSubviewsBlock 时产生持续的重复调用（但又不死循环，因为每次都在下一次 runloop 执行，而且奇怪的是如果不放到下一次 runloop，反而不会重复调用），所以这里 hack 地屏蔽 addSubview: 操作
-        OverrideImplementation(NSClassFromString([NSString stringWithFormat:@"%@%@", @"UITab", @"BarButton"]), @selector(addSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^(UIView *selfObject, UIView *firstArgv) {
-                
-                if (firstArgv.superview == selfObject) {
-                    return;
-                }
-                
-                // call super
-                IMP originalIMP = originalIMPProvider();
-                void (*originSelectorIMP)(id, SEL, UIView *);
-                originSelectorIMP = (void (*)(id, SEL, UIView *))originalIMP;
-                originSelectorIMP(selfObject, originCMD, firstArgv);
-            };
-        });
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        // 保证配置表里的默认值正确被设置
+//        ExtendImplementationOfNonVoidMethodWithoutArguments([UIBarItem class], @selector(init), __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, __kindof UIBarItem *originReturnValue) {
+//            [selfObject tmuibaritem_didInitialize];
+//            return originReturnValue;
+//        });
+//        
+//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIBarItem class], @selector(initWithCoder:), NSCoder *, __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, NSCoder *firstArgv, __kindof UIBarItem *originReturnValue) {
+//            [selfObject tmuibaritem_didInitialize];
+//            return originReturnValue;
+//        });
+//        
+//        // UITabBarButton 在 layoutSubviews 时每次都重新让 imageView 和 label addSubview:，这会导致我们用 tmui_layoutSubviewsBlock 时产生持续的重复调用（但又不死循环，因为每次都在下一次 runloop 执行，而且奇怪的是如果不放到下一次 runloop，反而不会重复调用），所以这里 hack 地屏蔽 addSubview: 操作
+//        OverrideImplementation(NSClassFromString([NSString stringWithFormat:@"%@%@", @"UITab", @"BarButton"]), @selector(addSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^(UIView *selfObject, UIView *firstArgv) {
+//                
+//                if (firstArgv.superview == selfObject) {
+//                    return;
+//                }
+//                
+//                // call super
+//                IMP originalIMP = originalIMPProvider();
+//                void (*originSelectorIMP)(id, SEL, UIView *);
+//                originSelectorIMP = (void (*)(id, SEL, UIView *))originalIMP;
+//                originSelectorIMP(selfObject, originCMD, firstArgv);
+//            };
+//        });
+//    });
+//}
 
 - (void)tmuibaritem_didInitialize {
     if (TMUICMIActivated) {

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '1.1.0'
+  s.version          = '1.1.2'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chengzongxin' => 'joe.cheng@corp.to8to.com' }
   # s.source           = { :git => './'}
-  s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => s.version.to_s }
+  s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => "v"+"#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
@@ -191,6 +191,10 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUICellHeightCache/*.{h,m}'
       end
       
+      # TMUIBadge
+      ss.subspec 'TMUIBadge' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
+      end
       
       #### 以下组件暂不使用，先屏蔽
 #      # TMUITableView
@@ -211,11 +215,6 @@ Pod::Spec.new do |s|
 #        sss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
 #      end
 #
-#
-#      # TMUIBadge
-#      ss.subspec 'TMUIBadge' do |sss|
-#        sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
-#      end
 #      # TMUITheme
 #      ss.subspec 'TMUITheme' do |sss|
 #        sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
