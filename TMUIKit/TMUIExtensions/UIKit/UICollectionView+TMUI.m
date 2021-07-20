@@ -11,37 +11,37 @@
 @implementation UICollectionView (TMUI)
 
 
-//+ (void)load {
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        
-//        // 防止 release 版本滚动到不合法的 indexPath 会 crash
-//        OverrideImplementation([UICollectionView class], @selector(scrollToItemAtIndexPath:atScrollPosition:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-//            return ^(UICollectionView *selfObject, NSIndexPath *indexPath, UICollectionViewScrollPosition scrollPosition, BOOL animated) {
-//                BOOL isIndexPathLegal = YES;
-//                NSInteger numberOfSections = [selfObject numberOfSections];
-//                if (indexPath.section >= numberOfSections) {
-//                    isIndexPathLegal = NO;
-//                } else {
-//                    NSInteger items = [selfObject numberOfItemsInSection:indexPath.section];
-//                    if (indexPath.item >= items) {
-//                        isIndexPathLegal = NO;
-//                    }
-//                }
-//                if (!isIndexPathLegal) {
-//                    NSLog(@"UICollectionView (QMUI) %@ - target indexPath : %@ ，不合法的indexPath。\n%@", selfObject, indexPath, [NSThread callStackSymbols]);
-//                    NSAssert(NO, @"出现不合法的indexPath");
-//                    return;
-//                }
-//                
-//                // call super
-//                void (*originSelectorIMP)(id, SEL, NSIndexPath *, UICollectionViewScrollPosition, BOOL);
-//                originSelectorIMP = (void (*)(id, SEL, NSIndexPath *, UICollectionViewScrollPosition, BOOL))originalIMPProvider();
-//                originSelectorIMP(selfObject, originCMD, indexPath, scrollPosition, animated);
-//            };
-//        });
-//    });
-//}
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        // 防止 release 版本滚动到不合法的 indexPath 会 crash
+        OverrideImplementation([UICollectionView class], @selector(scrollToItemAtIndexPath:atScrollPosition:animated:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UICollectionView *selfObject, NSIndexPath *indexPath, UICollectionViewScrollPosition scrollPosition, BOOL animated) {
+                BOOL isIndexPathLegal = YES;
+                NSInteger numberOfSections = [selfObject numberOfSections];
+                if (indexPath.section >= numberOfSections) {
+                    isIndexPathLegal = NO;
+                } else {
+                    NSInteger items = [selfObject numberOfItemsInSection:indexPath.section];
+                    if (indexPath.item >= items) {
+                        isIndexPathLegal = NO;
+                    }
+                }
+                if (!isIndexPathLegal) {
+                    NSLog(@"UICollectionView (QMUI) %@ - target indexPath : %@ ，不合法的indexPath。\n%@", selfObject, indexPath, [NSThread callStackSymbols]);
+                    NSAssert(NO, @"出现不合法的indexPath");
+                    return;
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, NSIndexPath *, UICollectionViewScrollPosition, BOOL);
+                originSelectorIMP = (void (*)(id, SEL, NSIndexPath *, UICollectionViewScrollPosition, BOOL))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, indexPath, scrollPosition, animated);
+            };
+        });
+    });
+}
 
 - (void)tmui_clearsSelection {
     NSArray *selectedItemIndexPaths = [self indexPathsForSelectedItems];

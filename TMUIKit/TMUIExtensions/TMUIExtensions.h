@@ -8,16 +8,37 @@
 #ifndef TMUIExtensions_h
 #define TMUIExtensions_h
 
+/// UIKit
 #import "UIView+TMUI.h"
 #import "UIColor+TMUI.h"
 #import "UIImage+TMUI.h"
 #import "UIView+TMUI.h"
-#import "NSBundle+TMUI.h"
 #import "UIButton+TMUI.h"
 #import "UILabel+TMUI.h"
 #import "UITextField+TMUI.h"
 #import "UITextView+TMUI.h"
 #import "UIViewController+TMUI.h"
+#import "UITableView+TMUI.h"
+#import "UICollectionView+TMUI.h"
+#import "UIBarButtonItem+TMUI.h"
+#import "CALayer+TMUI.h"
+#import "CAAnimation+TMUI.h"
+#import "UITableViewCell+TMUI.h"
+#import "UIView+TMUIBorder.h"
+#import "UITableViewHeaderFooterView+TMUI.h"
+#import "UIBarItem+TMUI.h"
+#import "UICollectionViewCell+TMUI.h"
+#import "UINib+TMUI.h"
+#import "UIScrollView+TMUI.h"
+#import "UITabBarItem+TMUI.h"
+#import "UITableViewHeaderFooterView+TMUI.h"
+#import "UITextInputTraits+TMUI.h"
+#import "UITraitCollection+TMUI.h"
+#import "UIVisualEffectView+TMUI.h"
+
+
+/// Foundation
+#import "NSBundle+TMUI.h"
 #import "NSString+TMUI.h"
 #import "NSArray+TMUI.h"
 #import "NSMutableParagraphStyle+TMUI.h"
@@ -25,18 +46,8 @@
 #import "NSDate+TMUI.h"
 #import "NSDictionary+TMUI.h"
 #import "NSURL+TMUI.h"
-#import "UITableView+TMUI.h"
-#import "UICollectionView+TMUI.h"
-#import "UIBarButtonItem+TMUI.h"
-#import "CALayer+TMUI.h"
-#import "CAAnimation+TMUI.h"
 #import "NSFileManager+TMUI.h"
 #import "ALAssetsLibrary+TMUI.h"
-#import "NSString+TMUI.h"
-#import "UITableView+TMUI.h"
-#import "UITableViewCell+TMUI.h"
-#import "UIView+TMUIBorder.h"
 #import "NSMethodSignature+TMUI.h"
-#import "UITableViewHeaderFooterView+TMUI.h"
 
 #endif /* TMUIExtensions_h */
