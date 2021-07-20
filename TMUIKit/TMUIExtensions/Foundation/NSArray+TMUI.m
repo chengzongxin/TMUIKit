@@ -182,6 +182,15 @@ TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(__NSFrozenArrayM);
 #pragma mark -
 
 
+- (id)tmui_safeObjectAtIndex:(NSUInteger)index
+{
+    if (index >= self.count) {
+        return nil;
+    } else {
+        return [self objectAtIndex:index];
+    }
+}
+
 - (NSArray *)tmui_arrayByAddObject:(id)object {
     if (!object) {
         return self;

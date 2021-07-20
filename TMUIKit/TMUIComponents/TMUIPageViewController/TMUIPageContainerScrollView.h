@@ -9,13 +9,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TMUIPageBGScrollView : UIScrollView
+@interface TMUIPageContainerScrollView : UIScrollView
 @property (nonatomic, weak) id<UIScrollViewDelegate> t_delegate;
 
 @property (nonatomic, assign) CGFloat lockArea;
 
 - (void)scrollToTop:(BOOL)animated;
 
+@end
+
+@interface UIScrollView (TMUI_ContainerNotScroll)
+@property (nonatomic, assign) BOOL tmui_containerNotScroll;
 @end
 
 NS_ASSUME_NONNULL_END

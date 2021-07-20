@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) NSArray *vcs;
 @property (nonatomic, strong) NSArray *titles;
-@property (nonatomic, strong) THKSegmentControl *slideBar;
+//@property (nonatomic, strong) THKSegmentControl *slideBar;
 @end
 
 @implementation TMPageRootViewController
@@ -45,19 +45,6 @@
     });
 }
 
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    [self.navigationController.navigationBar setBackgroundImage:UIImage.new forBarMetrics:UIBarMetricsDefault];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-}
-
 - (void)reload{
     self.vcs = [[@[Table1ViewController.class,
                    Table2ViewController.class,
@@ -70,13 +57,12 @@
         return [[cls alloc] init];
     }] array];
     self.titles = @[@"热门",@"最新",@"涉及",@"案例",@"热门",@"最新",@"涉及",@"案例"];
-    self.slideBar = nil;
+//    self.slideBar = nil;
     
     [self reloadData];
 }
 
-
-- (NSArray<__kindof UIViewController *> *)childViewControllers{
+- (NSArray<__kindof UIViewController *> *)viewControllersForChildViewControllers{
     return self.vcs;
 }
 
@@ -84,26 +70,20 @@
     return self.titles;
 }
 
-- (CGFloat)heightForSliderBar{
-    return 44;
-}
-
-
 - (void)segmentControlConfig:(THKSegmentControl *)control{
-    control.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
-    control.autoAlignmentCenter = YES;
-    control.backgroundColor = [UIColor orangeColor];
-    control.indicatorView.backgroundColor = UIColor.blueColor;
-    control.indicatorView.layer.cornerRadius = 0.0;
-    [control setTitleFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] forState:UIControlStateNormal];
-    [control setTitleFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] forState:UIControlStateSelected];
-    [control setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
-    [control setTitleColor:UIColor.greenColor forState:UIControlStateSelected];
+//    control.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
+//    control.autoAlignmentCenter = YES;
+//    control.backgroundColor = [UIColor orangeColor];
+//    control.indicatorView.backgroundColor = UIColor.blueColor;
+//    control.indicatorView.layer.cornerRadius = 0.0;
+//    [control setTitleFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] forState:UIControlStateNormal];
+//    [control setTitleFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] forState:UIControlStateSelected];
+//    [control setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
+//    [control setTitleColor:UIColor.greenColor forState:UIControlStateSelected];
+    control.height = 44;
 }
 
 - (CGFloat)heightForHeader{
-//    THKUserCenterHeaderViewModel *viewModel = [[THKUserCenterHeaderViewModel alloc] init];
-//    return viewModel.viewHeight;
     return 300;
 }
 
@@ -127,38 +107,6 @@
     }];
     [view addSubview:UISwitch.new];
     return view;
-}
-
-- (UIView *)viewForTabSegmentControl{
-    return self.slideBar;
-}
-
-- (void)pageViewControllerDidScrolFrom:(NSInteger)fromVC to:(NSInteger)toVC{
-    NSLog(@"%zd-%zd",fromVC,toVC);
-    self.slideBar.selectedIndex = toVC;
-}
-
-- (THKSegmentControl *)slideBar {
-    if (!_slideBar) {
-        CGRect frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
-        _slideBar = [[THKSegmentControl alloc] initWithFrame:frame titles:self.titles];
-        _slideBar.backgroundColor = [UIColor whiteColor];
-        _slideBar.indicatorView.backgroundColor = THKColor_WeakDeepRedColor;
-        [_slideBar setTitleFont:[UIFont systemFontOfSize:14.0 weight:UIFontWeightMedium] forState:UIControlStateNormal];
-        [_slideBar setTitleFont:[UIFont systemFontOfSize:16.0 weight:UIFontWeightMedium] forState:UIControlStateSelected];
-        [_slideBar setTitleColor:UIColorHex(#BABDC6) forState:UIControlStateNormal];
-        [_slideBar setTitleColor:THKColor_WeakDeepRedColor forState:UIControlStateSelected];
-        [_slideBar addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventValueChanged];
-        _slideBar.indicatorView.height = 3;
-        _slideBar.indicatorView.y -= 3; // 需要放到最后设置
-    }
-    
-    return _slideBar;
-}
-
-- (void)btnClick:(THKSegmentControl *)sender{
-    NSLog(@"%@",sender);
-    [self scrollToIndex:sender.selectedIndex];
 }
 
 @end

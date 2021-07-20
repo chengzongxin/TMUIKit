@@ -49,5 +49,9 @@
 #import "NSFileManager+TMUI.h"
 #import "ALAssetsLibrary+TMUI.h"
 #import "NSMethodSignature+TMUI.h"
+#import "NSMutableArray+TMUI.h"
+#import "NSMutableDictionary+TMUI.h"
+#import "NSObject+TMUI.h"
+#import "NSTimer+TMUI.h"
 
 #endif /* TMUIExtensions_h */
