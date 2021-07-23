@@ -52,10 +52,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSAttributedString (TMUI_Calculate)
 
 
-/**
- *  按照中文 2 个字符、英文 1 个字符的方式来计算文本长度
- */
-- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo;
+/// 计算富文本高度的方法
+/// @note 高度取决于富文本中最大的字体，计算高度时候最好传入最大的字体
+/// @param width 富文本容器宽度
+- (CGSize)tmui_sizeForWidth:(CGFloat)width;
 
 - (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing;
 
@@ -63,15 +63,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (CGFloat)tmui_heightForString:(NSString *)str font:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing maxLine:(NSUInteger)maxLine;
 
-/// 计算富文本高度的方法
-/// @note 高度取决于富文本中最大的字体，计算高度时候最好传入最大的字体
-/// @param width 富文本容器宽度
-- (CGSize)tmui_sizeForWidth:(CGFloat)width;
 
 /**
  * 获取NSAttributedString显示的高度
  */
 - (CGFloat)tmui_heightForWidth:(CGFloat)width;
+
+
+/**
+ *  按照中文 2 个字符、英文 1 个字符的方式来计算文本长度
+ */
+- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo;
 
 
 @end
@@ -89,9 +91,11 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion Get this property returns the first character's attribute.
  @since CoreText:3.2  UIKit:6.0  YYKit:6.0
  */
-//@property (nullable, nonatomic, strong, readonly) UIFont *tmui_font;
-//- (nullable UIFont *)tmui_fontAtIndex:(NSUInteger)index;
-//
+@property (nullable, nonatomic, strong, readonly) UIFont *tmui_font;
+- (nullable UIFont *)tmui_fontAtIndex:(NSUInteger)index;
+
+@property (nullable, nonatomic, strong, readonly) NSMutableParagraphStyle *tmui_paragraphStyle;
+- (nullable NSMutableParagraphStyle *)tmui_paragraphStyle:(NSUInteger)index;
 
 
 @end

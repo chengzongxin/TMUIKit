@@ -15,6 +15,7 @@
 #import "UIView+TMUI.h"
 #import "UIButton+TMUI.h"
 #import "UILabel+TMUI.h"
+#import "UILabel+TMUIAttributesTextClick.h"
 #import "UITextField+TMUI.h"
 #import "UITextView+TMUI.h"
 #import "UIViewController+TMUI.h"

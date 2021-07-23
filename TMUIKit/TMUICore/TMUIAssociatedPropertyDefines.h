@@ -1,5 +1,5 @@
 //
-//  TMAssociatedPropertyMacro.h
+//  TMUIAssociatedPropertyDefines.h
 //  Pods
 //
 //  Created by nigel.ning on 2020/7/23.

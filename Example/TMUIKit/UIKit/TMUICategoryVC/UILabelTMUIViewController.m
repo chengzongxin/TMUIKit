@@ -7,7 +7,6 @@
 //
 
 #import "UILabelTMUIViewController.h"
-#import <CoreText/CoreText.h>
 
 @interface UILabelTMUIViewController ()
 
@@ -64,10 +63,10 @@
     // 行间距
     [label tmui_setAttributeslineSpacing:10];
     // 指定富文本
-    [label tmui_setAttributesString:@"春眠不觉晓，" color:UIColor.systemPinkColor font:UIFont(15)];
+    [label tmui_setAttributesString:@"春眠不觉晓，" color:UIColor.systemBlueColor font:UIFont(20)];
     [label tmui_setAttributesString:@"处处闻啼鸟，" color:UIColor.greenColor font:UIFont(15)];
     [label tmui_setAttributesString:@"夜来风雨声，" color:UIColor.systemPurpleColor font:UIFont(15)];
-    [label tmui_setAttributesString:@"花落知多少。" color:UIColor.systemPurpleColor font:UIFont(15)];
+    [label tmui_setAttributesString:@"花落知多少。" color:UIColor.yellowColor font:UIFont(15)];
     // 垂直偏移
     [label tmui_setAttributesLineOffset:0];
     // 加横线
@@ -87,7 +86,7 @@
                                     lineHeight:label.tmui_attributeTextLineHeight
                                           mode:label.lineBreakMode];
     // NSAttributionStirng 计算
-    CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width - 40];
+    CGSize size2 = [label.tmui_attributedText tmui_sizeForWidth:self.view.width - 40];
     
 //    [self.view layoutIfNeeded];
 //    View.bgColor(Color(@"random,0.5")).addTo(self.view).makeCons(^{
@@ -95,17 +94,17 @@
 //    });
     
     // label max
-    CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
-    
+    CGSize size3 = [label tmui_sizeForWidth:self.view.width - 40];
+
     [label mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(size2);
     }];
-    
+
     _demo1lbl = label;
-    
-    
-    [tips tmui_setAttributesString:[NSString stringWithFormat:@"\n文本尺寸(字体按照最大字体20计算) = %@,富文本尺寸（自动计算） = %@,label尺寸（取max） = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
-    [tips tmui_setAttributeslineSpacing:3];
+//    
+//    
+//    [tips tmui_setAttributesString:[NSString stringWithFormat:@"\n文本尺寸(字体按照最大字体20计算) = %@,富文本尺寸（自动计算） = %@,label尺寸（取max） = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
+//    [tips tmui_setAttributeslineSpacing:3];
 }
 
 - (void)demo2{
@@ -159,7 +158,7 @@
     _demo2lbl = label;
     
     // label max
-    CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
+    CGSize size3 = [label tmui_sizeForWidth:self.view.width - 40];
     
     [tips tmui_setAttributesString:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];
@@ -214,14 +213,15 @@
     }];
     
     CGSize size1 = [label.text tmui_sizeForFont:label.font size:CGSizeMake(self.view.width - 40, HUGE) lineHeight:label.tmui_attributeTextLineHeight mode:label.lineBreakMode];
-    CGSize size2 = [label.attributedText tmui_sizeForWidth:self.view.width - 40];
+    CGSize size2 = [label.tmui_attributedText tmui_sizeForWidth:self.view.width - 40];
+    CGSize size3 = [label tmui_sizeForWidth:self.view.width - 40];
+    
     size1.width += [UIImage imageNamed:@"emotion_06"].size.width+[UIImage imageNamed:@"emotion_07"].size.width;
     size2.width += [UIImage imageNamed:@"emotion_06"].size.width+[UIImage imageNamed:@"emotion_07"].size.width;
     [label mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(size1.width, size2.height));
+        make.size.mas_equalTo(size3);
     }];
     
-    CGSize size3 = [label tmui_sizeWithWidth:self.view.width - 40];
     
     [tips tmui_setAttributesString:[NSString stringWithFormat:@"\n文本尺寸 = %@,富文本尺寸 = %@,label尺寸 = %@",NSStringFromCGSize(size1),NSStringFromCGSize(size2),NSStringFromCGSize(size3)] color:UIColor.grayColor font:UIFont(14)];
     [tips tmui_setAttributeslineSpacing:3];

@@ -165,7 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-@interface NSString (TMUI_Drawing)
+@interface NSString (TMUI_Calculate)
 
 ///=============================================================================
 /// @name Drawing
@@ -215,20 +215,24 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width;
 
 
+/// 获取行数
+/// @param string 文本
+/// @param font 字体
+/// @param maxWidth 宽度
+- (NSArray *)tmui_linesArrayForFont:(UIFont *)font maxWidth:(CGFloat)maxWidth;
+
+/// 获取行数
+/// @param string 文本
+/// @param font 字体
+/// @param maxWidth 宽度
+- (NSInteger)tmui_numberOfLinesForFont:(UIFont *)font maxWidth:(CGFloat)maxWidth;
+
+
 //////  follow from NSString + TSize
 /**
  * 获取字符串显示的高度
  */
 - (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w;
-/**
- *  获取字符串的宽高（在指定的宽度下）
- *
- *  @param ft 字体
- *  @param w  指定宽
- *
- *  @return 字符串大大小
- */
-- (CGSize)tmui_sizeWithFont:(UIFont *)ft width:(CGFloat)w;
 
 /**
  *  获取字符串的高度，可限制行数

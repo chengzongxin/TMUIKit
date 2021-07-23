@@ -10,6 +10,7 @@
 #import "NSArray+TMUI.h"
 #import "TMUICommonDefines.h"
 #import <objc/runtime.h>
+#import <CoreText/CoreText.h>
 
 @implementation NSString (TMUI)
 
@@ -311,7 +312,7 @@
 @end
 
 
-@implementation NSString (TMUI_Drawing)
+@implementation NSString (TMUI_Calculate)
 BeginIgnoreDeprecatedWarning
 
 - (CGSize)tmui_sizeForFont:(UIFont *)font size:(CGSize)size lineHeight:(CGFloat)lineHeight mode:(NSLineBreakMode)lineBreakMode {
@@ -346,7 +347,42 @@ BeginIgnoreDeprecatedWarning
     return size.height;
 }
 
+- (NSArray *)tmui_linesArrayForFont:(UIFont *)font maxWidth:(CGFloat)maxWidth{
+    CTFontRef myFont = CTFontCreateWithName(( CFStringRef)([font fontName]), [font pointSize], NULL);
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineBreakMode = NSLineBreakByWordWrapping;
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:self attributes:@{NSParagraphStyleAttributeName:style,NSFontAttributeName:font}];
+    [attStr addAttribute:(NSString *)kCTFontAttributeName value:(__bridge  id)myFont range:NSMakeRange(0, attStr.length)];
+    CFRelease(myFont);
+    CTFramesetterRef frameSetter = CTFramesetterCreateWithAttributedString(( CFAttributedStringRef)attStr);
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, CGRectMake(0,0,maxWidth,CGFLOAT_MAX));
+    CTFrameRef frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, 0), path, NULL);
+    NSArray *lines = ( NSArray *)CTFrameGetLines(frame);
+    NSMutableArray *linesArray = [[NSMutableArray alloc]init];
+    for (id line in lines) {
+        CTLineRef lineRef = (__bridge  CTLineRef )line;
+        CFRange lineRange = CTLineGetStringRange(lineRef);
+        NSRange range = NSMakeRange(lineRange.location, lineRange.length);
+        NSString *lineString = [self substringWithRange:range];
+        CFAttributedStringSetAttribute((CFMutableAttributedStringRef)attStr, lineRange, kCTKernAttributeName, (CFTypeRef)([NSNumber numberWithFloat:0.0]));
+        CFAttributedStringSetAttribute((CFMutableAttributedStringRef)attStr, lineRange, kCTKernAttributeName, (CFTypeRef)([NSNumber numberWithInt:0.0]));
+        [linesArray addObject:lineString];
+    }
+    
+    CGPathRelease(path);
+    CFRelease( frame );
+    CFRelease(frameSetter);
+    return (NSArray *)linesArray;
+}
 
+- (NSInteger)tmui_numberOfLinesForFont:(UIFont *)font maxWidth:(CGFloat)maxWidth{
+    return [self tmui_linesArrayForFont:font maxWidth:maxWidth];
+}
+
+
+
+#pragma mark - houseKeeper
 // 获取字符串显示的高度
 - (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w {
     if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
@@ -359,21 +395,6 @@ BeginIgnoreDeprecatedWarning
         CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, HUGE)];
         return ceilf(s.height);
     }
-}
-
-- (CGSize)tmui_sizeWithFont:(UIFont *)ft width:(CGFloat)w {
-    CGSize ceilfSize;
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0) {
-        CGSize size = [self boundingRectWithSize:CGSizeMake(w, HUGE)
-                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                      attributes:@{NSFontAttributeName:ft}
-                                         context:nil].size;
-        ceilfSize = CGSizeMake(ceilf(size.width), ceilf(size.height));
-    } else {
-        CGSize s = [self sizeWithFont:ft constrainedToSize:CGSizeMake(w, HUGE)];
-        ceilfSize = CGSizeMake(ceilf(s.width), ceilf(s.height));
-    }
-    return ceilfSize;
 }
 
 - (CGFloat)tmui_heightWithFont:(UIFont *)ft width:(CGFloat)w maxLine:(NSUInteger)lineNum {

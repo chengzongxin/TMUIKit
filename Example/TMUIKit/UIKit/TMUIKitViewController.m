@@ -51,6 +51,9 @@
                            ROW_CREATE(@"UILable+TMUI",
                                       @"设置富文本属性、计算文本size、富文本超链接",
                                       @"UILabelTMUIViewController"),
+                           ROW_CREATE(@"UILable+TMUI",
+                                      @"通用方法",
+                                      @"UILabelTMUIViewController2"),
                            ROW_CREATE(@"UIButton+TMUI",
                                       @"设置图片位置、图文间距、扩大点击区域",
                                       @"UIButtonTMUIViewController"),
@@ -78,7 +81,7 @@
 }
 
 - (void)debug{
-    [self.navigationController pushViewController:TDDebugViewController.new animated:YES];
+    [self.navigationController pushViewController:[NSClassFromString(@"UILabelTMUIViewController2") new] animated:YES];
 }
 
 @end
