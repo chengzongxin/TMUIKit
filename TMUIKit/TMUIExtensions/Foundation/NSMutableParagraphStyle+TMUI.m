@@ -10,8 +10,13 @@
 @implementation NSMutableParagraphStyle (TMUI)
 
 + (instancetype)tmui_paragraphStyleWithLineSpacing:(CGFloat)lineSpacing{
+    return [self tmui_paragraphStyleWithLineSpacing:lineSpacing lineBreakMode:NSLineBreakByTruncatingTail];
+}
+
++ (instancetype)tmui_paragraphStyleWithLineSpacing:(CGFloat)lineSpacing lineBreakMode:(NSLineBreakMode)lineBreakMode {
     NSMutableParagraphStyle *paragraphStyle = [[self alloc] init];
     paragraphStyle.lineSpacing = lineSpacing;
+    paragraphStyle.lineBreakMode = lineBreakMode;
     return paragraphStyle;
 }
 

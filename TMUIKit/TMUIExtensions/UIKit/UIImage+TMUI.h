@@ -323,8 +323,8 @@ typedef NS_OPTIONS(NSInteger, TMUIImageBorderPosition) {
  *
  *  @return 压缩后的数据
  */
-- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio;
-- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen;
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio;
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen;
 
 @end
 

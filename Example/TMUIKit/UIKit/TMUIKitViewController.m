@@ -52,7 +52,7 @@
                                       @"设置富文本属性、计算文本size、富文本超链接",
                                       @"UILabelTMUIViewController"),
                            ROW_CREATE(@"UILable+TMUI",
-                                      @"通用方法",
+                                      @"富文本展示、尺寸计算2",
                                       @"UILabelTMUIViewController2"),
                            ROW_CREATE(@"UIButton+TMUI",
                                       @"设置图片位置、图文间距、扩大点击区域",

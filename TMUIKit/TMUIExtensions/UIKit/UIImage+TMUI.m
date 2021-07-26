@@ -788,11 +788,11 @@
  *
  *  @return 压缩后的图片
  */
-- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen {
-    return [self tmui_compressToMaxDataLen:maxDataLen aspectRatio:0];
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen {
+    return [self tmui_resizedToMaxDataLen:maxDataLen aspectRatio:0];
 }
 
-- (NSData *)tmui_compressToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio {
+- (NSData *)tmui_resizedToMaxDataLen:(NSInteger)maxDataLen aspectRatio:(CGFloat)aspectRatio {
     CGFloat compression = 1.0;
     CGFloat scale = 1.0;
     CGFloat imgW = self.size.width * self.scale ? : 1;  //防止为0

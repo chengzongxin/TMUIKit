@@ -31,28 +31,9 @@
 @implementation UILabel (TMUI_Caculate)
 
 - (CGSize)tmui_sizeForWidth:(CGFloat)width{
-    if (width == 0) {
-        if (self.width == 0) {
-            [self layoutIfNeeded];
-        }
-        width = self.width;
-    }
-    
-    CGSize size = CGSizeZero;
-    if (self.lineBreakMode == NSLineBreakByWordWrapping) {
-        // NSString 计算
-        size = [self.text tmui_sizeForFont:self.font
-                                      size:CGSizeMake(width, HUGE)
-                                lineHeight:self.tmui_attributeTextLineHeight
-                                      mode:self.lineBreakMode];
-    }else{
-        size = [self sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
-    }
-    
-    return size;
+    CGSize size = [self sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+    return CGSizeMake(ceil(MIN(width, size.width)), ceil(size.height));
 }
-
-
 
 - (CGFloat)tmui_attributeTextLineHeight{
     return [(NSMutableParagraphStyle *)[self.attributedText attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:nil] lineSpacing];
@@ -78,7 +59,7 @@
 
 #pragma mark - 设置富文本
 @implementation UILabel (TMUI_AttributeText)
-
+#pragma mark 全部设置富文本
 - (void)tmui_setAttributesString:(NSString *)text lineSpacing:(CGFloat)lineSpacing{
     if (tmui_isNullString(text)) return;
     if (self.width == 0) {
@@ -97,6 +78,38 @@
     self.attributedText = attr;
 }
 
+- (void)tmui_setAttributeslineSpacing:(CGFloat)lineSpacing{
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle tmui_paragraphStyleWithLineSpacing:lineSpacing];
+    [self tmui_setAttribute:NSParagraphStyleAttributeName value:paragraphStyle];
+}
+
+- (void)tmui_setAttributesLineOffset:(CGFloat)lineOffset{
+    [self tmui_setAttribute:NSBaselineOffsetAttributeName value:@(lineOffset)];
+}
+
+
+- (void)tmui_setAttributesLineSingle{
+    [self tmui_setAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle]];
+}
+
+- (void)tmui_setAttributesUnderLink{
+    [self tmui_setAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle]];
+}
+
+- (void)tmui_setAttribute:(NSAttributedStringKey)name value:(id)value{
+    NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
+    [mAttrStr tmui_setAttribute:name value:value];
+    self.attributedText = mAttrStr;
+}
+
+- (void)tmui_setAttribute:(NSDictionary<NSAttributedStringKey, id> *)attrs{
+    NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
+    [mAttrStr tmui_setAttributes:attrs];
+    self.attributedText = mAttrStr;
+}
+
+
+#pragma mark 设置部分富文本
 - (void)tmui_setAttributesString:(NSString *)string color:(UIColor *)color font:(UIFont *)font{
     NSRange range = [[self.attributedText string] rangeOfString:string];
     if(range.location != NSNotFound && range.length) {
@@ -120,45 +133,6 @@
         NSMutableAttributedString *mat = [self.attributedText mutableCopy] ?: [[NSMutableAttributedString alloc] init];
         [mat appendAttributedString:appendAtr];
         self.attributedText = mat;
-    }
-}
-
-- (void)tmui_setAttributeslineSpacing:(CGFloat)lineSpacing{
-    NSRange range = NSMakeRange(0, [self.attributedText string].length);
-    if(range.location != NSNotFound) {
-        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
-        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-        paragraphStyle.lineSpacing = lineSpacing;
-        [mAttrStr addAttributes:@{NSParagraphStyleAttributeName:paragraphStyle} range:range];
-        self.attributedText = mAttrStr;
-    }
-}
-
-- (void)tmui_setAttributesLineOffset:(CGFloat)lineOffset{
-    NSRange range = NSMakeRange(0, [self.attributedText string].length);
-    if(range.location != NSNotFound) {
-        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
-        [mAttrStr addAttributes:@{NSBaselineOffsetAttributeName: @(lineOffset)} range:range];
-        self.attributedText = mAttrStr;
-    }
-}
-
-
-- (void)tmui_setAttributesLineSingle{
-    NSRange range = NSMakeRange(0, [self.attributedText string].length);
-    if(range.location != NSNotFound) {
-        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
-        [mAttrStr addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
-        self.attributedText = mAttrStr;
-    }
-}
-
-- (void)tmui_setAttributesUnderLink{
-    NSRange range = NSMakeRange(0, [self.attributedText string].length);
-    if(range.location != NSNotFound) {
-        NSMutableAttributedString *mAttrStr = [self.attributedText mutableCopy];
-        [mAttrStr addAttributes:@{NSUnderlineStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:range];
-        self.attributedText = mAttrStr;
     }
 }
 

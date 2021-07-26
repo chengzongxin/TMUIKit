@@ -47,8 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 设置富文本
 @interface UILabel (TMUI_AttributeText)
 
-
-/// 给label指定文本设置文本、行距
+#pragma mark 全部设置富文本
+/// 给label指定文本设置文本、行距,(注意，需要在设置之前保证label的宽度不为0，否则设置行距失败)
 /// @param text 文本
 /// @param lineSpacing 行距
 - (void)tmui_setAttributesString:(NSString *)text lineSpacing:(CGFloat)lineSpacing;
@@ -57,18 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param text 文本
 /// @param lineHeight 行高
 - (void)tmui_setAttributesString:(NSString *)text lineHeight:(CGFloat)lineHeight;
-
-/// 给label指定text的颜色、字体，分段设置
-/// @param text 指定文本
-/// @param color 指定文本颜色
-/// @param font 指定文本字体
-- (void)tmui_setAttributesString:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
-
-/// 给label追加text的颜色、字体，分段设置
-/// @param text 指定文本
-/// @param color 指定文本颜色
-/// @param font 指定文本字体
-- (void)tmui_appendAttributesString:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
 
 /// 设置文字行间距,统一设置
 /// @param lineSpacing 行间距
@@ -83,6 +71,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 给label设置下划线样式
 - (void)tmui_setAttributesUnderLink;
+
+/// 给label设置特定属性
+- (void)tmui_setAttribute:(NSAttributedStringKey)name value:(id)value;
+
+/// 给label设置特定集合属性
+- (void)tmui_setAttribute:(NSDictionary<NSAttributedStringKey, id> *)attrs;
+
+
+#pragma mark 指定设置副本text富文本
+/// 给label指定text的颜色、字体，分段设置
+/// @param text 指定文本
+/// @param color 指定文本颜色
+/// @param font 指定文本字体
+- (void)tmui_setAttributesString:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
+
+/// 给label追加text的颜色、字体，分段设置
+/// @param text 指定文本
+/// @param color 指定文本颜色
+/// @param font 指定文本字体
+- (void)tmui_appendAttributesString:(NSString *)text color:(UIColor *)color font:(UIFont *)font;
 
 @end
 

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)tmui_attributedStringWithString:(NSString *)str lineSpacing:(CGFloat)lineSpacing;
 
++ (instancetype)tmui_attributedStringWithString:(NSString *)str lineSpacing:(CGFloat)lineSpacing lineBreakMode:(NSLineBreakMode)lineBreakMode ;
+
 + (instancetype)tmui_attributedStringWithString:(NSString *)str font:(UIFont *)font color:(UIColor *)color;
 
 + (instancetype)tmui_attributedStringWithString:(NSString *)str font:(UIFont *)font color:(UIColor *)color lineSpacing:(CGFloat)lineSpacing;
@@ -53,10 +55,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// 计算富文本高度的方法
-/// @note 高度取决于富文本中最大的字体，计算高度时候最好传入最大的字体
+/// @note 如果对应到UILabel，则富文本中属性都需要能取到，例如字体，段落等，因为UILabel中的属性，不一定会全部填充进来
 /// @param width 富文本容器宽度
 - (CGSize)tmui_sizeForWidth:(CGFloat)width;
 
+#pragma mark - HouseKeeper
 - (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing;
 
 + (CGFloat)tmui_heightForString:(NSString *)str font:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing;
