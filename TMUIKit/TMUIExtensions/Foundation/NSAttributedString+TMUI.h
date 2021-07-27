@@ -139,6 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param range  The range of characters.
  */
 - (void)tmui_removeAttributesInRange:(NSRange)range;
+
 @end
 
 

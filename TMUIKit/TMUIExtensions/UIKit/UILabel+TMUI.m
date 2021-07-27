@@ -11,6 +11,8 @@
 #import "NSMutableParagraphStyle+TMUI.h"
 #import "UIView+TMUI.h"
 #import "NSAttributedString+TMUI.h"
+#import "UIColor+TMUI.h"
+#import <objc/runtime.h>
 
 #pragma mark - 提供基本快捷方法、初始化等
 @implementation UILabel (TMUI)
@@ -62,11 +64,7 @@
 #pragma mark 全部设置富文本
 - (void)tmui_setAttributesString:(NSString *)text lineSpacing:(CGFloat)lineSpacing{
     if (tmui_isNullString(text)) return;
-    if (self.width == 0) {
-        // 还没布局的时候，宽度是0，这里提前渲染方便后面计算
-        [self layoutIfNeeded];
-    }
-    // 1行的时候，修正lineSpacing
+    // 1行的时候，修正lineSpacing,还没布局的时候，宽度是0, 例如，cellForRow第一次创建的时候，并没有加载到window上，
     CGFloat height = [NSAttributedString tmui_heightForString:text font:self.font width:self.width lineSpacing:lineSpacing];
     self.attributedText = [NSAttributedString tmui_attributedStringWithString:text lineSpacing:(height<self.font.pointSize*2+lineSpacing)?0:lineSpacing];
 }
@@ -138,3 +136,17 @@
 
 @end
 
+@implementation UILabel (TMUI_IB)
+#pragma mark - TBTCategory
+static char textColorHexStringKey;
+
+- (void)setTextColorHexString:(NSString *)textColorHexString {
+    self.textColor = [UIColor tmui_colorWithHexString:textColorHexString];
+    objc_setAssociatedObject(self, &textColorHexStringKey, textColorHexString, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSString *)textColorHexString {
+    return objc_getAssociatedObject(self, &textColorHexStringKey);
+}
+
+@end

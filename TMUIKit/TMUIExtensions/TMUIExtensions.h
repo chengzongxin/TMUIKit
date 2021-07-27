@@ -36,7 +36,8 @@
 #import "UITextInputTraits+TMUI.h"
 #import "UITraitCollection+TMUI.h"
 #import "UIVisualEffectView+TMUI.h"
-
+#import "UITableView+TMUIGroup.h"
+#import "UITextView+TMUIPlaceholder.h"
 
 /// Foundation
 #import "NSBundle+TMUI.h"

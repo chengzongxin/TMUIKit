@@ -151,20 +151,23 @@ extern const UITableViewStyle TMUITableViewStyleInsetGrouped;
 
 @interface UITableView (TMUI_RegisterCell)
 
+/// 以Nib注册cell
+/// @param cellClass cell与nib同名类文件
+- (void)tmui_registerCellWithNibClass:(Class)cellClass;
 
-/// 注册nib和class同名的cell，并以类名作为identifier
-/// @param nibName nib文件
-- (void)tmui_registerCellWithNibName:(NSString *)nibName;
+/// 以Nib注册cell
+/// @param cellClass cell与nib同名类文件
+/// @param identifier 复用标识
+- (void)tmui_registerCellWithNibClass:(Class)cellClass identifier:(NSString *)identifier;
 
+/// 以Nib注册cell
+/// @param nibName nib文件名
+/// @param identifier 复用标识
+- (void)tmui_registerCellWithNibName:(NSString *)nibName identifier:(NSString *)identifier;
 
-/// 以类文件注册cell
+/// 以class类注册cell
 /// @param aClass cell类
 - (void)tmui_registerCellWithClass:(Class)aClass;
-
-/// 注册cell
-/// @param nibName nib文件
-/// @param identifier 复用标识
-- (void)tmui_registerCellWithNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier;
 
 ///  注册header
 /// @param nibName nib文件

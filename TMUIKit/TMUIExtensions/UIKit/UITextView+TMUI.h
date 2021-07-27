@@ -43,16 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
  * 将光标滚到可视区域
  */
 - (void)tmui_scrollCaretVisibleAnimated:(BOOL)animated;
+
 @end
 
-
-// 和TCategory冲突了，后面删掉Tcategory再放开
-//@interface UITextView (TMUI_TCategery_Placeholder)
-//
-//@property (nonatomic, copy  ) NSAttributedString *attributePlaceholder;
-//@property (nonatomic, copy  ) IBInspectable NSString *placeholder;
-//@property (nonatomic, strong) IBInspectable UIColor  *placeholderColor;
-//
-//@end
 
 NS_ASSUME_NONNULL_END

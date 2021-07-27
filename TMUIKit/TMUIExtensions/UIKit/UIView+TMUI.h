@@ -532,7 +532,11 @@ typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
 //@end
 
 @interface UIView (TBTCategorAdd)
+// 获取第一个description包含aString的视图
 - (UIView *)tmui_subViewOfContainDescription:(NSString *)aString ;
+// 获取第一个class=aClass的视图
+- (UIView *)tmui_subViewOfClass:(Class)aClass;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -95,4 +95,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@interface UILabel (TMUI_IB)
+
+@property (nonatomic, copy) IBInspectable NSString *textColorHexString;
+
+@end
+
 NS_ASSUME_NONNULL_END

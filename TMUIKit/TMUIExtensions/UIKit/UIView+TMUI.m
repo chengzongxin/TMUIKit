@@ -1431,6 +1431,21 @@ static char kAssociatedObjectKey_sizeThatFitsBlock;
 
 @implementation UIView (TBTCategorAdd)
 
+- (UIView *)tmui_subViewOfClass:(Class)aClass{
+    UIView *aView = nil;
+    NSMutableArray *views = [self.subviews mutableCopy];
+    while (!aView && views.count>0) {
+        UIView *temp = [views firstObject];
+        if ([temp isKindOfClass:aClass]) {
+            aView = temp;
+        }else{
+            [views addObjectsFromArray:temp.subviews];
+            [views removeObject:temp];
+        }
+    }
+    return aView;
+}
+
 - (UIView *)tmui_subViewOfContainDescription:(NSString *)aString {
     if(![aString isKindOfClass:[NSString class]]){
         return nil;
