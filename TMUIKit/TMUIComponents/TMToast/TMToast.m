@@ -8,7 +8,7 @@
 #import "TMToast.h"
 #import <Masonry/Masonry.h>
 #import <TMUICommonDefines.h>
-#import <TMUIKitDefines.h>
+#import <TMUIBasicDefines.h>
 #import <UIColor+TMUI.h>
 
 @interface TMToastView : UIView

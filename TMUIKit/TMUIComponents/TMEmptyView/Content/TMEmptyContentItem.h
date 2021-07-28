@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "TMEmptyContentItemProtocol.h"
 #import "TMEmptyDefine.h"
-#import "TMUIKitDefines.h"
+#import "TMUIBasicDefines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

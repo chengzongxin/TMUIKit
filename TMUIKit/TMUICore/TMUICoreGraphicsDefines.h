@@ -1,14 +1,35 @@
 //
-//  TMCoreGraphicsDefines.h
+//  TMUICoreGraphicsDefines.h
 //  Pods
 //
 //  Created by nigel.ning on 2020/4/15.
 //
 
-#ifndef TMCoreGraphicsDefines_h
-#define TMCoreGraphicsDefines_h
+#ifndef TMUICoreGraphicsDefines_h
+#define TMUICoreGraphicsDefines_h
 
 #import <CoreGraphics/CoreGraphics.h>
+
+#pragma mark - 变量-设备相关
+
+/// 是否横竖屏
+/// 用户界面横屏了才会返回YES
+#define IS_LANDSCAPE UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)
+/// 无论支不支持横屏，只要设备横屏了，就会返回YES
+#define IS_DEVICE_LANDSCAPE UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])
+/// 屏幕宽度，会根据横竖屏的变化而变化
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+/// 屏幕高度，会根据横竖屏的变化而变化
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+/// 设备宽度，跟横竖屏无关
+#define DEVICE_WIDTH MIN([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)
+/// 设备高度，跟横竖屏无关
+#define DEVICE_HEIGHT MAX([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)
+/// bounds && nativeBounds / scale && nativeScale
+#define ScreenBoundsSize ([[UIScreen mainScreen] bounds].size)
+#define ScreenNativeBoundsSize ([[UIScreen mainScreen] nativeBounds].size)
+#define ScreenScale ([[UIScreen mainScreen] scale])
+#define ScreenNativeScale ([[UIScreen mainScreen] nativeScale])
 
 /// !!!: 此CoreGraphics库扩展的一些宏定义均以相关CoreGraphics里的结构体名作开头
 #define ScreenScale ([[UIScreen mainScreen] scale])
@@ -619,4 +640,4 @@ UIEdgeInsetsRemoveFloatMin(UIEdgeInsets insets) {
 
 
 
-#endif /* TMCoreGraphicsDefines_h */
+#endif /* TMUICoreGraphicsDefines_h */

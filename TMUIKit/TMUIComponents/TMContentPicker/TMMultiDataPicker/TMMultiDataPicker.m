@@ -7,7 +7,7 @@
 
 #import "TMMultiDataPicker.h"
 #import "TMUICommonDefines.h"
-#import "TMUIKitDefines.h"
+#import "TMUIBasicDefines.h"
 #import "TMUIExtensions.h"
 
 @interface TMMultiDataPicker()<UIPickerViewDelegate, UIPickerViewDataSource>

@@ -12,20 +12,12 @@
 #import "TMUIAssociatedPropertyDefines.h"
 #endif
 
-#if __has_include("TMUICommonDefines.h")
-#import "TMUICommonDefines.h"
+#if __has_include("TMUIBasicDefines.h")
+#import "TMUIBasicDefines.h"
 #endif
 
 #if __has_include("TMUICoreGraphicsDefines.h")
 #import "TMUICoreGraphicsDefines.h"
-#endif
-
-#if __has_include("TMUIKitDefines.h")
-#import "TMUIKitDefines.h"
-#endif
-
-#if __has_include("TMUIHelper.h")
-#import "TMUIHelper.h"
 #endif
 
 #if __has_include("TMUIInitMacro.h")
@@ -39,17 +31,5 @@
 #if __has_include("TMUIWeakObjectContainer.h")
 #import "TMUIWeakObjectContainer.h"
 #endif
-
-
-#if __has_include("TMUIConfiguration.h")
-#import "TMUIConfiguration.h"
-#endif
-
-
-#if __has_include("TMUIConfigurationMacros.h")
-#import "TMUIConfigurationMacros.h"
-#endif
-
-
 
 #endif /* TMUICore_h */

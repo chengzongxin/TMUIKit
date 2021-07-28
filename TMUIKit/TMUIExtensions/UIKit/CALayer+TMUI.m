@@ -11,6 +11,8 @@
 #import "UIColor+TMUI.h"
 #import "TMUIAssociatedPropertyDefines.h"
 #import "TMUIRuntime.h"
+#import "TMUIBasicDefines.h"
+#import "TMUICoreGraphicsDefines.h"
 
 @interface CALayer ()
 

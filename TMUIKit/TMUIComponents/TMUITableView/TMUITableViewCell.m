@@ -10,7 +10,7 @@
 #import "TMUIButton.h"
 #import "UITableView+TMUI.h"
 #import "UITableViewCell+TMUI.h"
-
+#import "TMUIConfigurationMacros.h"
 @interface TMUITableViewCell() <UIScrollViewDelegate>
 
 @property(nonatomic, assign) BOOL initByTableView;

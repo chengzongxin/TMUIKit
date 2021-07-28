@@ -10,7 +10,7 @@
 #import "UIView+TMUI.h"
 #import "UITableView+TMUI.h"
 #import "UITableViewHeaderFooterView+TMUI.h"
-
+#import "TMUIConfigurationMacros.h"
 @implementation TMUITableViewHeaderFooterView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {

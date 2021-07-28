@@ -11,6 +11,7 @@
 static NSString * const TMUI_VERSION = @"1.0.3";  // 去掉不用组件，审查+load方法
 
 #import "TMUICore.h"
+#import "TMUIDefines.h"
 #import "TMUIComponents.h"
 #import "TMUIExtensions.h"
 #import "TMUIWidgets.h"

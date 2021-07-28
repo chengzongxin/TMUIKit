@@ -22,8 +22,6 @@
     self.view.clipsToBounds = YES;
 }
 
-TMUI_DEBUG_Code_Dealloc;
-
 - (void)fuzzySearchForText:(nullable NSString *)searchText {};
 - (void)clickSearchWithText:(nullable NSString *)searchText {};
 

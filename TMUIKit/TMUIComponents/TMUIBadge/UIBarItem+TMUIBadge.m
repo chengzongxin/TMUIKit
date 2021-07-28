@@ -10,6 +10,7 @@
 #import "TMUICore.h"
 #import "UIView+TMUIBadge.h"
 #import "UIBarItem+TMUI.h"
+#import "TMUIConfigurationMacros.h"
 
 @implementation UIBarItem (TMUIBadge)
 

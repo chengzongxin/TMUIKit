@@ -11,6 +11,7 @@
 #import "TMUILabel.h"
 #import "UIView+TMUI.h"
 #import "UITabBarItem+TMUI.h"
+#import "TMUIConfigurationMacros.h"
 
 @protocol _TMUIBadgeViewProtocol <NSObject>
 

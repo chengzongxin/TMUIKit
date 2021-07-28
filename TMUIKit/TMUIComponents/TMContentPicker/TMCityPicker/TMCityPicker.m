@@ -7,7 +7,7 @@
 
 #import "TMCityPicker.h"
 #import "TMUICommonDefines.h"
-#import "TMUIKitDefines.h"
+#import "TMUIBasicDefines.h"
 #import "TMUIExtensions.h"
 
 NSString *const TMCityPickerTitle = @"选择城市";

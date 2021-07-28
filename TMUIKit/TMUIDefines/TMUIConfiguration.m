@@ -11,7 +11,9 @@
 #import "NSString+TMUI.h"
 #import "UIViewController+TMUI.h"
 #import "TMUIKit.h"
-
+#import "TMUIConfigurationMacros.h"
+#import "TMUIBasicDefines.h"
+#import "TMUICommonDefines.h"
 
 @implementation UITabBarAppearance (QMUI)
 

@@ -6,8 +6,13 @@
 //
 
 #import "UIView+TMUIBorder.h"
-#import "TMUICore.h"
+#import "TMUIBasicDefines.h"
+#import "TMUICommonDefines.h"
 #import "CALayer+TMUI.h"
+#import <objc/runtime.h>
+#import "TMUIAssociatedPropertyDefines.h"
+#import "TMUIRuntime.h"
+#import "TMUIConfigurationMacros.h"
 
 
 @interface CAShapeLayer (TMUIBorder)

@@ -7,7 +7,7 @@
 
 #import "UILabel+TMUI.h"
 #import <Foundation/Foundation.h>
-#import "TMUICommonDefines.h"
+#import "TMUIBasicDefines.h"
 #import "NSMutableParagraphStyle+TMUI.h"
 #import "UIView+TMUI.h"
 #import "NSAttributedString+TMUI.h"
