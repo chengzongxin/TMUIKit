@@ -62,6 +62,7 @@ Pod::Spec.new do |s|
       ss.public_header_files = 'TMUIKit/TMUIDefines/*.h'
       #依赖的三方库，pod库或者可以是自身的subspec
       ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+      ss.dependency 'TMUIKit/TMUICore'
     end
   
   #TMUIExtensions 分类
@@ -73,7 +74,7 @@ Pod::Spec.new do |s|
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
     ss.dependency 'TMUIKit/TMUICore'
-#    ss.dependency 'TMUIKit/TMUIDefines'
+    ss.dependency 'TMUIKit/TMUIDefines'
     ss.subspec 'UIKit' do |sss|
       sss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
     end
