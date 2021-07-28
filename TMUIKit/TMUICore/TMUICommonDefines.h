@@ -13,7 +13,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import "TMUICoreGraphicsDefines.h"
 #import "TMUIKitDefines.h"
-#import "NSString+TMUI.h"
+//#import "NSString+TMUI.h"
 
 
 #pragma mark - 变量-编译相关
@@ -281,7 +281,7 @@ CG_INLINE SEL
 setterWithGetter(SEL getter) {
     NSString *getterString = NSStringFromSelector(getter);
     NSMutableString *setterString = [[NSMutableString alloc] initWithString:@"set"];
-    [setterString appendString:getterString.tmui_capitalizedString];
+    [setterString appendString:[NSString stringWithFormat:@"%@%@", [getterString substringToIndex:1].uppercaseString, [getterString substringFromIndex:1]].copy];
     [setterString appendString:@":"];
     SEL setter = NSSelectorFromString(setterString);
     return setter;

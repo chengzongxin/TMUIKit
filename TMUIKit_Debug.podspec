@@ -53,6 +53,16 @@ Pod::Spec.new do |s|
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
   end
+
+    #TMUIDefines Core中依赖部分拆离出来，以便二进制
+    s.subspec 'TMUIDefines' do |ss|
+      #引入TMUICore中所有资源文件
+      ss.source_files = 'TMUIKit/TMUIDefines/**/*'
+      #公开TMUICore模块中的头文件
+      ss.public_header_files = 'TMUIKit/TMUIDefines/*.h'
+      #依赖的三方库，pod库或者可以是自身的subspec
+      ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+    end
   
   #TMUIExtensions 分类
   s.subspec 'TMUIExtensions' do |ss|

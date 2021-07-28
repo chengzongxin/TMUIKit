@@ -13,6 +13,7 @@
 #import "TMUIAssociatedPropertyDefines.h"
 #import "NSObject+TMUI.h"
 #import "UIViewController+TMUI.h"
+#import "NSString+TMUI.h"
 
 
 NSString *const kTMUIResourcesBundleName = @"TMUIResources";
