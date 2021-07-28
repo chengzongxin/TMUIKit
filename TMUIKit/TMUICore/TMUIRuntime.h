@@ -7,8 +7,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
 #import <Foundation/Foundation.h>
-#import "NSObject+TMUI.h"
+//#import "NSObject+TMUI.h"
 #import "TMUICommonDefines.h"
 //#import "NSMethodSignature+TMUI.h"
 NS_ASSUME_NONNULL_BEGIN

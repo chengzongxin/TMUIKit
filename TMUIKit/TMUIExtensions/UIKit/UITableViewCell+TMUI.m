@@ -6,10 +6,14 @@
 //
 
 #import "UITableViewCell+TMUI.h"
-#import "TMUICore.h"
+#import "NSObject+TMUI.h"
 #import "UIView+TMUI.h"
 #import "UITableView+TMUI.h"
 #import "CALayer+TMUI.h"
+#import "TMUIHelper.h"
+#import "TMUIAssociatedPropertyDefines.h"
+#import "TMUIRuntime.h"
+#import "TMUIConfigurationMacros.h"
 
 const UIEdgeInsets TMUITableViewCellSeparatorInsetsNone = {INFINITY, INFINITY, INFINITY, INFINITY};
 

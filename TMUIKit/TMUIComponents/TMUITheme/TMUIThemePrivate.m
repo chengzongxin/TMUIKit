@@ -6,7 +6,7 @@
 //
 
 #import "TMUIThemePrivate.h"
-#import "TMUICore.h"
+#import "TMUIRuntime.h"
 #import "UIColor+TMUI.h"
 #import "UIVisualEffect+TMUITheme.h"
 #import "UIView+TMUITheme.h"
@@ -41,6 +41,8 @@
 //#import "TMUIVisualEffectView.h"
 //#import "TMUIToastBackgroundView.h"
 #import "TMUIBadgeProtocol.h"
+
+#import "NSObject+TMUI.h"
 
 @interface TMUIThemePropertiesRegister : NSObject
 

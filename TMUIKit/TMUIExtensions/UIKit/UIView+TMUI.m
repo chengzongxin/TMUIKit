@@ -16,6 +16,7 @@
 #import "TMUIHelper.h"
 #import "TMUIRuntime.h"
 #import "CALayer+TMUI.h"
+#import "NSObject+TMUI.h"
 
 @implementation UIView (TMUI)
 TMUISynthesizeBOOLProperty(tmui_tintColorCustomized, setTmui_tintColorCustomized)

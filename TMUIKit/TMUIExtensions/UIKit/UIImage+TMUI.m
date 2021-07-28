@@ -6,9 +6,12 @@
 //
 
 #import "UIImage+TMUI.h"
-#import "TMUICore.h"
+#import "NSObject+TMUI.h"
 #import "UIColor+TMUI.h"
 #import <objc/runtime.h>
+#import "TMUICoreGraphicsDefines.h"
+#import "TMUICommonDefines.h"
+#import "TMUIHelper.h"
 
 #ifdef DEBUG
 #define CGContextInspectContext(context) { \

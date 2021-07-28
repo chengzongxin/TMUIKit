@@ -6,7 +6,8 @@
 //
 
 #import "UIColor+TMUI.h"
-#import "TMUICore.h"
+#import "NSObject+TMUI.h"
+#import "TMUIRuntime.h"
 
 @implementation UIColor (TMUI)
 
