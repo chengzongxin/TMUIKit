@@ -6,7 +6,8 @@
 //
 
 #import "TMUIDynamicHeightTableViewCell.h"
-#import "TMUIKit.h"
+#import "TMUIExtensions.h"
+#import "TMUICore.h"
 
 const UIEdgeInsets kInsets = {15, 16, 15, 16};
 const CGFloat kAvatarSize = 30;

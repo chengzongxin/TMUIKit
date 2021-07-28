@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '1.1.2'
+  s.version          = '1.1.3'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -54,16 +54,16 @@ Pod::Spec.new do |s|
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
   end
 
-    #TMUIDefines Core中依赖部分拆离出来，以便二进制
-    s.subspec 'TMUIDefines' do |ss|
-      #引入TMUICore中所有资源文件
-      ss.source_files = 'TMUIKit/TMUIDefines/**/*'
-      #公开TMUICore模块中的头文件
-      ss.public_header_files = 'TMUIKit/TMUIDefines/*.h'
-      #依赖的三方库，pod库或者可以是自身的subspec
-      ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-      ss.dependency 'TMUIKit/TMUICore'
-    end
+    # #TMUIDefines Core中依赖部分拆离出来，以便二进制
+    # s.subspec 'TMUIDefines' do |ss|
+    #   #引入TMUICore中所有资源文件
+    #   ss.source_files = 'TMUIKit/TMUIDefines/**/*'
+    #   #公开TMUICore模块中的头文件
+    #   ss.public_header_files = 'TMUIKit/TMUIDefines/*.h'
+    #   #依赖的三方库，pod库或者可以是自身的subspec
+    #   ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+    #   ss.dependency 'TMUIKit/TMUICore'
+    # end
   
   #TMUIExtensions 分类
   s.subspec 'TMUIExtensions' do |ss|
@@ -74,10 +74,19 @@ Pod::Spec.new do |s|
     #依赖的三方库，pod库或者可以是自身的subspec
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
     ss.dependency 'TMUIKit/TMUICore'
-    ss.dependency 'TMUIKit/TMUIDefines'
+
+    #TMUIDefines Core中依赖部分拆离出来，以便二进制
+    ss.subspec 'TMUIDefines' do |sss|
+      #引入TMUICore中所有资源文件
+      sss.source_files = 'TMUIKit/TMUIExtensions/TMUIDefines/**/*'
+      # #公开TMUICore模块中的头文件
+      # sss.public_header_files = 'TMUIKit/TMUIExtensions/TMUIDefines/*.h'
+    end
+
     ss.subspec 'UIKit' do |sss|
       sss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
     end
+
     ss.subspec 'Foundation' do |sss|
       sss.source_files = 'TMUIKit/TMUIExtensions/Foundation'
       # NSString
@@ -87,48 +96,47 @@ Pod::Spec.new do |s|
     end
   end
   
-  #TMUIWidgets 基类控件
-  s.subspec 'TMUIWidgets' do |ss|
-    #引入TMUIWidgets中所有资源文件
-    ss.source_files = 'TMUIKit/TMUIWidgets/TMUIWidgets.h'
-    #公开TMUIWidgets模块中的头文件
-    ss.public_header_files = 'TMUIKit/TMUIWidgets/*.h'
-    #依赖的三方库，pod库或者可以是自身的subspec
-    ss.dependency 'TMUIKit/TMUICore'
-#    ss.dependency 'TMUIKit/TMUIDefines'
-    ss.dependency 'TMUIKit/TMUIExtensions'
-    # TMUIButton
-    ss.subspec 'TMUIButton' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMUIButton'
-    end
-    # TMUILabel
-    ss.subspec 'TMUILabel' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMUILabel'
-    end
-    # TMUITextField
-    ss.subspec 'TMUITextField' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMUITextField'
-    end
-    # TMUITextView
-    ss.subspec 'TMUITextView' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMUITextView'
-    end
-    # TMUISlider
-    ss.subspec 'TMUISlider' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMUISlider'
-    end
-    # TMUISegmentedControl
-    ss.subspec 'TMUISegmentedControl' do |sss|
-      sss.source_files = 'TMUIKit/TMUIWidgets/TMUISegmentedControl'
-    end
-  end
-  
   #TMUIComponents 组件
   s.subspec 'TMUIComponents' do |ss|
       ss.dependency 'TMUIKit/TMUICore'
-#      ss.dependency 'TMUIKit/TMUIDefines'
       ss.dependency 'TMUIKit/TMUIExtensions'
+      # ss.dependency 'TMUIKit/TMUIWidgets'
       ss.source_files = 'TMUIKit/TMUIComponents/TMUIComponents.h'
+
+      #TMUIWidgets 基类控件
+      ss.subspec 'TMUIWidgets' do |sss|
+        #引入TMUIWidgets中所有资源文件
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUIWidgets.h'
+        # #公开TMUIWidgets模块中的头文件
+        # sss.public_header_files = 'TMUIKit/TMUIWidgets/*.h'
+        # #依赖的三方库，pod库或者可以是自身的subspec
+        # sss.dependency 'TMUIKit/TMUICore'
+        # sss.dependency 'TMUIKit/TMUIExtensions'
+        # TMUIButton
+        sss.subspec 'TMUIButton' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUIButton'
+        end
+        # TMUILabel
+        sss.subspec 'TMUILabel' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUILabel'
+        end
+        # TMUITextField
+        sss.subspec 'TMUITextField' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUITextField'
+        end
+        # TMUITextView
+        sss.subspec 'TMUITextView' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUITextView'
+        end
+        # TMUISlider
+        sss.subspec 'TMUISlider' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUISlider'
+        end
+        # TMUISegmentedControl
+        sss.subspec 'TMUISegmentedControl' do |ssss|
+          ssss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUISegmentedControl'
+        end
+      end
       
       # TMUIMultipleDelegates
       ss.subspec 'TMUIMultipleDelegates' do |sss|
@@ -207,7 +215,8 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
       end
       
-      #### 以下组件暂不使用，先屏蔽
+    ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
+
      # TMUITableView
      ss.subspec 'TMUITableView' do |sss|
        sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
@@ -259,9 +268,13 @@ Pod::Spec.new do |s|
         end
       end
 
+      ########################  end 以上组件只在demo中打开  ########################
+
 
   end
   
+
+  ######################## begin HouseKeeper项目中使用  ########################
   
   # #tools
   # s.subspec 'TMTools' do |ss|
@@ -282,5 +295,7 @@ Pod::Spec.new do |s|
   #     end
   #   end
   # end
+
+  ######################## end HouseKeeper项目中使用  ########################
   
 end

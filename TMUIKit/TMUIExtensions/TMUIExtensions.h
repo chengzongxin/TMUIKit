@@ -8,6 +8,10 @@
 #ifndef TMUIExtensions_h
 #define TMUIExtensions_h
 
+
+/// Common
+#import "TMUIDefines.h"
+
 /// UIKit
 #import "UIView+TMUI.h"
 #import "UIColor+TMUI.h"

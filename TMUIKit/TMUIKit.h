@@ -10,10 +10,8 @@
 #import <Foundation/Foundation.h>
 
 #import "TMUICore.h"
-#import "TMUIDefines.h"
-#import "TMUIComponents.h"
 #import "TMUIExtensions.h"
-#import "TMUIWidgets.h"
+#import "TMUIComponents.h"
 
 //dependency
 #import <Masonry/Masonry.h>
