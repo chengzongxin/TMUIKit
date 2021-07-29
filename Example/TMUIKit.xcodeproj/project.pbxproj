@@ -454,6 +454,7 @@
 			children = (
 				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+				16945FD225B7C4D10056AE74 /* TMUIWidgetsVC */,
 				1632A136264549FD0074424D /* TDModalPresentationViewController */,
 				1685727E261F10CE007A0E6D /* TDTheme */,
 				16402B53260C1D0A00B4ADBF /* TMPopoverView */,
@@ -481,7 +482,6 @@
 			children = (
 				16455E3C25B6F3E400BBBEC2 /* TMUIKitViewController.h */,
 				16455E3D25B6F3E400BBBEC2 /* TMUIKitViewController.m */,
-				16945FD225B7C4D10056AE74 /* TMUIWidgetsVC */,
 				1646635225F8AEFA00B0125B /* TMUICategoryVC */,
 			);
 			path = UIKit;

@@ -36,6 +36,7 @@
     UILabel *tips = [[UILabel alloc] tmui_initWithFont:UIFont(14) textColor:UIColor.blackColor];
     
     tips.text = [NSString stringWithFormat:@"DEMO1:可点击带下划线的富文本"];
+    tips.textColor = UIColor.td_tintColor;
     [self.view addSubview:tips];
     tips.numberOfLines = 0;
     [tips mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -110,7 +111,7 @@
 - (void)demo2{
     // tips
     UILabel *tips = [[UILabel alloc] tmui_initWithFont:UIFont(14) textColor:UIColor.blackColor];
-    
+    tips.textColor = UIColor.td_tintColor;
     tips.text = [NSString stringWithFormat:@"DEMO2:包含emoji等图像的富文本"];
     [self.view addSubview:tips];
     tips.numberOfLines = 0;
@@ -187,6 +188,7 @@
     // tips
     UILabel *tips = [[UILabel alloc] tmui_initWithFont:UIFont(14) textColor:UIColor.blackColor];
     tips.text = [NSString stringWithFormat:@"DEMO3:包含UIImage图像的富文本"];
+    tips.textColor = UIColor.td_tintColor;
     [self.view addSubview:tips];
     tips.numberOfLines = 0;
     [tips mas_makeConstraints:^(MASConstraintMaker *make) {

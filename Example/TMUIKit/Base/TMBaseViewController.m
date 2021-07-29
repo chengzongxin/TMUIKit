@@ -29,14 +29,25 @@
 - (UISegmentedControl *)addSegmentedWithTop:(CGFloat)top labelText:(NSString *)lbltext titles:(NSArray<NSString *> *)titles click:(void (^)(NSInteger))clickBlock{
     UILabel *label = [[UILabel alloc] init];
     label.text = lbltext;
+    label.textColor = UIColor.td_mainTextColor;
 //    label.adjustsFontSizeToFitWidth = YES;
     label.font = UIFont(12);
     [self.view addSubview:label];
     
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:titles];
+    TMUISegmentedControl *segmentedControl = [[TMUISegmentedControl alloc] initWithItems:titles];
     [segmentedControl addTarget:self action:@selector(segmentedControlValueChanged:) forControlEvents:UIControlEventValueChanged];
     segmentedControl.clickBlock = clickBlock;
+    // 可以比较大程度地修改样式。比如 tintColor，selectedTextColor
+    [segmentedControl updateSegmentedUIWithTintColor:UIColor.td_tintColor selectedTextColor:UIColor.whiteColor fontSize:UIFontSemibold(18)];
     [self.view addSubview:segmentedControl];
+    
+    if (@available(iOS 13.0, *)) {
+        segmentedControl.selectedSegmentTintColor = UIColor.td_tintColor;
+//        s2.selectedSegmentTintColor = UIColor.td_tintColor;
+//        s3.selectedSegmentTintColor = UIColor.td_tintColor;
+    } else {
+        // Fallback on earlier versions
+    }
     
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
