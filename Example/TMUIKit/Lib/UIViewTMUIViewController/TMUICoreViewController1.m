@@ -17,8 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.bgColor(@"white");
-    
     id l1 = Label.str(self.demoInstructions).styles(h1);
     id a2 = AttStr(
                    AttStr(Str(@"IS_DEBUG : %d\n",IS_DEBUG),

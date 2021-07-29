@@ -47,6 +47,7 @@
 		1646639825F8C9A600B0125B /* TMUICoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1646639725F8C9A600B0125B /* TMUICoreViewController.m */; };
 		164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 164663A025F8D14300B0125B /* TMUICoreViewController4.m */; };
 		1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671EEFF264D0D4D00673A91 /* TDTestViewController.m */; };
+		167E545626B23A1700D63789 /* TDThemeGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 167E545526B23A1700D63789 /* TDThemeGlobalConfig.m */; };
 		16812AFB2603225F00AECD14 /* TMUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812AFA2603225F00AECD14 /* TMUITableViewController.m */; };
 		16812B012603292C00AECD14 /* TMUITableViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812B002603292C00AECD14 /* TMUITableViewController1.m */; };
 		16812BD6260351AC00AECD14 /* TMUITableViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812BD5260351AC00AECD14 /* TMUITableViewController2.m */; };
@@ -196,6 +197,8 @@
 		164663A025F8D14300B0125B /* TMUICoreViewController4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController4.m; sourceTree = "<group>"; };
 		1671EEFE264D0D4D00673A91 /* TDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDTestViewController.h; sourceTree = "<group>"; };
 		1671EEFF264D0D4D00673A91 /* TDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDTestViewController.m; sourceTree = "<group>"; };
+		167E545426B23A1700D63789 /* TDThemeGlobalConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDThemeGlobalConfig.h; sourceTree = "<group>"; };
+		167E545526B23A1700D63789 /* TDThemeGlobalConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDThemeGlobalConfig.m; sourceTree = "<group>"; };
 		16812AF92603225F00AECD14 /* TMUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController.h; sourceTree = "<group>"; };
 		16812AFA2603225F00AECD14 /* TMUITableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUITableViewController.m; sourceTree = "<group>"; };
 		16812AFF2603292C00AECD14 /* TMUITableViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController1.h; sourceTree = "<group>"; };
@@ -711,6 +714,8 @@
 				16EABFDA25BA7BCD00A3273D /* TMBaseViewController.m */,
 				16D1518825F852020087BF7F /* UIViewController+Base.h */,
 				16D1518925F852020087BF7F /* UIViewController+Base.m */,
+				167E545426B23A1700D63789 /* TDThemeGlobalConfig.h */,
+				167E545526B23A1700D63789 /* TDThemeGlobalConfig.m */,
 				16EABFE025BAAD7D00A3273D /* UISegmentedControl+associateObject.h */,
 				16EABFE125BAAD7D00A3273D /* UISegmentedControl+associateObject.m */,
 				16EABFE525BAAE7C00A3273D /* UISlider+associateObject.h */,
@@ -1064,6 +1069,7 @@
 				16455E3E25B6F3E400BBBEC2 /* TMUIKitViewController.m in Sources */,
 				16E8002825EE449F005D8E4B /* UIViewControllerTMUIViewController.m in Sources */,
 				163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */,
+				167E545626B23A1700D63789 /* TDThemeGlobalConfig.m in Sources */,
 				160860BC25C01D8100F31337 /* Table3ViewController.m in Sources */,
 				160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */,
 				16331EE4264664A6006FB17D /* UIImageEffects.m in Sources */,

@@ -19,6 +19,8 @@
 #import "TDThemeViewController.h"
 #import "TDModalPresentationViewController.h"
 
+#define THEME_CELL fnt(18).subtitleStyle.cellHeightAuto.color(UIColor.td_mainTextColor).detailColor(UIColor.td_descriptionTextColor)
+
 @interface TMComponentsViewController ()
 
 @end
@@ -35,41 +37,41 @@
     
     GroupTV(
             Section(
-                    Row.str(@"TMUITheme").fnt(18).detailStr(@"主题管理").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMUITheme").detailStr(@"主题管理").THEME_CELL.onClick(^{
                             [self push:TDThemeViewController.class];
                         }),
-                    Row.str(@"TMUIModalPresentationViewController").fnt(18).detailStr(@"各种自定义弹窗").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMUIModalPresentationViewController").detailStr(@"各种自定义弹窗").THEME_CELL.onClick(^{
                             [self push:TDModalPresentationViewController.class];
                         }),
-                    Row.str(@"TMUITableView").fnt(18).detailStr(@"多样式UITableView").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMUITableView").detailStr(@"多样式UITableView").THEME_CELL.onClick(^{
                             [self push:TMUITableViewController.class];
                         }),
-                    Row.str(@"TMUIBadge").fnt(18).detailStr(@"一行代码添加badge").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMUIBadge").detailStr(@"一行代码添加badge").THEME_CELL.onClick(^{
                             [self push:TMUIBadgeViewController.class];
                         }),
-                    Row.str(@"TMUIMultipleDelegates").fnt(18).detailStr(@"让对象支持多个delegate、支持自定义的delegate").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMUIMultipleDelegates").detailStr(@"让对象支持多个delegate、支持自定义的delegate").THEME_CELL.onClick(^{
                             [self push:TMUICoreViewController6.class];
                         }),
-                    Row.str(@"TMPageViewController").fnt(18).detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMPageViewController").detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").THEME_CELL.onClick(^{
                             [self push:TMPageRootViewController.class];
                         }),
                     ).title(@"TMUI Components"),
             Section(
-                    Row.str(@"TMContentAlert").fnt(18).detailStr(@"TMContentAlert").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMContentAlert").detailStr(@"TMContentAlert").THEME_CELL.onClick(^{
                             [self push:TMUIAlertViewController.class];
                         }),
-                    Row.str(@"TMPopoverView").fnt(18).detailStr(@"弹窗popover view").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"TMPopoverView").detailStr(@"弹窗popover view").THEME_CELL.onClick(^{
                             [self push:TMPopoverViewController.class];
                         }),
                     ).title(@"TMUI Alert"),
             Section(
-                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI功能Demo").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"ChainUI").detailStr(@"链式UI功能Demo").THEME_CELL.onClick(^{
                             [self push:ChainUIViewController.class];
                         }),
-                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式UI常用方法").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"ChainUI").detailStr(@"链式UI常用方法").THEME_CELL.onClick(^{
                             [self push:ChainUIViewController1.class];
                         }),
-                    Row.str(@"ChainUI").fnt(18).detailStr(@"链式Style全局配置").subtitleStyle.cellHeightAuto.onClick(^{
+                    Row.str(@"ChainUI").detailStr(@"链式Style全局配置").THEME_CELL.onClick(^{
                             [self push:ChainStyleConfigViewController.class];
                         }),
                     ).title(@"TMUI ChainUI"),
