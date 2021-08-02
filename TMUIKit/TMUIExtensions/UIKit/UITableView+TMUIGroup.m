@@ -6,7 +6,7 @@
 //
 
 #import "UITableView+TMUIGroup.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import "TMUIRuntime.h"
 #import "TMUIAssociatedPropertyDefines.h"
 #import "TMUICommonDefines.h"

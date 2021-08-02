@@ -10,7 +10,7 @@
 #import "UIColor+TMUI.h"
 #import <objc/runtime.h>
 #import "TMUICoreGraphicsDefines.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import "TMUIHelper.h"
 
 #ifdef DEBUG

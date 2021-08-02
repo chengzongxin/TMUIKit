@@ -7,7 +7,7 @@
 
 #import "TMNormalPicker.h"
 #import "TMUICoreGraphicsDefines.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import "TMUIExtensions.h"
 
 @interface TMNormalPicker()<UIPickerViewDelegate, UIPickerViewDataSource>

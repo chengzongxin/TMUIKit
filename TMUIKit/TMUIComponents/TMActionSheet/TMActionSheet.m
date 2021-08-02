@@ -8,7 +8,7 @@
 #import "TMActionSheet.h"
 #import "TMContentAlert.h"
 #import "TMUICommonDefines.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import "TMUIExtensions.h"
 #import <Masonry/Masonry.h>
 

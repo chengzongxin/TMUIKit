@@ -12,8 +12,8 @@
 #import "TMUIAssociatedPropertyDefines.h"
 #endif
 
-#if __has_include("TMUIBasicDefines.h")
-#import "TMUIBasicDefines.h"
+#if __has_include("TMUIKitDefines.h")
+#import "TMUIKitDefines.h"
 #endif
 
 #if __has_include("TMUICoreGraphicsDefines.h")

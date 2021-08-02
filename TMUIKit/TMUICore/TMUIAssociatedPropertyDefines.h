@@ -9,7 +9,7 @@
 #define TMAssociatedPropertyMacro_h
 
 #import "TMUIWeakObjectContainer.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import <objc/runtime.h>
 
 //针对在类型里添加属性的相关便捷宏定义

@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import <Foundation/Foundation.h>
 //#import "NSObject+TMUI.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 //#import "NSMethodSignature+TMUI.h"
 NS_ASSUME_NONNULL_BEGIN
 

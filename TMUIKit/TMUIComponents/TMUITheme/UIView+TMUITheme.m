@@ -7,7 +7,7 @@
 
 
 #import "UIView+TMUITheme.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import "TMUIAssociatedPropertyDefines.h"
 #import "TMUICommonDefines.h"
 #import "UIView+TMUI.h"

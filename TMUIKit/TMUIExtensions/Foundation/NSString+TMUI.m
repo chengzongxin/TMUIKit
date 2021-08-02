@@ -8,7 +8,7 @@
 #import "NSString+TMUI.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "NSArray+TMUI.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import <objc/runtime.h>
 #import <CoreText/CoreText.h>
 

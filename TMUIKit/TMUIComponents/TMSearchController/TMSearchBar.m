@@ -10,7 +10,7 @@
 #import <Masonry/Masonry.h>
 #import "TMUICommonDefines.h"
 #import "TMUIExtensions.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 
 #pragma mark -
 #pragma mark - TMSearchBarCancelButton

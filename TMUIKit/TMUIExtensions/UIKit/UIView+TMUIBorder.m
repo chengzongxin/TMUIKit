@@ -6,7 +6,7 @@
 //
 
 #import "UIView+TMUIBorder.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import "TMUICommonDefines.h"
 #import "CALayer+TMUI.h"
 #import <objc/runtime.h>

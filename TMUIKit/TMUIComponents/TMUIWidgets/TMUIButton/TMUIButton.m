@@ -9,7 +9,7 @@
 #import "TMUICommonDefines.h"
 #import "TMUICoreGraphicsDefines.h"
 #import "CALayer+TMUI.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 
 @interface TMUIButton ()
 

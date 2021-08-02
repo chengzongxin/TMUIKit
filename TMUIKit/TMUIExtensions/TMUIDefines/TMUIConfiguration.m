@@ -11,7 +11,7 @@
 #import "NSString+TMUI.h"
 #import "UIViewController+TMUI.h"
 #import "TMUIConfigurationMacros.h"
-#import "TMUIBasicDefines.h"
+#import "TMUIKitDefines.h"
 #import "TMUICommonDefines.h"
 #import "NSArray+TMUI.h"
 
