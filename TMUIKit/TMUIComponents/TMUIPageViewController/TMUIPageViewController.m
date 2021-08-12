@@ -271,6 +271,8 @@ static const CGFloat kSliderBarStartX = 0;
     if (childVC.isViewLoaded && childVC.view.superview) {
         // 已加载过，调用生命周期方法
         [childVC beginAppearanceTransition:YES animated:YES];
+        CGFloat x = index * [UIScreen mainScreen].bounds.size.width;
+        [self.contentView setContentOffset:CGPointMake(x, 0) animated:animate];
         [childVC endAppearanceTransition];
     }else{
         // 未加载，需要添加后，再调用生命周期
@@ -308,7 +310,7 @@ static const CGFloat kSliderBarStartX = 0;
 }
 
 - (void)scrollToTopAnimate:(BOOL)animate{
-    [self.containerView setContentOffset:CGPointZero animated:animate];
+    [self.containerView setContentOffset:CGPointMake(self.containerView.contentOffset.x, 0) animated:animate];
 }
 
 //- (void)addRefreshWithBlock:(dispatch_block_t)freshBlock{
@@ -401,12 +403,8 @@ static const CGFloat kSliderBarStartX = 0;
         direction = UIPageViewControllerNavigationDirectionReverse;
     }
     
-    CGFloat x = index * [UIScreen mainScreen].bounds.size.width;
-    
     BOOL animate = abs((int)(index - self.currentIndex)) > 1 ? NO : YES;
-    [self.contentView setContentOffset:CGPointMake(x, 0) animated:animate];
     
-//    [self.pageViewController setViewControllers:@[self.childVCs[index]] direction:direction animated:YES completion:nil];
     [self addChildViewAtIndex:index animate:animate];
 }
 

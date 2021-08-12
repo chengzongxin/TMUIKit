@@ -128,8 +128,7 @@ static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;
         CGPoint new = [[change objectForKey:NSKeyValueChangeNewKey] CGPointValue];
         CGPoint old = [[change objectForKey:NSKeyValueChangeOldKey] CGPointValue];
         CGFloat diff = old.y - new.y;
-        UIScrollView *scroll = object;
-//        NSLog(@"observeValueForKeyPath %@.contentOffset.y=%f",NSStringFromClass(scroll.class),scroll.contentOffset.y);
+        NSLog(@"%@,old[%.0f],new[%.0f]",NSStringFromClass([object class]),old.y,new.y);
 
         if (diff == 0.0 || !_isObserving) { return; }
         // 当前不是scrollView，需要滑动
