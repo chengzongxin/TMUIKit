@@ -9,7 +9,7 @@
 
 @implementation TMUIPageContentScrollView
 
-// 优化快速滑动时，会左右翻页的问题
+// 优化快速滑动时，会左右翻页的问题,开启后，滑动不会走到父类
 - (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer{
     //  UIScrollViewPanGestureRecognizer 私有类
     if ([gestureRecognizer respondsToSelector:@selector(velocityInView:)]) {

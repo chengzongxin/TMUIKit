@@ -36,7 +36,8 @@ static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;
         self.directionalLockEnabled = YES;
         self.bounces = YES;
 
-        [self addObserver:self forKeyPath:NSStringFromSelector(@selector(contentOffset))
+        [self addObserver:self
+               forKeyPath:NSStringFromSelector(@selector(contentOffset))
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                   context:kTDCScrollViewKVOContext];
         _isObserving = YES;
@@ -61,12 +62,6 @@ static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;
     }
     
     _shouldScrollHeader = [gestureRecognizer locationInView:self].y < 0;
-    //if (_lock && point.y > 0 && !_shouldScrollHeader) {
-    // 刚切换VC的时候下拉会无法滑动，这里添加只在去除弹簧效果才禁止滑动  V9.0
-    if (_lock && point.y > 0 && self.bounces == NO) {
-        _shouldScrollThisTime = NO;
-        return NO;
-    }
     
     _shouldScrollThisTime = YES;
     return YES;
@@ -128,7 +123,7 @@ static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;
         CGPoint new = [[change objectForKey:NSKeyValueChangeNewKey] CGPointValue];
         CGPoint old = [[change objectForKey:NSKeyValueChangeOldKey] CGPointValue];
         CGFloat diff = old.y - new.y;
-        NSLog(@"%@,old[%.0f],new[%.0f]",NSStringFromClass([object class]),old.y,new.y);
+        NSLog(@"old[%.0f],new[%.0f],Offset[%.0f],Inset[%.0f],%@",old.y,new.y,self.contentOffset.y,self.contentInset.top,NSStringFromClass([object class]));
 
         if (diff == 0.0 || !_isObserving) { return; }
         // 当前不是scrollView，需要滑动
@@ -139,12 +134,11 @@ static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;
         if (object == self) {
             if (diff > 0 && _lock && !_shouldScrollHeader) {
                 [self scrollView:self setContentOffset:old];
-            } else if (((self.contentOffset.y < -self.contentInset.top) && !self.bounces)) {
-                [self scrollView:self setContentOffset:CGPointMake(self.contentOffset.x, -self.contentInset.top)];
             }
         } else {
             UIScrollView *scrollView = object;
-            _lock = (scrollView.contentOffset.y > -scrollView.contentInset.top) && (self.contentOffset.y >= -_lockArea);
+            BOOL isContentOffset = scrollView.contentOffset.y > -scrollView.contentInset.top;
+            _lock = (isContentOffset) && (self.contentOffset.y >= -_lockArea);
             
             if (self.contentOffset.y < -_lockArea && _lock && diff < 0) {
                 [self scrollView:scrollView setContentOffset:old];
@@ -154,8 +148,12 @@ static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;
                 [self scrollView:self setContentOffset:CGPointMake(self.contentOffset.x, self.contentOffset.y - diff)];
             }
 
-            if (!_lock && ((self.contentOffset.y > -self.contentInset.top) || self.bounces)) {
-                [self scrollView:scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, -scrollView.contentInset.top)];
+            if (!_lock) {
+                if (isContentOffset) {
+                    [self scrollView:scrollView setContentOffset:old];
+                }else{
+                    [self scrollView:scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, -scrollView.contentInset.top)];
+                }
             }
         }
     }
@@ -164,7 +162,7 @@ static void * const kTDCScrollViewKVOContext = (void*)&kTDCScrollViewKVOContext;
     }
 }
 
-- (void) scrollView:(UIScrollView*)scrollView setContentOffset:(CGPoint)offset {
+- (void)scrollView:(UIScrollView*)scrollView setContentOffset:(CGPoint)offset {
     _isObserving = NO;
     scrollView.contentOffset = offset;
     _isObserving = YES;
