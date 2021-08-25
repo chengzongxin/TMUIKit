@@ -15,22 +15,34 @@
 #pragma mark - Text Attribute
 
 + (instancetype)tmui_attributedStringWithString:(NSString *)str lineSpacing:(CGFloat)lineSpacing{
+    return [self tmui_attributedStringWithString:str lineSpacing:lineSpacing lineBreakMode:NSLineBreakByTruncatingTail];
+}
+
++ (instancetype)tmui_attributedStringWithString:(NSString *)str lineSpacing:(CGFloat)lineSpacing lineBreakMode:(NSLineBreakMode)lineBreakMode{
     if (tmui_isNullString(str)) return nil;
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle tmui_paragraphStyleWithLineSpacing:lineSpacing];
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle tmui_paragraphStyleWithLineSpacing:lineSpacing lineBreakMode:lineBreakMode];
     NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:str attributes:@{NSParagraphStyleAttributeName:paragraphStyle}];
     return attrStr;
 }
 
 + (instancetype)tmui_attributedStringWithString:(NSString *)str font:(UIFont *)font color:(UIColor *)color{
-    if (tmui_isNullString(str) || font == nil || color == nil) return nil;
-    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:color}];
+    if (tmui_isNullString(str)) return nil;
+    NSMutableDictionary *attrDict = NSMutableDictionary.dictionary;
+    if (font) {
+        attrDict[NSFontAttributeName] = font;
+    }
+    if (color) {
+        attrDict[NSForegroundColorAttributeName] = color;
+    }
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:str attributes:attrDict];
     return attrStr;
 }
 
 + (instancetype)tmui_attributedStringWithString:(NSString *)str font:(UIFont *)font color:(UIColor *)color lineSpacing:(CGFloat)lineSpacing{
     NSMutableAttributedString *attrStr = [[NSAttributedString tmui_attributedStringWithString:str font:font color:color] mutableCopy];
-    NSMutableParagraphStyle *paragraphStyle = [[self alloc] init];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = lineSpacing;
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
     [attrStr tmui_setAttribute:NSParagraphStyleAttributeName value:paragraphStyle];
     return attrStr;
 }
@@ -73,9 +85,24 @@
 
 @implementation NSAttributedString (TMUI_Calculate)
 
-- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo {
-    return self.string.tmui_lengthWhenCountingNonASCIICharacterAsTwo;
+//固定宽度计算多行文本高度，支持开头空格、自定义插入的文本图片不纳入计算范围，包含emoji表情符仍然会有较大偏差，但在UITextView和UILabel等控件中不影响显示。向上取整，消除小数转整数误差
+- (CGSize)tmui_sizeForWidth:(CGFloat)width {
+    NSMutableAttributedString *mAttr = [self mutableCopy];
+    NSMutableParagraphStyle *style = [mAttr.tmui_paragraphStyle mutableCopy];
+    if (!style) {
+        style = [[NSMutableParagraphStyle alloc] init];
+    }
+    style.lineBreakMode = NSLineBreakByWordWrapping;
+    [mAttr tmui_setAttribute:NSParagraphStyleAttributeName value:style];
+    CGRect rect = [mAttr boundingRectWithSize:CGSizeMake(width, HUGE)
+                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                     context:nil];
+    return CGSizeMake(ceilf(rect.size.width), ceilf(rect.size.height));
+    
+    // text calculate
+//    return [self.string tmui_sizeForFont:self.tmui_font size:CGSizeMake(width, CGFLOAT_MAX) lineHeight:self.tmui_paragraphStyle.lineSpacing mode:self.tmui_paragraphStyle.lineBreakMode];
 }
+
 
 - (CGFloat)tmui_heightForFont:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing {
     CGFloat height = [self tmui_heightForWidth:width];
@@ -89,7 +116,7 @@
     if (![str isKindOfClass:[NSString class]] || str.length == 0) {
         return 0;
     }
-    NSMutableAttributedString *attributedString = [[NSAttributedString tmui_attributedStringWithString:str lineSpacing:lineSpacing] mutableCopy];
+    NSMutableAttributedString *attributedString = [[NSAttributedString tmui_attributedStringWithString:str lineSpacing:lineSpacing lineBreakMode:NSLineBreakByWordWrapping] mutableCopy];
     [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
     CGFloat height = [attributedString tmui_heightForFont:font width:width lineSpacing:lineSpacing];
     return ceilf(height);
@@ -110,17 +137,17 @@
 }
 
 
-//固定宽度计算多行文本高度，支持开头空格、自定义插入的文本图片不纳入计算范围，包含emoji表情符仍然会有较大偏差，但在UITextView和UILabel等控件中不影响显示。向上取整，消除小数转整数误差
-- (CGSize)tmui_sizeForWidth:(CGFloat)width {
-    CGRect rect = [self boundingRectWithSize:CGSizeMake(width, HUGE)
-                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-                                     context:nil];
-    return CGSizeMake(ceilf(rect.size.width), ceilf(rect.size.height));
-}
+
 
 - (CGFloat)tmui_heightForWidth:(CGFloat)width {
     return [self tmui_sizeForWidth:width].height;
 }
+
+
+- (NSUInteger)tmui_lengthWhenCountingNonASCIICharacterAsTwo {
+    return self.string.tmui_lengthWhenCountingNonASCIICharacterAsTwo;
+}
+
 
 @end
 
@@ -129,24 +156,29 @@
 
 @implementation NSAttributedString (TMUI_Attributes)
 
+- (NSMutableParagraphStyle *)tmui_paragraphStyle{
+    return [self _attribute:NSParagraphStyleAttributeName atIndex:0];
+}
 
-//- (UIFont *)tmui_font{
-//    return [self tmui_fontAtIndex:0];
-//}
+- (NSMutableParagraphStyle *)tmui_paragraphStyle:(NSUInteger)index{
+    return [self _attribute:NSParagraphStyleAttributeName atIndex:index];
+}
 
+- (UIFont *)tmui_font{
+    return [self tmui_fontAtIndex:0];
+}
 
+- (UIFont *)tmui_fontAtIndex:(NSUInteger)index {
+    /*
+     In iOS7 and later, UIFont is toll-free bridged to CTFontRef,
+     although Apple does not mention it in documentation.
 
-//- (UIFont *)tmui_fontAtIndex:(NSUInteger)index {
-//    /*
-//     In iOS7 and later, UIFont is toll-free bridged to CTFontRef,
-//     although Apple does not mention it in documentation.
-//
-//     In iOS6, UIFont is a wrapper for CTFontRef, so CoreText can alse use UIfont,
-//     but UILabel/UITextView cannot use CTFontRef.
-//
-//     We use UIFont for both CoreText and UIKit.
-//     */
-//    UIFont *font = [self _attribute:NSFontAttributeName atIndex:index];
+     In iOS6, UIFont is a wrapper for CTFontRef, so CoreText can alse use UIfont,
+     but UILabel/UITextView cannot use CTFontRef.
+
+     We use UIFont for both CoreText and UIKit.
+     */
+    UIFont *font = [self _attribute:NSFontAttributeName atIndex:index];
 //    if (kSystemVersion <= 6) {
 //        if (font) {
 //            if (CFGetTypeID((__bridge CFTypeRef)(font)) == CTFontGetTypeID()) {
@@ -154,16 +186,16 @@
 //            }
 //        }
 //    }
-//    return font;
-//}
-//
-//
-//- (id)_attribute:(NSString *)attributeName atIndex:(NSUInteger)index {
-//    if (!attributeName) return nil;
-//    if (index > self.length || self.length == 0) return nil;
-//    if (self.length > 0 && index == self.length) index--;
-//    return [self attribute:attributeName atIndex:index effectiveRange:NULL];
-//}
+    return font;
+}
+
+
+- (id)_attribute:(NSString *)attributeName atIndex:(NSUInteger)index {
+    if (!attributeName) return nil;
+    if (index > self.length || self.length == 0) return nil;
+    if (self.length > 0 && index == self.length) index--;
+    return [self attribute:attributeName atIndex:index effectiveRange:NULL];
+}
 
 @end
 

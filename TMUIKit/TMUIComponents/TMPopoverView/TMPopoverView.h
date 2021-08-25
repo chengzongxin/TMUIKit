@@ -61,6 +61,7 @@ typedef NS_ENUM(NSUInteger, TMPopoverArrowDirection) {
 /**一般情况下在点击了导航条上的item视图后需要显示Popover视图时可用此便捷方法，相关箭头即指向对应的item视图对位
  @note 通常导航条的direction给up；底部toolbar时direction给down.
  @warning ⚠️⚠️⚠️ 此接口参数arrowDirection约定限定为up/down 两种
+ @warning ⚠️⚠️⚠️ 此种情况 popoverView展示在window上
  */
 - (void)showFromBarButtonItem:(UIBarButtonItem *)barItem arrowDirection:(TMPopoverArrowDirection)arrowDirection;
 
@@ -68,10 +69,21 @@ typedef NS_ENUM(NSUInteger, TMPopoverArrowDirection) {
  @note 一般情况 箭头向下，显示在视图上方；箭头向上，显示在视图下方；箭头向左，显示在视图右方；箭头向右，显示在视图左方
  @warning 若view为nil则不会显示
  @warning ⚠️⚠️⚠️ 传入的位置参数与arrowDirection要确实合适，否则可能会报内部视图的约束警告
- @warning ⚠️⚠️⚠️传入的rectr和view是为了方便内部计算出合适的显示位置，但不是显示在view上，而是直接显示在当前AppDelegate的window上
+ @warning ⚠️⚠️⚠️ 传入的rect和view是为了确定显示的父视图和显示位置
  */
 - (void)showFromRect:(CGRect)rect inView:(UIView *)view
       arrowDirection:(TMPopoverArrowDirection)arrowDirection;
+
+
+/// 同 showFromRect:inView:arrowDirection , 只是这里可以决定是直接显示在父视图view上还是通过相关位置计算转换后显示到view.window上
+/// @param rect 需要展示的位置
+/// @param view 上述rect位置对应的父视图对象，也可作为当前Popoverview展示的父视图
+/// @param arrowDirection 箭头方向
+/// @param showOnWindow 是展示在对应的window上 还是 展示在传入的view上
+- (void)showFromRect:(CGRect)rect inView:(UIView *)view
+      arrowDirection:(TMPopoverArrowDirection)arrowDirection
+      asShowOnWindow:(BOOL)showOnWindow;
+
 
 #pragma mark - dismiss methods
 

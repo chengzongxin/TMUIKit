@@ -66,6 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArray (TMUI_Extensions)
 
+- (id)tmui_safeObjectAtIndex:(NSUInteger)index;
 /**
  *  删掉object
  *

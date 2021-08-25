@@ -6,7 +6,7 @@
 //
 
 #import "TMNormalPicker.h"
-#import "TMUICommonDefines.h"
+#import "TMUICoreGraphicsDefines.h"
 #import "TMUIKitDefines.h"
 #import "TMUIExtensions.h"
 

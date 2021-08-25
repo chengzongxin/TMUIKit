@@ -17,23 +17,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Component Properties
 ///=============================================================================
 
-@property (nonatomic, readonly) NSInteger year; ///< Year component
-@property (nonatomic, readonly) NSInteger month; ///< Month component (1~12)
-@property (nonatomic, readonly) NSInteger day; ///< Day component (1~31)
-@property (nonatomic, readonly) NSInteger hour; ///< Hour component (0~23)
-@property (nonatomic, readonly) NSInteger minute; ///< Minute component (0~59)
-@property (nonatomic, readonly) NSInteger second; ///< Second component (0~59)
-@property (nonatomic, readonly) NSInteger nanosecond; ///< Nanosecond component
-@property (nonatomic, readonly) NSInteger weekday; ///< Weekday component (1~7, first day is based on user setting)
-@property (nonatomic, readonly) NSInteger weekdayOrdinal; ///< WeekdayOrdinal component
-@property (nonatomic, readonly) NSInteger weekOfMonth; ///< WeekOfMonth component (1~5)
-@property (nonatomic, readonly) NSInteger weekOfYear; ///< WeekOfYear component (1~53)
-@property (nonatomic, readonly) NSInteger yearForWeekOfYear; ///< YearForWeekOfYear component
-@property (nonatomic, readonly) NSInteger quarter; ///< Quarter component
-@property (nonatomic, readonly) BOOL isLeapMonth; ///< whether the month is leap month
-@property (nonatomic, readonly) BOOL isLeapYear; ///< whether the year is leap year
-@property (nonatomic, readonly) BOOL isToday; ///< whether date is today (based on current locale)
-@property (nonatomic, readonly) BOOL isYesterday; ///< whether date is yesterday (based on current locale)
+@property (nonatomic, readonly) NSInteger tmui_year; ///< Year component
+@property (nonatomic, readonly) NSInteger tmui_month; ///< Month component (1~12)
+@property (nonatomic, readonly) NSInteger tmui_day; ///< Day component (1~31)
+@property (nonatomic, readonly) NSInteger tmui_hour; ///< Hour component (0~23)
+@property (nonatomic, readonly) NSInteger tmui_minute; ///< Minute component (0~59)
+@property (nonatomic, readonly) NSInteger tmui_second; ///< Second component (0~59)
+@property (nonatomic, readonly) NSInteger tmui_nanosecond; ///< Nanosecond component
+@property (nonatomic, readonly) NSInteger tmui_weekday; ///< Weekday component (1~7, first day is based on user setting)
+@property (nonatomic, readonly) NSInteger tmui_weekdayOrdinal; ///< WeekdayOrdinal component
+@property (nonatomic, readonly) NSInteger tmui_weekOfMonth; ///< WeekOfMonth component (1~5)
+@property (nonatomic, readonly) NSInteger tmui_weekOfYear; ///< WeekOfYear component (1~53)
+@property (nonatomic, readonly) NSInteger tmui_yearForWeekOfYear; ///< YearForWeekOfYear component
+@property (nonatomic, readonly) NSInteger tmui_quarter; ///< Quarter component
+@property (nonatomic, readonly) BOOL tmui_isLeapMonth; ///< whether the month is leap month
+@property (nonatomic, readonly) BOOL tmui_isLeapYear; ///< whether the year is leap year
+@property (nonatomic, readonly) BOOL tmui_isToday; ///< whether date is today (based on current locale)
+@property (nonatomic, readonly) BOOL tmui_isYesterday; ///< whether date is yesterday (based on current locale)
 
 #pragma mark - Date modify
 ///=============================================================================
@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param years  Number of years to add.
  @return Date modified by the number of desired years.
  */
-- (nullable NSDate *)dateByAddingYears:(NSInteger)years;
+- (nullable NSDate *)tmui_dateByAddingYears:(NSInteger)years;
 
 /**
  Returns a date representing the receiver date shifted later by the provided number of months.
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param months  Number of months to add.
  @return Date modified by the number of desired months.
  */
-- (nullable NSDate *)dateByAddingMonths:(NSInteger)months;
+- (nullable NSDate *)tmui_dateByAddingMonths:(NSInteger)months;
 
 /**
  Returns a date representing the receiver date shifted later by the provided number of weeks.
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param weeks  Number of weeks to add.
  @return Date modified by the number of desired weeks.
  */
-- (nullable NSDate *)dateByAddingWeeks:(NSInteger)weeks;
+- (nullable NSDate *)tmui_dateByAddingWeeks:(NSInteger)weeks;
 
 /**
  Returns a date representing the receiver date shifted later by the provided number of days.
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param days  Number of days to add.
  @return Date modified by the number of desired days.
  */
-- (nullable NSDate *)dateByAddingDays:(NSInteger)days;
+- (nullable NSDate *)tmui_dateByAddingDays:(NSInteger)days;
 
 /**
  Returns a date representing the receiver date shifted later by the provided number of hours.
@@ -78,7 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param hours  Number of hours to add.
  @return Date modified by the number of desired hours.
  */
-- (nullable NSDate *)dateByAddingHours:(NSInteger)hours;
+- (nullable NSDate *)tmui_dateByAddingHours:(NSInteger)hours;
 
 /**
  Returns a date representing the receiver date shifted later by the provided number of minutes.
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param minutes  Number of minutes to add.
  @return Date modified by the number of desired minutes.
  */
-- (nullable NSDate *)dateByAddingMinutes:(NSInteger)minutes;
+- (nullable NSDate *)tmui_dateByAddingMinutes:(NSInteger)minutes;
 
 /**
  Returns a date representing the receiver date shifted later by the provided number of seconds.
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param seconds  Number of seconds to add.
  @return Date modified by the number of desired seconds.
  */
-- (nullable NSDate *)dateByAddingSeconds:(NSInteger)seconds;
+- (nullable NSDate *)tmui_dateByAddingSeconds:(NSInteger)seconds;
 
 
 #pragma mark - Date Format
@@ -112,7 +112,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return NSString representing the formatted date string.
  */
-- (nullable NSString *)stringWithFormat:(NSString *)format;
+- (nullable NSString *)tmui_stringWithFormat:(NSString *)format;
 
 /**
  Returns a formatted string representing this date.
@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return NSString representing the formatted date string.
  */
-- (nullable NSString *)stringWithFormat:(NSString *)format
+- (nullable NSString *)tmui_stringWithFormat:(NSString *)format
                                timeZone:(nullable NSTimeZone *)timeZone
                                  locale:(nullable NSLocale *)locale;
 
@@ -138,7 +138,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return NSString representing the formatted date string in ISO8601.
  */
-- (nullable NSString *)stringWithISOFormat;
+- (nullable NSString *)tmui_stringWithISOFormat;
 
 /**
  Returns a date parsed from given string interpreted using the format.
@@ -149,7 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A date representation of string interpreted using the format.
  If can not parse the string, returns nil.
  */
-+ (nullable NSDate *)dateWithString:(NSString *)dateString format:(NSString *)format;
++ (nullable NSDate *)tmui_dateWithString:(NSString *)dateString format:(NSString *)format;
 
 /**
  Returns a date parsed from given string interpreted using the format.
@@ -162,7 +162,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A date representation of string interpreted using the format.
  If can not parse the string, returns nil.
  */
-+ (nullable NSDate *)dateWithString:(NSString *)dateString
++ (nullable NSDate *)tmui_dateWithString:(NSString *)dateString
                              format:(NSString *)format
                            timeZone:(nullable NSTimeZone *)timeZone
                              locale:(nullable NSLocale *)locale;
@@ -175,7 +175,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return A date representation of string interpreted using the format.
  If can not parse the string, returns nil.
  */
-+ (nullable NSDate *)dateWithISOFormatString:(NSString *)dateString;
++ (nullable NSDate *)tmui_dateWithISOFormatString:(NSString *)dateString;
 
 
 

@@ -17,9 +17,6 @@
 - (void)viewDidLoad1 {
     [super viewDidLoad];
     
-    self.view.bgColor(@"white");
-    
-    
     UIScrollView *scrollView = (UIScrollView *)[UIScrollView new].embedIn(self.view);
     scrollView.contentSize = self.view.bounds.size;
     id l1 = Label.str(@"此demo中，滚动scrollView和输入textField将会在VC和TMAppDelegate同时回调此demo中，滚动scrollView和输入textField将会在VC和TMAppDelegate同时回调").styles(h1);

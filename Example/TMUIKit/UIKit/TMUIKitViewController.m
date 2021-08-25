@@ -22,26 +22,6 @@
     
     GroupTV(
             SECTION_CREATE(
-                           ROW_CREATE(@"TMUIButton",
-                                      @"设置图片、文字位置、图文间距",
-                                      @"TMUIButtonViewController"),
-                           ROW_CREATE(@"TMUILabel",
-                                      @"控制label内容的padding、设置是否需要长按复制的功能",
-                                      @"TMUILabelViewController"),
-                           ROW_CREATE(@"TMUITextField",
-                                      @"自定义 placeholderColor、支持限制输入的文字的长度、超过时回调、设置TextField内容Inset、clearButton位置偏移",
-                                      @"TMUITextFieldViewController"),
-                           ROW_CREATE(@"TMUITextView",
-                                      @"支持 placeholder 并支持更改 placeholderColor；若使用了富文本文字，则 placeholder 的样式也会跟随文字的样式（除了 placeholder 颜色）、支持在文字发生变化时计算内容高度并通知 delegate、支持限制输入框最大高度，一般配合第 2 点使用、支持限制输入的文本的最大长度，默认不限制、修正系统 UITextView 在输入时自然换行的时候，contentOffset 的滚动位置没有考虑textContainerInset.bottom",
-                                      @"TMUITextViewViewController"),
-                           ROW_CREATE(@"TMUISlider",
-                                      @"修改背后导轨的高度、修改圆点的大小、修改圆点的阴影样式",
-                                      @"TMUISliderViewController"),
-                           ROW_CREATE(@"TMUISegmentedControl",
-                                      @"修改背后导轨的高度、修改圆点的大小、修改圆点的阴影样式",
-                                      @"TMUISegmentedControlViewController"),
-                           ).title(@"TMUI Widget"),
-            SECTION_CREATE(
                            ROW_CREATE(@"设置圆角、阴影、渐变、边框", @"UIViewTMUIViewController"),
                            ROW_CREATE(@"快速添加各种手势事件、坐标系转换", @"UIViewTMUI2ViewController"),
                            ROW_CREATE(@"创建动画", @"UIViewTMUI3ViewController"),
@@ -51,6 +31,9 @@
                            ROW_CREATE(@"UILable+TMUI",
                                       @"设置富文本属性、计算文本size、富文本超链接",
                                       @"UILabelTMUIViewController"),
+                           ROW_CREATE(@"UILable+TMUI",
+                                      @"富文本展示、尺寸计算2",
+                                      @"UILabelTMUIViewController2"),
                            ROW_CREATE(@"UIButton+TMUI",
                                       @"设置图片位置、图文间距、扩大点击区域",
                                       @"UIButtonTMUIViewController"),
@@ -78,7 +61,7 @@
 }
 
 - (void)debug{
-    [self.navigationController pushViewController:TDDebugViewController.new animated:YES];
+    [self.navigationController pushViewController:[NSClassFromString(@"UILabelTMUIViewController2") new] animated:YES];
 }
 
 @end

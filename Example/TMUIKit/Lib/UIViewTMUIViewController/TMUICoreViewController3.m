@@ -18,8 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.bgColor(@"white");
-    
     id l1 = Label.str(self.demoInstructions).styles(h1);
     
     id a2 = AttStr(AttStr(@"图片加载2：\n").styles(h2),

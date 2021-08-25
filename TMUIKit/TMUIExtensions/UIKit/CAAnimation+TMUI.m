@@ -7,7 +7,7 @@
 
 #import "CAAnimation+TMUI.h"
 #import "TMUIRuntime.h"
-#import "TMUIMultipleDelegates.h"
+//#import "TMUIMultipleDelegates.h"
 
 @interface _TMUICAAnimationDelegator : NSObject<CAAnimationDelegate>
 
@@ -20,7 +20,7 @@
     dispatch_once(&onceToken, ^{
         ExtendImplementationOfNonVoidMethodWithSingleArgument([CAAnimation class], @selector(copyWithZone:), NSZone *, id, ^id(CAAnimation *selfObject, NSZone *firstArgv, id originReturnValue) {
             CAAnimation *animation = (CAAnimation *)originReturnValue;
-            animation.tmui_multipleDelegatesEnabled = selfObject.tmui_multipleDelegatesEnabled;
+//            animation.tmui_multipleDelegatesEnabled = selfObject.tmui_multipleDelegatesEnabled;
             animation.tmui_animationDidStartBlock = selfObject.tmui_animationDidStartBlock;
             animation.tmui_animationDidStopBlock = selfObject.tmui_animationDidStopBlock;
             return animation;
@@ -29,18 +29,18 @@
 }
 
 - (void)enabledDelegateBlocks {
-    self.tmui_multipleDelegatesEnabled = YES;
+//    self.tmui_multipleDelegatesEnabled = YES;
     BOOL shouldSetDelegator = !self.delegate;
-    if (!shouldSetDelegator && [self.delegate isKindOfClass:[TMUIMultipleDelegates class]]) {
-        TMUIMultipleDelegates *delegates = (TMUIMultipleDelegates *)self.delegate;
-        NSPointerArray *array = delegates.delegates;
-        for (NSUInteger i = 0; i < array.count; i++) {
-            if ([((NSObject *)[array pointerAtIndex:i]) isKindOfClass:[_TMUICAAnimationDelegator class]]) {
-                shouldSetDelegator = NO;
-                break;
-            }
-        }
-    }
+//    if (!shouldSetDelegator && [self.delegate isKindOfClass:[TMUIMultipleDelegates class]]) {
+//        TMUIMultipleDelegates *delegates = (TMUIMultipleDelegates *)self.delegate;
+//        NSPointerArray *array = delegates.delegates;
+//        for (NSUInteger i = 0; i < array.count; i++) {
+//            if ([((NSObject *)[array pointerAtIndex:i]) isKindOfClass:[_TMUICAAnimationDelegator class]]) {
+//                shouldSetDelegator = NO;
+//                break;
+//            }
+//        }
+//    }
     if (shouldSetDelegator) {
         self.delegate = [[_TMUICAAnimationDelegator alloc] init];// delegate is a strong property, it can retain _TMUICAAnimationDelegator
     }

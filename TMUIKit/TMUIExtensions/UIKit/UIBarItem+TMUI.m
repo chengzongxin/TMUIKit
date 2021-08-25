@@ -6,9 +6,12 @@
 //
 
 #import "UIBarItem+TMUI.h"
-#import "TMUICore.h"
+#import "NSObject+TMUI.h"
 #import "UIView+TMUI.h"
-#import "TMUIWeakObjectContainer.h"
+#import "TMUIAssociatedPropertyDefines.h"
+#import "TMUICommonDefines.h"
+#import "TMUIHelper.h"
+//#import "TMUIWeakObjectContainer.h"
 
 @interface UIBarItem ()
 
@@ -17,32 +20,32 @@
 
 @implementation UIBarItem (TMUI)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        // UIBarButtonItem -setView:
-        // @warning 如果作为 UIToolbar.items 使用，则 customView 的情况下，iOS 10 及以下的版本不会调用 setView:，所以那种情况改为在 setToolbarItems:animated: 时调用，代码见下方
-        ExtendImplementationOfVoidMethodWithSingleArgument([UIBarButtonItem class], @selector(setView:), UIView *, ^(UIBarButtonItem *selfObject, UIView *firstArgv) {
-            [UIBarItem setView:firstArgv inBarButtonItem:selfObject];
-        });
-        
-        if (IOS_VERSION_NUMBER < 110000) {
-            // iOS 11.0 及以上，通过 setView: 调用 tmui_viewDidSetBlock 即可，10.0 及以下只能在 setToolbarItems 的时机触发
-            ExtendImplementationOfVoidMethodWithTwoArguments([UIViewController class], @selector(setToolbarItems:animated:), NSArray<__kindof UIBarButtonItem *> *, BOOL, ^(UIViewController *selfObject, NSArray<__kindof UIBarButtonItem *> *firstArgv, BOOL secondArgv) {
-                for (UIBarButtonItem *item in firstArgv) {
-                    [UIBarItem setView:item.customView inBarButtonItem:item];
-                }
-            });
-        }
-        
-        
-        // UITabBarItem -setView:
-        ExtendImplementationOfVoidMethodWithSingleArgument([UITabBarItem class], @selector(setView:), UIView *, ^(UITabBarItem *selfObject, UIView *firstArgv) {
-            [UIBarItem setView:firstArgv inBarItem:selfObject];
-        });
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        
+//        // UIBarButtonItem -setView:
+//        // @warning 如果作为 UIToolbar.items 使用，则 customView 的情况下，iOS 10 及以下的版本不会调用 setView:，所以那种情况改为在 setToolbarItems:animated: 时调用，代码见下方
+//        ExtendImplementationOfVoidMethodWithSingleArgument([UIBarButtonItem class], @selector(setView:), UIView *, ^(UIBarButtonItem *selfObject, UIView *firstArgv) {
+//            [UIBarItem setView:firstArgv inBarButtonItem:selfObject];
+//        });
+//        
+//        if (IOS_VERSION_NUMBER < 110000) {
+//            // iOS 11.0 及以上，通过 setView: 调用 tmui_viewDidSetBlock 即可，10.0 及以下只能在 setToolbarItems 的时机触发
+//            ExtendImplementationOfVoidMethodWithTwoArguments([UIViewController class], @selector(setToolbarItems:animated:), NSArray<__kindof UIBarButtonItem *> *, BOOL, ^(UIViewController *selfObject, NSArray<__kindof UIBarButtonItem *> *firstArgv, BOOL secondArgv) {
+//                for (UIBarButtonItem *item in firstArgv) {
+//                    [UIBarItem setView:item.customView inBarButtonItem:item];
+//                }
+//            });
+//        }
+//        
+//        
+//        // UITabBarItem -setView:
+//        ExtendImplementationOfVoidMethodWithSingleArgument([UITabBarItem class], @selector(setView:), UIView *, ^(UITabBarItem *selfObject, UIView *firstArgv) {
+//            [UIBarItem setView:firstArgv inBarItem:selfObject];
+//        });
+//    });
+//}
 
 - (UIView *)tmui_view {
     // UIBarItem 本身没有 view 属性，只有子类 UIBarButtonItem 和 UITabBarItem 才有

@@ -65,7 +65,7 @@
     
     id iv1 = ImageView.img(img).styles(@"img_demo");
     // compress to max data len 100000 image
-    NSData *maxData = [img tmui_compressToMaxDataLen:100000];
+    NSData *maxData = [img tmui_resizedToMaxDataLen:100000];
     UIImage *maxImg = [UIImage imageWithData:maxData];
     id a3 = AttStr(AttStr(@"Resized to max date length < 100000 bytes \n").styles(h1),
            AttStr(Str(@"data length %zd",maxData.length)).styles(body));

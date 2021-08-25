@@ -18,7 +18,7 @@ TMUISynthesizeIdCopyProperty(tmui_textChangeBlock, setTmui_textChangeBlock);
     self.font = font;
 }
 
-- (void)textFieldEditingChanged:(UITextField *)textField{
+- (void)tmui_textFieldEditingChanged:(UITextField *)textField{
     NSString *toBeginString = self.text;
     // 获取高亮部分
     UITextRange *selectRange = [self markedTextRange];
@@ -88,7 +88,7 @@ TMUISynthesizeIdCopyProperty(tmui_textChangeBlock, setTmui_textChangeBlock);
 
 - (void)setTmui_maximumTextLength:(NSUInteger)tmui_maximumTextLength{
     objc_setAssociatedObject(self, @selector(tmui_maximumTextLength), @(tmui_maximumTextLength), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [self addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self addTarget:self action:@selector(tmui_textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (NSUInteger)tmui_maximumTextLength{

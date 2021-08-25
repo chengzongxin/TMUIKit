@@ -6,10 +6,16 @@
 //
 
 #import "UITableViewCell+TMUI.h"
-#import "TMUICore.h"
+#import "NSObject+TMUI.h"
 #import "UIView+TMUI.h"
 #import "UITableView+TMUI.h"
 #import "CALayer+TMUI.h"
+#import "TMUIHelper.h"
+#import "TMUIAssociatedPropertyDefines.h"
+#import "TMUIRuntime.h"
+#import "TMUIConfigurationMacros.h"
+#import "TMUICoreGraphicsDefines.h"
+#import "TMUICommonDefines.h"
 
 const UIEdgeInsets TMUITableViewCellSeparatorInsetsNone = {INFINITY, INFINITY, INFINITY, INFINITY};
 
@@ -29,51 +35,51 @@ TMUISynthesizeIdCopyProperty(tmui_topSeparatorInsetsBlock, setTmui_topSeparatorI
 TMUISynthesizeIdCopyProperty(tmui_setHighlightedBlock, setTmui_setHighlightedBlock)
 TMUISynthesizeIdCopyProperty(tmui_setSelectedBlock, setTmui_setSelectedBlock)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        OverrideImplementation([UITableViewCell class], @selector(initWithStyle:reuseIdentifier:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^UITableViewCell *(UITableViewCell *selfObject, UITableViewCellStyle firstArgv, NSString *secondArgv) {
-                // call super
-                UITableViewCell *(*originSelectorIMP)(id, SEL, UITableViewCellStyle, NSString *);
-                originSelectorIMP = (UITableViewCell *(*)(id, SEL, UITableViewCellStyle, NSString *))originalIMPProvider();
-                UITableViewCell *result = originSelectorIMP(selfObject, originCMD, firstArgv, secondArgv);
-                
-                // 系统虽然有私有 API - (UITableViewCellStyle)style; 可以用，但该方法在 init 内得到的永远是 0，只有 init 执行完成后才可以得到正确的值，所以这里只能自己记录
-                result.tmui_style = firstArgv;
-//                [selfObject tmui_styledAsTMUITableViewCell];
-                return result;
-            };
-        });
-        ExtendImplementationOfVoidMethodWithTwoArguments([UITableViewCell class], @selector(setHighlighted:animated:), BOOL, BOOL, ^(UITableViewCell *selfObject, BOOL highlighted, BOOL animated) {
-            if (selfObject.tmui_setHighlightedBlock) {
-                selfObject.tmui_setHighlightedBlock(highlighted, animated);
-            }
-        });
-        
-        ExtendImplementationOfVoidMethodWithTwoArguments([UITableViewCell class], @selector(setSelected:animated:), BOOL, BOOL, ^(UITableViewCell *selfObject, BOOL selected, BOOL animated) {
-            if (selfObject.tmui_setSelectedBlock) {
-                selfObject.tmui_setSelectedBlock(selected, animated);
-            }
-        });
-        
-        // 修复 iOS 13.0 UIButton 作为 cell.accessoryView 时布局错误的问题
-        // https://github.com/Tencent/TMUI_iOS/issues/693
-        if (@available(iOS 13.0, *)) {
-            if (@available(iOS 13.1, *)) {
-            } else {
-                ExtendImplementationOfVoidMethodWithoutArguments([UITableViewCell class], @selector(layoutSubviews), ^(UITableViewCell *selfObject) {
-                    if ([selfObject.accessoryView isKindOfClass:[UIButton class]]) {
-                        CGFloat defaultRightMargin = 15 + SafeAreaInsetsConstantForDeviceWithNotch.right;
-                        selfObject.accessoryView.left = selfObject.width - defaultRightMargin - selfObject.accessoryView.width;
-                        selfObject.accessoryView.top = CGRectGetMinYVerticallyCenterInParentRect(selfObject.frame, selfObject.accessoryView.frame);;
-                        selfObject.contentView.right = selfObject.accessoryView.left;
-                    }
-                });
-            }
-        }
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        OverrideImplementation([UITableViewCell class], @selector(initWithStyle:reuseIdentifier:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^UITableViewCell *(UITableViewCell *selfObject, UITableViewCellStyle firstArgv, NSString *secondArgv) {
+//                // call super
+//                UITableViewCell *(*originSelectorIMP)(id, SEL, UITableViewCellStyle, NSString *);
+//                originSelectorIMP = (UITableViewCell *(*)(id, SEL, UITableViewCellStyle, NSString *))originalIMPProvider();
+//                UITableViewCell *result = originSelectorIMP(selfObject, originCMD, firstArgv, secondArgv);
+//
+//                // 系统虽然有私有 API - (UITableViewCellStyle)style; 可以用，但该方法在 init 内得到的永远是 0，只有 init 执行完成后才可以得到正确的值，所以这里只能自己记录
+//                result.tmui_style = firstArgv;
+////                [selfObject tmui_styledAsTMUITableViewCell];
+//                return result;
+//            };
+//        });
+//        ExtendImplementationOfVoidMethodWithTwoArguments([UITableViewCell class], @selector(setHighlighted:animated:), BOOL, BOOL, ^(UITableViewCell *selfObject, BOOL highlighted, BOOL animated) {
+//            if (selfObject.tmui_setHighlightedBlock) {
+//                selfObject.tmui_setHighlightedBlock(highlighted, animated);
+//            }
+//        });
+//
+//        ExtendImplementationOfVoidMethodWithTwoArguments([UITableViewCell class], @selector(setSelected:animated:), BOOL, BOOL, ^(UITableViewCell *selfObject, BOOL selected, BOOL animated) {
+//            if (selfObject.tmui_setSelectedBlock) {
+//                selfObject.tmui_setSelectedBlock(selected, animated);
+//            }
+//        });
+//
+//        // 修复 iOS 13.0 UIButton 作为 cell.accessoryView 时布局错误的问题
+//        // https://github.com/Tencent/TMUI_iOS/issues/693
+//        if (@available(iOS 13.0, *)) {
+//            if (@available(iOS 13.1, *)) {
+//            } else {
+//                ExtendImplementationOfVoidMethodWithoutArguments([UITableViewCell class], @selector(layoutSubviews), ^(UITableViewCell *selfObject) {
+//                    if ([selfObject.accessoryView isKindOfClass:[UIButton class]]) {
+//                        CGFloat defaultRightMargin = 15 + SafeAreaInsetsConstantForDeviceWithNotch.right;
+//                        selfObject.accessoryView.left = selfObject.width - defaultRightMargin - selfObject.accessoryView.width;
+//                        selfObject.accessoryView.top = CGRectGetMinYVerticallyCenterInParentRect(selfObject.frame, selfObject.accessoryView.frame);;
+//                        selfObject.contentView.right = selfObject.accessoryView.left;
+//                    }
+//                });
+//            }
+//        }
+//    });
+//}
 
 static char kAssociatedObjectKey_cellPosition;
 - (void)setTmui_cellPosition:(TMUITableViewCellPosition)tmui_cellPosition {
@@ -278,109 +284,109 @@ static char kAssociatedObjectKey_selectedBackgroundColor;
 
 @implementation UITableViewCell (TMUI_InsetGrouped)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        OverrideImplementation([UITableViewCell class], NSSelectorFromString(@"_separatorFrame"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^CGRect(UITableViewCell *selfObject) {
-                
-                if ([selfObject tmuiTbc_customizedSeparator]) {
-                    return CGRectZero;
-                }
-                
-                // iOS 13 自己会控制好 InsetGrouped 时不同 cellPosition 的分隔线显隐，iOS 12 及以下要全部手动处理
-                if (@available(iOS 13.0, *)) {
-                } else {
-                    if (selfObject.tmui_tableView && selfObject.tmui_tableView.tmui_style == TMUITableViewStyleInsetGrouped && (selfObject.tmui_cellPosition & TMUITableViewCellPositionLastInSection) == TMUITableViewCellPositionLastInSection) {
-                        return CGRectZero;
-                    }
-                }
-                
-                // call super
-                CGRect (*originSelectorIMP)(id, SEL);
-                originSelectorIMP = (CGRect (*)(id, SEL))originalIMPProvider();
-                CGRect result = originSelectorIMP(selfObject, originCMD);
-                return result;
-            };
-        });
-        
-        OverrideImplementation([UITableViewCell class], NSSelectorFromString(@"_topSeparatorFrame"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^CGRect(UITableViewCell *selfObject) {
-                
-                if ([selfObject tmuiTbc_customizedTopSeparator]) {
-                    return CGRectZero;
-                }
-                
-                if (@available(iOS 13.0, *)) {
-                } else {
-                    // iOS 13 系统在 InsetGrouped 时默认就会隐藏顶部分隔线，所以这里只对 iOS 12 及以下处理
-                    if (selfObject.tmui_tableView && selfObject.tmui_tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
-                        return CGRectZero;
-                    }
-                }
-                
-                
-                // call super
-                CGRect (*originSelectorIMP)(id, SEL);
-                originSelectorIMP = (CGRect (*)(id, SEL))originalIMPProvider();
-                CGRect result = originSelectorIMP(selfObject, originCMD);
-                return result;
-            };
-        });
-        
-        // 下方的功能，iOS 13 都交给系统的 InsetGrouped 处理
-        if (@available(iOS 13.0, *)) return;
-        
-        OverrideImplementation([UITableViewCell class], @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^(UITableViewCell *selfObject, CGRect firstArgv) {
-                
-                UITableView *tableView = selfObject.tmui_tableView;
-                if (tableView && tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
-                    firstArgv = CGRectMake(tableView.tmui_safeAreaInsets.left + tableView.tmui_insetGroupedHorizontalInset, CGRectGetMinY(firstArgv), CGRectGetWidth(firstArgv) - UIEdgeInsetsGetHorizontalValue(tableView.tmui_safeAreaInsets) - tableView.tmui_insetGroupedHorizontalInset * 2, CGRectGetHeight(firstArgv));
-                }
-                
-                // call super
-                void (*originSelectorIMP)(id, SEL, CGRect);
-                originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
-                originSelectorIMP(selfObject, originCMD, firstArgv);
-            };
-        });
-        
-        // 将缩进后的宽度传给 cell 的 sizeThatFits:，注意 sizeThatFits: 只有在 tableView 开启 self-sizing 的情况下才会被调用（也即高度被指定为 UITableViewAutomaticDimension）
-        // TODO: molice 系统的 UITableViewCell 第一次布局总是得到错误的高度，不知道为什么
-        OverrideImplementation([UITableViewCell class], @selector(systemLayoutSizeFittingSize:withHorizontalFittingPriority:verticalFittingPriority:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-            return ^CGSize(UITableViewCell *selfObject, CGSize targetSize, UILayoutPriority horizontalFittingPriority, UILayoutPriority verticalFittingPriority) {
-                
-                UITableView *tableView = selfObject.tmui_tableView;
-                if (tableView && tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
-                    [TMUIHelper executeBlock:^{
-                        OverrideImplementation(selfObject.class, @selector(sizeThatFits:), ^id(__unsafe_unretained Class originClass, SEL cellOriginCMD, IMP (^cellOriginalIMPProvider)(void)) {
-                            return ^CGSize(UITableViewCell *cell, CGSize firstArgv) {
-                                
-                                UITableView *tableView = cell.tmui_tableView;
-                                if (tableView && tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
-                                    firstArgv.width = firstArgv.width - UIEdgeInsetsGetHorizontalValue(tableView.tmui_safeAreaInsets) - tableView.tmui_insetGroupedHorizontalInset * 2;
-                                }
-                                
-                                // call super
-                                CGSize (*originSelectorIMP)(id, SEL, CGSize);
-                                originSelectorIMP = (CGSize (*)(id, SEL, CGSize))cellOriginalIMPProvider();
-                                CGSize result = originSelectorIMP(cell, cellOriginCMD, firstArgv);
-                                return result;
-                            };
-                        });
-                    } oncePerIdentifier:[NSString stringWithFormat:@"InsetGroupedCell %@-%@", NSStringFromClass(selfObject.class), NSStringFromSelector(@selector(sizeThatFits:))]];
-                }
-                
-                // call super
-                CGSize (*originSelectorIMP)(id, SEL, CGSize, UILayoutPriority, UILayoutPriority);
-                originSelectorIMP = (CGSize (*)(id, SEL, CGSize, UILayoutPriority, UILayoutPriority))originalIMPProvider();
-                CGSize result = originSelectorIMP(selfObject, originCMD, targetSize, horizontalFittingPriority, verticalFittingPriority);
-                return result;
-            };
-        });
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        
+//        OverrideImplementation([UITableViewCell class], NSSelectorFromString(@"_separatorFrame"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^CGRect(UITableViewCell *selfObject) {
+//                
+//                if ([selfObject tmuiTbc_customizedSeparator]) {
+//                    return CGRectZero;
+//                }
+//                
+//                // iOS 13 自己会控制好 InsetGrouped 时不同 cellPosition 的分隔线显隐，iOS 12 及以下要全部手动处理
+//                if (@available(iOS 13.0, *)) {
+//                } else {
+//                    if (selfObject.tmui_tableView && selfObject.tmui_tableView.tmui_style == TMUITableViewStyleInsetGrouped && (selfObject.tmui_cellPosition & TMUITableViewCellPositionLastInSection) == TMUITableViewCellPositionLastInSection) {
+//                        return CGRectZero;
+//                    }
+//                }
+//                
+//                // call super
+//                CGRect (*originSelectorIMP)(id, SEL);
+//                originSelectorIMP = (CGRect (*)(id, SEL))originalIMPProvider();
+//                CGRect result = originSelectorIMP(selfObject, originCMD);
+//                return result;
+//            };
+//        });
+//        
+//        OverrideImplementation([UITableViewCell class], NSSelectorFromString(@"_topSeparatorFrame"), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^CGRect(UITableViewCell *selfObject) {
+//                
+//                if ([selfObject tmuiTbc_customizedTopSeparator]) {
+//                    return CGRectZero;
+//                }
+//                
+//                if (@available(iOS 13.0, *)) {
+//                } else {
+//                    // iOS 13 系统在 InsetGrouped 时默认就会隐藏顶部分隔线，所以这里只对 iOS 12 及以下处理
+//                    if (selfObject.tmui_tableView && selfObject.tmui_tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
+//                        return CGRectZero;
+//                    }
+//                }
+//                
+//                
+//                // call super
+//                CGRect (*originSelectorIMP)(id, SEL);
+//                originSelectorIMP = (CGRect (*)(id, SEL))originalIMPProvider();
+//                CGRect result = originSelectorIMP(selfObject, originCMD);
+//                return result;
+//            };
+//        });
+//        
+//        // 下方的功能，iOS 13 都交给系统的 InsetGrouped 处理
+//        if (@available(iOS 13.0, *)) return;
+//        
+//        OverrideImplementation([UITableViewCell class], @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^(UITableViewCell *selfObject, CGRect firstArgv) {
+//                
+//                UITableView *tableView = selfObject.tmui_tableView;
+//                if (tableView && tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
+//                    firstArgv = CGRectMake(tableView.tmui_safeAreaInsets.left + tableView.tmui_insetGroupedHorizontalInset, CGRectGetMinY(firstArgv), CGRectGetWidth(firstArgv) - UIEdgeInsetsGetHorizontalValue(tableView.tmui_safeAreaInsets) - tableView.tmui_insetGroupedHorizontalInset * 2, CGRectGetHeight(firstArgv));
+//                }
+//                
+//                // call super
+//                void (*originSelectorIMP)(id, SEL, CGRect);
+//                originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
+//                originSelectorIMP(selfObject, originCMD, firstArgv);
+//            };
+//        });
+//        
+//        // 将缩进后的宽度传给 cell 的 sizeThatFits:，注意 sizeThatFits: 只有在 tableView 开启 self-sizing 的情况下才会被调用（也即高度被指定为 UITableViewAutomaticDimension）
+//        // TODO: molice 系统的 UITableViewCell 第一次布局总是得到错误的高度，不知道为什么
+//        OverrideImplementation([UITableViewCell class], @selector(systemLayoutSizeFittingSize:withHorizontalFittingPriority:verticalFittingPriority:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+//            return ^CGSize(UITableViewCell *selfObject, CGSize targetSize, UILayoutPriority horizontalFittingPriority, UILayoutPriority verticalFittingPriority) {
+//                
+//                UITableView *tableView = selfObject.tmui_tableView;
+//                if (tableView && tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
+//                    [TMUIHelper executeBlock:^{
+//                        OverrideImplementation(selfObject.class, @selector(sizeThatFits:), ^id(__unsafe_unretained Class originClass, SEL cellOriginCMD, IMP (^cellOriginalIMPProvider)(void)) {
+//                            return ^CGSize(UITableViewCell *cell, CGSize firstArgv) {
+//                                
+//                                UITableView *tableView = cell.tmui_tableView;
+//                                if (tableView && tableView.tmui_style == TMUITableViewStyleInsetGrouped) {
+//                                    firstArgv.width = firstArgv.width - UIEdgeInsetsGetHorizontalValue(tableView.tmui_safeAreaInsets) - tableView.tmui_insetGroupedHorizontalInset * 2;
+//                                }
+//                                
+//                                // call super
+//                                CGSize (*originSelectorIMP)(id, SEL, CGSize);
+//                                originSelectorIMP = (CGSize (*)(id, SEL, CGSize))cellOriginalIMPProvider();
+//                                CGSize result = originSelectorIMP(cell, cellOriginCMD, firstArgv);
+//                                return result;
+//                            };
+//                        });
+//                    } oncePerIdentifier:[NSString stringWithFormat:@"InsetGroupedCell %@-%@", NSStringFromClass(selfObject.class), NSStringFromSelector(@selector(sizeThatFits:))]];
+//                }
+//                
+//                // call super
+//                CGSize (*originSelectorIMP)(id, SEL, CGSize, UILayoutPriority, UILayoutPriority);
+//                originSelectorIMP = (CGSize (*)(id, SEL, CGSize, UILayoutPriority, UILayoutPriority))originalIMPProvider();
+//                CGSize result = originSelectorIMP(selfObject, originCMD, targetSize, horizontalFittingPriority, verticalFittingPriority);
+//                return result;
+//            };
+//        });
+//    });
+//}
 
 @end

@@ -6,8 +6,9 @@
 //
 
 #import "TMUISlider.h"
-#import "TMUICore.h"
+#import "NSObject+TMUI.h"
 #import "UIImage+TMUI.h"
+#import "TMUICoreGraphicsDefines.h"
 
 @implementation TMUISlider
 

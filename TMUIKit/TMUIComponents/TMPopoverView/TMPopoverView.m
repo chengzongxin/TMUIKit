@@ -105,10 +105,16 @@ TMUI_DEBUG_Code_Dealloc;
 #pragma mark - show methods
 - (void)showFromBarButtonItem:(UIBarButtonItem *)barItem arrowDirection:(TMPopoverArrowDirection)arrowDirection {
     UIView *view = [self itemViewInItem:barItem];
-    [self showFromRect:view.bounds inView:view arrowDirection:arrowDirection];
+    [self showFromRect:view.bounds inView:view arrowDirection:arrowDirection asShowOnWindow:YES];
 }
 
 - (void)showFromRect:(CGRect)rect inView:(UIView *)view arrowDirection:(TMPopoverArrowDirection)arrowDirection {
+    [self showFromRect:rect inView:view arrowDirection:arrowDirection asShowOnWindow:NO];
+}
+
+- (void)showFromRect:(CGRect)rect inView:(UIView *)view
+          arrowDirection:(TMPopoverArrowDirection)arrowDirection
+      asShowOnWindow:(BOOL)showOnWindow {
     if (!view) {
         return;
     }
@@ -117,15 +123,20 @@ TMUI_DEBUG_Code_Dealloc;
     self.popoverContentContainerView.backgroundColor = self.popoverBackgroundColor;
     [self.popoverArrowImgView setImage:[self generateArrowImage]];
     
-    UIView *superView = [UIApplication sharedApplication].delegate.window;
+    UIView *superView = view;
+    CGRect viewFrameToSuperView = rect;
+    
+    if (showOnWindow) {
+        superView = view.window ?: [UIApplication sharedApplication].delegate.window;
+        viewFrameToSuperView = [view convertRect:rect toView:superView];
+    }
+            
     [superView addSubview:self.bgMaskControl];
     [self.bgMaskControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
     self.bgMaskControl.enabled = NO;
     self.bgMaskControl.alpha = 0;
-    
-    CGRect viewFrameToSuperView = [view convertRect:rect toView:superView];
     
     self.alpha = 0;
     [superView addSubview:self];

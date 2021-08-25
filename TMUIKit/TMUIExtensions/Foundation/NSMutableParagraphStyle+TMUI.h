@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return 一个NSMutableParagraphStyle对象
  */
 + (instancetype)tmui_paragraphStyleWithLineSpacing:(CGFloat)lineSpacing;
++ (instancetype)tmui_paragraphStyleWithLineSpacing:(CGFloat)lineSpacing lineBreakMode:(NSLineBreakMode)lineBreakMode;
 
 /**
  *  快速创建一个NSMutableParagraphStyle，等同于`tmui_paragraphStyleWithLineHeight:lineBreakMode:NSLineBreakByWordWrapping textAlignment:NSTextAlignmentLeft`

@@ -6,8 +6,13 @@
 //
 
 #import "UIView+TMUIBorder.h"
-#import "TMUICore.h"
+#import "TMUIKitDefines.h"
+#import "TMUICommonDefines.h"
 #import "CALayer+TMUI.h"
+#import <objc/runtime.h>
+#import "TMUIAssociatedPropertyDefines.h"
+#import "TMUIRuntime.h"
+#import "TMUIConfigurationMacros.h"
 
 
 @interface CAShapeLayer (TMUIBorder)
@@ -19,21 +24,21 @@
 
 TMUISynthesizeIdStrongProperty(tmui_borderLayer, setTmui_borderLayer)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithFrame:), CGRect, UIView *, ^UIView *(UIView *selfObject, CGRect frame, UIView *originReturnValue) {
-            [selfObject _tmuibd_setDefaultStyle];
-            return originReturnValue;
-        });
-        
-        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithCoder:), NSCoder *, UIView *, ^UIView *(UIView *selfObject, NSCoder *aDecoder, UIView *originReturnValue) {
-            [selfObject _tmuibd_setDefaultStyle];
-            return originReturnValue;
-        });
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//
+//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithFrame:), CGRect, UIView *, ^UIView *(UIView *selfObject, CGRect frame, UIView *originReturnValue) {
+//            [selfObject _tmuibd_setDefaultStyle];
+//            return originReturnValue;
+//        });
+//
+//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithCoder:), NSCoder *, UIView *, ^UIView *(UIView *selfObject, NSCoder *aDecoder, UIView *originReturnValue) {
+//            [selfObject _tmuibd_setDefaultStyle];
+//            return originReturnValue;
+//        });
+//    });
+//}
 
 - (void)_tmuibd_setDefaultStyle {
     self.tmui_borderWidth = PixelOne;

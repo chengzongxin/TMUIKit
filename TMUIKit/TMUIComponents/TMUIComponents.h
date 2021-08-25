@@ -8,6 +8,10 @@
 #ifndef TMUIComponents_h
 #define TMUIComponents_h
 
+#if __has_include("TMUIWidgets.h")
+#import "TMUIWidgets.h"
+#endif
+
 #if __has_include("TMContentAlert.h")
 #import "TMContentAlert.h"
 #endif

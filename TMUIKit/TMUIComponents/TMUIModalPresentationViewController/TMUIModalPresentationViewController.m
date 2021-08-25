@@ -10,7 +10,9 @@
 #import "TMUIAppearance.h"
 #import "TMUICore.h"
 #import "UIView+TMUI.h"
-
+#import "TMUIHelper.h"
+#import "TMUIConfigurationMacros.h"
+#import "TMUICommonDefines.h"
 @interface UIViewController ()
 
 @property(nonatomic, weak, readwrite) TMUIModalPresentationViewController *tmui_modalPresentationViewController;

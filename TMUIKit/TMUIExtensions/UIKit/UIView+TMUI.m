@@ -16,32 +16,33 @@
 #import "TMUIHelper.h"
 #import "TMUIRuntime.h"
 #import "CALayer+TMUI.h"
+#import "NSObject+TMUI.h"
 
 @implementation UIView (TMUI)
 TMUISynthesizeBOOLProperty(tmui_tintColorCustomized, setTmui_tintColorCustomized)
 TMUISynthesizeIdCopyProperty(tmui_frameWillChangeBlock, setTmui_frameWillChangeBlock)
 TMUISynthesizeIdCopyProperty(tmui_frameDidChangeBlock, setTmui_frameDidChangeBlock)
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], @selector(setTintColor:), UIColor *, ^(UIView *selfObject, UIColor *tintColor) {
-            selfObject.tmui_tintColorCustomized = !!tintColor;
-        });
-        
-        // 这个私有方法在 view 被调用 becomeFirstResponder 并且处于 window 上时，才会被调用，所以比 becomeFirstResponder 更适合用来检测
-        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], NSSelectorFromString(@"_didChangeToFirstResponder:"), id, ^(UIView *selfObject, id firstArgv) {
-            if (selfObject == firstArgv && [selfObject conformsToProtocol:@protocol(UITextInput)]) {
-                // 像 TMUIModalPresentationViewController 那种以 window 的形式展示浮层，浮层里的输入框 becomeFirstResponder 的场景，[window makeKeyAndVisible] 被调用后，就会立即走到这里，但此时该 window 尚不是 keyWindow，所以这里延迟到下一个 runloop 里再去判断
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (IS_DEBUG && ![selfObject isKindOfClass:[UIWindow class]] && selfObject.window && !selfObject.window.keyWindow) {
-                        [selfObject TMUISymbolicUIViewBecomeFirstResponderWithoutKeyWindow];
-                    }
-                });
-            }
-        });
-    });
-}
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//
+//        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], @selector(setTintColor:), UIColor *, ^(UIView *selfObject, UIColor *tintColor) {
+//            selfObject.tmui_tintColorCustomized = !!tintColor;
+//        });
+//
+//        // 这个私有方法在 view 被调用 becomeFirstResponder 并且处于 window 上时，才会被调用，所以比 becomeFirstResponder 更适合用来检测
+//        ExtendImplementationOfVoidMethodWithSingleArgument([UIView class], NSSelectorFromString(@"_didChangeToFirstResponder:"), id, ^(UIView *selfObject, id firstArgv) {
+//            if (selfObject == firstArgv && [selfObject conformsToProtocol:@protocol(UITextInput)]) {
+//                // 像 TMUIModalPresentationViewController 那种以 window 的形式展示浮层，浮层里的输入框 becomeFirstResponder 的场景，[window makeKeyAndVisible] 被调用后，就会立即走到这里，但此时该 window 尚不是 keyWindow，所以这里延迟到下一个 runloop 里再去判断
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    if (IS_DEBUG && ![selfObject isKindOfClass:[UIWindow class]] && selfObject.window && !selfObject.window.keyWindow) {
+//                        [selfObject TMUISymbolicUIViewBecomeFirstResponderWithoutKeyWindow];
+//                    }
+//                });
+//            }
+//        });
+//    });
+//}
 
 - (void)TMUISymbolicUIViewBecomeFirstResponderWithoutKeyWindow {
     NSLog(@"尝试让一个处于非 keyWindow 上的 %@ becomeFirstResponder，可能导致界面显示异常，请添加 '%@' 的 Symbolic Breakpoint 以捕捉此类信息\n%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), [NSThread callStackSymbols]);
@@ -453,16 +454,16 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         OverrideImplementation([UIView class], @selector(setFrame:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGRect frame) {
-                
+
                 // TMUIViewSelfSizingHeight 的功能
                 if (frame.size.width > 0 && isinf(frame.size.height)) {
                     CGFloat height = flat([selfObject sizeThatFits:CGSizeMake(CGRectGetWidth(frame), CGFLOAT_MAX)].height);
                     frame = CGRectSetHeight(frame, height);
                 }
-                
+
                 // 对非法的 frame，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
                 if (CGRectIsNaN(frame)) {
                     NSLog(@"%@ setFrame:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(frame), [NSThread callStackSymbols]);
@@ -473,27 +474,27 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
                         frame = CGRectSafeValue(frame);
                     }
                 }
-                
+
                 CGRect precedingFrame = selfObject.frame;
                 BOOL valueChange = !CGRectEqualToRect(frame, precedingFrame);
                 if (selfObject.tmui_frameWillChangeBlock && valueChange) {
                     frame = selfObject.tmui_frameWillChangeBlock(selfObject, frame);
                 }
-                
+
                 // call super
                 void (*originSelectorIMP)(id, SEL, CGRect);
                 originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
                 originSelectorIMP(selfObject, originCMD, frame);
-                
+
                 if (selfObject.tmui_frameDidChangeBlock && valueChange) {
                     selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
             };
         });
-        
+
         OverrideImplementation([UIView class], @selector(setBounds:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGRect bounds) {
-                
+
                 CGRect precedingFrame = selfObject.frame;
                 CGRect precedingBounds = selfObject.bounds;
                 BOOL valueChange = !CGSizeEqualToSize(bounds.size, precedingBounds.size);// bounds 只有 size 发生变化才会影响 frame
@@ -502,21 +503,21 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
                     followingFrame = selfObject.tmui_frameWillChangeBlock(selfObject, followingFrame);
                     bounds = CGRectSetSize(bounds, followingFrame.size);
                 }
-                
+
                 // call super
                 void (*originSelectorIMP)(id, SEL, CGRect);
                 originSelectorIMP = (void (*)(id, SEL, CGRect))originalIMPProvider();
                 originSelectorIMP(selfObject, originCMD, bounds);
-                
+
                 if (selfObject.tmui_frameDidChangeBlock && valueChange) {
                     selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
             };
         });
-        
+
         OverrideImplementation([UIView class], @selector(setCenter:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGPoint center) {
-                
+
                 CGRect precedingFrame = selfObject.frame;
                 CGPoint precedingCenter = selfObject.center;
                 BOOL valueChange = !CGPointEqualToPoint(center, precedingCenter);
@@ -525,21 +526,21 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
                     followingFrame = selfObject.tmui_frameWillChangeBlock(selfObject, followingFrame);
                     center = CGPointMake(CGRectGetMidX(followingFrame), CGRectGetMidY(followingFrame));
                 }
-                
+
                 // call super
                 void (*originSelectorIMP)(id, SEL, CGPoint);
                 originSelectorIMP = (void (*)(id, SEL, CGPoint))originalIMPProvider();
                 originSelectorIMP(selfObject, originCMD, center);
-                
+
                 if (selfObject.tmui_frameDidChangeBlock && valueChange) {
                     selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
             };
         });
-        
+
         OverrideImplementation([UIView class], @selector(setTransform:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGAffineTransform transform) {
-                
+
                 CGRect precedingFrame = selfObject.frame;
                 CGAffineTransform precedingTransform = selfObject.transform;
                 BOOL valueChange = !CGAffineTransformEqualToTransform(transform, precedingTransform);
@@ -547,12 +548,12 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
                     CGRect followingFrame = CGRectApplyAffineTransformWithAnchorPoint(precedingFrame, transform, selfObject.layer.anchorPoint);
                     selfObject.tmui_frameWillChangeBlock(selfObject, followingFrame);// 对于 CGAffineTransform，无法根据修改后的 rect 来算出新的 transform，所以就不修改 transform 的值了
                 }
-                
+
                 // call super
                 void (*originSelectorIMP)(id, SEL, CGAffineTransform);
                 originSelectorIMP = (void (*)(id, SEL, CGAffineTransform))originalIMPProvider();
                 originSelectorIMP(selfObject, originCMD, transform);
-                
+
                 if (selfObject.tmui_frameDidChangeBlock && valueChange) {
                     selfObject.tmui_frameDidChangeBlock(selfObject, precedingFrame);
                 }
@@ -1430,6 +1431,21 @@ static char kAssociatedObjectKey_sizeThatFitsBlock;
 
 
 @implementation UIView (TBTCategorAdd)
+
+- (UIView *)tmui_subViewOfClass:(Class)aClass{
+    UIView *aView = nil;
+    NSMutableArray *views = [self.subviews mutableCopy];
+    while (!aView && views.count>0) {
+        UIView *temp = [views firstObject];
+        if ([temp isKindOfClass:aClass]) {
+            aView = temp;
+        }else{
+            [views addObjectsFromArray:temp.subviews];
+            [views removeObject:temp];
+        }
+    }
+    return aView;
+}
 
 - (UIView *)tmui_subViewOfContainDescription:(NSString *)aString {
     if(![aString isKindOfClass:[NSString class]]){

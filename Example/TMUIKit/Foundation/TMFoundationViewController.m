@@ -64,12 +64,18 @@
     }
     cell.textLabel.text = titleDict[@"title"];
     cell.detailTextLabel.text = titleDict[@"desc"];
+    cell.textLabel.textColor = TableViewCellTitleLabelColor;
+    cell.detailTextLabel.textColor = TableViewCellDetailLabelColor;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return View.tg(999).bgColor(TableViewSectionHeaderBackgroundColor);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

@@ -7,7 +7,9 @@
 
 
 #import "UIView+TMUITheme.h"
-#import "TMUICore.h"
+#import "TMUIKitDefines.h"
+#import "TMUIAssociatedPropertyDefines.h"
+#import "TMUICommonDefines.h"
 #import "UIView+TMUI.h"
 #import "UIColor+TMUI.h"
 #import "UIImage+TMUI.h"
@@ -19,7 +21,8 @@
 #import "TMUIThemePrivate.h"
 #import "NSObject+TMUI.h"
 #import "UITextInputTraits+TMUI.h"
-
+#import "TMUIRuntime.h"
+#import "TMUIConfigurationMacros.h"
 @implementation UIView (TMUITheme)
 
 TMUISynthesizeIdCopyProperty(tmui_themeDidChangeBlock, setTmui_themeDidChangeBlock)

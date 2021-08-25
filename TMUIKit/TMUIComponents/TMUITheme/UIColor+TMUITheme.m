@@ -8,7 +8,7 @@
 
 #import "UIColor+TMUITheme.h"
 #import "TMUIThemeManager.h"
-#import "TMUICore.h"
+#import "NSObject+TMUI.h"
 #import "NSMethodSignature+TMUI.h"
 #import "UIColor+TMUI.h"
 #import "TMUIThemePrivate.h"

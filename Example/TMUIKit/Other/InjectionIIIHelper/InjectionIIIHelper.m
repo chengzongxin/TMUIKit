@@ -13,7 +13,6 @@
 
 @implementation InjectionIIIHelper
 
-
 /**
  InjectionIII 热部署会调用的一个方法，
  runtime给VC绑定上之后，每次部署完就重新viewDidLoad
@@ -59,7 +58,12 @@ void injected (id self, SEL _cmd) {
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
 
         //更改bundlePath
+        // iOS
         [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];
+        // tvOS
+        //[[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/tvOSInjection.bundle"] load];
+        // macOS
+        //[[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/macOSInjection.bundle"] load];
 
         [[NSNotificationCenter defaultCenter] removeObserver:observer];
     }];
