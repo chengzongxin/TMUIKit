@@ -75,6 +75,12 @@
     }];
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    self.scrollView.frame = self.bounds;
+}
+
 - (void)setFrame:(CGRect)frame
 {
     BOOL refresh = NO;

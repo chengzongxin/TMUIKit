@@ -222,9 +222,9 @@ Pod::Spec.new do |s|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
     #  end
 
-    #  ss.subspec 'TMUIPageViewController' do |sss|
-    #    sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
-    #  end
+     ss.subspec 'TMUIPageViewController' do |sss|
+       sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
+     end
 
     #  ss.subspec 'TMShowBigImageController' do |sss|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
