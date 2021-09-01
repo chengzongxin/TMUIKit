@@ -247,26 +247,26 @@ Pod::Spec.new do |s|
 
 
 
-      #ChainUI
-      ss.subspec 'ChainUI' do |sss|
-        sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
-        sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
-        sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-        sss.subspec 'Private' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
-          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
-        end
-        sss.subspec 'Public' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
-          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-        end
-        sss.subspec 'Chainable' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-        end
-      end
+      # #ChainUI
+      # ss.subspec 'ChainUI' do |sss|
+      #   sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
+      #   sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
+      #   sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+      #   sss.subspec 'Private' do |ssss|
+      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
+      #     ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
+      #   end
+      #   sss.subspec 'Public' do |ssss|
+      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
+      #     ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
+      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+      #   end
+      #   sss.subspec 'Chainable' do |ssss|
+      #     ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
+      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
+      #     ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
+      #   end
+      # end
 
       ########################  end 以上组件只在demo中打开  ########################
 
