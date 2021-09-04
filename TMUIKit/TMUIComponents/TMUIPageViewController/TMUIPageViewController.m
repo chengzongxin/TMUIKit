@@ -22,9 +22,9 @@ static NSString *const kParentVC = @"kParentVC";
 @implementation UIViewController (TMUIPageViewControllerRefreshProtocolImp)
 
 /// 使用协议分类的形式添加默认实现，子类停止刷新会回调这里
-- (void)childViewControllerEndRefreshing{
+- (void)pageViewControllerEndRefreshing{
     TMUIPageViewController *pvc = (TMUIPageViewController *)[self tmui_getBoundObjectForKey:kParentVC];
-    if ([pvc isKindOfClass:TMUIPageViewController.class] && [pvc respondsToSelector:@selector(endRefreshing)]) {
+    if ([pvc respondsToSelector:@selector(endRefreshing)]) {
         [pvc endRefreshing];
     }
 }

@@ -35,7 +35,7 @@
 - (void)childViewControllerBeginRefreshingWithPara:(NSDictionary *)para;
 
 /// 已添加默认实现，子VC只需要调用该方法，结束下拉刷新
-- (void)childViewControllerEndRefreshing;
+- (void)pageViewControllerEndRefreshing;
 
 /// 子VC在tabbar中点击事件
 - (void)childViewControllerTabbarDidRepeatSelect;
