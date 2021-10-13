@@ -22,9 +22,9 @@ static NSString *const kParentVC = @"kParentVC";
 @implementation UIViewController (TMUIPageViewControllerRefreshProtocolImp)
 
 /// 使用协议分类的形式添加默认实现，子类停止刷新会回调这里
-- (void)childViewControllerEndRefreshing{
+- (void)pageViewControllerEndRefreshing{
     TMUIPageViewController *pvc = (TMUIPageViewController *)[self tmui_getBoundObjectForKey:kParentVC];
-    if ([pvc isKindOfClass:TMUIPageViewController.class] && [pvc respondsToSelector:@selector(endRefreshing)]) {
+    if ([pvc respondsToSelector:@selector(endRefreshing)]) {
         [pvc endRefreshing];
     }
 }
@@ -186,6 +186,10 @@ static const CGFloat kSliderBarStartX = 0;
         self.containerView.height = [self contentViewHeight];
     }
     
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
     UIEdgeInsets contentInset = UIEdgeInsetsMake(self.headerHeight+self.sliderBarHeight, 0, 0, 0);
     self.containerView.contentInset = contentInset;
     if (contentInset.top > self.view.bounds.size.height) {
@@ -198,14 +202,16 @@ static const CGFloat kSliderBarStartX = 0;
         make.left.equalTo(self.containerView);
         make.top.mas_equalTo(-self.headerHeight-self.sliderBarHeight);
         make.height.mas_equalTo(self.headerHeight);
-        make.width.mas_equalTo(self.view.bounds.size.width);
+        make.width.mas_equalTo(self.view.mas_width);
     }];
     
     [self.slideBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.containerView.mas_left).offset(kSliderBarStartX);
         make.top.equalTo(self.headerView.mas_bottom);
         make.height.mas_equalTo(self.sliderBarHeight);
-        make.width.mas_equalTo(self.view.bounds.size.width - kSliderBarStartX);
+//        make.width.mas_equalTo(self.view.bounds.size.width - kSliderBarStartX);
+//        make.right.mas_equalTo(0);
+        make.width.mas_equalTo(self.view.mas_width).offset(-kSliderBarStartX);
     }];
     
     
@@ -225,7 +231,7 @@ static const CGFloat kSliderBarStartX = 0;
     if (self.isEnableHeaderViewBlurWhenScroll) {
         [self.headerView addSubview:self.effectView];
         // 这里先使用frame达到需求，设置约束会有偶现的bug，这里避免约束存在nil的情况，后续排查问题
-        self.effectView.frame = CGRectMake(0, 0, TMUI_SCREEN_WIDTH, self.headerHeight);
+        self.effectView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.headerHeight);
 //        [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.edges.equalTo(self.headerView);  // headerView可能为空
 //        }];
@@ -271,13 +277,13 @@ static const CGFloat kSliderBarStartX = 0;
     if (childVC.isViewLoaded && childVC.view.superview) {
         // 已加载过，调用生命周期方法
         [childVC beginAppearanceTransition:YES animated:YES];
-        CGFloat x = index * [UIScreen mainScreen].bounds.size.width;
+        CGFloat x = index * self.view.bounds.size.width;
         [self.contentView setContentOffset:CGPointMake(x, 0) animated:animate];
         [childVC endAppearanceTransition];
     }else{
         // 未加载，需要添加后，再调用生命周期
-        CGFloat x = index * [UIScreen mainScreen].bounds.size.width;
-        childVC.view.frame = CGRectMake(x, 0, [UIScreen mainScreen].bounds.size.width , self.contentView.bounds.size.height);
+        CGFloat x = index * self.view.bounds.size.width;
+        childVC.view.frame = CGRectMake(x, 0, self.view.bounds.size.width , self.contentView.bounds.size.height);
         [childVC beginAppearanceTransition:YES animated:YES];
         [self.contentView addSubview:childVC.view];
         self.contentView.contentSize = CGSizeMake(self.view.bounds.size.width * self.childVCs.count, 0);
@@ -516,7 +522,7 @@ static const CGFloat kSliderBarStartX = 0;
 {
     if (scrollView == self.contentView) {
         // 获取当前角标
-        NSInteger i = scrollView.contentOffset.x / UIScreen.mainScreen.bounds.size.width;
+        NSInteger i = scrollView.contentOffset.x / self.view.bounds.size.width;
         
         self.slideBar.selectedIndex = i;
         
@@ -553,7 +559,7 @@ static const CGFloat kSliderBarStartX = 0;
 #pragma mark - Getters and Setters
 - (TMUIPageContainerScrollView *)containerView {
     if (_containerView == nil) {
-        _containerView = [[TMUIPageContainerScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        _containerView = [[TMUIPageContainerScrollView alloc] init];
         _containerView.backgroundColor = [self contentViewBackgroundColor];
         _containerView.showsHorizontalScrollIndicator = NO;
         _containerView.t_delegate = self;
