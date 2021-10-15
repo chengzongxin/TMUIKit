@@ -534,7 +534,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
             _navBarBackIndicatorImage = [[_navBarBackIndicatorImage tmui_imageWithSpacingExtensionInsets:UIEdgeInsetsMake(imageExtensionVerticalFloat,
                                                                                                                           0,
                                                                                                                           imageExtensionVerticalFloat,
-                                                                                                                          systemBackIndicatorImageSize.width - customBackIndicatorImageSize.width)] imageWithRenderingMode:_navBarBackIndicatorImage.renderingMode];
+                                                                                                                          systemBackIndicatorImageSize.width - customBackIndicatorImageSize.width)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];// UIImageRenderingModeAlwaysOriginal 这里要设置为原始渲染，修复iOS15，会变成蓝色图标
         }
     }
     
