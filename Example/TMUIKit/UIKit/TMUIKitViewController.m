@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem tmui_itemWithTitle:@"DEBUG" titleColorStyle:UIBarButtonItem_TMUIColorStyleWhite target:self action:@selector(debug)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DEBUG" style:UIBarButtonItemStylePlain target:self action:@selector(debug)];
     
     GroupTV(
             SECTION_CREATE(

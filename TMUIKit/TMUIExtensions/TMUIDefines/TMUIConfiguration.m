@@ -34,6 +34,7 @@ const CGSize kUINavigationBarBackIndicatorImageSize = {13, 21};
 @interface TMUIConfiguration ()
 
 @property(nonatomic, strong) UITabBarAppearance *tabBarAppearance API_AVAILABLE(ios(13.0));
+@property(nonatomic, strong) UINavigationBarAppearance *navBarAppearance API_AVAILABLE(ios(13.0));
 @end
 
 @implementation UIViewController (TMUIConfiguration)
@@ -310,6 +311,26 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 #pragma mark - NavigationBar Setter
 
+- (UINavigationBarAppearance *)navBarAppearance{
+    if (!_navBarAppearance) {
+        _navBarAppearance = [[UINavigationBarAppearance alloc] init];
+        [_navBarAppearance configureWithDefaultBackground];
+    }
+    return _navBarAppearance;
+}
+
+- (void)updateNavBarAppearance{
+    if (@available(iOS 13.0, *)) {
+        UINavigationBar.tmui_appearanceConfigured.standardAppearance = self.navBarAppearance;
+        UINavigationBar.tmui_appearanceConfigured.scrollEdgeAppearance = self.navBarAppearance;
+        [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController, NSUInteger idx, BOOL * _Nonnull stop) {
+            navigationController.navigationBar.standardAppearance = self.navBarAppearance;
+            navigationController.navigationBar.scrollEdgeAppearance = self.navBarAppearance;
+            [navigationController.navigationBar setNeedsLayout];
+        }];
+    }
+}
+
 - (void)setNavBarButtonFont:(UIFont *)navBarButtonFont {
     _navBarButtonFont = navBarButtonFont;
     // by molice 2017-08-04 只要用 appearence 的方式修改 UIBarButtonItem 的 font，就会导致界面切换时 UIBarButtonItem 抖动，系统的问题，所以暂时不修改 appearance。
@@ -323,8 +344,26 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 - (void)setNavBarTintColor:(UIColor *)navBarTintColor {
     _navBarTintColor = navBarTintColor;
-    // tintColor 并没有声明 UI_APPEARANCE_SELECTOR，所以暂不使用 appearance 的方式去修改（虽然 appearance 方式实测是生效的）
-    UINavigationBar.tmui_appearanceConfigured.tintColor = navBarTintColor;
+    
+    if (@available(iOS 13.0, *)) {
+        UIFont *font = self.navBarButtonFont;
+        
+        UIBarButtonItemAppearance *buttonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStylePlain];
+        buttonAppearance.normal.titleTextAttributes = @{NSFontAttributeName: font,NSForegroundColorAttributeName:_navBarTintColor};
+        
+        UIBarButtonItemAppearance *doneButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStylePlain];
+        doneButtonAppearance.normal.titleTextAttributes = @{NSFontAttributeName: font,NSForegroundColorAttributeName:_navBarTintColor};
+        
+        UIBarButtonItemAppearance *backButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStylePlain];
+        backButtonAppearance.normal.titleTextAttributes = @{NSFontAttributeName: font,NSForegroundColorAttributeName:_navBarTintColor};
+        
+        self.navBarAppearance.buttonAppearance = buttonAppearance;
+        self.navBarAppearance.doneButtonAppearance = doneButtonAppearance;
+        self.navBarAppearance.backButtonAppearance = backButtonAppearance;
+        [self updateNavBarAppearance];
+    }else{
+        UINavigationBar.tmui_appearanceConfigured.tintColor = _navBarTintColor;
+    }
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.tintColor = _navBarTintColor;
     }];
@@ -332,7 +371,13 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 - (void)setNavBarBarTintColor:(UIColor *)navBarBarTintColor {
     _navBarBarTintColor = navBarBarTintColor;
-    UINavigationBar.tmui_appearanceConfigured.barTintColor = _navBarBarTintColor;
+    
+    if (@available(iOS 13.0, *)) {
+        self.navBarAppearance.backgroundColor = _navBarBarTintColor;
+        [self updateNavBarAppearance];
+    }else{
+        UINavigationBar.tmui_appearanceConfigured.barTintColor = _navBarBarTintColor;
+    }
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.barTintColor = _navBarBarTintColor;
     }];
@@ -363,7 +408,12 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         _navBarShadowImage = shadowImage;
     }
     
-    UINavigationBar.tmui_appearanceConfigured.shadowImage = shadowImage;
+    if (@available(iOS 13.0, *)) {
+        self.navBarAppearance.shadowImage = shadowImage;
+        [self updateNavBarAppearance];
+    }else{
+        UINavigationBar.tmui_appearanceConfigured.shadowImage = shadowImage;
+    }
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.shadowImage = shadowImage;
     }];
@@ -371,7 +421,13 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 - (void)setNavBarStyle:(UIBarStyle)navBarStyle {
     _navBarStyle = navBarStyle;
-    UINavigationBar.tmui_appearanceConfigured.barStyle = navBarStyle;
+    
+    if (@available(iOS 13.0, *)) {
+        self.navBarAppearance.backgroundEffect = [UIBlurEffect effectWithStyle:navBarStyle == UIBarStyleDefault ? UIBlurEffectStyleSystemChromeMaterialLight : UIBlurEffectStyleSystemChromeMaterialDark];
+        [self updateNavBarAppearance];
+    }else{
+        UINavigationBar.tmui_appearanceConfigured.barStyle = navBarStyle;
+    }
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.barStyle = navBarStyle;
         [navigationController.navigationBar setNeedsLayout];
@@ -380,7 +436,13 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 - (void)setNavBarBackgroundImage:(UIImage *)navBarBackgroundImage {
     _navBarBackgroundImage = navBarBackgroundImage;
-    [UINavigationBar.tmui_appearanceConfigured setBackgroundImage:_navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    if (@available(iOS 13.0, *)) {
+        self.navBarAppearance.backgroundImage = _navBarBackgroundImage;
+        [self updateNavBarAppearance];
+    }else{
+        [UINavigationBar.tmui_appearanceConfigured setBackgroundImage:_navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    }
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         [navigationController.navigationBar setBackgroundImage:_navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
     }];
@@ -407,7 +469,13 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     if (self.navBarTitleColor) {
         titleTextAttributes[NSForegroundColorAttributeName] = self.navBarTitleColor;
     }
-    UINavigationBar.tmui_appearanceConfigured.titleTextAttributes = titleTextAttributes;
+    
+    if (@available(iOS 13.0, *)) {
+        self.navBarAppearance.titleTextAttributes = titleTextAttributes;
+        [self updateNavBarAppearance];
+    }else{
+        UINavigationBar.tmui_appearanceConfigured.titleTextAttributes = titleTextAttributes;
+    }
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.titleTextAttributes = titleTextAttributes;
     }];
@@ -432,7 +500,14 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         if (self.navBarLargeTitleColor) {
             largeTitleTextAttributes[NSForegroundColorAttributeName] = self.navBarLargeTitleColor;
         }
-        UINavigationBar.tmui_appearanceConfigured.largeTitleTextAttributes = largeTitleTextAttributes;
+        
+        if (@available(iOS 13.0, *)) {
+            self.navBarAppearance.largeTitleTextAttributes = largeTitleTextAttributes;
+            [self updateNavBarAppearance];
+        }else{
+            UINavigationBar.tmui_appearanceConfigured.largeTitleTextAttributes = largeTitleTextAttributes;
+        }
+        
         [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
             navigationController.navigationBar.largeTitleTextAttributes = largeTitleTextAttributes;
         }];
@@ -463,9 +538,14 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         }
     }
     
-    UINavigationBar *navBarAppearance = UINavigationBar.tmui_appearanceConfigured;
-    navBarAppearance.backIndicatorImage = _navBarBackIndicatorImage;
-    navBarAppearance.backIndicatorTransitionMaskImage = _navBarBackIndicatorImage;
+    if (@available(iOS 13.0, *)) {
+        [self.navBarAppearance setBackIndicatorImage:_navBarBackIndicatorImage transitionMaskImage:_navBarBackIndicatorImage];
+        [self updateNavBarAppearance];
+    }else{
+        UINavigationBar *navBarAppearance = UINavigationBar.tmui_appearanceConfigured;
+        navBarAppearance.backIndicatorImage = _navBarBackIndicatorImage;
+        navBarAppearance.backIndicatorTransitionMaskImage = _navBarBackIndicatorImage;
+    }
     
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController,NSUInteger idx, BOOL * _Nonnull stop) {
         navigationController.navigationBar.backIndicatorImage = _navBarBackIndicatorImage;
@@ -477,8 +557,14 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 - (void)setNavBarBackButtonTitlePositionAdjustment:(UIOffset)navBarBackButtonTitlePositionAdjustment {
     _navBarBackButtonTitlePositionAdjustment = navBarBackButtonTitlePositionAdjustment;
     
-    UIBarButtonItem *backBarButtonItem = [UIBarButtonItem appearance];
-    [backBarButtonItem setBackButtonTitlePositionAdjustment:_navBarBackButtonTitlePositionAdjustment forBarMetrics:UIBarMetricsDefault];
+    if (@available(iOS 13.0, *)) {
+        [self.navBarAppearance setTitlePositionAdjustment:navBarBackButtonTitlePositionAdjustment];
+        [self updateNavBarAppearance];
+    }else{
+        UIBarButtonItem *backBarButtonItem = [UIBarButtonItem appearance];
+        [backBarButtonItem setBackButtonTitlePositionAdjustment:_navBarBackButtonTitlePositionAdjustment forBarMetrics:UIBarMetricsDefault];
+    }
+    
     [self.appearanceUpdatingNavigationControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController, NSUInteger idx, BOOL * _Nonnull stop) {
         [navigationController.navigationItem.backBarButtonItem setBackButtonTitlePositionAdjustment:_navBarBackButtonTitlePositionAdjustment forBarMetrics:UIBarMetricsDefault];
     }];
