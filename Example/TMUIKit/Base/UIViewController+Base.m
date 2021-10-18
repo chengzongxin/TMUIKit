@@ -111,8 +111,6 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 + (void)load{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-        
         ExchangeImplementations([self class], @selector(pushViewController:animated:), @selector(tmui_pushViewController:animated:));
     });
 }
@@ -134,7 +132,6 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
 + (void)load{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
         ExtendImplementationOfVoidMethodWithoutArguments(self, @selector(awakeFromNib), ^(__kindof UITabBarController * _Nonnull selfObject) {
             for (UINavigationController *nav in selfObject.childViewControllers) {
                 [nav.topViewController tmui_bindBOOL:YES forKey:kShowByUser];

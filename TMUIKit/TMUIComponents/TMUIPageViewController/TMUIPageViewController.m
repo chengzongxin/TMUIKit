@@ -46,9 +46,9 @@ static const CGFloat kSliderBarStartX = 0;
 
 // component
 @property (nonatomic, strong) _TMUIPageHeaderVisualEffectView *effectView;
-@property (nonatomic, strong) TMUIPageContainerScrollView *containerView;
-@property (nonatomic, strong) TMUISegmentControl *slideBar;
+@property (nonatomic, strong) TMUIPageWrapperScrollView *wrapperView;
 @property (nonatomic, strong) TMUIPageContentScrollView *contentView;
+@property (nonatomic, strong) TMUISegmentControl *slideBar;
 @property (nonatomic, strong) UIColor *sliderBarOriginBgColor;
 // delegate
 @property (nonatomic, strong) NSArray <UIViewController *> *childVCs;
@@ -94,9 +94,9 @@ static const CGFloat kSliderBarStartX = 0;
 
 - (void)clear{
     [self.contentView tmui_removeAllSubviews];
-    [self.containerView tmui_removeAllSubviews];
-    [self.containerView removeFromSuperview];
-    _containerView = nil;
+    [self.wrapperView tmui_removeAllSubviews];
+    [self.wrapperView removeFromSuperview];
+    _wrapperView = nil;
     _headerView = nil;
     _slideBar = nil;
     _contentView = nil;
@@ -167,10 +167,10 @@ static const CGFloat kSliderBarStartX = 0;
 
 // 子视图布局
 - (void)addSubviews {
-    [self.view insertSubview:self.containerView atIndex:0];
-    [self.containerView addSubview:self.headerView];
-    [self.containerView addSubview:self.slideBar];
-    [self.containerView addSubview:self.contentView];
+    [self.view insertSubview:self.wrapperView atIndex:0];
+    [self.wrapperView addSubview:self.headerView];
+    [self.wrapperView addSubview:self.slideBar];
+    [self.wrapperView addSubview:self.contentView];
 }
 
 - (CGFloat)contentViewHeight {
@@ -183,30 +183,30 @@ static const CGFloat kSliderBarStartX = 0;
 // 设置约束
 - (void)makeConstraints{
     if (self.isUseSystemNavBar) {
-        self.containerView.height = [self contentViewHeight];
+        self.wrapperView.height = [self contentViewHeight];
     }
     
-    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.wrapperView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     
     UIEdgeInsets contentInset = UIEdgeInsetsMake(self.headerHeight+self.sliderBarHeight, 0, 0, 0);
-    self.containerView.contentInset = contentInset;
+    self.wrapperView.contentInset = contentInset;
     if (contentInset.top > self.view.bounds.size.height) {
         // 当contentInset.top很高的时候，scrollview会自动滚动，这里需要重新定位到顶部
-        self.containerView.contentOffset = CGPointMake(0, -contentInset.top);
+        self.wrapperView.contentOffset = CGPointMake(0, -contentInset.top);
     }
-    self.containerView.contentSize = self.view.bounds.size;
+    self.wrapperView.contentSize = self.view.bounds.size;
     
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.containerView);
+        make.left.equalTo(self.wrapperView);
         make.top.mas_equalTo(-self.headerHeight-self.sliderBarHeight);
         make.height.mas_equalTo(self.headerHeight);
         make.width.mas_equalTo(self.view.mas_width);
     }];
     
     [self.slideBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.containerView.mas_left).offset(kSliderBarStartX);
+        make.left.equalTo(self.wrapperView.mas_left).offset(kSliderBarStartX);
         make.top.equalTo(self.headerView.mas_bottom);
         make.height.mas_equalTo(self.sliderBarHeight);
 //        make.width.mas_equalTo(self.view.bounds.size.width - kSliderBarStartX);
@@ -249,7 +249,7 @@ static const CGFloat kSliderBarStartX = 0;
     }
     
     // 设置吸顶区域
-    self.containerView.lockArea = topInset+self.sliderBarHeight;
+    self.wrapperView.lockArea = topInset+self.sliderBarHeight;
     
     [self.view layoutIfNeeded];
 }
@@ -316,7 +316,7 @@ static const CGFloat kSliderBarStartX = 0;
 }
 
 - (void)scrollToTopAnimate:(BOOL)animate{
-    [self.containerView setContentOffset:CGPointMake(self.containerView.contentOffset.x, 0) animated:animate];
+    [self.wrapperView setContentOffset:CGPointMake(self.wrapperView.contentOffset.x, 0) animated:animate];
 }
 
 //- (void)addRefreshWithBlock:(dispatch_block_t)freshBlock{
@@ -335,9 +335,9 @@ static const CGFloat kSliderBarStartX = 0;
 - (void)addRefreshHeader:(id<TMUIPageRefreshHeaderComponent>)header addAction:(void (^)(UIScrollView *))addAction{
     // 刘海屏需要在header上面显示
     self.refreshHeader = header;
-    CGFloat inset = self.containerView.contentInset.top - [self safeAreaTop] - self.navBarHeight + 3; // 微调
+    CGFloat inset = self.wrapperView.contentInset.top - [self safeAreaTop] - self.navBarHeight + 3; // 微调
 //    [self.contentView addRefreshHeader:header refreshingBlock:freshBlock];
-    addAction(self.containerView);
+    addAction(self.wrapperView);
     header.headerInset = inset;
     // 使代理有多个回调对象
     self.tmui_multipleDelegatesEnabled = YES;
@@ -365,11 +365,11 @@ static const CGFloat kSliderBarStartX = 0;
 
 
 - (void)tabbarDidRepeatSelect{
-    if (self.containerView.contentOffset.y > -self.containerView.contentInset.top) {
+    if (self.wrapperView.contentOffset.y > -self.wrapperView.contentInset.top) {
         // 需要子类先滑动到顶部，才能滚动scrollView
         [self performChildVCSelector:@selector(childViewControllerTabbarDidRepeatSelect) para:nil forceAll:NO];
 //        [self.contentView setContentOffset:CGPointMake(0, -self.contentView.contentInset.top) animated:NO];
-        [self.containerView tmui_scrollToTopAnimated:YES];
+        [self.wrapperView tmui_scrollToTopAnimated:YES];
     }else{
         [self.refreshHeader beginRefreshing];
     }
@@ -428,7 +428,7 @@ static const CGFloat kSliderBarStartX = 0;
 }
 
 - (CGFloat)heightForHeader{
-    self.containerView.bounces = NO;
+    self.wrapperView.bounces = NO;
     return 0;
 }
 
@@ -496,7 +496,7 @@ static const CGFloat kSliderBarStartX = 0;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if ([scrollView isKindOfClass:TMUIPageContainerScrollView.class]) {
+    if (scrollView == self.wrapperView) {
         if ([self.delegate respondsToSelector:@selector(pageContentViewControllerDidScroll:)]) {
             [self.delegate pageContentViewControllerDidScroll:scrollView];
         }
@@ -515,6 +515,8 @@ static const CGFloat kSliderBarStartX = 0;
             
             self.effectView.alpha = progress;
         }
+    }else if (scrollView == self.contentView) {
+        
     }
 }
 
@@ -557,14 +559,14 @@ static const CGFloat kSliderBarStartX = 0;
 
 
 #pragma mark - Getters and Setters
-- (TMUIPageContainerScrollView *)containerView {
-    if (_containerView == nil) {
-        _containerView = [[TMUIPageContainerScrollView alloc] init];
-        _containerView.backgroundColor = [self contentViewBackgroundColor];
-        _containerView.showsHorizontalScrollIndicator = NO;
-        _containerView.t_delegate = self;
+- (TMUIPageWrapperScrollView *)wrapperView{
+    if (_wrapperView == nil) {
+        _wrapperView = [[TMUIPageWrapperScrollView alloc] init];
+        _wrapperView.backgroundColor = [self contentViewBackgroundColor];
+        _wrapperView.showsHorizontalScrollIndicator = NO;
+        _wrapperView.t_delegate = self;
     }
-    return _containerView;
+    return _wrapperView;
 }
 
 - (UIColor *)contentViewBackgroundColor {
@@ -595,7 +597,6 @@ static const CGFloat kSliderBarStartX = 0;
         
         // 设置代理.目的:监听内容滚动视图 什么时候滚动完成
         _contentView.delegate = self;
-        _contentView.tag = 888;
     }
     return _contentView;
 }

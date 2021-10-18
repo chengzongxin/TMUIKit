@@ -6,6 +6,7 @@ target 'TMUIKit_Example' do
   pod 'TMUIKit', :path => '../TMUIKit_Debug.podspec'
   pod 'LookinServer', :configurations => ['Debug']
   pod 'ReactiveObjC'
+  pod 'MJRefresh'
   
   
   target 'TMUIKit_Tests' do

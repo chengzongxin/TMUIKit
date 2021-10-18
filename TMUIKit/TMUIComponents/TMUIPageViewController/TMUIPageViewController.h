@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TMUIPageContainerScrollView.h"
+#import "TMUIPageWrapperScrollView.h"
 #import "TMUIPageContentScrollView.h"
 #import "TMUISegmentControl.h"
 
@@ -99,7 +99,7 @@ TMUIPageViewControllerDelegate
 @property (nonatomic, strong, readonly) NSArray <UIViewController *> *childVCs;
 /* 组件视图*/
 /// 总的背景ScrollView
-@property (nonatomic, strong, readonly) TMUIPageContainerScrollView *containerView;
+@property (nonatomic, strong, readonly) TMUIPageWrapperScrollView *wrapperView;
 /// 头部遮罩
 @property (nonatomic, strong, readonly) _TMUIPageHeaderVisualEffectView *effectView;
 /// 滑动tab

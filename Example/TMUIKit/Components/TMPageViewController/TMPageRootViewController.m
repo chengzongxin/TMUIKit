@@ -13,6 +13,7 @@
 #import "NormalViewController.h"
 #import "THKSegmentControl.h"
 #import "THKColorsDefine.h"
+#import <MJRefresh.h>
 
 @interface TMPageRootViewController ()
 
@@ -42,6 +43,14 @@
         self.titles = @[@"热门",@"最新",@"涉及",@"案例"];
         
         [self reloadData];
+        
+        self.wrapperView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self reload];
+            });
+        }];
+        self.wrapperView.mj_header.ignoredScrollViewContentInsetTop = [self heightForHeader]+44;
     });
 }
 
