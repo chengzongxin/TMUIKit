@@ -46,7 +46,7 @@ static const CGFloat kSliderBarStartX = 0;
 
 // component
 @property (nonatomic, strong) _TMUIPageHeaderVisualEffectView *effectView;
-@property (nonatomic, strong) TMUIPageContainerScrollView *containerView;
+@property (nonatomic, strong) TMUIPageWrapperScrollView *containerView;
 @property (nonatomic, strong) TMUISegmentControl *slideBar;
 @property (nonatomic, strong) TMUIPageContentScrollView *contentView;
 @property (nonatomic, strong) UIColor *sliderBarOriginBgColor;
@@ -557,9 +557,9 @@ static const CGFloat kSliderBarStartX = 0;
 
 
 #pragma mark - Getters and Setters
-- (TMUIPageContainerScrollView *)containerView {
+- (TMUIPageWrapperScrollView *)containerView {
     if (_containerView == nil) {
-        _containerView = [[TMUIPageContainerScrollView alloc] init];
+        _containerView = [[TMUIPageWrapperScrollView alloc] init];
         _containerView.backgroundColor = [self contentViewBackgroundColor];
         _containerView.showsHorizontalScrollIndicator = NO;
         _containerView.t_delegate = self;
