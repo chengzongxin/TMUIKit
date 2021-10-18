@@ -7,14 +7,15 @@
 
 #import "TMUIPageWrapperScrollView.h"
 #import "UIView+TMUI.h"
+#import "TMUICore.h"
 
 @interface TMUIPageWrapperScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 {
     __weak UIScrollView *_currentScrollView;
     BOOL _isObserving;
-    BOOL _lock;
 }
 
+@property (nonatomic, assign, readwrite) BOOL pin;
 
 @property (nonatomic, strong) NSMutableArray<UIScrollView *> *observedViews;
 
@@ -30,7 +31,9 @@
     return _observedViews;
 }
 
-static void * const kTMUIScrollViewKVOContext = (void*)&kTMUIScrollViewKVOContext;
+static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScrollViewContentOffsetKVOContext;
+
+
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame: frame];
@@ -43,15 +46,16 @@ static void * const kTMUIScrollViewKVOContext = (void*)&kTMUIScrollViewKVOContex
         [self addObserver:self
                forKeyPath:NSStringFromSelector(@selector(contentOffset))
                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                  context:kTMUIScrollViewKVOContext];
+                  context:kTMUIScrollViewContentOffsetKVOContext];
         _isObserving = YES;
     }
     return self;
 }
 
-- (void)dealloc{
-    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(contentOffset)) context:kTMUIScrollViewKVOContext];
-    [self removeObservedViews];
+
+- (void)scrollToTop:(BOOL)animated{
+    _pin = NO;
+    [self setContentOffset:self.tmui_scrollViewTopPoint animated:animated];
 }
 
 
@@ -71,33 +75,13 @@ static void * const kTMUIScrollViewKVOContext = (void*)&kTMUIScrollViewKVOContex
     [scrollView addObserver:self
                  forKeyPath:NSStringFromSelector(@selector(contentOffset))
                     options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
-                    context:kTMUIScrollViewKVOContext];
-
-//    _lock = (scrollView.contentOffset.y >= -scrollView.contentInset.top);
-    //NSLog(@"addObserverToView scrollView.contentOffset.y=%f",scrollView.contentOffset.y);
-}
-
-
-- (void)removeObservedViews{
-    for (UIScrollView *scrollView in self.observedViews) {
-        [self removeObserverFromView:scrollView];
-    }
-    [self.observedViews removeAllObjects];
-}
-
-- (void) removeObserverFromView:(UIScrollView *)scrollView{
-    @try {
-        [scrollView removeObserver:self
-                        forKeyPath:NSStringFromSelector(@selector(contentOffset))
-                           context:kTMUIScrollViewKVOContext];
-    }
-    @catch (NSException *exception) {}
+                    context:kTMUIScrollViewContentOffsetKVOContext];
 }
 
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if (context == kTMUIScrollViewKVOContext && [keyPath isEqualToString:NSStringFromSelector(@selector(contentOffset))]) {
+    if (context == kTMUIScrollViewContentOffsetKVOContext && [keyPath isEqualToString:NSStringFromSelector(@selector(contentOffset))]) {
         
         CGPoint new = [[change objectForKey:NSKeyValueChangeNewKey] CGPointValue];
         CGPoint old = [[change objectForKey:NSKeyValueChangeOldKey] CGPointValue];
@@ -111,46 +95,29 @@ static void * const kTMUIScrollViewKVOContext = (void*)&kTMUIScrollViewKVOContex
         if (_currentScrollView) {
             isContentOffset = _currentScrollView.contentOffset.y > -_currentScrollView.contentInset.top; // 子scroll有offset
         }
-//        if (object == self && _currentScrollView) {
-//            _lock = new.y >= -_lockArea;
-//        }
-        if (object == self) {
-        }
         
         if (object == self) {
-    
-            _lock = (new.y + diff >= -_lockArea) && _currentScrollView;
+            _pin = (new.y >= -_lockArea) || (old.y == -_lockArea && isContentOffset);
         }
         
 //        NSLog(@"=========== KVO event begin===========");
 //        NSLog(@"ScrollView      : %@",[object class]);
 //        NSLog(@"Observing       : %d",_isObserving);
 //        NSLog(@"ContentOffset   : old[%.0f],new[%.0f],Offset[%.0f],Inset[%.0f]",old.y,new.y,self.contentOffset.y,self.contentInset.top);
-//        NSLog(@"lock            : %d",lock);
+//        NSLog(@"lock            : %d",_lock);
 //        NSLog(@"=========== KVO event end===========");
         
-        
-        if (object == self) {
-            if (_lock) {
-                if (isContentOffset) {
-                    [self scrollView:self setContentOffset:CGPointMake(0, -_lockArea)];
-                }else{
-                    [self scrollView:self setContentOffset:new];
-                }
+        if (_pin) {
+            if (object == self) {
+                [self scrollView:self setContentOffset:CGPointMake(0, -_lockArea)];
             }else{
-                [self scrollView:self setContentOffset:new];
+//                [self scrollView:_currentScrollView setContentOffset:new];
             }
-        } else {
-            if (_lock) {
-                [self scrollView:_currentScrollView setContentOffset:new];
-//                [self scrollView:self setContentOffset:CGPointMake(self.contentOffset.x, self.contentOffset.y - diff)];
+        }else{
+            if (object == self) {
+//                [self scrollView:self setContentOffset:new];
             }else{
-                if (isContentOffset) {
-                    [self scrollView:_currentScrollView setContentOffset:CGPointZero];
-//                    [self scrollView:self setContentOffset:CGPointMake(self.contentOffset.x, self.contentOffset.y - diff)];
-                }else{
-                    [self scrollView:_currentScrollView setContentOffset:new];
-                }
+                [self scrollView:_currentScrollView setContentOffset:_currentScrollView.tmui_scrollViewTopPoint];
             }
         }
     } else {
@@ -181,13 +148,50 @@ static void * const kTMUIScrollViewKVOContext = (void*)&kTMUIScrollViewKVOContex
 }
 
 - (void)addObservedView:(UIScrollView *)scrollView{
-//    if (scrollView.tmui_containerNotScroll) {
-//        return;
-//    }
+    if (scrollView.tmui_isWarpperNotScroll) {
+        return;
+    }
+    
     if (![self.observedViews containsObject:scrollView]) {
         [self.observedViews addObject:scrollView];
         [self addObserverToView:scrollView];
     }
 }
 
+
+- (void)dealloc{
+    [self removeObserver:self forKeyPath:NSStringFromSelector(@selector(contentOffset)) context:kTMUIScrollViewContentOffsetKVOContext];
+    [self removeObservedViews];
+}
+
+
+- (void)removeObservedViews{
+    for (UIScrollView *scrollView in self.observedViews) {
+        [self removeObserverFromView:scrollView];
+    }
+    [self.observedViews removeAllObjects];
+}
+
+- (void) removeObserverFromView:(UIScrollView *)scrollView{
+    @try {
+        [scrollView removeObserver:self
+                        forKeyPath:NSStringFromSelector(@selector(contentOffset))
+                           context:kTMUIScrollViewContentOffsetKVOContext];
+    }
+    @catch (NSException *exception) {}
+}
+
+
+- (BOOL)isPin{
+    return _pin;
+}
+
+@end
+
+
+@implementation UIScrollView (TMUI_PageComponent)
+TMUISynthesizeBOOLProperty(tmui_isWarpperNotScroll, setTmui_isWarpperNotScroll);
+- (CGPoint)tmui_scrollViewTopPoint{
+    return CGPointMake(self.contentOffset.x, -self.contentInset.top);
+}
 @end

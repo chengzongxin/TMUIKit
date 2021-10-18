@@ -6,7 +6,6 @@
 //
 
 #import "TableViewController.h"
-#import <MJRefresh.h>
 
 @interface TableViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -54,19 +53,7 @@
         make.edges.equalTo(self.view);
     }];
     
-    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        NSLog(@"ddddd");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [tableView.mj_header endRefreshing];
-        });
-    }];
-    
-    tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        NSLog(@"123323");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [tableView.mj_footer endRefreshing];
-        });
-    }];
+    _tableView = tableView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
