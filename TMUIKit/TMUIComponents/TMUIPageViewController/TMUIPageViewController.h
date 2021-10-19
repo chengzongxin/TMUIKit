@@ -109,8 +109,14 @@ TMUIPageViewControllerDelegate
 
 @property (nonatomic, strong, readonly) id<TMUIPageRefreshHeaderComponent> refreshHeader;
 
-/// 刷新数据源，会初始化所有属性和子视图，重新调代理方法渲染界面
+/// 刷新数据源，会清除所有视图，重新初始化所有属性和子视图，重新调代理方法渲染界面
 - (void)reloadData;
+
+/// 刷新头部视图，重新调相应的代理方法渲染界面
+- (void)reloadHeaderView;
+
+/// 刷新所有子VC，重新调相应的代理方法渲染界面
+- (void)reloadChildViewControllers;
 
 /// 滑动到某一个子VC
 - (void)scrollTo:(UIViewController *)vc;
