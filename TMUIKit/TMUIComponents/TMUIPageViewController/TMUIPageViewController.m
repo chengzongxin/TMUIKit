@@ -123,10 +123,23 @@ static const CGFloat kSliderBarStartX = 0;
     [self addChildViewAtIndex:self.currentIndex animate:NO];
 }
 
+/// 抓取DataSource
 - (void)fetchDataSource{
+    [self fetchChildvcsDataSource];
+    
+    [self fetchHeaderViewDataSource];
+    
+    [self fetchTabsDataSource];
+}
+
+/// 刷新子VC
+- (void)fetchChildvcsDataSource{
     self.childTitles = [self titlesForChildViewControllers];
     self.childVCs = [self viewControllersForChildViewControllers];
-    
+}
+
+/// 刷新头部
+- (void)fetchHeaderViewDataSource{
     if ([self.dataSource respondsToSelector:@selector(heightForHeader)]) {
         self.headerHeight = [self.dataSource heightForHeader];
     }
@@ -136,6 +149,21 @@ static const CGFloat kSliderBarStartX = 0;
     }else{
         self.headerView = UIView.new;
     }
+}
+
+- (void)fetchTabsDataSource{
+    void (^tabExposeBlock)(void) = ^void() {
+        // 修复TMUISegmentControl组件曝光埋点,创建slider的时候，曝光block为空，这里重复曝光一下之前未曝光数据,后续滑动slider曝光不受影响
+        if (self.slideBar.itemExposeBlock) {
+            [self.slideBar.segmentButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj.x < self.view.width) {
+                    self.slideBar.itemExposeBlock(obj, idx);
+                }else{
+                    *stop = YES;
+                };
+            }];
+        }
+    };
     
     if ([self respondsToSelector:@selector(heightForSliderBar)]) {
         self.sliderBarHeight = [self.dataSource heightForSliderBar];
@@ -152,17 +180,7 @@ static const CGFloat kSliderBarStartX = 0;
         self.sliderBarHeight = self.slideBar.frame.size.height;
         self.sliderBarOriginBgColor = self.slideBar.backgroundColor;
     }
-    
-    // 修复TMUISegmentControl组件曝光埋点,创建slider的时候，曝光block为空，这里重复曝光一下之前未曝光数据,后续滑动slider曝光不受影响
-    if (self.slideBar.itemExposeBlock) {
-        [self.slideBar.segmentButtons enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.x < self.view.width) {
-                self.slideBar.itemExposeBlock(obj, idx);
-            }else{
-                *stop = YES;
-            };
-        }];
-    }
+    tabExposeBlock();
 }
 
 // 子视图布局
@@ -186,26 +204,26 @@ static const CGFloat kSliderBarStartX = 0;
         self.wrapperView.height = [self contentViewHeight];
     }
     
-    [self.wrapperView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.wrapperView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
     
     UIEdgeInsets contentInset = UIEdgeInsetsMake(self.headerHeight+self.sliderBarHeight, 0, 0, 0);
     self.wrapperView.contentInset = contentInset;
-    if (contentInset.top > self.view.bounds.size.height) {
-        // 当contentInset.top很高的时候，scrollview会自动滚动，这里需要重新定位到顶部
-        self.wrapperView.contentOffset = CGPointMake(0, -contentInset.top);
-    }
+    // 当contentInset.top很高的时候，scrollview会自动滚动，这里需要重新定位到顶部
+    self.wrapperView.contentOffset = CGPointMake(0, -contentInset.top);
+//    if (contentInset.top > self.view.bounds.size.height) {
+//    }
     self.wrapperView.contentSize = self.view.bounds.size;
     
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.wrapperView);
         make.top.mas_equalTo(-self.headerHeight-self.sliderBarHeight);
         make.height.mas_equalTo(self.headerHeight);
         make.width.mas_equalTo(self.view.mas_width);
     }];
     
-    [self.slideBar mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.slideBar mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.wrapperView.mas_left).offset(kSliderBarStartX);
         make.top.equalTo(self.headerView.mas_bottom);
         make.height.mas_equalTo(self.sliderBarHeight);
@@ -222,7 +240,7 @@ static const CGFloat kSliderBarStartX = 0;
         contentScrollHeight = self.view.bounds.size.height - [self safeAreaTop] - self.navBarHeight - self.sliderBarHeight - [self contentScrollBottomSafeArea];
     }
     
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.slideBar.mas_bottom).priorityHigh();
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(contentScrollHeight);
@@ -232,9 +250,6 @@ static const CGFloat kSliderBarStartX = 0;
         [self.headerView addSubview:self.effectView];
         // 这里先使用frame达到需求，设置约束会有偶现的bug，这里避免约束存在nil的情况，后续排查问题
         self.effectView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.headerHeight);
-//        [self.effectView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(self.headerView);  // headerView可能为空
-//        }];
     }
     
     // 修正slider距离顶部距离
@@ -300,6 +315,32 @@ static const CGFloat kSliderBarStartX = 0;
 }
 
 #pragma mark - Public
+
+- (void)reloadHeaderView{
+    [self.headerView tmui_removeAllSubviews];
+    [self.headerView removeFromSuperview];
+    self.headerView = nil;
+    [self.slideBar removeFromSuperview];
+    [self.contentView removeFromSuperview];
+    
+    [self fetchHeaderViewDataSource];
+    
+    [self addSubviews];
+    
+    [self makeConstraints];
+}
+
+- (void)reloadChildViewControllers{
+    self.currentIndex = 0;
+    [self.contentView tmui_removeAllSubviews];
+    self.contentView.contentSize = CGSizeZero;
+    self.contentView.contentOffset = CGPointZero;
+    [self fetchChildvcsDataSource];
+    [self fetchTabsDataSource];
+    [self.slideBar setSegmentTitles:self.childTitles];
+    [self.slideBar setSelectedIndex:0 animated:NO];
+    [self scrollToIndex:0 animate:NO];
+}
 
 - (void)scrollTo:(UIViewController *)vc{
     if (![vc isKindOfClass:[UIViewController class]]) return;
