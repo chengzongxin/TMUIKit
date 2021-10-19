@@ -44,14 +44,19 @@
         
         [self reloadData];
         
-        self.wrapperView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [self reload];
-            });
-        }];
-        self.wrapperView.mj_header.ignoredScrollViewContentInsetTop = [self heightForHeader]+44;
+        [self addRefreshHeader:nil];
     });
+}
+
+- (void)addRefreshHeader:(UIControl *)contorl{
+    
+    self.wrapperView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self reload];
+        });
+    }];
+    self.wrapperView.mj_header.ignoredScrollViewContentInsetTop = [self heightForHeader]+44;
 }
 
 - (void)reload{
@@ -71,6 +76,7 @@
     [self reloadData];
 }
 
+#pragma mark - TMUIPageViewController DataSource
 - (NSArray<__kindof UIViewController *> *)viewControllersForChildViewControllers{
     return self.vcs;
 }
@@ -80,15 +86,6 @@
 }
 
 - (void)segmentControlConfig:(THKSegmentControl *)control{
-//    control.frame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
-//    control.autoAlignmentCenter = YES;
-//    control.backgroundColor = [UIColor orangeColor];
-//    control.indicatorView.backgroundColor = UIColor.blueColor;
-//    control.indicatorView.layer.cornerRadius = 0.0;
-//    [control setTitleFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] forState:UIControlStateNormal];
-//    [control setTitleFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] forState:UIControlStateSelected];
-//    [control setTitleColor:UIColor.grayColor forState:UIControlStateNormal];
-//    [control setTitleColor:UIColor.greenColor forState:UIControlStateSelected];
     control.height = 44;
 }
 
@@ -106,7 +103,7 @@
     imgV.layer.cornerRadius = 50;
     imgV.layer.masksToBounds = YES;
     [imgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(100);
+        make.left.mas_equalTo(200);
         make.top.mas_equalTo(100);
         make.width.mas_equalTo(100);
         make.height.mas_equalTo(100);
@@ -114,7 +111,25 @@
     [imgV tmui_addSingerTapWithBlock:^{
         [TMShowBigImageViewController showBigImageWithImageView:imgV transitionStyle:THKTransitionStylePush];
     }];
-    [view addSubview:UISwitch.new];
+    
+    id attStr = AttStr(AttStr(@"Tab组件：\n").styles(h1),
+           AttStr(@"可在容器页添加刷新头部，子页面头部，尾部，添加刷新组件").styles(h2));
+    UILabel *lbl = Label.str(attStr).multiline.lineGap(10).xywh(10,50,300,100).leftAlignment.addTo(view).makeCons(^{
+        make.top.left.right.constants(20,20,20);
+    });
+    
+    UISwitch *switchControl = [[UISwitch alloc] init];
+    [switchControl addTarget:self action:@selector(addRefreshHeader:) forControlEvents:UIControlEventValueChanged];
+    switchControl.addTo(view).makeCons(^{
+        make.left.equal.view(lbl).left.constants(0);
+        make.top.equal.view(lbl).bottom.constants(20);
+    });
+    
+    Label.str(@"是否添加头部").styles(h1).addTo(view).makeCons(^{
+        make.left.equal.view(switchControl).right.constants(20);
+        make.centerY.equal.view(switchControl).centerY.constants(0);
+    });
+    
     return view;
 }
 
