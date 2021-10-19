@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) NSMutableArray *vcs;
 @property (nonatomic, strong) NSMutableArray *titles;
+@property (nonatomic, assign) CGFloat headerH;
 @property (nonatomic, strong) UILabel *label;
 @end
 
@@ -27,6 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"reload" style:UIBarButtonItemStyleDone target:self action:@selector(reload)];
+    
+    [self reload];
+}
+
+- (void)reload{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self reloadVCs];
         
@@ -48,7 +55,8 @@
 }
 
 - (CGFloat)heightForHeader{
-    return arc4random()%200 + 200;
+    _headerH = arc4random()%200 + 200;
+    return _headerH;
 }
 
 - (UIView *)viewForHeader{
@@ -99,7 +107,10 @@
             [self addRefreshHeader];
             break;
         case 2:
+        {
             [self reloadHeaderView];
+            self.wrapperView.mj_header.ignoredScrollViewContentInsetTop = _headerH + self.sliderBarHeight;
+        }
             break;
         case 3:
             [self reloadAllChildvcs];
@@ -116,7 +127,7 @@
             [self.wrapperView.mj_header endRefreshing];
         });
     }];
-    self.wrapperView.mj_header.ignoredScrollViewContentInsetTop = [self heightForHeader]+44;
+    self.wrapperView.mj_header.ignoredScrollViewContentInsetTop = _headerH + self.sliderBarHeight;
 }
 
 #pragma mark - 添加自定义头部视图
@@ -164,7 +175,7 @@
         make.top.equal.view(switchControl1).bottom.constants(20);
     });
     
-    Label.str(Str(@"刷新头部视图,当前高度，%.0f",[self heightForHeader])).styles(h1).addTo(view).makeCons(^{
+    Label.str(Str(@"刷新头部视图,当前高度，%.0f",_headerH)).styles(h1).addTo(view).makeCons(^{
         make.left.equal.view(switchControl2).right.constants(20);
         make.centerY.equal.view(switchControl2).centerY.constants(0);
     });
