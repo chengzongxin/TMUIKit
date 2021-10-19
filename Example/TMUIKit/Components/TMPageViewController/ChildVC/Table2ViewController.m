@@ -36,6 +36,7 @@
             [self.tableView reloadData];
         });
     }];
+    self.tableView.tmui_isAddRefreshControl = YES;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
