@@ -108,6 +108,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 //        NSLog(@"=========== KVO event end===========");
         
         if (_pin) {
+            // 头部固定后，锁定不允许头部继续往上滑动
             if (object == self) {
                 [self scrollView:self setContentOffset:CGPointMake(0, -_lockArea)];
             }else{
@@ -115,9 +116,23 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
             }
         }else{
             if (object == self) {
-//                [self scrollView:self setContentOffset:new];
+                // 当子scrollView包含下拉刷新头部组件，自身不往下滑动
+                if (_currentScrollView.tmui_isAddRefreshControl) {
+                    // 当包含有
+                    if (new.y < -self.contentInset.top) {
+                        new.y = -self.contentInset.top;
+                    }
+                    [self scrollView:self setContentOffset:new];
+                }else{
+//                    [self scrollView:self setContentOffset:new];
+                }
             }else{
-                [self scrollView:_currentScrollView setContentOffset:_currentScrollView.tmui_scrollViewTopPoint];
+                if (_currentScrollView.tmui_isAddRefreshControl) {
+                    // 当子scrollView包含下拉刷新头部组件，子scrollView可以继续往下滑动
+//                    [self scrollView:_currentScrollView setContentOffset:new];
+                }else{
+                    [self scrollView:_currentScrollView setContentOffset:_currentScrollView.tmui_scrollViewTopPoint];
+                }
             }
         }
     } else {
@@ -135,9 +150,17 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     UIScrollView *scrollView = (UIScrollView *)otherGestureRecognizer.view;
+    
+    if (![scrollView isKindOfClass:[UIScrollView class]]) {
+        return NO;
+    }
+    
+    if (scrollView.tmui_isWarpperNotScroll) {
+        return NO;
+    }
 
-    BOOL shouldScroll = scrollView != self && [scrollView isKindOfClass:[UIScrollView class]];
-
+    BOOL shouldScroll = scrollView != self;
+    
     if (shouldScroll) {
         [self addObservedView:scrollView];
         _currentScrollView = scrollView;
@@ -148,10 +171,6 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 }
 
 - (void)addObservedView:(UIScrollView *)scrollView{
-    if (scrollView.tmui_isWarpperNotScroll) {
-        return;
-    }
-    
     if (![self.observedViews containsObject:scrollView]) {
         [self.observedViews addObject:scrollView];
         [self addObserverToView:scrollView];
@@ -191,6 +210,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 
 @implementation UIScrollView (TMUI_PageComponent)
 TMUISynthesizeBOOLProperty(tmui_isWarpperNotScroll, setTmui_isWarpperNotScroll);
+TMUISynthesizeBOOLProperty(tmui_isAddRefreshControl, setTmui_isAddRefreshControl);
 - (CGPoint)tmui_scrollViewTopPoint{
     return CGPointMake(self.contentOffset.x, -self.contentInset.top);
 }
