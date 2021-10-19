@@ -135,9 +135,17 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     UIScrollView *scrollView = (UIScrollView *)otherGestureRecognizer.view;
+    
+    if (![scrollView isKindOfClass:[UIScrollView class]]) {
+        return NO;
+    }
+    
+    if (scrollView.tmui_isWarpperNotScroll) {
+        return NO;
+    }
 
-    BOOL shouldScroll = scrollView != self && [scrollView isKindOfClass:[UIScrollView class]];
-
+    BOOL shouldScroll = scrollView != self;
+    
     if (shouldScroll) {
         [self addObservedView:scrollView];
         _currentScrollView = scrollView;
@@ -148,10 +156,6 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 }
 
 - (void)addObservedView:(UIScrollView *)scrollView{
-    if (scrollView.tmui_isWarpperNotScroll) {
-        return;
-    }
-    
     if (![self.observedViews containsObject:scrollView]) {
         [self.observedViews addObject:scrollView];
         [self addObserverToView:scrollView];
