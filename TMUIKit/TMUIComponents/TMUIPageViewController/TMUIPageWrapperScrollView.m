@@ -86,18 +86,17 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
         CGPoint new = [[change objectForKey:NSKeyValueChangeNewKey] CGPointValue];
         CGPoint old = [[change objectForKey:NSKeyValueChangeOldKey] CGPointValue];
         CGFloat diff = old.y - new.y;
+        CGFloat diffX = old.x - new.x;
         
+        if (!_pin && fabs(diffX) > 5) {
+            // 翻页，需要把之前的scroll内容滑动顶部
+            [self scrollSubScrollViewToTop];
+        }
         
         if (diff == 0.0 || !_isObserving) { return ;}
         
-        BOOL isContentOffset = NO;
-        
-        if (_currentScrollView) {
-            isContentOffset = _currentScrollView.contentOffset.y > -_currentScrollView.contentInset.top; // 子scroll有offset
-        }
-        
         if (object == self) {
-            _pin = (new.y >= -_lockArea) || (old.y == -_lockArea && isContentOffset);
+            _pin = (new.y >= -_lockArea) || (old.y == -_lockArea && _currentScrollView && !_currentScrollView.tmui_isAtTop);
         }
         
 //        NSLog(@"=========== KVO event begin===========");
@@ -116,9 +115,8 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
             }
         }else{
             if (object == self) {
-                // 当子scrollView包含下拉刷新头部组件，自身不往下滑动，（去除弹簧效果，不下拉刷新，使子VC开启下拉刷新）
                 if (_currentScrollView.tmui_isAddRefreshControl && self.tmui_isAtTop) {
-                    // 当包含有
+                    // 当子scrollView包含下拉刷新头部组件，自身不往下滑动，（去除弹簧效果，不下拉刷新，使子VC开启下拉刷新）
                     if (new.y < -self.contentInset.top) {
                         new.y = -self.contentInset.top;
                     }
@@ -127,8 +125,8 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 //                    [self scrollView:self setContentOffset:new];
                 }
             }else{
-                // 当子scrollView包含下拉刷新头部组件，子scrollView可以继续往下滑动,（开始下拉刷新）
                 if (_currentScrollView.tmui_isAddRefreshControl && self.tmui_isAtTop) {
+                    // 当子scrollView包含下拉刷新头部组件，子scrollView可以继续往下滑动,（开始下拉刷新）
 //                    [self scrollView:_currentScrollView setContentOffset:new];
                 }else{
                     [self scrollView:_currentScrollView setContentOffset:_currentScrollView.tmui_topPoint];
@@ -191,7 +189,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
     [self.observedViews removeAllObjects];
 }
 
-- (void) removeObserverFromView:(UIScrollView *)scrollView{
+- (void)removeObserverFromView:(UIScrollView *)scrollView{
     @try {
         [scrollView removeObserver:self
                         forKeyPath:NSStringFromSelector(@selector(contentOffset))
@@ -200,6 +198,14 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
     @catch (NSException *exception) {}
 }
 
+
+- (void)scrollSubScrollViewToTop{
+    [self.observedViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj != self) {
+            obj.contentOffset = obj.tmui_topPoint;
+        }
+    }];
+}
 
 - (BOOL)isPin{
     return _pin;
