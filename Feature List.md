@@ -1,6 +1,8 @@
 [TOC]
 
-
+# TMUIKit 
+- TMUIKit iOS 是一个致力于提高项目 UI 开发效率的组件库，为工程提供一些通用的UI基础库及功能组件库以及一些通用的工具库。
+- 旨在帮助快速高效的构建工程的基础设计元素，以及统一维护基础元素的版本兼容性处理，助于提高开发效率和项目质量。
 
 # TMUICore
 <!-- TMUIKit核心模块，提供基础的设备宏、工具类、全局配置等 -->
@@ -74,51 +76,6 @@
 
 - 弱持有对象容器，避免强引用的同时，也避免野指针crash。
 - 适用定时器、弱关联属性
-
-# TMUIWidgets
-<!-- TMUIKit基础模块，主要继承UIKit，扩展组件的自定义实现，实现更加强大的功能 -->
-#### TMUIButton
-
-- 支持让文字和图片自动跟随 tintColor 变化（系统的 UIButton 默认是不响应 tintColor 的）
-- highlighted、disabled 状态均通过改变整个按钮的alpha来表现，无需分别设置不同 state 下的 titleColor、image。
-- 支持点击时改变背景色颜色（highlightedBackgroundColor）
-- 支持点击时改变边框颜色（highlightedBorderColor）
-- 支持设置图片相对于 titleLabel 的位置（imagePosition）
-- 支持设置图片和 titleLabel 之间的间距，无需自行调整 titleEdgeInests、imageEdgeInsets（spacingBetweenImageAndTitle）
-
-#### TMUILabel
-
-- 控制label内容的padding
-- 设置是否需要长按复制的功能
-
-#### TMUITextField
-
-- 自定义 placeholderColor
-- 支持限制输入的文字的长度、超过时回调
-- 设置TextField内容Inset
-- clearButton位置偏移
-
-#### TMUITextView
-
-- 支持 placeholder 并支持更改 placeholderColor；若使用了富文本文字，则 placeholder 的样式也会跟随文字的样式（除了 placeholder 颜色）
-- 支持在文字发生变化时计算内容高度并通知 delegate
-- 支持限制输入框最大高度，一般配合第 2 点使用
-- 支持限制输入的文本的最大长度，默认不限制
-- 修正系统 UITextView 在输入时自然换行的时候，contentOffset 的滚动位置没有考虑 textContainerInset.bottom
-
-#### TMUISlider
-
-- 修改背后导轨的高度
-- 修改圆点的大小
-- 修改圆点的阴影样式
-
-#### TMUISegmentedControl
-
-- TMUISegmentedControl，继承自 UISegmentedControl
-
-- 如果需要更大程度地修改样式，比如说字体大小，选中的 segment 的文字颜色等等
-
-- TMUISegmentedControl 也同样支持使用图片来做样式。
 
 
 
@@ -411,3 +368,48 @@
 
 #### TMToast
 - Toast组件
+
+## TMUIWidgets
+<!-- TMUIKit基础模块，主要继承UIKit，扩展组件的自定义实现，实现更加强大的功能 -->
+#### TMUIButton
+
+- 支持让文字和图片自动跟随 tintColor 变化（系统的 UIButton 默认是不响应 tintColor 的）
+- highlighted、disabled 状态均通过改变整个按钮的alpha来表现，无需分别设置不同 state 下的 titleColor、image。
+- 支持点击时改变背景色颜色（highlightedBackgroundColor）
+- 支持点击时改变边框颜色（highlightedBorderColor）
+- 支持设置图片相对于 titleLabel 的位置（imagePosition）
+- 支持设置图片和 titleLabel 之间的间距，无需自行调整 titleEdgeInests、imageEdgeInsets（spacingBetweenImageAndTitle）
+
+#### TMUILabel
+
+- 控制label内容的padding
+- 设置是否需要长按复制的功能
+
+#### TMUITextField
+
+- 自定义 placeholderColor
+- 支持限制输入的文字的长度、超过时回调
+- 设置TextField内容Inset
+- clearButton位置偏移
+
+#### TMUITextView
+
+- 支持 placeholder 并支持更改 placeholderColor；若使用了富文本文字，则 placeholder 的样式也会跟随文字的样式（除了 placeholder 颜色）
+- 支持在文字发生变化时计算内容高度并通知 delegate
+- 支持限制输入框最大高度，一般配合第 2 点使用
+- 支持限制输入的文本的最大长度，默认不限制
+- 修正系统 UITextView 在输入时自然换行的时候，contentOffset 的滚动位置没有考虑 textContainerInset.bottom
+
+#### TMUISlider
+
+- 修改背后导轨的高度
+- 修改圆点的大小
+- 修改圆点的阴影样式
+
+#### TMUISegmentedControl
+
+- TMUISegmentedControl，继承自 UISegmentedControl
+
+- 如果需要更大程度地修改样式，比如说字体大小，选中的 segment 的文字颜色等等
+
+- TMUISegmentedControl 也同样支持使用图片来做样式。

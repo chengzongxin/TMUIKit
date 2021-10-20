@@ -292,7 +292,7 @@
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.7 options:UIViewAnimationOptionCurveLinear animations:^{
         fromVC.view.alpha = 0;
-        self.animateImageView.frame = UIScreen.mainScreen.bounds;
+        self.animateImageView.frame = toVC.view.frame;
     } completion:^(BOOL finished) {
         toVC.view.frame = UIScreen.mainScreen.bounds;
         [containerView addSubview:toVC.view];
