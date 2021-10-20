@@ -605,7 +605,7 @@ static const CGFloat kSliderBarStartX = 0;
         _wrapperView = [[TMUIPageWrapperScrollView alloc] init];
         _wrapperView.backgroundColor = [self contentViewBackgroundColor];
         _wrapperView.showsHorizontalScrollIndicator = NO;
-        _wrapperView.t_delegate = self;
+        _wrapperView.delegate = self;
     }
     return _wrapperView;
 }

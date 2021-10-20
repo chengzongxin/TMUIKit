@@ -55,7 +55,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 
 - (void)scrollToTop:(BOOL)animated{
     _pin = NO;
-    [self setContentOffset:self.tmui_scrollViewTopPoint animated:animated];
+    [self setContentOffset:self.tmui_topPoint animated:animated];
 }
 
 
@@ -115,10 +115,9 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 //                [self scrollView:_currentScrollView setContentOffset:new];
             }
         }else{
-            BOOL top = self.contentOffset.y <= -self.contentInset.top; // 是否滑动到顶部
             if (object == self) {
-                // 当子scrollView包含下拉刷新头部组件，自身不往下滑动
-                if (_currentScrollView.tmui_isAddRefreshControl && top) {
+                // 当子scrollView包含下拉刷新头部组件，自身不往下滑动，（去除弹簧效果，不下拉刷新，使子VC开启下拉刷新）
+                if (_currentScrollView.tmui_isAddRefreshControl && self.tmui_isAtTop) {
                     // 当包含有
                     if (new.y < -self.contentInset.top) {
                         new.y = -self.contentInset.top;
@@ -128,11 +127,11 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 //                    [self scrollView:self setContentOffset:new];
                 }
             }else{
-                if (_currentScrollView.tmui_isAddRefreshControl && top) {
-                    // 当子scrollView包含下拉刷新头部组件，子scrollView可以继续往下滑动
+                // 当子scrollView包含下拉刷新头部组件，子scrollView可以继续往下滑动,（开始下拉刷新）
+                if (_currentScrollView.tmui_isAddRefreshControl && self.tmui_isAtTop) {
 //                    [self scrollView:_currentScrollView setContentOffset:new];
                 }else{
-                    [self scrollView:_currentScrollView setContentOffset:_currentScrollView.tmui_scrollViewTopPoint];
+                    [self scrollView:_currentScrollView setContentOffset:_currentScrollView.tmui_topPoint];
                 }
             }
         }
@@ -212,7 +211,10 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 @implementation UIScrollView (TMUI_PageComponent)
 TMUISynthesizeBOOLProperty(tmui_isWarpperNotScroll, setTmui_isWarpperNotScroll);
 TMUISynthesizeBOOLProperty(tmui_isAddRefreshControl, setTmui_isAddRefreshControl);
-- (CGPoint)tmui_scrollViewTopPoint{
+- (CGPoint)tmui_topPoint{
     return CGPointMake(self.contentOffset.x, -self.contentInset.top);
+}
+- (BOOL)tmui_isAtTop{
+    return self.contentOffset.y <= -self.contentInset.top;
 }
 @end
