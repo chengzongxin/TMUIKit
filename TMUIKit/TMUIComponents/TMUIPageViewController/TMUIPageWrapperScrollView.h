@@ -10,8 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TMUIPageWrapperScrollView : UIScrollView
-/// 代理
-@property (nonatomic, weak) id<UIScrollViewDelegate> t_delegate;
 /// 头部固定区域
 @property (nonatomic, assign) CGFloat lockArea;
 /// 是否头部固定
@@ -22,14 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface UIScrollView (TMUI_PageComponent)
-
+#pragma mark - 私有属性
 /// 滑动某一个scrollView时，禁止Wrapper联动滑动，通常在子VC中有弹窗类scrollView时，需要禁止弹窗scrollView的联动Wrapper，或者有包多层scrollView时使用
 @property (nonatomic, assign) BOOL tmui_isWarpperNotScroll;
-/// 是否包含刷新头部
+/// 是否包含刷新头部组件、如果子VC需要下拉，则需要设置此值，否则只会响应父scrollView的下拉刷新
 @property (nonatomic, assign) BOOL tmui_isAddRefreshControl;
-/// Wrapper顶部坐标
-@property (nonatomic, assign, readonly) CGPoint tmui_scrollViewTopPoint;
-
+#pragma mark - 快捷访问方法
+/// scrollView顶部坐标
+@property (nonatomic, assign, readonly) CGPoint tmui_topPoint;
+/// scrollView是否在顶部
+@property (nonatomic, assign, readonly) BOOL tmui_isAtTop;
 @end
 
 NS_ASSUME_NONNULL_END

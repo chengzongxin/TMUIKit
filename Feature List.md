@@ -348,9 +348,11 @@
 #### TMUIPageViewController
 
 - 数据源驱动代理设计模式
-- 内部支持滑动吸顶header
+- 支持多种视图类型，UITableView、UICollectionView、UIScrollView、UIView等
+- 内部支持滑动吸顶header，支持系统导航栏、自定义导航栏、无导航栏
 - 支持自定义tabs
-- 支持动态tabs刷新子VC和header
+- 支持全局刷新、局部刷新（只刷新头部、tabs、vcs）
+- 支持全局下拉刷新、局部下拉刷新、上拉加载
 
 #### TMShowBigImageViewController
 - 大图浏览组件，提供基础的转场动画和大图切换功能
