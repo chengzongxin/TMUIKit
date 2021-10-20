@@ -61,7 +61,7 @@
 }
 
 - (void)debug{
-    [self.navigationController pushViewController:[NSClassFromString(@"UILabelTMUIViewController2") new] animated:YES];
+    [self.navigationController pushViewController:[NSClassFromString(@"TMUIDebugViewController") new] animated:YES];
 }
 
 @end

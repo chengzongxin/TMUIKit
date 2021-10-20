@@ -115,9 +115,10 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 //                [self scrollView:_currentScrollView setContentOffset:new];
             }
         }else{
+            BOOL top = self.contentOffset.y <= -self.contentInset.top; // 是否滑动到顶部
             if (object == self) {
                 // 当子scrollView包含下拉刷新头部组件，自身不往下滑动
-                if (_currentScrollView.tmui_isAddRefreshControl) {
+                if (_currentScrollView.tmui_isAddRefreshControl && top) {
                     // 当包含有
                     if (new.y < -self.contentInset.top) {
                         new.y = -self.contentInset.top;
@@ -127,7 +128,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 //                    [self scrollView:self setContentOffset:new];
                 }
             }else{
-                if (_currentScrollView.tmui_isAddRefreshControl) {
+                if (_currentScrollView.tmui_isAddRefreshControl && top) {
                     // 当子scrollView包含下拉刷新头部组件，子scrollView可以继续往下滑动
 //                    [self scrollView:_currentScrollView setContentOffset:new];
                 }else{
