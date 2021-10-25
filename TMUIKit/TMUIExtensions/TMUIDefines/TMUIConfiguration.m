@@ -132,7 +132,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 - (void)sendAnalyticsWithQuery:(NSString *)query {
     NSString *identifier = [NSBundle mainBundle].bundleIdentifier.tmui_stringByEncodingUserInputQuery;
     NSString *displayName = ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"] ?: [NSBundle mainBundle].infoDictionary[@"CFBundleName"])).tmui_stringByEncodingUserInputQuery;
-    NSString *TMUIVersion = @"1.1.3".tmui_stringByEncodingUserInputQuery;// 如果不以 framework 方式引入 TMUI 的话，是无法通过 CFBundleShortVersionString 获取到 TMUI 所在的 bundle 的版本号的，所以这里改为用脚本生成的变量来获取
+    NSString *TMUIVersion = @"1.1.0".tmui_stringByEncodingUserInputQuery;// 如果不以 framework 方式引入 TMUI 的话，是无法通过 CFBundleShortVersionString 获取到 TMUI 所在的 bundle 的版本号的，所以这里改为用脚本生成的变量来获取
     NSString *queryString = [NSString stringWithFormat:@"appId=%@&appName=%@&version=%@&platform=iOS", identifier, displayName, TMUIVersion];
     if (query.length > 0) queryString = [NSString stringWithFormat:@"%@&%@", queryString, query];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://tmuiteam.com/analytics/usageReport"]];
@@ -294,7 +294,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     self.needsBackBarButtonItemTitle = YES;
     self.preventConcurrentNavigationControllerTransitions = YES;
     self.shouldFixTabBarSafeAreaInsetsBug = YES;
-//    self.sendAnalyticsToTMUITeam = YES;
+    self.sendAnalyticsToTMUITeam = NO;
 }
 
 #pragma mark - Switch Setter

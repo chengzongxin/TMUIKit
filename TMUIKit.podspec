@@ -214,6 +214,11 @@ Pod::Spec.new do |s|
       ss.subspec 'TMUIBadge' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
       end
+
+      # TMUIPageViewController
+      ss.subspec 'TMUIPageViewController' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
+      end
       
     ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
 
@@ -221,10 +226,6 @@ Pod::Spec.new do |s|
     #  ss.subspec 'TMUITableView' do |sss|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
     #  end
-
-     ss.subspec 'TMUIPageViewController' do |sss|
-       sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
-     end
 
     #  ss.subspec 'TMShowBigImageController' do |sss|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'

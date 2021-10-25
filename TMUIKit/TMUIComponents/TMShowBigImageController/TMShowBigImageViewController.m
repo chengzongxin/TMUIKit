@@ -8,6 +8,7 @@
 #import "TMShowBigImageViewController.h"
 #import "TMShowImageAnimatorTransition.h"
 #import "UIView+TMUI.h"
+#import <Masonry.h>
 
 @interface TMShowBigImageViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -40,6 +41,9 @@
     }else{
         [self.view addSubview:self.imageView];
         self.imageView.image = self.image;
+        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
     }
 }
 
@@ -102,7 +106,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(UICollectionViewCell.class) forIndexPath:indexPath];
-    
+    cell.backgroundColor = UIColor.blackColor;
     UIImageView *imgV = (UIImageView *)[cell viewWithTag:888];
     if (!imgV) {
         imgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -147,7 +151,7 @@
 
 - (UIImageView *)imageView{
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        _imageView = [[UIImageView alloc] init];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _imageView;
