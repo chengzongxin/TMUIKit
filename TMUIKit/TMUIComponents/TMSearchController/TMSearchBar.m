@@ -173,7 +173,14 @@ TMUI_DEBUG_Code_Dealloc_Other(
         UITextRange *selectedRange = [_textField markedTextRange];
         UITextPosition *position = [_textField positionFromPosition:selectedRange.start offset:0];
         if (position) {
-            //处于拼音输入且还未确认汉字的状态，忽略此输入过程中的临时变化
+            //处于拼音输入且还未确认汉字的状态
+            if ([self.delegate respondsToSelector:@selector(tmSearchBar:textDidChangeWhenPinyinEditing:)]) {
+                NSString *str = [_textField.text tmui_trimAllSpace];
+                //stringByReplacingOccurrencesOfString替换不了【处于拼音输入且还未确认汉字的状态（例如：ke ting）】之间的空格
+                NSArray *array = [str componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                str = [array componentsJoinedByString:@""];
+                [self.delegate tmSearchBar:self textDidChangeWhenPinyinEditing:str];
+            }
             return;
         }
         if ([self.delegate respondsToSelector:@selector(tmSearchBar:textDidChange:)]) {
