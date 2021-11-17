@@ -27,5 +27,5 @@ Pod::Spec.new do |s|
   }
     
   s.dependency 'Masonry', '1.1.0'
-  s.dependency 'TBasicLib', '0.8.67'
+ 
 end

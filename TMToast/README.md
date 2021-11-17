@@ -11,6 +11,7 @@
 # TMToast 1.1.0
 ## 修改以下几点
 - 引入TBasicLib 库
-- 替换对`TMUI_DEBUG_Code`宏引用，替换为`BASIC_DEBUG_Code`
-- 替换`tmui_safeAreaTopInset`内联函数，添加相同功能`INSafeAreaBottomInset`
+- 替换对`TMUI_DEBUG_Code`宏引用，替换为`DEBUG_Code`
+- 替换`tmui_safeAreaTopInset`内联函数，添加相同功能`SafeAreaBottomInset`
+- 移除对`TBasicLib`库依赖
 
