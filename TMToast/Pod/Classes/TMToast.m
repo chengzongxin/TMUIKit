@@ -7,7 +7,6 @@
 
 #import "TMToast.h"
 #import <Masonry/Masonry.h>
-#import "TBasicLib.h"
 
 @interface TMToastView : UIView
 @property (nonatomic, strong)UIVisualEffectView *effectView;
@@ -17,6 +16,19 @@
 @end
 
 @implementation TMToastView
+
+#define DEBUG_Code(...) \
+    __VA_ARGS__;
+
+NS_INLINE CGFloat SafeAreaBottomInset(){
+    CGFloat bottom = 0;
+    if (@available(iOS 11.0, *)) {
+        UIWindow *currentWindow =[[UIApplication sharedApplication].windows firstObject];
+        bottom = currentWindow.safeAreaInsets.bottom;
+    }
+    return bottom;
+}
+
 
 + (instancetype)toastViewWithString:(NSString *)str {
     TMToastView *view = [[self alloc] init];
@@ -79,7 +91,7 @@
         make.trailing.mas_lessThanOrEqualTo(-50);
         make.height.mas_greaterThanOrEqualTo(34);
         make.centerX.mas_equalTo(window.mas_centerX);
-        make.top.mas_equalTo(INSafeAreaBottomInset() + 44);
+        make.top.mas_equalTo(SafeAreaBottomInset() + 44);
     }];
     [self.superview setNeedsUpdateConstraints];
     [self.superview updateConstraints];
@@ -89,7 +101,7 @@
     [UIView animateWithDuration:0.4 animations:^{
         self.alpha = 1;
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(INSafeAreaBottomInset() + 44 + 54);
+            make.top.mas_equalTo(SafeAreaBottomInset() + 44 + 54);
         }];
         [self.superview setNeedsUpdateConstraints];
         [self.superview updateConstraints];
@@ -144,21 +156,21 @@ static NSTimeInterval s_duration = 1.0;
 
 + (void)toast:(NSString *)str hideAfterDelay:(NSTimeInterval)delay hideFinishBlock:(void(^_Nullable)(void))block {
     if (!str) {
-        BASIC_DEBUG_Code(
+        DEBUG_Code(
                 NSLog(@"toast 'str' must not be nil.");
                 )
         return;
     }
     
     if (![str isKindOfClass:[NSString class]]) {
-        BASIC_DEBUG_Code(
+        DEBUG_Code(
                 NSLog(@"toast 'str' must be a string.");
                 )
         return;
     }
     
     if (str.length == 0) {
-        BASIC_DEBUG_Code(
+        DEBUG_Code(
                 NSLog(@"toast 'str' must not be empty.");
                 )
         return;
@@ -172,21 +184,21 @@ static NSTimeInterval s_duration = 1.0;
 
 + (void)toastAttributedString:(NSAttributedString *)attrStr hideAfterDelay:(NSTimeInterval)delay hideFinishBlock:(void(^_Nullable)(void))block {
     if (!attrStr) {
-        BASIC_DEBUG_Code(
+        DEBUG_Code(
                 NSLog(@"toast 'attrStr' must not be nil.");
                 )
         return;
     }
     
     if (![attrStr isKindOfClass:[NSAttributedString class]]) {
-        BASIC_DEBUG_Code(
+        DEBUG_Code(
                 NSLog(@"toast 'attrStr' must be a attributedString.");
                 )
         return;
     }
     
     if (attrStr.length == 0) {
-        BASIC_DEBUG_Code(
+        DEBUG_Code(
                 NSLog(@"toast 'attrStr' must not be empty.");
                 )
         return;

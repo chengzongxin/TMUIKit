@@ -1,6 +1,6 @@
 {
   "name": "TMToast",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "summary": "实现toast弹出视图",
   "description": "基于TMUIKit库抽离实现",
   "homepage": "http://repo.we.com/tubroker/tmuikit",
@@ -25,9 +25,6 @@
   "dependencies": {
     "Masonry": [
       "1.1.0"
-    ],
-    "TBasicLib": [
-      "0.8.67"
     ]
   },
   "subspecs": [
