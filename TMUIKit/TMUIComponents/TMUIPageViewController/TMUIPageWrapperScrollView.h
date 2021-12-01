@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly, getter=isPin) BOOL pin;
 /// 滑动到顶部
 - (void)scrollToTop:(BOOL)animated;
+/// 子VC下拉后左右滑动，需要把内部scrollView置顶
+- (void)childViewControllerDidChanged:(UIViewController *)vc;
 
 @end
 

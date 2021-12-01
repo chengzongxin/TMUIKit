@@ -86,12 +86,6 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
         CGPoint new = [[change objectForKey:NSKeyValueChangeNewKey] CGPointValue];
         CGPoint old = [[change objectForKey:NSKeyValueChangeOldKey] CGPointValue];
         CGFloat diff = old.y - new.y;
-        CGFloat diffX = old.x - new.x;
-        
-        if (!_pin && fabs(diffX) > 5) {
-            // 翻页，需要把之前的scroll内容滑动顶部
-            [self scrollSubScrollViewToTop];
-        }
         
         if (diff == 0.0 || !_isObserving) { return ;}
         
@@ -198,10 +192,12 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
     @catch (NSException *exception) {}
 }
 
-
-- (void)scrollSubScrollViewToTop{
+- (void)childViewControllerDidChanged:(UIViewController *)vc{
+    if (_pin) {
+        return;
+    }
     [self.observedViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj != self) {
+        if (obj.tmui_viewController == vc) {
             obj.contentOffset = obj.tmui_topPoint;
         }
     }];
