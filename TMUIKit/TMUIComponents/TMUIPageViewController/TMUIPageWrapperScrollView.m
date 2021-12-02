@@ -9,8 +9,9 @@
 #import "UIView+TMUI.h"
 #import "TMUICore.h"
 
-@interface TMUIPageWrapperScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
-{
+static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScrollViewContentOffsetKVOContext;
+
+@interface TMUIPageWrapperScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>{
     __weak UIScrollView *_currentScrollView;
     BOOL _isObserving;
 }
@@ -23,22 +24,12 @@
 
 
 @implementation TMUIPageWrapperScrollView
-
-- (NSMutableArray *)observedViews {
-    if (!_observedViews) {
-        _observedViews = [NSMutableArray array];
-    }
-    return _observedViews;
-}
-
-static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScrollViewContentOffsetKVOContext;
-
+@dynamic delegate;
 
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame: frame];
     if (self) {
-        self.delegate = self;
         self.showsVerticalScrollIndicator = NO;
         self.directionalLockEnabled = YES;
         self.bounces = YES;
@@ -54,7 +45,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 
 
 - (void)scrollToTop:(BOOL)animated{
-    _pin = NO;
+    self.pin = NO;
     [self setContentOffset:self.tmui_topPoint animated:animated];
 }
 
@@ -90,7 +81,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
         if (diff == 0.0 || !_isObserving) { return ;}
         
         if (object == self) {
-            _pin = (new.y >= -_lockArea) || (old.y == -_lockArea && _currentScrollView && !_currentScrollView.tmui_isAtTop);
+            self.pin = (new.y >= -_lockArea) || (old.y == -_lockArea && _currentScrollView && !_currentScrollView.tmui_isAtTop);
         }
         
 //        NSLog(@"=========== KVO event begin===========");
@@ -203,9 +194,26 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
     }];
 }
 
+- (void)doCallBackPinChanged:(BOOL)pin{
+    if ([self.delegate respondsToSelector:@selector(pageWrapperScrollView:pin:)]) {
+        [self.delegate pageWrapperScrollView:self pin:pin];
+    }
+}
+
+
+- (void)setPin:(BOOL)pin{
+    if (_pin != pin) {
+        _pin = pin;
+        [self doCallBackPinChanged:pin];
+    }
+}
+
 - (BOOL)isPin{
     return _pin;
 }
+
+
+TMUI_PropertyLazyLoad(NSMutableArray, observedViews)
 
 @end
 

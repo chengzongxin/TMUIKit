@@ -9,11 +9,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TMUIPageWrapperScrollView;
+@protocol TMUIPageWrapperScrollViewDelegate <UIScrollViewDelegate>
+
+@optional
+/// 吸顶状态改变回调
+- (void)pageWrapperScrollView:(TMUIPageWrapperScrollView *)pageWrapperScrollView pin:(BOOL)pin;
+
+@end
+
 @interface TMUIPageWrapperScrollView : UIScrollView
 /// 头部固定区域
 @property (nonatomic, assign) CGFloat lockArea;
 /// 是否头部固定
-@property (nonatomic, assign, readonly, getter=isPin) BOOL pin;
+@property (nonatomic, assign, readonly) BOOL pin;
+
+@property (nullable, nonatomic, weak) id<TMUIPageWrapperScrollViewDelegate> delegate;
 /// 滑动到顶部
 - (void)scrollToTop:(BOOL)animated;
 /// 子VC下拉后左右滑动，需要把内部scrollView置顶
