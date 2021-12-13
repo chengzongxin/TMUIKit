@@ -854,7 +854,6 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				16B12CD981E3544E2489EEE4 /* [CP] Embed Pods Frameworks */,
 				50D5BA5C61224A1B2402313F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -900,9 +899,10 @@
 						ProvisioningStyle = Automatic;
 					};
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = ARGK844GXV;
+						DevelopmentTeam = SM5GN8GTPY;
 					};
 					6003F5AD195388D20070C39A = {
+						DevelopmentTeam = SM5GN8GTPY;
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 				};
@@ -958,24 +958,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16B12CD981E3544E2489EEE4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh",
-				"${PODS_ROOT}/LookinServer/LookinServer.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		16E8000425EE3EC9005D8E4B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1001,6 +983,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TMToast/TMToastAssets.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMEmptyUIAssets.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMSearchUIAssets.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMToastAssets.bundle",
@@ -1008,9 +991,9 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMEmptyUIAssets.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMSearchUIAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1305,7 +1288,7 @@
 			baseConfigurationReference = F3C0677E9362D3549CF5BF9B /* Pods-TMUIKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ARGK844GXV;
+				DEVELOPMENT_TEAM = SM5GN8GTPY;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMUIKit/Supporting Files/TMUIKit-Prefix.pch";
 				INFOPLIST_FILE = "TMUIKit/Supporting Files/TMUIKit-Info.plist";
@@ -1323,7 +1306,7 @@
 			baseConfigurationReference = D0348311BFA52F2FA55C0FFA /* Pods-TMUIKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ARGK844GXV;
+				DEVELOPMENT_TEAM = SM5GN8GTPY;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMUIKit/Supporting Files/TMUIKit-Prefix.pch";
 				INFOPLIST_FILE = "TMUIKit/Supporting Files/TMUIKit-Info.plist";
@@ -1341,6 +1324,7 @@
 			baseConfigurationReference = D4F0BDB1986A6BA6E763B1D6 /* Pods-TMUIKit_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = SM5GN8GTPY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1366,6 +1350,7 @@
 			baseConfigurationReference = AC673D62112E43A82F988789 /* Pods-TMUIKit_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = SM5GN8GTPY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
