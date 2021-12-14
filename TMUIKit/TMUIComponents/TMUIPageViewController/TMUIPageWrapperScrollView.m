@@ -8,7 +8,6 @@
 #import "TMUIPageWrapperScrollView.h"
 #import "UIView+TMUI.h"
 #import "TMUICore.h"
-#import "NSObject+TMUI.h"
 
 static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScrollViewContentOffsetKVOContext;
 
@@ -83,8 +82,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
         
         if (object == self) {
             self.pin = (new.y >= -_lockArea) || (old.y == -_lockArea && _currentScrollView && !_currentScrollView.tmui_isAtTop);
-            [self tmui_bindDouble:diff forKey:@"diff"];
-            [NSNotificationCenter.defaultCenter postNotificationName:@"TMUIPageWrapperScrollViewContentOffsetRealChange" object:self];
+            [self doCallBackRealChanged:diff];
         }
         
 //        NSLog(@"=========== KVO event begin===========");
@@ -203,6 +201,12 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
     }
 }
 
+- (void)doCallBackRealChanged:(CGFloat)diff{
+    if ([self.delegate respondsToSelector:@selector(pageWrapperScrollViewRealChanged:diff:)]) {
+        [self.delegate pageWrapperScrollViewRealChanged:self diff:diff];
+    }
+}
+
 
 - (void)setPin:(BOOL)pin{
     if (_pin != pin) {
@@ -228,6 +232,6 @@ TMUISynthesizeBOOLProperty(tmui_isAddRefreshControl, setTmui_isAddRefreshControl
     return CGPointMake(self.contentOffset.x, -self.contentInset.top);
 }
 - (BOOL)tmui_isAtTop{
-    return self.contentOffset.y <= -self.contentInset.top;
+    return (int)self.contentOffset.y <= -(int)self.contentInset.top;
 }
 @end

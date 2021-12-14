@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 /// 吸顶状态改变回调
 - (void)pageWrapperScrollView:(TMUIPageWrapperScrollView *)pageWrapperScrollView pin:(BOOL)pin;
+/// 真实滑动（不被吸顶影响的滑动事件）
+- (void)pageWrapperScrollViewRealChanged:(TMUIPageWrapperScrollView *)pageWrapperScrollView diff:(CGFloat)diff;
 
 @end
 
