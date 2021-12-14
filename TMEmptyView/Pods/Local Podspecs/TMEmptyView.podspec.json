@@ -1,0 +1,40 @@
+{
+  "name": "TMEmptyView",
+  "version": "1.0.0",
+  "summary": "实现自定义空界面占位视图",
+  "description": "基于TMUIKit库抽离实现",
+  "homepage": "http://repo.we.com/tubroker/tmuikit",
+  "license": "MIT",
+  "authors": {
+    "jerry.jiang": "jerry.jiang@corp.to8to.com"
+  },
+  "source": {
+    "git": "http://repo.we.com/ios/tbtrepo.git",
+    "commit": "9cd963a9"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/**/*.{h,m}",
+  "resource_bundles": {
+    "TMEmptyUIAssets": [
+      "Pod/Resource/**"
+    ]
+  },
+  "dependencies": {
+    "Masonry": [
+      "1.1.0"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Content",
+      "source_files": "Pod/Content/*"
+    },
+    {
+      "name": "Resources",
+      "source_files": "Pod/Resource/*.png"
+    }
+  ]
+}

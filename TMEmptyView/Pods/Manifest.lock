@@ -1,0 +1,29 @@
+PODS:
+  - Masonry (1.1.0)
+  - TMEmptyView (1.0.0):
+    - Masonry (= 1.1.0)
+    - TMEmptyView/Content (= 1.0.0)
+    - TMEmptyView/Resources (= 1.0.0)
+  - TMEmptyView/Content (1.0.0):
+    - Masonry (= 1.1.0)
+  - TMEmptyView/Resources (1.0.0):
+    - Masonry (= 1.1.0)
+
+DEPENDENCIES:
+  - TMEmptyView (from `TMEmptyView.podspec`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Masonry
+
+EXTERNAL SOURCES:
+  TMEmptyView:
+    :path: TMEmptyView.podspec
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  TMEmptyView: 011564612ba9998e396162680dbbf5473ab33a6f
+
+PODFILE CHECKSUM: 1655396e8e661d72500f77a2828ce0c04f510bda
+
+COCOAPODS: 1.10.0
