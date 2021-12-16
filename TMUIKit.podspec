@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '1.1.4'
+  s.version          = '1.1.12'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -167,11 +167,10 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
       end
       
-      
       ss.subspec 'TMPopoverView' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMPopoverView/*.{h,m}'
       end
-            
+      
       ss.subspec 'TMSearchController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
         sss.subspec 'Private' do |ssss|
@@ -197,7 +196,7 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
       end
 
-      # TMUIPageViewController
+      # TMUIPageViewController 项目中的 THKPageContentViewController封装抽取
       ss.subspec 'TMUIPageViewController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
       end
@@ -208,6 +207,7 @@ Pod::Spec.new do |s|
     #  ss.subspec 'TMUITableView' do |sss|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
     #  end
+
 
     #  ss.subspec 'TMShowBigImageController' do |sss|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '1.1.4'
+  s.version          = '1.1.12'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -167,27 +167,8 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
       end
       
-      ss.subspec 'TMToast' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMToast/*.{h,m}'
-        # TMToastAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMToastAssets.bundle
-        sss.resource_bundles = {
-          'TMToastAssets' => ['TMUIKit/TMUIComponents/TMToast/Resource/*.png']
-        }
-      end
-      
       ss.subspec 'TMPopoverView' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMPopoverView/*.{h,m}'
-      end
-      
-      ss.subspec 'TMEmptyView' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/*.{h,m}'
-        sss.subspec 'Content' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/TMEmptyView/Content/*.{h,m}'
-        end
-        # TMEmptyUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMEmptyUIAssets.bundle
-        sss.resource_bundles = {
-          'TMEmptyUIAssets' => ['TMUIKit/TMUIComponents/TMEmptyView/Resource/*.png']
-        }
       end
       
       ss.subspec 'TMSearchController' do |sss|
@@ -214,6 +195,11 @@ Pod::Spec.new do |s|
       ss.subspec 'TMUIBadge' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
       end
+
+      # TMUIPageViewController 项目中的 THKPageContentViewController封装抽取
+      ss.subspec 'TMUIPageViewController' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
+      end
       
     ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
 
@@ -222,9 +208,6 @@ Pod::Spec.new do |s|
        sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
      end
 
-     ss.subspec 'TMUIPageViewController' do |sss|
-       sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
-     end
 
      ss.subspec 'TMShowBigImageController' do |sss|
        sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
