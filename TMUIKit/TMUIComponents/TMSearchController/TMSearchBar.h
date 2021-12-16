@@ -70,6 +70,7 @@ typedef UITextField TMSearchBarTextField;
 - (BOOL)tmSearchBarTextShouldBeginEditing:(TMSearchBar *)searchBar;///< 若不实现则默认返回按YES处理
 - (void)tmSearchBarTextDidBeginEditing:(TMSearchBar *)searchBar;                     // called when text starts editing
 - (void)tmSearchBar:(TMSearchBar *)searchBar textDidChange:(NSString *)searchText;   // called when text changes (including clear)
+- (void)tmSearchBar:(TMSearchBar *)searchBar textDidChangeWhenPinyinEditing:(NSString *)searchText;   // called text changes when pinyin text Editing
 - (void)tmSearchBarSearchButtonClicked:(TMSearchBar *)searchBar;                     // called when keyboard search button pressed
 - (void)tmSearchBarCancelButtonClicked:(TMSearchBar *)searchBar;   // called when cancel button pressed
 
