@@ -9,7 +9,154 @@
 #import "TMEmptyContentItem.h"
 #import <Masonry/Masonry.h>
 #import <objc/runtime.h>
-#import "TBasicLib.h"
+
+#if DEBUG
+#define EMPTY_DEBUG_Code(...) \
+    __VA_ARGS__;
+#else
+#define EMPTY_DEBUG_Code(...)
+#endif
+
+///NSObject类型的属性的懒加载宏
+#define Empty_PropertyLazyLoad(Type, propertyName) \
+- (Type *)propertyName { \
+    if (!_##propertyName) {\
+        _##propertyName = [[Type alloc] init]; \
+    } \
+    return _##propertyName; \
+}   \
+
+NS_INLINE CGFloat kEmptySafeAreaTopInset(){
+    CGFloat top = 0;
+    if (@available(iOS 11.0, *)) {
+        top = [[UIApplication sharedApplication].windows firstObject].safeAreaInsets.top;
+    }
+    return top;
+}
+
+@interface UIColor (ColorChange)
+// 颜色转换：iOS中（以#开头）十六进制的颜色转换为UIColor(RGB)
++ (UIColor *) tmempty_colorWithHexString: (NSString *)color;
+@end
+@implementation UIColor (ColorChange)
++ (UIColor *) tmempty_colorWithHexString: (NSString *)color{
+    NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) {
+        return [UIColor clearColor];
+    }
+    // 判断前缀
+    if ([cString hasPrefix:@"0X"])
+        cString = [cString substringFromIndex:2];
+    if ([cString hasPrefix:@"#"])
+        cString = [cString substringFromIndex:1];
+    if ([cString length] != 6)
+        return [UIColor clearColor];
+    // 从六位数值中找到RGB对应的位数并转换
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    //R、G、B
+    NSString *rString = [cString substringWithRange:range];
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    return [UIColor colorWithRed:((float) r / 255.0f) green:((float) g / 255.0f) blue:((float) b / 255.0f) alpha:1.0f];
+}
+@end
+
+@interface TMEmptyWeakObjectContainer : NSProxy
+/// 将一个 object 包装到一个 TMEmptyWeakObjectContainer 里
+- (instancetype)initWithObject:(id)object;
+- (instancetype)init;///< NSProxy默认无init方法支持，这里为了统一用户初始化对象的使用习惯，扩展一个同名函数，内部实现为直接return self
++ (instancetype)containerWithObject:(id)object;
+
+/// 获取原始对象 object，如果 object 已被释放则该属性返回 nil
+@property (nullable, nonatomic, weak) id object;
+
+@end
+
+
+@implementation TMEmptyWeakObjectContainer
+
+- (instancetype)initWithObject:(id)object {
+    _object = object;
+    return self;
+}
+
+- (instancetype)init {
+    return self;
+}
+
++ (instancetype)containerWithObject:(id)object {
+    return [[self alloc] initWithObject:object];
+}
+
+- (id)forwardingTargetForSelector:(SEL)selector {
+    return _object;
+}
+
+- (void)forwardInvocation:(NSInvocation *)invocation {
+    void *null = NULL;
+    [invocation setReturnValue:&null];
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector {
+    return [NSObject instanceMethodSignatureForSelector:@selector(init)];
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    return [_object respondsToSelector:aSelector];
+}
+
+- (BOOL)isEqual:(id)object {
+    return [_object isEqual:object];
+}
+
+- (NSUInteger)hash {
+    return [_object hash];
+}
+
+- (Class)superclass {
+    return [_object superclass];
+}
+
+- (Class)class {
+    return [_object class];
+}
+
+- (BOOL)isKindOfClass:(Class)aClass {
+    return [_object isKindOfClass:aClass];
+}
+
+- (BOOL)isMemberOfClass:(Class)aClass {
+    return [_object isMemberOfClass:aClass];
+}
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    return [_object conformsToProtocol:aProtocol];
+}
+
+- (BOOL)isProxy {
+    return YES;
+}
+
+- (NSString *)description {
+    return [_object description];
+}
+
+- (NSString *)debugDescription {
+    return [_object debugDescription];
+}
+
+@end
+
 
 @interface TMEmptyView()
 @property (nonatomic, strong) UIButton *bgButton;
@@ -71,14 +218,14 @@
                      safeMargin:(UIEdgeInsets)margin
                 withContentItem:(NSObject<TMEmptyContentItemProtocol> *)contentItem {
     if (!view) {
-        BASIC_DEBUG_Code(
+        EMPTY_DEBUG_Code(
                 NSLog(@"empty must not be show in view: nil");
                 )
         return nil;
     }
     
     if (!contentItem) {
-        BASIC_DEBUG_Code(
+        EMPTY_DEBUG_Code(
                 NSLog(@"empty must not be show with contentItem: nil");
                 )
         return nil;
@@ -87,7 +234,7 @@
     if (!contentItem.emptyImg &&
         contentItem.title.length == 0 &&
         contentItem.desc.length == 0) {
-        BASIC_DEBUG_Code(
+        EMPTY_DEBUG_Code(
                 NSLog(@"empty contentItem is invalid. img: %@, title: %@, desc: %@", contentItem.emptyImg ? @"OK" : @"nil", contentItem.title.length > 0 ? contentItem.title : @"nil", contentItem.desc.length > 0 ? contentItem.desc : @"nil");
                 )
         return nil;
@@ -258,11 +405,11 @@
     return self;
 }
 
-Basic_PropertyLazyLoad(UIButton, bgButton);
-Basic_PropertyLazyLoad(UIView, contentBoxView);
-Basic_PropertyLazyLoad(UIImageView, imgView);
-Basic_PropertyLazyLoad(UILabel, titleLbl);
-Basic_PropertyLazyLoad(UILabel, descLbl);
+Empty_PropertyLazyLoad(UIButton, bgButton);
+Empty_PropertyLazyLoad(UIView, contentBoxView);
+Empty_PropertyLazyLoad(UIImageView, imgView);
+Empty_PropertyLazyLoad(UILabel, titleLbl);
+Empty_PropertyLazyLoad(UILabel, descLbl);
 
 
 - (void)loadSubUI {
@@ -311,12 +458,13 @@ Basic_PropertyLazyLoad(UILabel, descLbl);
     self.titleLbl.numberOfLines = 2;
     self.titleLbl.textAlignment = NSTextAlignmentCenter;
     self.titleLbl.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
-    self.titleLbl.textColor = UIColorHexString(@"111111");
+    self.titleLbl.textColor =[UIColor tmempty_colorWithHexString:@"111111"];
+    
     
     self.descLbl.numberOfLines = 3;
     self.descLbl.textAlignment = NSTextAlignmentCenter;
     self.descLbl.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
-    self.descLbl.textColor = UIColorHexString(@"AAAFBE");
+    self.descLbl.textColor = [UIColor tmempty_colorWithHexString:@"AAAFBE"];
     
     //迭代追加带nav但navBar隐藏时全屏空态页下，左上角增加返回按钮
     self.navBackBtn = [[UIButton alloc] init];
@@ -327,7 +475,7 @@ Basic_PropertyLazyLoad(UILabel, descLbl);
     [self.navBackBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(0);
         make.width.height.mas_equalTo(44);
-        make.top.mas_equalTo(MAX(20, INSafeAreaTopInset()));
+        make.top.mas_equalTo(MAX(20, kEmptySafeAreaTopInset()));
     }];
     //
 #if DEBUG
@@ -383,15 +531,15 @@ Basic_PropertyLazyLoad(UILabel, descLbl);
 
 - (void)setTmui_emptyView:(TMEmptyView *)tmui_emptyView {
     if (tmui_emptyView && ![tmui_emptyView isKindOfClass:[TMEmptyView class]]) {
-        BASIC_DEBUG_Code(
+        EMPTY_DEBUG_Code(
                 NSLog(@"setTmui_emptyView: setTmui_emptyView must be kind of TMEmptyView.class .");
                 )
         return;
     }
     
-    TBTWeakObjectContainer *weakObjContainer = objc_getAssociatedObject(self, @selector(tmui_emptyView));
+    TMEmptyWeakObjectContainer *weakObjContainer = objc_getAssociatedObject(self, @selector(tmui_emptyView));
     if (!weakObjContainer) {
-        weakObjContainer = [TBTWeakObjectContainer containerWithObject:tmui_emptyView];
+        weakObjContainer = [TMEmptyWeakObjectContainer containerWithObject:tmui_emptyView];
     }
     weakObjContainer.object = tmui_emptyView;
     
@@ -402,7 +550,7 @@ Basic_PropertyLazyLoad(UILabel, descLbl);
 }
 
 - (TMEmptyView *_Nullable)tmui_emptyView {
-    TBTWeakObjectContainer *weakObjContainer = objc_getAssociatedObject(self, @selector(tmui_emptyView));
+    TMEmptyWeakObjectContainer *weakObjContainer = objc_getAssociatedObject(self, @selector(tmui_emptyView));
     if (weakObjContainer.object) {
         return weakObjContainer.object;
     }

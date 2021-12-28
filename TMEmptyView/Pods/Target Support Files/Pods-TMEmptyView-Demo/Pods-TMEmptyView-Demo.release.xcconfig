@@ -1,8 +1,8 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Masonry" "${PODS_ROOT}/Headers/Public/TBasicLib" "${PODS_ROOT}/Headers/Public/TMEmptyView"
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/TBasicLib" "${PODS_CONFIGURATION_BUILD_DIR}/TMEmptyView"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Masonry" -l"TBasicLib" -l"TMEmptyView" -framework "Foundation" -framework "UIKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Masonry" "${PODS_ROOT}/Headers/Public/TMEmptyView"
+LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Masonry" "${PODS_CONFIGURATION_BUILD_DIR}/TMEmptyView"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Masonry" -l"TMEmptyView" -framework "Foundation" -framework "UIKit"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

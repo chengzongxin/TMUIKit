@@ -23,9 +23,6 @@
     ]
   },
   "dependencies": {
-    "TBasicLib": [
-      "0.8.67"
-    ],
     "Masonry": [
       "1.1.0"
     ]

@@ -48,7 +48,6 @@
     Log(textField);
     Log(range);
     Log(replacementString);
-    [TMToast toast:replacementString];
 }
 
 @end

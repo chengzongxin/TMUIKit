@@ -9,8 +9,9 @@
 #import "UIView+TMUI.h"
 #import "TMUICore.h"
 
-@interface TMUIPageWrapperScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
-{
+static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScrollViewContentOffsetKVOContext;
+
+@interface TMUIPageWrapperScrollView () <UIScrollViewDelegate, UIGestureRecognizerDelegate>{
     __weak UIScrollView *_currentScrollView;
     BOOL _isObserving;
 }
@@ -23,22 +24,12 @@
 
 
 @implementation TMUIPageWrapperScrollView
-
-- (NSMutableArray *)observedViews {
-    if (!_observedViews) {
-        _observedViews = [NSMutableArray array];
-    }
-    return _observedViews;
-}
-
-static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScrollViewContentOffsetKVOContext;
-
+@dynamic delegate;
 
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame: frame];
     if (self) {
-        self.delegate = self;
         self.showsVerticalScrollIndicator = NO;
         self.directionalLockEnabled = YES;
         self.bounces = YES;
@@ -54,7 +45,7 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
 
 
 - (void)scrollToTop:(BOOL)animated{
-    _pin = NO;
+    self.pin = NO;
     [self setContentOffset:self.tmui_topPoint animated:animated];
 }
 
@@ -86,17 +77,12 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
         CGPoint new = [[change objectForKey:NSKeyValueChangeNewKey] CGPointValue];
         CGPoint old = [[change objectForKey:NSKeyValueChangeOldKey] CGPointValue];
         CGFloat diff = old.y - new.y;
-        CGFloat diffX = old.x - new.x;
-        
-        if (!_pin && fabs(diffX) > 5) {
-            // 翻页，需要把之前的scroll内容滑动顶部
-            [self scrollSubScrollViewToTop];
-        }
         
         if (diff == 0.0 || !_isObserving) { return ;}
         
         if (object == self) {
-            _pin = (new.y >= -_lockArea) || (old.y == -_lockArea && _currentScrollView && !_currentScrollView.tmui_isAtTop);
+            self.pin = (new.y >= -_lockArea) || (old.y == -_lockArea && _currentScrollView && !_currentScrollView.tmui_isAtTop);
+            [self doCallBackRealChanged:diff];
         }
         
 //        NSLog(@"=========== KVO event begin===========");
@@ -198,18 +184,43 @@ static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScroll
     @catch (NSException *exception) {}
 }
 
-
-- (void)scrollSubScrollViewToTop{
+- (void)childViewControllerDidChanged:(UIViewController *)vc{
+    if (_pin) {
+        return;
+    }
     [self.observedViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj != self) {
+        if (obj.tmui_viewController == vc) {
             obj.contentOffset = obj.tmui_topPoint;
         }
     }];
 }
 
+- (void)doCallBackPinChanged:(BOOL)pin{
+    if ([self.delegate respondsToSelector:@selector(pageWrapperScrollView:pin:)]) {
+        [self.delegate pageWrapperScrollView:self pin:pin];
+    }
+}
+
+- (void)doCallBackRealChanged:(CGFloat)diff{
+    if ([self.delegate respondsToSelector:@selector(pageWrapperScrollViewRealChanged:diff:)]) {
+        [self.delegate pageWrapperScrollViewRealChanged:self diff:diff];
+    }
+}
+
+
+- (void)setPin:(BOOL)pin{
+    if (_pin != pin) {
+        _pin = pin;
+        [self doCallBackPinChanged:pin];
+    }
+}
+
 - (BOOL)isPin{
     return _pin;
 }
+
+
+TMUI_PropertyLazyLoad(NSMutableArray, observedViews)
 
 @end
 
@@ -221,6 +232,6 @@ TMUISynthesizeBOOLProperty(tmui_isAddRefreshControl, setTmui_isAddRefreshControl
     return CGPointMake(self.contentOffset.x, -self.contentInset.top);
 }
 - (BOOL)tmui_isAtTop{
-    return self.contentOffset.y <= -self.contentInset.top;
+    return (int)self.contentOffset.y <= -(int)self.contentInset.top;
 }
 @end

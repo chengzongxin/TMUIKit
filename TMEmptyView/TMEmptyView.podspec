@@ -25,7 +25,6 @@ Pod::Spec.new do |s|
     "TMEmptyUIAssets" => ["Pod/Resource/**"]
   }
   
-  s.dependency 'TBasicLib', '0.8.67'
   s.dependency 'Masonry', '1.1.0'
   
 
