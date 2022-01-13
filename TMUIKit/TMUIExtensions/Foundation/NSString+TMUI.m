@@ -714,3 +714,33 @@ int tmui_containsString(NSString *self, SEL _cmd, NSString *aString) {
 
 @end
 
+@implementation NSString (Debug)
+
++ (NSString *)tmui_random{
+    return [self tmui_random:100];
+}
+
+
++ (NSString *)tmui_random:(NSInteger)count{
+    NSMutableString *randomChineseString = [[NSMutableString alloc] init];
+    
+    for(int i = 0; i < count; i++){
+        //随机生成汉字高位
+        NSInteger randomH =0xA1+arc4random()%(0xFE - 0xA1 + 1);
+        //随机生成汉子低位
+        NSInteger randomL =0xB0+arc4random()%(0xF7 - 0xB0 + 1);
+        //组合生成随机汉字
+        NSInteger number = (randomH<<8)+randomL;
+        
+        NSData *data = [NSData dataWithBytes:&number length:2];
+        
+        NSStringEncoding gbkEncoding =CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        
+        NSString *string = [[NSString alloc] initWithData:data encoding:gbkEncoding];
+        
+        [randomChineseString appendString:string];
+    }
+    return randomChineseString;
+}
+
+@end
