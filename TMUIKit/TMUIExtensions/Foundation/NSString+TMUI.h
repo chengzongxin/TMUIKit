@@ -394,4 +394,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSString (Debug)
+
+/// 生成随机汉字（100个）
++ (NSString *)tmui_random;
+
+/// 生成随机汉字
+/// @param count 汉字个数
++ (NSString *)tmui_random:(NSInteger)count;
+
+@end
+
 NS_ASSUME_NONNULL_END
