@@ -223,12 +223,15 @@ Pod::Spec.new do |s|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
     #  end
 
-    #  # TMUITheme
+    #  # TMUIAppearance
     #  ss.subspec 'TMUIAppearance' do |sss|
     #    sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
     #  end
 
-
+    #  # TMUIToast
+    #  ss.subspec 'TMUIToast' do |sss|
+    #    sss.source_files = 'TMUIKit/TMUIComponents/TMUIToast/*.{h,m}'
+    #  end
 
     #   #ChainUI
     #   ss.subspec 'ChainUI' do |sss|

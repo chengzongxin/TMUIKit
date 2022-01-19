@@ -16,7 +16,10 @@ Row.str(self.dataSource[x].allKeys[y]).fnt(18).detailStr(self.dataSource[x].allV
 
 #import "TDDialogViewController.h"
 #import "TMUIDialogViewController.h"
+#import "TMUITips.h"
+
 @interface TDDialogViewController ()
+@property(nonatomic, weak) TMUIDialogTextFieldViewController *currentTextFieldDialogViewController;
 @property(nonatomic, strong) TMUIOrderedDictionary <NSString *,TMUIOrderedDictionary *>*dataSource;
 @end
 
@@ -209,10 +212,10 @@ Row.str(self.dataSource[x].allKeys[y]).fnt(18).detailStr(self.dataSource[x].allV
         NSString *city = d.items[d.selectedItemIndex];
         NSString *resultString = (NSString *)[citys objectForKey:city];
         [aDialogViewController hideWithAnimated:YES completion:^(BOOL finished) {
-            TMUIAlertController *alertController = [TMUIAlertController alertControllerWithTitle:resultString message:nil preferredStyle:TMUIAlertControllerStyleAlert];
-            TMUIAlertAction *action = [TMUIAlertAction actionWithTitle:@"好" style:TMUIAlertActionStyleCancel handler:nil];
-            [alertController addAction:action];
-            [alertController showWithAnimated:YES];
+//            TMUIAlertController *alertController = [TMUIAlertController alertControllerWithTitle:resultString message:nil preferredStyle:TMUIAlertControllerStyleAlert];
+//            TMUIAlertAction *action = [TMUIAlertAction actionWithTitle:@"好" style:TMUIAlertActionStyleCancel handler:nil];
+//            [alertController addAction:action];
+//            [alertController showWithAnimated:YES];
         }];
     }];
     [dialogViewController show];
