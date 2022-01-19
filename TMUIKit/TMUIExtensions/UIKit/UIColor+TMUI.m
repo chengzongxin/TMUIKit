@@ -181,6 +181,14 @@
     return sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+- (UIColor *)tmui_colorWithAlpha:(CGFloat)alpha backgroundColor:(UIColor *)backgroundColor {
+    return [UIColor tmui_colorWithBackendColor:backgroundColor frontColor:[self colorWithAlphaComponent:alpha]];
+    
+}
+
+- (UIColor *)tmui_colorWithAlphaAddedToWhite:(CGFloat)alpha {
+    return [self tmui_colorWithAlpha:alpha backgroundColor:UIColor.whiteColor];
+}
 
 + (UIColor *)tmui_colorWithBackendColor:(UIColor *)backendColor frontColor:(UIColor *)frontColor {
     CGFloat bgAlpha = [backendColor tmui_alpha];

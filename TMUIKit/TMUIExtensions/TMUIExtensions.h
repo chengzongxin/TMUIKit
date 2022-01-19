@@ -42,6 +42,7 @@
 #import "UIVisualEffectView+TMUI.h"
 #import "UITableView+TMUIGroup.h"
 #import "UITextView+TMUIPlaceholder.h"
+#import "UINavigationItem+TMUI.h"
 
 /// Foundation
 #import "NSBundle+TMUI.h"

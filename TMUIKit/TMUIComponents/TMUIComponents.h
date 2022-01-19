@@ -100,5 +100,12 @@
 #import "TMUIModalPresentationViewController.h"
 #endif
 
+#if __has_include("TMUIDialogViewController.h")
+#import "TMUIDialogViewController.h"
+#endif
+
+#if __has_include("TMUINavigationTitleView.h")
+#import "TMUINavigationTitleView.h"
+#endif
 
 #endif /* TMUIComponents_h */

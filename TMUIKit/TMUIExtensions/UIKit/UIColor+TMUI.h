@@ -111,6 +111,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)tmui_distanceBetweenColor:(UIColor *)color;
 
 /**
+ *  计算当前color叠加了alpha之后放在指定颜色的背景上的色值
+ */
+- (UIColor *)tmui_colorWithAlpha:(CGFloat)alpha backgroundColor:(nullable UIColor *)backgroundColor;
+
+/**
+ *  计算当前color叠加了alpha之后放在白色背景上的色值
+ */
+- (UIColor *)tmui_colorWithAlphaAddedToWhite:(CGFloat)alpha;
+
+/**
  *  计算两个颜色叠加之后的最终色（注意区分前景色后景色的顺序）<br/>
  *  @link http://stackoverflow.com/questions/10781953/determine-rgba-colour-received-by-combining-two-colours @/link
  */

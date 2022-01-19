@@ -48,6 +48,7 @@
 		164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 164663A025F8D14300B0125B /* TMUICoreViewController4.m */; };
 		166E5113271ECE9C00DF0F16 /* TMUIDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 166E5112271ECE9C00DF0F16 /* TMUIDebugViewController.m */; };
 		1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671EEFF264D0D4D00673A91 /* TDTestViewController.m */; };
+		167399E62797A3560098B479 /* TDDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 167399E52797A3560098B479 /* TDDialogViewController.m */; };
 		167E545626B23A1700D63789 /* TDThemeGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 167E545526B23A1700D63789 /* TDThemeGlobalConfig.m */; };
 		16812AFB2603225F00AECD14 /* TMUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812AFA2603225F00AECD14 /* TMUITableViewController.m */; };
 		16812B012603292C00AECD14 /* TMUITableViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812B002603292C00AECD14 /* TMUITableViewController1.m */; };
@@ -200,6 +201,8 @@
 		166E5112271ECE9C00DF0F16 /* TMUIDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIDebugViewController.m; sourceTree = "<group>"; };
 		1671EEFE264D0D4D00673A91 /* TDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDTestViewController.h; sourceTree = "<group>"; };
 		1671EEFF264D0D4D00673A91 /* TDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDTestViewController.m; sourceTree = "<group>"; };
+		167399E42797A3560098B479 /* TDDialogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDDialogViewController.h; sourceTree = "<group>"; };
+		167399E52797A3560098B479 /* TDDialogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDDialogViewController.m; sourceTree = "<group>"; };
 		167E545426B23A1700D63789 /* TDThemeGlobalConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDThemeGlobalConfig.h; sourceTree = "<group>"; };
 		167E545526B23A1700D63789 /* TDThemeGlobalConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDThemeGlobalConfig.m; sourceTree = "<group>"; };
 		16812AF92603225F00AECD14 /* TMUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController.h; sourceTree = "<group>"; };
@@ -459,6 +462,7 @@
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
 				16945FD225B7C4D10056AE74 /* TMUIWidgetsVC */,
 				1632A136264549FD0074424D /* TDModalPresentationViewController */,
+				167399E32797A3460098B479 /* TDDialogViewController */,
 				1685727E261F10CE007A0E6D /* TDTheme */,
 				16402B53260C1D0A00B4ADBF /* TMPopoverView */,
 				1602D6F1260ADCE900B11DC6 /* TMUIAlert */,
@@ -559,6 +563,15 @@
 				166E5112271ECE9C00DF0F16 /* TMUIDebugViewController.m */,
 			);
 			path = TMUICategoryVC;
+			sourceTree = "<group>";
+		};
+		167399E32797A3460098B479 /* TDDialogViewController */ = {
+			isa = PBXGroup;
+			children = (
+				167399E42797A3560098B479 /* TDDialogViewController.h */,
+				167399E52797A3560098B479 /* TDDialogViewController.m */,
+			);
+			path = TDDialogViewController;
 			sourceTree = "<group>";
 		};
 		16812AF82603224B00AECD14 /* TMUITableView */ = {
@@ -1003,15 +1016,12 @@
 				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMToast/TMToastAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMEmptyUIAssets.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMSearchUIAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMToastAssets.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMEmptyUIAssets.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMSearchUIAssets.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1124,6 +1134,7 @@
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
 				16EED01B26527299001FE514 /* UIBarButtonItemTMUIViewController.m in Sources */,
 				1685728A261F11F1007A0E6D /* TMUIConfigurationTemplateGrapefruit.m in Sources */,
+				167399E62797A3560098B479 /* TDDialogViewController.m in Sources */,
 				16402B56260C1D1C00B4ADBF /* TMPopoverViewController.m in Sources */,
 				16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */,
 				16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */,
