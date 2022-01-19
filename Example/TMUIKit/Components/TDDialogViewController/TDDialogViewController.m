@@ -64,10 +64,6 @@ Row.str(self.dataSource[x].allKeys[y]).fnt(18).detailStr(self.dataSource[x].allV
                     Row_Modal(2, 3),
                     ).title(self.dataSource.allKeys[2]),
             ).embedIn(self.view);
-    
-    TMUIDialogViewController *vc = [TMUIDialogViewController new];
-    NSLog(@"%@",vc);
-    
 }
 
 - (void)didSelectCellWithTitle:(NSString *)title {

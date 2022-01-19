@@ -85,6 +85,13 @@
 
 
 - (void)didInitialize {
+    self.titleView = [[TMUINavigationTitleView alloc] init];
+    self.titleView.title = self.title;// 从 storyboard 初始化的话，可能带有 self.title 的值
+    self.navigationItem.titleView = self.titleView;
+    // 不管navigationBar的backgroundImage如何设置，都让布局撑到屏幕顶部，方便布局的统一
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    
+    // 需要先创建titleView，不然应用外观的时候，titleview是nil，后面的会重新再用属性赋值，可以在应用外观后
     [self tmui_applyAppearance];
     
     _contentView = [[UIView alloc] init]; // 特地不使用setter，从而不要影响self.hasCustomContentView的默认值
