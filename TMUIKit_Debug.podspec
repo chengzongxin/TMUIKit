@@ -231,6 +231,10 @@ Pod::Spec.new do |s|
      # TMUIToast
      ss.subspec 'TMUIToast' do |sss|
       sss.source_files = 'TMUIKit/TMUIComponents/TMUIToast/*.{h,m}'
+      # TMUIToastUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMUIToastUIAssets.bundle
+      sss.resource_bundles = {
+        'TMUIToastUIAssets' => ['TMUIKit/TMUIComponents/TMUIToast/Resource/*']
+      }
     end
 
       #ChainUI

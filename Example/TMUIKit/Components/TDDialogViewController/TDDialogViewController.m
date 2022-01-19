@@ -186,7 +186,9 @@ Row.str(self.dataSource[x].allKeys[y]).fnt(18).detailStr(self.dataSource[x].allV
     dialogViewController.heightForItemBlock = ^CGFloat (TMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
         return 54;// 修改默认的行高，默认为 TableViewCellNormalHeight
     };
+    __weak __typeof(dialogViewController)weakDialogViewController = dialogViewController;
     dialogViewController.didSelectItemBlock = ^(TMUIDialogSelectionViewController *aDialogViewController, NSUInteger itemIndex) {
+        [TMUITips showInfo:weakDialogViewController.items[itemIndex] inView:self.view];
         [aDialogViewController hide];
     };
     [dialogViewController show];
@@ -212,6 +214,7 @@ Row.str(self.dataSource[x].allKeys[y]).fnt(18).detailStr(self.dataSource[x].allV
         NSString *city = d.items[d.selectedItemIndex];
         NSString *resultString = (NSString *)[citys objectForKey:city];
         [aDialogViewController hideWithAnimated:YES completion:^(BOOL finished) {
+            [TMUITips showWithText:resultString];
 //            TMUIAlertController *alertController = [TMUIAlertController alertControllerWithTitle:resultString message:nil preferredStyle:TMUIAlertControllerStyleAlert];
 //            TMUIAlertAction *action = [TMUIAlertAction actionWithTitle:@"好" style:TMUIAlertActionStyleCancel handler:nil];
 //            [alertController addAction:action];
