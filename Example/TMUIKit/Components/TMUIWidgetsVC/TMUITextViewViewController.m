@@ -91,12 +91,12 @@
 }
 
 - (void)textView:(TMUITextView *)textView didPreventTextChangeInRange:(NSRange)range replacementText:(NSString *)replacementText {
-    [TMToast toast:[NSString stringWithFormat:@"文字不能超过 %@ 个字符", @(textView.maximumTextLength)]];
+    [TMUITips showWithText:[NSString stringWithFormat:@"文字不能超过 %@ 个字符", @(textView.maximumTextLength)]];
 }
 
 // 可以利用这个 delegate 来监听发送按钮的事件，当然，如果你习惯以前的方式的话，也可以继续在 textView:shouldChangeTextInRange:replacementText: 里处理
 - (BOOL)textViewShouldReturn:(TMUITextView *)textView {
-    [TMToast toast:[NSString stringWithFormat:@"成功发送文字：%@", textView.text]];
+    [TMUITips showWithText:[NSString stringWithFormat:@"成功发送文字：%@", textView.text]];
     textView.text = nil;
     
     // return YES 表示这次 return 按钮的点击是为了触发“发送”，而不是为了输入一个换行符

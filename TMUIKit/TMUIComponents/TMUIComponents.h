@@ -108,6 +108,10 @@
 #import "TMUINavigationTitleView.h"
 #endif
 
+#if __has_include("TMUITips.h")
+#import "TMUITips.h"
+#endif
+
 #if __has_include("TMUIExpandLabel.h")
 #import "TMUIExpandLabel.h"
 #endif

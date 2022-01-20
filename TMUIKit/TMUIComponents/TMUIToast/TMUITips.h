@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "TMUIToastView.h"
 
+#define TMUITipsText(text) [TMUITips showWithText:text]
 // 自动计算秒数的标志符，在 delay 里面赋值 TMUITipsAutomaticallyHideToastSeconds 即可通过自动计算 tips 消失的秒数
 extern const NSInteger TMUITipsAutomaticallyHideToastSeconds;
 

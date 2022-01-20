@@ -69,7 +69,7 @@
     } fetchShowStringForCityItem:^NSString * _Nonnull(id  _Nonnull cityItem, NSInteger cityIndex, id  _Nonnull inProvinceItem, NSInteger provinceIndex) {
         return cityItem;
     } finishSelectBlock:^(id  _Nonnull selectedProvinceItem, NSInteger selectedProvinceIndex, id  _Nonnull selectedCityItem, NSInteger selectedCityIndex) {
-        [TMToast toast:selectedCityItem];
+        TMUITipsText(selectedCityItem);
     } curProvinceItemIndex:0 curCityItemIndex:0 fromViewController:self];
 }
 
@@ -147,7 +147,7 @@
     self.dateFormatter.dateFormat = @"yyyy年MM月";
     NSString * dateStr = [self.dateFormatter stringFromDate:date];
 //    [self.pickBtn setTitle:dateStr forState:UIControlStateNormal];
-    [TMToast toast:dateStr];
+    [TMUITips showWithText:dateStr];
 }
 
 /// MARK: demo 3,4,5
@@ -156,7 +156,7 @@
 //    TMDatePickerModeTime,           ///< 时-分-秒
 //    TMDatePickerModeDateAndTime,    ///< 年-月-日-时-分-秒
     [TMDatePicker showPickerWithTitle:@"日期选择样式：".a(mode+1) mode:mode limitMinDate:[NSDate.date tmui_dateByAddingYears:-3] limitMaxDate:NSDate.date currentDate:NSDate.date finishSelectBlock:^(NSDate * _Nonnull selectedDate) {
-        [TMToast toast:[selectedDate tmui_stringWithISOFormat]];
+        [TMUITips showWithText:[selectedDate tmui_stringWithISOFormat]];
     } fromViewController:self];
 }
 
@@ -179,7 +179,7 @@
             return [NSString stringWithFormat:@"%@-%@", accumulator, item];
         } initial:@""];
         
-        [TMToast toast:Str(@"你选择了%@，\n选择了序号%@",str1,str2)];
+        [TMUITips showWithText:Str(@"你选择了%@，\n选择了序号%@",str1,str2)];
         
     } curItemRowIndexs:@[@1,@2,@3] fromViewController:self];
 }
@@ -219,7 +219,7 @@
     } fetchShowStringFromItem:^NSString * _Nonnull(id  _Nonnull item, NSInteger idx) {
         return item;
     } finishSelectBlock:^(id  _Nonnull item, NSInteger idx) {
-        [TMToast toast:Str(@"你选了%@，在第%d行",item,idx)];
+        [TMUITips showWithText:Str(@"你选了%@，在第%d行",item,idx)];
     } curItemIndex:2 fromViewController:self];
 }
 

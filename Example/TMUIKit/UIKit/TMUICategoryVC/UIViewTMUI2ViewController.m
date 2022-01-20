@@ -7,7 +7,7 @@
 //
 
 #import "UIViewTMUI2ViewController.h"
-
+#import "TMUITips.h"
 @interface UIViewTMUI2ViewController ()
 
 @property (nonatomic, strong) UILabel *l1;
@@ -87,21 +87,21 @@
         switch (index) {
             case 1:{
                 [view tmui_addSingerTapWithBlock:^{
-                    [TMToast toast:titles[index]];
+                    TMUITipsText(titles[index]);
                     [self tapView:view];
                 }];
             }
                 break;
             case 2:{
                 [view tmui_addDoubleTapWithBlock:^{
-                    [TMToast toast:titles[index]];
+                    TMUITipsText(titles[index]);
                     [self tapView:view];
                 }];
             }
                 break;
             case 3:{
                 [view tmui_addLongPressGestureWithMinimumPressDuration:0.5 stateBegin:^{
-                    [TMToast toast:titles[index]];
+                    TMUITipsText(titles[index]);
                     [self tapView:view];
                 } stateEnd:^{
                     

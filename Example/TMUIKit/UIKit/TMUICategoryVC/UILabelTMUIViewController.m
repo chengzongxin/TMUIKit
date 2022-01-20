@@ -45,7 +45,7 @@
     }];
 
     [tips tmui_addSingerTapWithBlock:^{
-        [TMToast toast:tips.text];
+        [TMUITips showWithText:tips.text];
     }];
 
     
@@ -75,7 +75,7 @@
     // 设置可交互文字
     NSDictionary *linkAttr = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(20),NSForegroundColorAttributeName:UIColor.orangeColor};
     [label tmui_clickAttrTextWithStrings:@[@"不觉",@"啼鸟",@"风雨声",@"花落知多少"] attributes:linkAttr clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
-        [TMToast toast:[NSString stringWithFormat:@"你点击了%@",string]];
+        [TMUITips showWithText:[NSString stringWithFormat:@"你点击了%@",string]];
     }];
     label.tmui_enabledClickEffect = YES;
     label.tmui_clickEffectColor = UIColor.redColor;
@@ -151,7 +151,7 @@
     
     NSDictionary *linkAttr1 = @{NSUnderlineStyleAttributeName:@1,NSFontAttributeName:UIFont(15),NSForegroundColorAttributeName:UIColor.orangeColor};
     [label tmui_clickAttrTextWithStrings:@[@"装修",@"水真的很深",@"能省点就省点",@"地板"] attributes:linkAttr1 clickAction:^(NSString * _Nonnull string, NSRange range, NSInteger index) {
-        [TMToast toast:[NSString stringWithFormat:@"你点击了%@",string]];
+        [TMUITips showWithText:[NSString stringWithFormat:@"你点击了%@",string]];
     }];
     label.tmui_enabledClickEffect = YES;
     label.tmui_clickEffectColor = UIColor.tmui_randomColor;

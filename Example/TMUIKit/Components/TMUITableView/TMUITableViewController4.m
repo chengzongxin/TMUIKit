@@ -122,7 +122,7 @@
 - (void)handleButtonEvent:(UIView *)view {
     // 通过这个方法获取到点击的按钮所处的 sectionHeader，可兼容 sectionHeader 停靠在列表顶部的场景
     NSInteger sectionIndexForView = [self.tableView tmui_indexForSectionHeaderAtView:view];
-    [TMToast toast:Str(@"点击了第%d个section",sectionIndexForView)];
+    [TMUITips showWithText:Str(@"点击了第%d个section",sectionIndexForView)];
 }
 
 

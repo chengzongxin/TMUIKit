@@ -110,7 +110,7 @@ static NSString *const kStr3 = @"hello world hello world hello world hello world
 //    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
 //    [ALAssetsLibrary.new tmui_saveImage:i9 toAlbum:appName withCompletionBlock:^(NSError * _Nullable error) {
 //        if (!error) {
-//            [TMToast toast:@"保存成功"];
+//            [TMUITips showWithText:@"保存成功"];
 //        }else{
 //            [[[UIAlertView alloc]initWithTitle:@"无法保存"
 //                                       message:[NSString stringWithFormat:@"请在iPhone的“设置-隐私-照片”选项中，允许%@访问你的照片",appName]
