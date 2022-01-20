@@ -31,6 +31,8 @@
 @property (nonatomic, strong) NSAttributedString *expandAttr;
 /// 文本类型
 @property (nonatomic, assign) TMUIExpandLabelAttrType attrType;
+/// 文本高度
+@property (nonatomic, assign) CGFloat textHeight;
 
 @end
 
@@ -65,7 +67,7 @@
     }
     
     [self drawText];
-//    [self setNeedsDisplay];
+    [self setNeedsDisplay];
 }
 
 - (void)setAttributeString:(NSAttributedString *)attributeString{
@@ -77,15 +79,16 @@
     self.originAttr = attr;
 //    self.attrType = TMUIExpandLabelAttrType_Origin;
     
-//    [self drawText];
+    [self drawText];
     [self setNeedsDisplay];
 }
 
-- (void)drawRect:(CGRect)rect{
-    [super drawRect:rect];
-    
-    [self drawText];
-}
+//- (void)drawRect:(CGRect)rect{
+//    [super drawRect:rect];
+//
+//    // 这里会重复绘制
+//    [self drawText];
+//}
 
 - (void)setAttrType:(TMUIExpandLabelAttrType)attrType{
     if (_attrType != attrType) {
@@ -176,10 +179,11 @@
     _attrType = TMUIExpandLabelAttrType_Expand;
     // 避免重复走一遍逻辑
     [self setAttributedText:drawAttributedText];
-    !_sizeChangeBlock?:_sizeChangeBlock(CGSizeMake(self.width, totalHeight));
+    !_sizeChangeBlock?:_sizeChangeBlock(TMUIExpandLabelClickActionType_Expand,CGSizeMake(self.width, totalHeight));
     CFRelease(ctFrame);
     CFRelease(path);
     CFRelease(setter);
+    _textHeight = totalHeight;
 }
 
 // 显示裁剪
@@ -237,7 +241,8 @@
                     
                     self.clickArea = CGRectMake(lastLineSize.width - expandSize.width, totalHeight, expandSize.width, expandSize.height);
 //                    [self addDebugView:totalHeight];
-                    totalHeight += [self heightForCTLine:line];
+                    totalHeight += ([self heightForCTLine:line] - self.style.lineSpacing); // 最后一行需要减去多余空行
+                    
                     CFRelease(expandLine);
                     break;
                 }
@@ -254,14 +259,21 @@
     _attrType = TMUIExpandLabelAttrType_Shrink;
     // 避免重复走一遍逻辑
     [self setAttributedText:drawAttributedText];
-    !_sizeChangeBlock?:_sizeChangeBlock(CGSizeMake(self.width, totalHeight));
+    !_sizeChangeBlock?:_sizeChangeBlock(TMUIExpandLabelClickActionType_Shrink,CGSizeMake(self.width, totalHeight));
 //    CFRelease(ctFrame);  // 释放会crash
     CFRelease(setter);
     CFRelease(path);
+    _textHeight = totalHeight;
 }
 
-
-
+#pragma mark - Public
++ (CGFloat)heightForAttr:(NSAttributedString *)attr line:(NSInteger)line width:(CGFloat)width{
+    TMUIExpandLabel *label = [[TMUIExpandLabel alloc] init];
+    label.maxPreferWidth = width;
+    label.maxLine = line;
+    label.attributeString = attr;
+    return label.textHeight;
+}
 
 #pragma mark - Action Method
 -(void)actionNotificationReceived: (NSNotification*)sender{
@@ -280,9 +292,9 @@
             self.maxLine = 3;
             type = TMUIExpandLabelClickActionType_Shrink;
         }
-        !_clickActionBlock?:_clickActionBlock(type);
+        !_clickActionBlock?:_clickActionBlock(type,CGSizeMake(self.width, self.textHeight));
     }else{
-        !_clickActionBlock?:_clickActionBlock(TMUIExpandLabelClickActionType_Label);
+        !_clickActionBlock?:_clickActionBlock(TMUIExpandLabelClickActionType_Label,CGSizeMake(self.width, self.textHeight));
     }
 }
 

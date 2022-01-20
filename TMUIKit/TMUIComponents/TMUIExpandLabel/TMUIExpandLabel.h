@@ -19,8 +19,8 @@ typedef enum : NSUInteger {
     TMUIExpandLabelAttrType_Expand,
 } TMUIExpandLabelAttrType;
 
-typedef void(^TMUIExpandLabelClickAction)(TMUIExpandLabelClickActionType clickType);
-typedef void(^TMUIExpandLabelSizeChange)(CGSize size);
+typedef void(^TMUIExpandLabelClickAction)(TMUIExpandLabelClickActionType clickType,CGSize size);
+typedef void(^TMUIExpandLabelSizeChange)(TMUIExpandLabelClickActionType clickType,CGSize size);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) TMUIExpandLabelClickAction clickActionBlock;
 /// 尺寸改变
 @property (nonatomic, copy) TMUIExpandLabelSizeChange sizeChangeBlock;
+
+
+#pragma mark - Public
++ (CGFloat)heightForAttr:(NSAttributedString *)attr line:(NSInteger)line width:(CGFloat)width;
 
 @end
 

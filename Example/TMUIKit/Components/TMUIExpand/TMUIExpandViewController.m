@@ -15,31 +15,14 @@
 @end
 
 @implementation TMUIExpandCell
-- (NSString *)contentStr {
-    NSString *str = @"\
-Demo开发版base\n\
-土巴兔项目独立工程，抽离了部分组件，可用于快速迭代开发使用，可配合Injection进行热部署进一步提高效率\n\
-包含：\n\
-THKBaseNetwork\n\
-TRouter\n\
-TMUIKit\n\
-TMCardComponent\n\
-THKDynamicTabsManager\n\
-THKIdentityView\n\
-包含TBTBaseNetwork库快速开发接口、\n\
-TMUIKit库搭建页面\n\
-THKDynamicTabsManager\n\
-TMCardComponent瀑布流快速开\n\
-";
-    return str;
-}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         TMUIExpandLabel *label = [[TMUIExpandLabel alloc] init];
         [self.contentView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.equalTo(self.contentView);
+            make.top.equalTo(self.contentView);
+            make.left.right.equalTo(self.contentView).insets(20);
             make.height.mas_equalTo(20).priorityLow();
         }];
         label.maxLine = 3;
@@ -57,6 +40,8 @@ TMCardComponent瀑布流快速开\n\
 @property (nonatomic, assign) CGFloat cellHeight;
 
 @property (nonatomic, assign) NSInteger maxLine;
+
+@property (nonatomic, strong) NSAttributedString *attr;
 
 @end
 
@@ -77,23 +62,16 @@ TMCardComponent瀑布流快速开\n\
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [self.view addSubview:self.tableView];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    
     _adapter = [NSMutableArray array];
     for (int i = 0; i< 10; i++) {
         THKExpandAdpater *a = [THKExpandAdpater new];
-        a.cellHeight = 144;
         a.maxLine = 3;
+        a.attr = [[self attrStr] copy];
+        a.cellHeight = [TMUIExpandLabel heightForAttr:a.attr line:a.maxLine width:TMUI_SCREEN_WIDTH - 40];
         [_adapter addObject:a];
     }
     
-    [self.tableView reloadData];
+    [self.view addSubview:self.tableView];
 }
 
 #pragma mark UITableViewDelegate UITableViewDataSource
@@ -111,28 +89,26 @@ TMCardComponent瀑布流快速开\n\
     
     THKExpandAdpater *a = _adapter[indexPath.row];
     cell.label.maxLine = a.maxLine;
+    cell.label.attributeString = a.attr;
+    @TMUI_weakify(a);
+    cell.label.clickActionBlock = ^(TMUIExpandLabelClickActionType clickType, CGSize size) {
+        NSLog(@"点击了%@,文本尺寸改变：%@",(clickType == TMUIExpandLabelClickActionType_Expand?@"展开":@"收起"),NSStringFromCGSize(size));
+        if (@available(iOS 11.0, *)) {
+            [tableView performBatchUpdates:^{
+                @TMUI_strongify(a);
+                a.maxLine = clickType == TMUIExpandLabelClickActionType_Expand ? 0 : 3;
+                a.cellHeight = size.height;
+            } completion:^(BOOL finished) {
+                
+            }];
+        } else {
+            // Fallback on earlier versions
+        }
+    };
     
-    NSString *str = [self contentStr];
-    NSMutableAttributedString *attr = [NSMutableAttributedString tmui_attributedStringWithString:str font:UIFont(18) color:UIColor.tmui_randomColor lineSpacing:20];
-    cell.label.attributeString = attr;
     
-    @weakify(cell);
-    cell.label.clickActionBlock = ^(TMUIExpandLabelClickActionType clickType) {
-        @strongify(cell);
-        NSLog(@"%lu",(unsigned long)clickType);
-        
-        cell.label.sizeChangeBlock = ^(CGSize size) {
-            NSLog(@"%@",NSStringFromCGSize(size));
-            if (@available(iOS 11.0, *)) {
-                [tableView performBatchUpdates:^{
-                    a.cellHeight = size.height;
-                } completion:^(BOOL finished) {
-                    
-                }];
-            } else {
-                // Fallback on earlier versions
-            }
-        };
+    cell.label.sizeChangeBlock = ^(TMUIExpandLabelClickActionType clickType, CGSize size) {
+        NSLog(@"%zd,文本尺寸改变：%@",clickType,NSStringFromCGSize(size));
     };
     return cell;
 }
@@ -174,12 +150,12 @@ TMCardComponent瀑布流快速开\n\
     label.maxLine = 3;
     label.attributedText = attr;
     
-    label.clickActionBlock = ^(TMUIExpandLabelClickActionType clickType) {
-        NSLog(@"%lu",(unsigned long)clickType);
-    };
-    label.sizeChangeBlock = ^(CGSize size) {
-        NSLog(@"%@",NSStringFromCGSize(size));
-    };
+//    label.clickActionBlock = ^(TMUIExpandLabelClickActionType clickType) {
+//        NSLog(@"%lu",(unsigned long)clickType);
+//    };
+//    label.sizeChangeBlock = ^(CGSize size) {
+//        NSLog(@"%@",NSStringFromCGSize(size));
+//    };
 }
 
 - (void)test2{
@@ -204,6 +180,10 @@ TMCardComponent瀑布流快速开\n\
     }];
 }
 
+- (NSAttributedString *)attrStr{
+    NSMutableAttributedString *attr = [NSMutableAttributedString tmui_attributedStringWithString:[self contentStr] font:UIFont(18) color:UIColor.tmui_randomColor lineSpacing:20];
+    return attr;
+}
 
 - (NSString *)contentStr {
     NSString *str = @"\
