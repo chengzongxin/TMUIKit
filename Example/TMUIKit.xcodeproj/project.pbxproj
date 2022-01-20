@@ -107,6 +107,7 @@
 		16EABFE725BAAE7C00A3273D /* UISlider+associateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFE625BAAE7C00A3273D /* UISlider+associateObject.m */; };
 		16EED01B26527299001FE514 /* UIBarButtonItemTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EED01A26527299001FE514 /* UIBarButtonItemTMUIViewController.m */; };
 		16F1BDD625F9A758000709CF /* TMUICoreViewController5.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F1BDD525F9A758000709CF /* TMUICoreViewController5.m */; };
+		16F96AC627990A5D0067D1B5 /* TMUIExpandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F96AC527990A5D0067D1B5 /* TMUIExpandViewController.m */; };
 		23495E6D1C4E5EBA37EF54E7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C01E4ACDEFFA91DB088A365 /* SystemConfiguration.framework */; };
 		3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE7A625E5FD15001DA085 /* AttributeTextVC.m */; };
 		3B7BE7A925E5FD15001DA085 /* AttributeTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B7BE7A725E5FD15001DA085 /* AttributeTextVC.xib */; };
@@ -316,6 +317,8 @@
 		16EED01A26527299001FE514 /* UIBarButtonItemTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItemTMUIViewController.m; sourceTree = "<group>"; };
 		16F1BDD425F9A758000709CF /* TMUICoreViewController5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController5.h; sourceTree = "<group>"; };
 		16F1BDD525F9A758000709CF /* TMUICoreViewController5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController5.m; sourceTree = "<group>"; };
+		16F96AC427990A5D0067D1B5 /* TMUIExpandViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIExpandViewController.h; sourceTree = "<group>"; };
+		16F96AC527990A5D0067D1B5 /* TMUIExpandViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIExpandViewController.m; sourceTree = "<group>"; };
 		3B7BE7A525E5FD15001DA085 /* AttributeTextVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttributeTextVC.h; sourceTree = "<group>"; };
 		3B7BE7A625E5FD15001DA085 /* AttributeTextVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttributeTextVC.m; sourceTree = "<group>"; };
 		3B7BE7A725E5FD15001DA085 /* AttributeTextVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttributeTextVC.xib; sourceTree = "<group>"; };
@@ -470,6 +473,7 @@
 				160860A625C01D1800F31337 /* TMPageViewController */,
 				16812AF82603224B00AECD14 /* TMUITableView */,
 				16E4A57B261178CC005879A5 /* TMUIBadge */,
+				16F96AC327990A480067D1B5 /* TMUIExpand */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -746,6 +750,15 @@
 				16B05E8C2653ACAF00CC08A1 /* TDDebugViewController.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		16F96AC327990A480067D1B5 /* TMUIExpand */ = {
+			isa = PBXGroup;
+			children = (
+				16F96AC427990A5D0067D1B5 /* TMUIExpandViewController.h */,
+				16F96AC527990A5D0067D1B5 /* TMUIExpandViewController.m */,
+			);
+			path = TMUIExpand;
 			sourceTree = "<group>";
 		};
 		2BBD86156EF43A871B91179E /* Pods */ = {
@@ -1157,6 +1170,7 @@
 				16D1518A25F852020087BF7F /* UIViewController+Base.m in Sources */,
 				16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */,
 				1625BA4A25E63778005686D0 /* UIViewTMUI3ViewController.m in Sources */,
+				16F96AC627990A5D0067D1B5 /* TMUIExpandViewController.m in Sources */,
 				16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */,
 				16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */,
 				160860BF25C01D8100F31337 /* TableViewController.m in Sources */,

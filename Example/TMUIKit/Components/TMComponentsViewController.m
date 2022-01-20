@@ -20,6 +20,7 @@
 #import "TDModalPresentationViewController.h"
 #import "TDThemeGlobalConfig.h"
 #import "TDDialogViewController.h"
+#import "TMUIExpandViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -62,6 +63,9 @@
                         }),
                     Row.str(@"TMUIModalPresentationViewController").detailStr(@"自定义弹出视图控制器").THEME_CELL.onClick(^{
                             [self push:TDModalPresentationViewController.class];
+                        }),
+                    Row.str(@"TMUIExpandViewController").detailStr(@"展开文本").THEME_CELL.onClick(^{
+                            [self push:TMUIExpandViewController.class];
                         }),
                     Row.str(@"TDDialogViewController").detailStr(@"自定义弹窗").THEME_CELL.onClick(^{
                             [self push:TDDialogViewController.class];

@@ -237,6 +237,11 @@ Pod::Spec.new do |s|
       }
     end
 
+    # TMUIExpandLabel
+    ss.subspec 'TMUIExpandLabel' do |sss|
+      sss.source_files = 'TMUIKit/TMUIComponents/TMUIExpandLabel/*.{h,m}'
+    end
+
       #ChainUI
       ss.subspec 'ChainUI' do |sss|
         sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
