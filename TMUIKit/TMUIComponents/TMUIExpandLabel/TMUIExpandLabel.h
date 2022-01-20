@@ -25,7 +25,9 @@ typedef void(^TMUIExpandLabelSizeChange)(TMUIExpandLabelClickActionType clickTyp
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TMUIExpandLabel : UILabel
-/// 默认行数
+/// 默认行数,默认3行
+@property (nonatomic, assign) NSInteger defalutLine;
+/// 当前最大行数
 @property (nonatomic, assign) NSInteger maxLine;
 /// 最大宽度
 @property (nonatomic, assign) CGFloat maxPreferWidth;

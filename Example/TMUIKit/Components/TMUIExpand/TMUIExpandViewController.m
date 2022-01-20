@@ -9,6 +9,8 @@
 #import "TMUIExpandLabel.h"
 //#import "UILabel+Expand.h"
 
+static NSInteger const kContentRow = 4;
+
 @interface TMUIExpandCell : UITableViewCell
 
 @property (nonatomic, strong) TMUIExpandLabel *label;
@@ -25,7 +27,7 @@
             make.left.right.equalTo(self.contentView).insets(20);
             make.height.mas_equalTo(20).priorityLow();
         }];
-        label.maxLine = 3;
+        label.defalutLine = kContentRow;
         label.maxPreferWidth = TMUI_SCREEN_WIDTH - 20 * 2;
         
         self.label = label;
@@ -65,7 +67,7 @@
     _adapter = [NSMutableArray array];
     for (int i = 0; i< 10; i++) {
         THKExpandAdpater *a = [THKExpandAdpater new];
-        a.maxLine = 3;
+        a.maxLine = 4;
         a.attr = [[self attrStr] copy];
         a.cellHeight = [TMUIExpandLabel heightForAttr:a.attr line:a.maxLine width:TMUI_SCREEN_WIDTH - 40];
         [_adapter addObject:a];
@@ -96,7 +98,7 @@
         if (@available(iOS 11.0, *)) {
             [tableView performBatchUpdates:^{
                 @TMUI_strongify(a);
-                a.maxLine = clickType == TMUIExpandLabelClickActionType_Expand ? 0 : 3;
+                a.maxLine = clickType == TMUIExpandLabelClickActionType_Expand ? 0 : kContentRow;
                 a.cellHeight = size.height;
             } completion:^(BOOL finished) {
                 

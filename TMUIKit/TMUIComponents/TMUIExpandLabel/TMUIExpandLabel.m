@@ -14,7 +14,7 @@
     CGFloat _lineHeightErrorDimension; //误差值 默认为0.5
 }
 /// 是否换行
-@property (nonatomic, assign ) BOOL isNewLine;
+@property (nonatomic, assign) BOOL isNewLine;
 /// 展开区域
 @property (nonatomic, assign) CGRect clickArea;
 /** 收起/展开颜色 默认blueColor*/
@@ -51,10 +51,17 @@
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionGestureTapped:)]];
         self.numberOfLines = 0;
+        _defalutLine = 3;
         _maxLine = 3;
         _attrType = TMUIExpandLabelAttrType_Shrink;
     }
     return self;
+}
+
+- (void)setDefalutLine:(NSInteger)defalutLine{
+    _defalutLine = defalutLine;
+    
+    self.maxLine = defalutLine;
 }
 
 - (void)setMaxLine:(NSInteger)maxLine{
@@ -66,11 +73,14 @@
         self.attrType = TMUIExpandLabelAttrType_Shrink;
     }
     
-    [self drawText];
-    [self setNeedsDisplay];
+    if (_attributeString) {
+        [self drawText];
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)setAttributeString:(NSAttributedString *)attributeString{
+    _attributeString = attributeString;
     NSMutableAttributedString *attr = attributeString.mutableCopy;
     self.fontSize = attr.tmui_font.pointSize;
     self.style = attr.tmui_paragraphStyle;
@@ -289,7 +299,7 @@
             self.maxLine = 0;
             type = TMUIExpandLabelClickActionType_Expand;
         }else{
-            self.maxLine = 3;
+            self.maxLine = _defalutLine;
             type = TMUIExpandLabelClickActionType_Shrink;
         }
         !_clickActionBlock?:_clickActionBlock(type,CGSizeMake(self.width, self.textHeight));
