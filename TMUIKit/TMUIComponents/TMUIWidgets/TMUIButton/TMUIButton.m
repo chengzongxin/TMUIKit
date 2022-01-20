@@ -11,6 +11,8 @@
 #import "CALayer+TMUI.h"
 #import "TMUIKitDefines.h"
 
+const CGFloat TMUIButtonCornerRadiusAdjustsBounds = -1;
+
 @interface TMUIButton ()
 
 @property(nonatomic, strong) CALayer *highlightedBackgroundLayer;
@@ -140,6 +142,10 @@
     
     if (CGRectIsEmpty(self.bounds)) {
         return;
+    }
+    
+    if (self.cornerRadius == TMUIButtonCornerRadiusAdjustsBounds) {
+        self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2;
     }
     
     BOOL isImageViewShowing = !!self.currentImage;
@@ -588,4 +594,13 @@
         self.adjustsImageTintColorAutomatically = YES;
     }
 }
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    _cornerRadius = cornerRadius;
+    if (cornerRadius != TMUIButtonCornerRadiusAdjustsBounds) {
+        self.layer.cornerRadius = cornerRadius;
+    }
+    [self setNeedsLayout];
+}
+
 @end

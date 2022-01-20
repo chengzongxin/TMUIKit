@@ -116,4 +116,8 @@
 #import "TMUIExpandLabel.h"
 #endif
 
+#if __has_include("TMUIFloatLayoutView.h")
+#import "TMUIFloatLayoutView.h"
+#endif
+
 #endif /* TMUIComponents_h */

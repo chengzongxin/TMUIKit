@@ -21,6 +21,7 @@
 #import "TDThemeGlobalConfig.h"
 #import "TDDialogViewController.h"
 #import "TMUIExpandViewController.h"
+#import "TDFloatLayoutViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -69,6 +70,9 @@
                         }),
                     Row.str(@"TDDialogViewController").detailStr(@"自定义弹窗").THEME_CELL.onClick(^{
                             [self push:TDDialogViewController.class];
+                        }),
+                    Row.str(@"TDFloatLayoutViewController").detailStr(@"流式布局组件").THEME_CELL.onClick(^{
+                            [self push:TDFloatLayoutViewController.class];
                         }),
                     Row.str(@"TMUITableView").detailStr(@"多样式UITableView").THEME_CELL.onClick(^{
                             [self push:TMUITableViewController.class];

@@ -1,11 +1,9 @@
 //
 //  TMUIFloatLayoutView.m
-//  TMUIKit_Example
+//  TMUIKit
 //
-//  Created by Joe.cheng on 2021/4/8.
-//  Copyright © 2021 chengzongxin. All rights reserved.
+//  Created by Joe.cheng on 2022/1/20.
 //
-
 
 #import "TMUIFloatLayoutView.h"
 #import "TMUICore.h"
