@@ -22,6 +22,7 @@
 #import "TDDialogViewController.h"
 #import "TMUIExpandViewController.h"
 #import "TDFloatLayoutViewController.h"
+#import "TDFloatImagesViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -39,6 +40,9 @@
     
     GroupTV(
             SECTION_CREATE(
+                           ROW_CREATE(@"TMUITheme",
+                                      @"主题管理",
+                                      @"TDThemeViewController"),
                            ROW_CREATE(@"TMUIButton",
                                       @"设置图片、文字位置、图文间距",
                                       @"TMUIButtonViewController"),
@@ -57,11 +61,8 @@
                            ROW_CREATE(@"TMUISegmentedControl",
                                       @"修改背后导轨的高度、修改圆点的大小、修改圆点的阴影样式",
                                       @"TMUISegmentedControlViewController"),
-                           ).title(@"TMUI Widget"),
+                           ).THEME_TITLE(@"基础控件-TMUI Widget"),
             Section(
-                    Row.str(@"TMUITheme").detailStr(@"主题管理").THEME_CELL.onClick(^{
-                            [self push:TDThemeViewController.class];
-                        }),
                     Row.str(@"TMUIModalPresentationViewController").detailStr(@"自定义弹出视图控制器").THEME_CELL.onClick(^{
                             [self push:TDModalPresentationViewController.class];
                         }),
@@ -74,6 +75,11 @@
                     Row.str(@"TDFloatLayoutViewController").detailStr(@"流式布局组件").THEME_CELL.onClick(^{
                             [self push:TDFloatLayoutViewController.class];
                         }),
+                    Row.str(@"TDFloatImagesViewController").detailStr(@"九宫格组件").THEME_CELL.onClick(^{
+                            [self push:TDFloatImagesViewController.class];
+                        }),
+                    ).THEME_TITLE(@"业务通用组件 TMUI Universal Components"),
+            Section(
                     Row.str(@"TMUITableView").detailStr(@"多样式UITableView").THEME_CELL.onClick(^{
                             [self push:TMUITableViewController.class];
                         }),
@@ -86,7 +92,7 @@
                     Row.str(@"TMPageViewController").detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").THEME_CELL.onClick(^{
                             [self push:TMPageRootViewController.class];
                         }),
-                    ).title(@"TMUI Components"),
+                    ).THEME_TITLE(@"支撑组件 TMUI Components"),
             Section(
                     Row.str(@"TMContentAlert").detailStr(@"TMContentAlert").THEME_CELL.onClick(^{
                             [self push:TMUIAlertViewController.class];
@@ -94,7 +100,7 @@
                     Row.str(@"TMPopoverView").detailStr(@"弹窗popover view").THEME_CELL.onClick(^{
                             [self push:TMPopoverViewController.class];
                         }),
-                    ).title(@"TMUI Alert"),
+                    ).THEME_TITLE(@"选择器 TMUI Alert"),
             Section(
                     Row.str(@"ChainUI").detailStr(@"链式UI功能Demo").THEME_CELL.onClick(^{
                             [self push:ChainUIViewController.class];
@@ -105,7 +111,7 @@
                     Row.str(@"ChainUI").detailStr(@"链式Style全局配置").THEME_CELL.onClick(^{
                             [self push:ChainStyleConfigViewController.class];
                         }),
-                    ).title(@"TMUI ChainUI"),
+                    ).THEME_TITLE(@"链式UI组件 TMUI ChainUI"),
             
             ).embedIn(self.view);
 }

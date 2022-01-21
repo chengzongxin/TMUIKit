@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // Null passed to a callee that requires a non-null argument
     BeginIgnoreClangWarning(-Wnonnull)
     UIImage *img = [UIImage tmui_imageWithShape:TMUIImageShapeCheckmark size:CGSizeMake(20, 15) tintColor:UIColor.td_tintColor];
     

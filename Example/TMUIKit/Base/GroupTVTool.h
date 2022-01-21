@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
+#define THEME_CELL fnt(18).subtitleStyle.cellHeightAuto.color(TableViewCellTitleLabelColor).detailColor(TableViewCellDetailLabelColor)
+
+#define THEME_TITLE(text) title(text).titleFont(Fnt(20)).titleColor(UIColor.td_tintColor)
+
 // create GroupTV
 #define SECTION_CREATE(...) Section(\
 __VA_ARGS__\

@@ -98,6 +98,14 @@
     CUI_OBJECT_BLOCK([self setValue:value forKey:@"titleObject"]);
 }
 
+- (CUIChainableCUIStaticSectionObjectBlock)titleFont{
+    CUI_OBJECT_BLOCK([self setValue:value forKey:@"titleObjectFont"]);
+}
+
+- (CUIChainableCUIStaticSectionObjectBlock)titleColor{
+    CUI_OBJECT_BLOCK([self setValue:value forKey:@"titleObjectColor"]);
+}
+
 - (CUIChainableCUIStaticSectionObjectBlock)header {
     CUI_OBJECT_BLOCK([self setValue:value forKey:@"headerObject"]);
 }

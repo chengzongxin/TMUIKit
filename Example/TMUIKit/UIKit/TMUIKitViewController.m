@@ -26,7 +26,7 @@
                            ROW_CREATE(@"快速添加各种手势事件、坐标系转换", @"UIViewTMUI2ViewController"),
                            ROW_CREATE(@"创建动画", @"UIViewTMUI3ViewController"),
                            ROW_CREATE(@"UIView+TMUIBorder",@"设置边框", @"UIViewTMUI4ViewController"),
-                           ).title(@"UIView+TMUI"),
+                           ).THEME_TITLE(@"UIView+TMUI"),
             SECTION_CREATE(
                            ROW_CREATE(@"UILable+TMUI",
                                       @"设置富文本属性、计算文本size、富文本超链接",
@@ -52,11 +52,11 @@
                            ROW_CREATE(@"UIBarButtonItem+TMUI",
                                       @"全局配置的barButtonItem，快速创建使用",
                                       @"UIBarButtonItemTMUIViewController"),
-                           ).title(@"UIKit+TMUI"),
+                           ).THEME_TITLE(@"UIKit+TMUI"),
             SECTION_CREATE(
                            ROW_CREATE(@"设置图片外观",@"UIImageTMUIViewController1"),
                            ROW_CREATE(@"图片创建、压缩、裁剪",@"UIImageTMUIViewController2"),
-                           ).title(@"UIImage+TMUI"),
+                           ).THEME_TITLE(@"UIImage+TMUI"),
             ).embedIn(self.view);
 }
 

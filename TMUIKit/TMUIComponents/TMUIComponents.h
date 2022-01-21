@@ -120,4 +120,10 @@
 #import "TMUIFloatLayoutView.h"
 #endif
 
+#if __has_include("TMUIFloatImagesView.h")
+#import "TMUIFloatImagesView.h"
+#endif
+
+
+
 #endif /* TMUIComponents_h */

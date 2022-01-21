@@ -247,6 +247,11 @@ Pod::Spec.new do |s|
       sss.source_files = 'TMUIKit/TMUIComponents/TMUIFloatLayoutView/*.{h,m}'
     end
 
+    # TMUIFloatImagesView
+    ss.subspec 'TMUIFloatImagesView' do |sss|
+      sss.source_files = 'TMUIKit/TMUIComponents/TMUIFloatImagesView/*.{h,m}'
+    end
+
       #ChainUI
       ss.subspec 'ChainUI' do |sss|
         sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'

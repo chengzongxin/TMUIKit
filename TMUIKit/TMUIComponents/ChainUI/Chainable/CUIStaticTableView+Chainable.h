@@ -112,6 +112,8 @@ CUI_STATIC_PROP(Object)     styles;
 
 
 CUI_SECTION_PROP(Object)    title;
+CUI_SECTION_PROP(Object)    titleFont;
+CUI_SECTION_PROP(Object)    titleColor;
 /**
  * Section header
  * Argument can be:
