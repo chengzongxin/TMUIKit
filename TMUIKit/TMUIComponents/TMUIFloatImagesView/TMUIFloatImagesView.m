@@ -291,7 +291,7 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
     
     if (!_flowLayout) {
         _flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         _flowLayout.minimumInteritemSpacing = 8;
         _flowLayout.minimumLineSpacing = 8;
     }

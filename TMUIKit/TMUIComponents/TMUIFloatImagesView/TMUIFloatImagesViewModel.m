@@ -27,6 +27,7 @@
 - (instancetype)initWithModel:(id)model {
     self = [super init];
     if (self) {
+        [self initialize];
         self.model = model;
     }
     return self;
@@ -40,7 +41,7 @@
 - (void)initialize{
 //    [super initialize];
     
-    self.maxShowNum = 3;
+    self.maxShowNum = 9;
     self.minimumInteritemSpacing = 8;
     self.minimumLineSpacing = 8;
     self.itemCornerRadius = 2;
