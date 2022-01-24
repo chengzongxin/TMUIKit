@@ -63,7 +63,7 @@
     ];
     
     NSMutableArray <THKFloatImageModel *> *models = [NSMutableArray array];
-    for (int i = 0; i<9; i++) {
+    for (int i = 0; i<imgs.count; i++) {
         THKFloatImageModel *model = [[THKFloatImageModel alloc] init];
         model.thumbnailUrl = imgs[i];
         [models addObject:model];
@@ -121,7 +121,7 @@
     ];
     
     NSMutableArray <THKFloatImageModel *> *models = [NSMutableArray array];
-    for (int i = 0; i<9; i++) {
+    for (int i = 0; i<imgs.count; i++) {
         THKFloatImageModel *model = [[THKFloatImageModel alloc] init];
         model.thumbnailUrl = imgs[i];
         [models addObject:model];

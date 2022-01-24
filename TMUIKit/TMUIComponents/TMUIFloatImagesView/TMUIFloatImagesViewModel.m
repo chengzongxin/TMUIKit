@@ -37,6 +37,13 @@
     self.model = model;
 }
 
+- (void)setModel:(NSArray<THKFloatImageModel *> *)model{
+    _model = model;
+    
+    if ([model isKindOfClass:NSArray.class]) {
+        _imageNum = model.count;
+    }
+}
 
 - (void)initialize{
 //    [super initialize];
