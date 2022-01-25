@@ -136,8 +136,30 @@
 //        imageView
         [imageView yy_setImageWithURL:[NSURL URLWithString:model.thumbnailUrl] options:0];
     };
+    
+    
+    NSMutableArray *downImgs = [NSMutableArray array];
+    for (THKFloatImageModel *imgM in models) {
+        [YYWebImageManager.sharedManager requestImageWithURL:[NSURL URLWithString:imgM.thumbnailUrl] options:0 progress:nil transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
+            if (error == nil) {
+                [downImgs addObject:image];
+            }
+        }];
+    }
+    
+    
+    @TMUI_weakify(imgsView)
     imgsView.clickImage = ^(NSInteger index) {
         NSLog(@"%zd",index);
+     @TMUI_strongify(imgsView)
+        NSMutableArray *frames = [NSMutableArray array];
+        for (int i = 0; i < 9; i++) {
+            UIImageView *imgv = [imgsView imageViewAtIndex:i];
+            CGRect imgF = [imgv tmui_convertRect:imgv.frame toViewOrWindow:TMUI_AppWindow];
+            [frames addObject:@(imgF)];
+        }
+        
+        [TMShowBigImageViewController showBigImageWithImageView:downImgs frames:frames index:index transitionStyle:THKTransitionStylePush fromVC:self];
     };
     _imgsView2 = imgsView;
 }
