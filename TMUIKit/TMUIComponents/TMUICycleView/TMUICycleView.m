@@ -191,18 +191,15 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
         return;
     }
     
-//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentNumberOfItem inSection:0]
-//                                atScrollPosition:UICollectionViewScrollPositionNone
-//                                        animated:NO];
-//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentNumberOfItem inSection:0]
-//                                atScrollPosition:UICollectionViewScrollPositionNone
-//                                        animated:NO];
-//    [self.collectionView setContentOffset:CGPointMake(self.currentNumberOfItem * self.frame.size.width, 0) animated:NO];
     
-//    if ([self.delegate respondsToSelector:@selector(bannerView:didScrollToIndex:)]) {
-//        NSInteger index = self.currentNumberOfItem % self.numbers;
-//        [self.delegate bannerView:self didScrollToIndex:index];
-//    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentNumberOfItem inSection:0]
+                                    atScrollPosition:UICollectionViewScrollPositionNone
+                                            animated:NO];
+    });
+    
+//    [self.collectionView setContentOffset:CGPointMake(self.currentNumberOfItem * self.frame.size.width, 0) animated:NO];
 }
 
 - (void)registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier {
@@ -266,7 +263,8 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     TMUICycleViewCell *cell = (TMUICycleViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    !_selectCell?:_selectCell(cell,self.datas[indexPath.item]);
+    NSInteger idx = indexPath.item % self.numbers;
+    !_selectCell?:_selectCell(cell,self.datas[idx]);
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -275,7 +273,15 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
     if (self.numbers == 0) return;
     
     CGFloat pageWidth = scrollView.frame.size.width;
+    if (pageWidth == 0) {
+        return;
+    }
     NSInteger currentNumberOfItem = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    
+    // 还没布局，layoutsubview 会到这里，会更新current，需要在这里返回，以免初始化滚动到中间不执行
+    if (currentNumberOfItem == 0) {
+        return;
+    }
     
     if (currentNumberOfItem == self.currentNumberOfItem) {
         return;
