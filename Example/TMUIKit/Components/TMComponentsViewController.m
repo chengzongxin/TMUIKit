@@ -23,6 +23,7 @@
 #import "TMUIExpandViewController.h"
 #import "TDFloatLayoutViewController.h"
 #import "TDFloatImagesViewController.h"
+#import "TDCycleViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -77,6 +78,9 @@
                         }),
                     Row.str(@"TDFloatImagesViewController").detailStr(@"九宫格组件").THEME_CELL.onClick(^{
                             [self push:TDFloatImagesViewController.class];
+                        }),
+                    Row.str(@"TDCycleViewController").detailStr(@"轮播图组件").THEME_CELL.onClick(^{
+                            [self push:TDCycleViewController.class];
                         }),
                     ).THEME_TITLE(@"业务通用组件 TMUI Universal Components"),
             Section(

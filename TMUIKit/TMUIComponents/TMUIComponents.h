@@ -124,6 +124,13 @@
 #import "TMUIFloatImagesView.h"
 #endif
 
+#if __has_include("TMUITimer.h")
+#import "TMUITimer.h"
+#endif
+
+#if __has_include("TMUICycleView.h")
+#import "TMUICycleView.h"
+#endif
 
 
 #endif /* TMUIComponents_h */

@@ -252,6 +252,16 @@ Pod::Spec.new do |s|
       sss.source_files = 'TMUIKit/TMUIComponents/TMUIFloatImagesView/*.{h,m}'
     end
 
+    # TMUITimer
+    ss.subspec 'TMUITimer' do |sss|
+      sss.source_files = 'TMUIKit/TMUIComponents/TMUITimer/*.{h,m}'
+    end
+
+    # TMUITimer
+    ss.subspec 'TMUICycleView' do |sss|
+      sss.source_files = 'TMUIKit/TMUIComponents/TMUICycleView/*.{h,m}'
+    end
+
       #ChainUI
       ss.subspec 'ChainUI' do |sss|
         sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
