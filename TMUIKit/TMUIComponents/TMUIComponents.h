@@ -132,5 +132,13 @@
 #import "TMUICycleView.h"
 #endif
 
+#if __has_include("TMUISegmentView.h")
+#import "TMUISegmentView.h"
+#endif
+
+#if __has_include("TMUISearchView.h")
+#import "TMUISearchView.h"
+#endif
+
 
 #endif /* TMUIComponents_h */
