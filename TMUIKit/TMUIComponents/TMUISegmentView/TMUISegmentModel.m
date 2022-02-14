@@ -5,8 +5,8 @@
 //  Created by Joe.cheng on 2022/2/10.
 //
 
-#import "TMUISegmentItemModel.h"
+#import "TMUISegmentModel.h"
 
-@implementation TMUISegmentItemModel
+@implementation TMUISegmentModel
 
 @end

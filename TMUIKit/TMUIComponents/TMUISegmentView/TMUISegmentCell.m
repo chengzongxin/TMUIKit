@@ -5,8 +5,8 @@
 //  Created by Joe.cheng on 2022/2/10.
 //
 
-#import "TMUISegmentItemCell.h"
+#import "TMUISegmentCell.h"
 
-@implementation TMUISegmentItemCell
+@implementation TMUISegmentCell
 
 @end
