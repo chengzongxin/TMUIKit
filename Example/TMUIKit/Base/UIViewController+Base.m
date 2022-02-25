@@ -8,7 +8,7 @@
 
 #import "UIViewController+Base.h"
 #import "TDThemeManager.h"
-
+#import "TMUITips.h"
 static NSString * const kShowByUser = @"kShowByUser";
 
 @implementation UIResponder (hideKeyboard)
@@ -53,7 +53,7 @@ TMUISynthesizeIdCopyProperty(demoInstructions, setDemoInstructions)
                 label.canPerformCopyAction = YES;
                 label.didCopyBlock = ^(TMUILabel * _Nonnull label, NSString * _Nonnull stringCopied) {
                     NSLog(@"%@",stringCopied);
-                    [TMToast toast:stringCopied];
+                    TMUITipsText(stringCopied);
                 };
             }
         });

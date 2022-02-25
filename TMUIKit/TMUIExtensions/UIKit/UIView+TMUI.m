@@ -495,6 +495,14 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
         OverrideImplementation([UIView class], @selector(setBounds:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGRect bounds) {
 
+                // 对非法的 bounds，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
+                if (CGRectIsNaN(bounds)) {
+                    NSLog(@"%@ setBounds:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGRect(bounds), [NSThread callStackSymbols]);
+                    if (!IS_DEBUG) {
+                        bounds = CGRectSafeValue(bounds);
+                    }
+                }
+
                 CGRect precedingFrame = selfObject.frame;
                 CGRect precedingBounds = selfObject.bounds;
                 BOOL valueChange = !CGSizeEqualToSize(bounds.size, precedingBounds.size);// bounds 只有 size 发生变化才会影响 frame
@@ -517,6 +525,14 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
 
         OverrideImplementation([UIView class], @selector(setCenter:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
             return ^(UIView *selfObject, CGPoint center) {
+                
+                // 对非法的 center，Debug 下中 assert，Release 下会将其中的 NaN 改为 0，避免 crash
+                if (isnan(center.x) || isnan(center.y)) {
+                    NSLog(@"%@ setCenter:%@，参数包含 NaN，已被拦截并处理为 0。%@", selfObject, NSStringFromCGPoint(center), [NSThread callStackSymbols]);
+                    if (!IS_DEBUG) {
+                        center = CGPointMake(CGFloatSafeValue(center.x), CGFloatSafeValue(center.y));
+                    }
+                }
 
                 CGRect precedingFrame = selfObject.frame;
                 CGPoint precedingCenter = selfObject.center;
@@ -718,7 +734,7 @@ TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
 - (void)tmui_gradientWithColors:(NSArray<UIColor *> *)colors gradientType:(TMUIGradientType)gradientType locations:(NSArray<NSNumber *> *)locations{
     CGRect frame = self.layer.bounds;
     if (CGRectIsEmpty(frame)) {
-        [self layoutIfNeeded];  // masonry 
+        [self layoutIfNeeded];  // masonry
         frame = self.layer.bounds;
     }
     [self tmui_gradientWithColors:colors

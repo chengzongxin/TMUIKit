@@ -7,7 +7,7 @@
 //
 
 #import "UIViewControllerTMUIViewController.h"
-
+#import "TMUITips.h"
 @interface UIViewControllerTMUIViewController ()
 
 @end
@@ -37,13 +37,13 @@
     
     id b1 = Button.str(@"Click me to show custom Alert").styles(s3).addTo(self.view).onClick((^{
         [self tmui_showAlertWithTitle:@"title" message:@"message" block:^(NSInteger index) {
-            [TMToast toast:[NSString stringWithFormat:@"click button index %zd",index]];
+            [TMUITips showWithText:[NSString stringWithFormat:@"click button index %zd",index]];
         } buttons:@"0",@"1",@"2",@"3",nil];
     }));
     
     id b2 = Button.str(@"Click me to show custom Sheet").styles(s3).addTo(self.view).onClick((^{
         [self tmui_showSheetWithTitle:@"title" message:@"message" block:^(NSInteger index) {
-            [TMToast toast:[NSString stringWithFormat:@"click button index %zd",index]];
+            [TMUITips showWithText:[NSString stringWithFormat:@"click button index %zd",index]];
         } buttons:@"0",@"1",@"2",@"3",nil];
     }));
     

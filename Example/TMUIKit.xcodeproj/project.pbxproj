@@ -46,8 +46,11 @@
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
 		1646639825F8C9A600B0125B /* TMUICoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1646639725F8C9A600B0125B /* TMUICoreViewController.m */; };
 		164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 164663A025F8D14300B0125B /* TMUICoreViewController4.m */; };
+		1658A7A7279A84060013A24B /* TDFloatImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1658A7A6279A84060013A24B /* TDFloatImagesViewController.m */; };
 		166E5113271ECE9C00DF0F16 /* TMUIDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 166E5112271ECE9C00DF0F16 /* TMUIDebugViewController.m */; };
 		1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671EEFF264D0D4D00673A91 /* TDTestViewController.m */; };
+		167399E62797A3560098B479 /* TDDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 167399E52797A3560098B479 /* TDDialogViewController.m */; };
+		16775EAE27A3C9EE0069C5C2 /* TDCycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16775EAD27A3C9EE0069C5C2 /* TDCycleViewController.m */; };
 		167E545626B23A1700D63789 /* TDThemeGlobalConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 167E545526B23A1700D63789 /* TDThemeGlobalConfig.m */; };
 		16812AFB2603225F00AECD14 /* TMUITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812AFA2603225F00AECD14 /* TMUITableViewController.m */; };
 		16812B012603292C00AECD14 /* TMUITableViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812B002603292C00AECD14 /* TMUITableViewController1.m */; };
@@ -61,7 +64,6 @@
 		16857296261F121B007A0E6D /* TMUIConfigurationTemplateGrass.m in Sources */ = {isa = PBXBuildFile; fileRef = 16857295261F121B007A0E6D /* TMUIConfigurationTemplateGrass.m */; };
 		1685729C261F1227007A0E6D /* TMUIConfigurationTemplatePinkRose.m in Sources */ = {isa = PBXBuildFile; fileRef = 1685729B261F1227007A0E6D /* TMUIConfigurationTemplatePinkRose.m */; };
 		168572A2261F16C4007A0E6D /* TDThemeExampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 168572A0261F16C4007A0E6D /* TDThemeExampleView.m */; };
-		168572AB261F174E007A0E6D /* TMUIFloatLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 168572AA261F174E007A0E6D /* TMUIFloatLayoutView.m */; };
 		1687279D25F0C55700A05529 /* xueUIwang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1687279725F0C55700A05529 /* xueUIwang@3x.png */; };
 		16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */; };
 		1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1694602A25B7DC870056AE74 /* UIViewTMUIViewController.m */; };
@@ -106,6 +108,8 @@
 		16EABFE725BAAE7C00A3273D /* UISlider+associateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EABFE625BAAE7C00A3273D /* UISlider+associateObject.m */; };
 		16EED01B26527299001FE514 /* UIBarButtonItemTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EED01A26527299001FE514 /* UIBarButtonItemTMUIViewController.m */; };
 		16F1BDD625F9A758000709CF /* TMUICoreViewController5.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F1BDD525F9A758000709CF /* TMUICoreViewController5.m */; };
+		16F96AC627990A5D0067D1B5 /* TMUIExpandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F96AC527990A5D0067D1B5 /* TMUIExpandViewController.m */; };
+		16F96ACF27996B2E0067D1B5 /* TDFloatLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F96ACE27996B2E0067D1B5 /* TDFloatLayoutViewController.m */; };
 		23495E6D1C4E5EBA37EF54E7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C01E4ACDEFFA91DB088A365 /* SystemConfiguration.framework */; };
 		3B7BE7A825E5FD15001DA085 /* AttributeTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7BE7A625E5FD15001DA085 /* AttributeTextVC.m */; };
 		3B7BE7A925E5FD15001DA085 /* AttributeTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B7BE7A725E5FD15001DA085 /* AttributeTextVC.xib */; };
@@ -196,10 +200,16 @@
 		1646639725F8C9A600B0125B /* TMUICoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController.m; sourceTree = "<group>"; };
 		1646639F25F8D14300B0125B /* TMUICoreViewController4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController4.h; sourceTree = "<group>"; };
 		164663A025F8D14300B0125B /* TMUICoreViewController4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController4.m; sourceTree = "<group>"; };
+		1658A7A5279A84060013A24B /* TDFloatImagesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDFloatImagesViewController.h; sourceTree = "<group>"; };
+		1658A7A6279A84060013A24B /* TDFloatImagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDFloatImagesViewController.m; sourceTree = "<group>"; };
 		166E5111271ECE9C00DF0F16 /* TMUIDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIDebugViewController.h; sourceTree = "<group>"; };
 		166E5112271ECE9C00DF0F16 /* TMUIDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIDebugViewController.m; sourceTree = "<group>"; };
 		1671EEFE264D0D4D00673A91 /* TDTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDTestViewController.h; sourceTree = "<group>"; };
 		1671EEFF264D0D4D00673A91 /* TDTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDTestViewController.m; sourceTree = "<group>"; };
+		167399E42797A3560098B479 /* TDDialogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDDialogViewController.h; sourceTree = "<group>"; };
+		167399E52797A3560098B479 /* TDDialogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDDialogViewController.m; sourceTree = "<group>"; };
+		16775EAC27A3C9EE0069C5C2 /* TDCycleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDCycleViewController.h; sourceTree = "<group>"; };
+		16775EAD27A3C9EE0069C5C2 /* TDCycleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDCycleViewController.m; sourceTree = "<group>"; };
 		167E545426B23A1700D63789 /* TDThemeGlobalConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDThemeGlobalConfig.h; sourceTree = "<group>"; };
 		167E545526B23A1700D63789 /* TDThemeGlobalConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDThemeGlobalConfig.m; sourceTree = "<group>"; };
 		16812AF92603225F00AECD14 /* TMUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUITableViewController.h; sourceTree = "<group>"; };
@@ -226,8 +236,6 @@
 		1685729B261F1227007A0E6D /* TMUIConfigurationTemplatePinkRose.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIConfigurationTemplatePinkRose.m; sourceTree = "<group>"; };
 		168572A0261F16C4007A0E6D /* TDThemeExampleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDThemeExampleView.m; sourceTree = "<group>"; };
 		168572A1261F16C4007A0E6D /* TDThemeExampleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDThemeExampleView.h; sourceTree = "<group>"; };
-		168572A9261F174E007A0E6D /* TMUIFloatLayoutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIFloatLayoutView.h; sourceTree = "<group>"; };
-		168572AA261F174E007A0E6D /* TMUIFloatLayoutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIFloatLayoutView.m; sourceTree = "<group>"; };
 		1687279725F0C55700A05529 /* xueUIwang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xueUIwang@3x.png"; sourceTree = "<group>"; };
 		16945FD325B7C4DD0056AE74 /* TMUIButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIButtonViewController.h; sourceTree = "<group>"; };
 		16945FD425B7C4DD0056AE74 /* TMUIButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIButtonViewController.m; sourceTree = "<group>"; };
@@ -313,6 +321,10 @@
 		16EED01A26527299001FE514 /* UIBarButtonItemTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItemTMUIViewController.m; sourceTree = "<group>"; };
 		16F1BDD425F9A758000709CF /* TMUICoreViewController5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController5.h; sourceTree = "<group>"; };
 		16F1BDD525F9A758000709CF /* TMUICoreViewController5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController5.m; sourceTree = "<group>"; };
+		16F96AC427990A5D0067D1B5 /* TMUIExpandViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIExpandViewController.h; sourceTree = "<group>"; };
+		16F96AC527990A5D0067D1B5 /* TMUIExpandViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIExpandViewController.m; sourceTree = "<group>"; };
+		16F96ACD27996B2E0067D1B5 /* TDFloatLayoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDFloatLayoutViewController.h; sourceTree = "<group>"; };
+		16F96ACE27996B2E0067D1B5 /* TDFloatLayoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDFloatLayoutViewController.m; sourceTree = "<group>"; };
 		3B7BE7A525E5FD15001DA085 /* AttributeTextVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttributeTextVC.h; sourceTree = "<group>"; };
 		3B7BE7A625E5FD15001DA085 /* AttributeTextVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttributeTextVC.m; sourceTree = "<group>"; };
 		3B7BE7A725E5FD15001DA085 /* AttributeTextVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttributeTextVC.xib; sourceTree = "<group>"; };
@@ -459,6 +471,7 @@
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
 				16945FD225B7C4D10056AE74 /* TMUIWidgetsVC */,
 				1632A136264549FD0074424D /* TDModalPresentationViewController */,
+				167399E32797A3460098B479 /* TDDialogViewController */,
 				1685727E261F10CE007A0E6D /* TDTheme */,
 				16402B53260C1D0A00B4ADBF /* TMPopoverView */,
 				1602D6F1260ADCE900B11DC6 /* TMUIAlert */,
@@ -466,6 +479,10 @@
 				160860A625C01D1800F31337 /* TMPageViewController */,
 				16812AF82603224B00AECD14 /* TMUITableView */,
 				16E4A57B261178CC005879A5 /* TMUIBadge */,
+				16F96AC327990A480067D1B5 /* TMUIExpand */,
+				16F96ACC27996B090067D1B5 /* TDFloatLayoutView */,
+				1658A7A4279A83E70013A24B /* TDFloatImagesView */,
+				16775EAB27A3C9D90069C5C2 /* TDCycleView */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -561,6 +578,33 @@
 			path = TMUICategoryVC;
 			sourceTree = "<group>";
 		};
+		1658A7A4279A83E70013A24B /* TDFloatImagesView */ = {
+			isa = PBXGroup;
+			children = (
+				1658A7A5279A84060013A24B /* TDFloatImagesViewController.h */,
+				1658A7A6279A84060013A24B /* TDFloatImagesViewController.m */,
+			);
+			path = TDFloatImagesView;
+			sourceTree = "<group>";
+		};
+		167399E32797A3460098B479 /* TDDialogViewController */ = {
+			isa = PBXGroup;
+			children = (
+				167399E42797A3560098B479 /* TDDialogViewController.h */,
+				167399E52797A3560098B479 /* TDDialogViewController.m */,
+			);
+			path = TDDialogViewController;
+			sourceTree = "<group>";
+		};
+		16775EAB27A3C9D90069C5C2 /* TDCycleView */ = {
+			isa = PBXGroup;
+			children = (
+				16775EAC27A3C9EE0069C5C2 /* TDCycleViewController.h */,
+				16775EAD27A3C9EE0069C5C2 /* TDCycleViewController.m */,
+			);
+			path = TDCycleView;
+			sourceTree = "<group>";
+		};
 		16812AF82603224B00AECD14 /* TMUITableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,8 +636,6 @@
 				16857280261F10E6007A0E6D /* TDThemeViewController.m */,
 				168572A1261F16C4007A0E6D /* TDThemeExampleView.h */,
 				168572A0261F16C4007A0E6D /* TDThemeExampleView.m */,
-				168572A9261F174E007A0E6D /* TMUIFloatLayoutView.h */,
-				168572AA261F174E007A0E6D /* TMUIFloatLayoutView.m */,
 				1671EEFE264D0D4D00673A91 /* TDTestViewController.h */,
 				1671EEFF264D0D4D00673A91 /* TDTestViewController.m */,
 			);
@@ -733,6 +775,24 @@
 				16B05E8C2653ACAF00CC08A1 /* TDDebugViewController.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		16F96AC327990A480067D1B5 /* TMUIExpand */ = {
+			isa = PBXGroup;
+			children = (
+				16F96AC427990A5D0067D1B5 /* TMUIExpandViewController.h */,
+				16F96AC527990A5D0067D1B5 /* TMUIExpandViewController.m */,
+			);
+			path = TMUIExpand;
+			sourceTree = "<group>";
+		};
+		16F96ACC27996B090067D1B5 /* TDFloatLayoutView */ = {
+			isa = PBXGroup;
+			children = (
+				16F96ACD27996B2E0067D1B5 /* TDFloatLayoutViewController.h */,
+				16F96ACE27996B2E0067D1B5 /* TDFloatLayoutViewController.m */,
+			);
+			path = TDFloatLayoutView;
 			sourceTree = "<group>";
 		};
 		2BBD86156EF43A871B91179E /* Pods */ = {
@@ -1002,17 +1062,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMToast/TMToastAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMEmptyUIAssets.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMSearchUIAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMToastAssets.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMUIToastUIAssets.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMToastAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMEmptyUIAssets.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMSearchUIAssets.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMUIToastUIAssets.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1119,11 +1176,11 @@
 				16B05E8D2653ACAF00CC08A1 /* TDDebugViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
-				168572AB261F174E007A0E6D /* TMUIFloatLayoutView.m in Sources */,
 				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
 				16EED01B26527299001FE514 /* UIBarButtonItemTMUIViewController.m in Sources */,
 				1685728A261F11F1007A0E6D /* TMUIConfigurationTemplateGrapefruit.m in Sources */,
+				167399E62797A3560098B479 /* TDDialogViewController.m in Sources */,
 				16402B56260C1D1C00B4ADBF /* TMPopoverViewController.m in Sources */,
 				16E8FFF425EE2622005D8E4B /* AppStoreCell.m in Sources */,
 				16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */,
@@ -1144,6 +1201,7 @@
 				16D1518A25F852020087BF7F /* UIViewController+Base.m in Sources */,
 				16E8FFF325EE2622005D8E4B /* AppStoreViewController.m in Sources */,
 				1625BA4A25E63778005686D0 /* UIViewTMUI3ViewController.m in Sources */,
+				16F96AC627990A5D0067D1B5 /* TMUIExpandViewController.m in Sources */,
 				16EABFE225BAAD7D00A3273D /* UISegmentedControl+associateObject.m in Sources */,
 				16945FD525B7C4DD0056AE74 /* TMUIButtonViewController.m in Sources */,
 				160860BF25C01D8100F31337 /* TableViewController.m in Sources */,
@@ -1152,8 +1210,11 @@
 				16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */,
 				16D1519625F866A50087BF7F /* TMUICoreViewController3.m in Sources */,
 				1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */,
+				16775EAE27A3C9EE0069C5C2 /* TDCycleViewController.m in Sources */,
+				1658A7A7279A84060013A24B /* TDFloatImagesViewController.m in Sources */,
 				16857296261F121B007A0E6D /* TMUIConfigurationTemplateGrass.m in Sources */,
 				16D1519C25F8980B0087BF7F /* GroupTVTool.m in Sources */,
+				16F96ACF27996B2E0067D1B5 /* TDFloatLayoutViewController.m in Sources */,
 				16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */,
 				16C650C725BC1DF00047618E /* UILabelTMUIViewController.m in Sources */,
 			);

@@ -9,7 +9,7 @@ target 'TMUIKit_Example' do
   pod 'LookinServer', :configurations => ['Debug']
   pod 'ReactiveObjC'
   pod 'MJRefresh'
-  pod 'TMToast', '1.1.0'
+  pod 'YYWebImage'
   
   
   target 'TMUIKit_Tests' do

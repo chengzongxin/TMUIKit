@@ -97,20 +97,20 @@
     
     id b1 = Button.styles(button).str(@"点击交换viewDidLoad方法").fixWH(300,44).onClick(^{
         BOOL isSuccess = [self swizzViewDidLoad];
-        [TMToast toast:Str(@"方法交换%@！",isSuccess?@"成功":@"失败")];
+        [TMUITips showWithText:Str(@"方法交换%@！",isSuccess?@"成功":@"失败")];
     });
     
     id l8 = Label.str(@"\n用 block 重写某个 class 的指定方法:OverrideImplementation").styles(h2);
     id b2 = Button.styles(button).str(@"点击重写%@的viewDidLayoutSubviews方法",Str(self.class)).fixHeight(44).fnt(12).onClick(^{
         BOOL isSuccess = [TMUIHelper executeBlock:^{
-            [TMToast toast:Str(@"方法重写成功")];
+            [TMUITips showWithText:Str(@"方法重写成功")];
             ExtendImplementationOfVoidMethodWithoutArguments(self.class, @selector(viewDidLayoutSubviews), ^(__kindof UIViewController * _Nonnull selfObject) {
                 Log(@"invoke viewDidLayoutSubviews");
                 
             });
         } oncePerIdentifier:Str(self.class).a(@"viewDidLayoutSubviews")];
         
-        [TMToast toast:Str(@"方法重写%@！",isSuccess?@"成功":@"失败")];
+        [TMUITips showWithText:Str(@"方法重写%@！",isSuccess?@"成功":@"失败")];
     });
         
     id l9 = Label.str(@"\n判断Ivar 是哪种类型、获取Ivar的值").styles(h2);

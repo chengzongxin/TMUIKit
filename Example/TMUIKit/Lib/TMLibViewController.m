@@ -53,7 +53,7 @@
                            ROW_CREATE(@"TMUIRuntime",
                                       @"运行时相关的函数，例如 swizzle 方法替换、动态添加方法等",
                                       @"TMUICoreViewController5"),
-                           ).title(@"TMUI Core"),
+                           ).THEME_TITLE(@"TMUI Core"),
             ).embedIn(self.view);
     
 }

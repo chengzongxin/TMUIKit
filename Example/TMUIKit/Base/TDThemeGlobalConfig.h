@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define THEME_CELL fnt(18).subtitleStyle.cellHeightAuto.color(TableViewCellTitleLabelColor).detailColor(TableViewCellDetailLabelColor)
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TDThemeGlobalConfig : NSObject

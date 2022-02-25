@@ -100,5 +100,45 @@
 #import "TMUIModalPresentationViewController.h"
 #endif
 
+#if __has_include("TMUIDialogViewController.h")
+#import "TMUIDialogViewController.h"
+#endif
+
+#if __has_include("TMUINavigationTitleView.h")
+#import "TMUINavigationTitleView.h"
+#endif
+
+#if __has_include("TMUITips.h")
+#import "TMUITips.h"
+#endif
+
+#if __has_include("TMUIExpandLabel.h")
+#import "TMUIExpandLabel.h"
+#endif
+
+#if __has_include("TMUIFloatLayoutView.h")
+#import "TMUIFloatLayoutView.h"
+#endif
+
+#if __has_include("TMUIFloatImagesView.h")
+#import "TMUIFloatImagesView.h"
+#endif
+
+#if __has_include("TMUITimer.h")
+#import "TMUITimer.h"
+#endif
+
+#if __has_include("TMUICycleView.h")
+#import "TMUICycleView.h"
+#endif
+
+#if __has_include("TMUISegmentView.h")
+#import "TMUISegmentView.h"
+#endif
+
+#if __has_include("TMUISearchView.h")
+#import "TMUISearchView.h"
+#endif
+
 
 #endif /* TMUIComponents_h */

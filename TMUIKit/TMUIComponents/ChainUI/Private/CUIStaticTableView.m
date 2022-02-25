@@ -32,6 +32,8 @@
 @property (nonatomic, strong) NSArray *rows;
 
 @property (nonatomic, strong) id titleObject;
+@property (nonatomic, strong) id titleObjectFont;
+@property (nonatomic, strong) id titleObjectColor;
 
 @property (nonatomic, strong) id headerObject;
 @property (nonatomic, strong) id footerObject;
@@ -300,6 +302,18 @@
     CUIStaticSection *section = self.sections[index];
     
     if (section.titleObject) {
+        UIFont *font = section.titleObjectFont;
+        if (font) {
+            NSString *title = section.titleObject;
+            CGSize fitSize = UIScreen.mainScreen.bounds.size;
+            fitSize.width -= 55; // 这里暂时写死50，左20，右35
+            NSMutableDictionary *attr = [NSMutableDictionary new];
+            attr[NSFontAttributeName] = font;
+            CGSize size = [title boundingRectWithSize:fitSize
+                                             options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                          attributes:attr context:nil].size;
+            return size.height + 28;
+        }
         return 44;
     }else if([section.headerObject isKindOfClass:UIView.class]) {
         UIView *headerView = section.headerObject;
@@ -351,6 +365,19 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)index {
     CUIStaticSection *section = self.sections[index];
     return [section.footerObject isKindOfClass:UIView.class]? section.footerObject: nil;
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
+    // Text Color
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    CUIStaticSection *sec = self.sections[section];
+    if (sec.titleObjectFont) {
+        header.textLabel.font = sec.titleObjectFont;
+    }
+    if (sec.titleObjectColor) {
+        header.textLabel.textColor = sec.titleObjectColor;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

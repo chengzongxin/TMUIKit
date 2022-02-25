@@ -16,6 +16,10 @@ typedef NS_ENUM(NSUInteger, TMUIButtonImagePosition) {
     TMUIButtonImagePositionBottom,          // imageView在titleLabel下面
     TMUIButtonImagePositionRight,           // imageView在titleLabel右边
 };
+/**
+ *  用于 `TMUIButton.cornerRadius` 属性，当 `cornerRadius` 为 `TMUIButtonCornerRadiusAdjustsBounds` 时，`TMUIButton` 会在高度变化时自动调整 `cornerRadius`，使其始终保持为高度的 1/2。
+ */
+extern const CGFloat TMUIButtonCornerRadiusAdjustsBounds;
 
 /**
  *  提供以下功能：
@@ -98,6 +102,7 @@ typedef NS_ENUM(NSUInteger, TMUIButtonImagePosition) {
  */
 @property(nonatomic, assign) IBInspectable CGFloat spacingBetweenImageAndTitle;
 
+@property(nonatomic, assign) IBInspectable CGFloat cornerRadius UI_APPEARANCE_SELECTOR;// 默认为 0。将其设置为 TMUIButtonCornerRadiusAdjustsBounds 可自动保持圆角为按钮高度的一半。
 
 @end
 
