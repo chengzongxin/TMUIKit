@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '1.1.12'
+  s.version          = '1.1.13'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -200,66 +200,41 @@ Pod::Spec.new do |s|
       ss.subspec 'TMUIPageViewController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
       end
-      
-    ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
 
-    #  # TMUITableView
-    #  ss.subspec 'TMUITableView' do |sss|
-    #    sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
-    #  end
+      ss.subspec 'TMUIToast' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIToast/*.{h,m}'
+        # TMUIToastUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMUIToastUIAssets.bundle
+        sss.resource_bundles = {
+          'TMUIToastUIAssets' => ['TMUIKit/TMUIComponents/TMUIToast/Resource/*']
+        }
+      end
 
+      ss.subspec 'TMUIExpandLabel' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIExpandLabel/*.{h,m}'
+      end
 
-    #  ss.subspec 'TMShowBigImageController' do |sss|
-    #    sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
-    #  end
+      ss.subspec 'TMUIFloatLayoutView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIFloatLayoutView/*.{h,m}'
+      end
 
-    #  # TMUITheme
-    #  ss.subspec 'TMUIModalPresentationViewController' do |sss|
-    #    sss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
-    #  end
+      ss.subspec 'TMUIFloatImagesView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIFloatImagesView/*.{h,m}'
+      end
 
-    #  # TMUITheme
-    #  ss.subspec 'TMUITheme' do |sss|
-    #    sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
-    #  end
+      ss.subspec 'TMUITimer' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUITimer/*.{h,m}'
+      end
 
-    #  # TMUIAppearance
-    #  ss.subspec 'TMUIAppearance' do |sss|
-    #    sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
-    #  end
+      ss.subspec 'TMUICycleView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUICycleView/*.{h,m}'
+      end
 
-    #  # TMUIToast
-    #  ss.subspec 'TMUIToast' do |sss|
-    #    sss.source_files = 'TMUIKit/TMUIComponents/TMUIToast/*.{h,m}'
-#      # TMUIToastUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMUIToastUIAssets.bundle
-#      sss.resource_bundles = {
-#        'TMUIToastUIAssets' => ['TMUIKit/TMUIComponents/TMUIToast/Resource/*']
-#      }
-    #  end
+      ss.subspec 'TMUISegmentView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUISegmentView/*.{h,m}'
+      end
 
-    #   #ChainUI
-    #   ss.subspec 'ChainUI' do |sss|
-    #     sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
-    #     sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
-    #     sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-    #     sss.subspec 'Private' do |ssss|
-    #       ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
-    #       ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
-    #     end
-    #     sss.subspec 'Public' do |ssss|
-    #       ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
-    #       ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
-    #       ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-    #     end
-    #     sss.subspec 'Chainable' do |ssss|
-    #       ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
-    #       ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
-    #       ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-    #     end
-    #   end
-
-      ########################  end 以上组件只在demo中打开  ########################
-
-
+      ss.subspec 'TMUISearchView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUISearchView/*.{h,m}'
+      end
   end
 end

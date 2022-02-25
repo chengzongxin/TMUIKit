@@ -14,7 +14,7 @@
 #import "TMUIHelper.h"
 #import "NSArray+TMUI.h"
 
-@interface UIBezierPath (QMUI)
+@interface UIBezierPath (TMUI)
 
 /**
  * 创建一条支持四个角的圆角值不相同的路径
@@ -1529,7 +1529,7 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 
 
 
-@implementation UIBezierPath (QMUI)
+@implementation UIBezierPath (TMUI)
 
 + (UIBezierPath *)tmui_bezierPathWithRoundedRect:(CGRect)rect cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius lineWidth:(CGFloat)lineWidth {
     CGFloat topLeftCornerRadius = cornerRadius[0].floatValue;
