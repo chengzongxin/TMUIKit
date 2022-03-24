@@ -236,7 +236,7 @@ Pod::Spec.new do |s|
       ss.subspec 'TMUISearchBar' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUISearchBar/*.{h,m}'
         sss.resource_bundles = {
-          'Resource' => ['TMUIKit/TMUIComponents/TMUISearchBar/Resource/*']
+          'TMUISearchBarUIAssets' => ['TMUIKit/TMUIComponents/TMUISearchBar/Resource/*']
         }
       end
   end

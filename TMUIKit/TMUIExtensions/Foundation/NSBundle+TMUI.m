@@ -6,8 +6,21 @@
 //
 
 #import "NSBundle+TMUI.h"
-
+#import "TMUIRuntime.h"
 @implementation NSBundle (TMUI)
+
++ (UIImage *)tmui_imageName:(NSString *)imageName bundleName:(NSString *)bundleName{
+    // 获取当前的bundle,self只是在当前pod库中的一个类，也可以随意写一个其他的类,只要是一个Framework里的就行，这里取最通用的最外层的TMUICore中一个类作为标准
+    NSBundle *currentBundle = [NSBundle bundleForClass:[TMUIRuntime class]];
+    // 获取屏幕pt和px之间的比例
+    NSInteger scale = [UIScreen mainScreen].scale;
+    NSString *imagefailName = [NSString stringWithFormat:@"%@@%zdx.png",imageName,scale];
+    // 获取图片的路径,其中BMCH5WebView是组件名
+    NSString *imagePath = [currentBundle pathForResource:imagefailName ofType:nil inDirectory:[NSString stringWithFormat:@"%@.bundle",bundleName]];
+    // 获取图片
+    return [UIImage imageWithContentsOfFile:imagePath];
+}
+
 /**
  获取文件所在name，默认情况下podName和bundlename相同，传一个即可
  
@@ -54,5 +67,6 @@
     NSString *path = [self tmui_filePathWithFileName:imageName bundleName:bundleName podName:podName];
     return [UIImage imageWithContentsOfFile:path];;
 }
+
 
 @end

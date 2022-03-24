@@ -8,8 +8,11 @@
 #import "TMUISearchBar.h"
 
 CGFloat const TMUISearchBarHeight = 36;
-//@"TMSearchUIAssets.bundle/searchBarLeftIcon"
-#define kImgName(imgName) [UIImage tmui_imageInBundleWithName:imgName]
+
+NS_INLINE UIImage *kImgName(NSString *imageName) {
+    return [NSBundle tmui_imageName:imageName bundleName:@"TMUISearchBarUIAssets"]; // 位于pod中使用
+//     [UIImage tmui_imageInBundleWithName:imgName];  // 位于项目中使用
+}
 
 @interface TMUISearchBar () <TMUITextFieldDelegate>
 

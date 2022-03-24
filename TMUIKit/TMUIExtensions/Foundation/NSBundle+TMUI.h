@@ -10,6 +10,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSBundle (TMUI)
+
+
+/// 获取Framework中bundle里的图片资源
+/// @param imageName 图片名称
+/// @param bundleName bundle名称，就是在resource_bundles里面的名字
++ (UIImage *)tmui_imageName:(NSString *)imageName bundleName:(NSString *)bundleName;
+
 /**
  获取文件所在name，默认情况下podName和bundlename相同，传一个即可
  
