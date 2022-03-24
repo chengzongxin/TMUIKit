@@ -64,6 +64,9 @@
                                       @"TMUISegmentedControlViewController"),
                            ).THEME_TITLE(@"基础控件-TMUI Widget"),
             Section(
+                    Row.str(@"TMUISearchBar").detailStr(@"搜索组件").THEME_CELL.onClick(^{
+                            [self push:TDModalPresentationViewController.class];
+                        }),
                     Row.str(@"TMUIModalPresentationViewController").detailStr(@"自定义弹出视图控制器").THEME_CELL.onClick(^{
                             [self push:TDModalPresentationViewController.class];
                         }),

@@ -92,6 +92,7 @@
 		16D151A125F8A9BE0087BF7F /* snk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 16D151A025F8A9BE0087BF7F /* snk.jpg */; };
 		16D41A7A260438A300CC6A41 /* ChainUIViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D41A79260438A300CC6A41 /* ChainUIViewController1.m */; };
 		16D89D7625F9E6D5004FD70F /* TMUICoreViewController6.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */; };
+		16DB3E9627EC173800A97726 /* TDSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DB3E9527EC173800A97726 /* TDSearchBarViewController.m */; };
 		16E4A57E261178E9005879A5 /* TMUIBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */; };
 		16E4A6732611DE30005879A5 /* TMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A6722611DE30005879A5 /* TMUIConfigurationTemplate.m */; };
 		16E4A6852611E137005879A5 /* TDCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 16E4A6842611E137005879A5 /* TDCommonUI.m */; };
@@ -289,6 +290,8 @@
 		16D41A79260438A300CC6A41 /* ChainUIViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChainUIViewController1.m; sourceTree = "<group>"; };
 		16D89D7425F9E6D5004FD70F /* TMUICoreViewController6.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController6.h; sourceTree = "<group>"; };
 		16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController6.m; sourceTree = "<group>"; };
+		16DB3E9427EC173800A97726 /* TDSearchBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDSearchBarViewController.h; sourceTree = "<group>"; };
+		16DB3E9527EC173800A97726 /* TDSearchBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDSearchBarViewController.m; sourceTree = "<group>"; };
 		16E4A57C261178E9005879A5 /* TMUIBadgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIBadgeViewController.h; sourceTree = "<group>"; };
 		16E4A57D261178E9005879A5 /* TMUIBadgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIBadgeViewController.m; sourceTree = "<group>"; };
 		16E4A6712611DE30005879A5 /* TMUIConfigurationTemplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIConfigurationTemplate.h; sourceTree = "<group>"; };
@@ -469,6 +472,7 @@
 			children = (
 				16455E4125B6F3F300BBBEC2 /* TMComponentsViewController.h */,
 				16455E4225B6F3F300BBBEC2 /* TMComponentsViewController.m */,
+				16DB3E9327EC172300A97726 /* TDSearchBar */,
 				16945FD225B7C4D10056AE74 /* TMUIWidgetsVC */,
 				1632A136264549FD0074424D /* TDModalPresentationViewController */,
 				167399E32797A3460098B479 /* TDDialogViewController */,
@@ -690,6 +694,15 @@
 				1699517C260F026100944BCA /* VC7Cell.xib */,
 			);
 			path = VC7Cell;
+			sourceTree = "<group>";
+		};
+		16DB3E9327EC172300A97726 /* TDSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				16DB3E9427EC173800A97726 /* TDSearchBarViewController.h */,
+				16DB3E9527EC173800A97726 /* TDSearchBarViewController.m */,
+			);
+			path = TDSearchBar;
 			sourceTree = "<group>";
 		};
 		16E4A57B261178CC005879A5 /* TMUIBadge */ = {
@@ -1063,12 +1076,14 @@
 				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMSearchUIAssets.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/Resource.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMUIToastUIAssets.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMSearchUIAssets.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Resource.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMUIToastUIAssets.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1168,6 +1183,7 @@
 				16CDF22625EF6B0D00C02C98 /* UITextFieldTMUIViewController.m in Sources */,
 				169FA7282611E39B00363F75 /* TDThemeManager.m in Sources */,
 				1646639825F8C9A600B0125B /* TMUICoreViewController.m in Sources */,
+				16DB3E9627EC173800A97726 /* TDSearchBarViewController.m in Sources */,
 				16C6507325BC02390047618E /* TMUITextFieldViewController.m in Sources */,
 				16402B66260C28E300B4ADBF /* ChainStyleConfigViewController.m in Sources */,
 				3B806CC425CA75CC00B78CD1 /* VerifyViewController.m in Sources */,

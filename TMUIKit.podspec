@@ -233,8 +233,11 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUISegmentView/*.{h,m}'
       end
 
-      ss.subspec 'TMUISearchView' do |sss|
-        sss.source_files = 'TMUIKit/TMUIComponents/TMUISearchView/*.{h,m}'
+      ss.subspec 'TMUISearchBar' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUISearchBar/*.{h,m}'
+        sss.resource_bundles = {
+          'Resource' => ['TMUIKit/TMUIComponents/TMUISearchBar/Resource/*']
+        }
       end
   end
 end
