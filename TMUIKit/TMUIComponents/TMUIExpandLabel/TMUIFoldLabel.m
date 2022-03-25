@@ -8,9 +8,8 @@
 #import "TMUIFoldLabel.h"
 #import <CoreText/CoreText.h>
 #import "NSAttributedString+TMUI.h"
-@interface TMUIFoldLabel (){
-    CGFloat _lineHeightErrorDimension; //误差值 默认为0.5
-}
+@interface TMUIFoldLabel ()
+
 @property (nonatomic, strong) NSAttributedString *originAttr;
 
 @property (nonatomic, assign) CGFloat maxWidth;
@@ -75,6 +74,7 @@
     
     self.numberOfLinesEnoughShowAllContents = NO;
     self.font = attributedText.tmui_font;
+    self.textColor = attributedText.tmui_color;
     self.style = attributedText.tmui_paragraphStyle;
     self.isFold = YES;
     
@@ -87,24 +87,8 @@
 /// 点击了展开文本后，显示展开文本
 - (void)actionGestureTapped: (UITapGestureRecognizer*)sender{
     if (CGRectContainsPoint(_clickArea, [sender locationInView:self])) {
-//        TMUIExpandLabelClickActionType type;
-//        if (self.attrType == TMUIExpandLabelAttrType_Shrink) {
-//            self.maxLine = 0;
-//            type = TMUIExpandLabelClickActionType_Expand;
-//        }else{
-//            self.maxLine = _defalutLine;
-//            type = TMUIExpandLabelClickActionType_Shrink;
-//        }
-//        !_clickActionBlock?:_clickActionBlock(type,CGSizeMake(self.width, self.textHeight));
         if (self.isFold == YES) {
             self.isFold = NO;
-//            if (!self.unfoldAttrString) {
-//                [self createUnfoldAttr:self.originAttr];
-//                [self invalidateIntrinsicContentSize];
-//            }
-//            [super setAttributedText:self.unfoldAttrString];
-            
-            
             self.numberOfLines = 0;
             [self invalidateIntrinsicContentSize];
             [super setAttributedText:self.originAttr];
@@ -114,6 +98,7 @@
     }
 }
 
+///  创建折叠文本
 - (void)createFoldAttr:(NSAttributedString *)originAttr{
     CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, self.maxWidth, UIScreen.mainScreen.bounds.size.height), nil);
 //    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithAttributedString:originAttr];
@@ -144,43 +129,42 @@
             // 不是最后一行
                 [foldAttrString appendAttributedString:lineAttr];
                 totalHeight += [self heightForCTLine:line];
+                totalHeight += self.style.lineSpacing; // 前面需要多加行高
         }else{
             // 是限制的最后一行
-            if (i == numberOfLines - 1) {
-                NSMutableAttributedString *lastLineAttr = (NSMutableAttributedString*)lineAttr;
-    //            if ([drawAttr.string hasSuffix:@"\n"]) { // 剔除结尾有换行的情况
-    //                [drawAttr deleteCharactersInRange:NSMakeRange(drawAttr.string.length - 1, 1)];
-    //            }
-                for (int j = 0; j < lastLineAttr.length; j++) {
-                    //所限制的最后一行的内容 + "... 展开" 处理刚刚只显示成一行内容 如果不只一行 一个一个字符的减掉到只有一行为止
-                    NSMutableAttributedString *lastAppendAttr = [[NSMutableAttributedString alloc] initWithAttributedString:[lastLineAttr attributedSubstringFromRange:NSMakeRange(0, lastLineAttr.length-j)]];
+            NSMutableAttributedString *lastLineAttr = (NSMutableAttributedString*)lineAttr;
+            //            if ([drawAttr.string hasSuffix:@"\n"]) { // 剔除结尾有换行的情况
+            //                [drawAttr deleteCharactersInRange:NSMakeRange(drawAttr.string.length - 1, 1)];
+            //            }
+            for (int j = 0; j < lastLineAttr.length; j++) {
+                //所限制的最后一行的内容 + "... 展开" 处理刚刚只显示成一行内容 如果不只一行 一个一个字符的减掉到只有一行为止
+                NSMutableAttributedString *lastAppendAttr = [[NSMutableAttributedString alloc] initWithAttributedString:[lastLineAttr attributedSubstringFromRange:NSMakeRange(0, lastLineAttr.length-j)]];
+                
+                [lastAppendAttr appendAttributedString:self.foldClickString];
+                //内容是否是只有一行
+                NSInteger number = [self numberOfLinesForAttributtedText:lastAppendAttr];
+                if (number == 1) {
+                    [foldAttrString appendAttributedString:lastAppendAttr];
                     
-                    [lastAppendAttr appendAttributedString:self.foldClickString];
-                    //内容是否是只有一行
-                    NSInteger number = [self numberOfLinesForAttributtedText:lastAppendAttr];
-                    if (number == 1) {
-                        [foldAttrString appendAttributedString:lastAppendAttr];
-                        
-                        CTLineRef lastLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)lastAppendAttr);
-                        CGSize lastLineSize = CTLineGetBoundsWithOptions(lastLine, 0).size;
-                        
-                        CTLineRef expandLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)self.foldClickString);
-                        CGSize expandSize = CTLineGetBoundsWithOptions(expandLine, 0).size;
-                        
-                        
-                        self.clickArea = CGRectMake(lastLineSize.width - expandSize.width, totalHeight, expandSize.width, expandSize.height);
-    //                    [self addDebugView:totalHeight];
-                        totalHeight += ([self heightForCTLine:line] - self.style.lineSpacing); // 最后一行需要减去多余空行
-                        
-                        CFRelease(expandLine);
-                        break;
-                    }
+                    CTLineRef lastLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)lastAppendAttr);
+                    CGSize lastLineSize = CTLineGetBoundsWithOptions(lastLine, 0).size;
+                    
+                    CTLineRef expandLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)self.foldClickString);
+                    CGSize expandSize = CTLineGetBoundsWithOptions(expandLine, 0).size;
+                    
+                    
+                    self.clickArea = CGRectMake(lastLineSize.width - expandSize.width, totalHeight, expandSize.width, expandSize.height);
+                    //                    [self addDebugView:totalHeight];
+                    totalHeight += [self heightForCTLine:line];
+                    
+                    CFRelease(expandLine);
+                    break;
                 }
             }
         }
         CFRelease(line);
     }
-    self.foldHeight = totalHeight;
+    self.foldHeight = ceil(totalHeight); // 这里需要向上取整，避免显示不全
     self.foldAttrString = foldAttrString;
 //    _attrType = TMUIExpandLabelAttrType_Shrink;
     // 避免重复走一遍逻辑
@@ -191,6 +175,7 @@
     CFRelease(path);
 }
 
+/// 创建展开文本
 - (void)createUnfoldAttr:(NSAttributedString *)originAttr{
     NSAttributedString *foldClickAttr = self.foldClickString;
     // 需要拼接 ”展开“
@@ -210,7 +195,6 @@
     for (int i = 0; i < lines.count; i++) {
         CTLineRef line = (__bridge CTLineRef)lines[i];
         if (i < lines.count - 1) {
-            
 //            [self addDebugView:totalHeight];
             // 前面几行
             totalHeight += [self heightForCTLine:line];
@@ -230,12 +214,11 @@
 //            if (self.isNewLine) {
 //                totalHeight += moreSize.height;
 //            }
-            
             CFRelease(moreLine);
         }
     }
     
-    self.unfoldHeight = totalHeight;
+    self.unfoldHeight = ceil(totalHeight);
     self.unfoldAttrString = unfoldAttr;
     
     CFRelease(ctFrame);
@@ -274,7 +257,7 @@
     CGFloat leading;
     CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
     h = MAX(h, ascent + descent + leading);
-    return h + _lineHeightErrorDimension + self.style.lineSpacing + self.style.minimumLineHeight;
+    return h;
 }
 
 
