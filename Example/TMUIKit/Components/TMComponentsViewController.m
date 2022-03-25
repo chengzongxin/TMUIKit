@@ -24,6 +24,7 @@
 #import "TDFloatLayoutViewController.h"
 #import "TDFloatImagesViewController.h"
 #import "TDCycleViewController.h"
+#import "TDFoldLabelViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -64,6 +65,9 @@
                                       @"TMUISegmentedControlViewController"),
                            ).THEME_TITLE(@"基础控件-TMUI Widget"),
             Section(
+                    Row.str(@"TDFoldLabelViewController").detailStr(@"展开文本组件").THEME_CELL.onClick(^{
+                            [self push:TDFoldLabelViewController.class];
+                        }),
                     Row.str(@"TMUIModalPresentationViewController").detailStr(@"自定义弹出视图控制器").THEME_CELL.onClick(^{
                             [self push:TDModalPresentationViewController.class];
                         }),

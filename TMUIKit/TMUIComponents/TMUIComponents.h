@@ -116,6 +116,10 @@
 #import "TMUIExpandLabel.h"
 #endif
 
+#if __has_include("TMUIFoldLabel.h")
+#import "TMUIFoldLabel.h"
+#endif
+
 #if __has_include("TMUIFloatLayoutView.h")
 #import "TMUIFloatLayoutView.h"
 #endif
