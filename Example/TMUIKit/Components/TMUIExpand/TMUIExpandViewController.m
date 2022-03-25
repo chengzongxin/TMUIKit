@@ -188,7 +188,21 @@ static NSInteger const kContentRow = 4;
 }
 
 - (NSString *)contentStr {
-    NSString *str = @"最新入驻的三家公司，在样式上logo外围增加一个圈，同时五家装修公司都增加new最新入驻的三家公司，在样式上logo外围增加一个圈，同时五家装修公司都增加new最新入驻的三家公司，在样式上logo外围增加一个圈，同时五家装修公司都增加new";
+    NSString *str = @"\
+Demo开发版base\n\
+土巴兔项目独立工程，抽离了部分组件，可用于快速迭代开发使用，可配合Injection进行热部署进一步提高效率\n\
+包含：\n\
+THKBaseNetwork\n\
+TRouter\n\
+TMUIKit\n\
+TMCardComponent\n\
+THKDynamicTabsManager\n\
+THKIdentityView\n\
+包含TBTBaseNetwork库快速开发接口、\n\
+TMUIKit库搭建页面\n\
+THKDynamicTabsManager\n\
+TMCardComponent瀑布流快速开\n\
+";
     return str;
 }
 

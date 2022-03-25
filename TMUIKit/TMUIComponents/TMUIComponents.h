@@ -140,8 +140,8 @@
 #import "TMUISegmentView.h"
 #endif
 
-#if __has_include("TMUISearchView.h")
-#import "TMUISearchView.h"
+#if __has_include("TMUISearchBar.h")
+#import "TMUISearchBar.h"
 #endif
 
 

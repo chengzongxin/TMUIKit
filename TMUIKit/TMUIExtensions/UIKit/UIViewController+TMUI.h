@@ -33,7 +33,7 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 
 
 // 导航栏返回按钮方法
--(void)tmui_navBackAction:(id)sender;
+-(void)tmui_navBackAction:(nullable id)sender;
 
 @end
 
