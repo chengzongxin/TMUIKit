@@ -46,6 +46,9 @@
 		16455E5C25B6FBC700BBBEC2 /* InjectionIIIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16455E5B25B6FBC700BBBEC2 /* InjectionIIIHelper.m */; };
 		1646639825F8C9A600B0125B /* TMUICoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1646639725F8C9A600B0125B /* TMUICoreViewController.m */; };
 		164663A125F8D14300B0125B /* TMUICoreViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 164663A025F8D14300B0125B /* TMUICoreViewController4.m */; };
+		164D25D327ED52B7001B7B67 /* TDFoldLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D25D227ED52B7001B7B67 /* TDFoldLabelViewController.m */; };
+		164D25D627ED5357001B7B67 /* TDOneFoldLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D25D527ED5357001B7B67 /* TDOneFoldLabelViewController.m */; };
+		164D25D927ED5364001B7B67 /* TDFoldLabelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 164D25D827ED5364001B7B67 /* TDFoldLabelListViewController.m */; };
 		1658A7A7279A84060013A24B /* TDFloatImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1658A7A6279A84060013A24B /* TDFloatImagesViewController.m */; };
 		166E5113271ECE9C00DF0F16 /* TMUIDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 166E5112271ECE9C00DF0F16 /* TMUIDebugViewController.m */; };
 		1671EF00264D0D4D00673A91 /* TDTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671EEFF264D0D4D00673A91 /* TDTestViewController.m */; };
@@ -201,6 +204,12 @@
 		1646639725F8C9A600B0125B /* TMUICoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController.m; sourceTree = "<group>"; };
 		1646639F25F8D14300B0125B /* TMUICoreViewController4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUICoreViewController4.h; sourceTree = "<group>"; };
 		164663A025F8D14300B0125B /* TMUICoreViewController4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUICoreViewController4.m; sourceTree = "<group>"; };
+		164D25D127ED52B7001B7B67 /* TDFoldLabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDFoldLabelViewController.h; sourceTree = "<group>"; };
+		164D25D227ED52B7001B7B67 /* TDFoldLabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDFoldLabelViewController.m; sourceTree = "<group>"; };
+		164D25D427ED5357001B7B67 /* TDOneFoldLabelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDOneFoldLabelViewController.h; sourceTree = "<group>"; };
+		164D25D527ED5357001B7B67 /* TDOneFoldLabelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDOneFoldLabelViewController.m; sourceTree = "<group>"; };
+		164D25D727ED5364001B7B67 /* TDFoldLabelListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDFoldLabelListViewController.h; sourceTree = "<group>"; };
+		164D25D827ED5364001B7B67 /* TDFoldLabelListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDFoldLabelListViewController.m; sourceTree = "<group>"; };
 		1658A7A5279A84060013A24B /* TDFloatImagesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDFloatImagesViewController.h; sourceTree = "<group>"; };
 		1658A7A6279A84060013A24B /* TDFloatImagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDFloatImagesViewController.m; sourceTree = "<group>"; };
 		166E5111271ECE9C00DF0F16 /* TMUIDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIDebugViewController.h; sourceTree = "<group>"; };
@@ -483,6 +492,7 @@
 				160860A625C01D1800F31337 /* TMPageViewController */,
 				16812AF82603224B00AECD14 /* TMUITableView */,
 				16E4A57B261178CC005879A5 /* TMUIBadge */,
+				164D25D027ED52A5001B7B67 /* TDFoldLable */,
 				16F96AC327990A480067D1B5 /* TMUIExpand */,
 				16F96ACC27996B090067D1B5 /* TDFloatLayoutView */,
 				1658A7A4279A83E70013A24B /* TDFloatImagesView */,
@@ -580,6 +590,19 @@
 				166E5112271ECE9C00DF0F16 /* TMUIDebugViewController.m */,
 			);
 			path = TMUICategoryVC;
+			sourceTree = "<group>";
+		};
+		164D25D027ED52A5001B7B67 /* TDFoldLable */ = {
+			isa = PBXGroup;
+			children = (
+				164D25D127ED52B7001B7B67 /* TDFoldLabelViewController.h */,
+				164D25D227ED52B7001B7B67 /* TDFoldLabelViewController.m */,
+				164D25D427ED5357001B7B67 /* TDOneFoldLabelViewController.h */,
+				164D25D527ED5357001B7B67 /* TDOneFoldLabelViewController.m */,
+				164D25D727ED5364001B7B67 /* TDFoldLabelListViewController.h */,
+				164D25D827ED5364001B7B67 /* TDFoldLabelListViewController.m */,
+			);
+			path = TDFoldLable;
 			sourceTree = "<group>";
 		};
 		1658A7A4279A83E70013A24B /* TDFloatImagesView */ = {
@@ -1076,14 +1099,14 @@
 				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMSearchUIAssets.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/Resource.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMUISearchBarUIAssets.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TMUIKit/TMUIToastUIAssets.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMSearchUIAssets.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Resource.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMUISearchBarUIAssets.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TMUIToastUIAssets.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1156,10 +1179,12 @@
 				160860AE25C01D5E00F31337 /* TMPageRootViewController.m in Sources */,
 				16331EE4264664A6006FB17D /* UIImageEffects.m in Sources */,
 				1602D6F4260ADD2B00B11DC6 /* TMUIAlertViewController.m in Sources */,
+				164D25D327ED52B7001B7B67 /* TDFoldLabelViewController.m in Sources */,
 				16812BDD260357A600AECD14 /* TMUITableViewController3.m in Sources */,
 				160860DB25C01E3200F31337 /* THKSegmentControl.m in Sources */,
 				16E75B10261ED8290087C3B5 /* UIViewTMUI4ViewController.m in Sources */,
 				168572A2261F16C4007A0E6D /* TDThemeExampleView.m in Sources */,
+				164D25D627ED5357001B7B67 /* TDOneFoldLabelViewController.m in Sources */,
 				16F1BDD625F9A758000709CF /* TMUICoreViewController5.m in Sources */,
 				16E66917261FF2CD00028DC8 /* TDUIHelper.m in Sources */,
 				16CDF23125EF839B00C02C98 /* UIImageTMUIViewController1.m in Sources */,
@@ -1192,6 +1217,7 @@
 				16B05E8D2653ACAF00CC08A1 /* TDDebugViewController.m in Sources */,
 				6003F59E195388D20070C39A /* TMAppDelegate.m in Sources */,
 				16455E4325B6F3F300BBBEC2 /* TMComponentsViewController.m in Sources */,
+				164D25D927ED5364001B7B67 /* TDFoldLabelListViewController.m in Sources */,
 				160860BE25C01D8100F31337 /* NormalViewController.m in Sources */,
 				1694602B25B7DC870056AE74 /* UIViewTMUIViewController.m in Sources */,
 				16EED01B26527299001FE514 /* UIBarButtonItemTMUIViewController.m in Sources */,
