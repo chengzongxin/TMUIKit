@@ -73,11 +73,11 @@
         return;
     }
     
-//    self.font = attributedText.tmui_font;
     self.numberOfLinesEnoughShowAllContents = NO;
+    self.font = attributedText.tmui_font;
     self.style = attributedText.tmui_paragraphStyle;
-    
     self.isFold = YES;
+    
     [self createFoldAttr:attributedText];
     [self invalidateIntrinsicContentSize];
     [super setAttributedText:self.foldAttrString];
@@ -246,7 +246,10 @@
 
 - (NSAttributedString *)foldClickString{
     if (!_foldClickString) {
-        _foldClickString = [[NSAttributedString alloc] initWithString:@"... 展开" attributes:@{NSFontAttributeName:self.font, NSForegroundColorAttributeName: self.foldColor}];
+        NSMutableAttributedString *foldClickString = [[NSMutableAttributedString alloc] initWithString:@"... " attributes:@{NSFontAttributeName:self.font, NSForegroundColorAttributeName:self.textColor}];
+         NSAttributedString  *foldString = [[NSAttributedString alloc] initWithString:@"展开" attributes:@{NSFontAttributeName:self.font, NSForegroundColorAttributeName:self.foldColor}];
+         [foldClickString appendAttributedString:foldString];
+        _foldClickString = foldClickString;
     }
     return _foldClickString;
 }
@@ -271,7 +274,7 @@
     CGFloat leading;
     CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
     h = MAX(h, ascent + descent + leading);
-    return h + _lineHeightErrorDimension + self.style.lineSpacing;
+    return h + _lineHeightErrorDimension + self.style.lineSpacing + self.style.minimumLineHeight;
 }
 
 
