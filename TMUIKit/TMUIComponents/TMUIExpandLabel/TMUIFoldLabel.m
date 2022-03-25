@@ -30,6 +30,8 @@
 
 @property (nonatomic, assign) BOOL isFold;
 
+@property (nonatomic, assign) BOOL numberOfLinesEnoughShowAllContents;
+
 @end
 
 
@@ -59,20 +61,21 @@
 - (void)setAttributedText:(NSAttributedString *)attributedText{
     _originAttr = attributedText;
     
-//    self.font = attributedText.tmui_font;
-    self.style = attributedText.tmui_paragraphStyle;
-    
     if (self.numberOfLines == 0) {
         [super setAttributedText:attributedText];
         return;
     }
-    
     // 计算行数
     NSInteger lineCount = [self numberOfLinesForAttributtedText:attributedText];
-    if (lineCount < self.numberOfLines) {
+    if (lineCount <= self.numberOfLines) {
+        self.numberOfLinesEnoughShowAllContents = YES;
         [super setAttributedText:attributedText];
         return;
     }
+    
+//    self.font = attributedText.tmui_font;
+    self.numberOfLinesEnoughShowAllContents = NO;
+    self.style = attributedText.tmui_paragraphStyle;
     
     self.isFold = YES;
     [self createFoldAttr:attributedText];
@@ -274,7 +277,7 @@
 
 #pragma mark - Super
 - (CGSize)intrinsicContentSize{
-    if (self.numberOfLines == 0) {
+    if (self.numberOfLines == 0 || self.numberOfLinesEnoughShowAllContents) {
         return [super intrinsicContentSize];
     }
     if (self.isFold) {

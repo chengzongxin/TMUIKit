@@ -17,12 +17,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    TMUIFoldLabel *label = [[TMUIFoldLabel alloc] init];
-    label.attributedText = [[NSAttributedString alloc] initWithString:[self contentStr] attributes:@{NSFontAttributeName:UIFont(12)}];
-    [self.view addSubview:label];
+    TMUIFoldLabel *label0 = [[TMUIFoldLabel alloc] init];
+    label0.numberOfLines = 0;
+    label0.attributedText = [[NSAttributedString alloc] initWithString:[self contentStr] attributes:@{NSFontAttributeName:UIFont(12)}];
+    [self.view addSubview:label0];
     
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+    TMUIFoldLabel *label1 = [[TMUIFoldLabel alloc] init];
+    label1.numberOfLines = 1;
+    label1.attributedText = [[NSAttributedString alloc] initWithString:[self contentStr] attributes:@{NSFontAttributeName:UIFont(12)}];
+    [self.view addSubview:label1];
+    
+    TMUIFoldLabel *label2 = [[TMUIFoldLabel alloc] init];
+    label2.numberOfLines = 2;
+    label2.attributedText = [[NSAttributedString alloc] initWithString:[self contentStr] attributes:@{NSFontAttributeName:UIFont(12)}];
+    [self.view addSubview:label2];
+    
+    TMUIFoldLabel *label3 = [[TMUIFoldLabel alloc] init];
+    label3.numberOfLines = 3;
+    label3.attributedText = [[NSAttributedString alloc] initWithString:[self contentStr] attributes:@{NSFontAttributeName:UIFont(12)}];
+    [self.view addSubview:label3];
+    
+    TMUIFoldLabel *label4 = [[TMUIFoldLabel alloc] init];
+    label4.numberOfLines = 4;
+    label4.attributedText = [[NSAttributedString alloc] initWithString:[self contentStr] attributes:@{NSFontAttributeName:UIFont(12)}];
+    [self.view addSubview:label4];
+    
+    [label0 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(NavigationContentTop + 20);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(label0.mas_bottom).offset(20);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(label1.mas_bottom).offset(20);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    [label3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(label2.mas_bottom).offset(20);
+        make.left.right.mas_equalTo(0);
+    }];
+    
+    [label4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(label3.mas_bottom).offset(20);
         make.left.right.mas_equalTo(0);
     }];
 }
