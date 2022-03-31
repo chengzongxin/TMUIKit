@@ -100,6 +100,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong, readonly) NSMutableParagraphStyle *tmui_paragraphStyle;
 - (nullable NSMutableParagraphStyle *)tmui_paragraphStyle:(NSUInteger)index;
 
+@property (nullable, nonatomic, strong, readonly) UIColor *tmui_color;
+- (nullable UIColor *)tmui_colorAtIndex:(NSUInteger)index;
+
 
 @end
 

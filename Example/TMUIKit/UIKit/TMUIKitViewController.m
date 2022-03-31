@@ -61,7 +61,7 @@
 }
 
 - (void)debug{
-    [self.navigationController pushViewController:[NSClassFromString(@"TMUIDebugViewController") new] animated:YES];
+    [self.navigationController pushViewController:[NSClassFromString(@"TDOneFoldLabelViewController") new] animated:YES];
 }
 
 @end

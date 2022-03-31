@@ -9,6 +9,7 @@
 #import "NSMutableParagraphStyle+TMUI.h"
 #import "NSString+TMUI.h"
 #import "TMUICore.h"
+#import <CoreText/CoreText.h>
 
 @implementation NSAttributedString (TMUI)
 
@@ -189,6 +190,25 @@
     return font;
 }
 
+- (UIColor *)tmui_color {
+    return [self tmui_colorAtIndex:0];
+}
+
+- (UIColor *)tmui_colorAtIndex:(NSUInteger)index {
+    UIColor *color = [self _attribute:NSForegroundColorAttributeName atIndex:index];
+    if (!color) {
+        CGColorRef ref = (__bridge CGColorRef)([self _attribute:(NSString *)kCTForegroundColorAttributeName atIndex:index]);
+        color = [UIColor colorWithCGColor:ref];
+    }
+    if (color && ![color isKindOfClass:[UIColor class]]) {
+        if (CFGetTypeID((__bridge CFTypeRef)(color)) == CGColorGetTypeID()) {
+            color = [UIColor colorWithCGColor:(__bridge CGColorRef)(color)];
+        } else {
+            color = nil;
+        }
+    }
+    return color;
+}
 
 - (id)_attribute:(NSString *)attributeName atIndex:(NSUInteger)index {
     if (!attributeName) return nil;
