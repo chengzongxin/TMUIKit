@@ -25,6 +25,8 @@
 #import "TDFloatImagesViewController.h"
 #import "TDCycleViewController.h"
 #import "TDFoldLabelViewController.h"
+#import "TDFilterViewController.h"
+#import "TDSearchBarViewController.h"
 
 @interface TMComponentsViewController ()
 
@@ -65,6 +67,12 @@
                                       @"TMUISegmentedControlViewController"),
                            ).THEME_TITLE(@"基础控件-TMUI Widget"),
             Section(
+                    Row.str(@"TDFilterViewController").detailStr(@"筛选组件").THEME_CELL.onClick(^{
+                            [self push:TDFilterViewController.class];
+                        }),
+                    Row.str(@"TDSearchBarViewController").detailStr(@"搜索组件").THEME_CELL.onClick(^{
+                            [self push:TDSearchBarViewController.class];
+                        }),
                     Row.str(@"TDFoldLabelViewController").detailStr(@"展开文本组件").THEME_CELL.onClick(^{
                             [self push:TDFoldLabelViewController.class];
                         }),

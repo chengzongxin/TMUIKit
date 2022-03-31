@@ -240,6 +240,10 @@ Pod::Spec.new do |s|
         }
       end
 
+      ss.subspec 'TMUIFilterView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIFilterView/*.{h,m}'
+      end
+
     ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
 
      ss.subspec 'TMUITableView' do |sss|
