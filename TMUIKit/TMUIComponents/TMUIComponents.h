@@ -144,5 +144,9 @@
 #import "TMUISearchBar.h"
 #endif
 
+#if __has_include("TMUIFilterView.h")
+#import "TMUIFilterView.h"
+#endif
+
 
 #endif /* TMUIComponents_h */

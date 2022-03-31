@@ -239,5 +239,9 @@ Pod::Spec.new do |s|
           'TMUISearchBarUIAssets' => ['TMUIKit/TMUIComponents/TMUISearchBar/Resource/*']
         }
       end
+
+      ss.subspec 'TMUIFilterView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIFilterView/*.{h,m}'
+      end
   end
 end
