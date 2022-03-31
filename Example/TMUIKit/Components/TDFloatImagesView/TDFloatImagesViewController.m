@@ -62,9 +62,9 @@
         @"https://pic.to8to.com/case/1911/15/20191115_8e9e1f7dda46f2b94d64b4r83oc23et5.jpg",
     ];
     
-    NSMutableArray <THKFloatImageModel *> *models = [NSMutableArray array];
+    NSMutableArray <TMUIFloatImageModel *> *models = [NSMutableArray array];
     for (int i = 0; i<imgs.count; i++) {
-        THKFloatImageModel *model = [[THKFloatImageModel alloc] init];
+        TMUIFloatImageModel *model = [[TMUIFloatImageModel alloc] init];
         model.thumbnailUrl = imgs[i];
         [models addObject:model];
     }
@@ -74,7 +74,7 @@
     [imgsView bindViewModel:vm];
     
     
-    imgsView.loadImage = ^(UIImageView * _Nonnull imageView, THKFloatImageModel * _Nonnull model) {
+    imgsView.loadImage = ^(UIImageView * _Nonnull imageView, TMUIFloatImageModel * _Nonnull model) {
         NSLog(@"%@",model.thumbnailUrl);
 //        imageView
         [imageView yy_setImageWithURL:[NSURL URLWithString:model.thumbnailUrl] options:0];
@@ -120,9 +120,9 @@
         @"https://pic.to8to.com/case/1911/15/20191115_8e9e1f7dda46f2b94d64b4r83oc23et5.jpg",
     ];
     
-    NSMutableArray <THKFloatImageModel *> *models = [NSMutableArray array];
+    NSMutableArray <TMUIFloatImageModel *> *models = [NSMutableArray array];
     for (int i = 0; i<imgs.count; i++) {
-        THKFloatImageModel *model = [[THKFloatImageModel alloc] init];
+        TMUIFloatImageModel *model = [[TMUIFloatImageModel alloc] init];
         model.thumbnailUrl = imgs[i];
         [models addObject:model];
     }
@@ -131,7 +131,7 @@
     [imgsView bindViewModel:vm];
     
     
-    imgsView.loadImage = ^(UIImageView * _Nonnull imageView, THKFloatImageModel * _Nonnull model) {
+    imgsView.loadImage = ^(UIImageView * _Nonnull imageView, TMUIFloatImageModel * _Nonnull model) {
         NSLog(@"%@",model.thumbnailUrl);
 //        imageView
         [imageView yy_setImageWithURL:[NSURL URLWithString:model.thumbnailUrl] options:0];
@@ -139,7 +139,7 @@
     
     
     NSMutableArray *downImgs = [NSMutableArray array];
-    for (THKFloatImageModel *imgM in models) {
+    for (TMUIFloatImageModel *imgM in models) {
         [YYWebImageManager.sharedManager requestImageWithURL:[NSURL URLWithString:imgM.thumbnailUrl] options:0 progress:nil transform:nil completion:^(UIImage * _Nullable image, NSURL * _Nonnull url, YYWebImageFromType from, YYWebImageStage stage, NSError * _Nullable error) {
             if (error == nil) {
                 [downImgs addObject:image];

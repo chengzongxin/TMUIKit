@@ -323,7 +323,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = UIFont(14);
-        [_cancelBtn setTitleColor:UIColorHex(0x1A1C1A) forState:UIControlStateNormal];
+        [_cancelBtn setTitleColor:UIColorHex(1A1C1A) forState:UIControlStateNormal];
         _cancelBtn.frame = CGRectMake(0, 0, 44, 44);
         [_cancelBtn addTarget:self action:@selector(cancelBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }

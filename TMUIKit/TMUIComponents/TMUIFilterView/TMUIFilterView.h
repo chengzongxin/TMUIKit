@@ -7,8 +7,9 @@
 
 #import <UIKit/UIKit.h>
 #import "TMUIFilterModel.h"
+#import "TMUIFilterCell.h"
 
-typedef void(^TMUIFilterViewSelectBlock)(NSArray <NSIndexPath *>* _Nullable indexPaths);
+typedef void(^TMUIFilterViewSelectBlock)(NSArray <NSIndexPath *>* _Nullable indexPaths,NSArray <TMUIFilterCell *> *_Nullable cells);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - config UI配置
 @property (nonatomic, strong) NSArray *sections;
-/// 选中颜色
+/// 选中背景颜色
 @property (nonatomic, strong) UIColor *selectColor;
 /// 多选模式
 @property (nonatomic, assign) BOOL isMultiSelect;
@@ -31,11 +32,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat topInset;
 /// 是否允许多选
 @property (nonatomic, assign) BOOL allowsMultipleSelection;
-
+/// 是否允许反选，默认YES
+@property (nonatomic, assign) BOOL allowsUnSelection;
+/// 选择回调
 @property (nonatomic, copy) TMUIFilterViewSelectBlock selectBlock;
 
 - (void)show;
 - (void)dismiss;
+- (void)dismissWithoutAnimate;
+
+- (BOOL)isShow;
 
 @end
 

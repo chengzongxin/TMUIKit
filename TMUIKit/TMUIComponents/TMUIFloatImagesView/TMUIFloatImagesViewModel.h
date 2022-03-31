@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-@interface THKFloatImageModel :NSObject
+@interface TMUIFloatImageModel :NSObject
 @property (nonatomic , assign) NSInteger              imageWidth;
 @property (nonatomic , assign) NSInteger              imageHeight;
 @property (nonatomic , copy) NSString              * originUrl;

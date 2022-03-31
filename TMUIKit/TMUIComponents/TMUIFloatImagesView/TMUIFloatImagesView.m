@@ -1,5 +1,5 @@
 //
-//  THKFloatImagesView.m
+//  TMUIFloatImagesView.m
 //  HouseKeeper
 //
 //  Created by Joe.cheng on 2021/11/30.
@@ -11,23 +11,23 @@
 #import "TMUICore.h"
 //#define kMaxWidth  (TMUI_SCREEN_WIDTH - 15*2)
 
-@interface THKFloatImagesCell : UICollectionViewCell
+@interface TMUIFloatImagesCell : UICollectionViewCell
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *numberOfPicLabel;
 @end
 
-@implementation THKFloatImagesCell
+@implementation TMUIFloatImagesCell
 
 #pragma mark - Init
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self thk_setupView];
+        [self TMUI_setupView];
     }
     return self;
 }
 
-- (void)thk_setupView {
+- (void)TMUI_setupView {
     [self.contentView addSubview:self.imageView];
     [self.contentView addSubview:self.numberOfPicLabel];
     
@@ -157,7 +157,7 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
 
 
 - (UIImageView *)imageViewAtIndex:(NSInteger)index{
-    THKFloatImagesCell *cell = (THKFloatImagesCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    TMUIFloatImagesCell *cell = (TMUIFloatImagesCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
     return cell.imageView;
 }
 // 设置外部约束
@@ -195,9 +195,9 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    THKFloatImagesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([THKFloatImagesCell class])
+    TMUIFloatImagesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TMUIFloatImagesCell class])
                                                                            forIndexPath:indexPath];
-    THKFloatImageModel *imgModel = self.viewModel.model[indexPath.item];
+    TMUIFloatImageModel *imgModel = self.viewModel.model[indexPath.item];
 //    [cell.imageView loadImageWithUrlStr:imgModel.thumbnailUrl];
     !_loadImage?:_loadImage(cell.imageView,imgModel);// 外部实现
     
@@ -229,7 +229,7 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
 
 - (CGSize)SizeForItemThatFits{
     CGSize fitSize = CGSizeZero;
-    NSArray <THKFloatImageModel *> *imgs = self.viewModel.model;
+    NSArray <TMUIFloatImageModel *> *imgs = self.viewModel.model;
     CGFloat kItemWidth = [self itemWidthForContentWidth:self.maxWidth];
     switch (imgs.count) {
         case 0:
@@ -240,7 +240,7 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
             break;
         case 1:
         {
-            THKFloatImageModel *item = imgs.firstObject;
+            TMUIFloatImageModel *item = imgs.firstObject;
             CGFloat width = kItemWidth*2 + _flowLayout.minimumLineSpacing;
             // w : x = imgW : imgH
             if (item.imageWidth == 0 || item.imageHeight == 0) {
@@ -280,8 +280,8 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.scrollEnabled = NO;
-        [_collectionView registerClass:[THKFloatImagesCell class]
-            forCellWithReuseIdentifier:NSStringFromClass([THKFloatImagesCell class])];
+        [_collectionView registerClass:[TMUIFloatImagesCell class]
+            forCellWithReuseIdentifier:NSStringFromClass([TMUIFloatImagesCell class])];
     }
     
     return _collectionView;

@@ -8,7 +8,6 @@
 #import "TMUIFilterView.h"
 #import "TMUICustomCornerRadiusView.h"
 #import "TMUIFilterSectionHeader.h"
-#import "TMUIFilterCell.h"
 #import "TMUIFilterToolbar.h"
 
 static UIEdgeInsets itemPadding = {0,15,0,15};
@@ -27,6 +26,8 @@ static CGFloat TMUIFilterHeaderTitleHeight = 47;
 
 @property (nonatomic, strong) TMUIFilterToolbar *toolbar;
 
+@property (nonatomic, strong) NSIndexPath *lastSelectIndexPath; // 记录最后一次选择，用于反选
+
 @end
 
 @implementation TMUIFilterView
@@ -44,11 +45,15 @@ static CGFloat TMUIFilterHeaderTitleHeight = 47;
 - (void)didInitalize{
     _topInset = NavigationContentTop;
     _column = 3;
+    _allowsUnSelection = YES;
+    _allowsMultipleSelection = NO;
+    _lastSelectIndexPath = [NSIndexPath indexPathForItem:NSNotFound inSection:NSNotFound];
+    _selectColor = UIColorHex(22C77D);
+    
     self.frame = CGRectMake(0, self.topInset, TMUI_SCREEN_WIDTH, TMUI_SCREEN_HEIGHT - self.topInset);
     self.backgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.5];
     self.userInteractionEnabled = YES;
     [self addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    self.selectColor = UIColorHex(22C77D);
 }
 
 - (void)setupviews{
@@ -124,12 +129,21 @@ static CGFloat TMUIFilterHeaderTitleHeight = 47;
         [self layoutIfNeeded];
     };
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:animations completion:^(BOOL finished) {
-        if (finished) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self removeFromSuperview];
-            });
-        }
+        [self removeFromSuperview];
     }];
+}
+
+- (void)dismissWithoutAnimate{
+    CGFloat contentH = [self contentHeight];
+    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(-contentH);
+    }];
+    [self layoutIfNeeded];
+    [self removeFromSuperview];
+}
+
+- (BOOL)isShow{
+    return self.superview;
 }
 
 - (void)setModels:(NSArray<TMUIFilterModel *> *)models{
@@ -208,20 +222,37 @@ static CGFloat TMUIFilterHeaderTitleHeight = 47;
     TMUIFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TMUIFilterCell class])
                                                                            forIndexPath:indexPath];
     cell.btn.tmui_text = self.models[indexPath.section].items[indexPath.item];
+    [cell.btn tmui_setNormalBackGroundColor:UIColorHex(F6F8F6) selectedBackGroundColor:self.selectColor];
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.allowsMultipleSelection == NO) {
-        [self doCallBack];
-        [self dismiss];
+    if (self.allowsUnSelection &&
+        indexPath.section == self.lastSelectIndexPath.section &&
+        indexPath.item == self.lastSelectIndexPath.item) {
+        [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+        self.lastSelectIndexPath = [NSIndexPath indexPathForItem:NSNotFound inSection:NSNotFound];
+        
+        // 如果是单选模式，立即回调
+        if (self.allowsMultipleSelection == NO) {
+            [self doCallBack];
+            [self dismiss];
+        }
     }else{
-        NSArray<NSIndexPath *> *selectItems = collectionView.indexPathsForSelectedItems;
-        for (NSIndexPath *idxP in selectItems) {
-            //  设置每组只选一个
-            if (idxP.section == indexPath.section && idxP.item != indexPath.item) {
-                [collectionView deselectItemAtIndexPath:idxP animated:NO];
+        self.lastSelectIndexPath = indexPath;
+        // 单选模式，直接回调
+        if (self.allowsMultipleSelection == NO) {
+            [self doCallBack];
+            [self dismiss];
+        }else{
+            // 多组多选模式，剔除同组其他选择
+            NSArray<NSIndexPath *> *selectItems = collectionView.indexPathsForSelectedItems;
+            for (NSIndexPath *idxP in selectItems) {
+                //  设置每组只选一个
+                if (idxP.section == indexPath.section && idxP.item != indexPath.item) {
+                    [collectionView deselectItemAtIndexPath:idxP animated:NO];
+                }
             }
         }
     }
@@ -241,8 +272,13 @@ static CGFloat TMUIFilterHeaderTitleHeight = 47;
 - (void)doCallBack{
     // 设置排序优先级，并组成数组
     NSSortDescriptor *section = [NSSortDescriptor sortDescriptorWithKey:@"section" ascending:YES];
-    NSArray *sortedArray = [self.collectionView.indexPathsForSelectedItems sortedArrayUsingDescriptors:@[section]];
-    !_selectBlock?:_selectBlock(sortedArray);
+    NSArray<NSIndexPath *> *sortedArray = [self.collectionView.indexPathsForSelectedItems sortedArrayUsingDescriptors:@[section]];
+
+    NSMutableArray <TMUIFilterCell *> *selectedCells = [NSMutableArray array];
+    [sortedArray enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [selectedCells addObject:(TMUIFilterCell *)[self.collectionView cellForItemAtIndexPath:obj]];
+    }];
+    !_selectBlock?:_selectBlock(sortedArray,selectedCells);
 }
 
 #pragma mark - Getter && Setter

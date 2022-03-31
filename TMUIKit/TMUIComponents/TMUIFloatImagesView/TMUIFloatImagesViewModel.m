@@ -56,5 +56,5 @@
 
 @end
 
-@implementation THKFloatImageModel
+@implementation TMUIFloatImageModel
 @end

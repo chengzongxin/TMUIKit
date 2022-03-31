@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) TMUIFloatImagesViewModel *viewModel;
 
 /// 实现加载数据
-@property (nonatomic, copy) void (^loadImage)(UIImageView *imageView,THKFloatImageModel *model);
+@property (nonatomic, copy) void (^loadImage)(UIImageView *imageView,TMUIFloatImageModel *model);
 
 /// 实现点击回调
 @property (nonatomic, copy) void (^clickImage)(NSInteger index);

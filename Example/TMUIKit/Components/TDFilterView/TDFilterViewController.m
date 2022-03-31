@@ -14,11 +14,15 @@
 
 @property (nonatomic, strong) UIButton *b2;
 
+@property (nonatomic, strong) UIButton *b3;
+
 @property (nonatomic, assign) NSInteger b1_0;
 
 @property (nonatomic, assign) NSInteger b2_0;
 @property (nonatomic, assign) NSInteger b2_1;
 
+@property (nonatomic, assign) NSInteger b3_0;
+@property (nonatomic, strong) TMUIFilterView *filterView3;
 @end
 
 @implementation TDFilterViewController
@@ -49,6 +53,16 @@
         make.height.mas_equalTo(44);
     }];
     
+    _b3 = Button.str(@"单选筛选组件记录").bgColor(@"random").addTo(self.view).onClick(^{
+        [self filter3];
+    });
+    
+    [_b3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view).inset(20);
+        make.top.mas_equalTo(328);
+        make.height.mas_equalTo(44);
+    }];
+    
     _b1_0 = NSNotFound;
     _b2_0 = NSNotFound;
     _b2_1 = NSNotFound;
@@ -67,7 +81,7 @@
     
     @weakify(self);
     @weakify(filterView);
-    filterView.selectBlock = ^(NSArray<NSIndexPath *> *indexPaths) {
+    filterView.selectBlock = ^(NSArray<NSIndexPath *> * _Nullable indexPaths, NSArray<TMUIFilterCell *> * _Nullable cells) {
         @strongify(self);
         @strongify(filterView);
         NSMutableString *str = [NSMutableString string];
@@ -102,7 +116,7 @@
     
     @weakify(self);
     @weakify(filterView);
-    filterView.selectBlock = ^(NSArray<NSIndexPath *> *indexPaths) {
+    filterView.selectBlock = ^(NSArray<NSIndexPath *> * _Nullable indexPaths, NSArray<TMUIFilterCell *> * _Nullable cells) {
         @strongify(self);
         @strongify(filterView);
         NSMutableString *str = [NSMutableString string];
@@ -120,6 +134,42 @@
         }
         self.b2.tmui_text = str;
     };
+}
+
+- (void)filter3{
+    if (!_filterView3) {
+        TMUIFilterModel *filterModel1 = [[TMUIFilterModel alloc] init];
+        filterModel1.title = @"装修公司所在区域";
+        filterModel1.subtitle = @"根据装修公司门店所在区域，选择方便到店的装修公司";
+        filterModel1.items = @[@"南山区",@"宝安区",@"福田区",@"龙岗区",@"罗湖区",@"盐田区"];
+        filterModel1.defalutItem = _b1_0;
+        TMUIFilterView *filterView = [[TMUIFilterView alloc] init];
+        filterView.topInset = CGRectGetMaxY(self.b3.frame);
+        filterView.models = @[filterModel1];
+        
+        @weakify(self);
+        @weakify(filterView);
+        filterView.selectBlock = ^(NSArray<NSIndexPath *> * _Nullable indexPaths, NSArray<TMUIFilterCell *> * _Nullable cells) {
+            @strongify(self);
+            @strongify(filterView);
+            NSMutableString *str = [NSMutableString string];
+            for (NSIndexPath *idxP in indexPaths) {
+                NSString *aAtr = filterView.models[idxP.section].items[idxP.item];
+                [str appendString:aAtr];
+                if (idxP.section == 0) {
+                    self.b3_0 = idxP.item;
+                }
+            }
+            self.b3.tmui_text = str;
+        };
+        
+        _filterView3 = filterView;
+    }
+    
+    
+    
+    [_filterView3 show];
+    
 }
 
 @end
