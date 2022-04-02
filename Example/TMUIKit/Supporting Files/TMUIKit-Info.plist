@@ -29,6 +29,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access Photos?</string>
 	<key>Product ID</key>
 	<string>ONEXB583C93221900_IOS-default</string>
 	<key>Product Version</key>
@@ -72,7 +74,5 @@
 		<key>SyncServer</key>
 		<string>mpaas-mss.aliyuncs.com</string>
 	</dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access Photos?</string>
 </dict>
 </plist>

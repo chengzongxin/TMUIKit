@@ -11,10 +11,9 @@
 @interface TDFilterViewController ()
 
 @property (nonatomic, strong) UIButton *b1;
-
 @property (nonatomic, strong) UIButton *b2;
-
 @property (nonatomic, strong) UIButton *b3;
+@property (nonatomic, strong) UIButton *b4;
 
 @property (nonatomic, assign) NSInteger b1_0;
 
@@ -22,6 +21,9 @@
 @property (nonatomic, assign) NSInteger b2_1;
 
 @property (nonatomic, assign) NSInteger b3_0;
+
+@property (nonatomic, assign) NSInteger b4_0;
+
 @property (nonatomic, strong) TMUIFilterView *filterView3;
 @end
 
@@ -49,7 +51,7 @@
     
     [_b2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view).inset(20);
-        make.top.mas_equalTo(264);
+        make.top.equalTo(_b1.mas_bottom).offset(20);
         make.height.mas_equalTo(44);
     }];
     
@@ -59,7 +61,17 @@
     
     [_b3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view).inset(20);
-        make.top.mas_equalTo(328);
+        make.top.equalTo(_b2.mas_bottom).offset(20);
+        make.height.mas_equalTo(44);
+    }];
+    
+    _b4 = Button.str(@"单选组件流式布局").bgColor(@"random").addTo(self.view).onClick(^{
+        [self filter4];
+    });
+    
+    [_b4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view).inset(20);
+        make.top.equalTo(_b3.mas_bottom).offset(20);
         make.height.mas_equalTo(44);
     }];
     
@@ -109,8 +121,21 @@
     filterModel2.items = @[@"全部",@"设计阶段",@"水电阶段",@"泥工阶段",@"油漆阶段",@"竣工阶段"];
     filterModel2.defalutItem = _b2_1;
     
+    TMUIFilterModel *filterModel3 = [[TMUIFilterModel alloc] init];
+    filterModel3.title = @"装修公司所在区域";
+    filterModel3.subtitle = @"根据装修公司门店所在区域，选择方便到店的装修公司";
+    filterModel3.items = @[@"南山区",@"宝安区",@"福田区",@"龙岗区",@"罗湖区",@"盐田区"];
+    filterModel3.defalutItem = _b2_0;
+    
+    TMUIFilterModel *filterModel4 = [[TMUIFilterModel alloc] init];
+    filterModel4.title = @"装修阶段";
+    filterModel4.subtitle = @"土巴兔平台根据装修公司综合服务能力排名";
+    filterModel4.items = @[@"全部",@"设计阶段",@"水电阶段",@"泥工阶段",@"油漆阶段",@"竣工阶段"];
+    filterModel4.defalutItem = _b2_1;
+    
     TMUIFilterView *filterView = [[TMUIFilterView alloc] init];
-    filterView.models = @[filterModel1,filterModel2];
+    filterView.maxHeight = 500;
+    filterView.models = @[filterModel1,filterModel2,filterModel3,filterModel4];
     
     [filterView show];
     
@@ -170,6 +195,35 @@
     
     [_filterView3 show];
     
+}
+
+
+- (void)filter4{
+    TMUIFilterModel *filterModel1 = [[TMUIFilterModel alloc] init];
+    filterModel1.title = @"装修公司所在区域";
+    filterModel1.subtitle = @"根据装修公司门店所在区域，选择方便到店的装修公司";
+    filterModel1.items = @[@"南山区南山区",@"宝安",@"福田区田区",@"龙岗龙岗龙岗区",@"罗湖区",@"龙龙岗田区",@"南区",@"宝安宝安宝安",@"福区田区",@"龙岗龙岗龙岗区",@"罗湖区",@"龙岗龙田区"];
+    TMUIFilterView *filterView = [[TMUIFilterView alloc] init];
+    filterView.column = 0;
+    filterView.models = @[filterModel1];
+    
+    [filterView show];
+    
+    @weakify(self);
+    @weakify(filterView);
+    filterView.selectBlock = ^(NSArray<NSIndexPath *> * _Nullable indexPaths, NSArray<TMUIFilterCell *> * _Nullable cells) {
+        @strongify(self);
+        @strongify(filterView);
+        NSMutableString *str = [NSMutableString string];
+        for (NSIndexPath *idxP in indexPaths) {
+            NSString *aAtr = filterView.models[idxP.section].items[idxP.item];
+            [str appendString:aAtr];
+            if (idxP.section == 0) {
+                self.b4_0 = idxP.item;
+            }
+        }
+        self.b4.tmui_text = str;
+    };
 }
 
 @end

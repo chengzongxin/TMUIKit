@@ -12,9 +12,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     //圆角形状遮罩处理-每次frame变化都需要重新赋值，写在此处更加合理
-    self.layer.mask = [self maskCornerRadiusLayer];
+    if (self.disableDrawPathWhenLayoutSubviews == NO) {
+        self.layer.mask = [self maskCornerRadiusLayer];
+    }
     //因相关渐变色在frame变化时也需要重新绘制，故在此处调用以下方法以便重绘
-    [self setNeedsDisplay];
+//    [self setNeedsDisplay];
 }
 
 - (CALayer *)maskCornerRadiusLayer {

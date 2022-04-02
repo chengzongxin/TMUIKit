@@ -42,6 +42,14 @@
     
 }
 
+- (void)setSelected:(BOOL)selected{
+    if (selected) {
+        _titleLbl.textColor = UIColorHex(22C77D);
+    }else{
+        _titleLbl.textColor = UIColorHex(1A1C1A);
+    }
+}
+
 - (void)setTitle:(NSString *)title{
     _title = title;
     _titleLbl.text = title;

@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"DEBUG" style:UIBarButtonItemStylePlain target:self action:@selector(debug)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(debug)];
     
     GroupTV(
             SECTION_CREATE(
@@ -61,7 +61,41 @@
 }
 
 - (void)debug{
-    [self.navigationController pushViewController:[NSClassFromString(@"TDOneFoldLabelViewController") new] animated:YES];
+//    [self.navigationController pushViewController:[NSClassFromString(@"TDOneFoldLabelViewController") new] animated:YES];
+    [self filter1];
+    
 }
 
+
+
+- (void)filter1{
+    
+    TMUIFilterModel *filterModel1 = [[TMUIFilterModel alloc] init];
+    filterModel1.title = @"装修公司所在区域";
+    filterModel1.subtitle = @"根据装修公司门店所在区域，选择方便到店的装修公司";
+    filterModel1.items = @[@"南山区",@"宝安区",@"福田区",@"龙岗区",@"罗湖区",@"盐田区"];
+//    filterModel1.defalutItem = _b1_0;
+//    filterModel1.
+    TMUIFilterView *filterView = [[TMUIFilterView alloc] init];
+    filterView.column = 4;
+//    filterView.topInset = NavigationContentTop;
+    filterView.models = @[filterModel1];
+    [filterView showInView:self.tabBarController.view topInset:0];
+    
+//    @weakify(self);
+//    @weakify(filterView);
+//    filterView.selectBlock = ^(NSArray<NSIndexPath *> * _Nullable indexPaths, NSArray<TMUIFilterCell *> * _Nullable cells) {
+////        @strongify(self);
+//        @strongify(filterView);
+//        NSMutableString *str = [NSMutableString string];
+//        for (NSIndexPath *idxP in indexPaths) {
+//            NSString *aAtr = filterView.models[idxP.section].items[idxP.item];
+//            [str appendString:aAtr];
+//            if (idxP.section == 0) {
+////                self.b1_0 = idxP.item;
+//            }
+//        }
+////        self.b1.tmui_text = str;
+//    };
+}
 @end

@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *subtitle;
 
+- (void)setSelected:(BOOL)selected;
+
 @end
 
 NS_ASSUME_NONNULL_END

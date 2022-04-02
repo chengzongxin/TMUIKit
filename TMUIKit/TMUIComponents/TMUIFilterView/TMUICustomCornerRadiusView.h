@@ -25,6 +25,9 @@ NS_INLINE TMUICustomCornerRadius TMUICustomCornerRadiusMake(CGFloat leftTopRadiu
 
 @interface TMUICustomCornerRadiusView : UIView
 @property (nonatomic, assign)TMUICustomCornerRadius customCornerRadius;///< 可指定四个角各自对应一个圆角半径值
+
+@property (nonatomic, assign) BOOL disableDrawPathWhenLayoutSubviews;///< 执行动画的时候，需要禁用掉，否则动画不会执行
+
 @end
 
 NS_ASSUME_NONNULL_END

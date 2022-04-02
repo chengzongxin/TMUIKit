@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger defalutItem;
 
+@property (nonatomic, assign) NSInteger defalutSection;
+
+@property (nonatomic, assign) BOOL isOnlySectionStyle;
+
 @end
 
 NS_ASSUME_NONNULL_END

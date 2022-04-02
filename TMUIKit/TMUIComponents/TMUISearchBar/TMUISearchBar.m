@@ -313,7 +313,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _textField.clipsToBounds = YES;
         _textField.font = UIFont(14);
         _textField.delegate = self;
-        [_textField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventAllEditingEvents];
+        [_textField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventValueChanged];
     }
     return _textField;
 }
