@@ -11,7 +11,7 @@
 #import "TMUICore.h"
 #import "TMUIExtensions.h"
 #import "TMUIMultipleDelegates.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 
 static NSString *const kParentVC = @"kParentVC";
 

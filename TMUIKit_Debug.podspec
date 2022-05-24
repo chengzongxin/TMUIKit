@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIKit'
-  s.version          = '1.1.13'
+  s.version          = '1.1.12'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -171,6 +171,10 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMPopoverView/*.{h,m}'
       end
       
+      ss.subspec 'TMUIMenuView' do |sss|
+         sss.source_files = 'TMUIKit/TMUIComponents/TMUIMenuView/*.{h,m}'
+      end    
+      
       ss.subspec 'TMSearchController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
         sss.subspec 'Private' do |ssss|
@@ -244,6 +248,25 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIFilterView/*.{h,m}'
       end
 
+      ss.subspec 'TMUIPickerView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPickerView/*.{h,m}'
+      end
+
+      ss.subspec 'TMUIAppearance' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
+      end
+
+      ss.subspec 'TMUIPopupContainerView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPopupContainerView/*.{h,m}'
+      end
+
+      ss.subspec 'TMUINavigationBar' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUINavigationBar/*.{h,m}'
+        sss.resource_bundles = {
+            'TMUINavigationBarUIAssets' => ['TMUIKit/TMUIComponents/TMUINavigationBar/Resource/*']
+          }
+      end
+
     ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
 
      ss.subspec 'TMUITableView' do |sss|
@@ -261,10 +284,6 @@ Pod::Spec.new do |s|
 
      ss.subspec 'TMUITheme' do |sss|
        sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
-     end
-
-     ss.subspec 'TMUIAppearance' do |sss|
-       sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
      end
 
       #ChainUI

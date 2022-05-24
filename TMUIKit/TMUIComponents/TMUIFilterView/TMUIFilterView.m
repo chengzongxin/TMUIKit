@@ -6,7 +6,6 @@
 //
 
 #import "TMUIFilterView.h"
-#import "TMUICustomCornerRadiusView.h"
 #import "TMUIFilterSectionHeader.h"
 #import "TMUIFilterToolbar.h"
 #import "TMUIFilterLeftAlignedLayout.h"
@@ -56,8 +55,9 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
 }
 
 - (void)didInitalize{
-    _topInset = NavigationContentTop;
+    _topInset = 0;
     _column = 3;
+    _animateDuration = 0.3;
     _isAutoDismiss = YES;
     _allowsUnSelection = NO;
     _allowsMultipleSelection = NO;
@@ -113,87 +113,8 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
 }
 
 #pragma mark - Public
-- (void)show{
-    UIViewController *topVC = UIViewController.new.tmui_topViewController;
-    [self showInView:topVC.view topInset:0];
-}
-
-- (void)dismiss{
-    self.contentView.disableDrawPathWhenLayoutSubviews = YES;
-    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(0);
-    }];
-    
-    self.alpha = 1;
-    dispatch_block_t animations = ^{
-        self.alpha = 0;
-        [self layoutIfNeeded];
-    };
-    [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.f initialSpringVelocity:0.f options:UIViewAnimationOptionBeginFromCurrentState animations:animations completion:^(BOOL finished) {
-        self.contentView.disableDrawPathWhenLayoutSubviews = NO;
-        [self removeFromSuperview];
-    }];
-}
-
-- (void)dismissWithoutAnimate{
-    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(0);
-    }];
-    [self layoutIfNeeded];
-    [self removeFromSuperview];
-}
-
-- (BOOL)isShow{
-    return self.superview;
-}
-
-- (void)showInView:(UIView *)view{
-    [self showInView:view topInset:self.topInset];
-}
-
-- (void)showInView:(UIView *)view topInset:(CGFloat)topInset{
-    [self showInView:view topInset:topInset animate:YES];
-}
-
-- (void)showInView:(UIView *)view topInset:(CGFloat)topInset animate:(BOOL)animate{
-    [view addSubview:self];
-    // Perform animations
-    CGFloat contentH = [self contentLimitHeight];
-    
-    if (animate) {
-        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(topInset);
-            make.height.mas_equalTo(0);
-        }];
-
-        [self layoutIfNeeded];
-
-        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(contentH);
-        }];
-        
-        self.alpha = 0;
-        dispatch_block_t animations = ^{
-            self.alpha = 1;
-            [self layoutIfNeeded];
-        };
-        [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:1.f initialSpringVelocity:0.f options:UIViewAnimationOptionBeginFromCurrentState animations:animations completion:nil];
-    }else{
-        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(topInset);
-            make.height.mas_equalTo(contentH);
-        }];
-    }
-}
-
-
-- (CGFloat)contentLimitHeight{
-    CGFloat toolbarH = self.allowsMultipleSelection? TMUIFilterToolBarHeight : 0;
-    CGFloat realH = self.collectionView.contentSize.height + UIEdgeInsetsGetVerticalValue(self.collectionView.contentInset) + toolbarH;
-    return MIN(realH, _maxHeight);
-}
-
-
+#pragma mark - datas 数据源
+/// 最好在所有的配置都设置完成后再设置数据源，因为设置数据源后就会刷新列表
 - (void)setModels:(NSArray<TMUIFilterModel *> *)models{
     _models = models;
     if (models.count > 1 && _isForceSingleList == NO) {
@@ -219,6 +140,17 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
     }];
 }
 
+#pragma mark - config 数据驱动配置，修改后会影响筛选菜单UI布局
+- (void)setColumn:(NSInteger)column{
+    _column = column;
+    
+    if (_column == 0) {
+        self.collectionView.collectionViewLayout = self.leftAlignedLayout;
+    }
+    [self.collectionView reloadData];
+}
+
+
 - (void)setTopInset:(CGFloat)topInset{
     _topInset = topInset;
     self.frame = CGRectMake(0, self.topInset, TMUI_SCREEN_WIDTH, TMUI_SCREEN_HEIGHT - self.topInset);
@@ -229,19 +161,110 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
     _collectionView.allowsMultipleSelection = allowsMultipleSelection;
 }
 
+
 - (void)setMaxHeight:(CGFloat)maxHeight{
     _maxHeight = maxHeight;
     
     [self updateLayoutWhenMultiSection];
 }
 
-- (void)setColumn:(NSInteger)column{
-    _column = column;
+#pragma mark - config 纯UI配置
+- (void)setContentInset:(UIEdgeInsets)contentInset{
+    _contentInset = contentInset;
     
-    if (_column == 0) {
-        self.collectionView.collectionViewLayout = self.leftAlignedLayout;
+    [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView).insets(contentInset);
+    }];
+    
+    [self updateLayoutWhenMultiSection];
+}
+
+
+#pragma mark - 接口方法
+- (CGFloat)contentLimitHeight{
+    CGFloat toolbarH = self.allowsMultipleSelection? TMUIFilterToolBarHeight : 0;
+    CGFloat realH = UIEdgeInsetsGetVerticalValue(self.contentInset) + self.collectionView.contentSize.height + UIEdgeInsetsGetVerticalValue(self.collectionView.contentInset) + toolbarH;
+    return MIN(realH, _maxHeight);
+}
+
+
+- (void)show{
+    UIViewController *topVC = UIViewController.new.tmui_topViewController;
+    [self showInView:topVC.view];
+}
+
+- (void)showInView:(UIView *)view{
+    [self showInView:view animate:YES];
+}
+
+- (void)showInView:(UIView *)view animate:(BOOL)animate{
+    [view addSubview:self];
+    // Perform animations
+    CGFloat contentH = [self contentLimitHeight];
+    
+    if (animate && self.animateDuration > 0) {
+        // 某些场景下，会出现collectionView的动画效果，需要先渲染出collectionview，再做动画，避免collectionview里的动画
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(contentH);
+        }];
+
+        [self layoutIfNeeded];
+        
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+
+        [self layoutIfNeeded];
+
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(contentH);
+        }];
+        
+        self.alpha = 0;
+        dispatch_block_t animations = ^{
+            self.alpha = 1;
+            [self layoutIfNeeded];
+        };
+        [UIView animateWithDuration:self.animateDuration delay:0.0 usingSpringWithDamping:1.f initialSpringVelocity:0.f options:UIViewAnimationOptionBeginFromCurrentState animations:animations completion:nil];
+    }else{
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(contentH);
+        }];
     }
-    [self.collectionView reloadData];
+}
+
+
+- (void)dismiss{
+    [self dismiss:YES];
+}
+
+- (void)dismiss:(BOOL)animate{
+    if (animate && self.animateDuration > 0) {
+        self.contentView.disableDrawPathWhenLayoutSubviews = YES;
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+        
+        self.alpha = 1;
+        dispatch_block_t animations = ^{
+            self.alpha = 0;
+            [self layoutIfNeeded];
+        };
+        [UIView animateWithDuration:self.animateDuration delay:0.0 usingSpringWithDamping:1.f initialSpringVelocity:0.f options:UIViewAnimationOptionBeginFromCurrentState animations:animations completion:^(BOOL finished) {
+            self.contentView.disableDrawPathWhenLayoutSubviews = NO;
+            [self removeFromSuperview];
+        }];
+    }else{
+        [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+        [self layoutIfNeeded];
+        [self removeFromSuperview];
+    }
+}
+
+- (BOOL)isShow{
+    return self.superview;
 }
 
 
@@ -311,7 +334,7 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *text = self.models[indexPath.section].items[indexPath.item];
+    NSString *text = self.models[indexPath.section].items[indexPath.item].text;
     CGSize size = [self itemSizeWithText:text];
     return size;
 }
@@ -320,7 +343,7 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     TMUIFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TMUIFilterCell class])
                                                                            forIndexPath:indexPath];
-    cell.btn.tmui_text = self.models[indexPath.section].items[indexPath.item];
+    cell.btn.tmui_text = self.models[indexPath.section].items[indexPath.item].text;
     [cell.btn tmui_setNormalBackGroundColor:UIColorHex(F6F8F6) selectedBackGroundColor:self.selectColor];
     return cell;
 }
@@ -376,12 +399,16 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
     // 设置排序优先级，并组成数组
     NSSortDescriptor *section = [NSSortDescriptor sortDescriptorWithKey:@"section" ascending:YES];
     NSArray<NSIndexPath *> *sortedArray = [self.collectionView.indexPathsForSelectedItems sortedArrayUsingDescriptors:@[section]];
-
-    NSMutableArray <TMUIFilterCell *> *selectedCells = [NSMutableArray array];
+    // 回调model
+    NSMutableArray <TMUIFilterItemModel *> *selectedModels = [NSMutableArray array];
+    // 回调cell
+//    NSMutableArray <TMUIFilterCell *> *selectedCells = [NSMutableArray array];
     [sortedArray enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [selectedCells addObject:(TMUIFilterCell *)[self.collectionView cellForItemAtIndexPath:obj]];
+        [selectedModels addObject:self.models[obj.section].items[obj.item]];
+        // 这里回调cell可能为nil，如果选中cell滑出屏幕会被回收
+//        [selectedCells addObject:(TMUIFilterCell *)[self.collectionView cellForItemAtIndexPath:obj]];
     }];
-    !_selectBlock?:_selectBlock(sortedArray,selectedCells);
+    !_selectBlock?:_selectBlock(sortedArray,selectedModels);
 }
 
 
@@ -392,7 +419,7 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
         }];
         
         [self.collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-TMUIFilterToolBarHeight);
+            make.bottom.mas_equalTo(-TMUIFilterToolBarHeight-_contentInset.bottom);
         }];
     }
 }

@@ -582,6 +582,46 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
 
 @implementation UIView (TMUI_Coordinate)
 
+- (CGPoint)tmui_convertPoint:(CGPoint)point toView:(nullable UIView *)view {
+    if (view) {
+        return [view tmui_convertPoint:point fromView:view];
+    }
+    return [self convertPoint:point toView:view];
+}
+
+- (CGPoint)tmui_convertPoint:(CGPoint)point fromView:(nullable UIView *)view {
+    UIWindow *selfWindow = [self isKindOfClass:[UIWindow class]] ? (UIWindow *)self : self.window;
+    UIWindow *fromWindow = [view isKindOfClass:[UIWindow class]] ? (UIWindow *)view : view.window;
+    if (selfWindow && fromWindow && selfWindow != fromWindow) {
+        CGPoint pointInFromWindow = fromWindow == view ? point : [view convertPoint:point toView:nil];
+        CGPoint pointInSelfWindow = [selfWindow convertPoint:pointInFromWindow fromWindow:fromWindow];
+        CGPoint pointInSelf = selfWindow == self ? pointInSelfWindow : [self convertPoint:pointInSelfWindow fromView:nil];
+        return pointInSelf;
+    }
+    return [self convertPoint:point fromView:view];
+}
+
+
+- (CGRect)tmui_convertRect:(CGRect)rect toView:(nullable UIView *)view {
+    if (view) {
+        return [view tmui_convertRect:rect fromView:self];
+    }
+    return [self convertRect:rect toView:view];
+}
+
+- (CGRect)tmui_convertRect:(CGRect)rect fromView:(nullable UIView *)view {
+    UIWindow *selfWindow = [self isKindOfClass:[UIWindow class]] ? (UIWindow *)self : self.window;
+    UIWindow *fromWindow = [view isKindOfClass:[UIWindow class]] ? (UIWindow *)view : view.window;
+    if (selfWindow && fromWindow && selfWindow != fromWindow) {
+        CGRect rectInFromWindow = fromWindow == view ? rect : [view convertRect:rect toView:nil];
+        CGRect rectInSelfWindow = [selfWindow convertRect:rectInFromWindow fromWindow:fromWindow];
+        CGRect rectInSelf = selfWindow == self ? rectInSelfWindow : [self convertRect:rectInSelfWindow fromView:nil];
+        return rectInSelf;
+    }
+    return [self convertRect:rect fromView:view];
+}
+
+
 - (CGPoint)tmui_convertPoint:(CGPoint)point toViewOrWindow:(UIView *)view {
     if (!view) {
         if ([self isKindOfClass:[UIWindow class]]) {
@@ -669,7 +709,7 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
 @property(nonatomic, strong) CAShapeLayer *tmui_shadowLayer;
 
 /// 边框layer
-@property(nonatomic, strong) CAShapeLayer *tmui_borderLayer;
+//@property(nonatomic, strong) CAShapeLayer *tmui_borderLayer;
 
 /// 渐变layer
 @property(nonatomic, strong) CAGradientLayer *tmui_gradientLayer;
@@ -680,7 +720,7 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
 
 TMUISynthesizeIdStrongProperty(tmui_cornerLayer, setTmui_cornerLayer);
 TMUISynthesizeIdStrongProperty(tmui_shadowLayer, setTmui_shadowLayer);
-TMUISynthesizeIdStrongProperty(tmui_borderLayer, setTmui_borderLayer);
+//TMUISynthesizeIdStrongProperty(tmui_borderLayer, setTmui_borderLayer);
 TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
 
 // 半圆角
@@ -701,6 +741,13 @@ TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
     if (self.tmui_gradientLayer) {
         self.tmui_gradientLayer.cornerRadius = self.layer.cornerRadius;
     }
+}
+
+- (void)tmui_cornerRadiuss:(NSArray<NSNumber *> *)cornerRadiuss frame:(CGRect)frame{
+    UIBezierPath *path = [UIBezierPath tmui_bezierPathWithRoundedRect:frame cornerRadiusArray:cornerRadiuss lineWidth:0];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = path.CGPath;
+    self.layer.mask = maskLayer;
 }
 
 - (void)tmui_shadowColor:(UIColor *)color
@@ -816,46 +863,46 @@ TMUISynthesizeIdStrongProperty(tmui_gradientLayer, setTmui_gradientLayer);
     self.tmui_gradientLayer = gradientLayer;
     
     //将CAGradientlayer对象添加在我们要设置背景色的视图的layer层
-    [self.layer insertSublayer:self.tmui_gradientLayer atIndex:1];
+    [self.layer insertSublayer:self.tmui_gradientLayer atIndex:0];
 }
 
-
-- (void)tmui_border:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect {
-    UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
-    switch (rect) {
-        case UIRectEdgeAll:
-            self.layer.borderWidth = width;
-            self.layer.borderColor = color.CGColor;
-            break;
-        case UIRectEdgeLeft:
-            [bezierPath moveToPoint:CGPointMake(0, self.height)];
-            [bezierPath addLineToPoint:CGPointZero];
-            break;
-        case UIRectEdgeRight:
-            [bezierPath moveToPoint:CGPointMake(self.width, 0)];
-            [bezierPath addLineToPoint:CGPointMake(self.width, self.height)];
-            break;
-        case UIRectEdgeTop:
-            [bezierPath moveToPoint:CGPointMake(0, 0)];
-            [bezierPath addLineToPoint:CGPointMake(self.width, 0)];
-            break;
-        case UIRectEdgeBottom:
-            [bezierPath moveToPoint:CGPointMake(0, self.height)];
-            [bezierPath addLineToPoint:CGPointMake(self.width, self.height)];
-            break;
-        default:
-            break;
-    }
-    
-    [self.tmui_borderLayer removeFromSuperlayer];
-    CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
-    shapeLayer.strokeColor = color.CGColor;
-    shapeLayer.fillColor = UIColor.clearColor.CGColor;
-    shapeLayer.path = bezierPath.CGPath;
-    shapeLayer.lineWidth = width;
-    self.tmui_borderLayer = shapeLayer;
-    [self.layer insertSublayer:self.tmui_borderLayer atIndex:2];
-}
+// 和TMUIBorder 冲突，弃用
+//- (void)tmui_border:(UIColor *)color width:(CGFloat)width type:(UIRectEdge)rect {
+//    UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
+//    switch (rect) {
+//        case UIRectEdgeAll:
+//            self.layer.borderWidth = width;
+//            self.layer.borderColor = color.CGColor;
+//            break;
+//        case UIRectEdgeLeft:
+//            [bezierPath moveToPoint:CGPointMake(0, self.height)];
+//            [bezierPath addLineToPoint:CGPointZero];
+//            break;
+//        case UIRectEdgeRight:
+//            [bezierPath moveToPoint:CGPointMake(self.width, 0)];
+//            [bezierPath addLineToPoint:CGPointMake(self.width, self.height)];
+//            break;
+//        case UIRectEdgeTop:
+//            [bezierPath moveToPoint:CGPointMake(0, 0)];
+//            [bezierPath addLineToPoint:CGPointMake(self.width, 0)];
+//            break;
+//        case UIRectEdgeBottom:
+//            [bezierPath moveToPoint:CGPointMake(0, self.height)];
+//            [bezierPath addLineToPoint:CGPointMake(self.width, self.height)];
+//            break;
+//        default:
+//            break;
+//    }
+//
+//    [self.tmui_borderLayer removeFromSuperlayer];
+//    CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+//    shapeLayer.strokeColor = color.CGColor;
+//    shapeLayer.fillColor = UIColor.clearColor.CGColor;
+//    shapeLayer.path = bezierPath.CGPath;
+//    shapeLayer.lineWidth = width;
+//    self.tmui_borderLayer = shapeLayer;
+//    [self.layer insertSublayer:self.tmui_borderLayer atIndex:2];
+//}
 @end
 
 
@@ -1488,3 +1535,31 @@ static char kAssociatedObjectKey_sizeThatFitsBlock;
 
 
 @end
+
+
+
+@implementation UIBezierPath (TMUI)
+
++ (UIBezierPath *)tmui_bezierPathWithRoundedRect:(CGRect)rect cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius lineWidth:(CGFloat)lineWidth {
+    CGFloat topLeftCornerRadius = cornerRadius[0].floatValue;
+    CGFloat bottomLeftCornerRadius = cornerRadius[1].floatValue;
+    CGFloat bottomRightCornerRadius = cornerRadius[2].floatValue;
+    CGFloat topRightCornerRadius = cornerRadius[3].floatValue;
+    CGFloat lineCenter = lineWidth / 2.0;
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(topLeftCornerRadius, lineCenter)];
+    [path addArcWithCenter:CGPointMake(topLeftCornerRadius, topLeftCornerRadius) radius:topLeftCornerRadius - lineCenter startAngle:M_PI * 1.5 endAngle:M_PI clockwise:NO];
+    [path addLineToPoint:CGPointMake(lineCenter, CGRectGetHeight(rect) - bottomLeftCornerRadius)];
+    [path addArcWithCenter:CGPointMake(bottomLeftCornerRadius, CGRectGetHeight(rect) - bottomLeftCornerRadius) radius:bottomLeftCornerRadius - lineCenter startAngle:M_PI endAngle:M_PI * 0.5 clockwise:NO];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - bottomRightCornerRadius, CGRectGetHeight(rect) - lineCenter)];
+    [path addArcWithCenter:CGPointMake(CGRectGetWidth(rect) - bottomRightCornerRadius, CGRectGetHeight(rect) - bottomRightCornerRadius) radius:bottomRightCornerRadius - lineCenter startAngle:M_PI * 0.5 endAngle:0.0 clockwise:NO];
+    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - lineCenter, topRightCornerRadius)];
+    [path addArcWithCenter:CGPointMake(CGRectGetWidth(rect) - topRightCornerRadius, topRightCornerRadius) radius:topRightCornerRadius - lineCenter startAngle:0.0 endAngle:M_PI * 1.5 clockwise:NO];
+    [path closePath];
+    
+    return path;
+}
+
+@end
+

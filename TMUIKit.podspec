@@ -171,6 +171,10 @@ Pod::Spec.new do |s|
         sss.source_files = 'TMUIKit/TMUIComponents/TMPopoverView/*.{h,m}'
       end
       
+      ss.subspec 'TMUIMenuView' do |sss|
+         sss.source_files = 'TMUIKit/TMUIComponents/TMUIMenuView/*.{h,m}'
+      end  
+      
       ss.subspec 'TMSearchController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
         sss.subspec 'Private' do |ssss|
@@ -242,6 +246,25 @@ Pod::Spec.new do |s|
 
       ss.subspec 'TMUIFilterView' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIFilterView/*.{h,m}'
+      end
+
+      ss.subspec 'TMUIPickerView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPickerView/*.{h,m}'
+      end
+
+      ss.subspec 'TMUIAppearance' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
+      end
+
+      ss.subspec 'TMUIPopupContainerView' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUIPopupContainerView/*.{h,m}'
+      end
+
+      ss.subspec 'TMUINavigationBar' do |sss|
+        sss.source_files = 'TMUIKit/TMUIComponents/TMUINavigationBar/*.{h,m}'
+        sss.resource_bundles = {
+            'TMUINavigationBarUIAssets' => ['TMUIKit/TMUIComponents/TMUINavigationBar/Resource/*']
+          }
       end
   end
 end

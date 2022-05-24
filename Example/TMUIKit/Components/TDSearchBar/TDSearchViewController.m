@@ -29,7 +29,7 @@ func(self, selector);
     TMUIFloatLayoutView *layoutView = [[TMUIFloatLayoutView alloc] tmui_initWithSize:TMUIFloatLayoutViewAutomaticalMaximumItemSize];
     layoutView.itemMargins = UIEdgeInsetsMake(0, 0, 8, 8);
     
-    NSArray *btns = @[@"显示/隐藏左边",@"显示/隐藏右边"];
+    NSArray *btns = @[@"显示/隐藏左边",@"显示/隐藏右边",@"结束编辑"];
     
     [btns enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         TMUIButton *btn = [TMUIButton tmui_button];
@@ -53,6 +53,10 @@ func(self, selector);
 //        _navBar.isBackButtonHidden = !_navBar.isBackButtonHidden;
     }else if (btn.tag == 1) {
 //        _navBar.isRightButtonHidden = !_navBar.isRightButtonHidden;
+    }else if (btn.tag == 2) {
+//        [self.view endEditing:YES];
+        TMUISearchBar *search = (TMUISearchBar *)self.navigationItem.titleView;
+        [search resignFirstResponder];
     }
 }
 
@@ -75,10 +79,10 @@ func(self, selector);
     NSString *method = [NSString stringWithFormat:@"style%zd",_style];
     invoke(method)
     
-    TMUISearchBar *search = self.navigationItem.titleView;
+    TMUISearchBar *search = (TMUISearchBar *)self.navigationItem.titleView;
     if ([search isKindOfClass:TMUISearchBar.class]) {
         
-        search.maxTextLength = 10;
+        search.maxTextLength = 50;
         __weak typeof(search) weakSearch = search;
         search.cityClick = ^(UIButton * _Nonnull btn) {
             NSLog(@"【cityClick】：%@",btn);
@@ -90,6 +94,9 @@ func(self, selector);
         };
         search.textChange = ^(UITextField * _Nonnull textField, NSString * _Nonnull text) {
             NSLog(@"【textChange】：%@\n%@",textField.text,textField);
+        };
+        search.textEnd = ^(UITextField * _Nonnull textField, NSString * _Nonnull text) {
+            NSLog(@"【textEnd】：%@\n%@",textField.text,textField);
         };
         search.maxLength = ^(UITextField * _Nonnull textField, NSRange range, NSString * _Nonnull replacementString) {
             NSLog(@"【maxLength】：%@-%@-%@",textField,NSStringFromRange(range),replacementString);

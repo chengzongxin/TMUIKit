@@ -30,13 +30,20 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
 
 @property (nonatomic, strong) UIButton *cancelBtn;
 
+@property (nonatomic, assign) BOOL isUseSystemNavBar;
+
 @end
 
 @implementation TMUISearchBar
 
 #pragma mark - 初始化
 + (instancetype)searchBarForSystemNavigationBar{
-    return [[self alloc] initWithStyle:TMUISearchBarStyle_Normal frame:CGRectMake(20, 0, TMUI_SCREEN_WIDTH - 20, TMUISearchBarHeight)];
+    TMUISearchBar *searchBar = [[TMUISearchBar alloc] initWithStyle:TMUISearchBarStyle_Normal frame:CGRectMake(0, 0, TMUI_SCREEN_WIDTH - 20, TMUISearchBarHeight)];
+    searchBar.isUseSystemNavBar = YES;
+    [searchBar.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+    }];
+    return searchBar;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -59,7 +66,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
 }
 
 - (void)setupViews{
-    self.layer.cornerRadius = 8;
+    self.layer.cornerRadius = TMUISearchBarHeight/2;
     self.userInteractionEnabled = YES;
     
     [self addSubview:self.contentView];
@@ -90,6 +97,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         [self.contentView addSubview:self.cityBtn];
         [_cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_offset(0);
+            make.centerY.equalTo(self.contentView);
             make.height.equalTo(self.contentView);
             make.width.mas_equalTo(80);
         }];
@@ -146,16 +154,19 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
 - (void)setShowsCancelButton:(BOOL)showsCancelButton{
     _showsCancelButton = showsCancelButton;
     
+    CGFloat cancelW = _isUseSystemNavBar ? 38 : 58;
+    CGFloat offsetCancelW = _isUseSystemNavBar ? 10 : 0;
+    
     if (showsCancelButton) {
         [self addSubview:self.cancelBtn];
         [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(_textField);
             make.right.mas_equalTo(0);
-            make.width.mas_equalTo(58);
+            make.width.mas_equalTo(cancelW);
             make.height.equalTo(_textField);
         }];
         [_contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-58);
+            make.right.mas_equalTo(-cancelW-offsetCancelW);
         }];
     }else{
         [_cancelBtn removeFromSuperview];
@@ -244,6 +255,18 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
     return YES;
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    return YES;
+}
+
+/// 输入完成事件
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    !_textEnd?:_textEnd(textField,textField.text);
+    if (self.delegate && [self.delegate respondsToSelector:@selector(searchBarTextEnd:textField:)]) {
+        [self.delegate searchBarTextEnd:self textField:textField];
+    }
+}
+
 /// 点击清除按钮
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
     !_clearClick?:_clearClick();
@@ -265,7 +288,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _contentView.clipsToBounds = YES;
         _contentView.backgroundColor = UIColorHex(F9FAF9);
         _contentView.layer.borderColor = UIColorHex(ECEEEC).CGColor;
-        _contentView.layer.cornerRadius = 8;
+        _contentView.layer.cornerRadius = TMUISearchBarHeight/2;
         _contentView.layer.borderWidth = .5;
         _contentView.userInteractionEnabled = YES;
     }
@@ -312,8 +335,9 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.clipsToBounds = YES;
         _textField.font = UIFont(14);
+        _textField.returnKeyType = UIReturnKeySearch;
         _textField.delegate = self;
-        [_textField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventValueChanged];
+        [_textField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
     }
     return _textField;
 }

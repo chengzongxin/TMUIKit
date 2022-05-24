@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 
 @interface TMUIFloatImagesViewModel ()
-@property (nonatomic, strong) NSArray <THKFloatImageModel *> *model;
+@property (nonatomic, strong) NSArray <TMUIFloatImageModel *> *model;
 @end
 
 @implementation TMUIFloatImagesViewModel
@@ -37,7 +37,7 @@
     self.model = model;
 }
 
-- (void)setModel:(NSArray<THKFloatImageModel *> *)model{
+- (void)setModel:(NSArray<TMUIFloatImageModel *> *)model{
     _model = model;
     
     if ([model isKindOfClass:NSArray.class]) {
@@ -47,7 +47,7 @@
 
 - (void)initialize{
 //    [super initialize];
-    
+    self.showNumLabel = YES;
     self.maxShowNum = 9;
     self.minimumInteritemSpacing = 8;
     self.minimumLineSpacing = 8;

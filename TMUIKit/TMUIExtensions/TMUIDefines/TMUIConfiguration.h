@@ -61,6 +61,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIColor            *testColorGreen;
 @property(nonatomic, strong) UIColor            *testColorBlue;
 
+#pragma mark - UILabel
+
+@property(nonatomic, strong) UIColor            *mainColor;
+@property(nonatomic, strong) UIColor            *textImportantColor;
+@property(nonatomic, strong) UIColor            *textRegularColor;
+@property(nonatomic, strong) UIColor            *textWeakColor;
+@property(nonatomic, strong) UIColor            *textPlaceholderColor;
+
 #pragma mark - UIControl
 
 @property(nonatomic, assign) CGFloat            controlHighlightedAlpha;

@@ -79,7 +79,7 @@
 //        imageView
         [imageView yy_setImageWithURL:[NSURL URLWithString:model.thumbnailUrl] options:0];
     };
-    imgsView.clickImage = ^(NSInteger index) {
+    imgsView.clickImage = ^(NSInteger index, NSArray<NSIndexPath *> * _Nonnull visibleIndexPath, NSArray<UIImageView *> * _Nonnull visibleImageView) {
         NSLog(@"%zd",index);
     };
     _imgsView1 = imgsView;
@@ -149,7 +149,7 @@
     
     
     @TMUI_weakify(imgsView)
-    imgsView.clickImage = ^(NSInteger index) {
+    imgsView.clickImage = ^(NSInteger index, NSArray<NSIndexPath *> * _Nonnull visibleIndexPath, NSArray<UIImageView *> * _Nonnull visibleImageView) {
         NSLog(@"%zd",index);
      @TMUI_strongify(imgsView)
         NSMutableArray *frames = [NSMutableArray array];

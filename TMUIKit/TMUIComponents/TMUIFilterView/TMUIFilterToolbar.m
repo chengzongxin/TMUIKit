@@ -6,7 +6,7 @@
 //
 
 #import "TMUIFilterToolbar.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "TMUICore.h"
 #import "TMUIExtensions.h"
 #import "TMUIComponents.h"

@@ -46,7 +46,8 @@
 #define TMUI_StatusBarHeight (UIApplication.sharedApplication.statusBarHidden ? 0 : UIApplication.sharedApplication.statusBarFrame.size.height)
 
 /// app的主winodw
-#define TMUI_AppWindow [UIApplication sharedApplication].delegate.window
+//#define TMUI_AppWindow UIApplication.sharedApplication.delegate.window
+#define TMUI_AppWindow UIApplication.sharedApplication.windows.firstObject
 
 ///获取一个像素
 #define TMUI_PixelOne tmui_pixelOne()

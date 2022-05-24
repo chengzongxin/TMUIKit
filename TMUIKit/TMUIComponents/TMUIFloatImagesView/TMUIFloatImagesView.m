@@ -9,6 +9,7 @@
 #import "TMUIFloatImagesView.h"
 #import <Masonry/Masonry.h>
 #import "TMUICore.h"
+#import "NSMutableArray+TMUI.h"
 //#define kMaxWidth  (TMUI_SCREEN_WIDTH - 15*2)
 
 @interface TMUIFloatImagesCell : UICollectionViewCell
@@ -118,7 +119,11 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    self.collectionView.frame = self.bounds;
+//    self.collectionView.frame = self.bounds;
+//    if (self.viewModel.model.count && self.collectionView.visibleCells.count == 0) {
+////        [self.collectionView reloadData];
+//        [self bindViewModel];
+//    }
 }
 
 - (void)didiniailze{
@@ -153,6 +158,8 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
     }
     
     [self.collectionView reloadData];
+    // 这里必须强制渲染collectionview，因为在cell会重用，导致不渲染不调用cellforrow
+    [self.collectionView layoutIfNeeded];
 }
 
 
@@ -184,6 +191,14 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
     return fitSize;
 }
 
++ (CGFloat)imagesViewHeightFor:(TMUIFloatImagesViewModel *)viewModel maxWidth:(CGFloat)width{
+    
+    TMUIFloatImagesView *imgsView = [[TMUIFloatImagesView alloc] initWithMaxWidth:width];
+    [imgsView bindViewModel:viewModel];
+    CGSize size = [imgsView sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
+    return size.height;
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -201,13 +216,14 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
 //    [cell.imageView loadImageWithUrlStr:imgModel.thumbnailUrl];
     !_loadImage?:_loadImage(cell.imageView,imgModel);// 外部实现
     
+    BOOL showNum = self.viewModel.showNumLabel;
     NSInteger imgNum = self.viewModel.imageNum;
     NSInteger maxNum = self.viewModel.maxShowNum;
     NSInteger imgCorner = self.viewModel.itemCornerRadius;
     cell.imageView.layer.cornerRadius = imgCorner;
     cell.imageView.layer.masksToBounds = YES;
     // 设置最后一个标签
-    if ( imgNum > maxNum && indexPath.item == maxNum - 1) {
+    if (showNum && imgNum > maxNum && indexPath.item == maxNum - 1) {
         cell.numberOfPicLabel.hidden = NO;
         cell.numberOfPicLabel.text = [NSString stringWithFormat:@"%zd图",imgNum];
     }else{
@@ -221,7 +237,16 @@ BeginIgnoreClangWarning(-Wobjc-designated-initializers)
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.clickImage) {
-        self.clickImage(indexPath.item);
+        // 设置排序优先级，并组成数组
+        
+        NSMutableArray *imgs = [NSMutableArray array];
+        NSSortDescriptor *itemSort = [NSSortDescriptor sortDescriptorWithKey:@"item" ascending:YES];
+        NSArray<NSIndexPath *> *visibleIndexPath = [collectionView.indexPathsForVisibleItems sortedArrayUsingDescriptors:@[itemSort]];
+        [visibleIndexPath enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            TMUIFloatImagesCell *cell = (TMUIFloatImagesCell *)[collectionView cellForItemAtIndexPath:obj];
+            [imgs tmui_safeAddObject:cell.imageView];
+        }];
+        self.clickImage(indexPath.item,collectionView.indexPathsForVisibleItems,imgs);
     }
 }
 

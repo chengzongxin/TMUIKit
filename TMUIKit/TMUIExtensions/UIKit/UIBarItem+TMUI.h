@@ -36,14 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
  
  @warning 仅对 UIBarButtonItem、UITabBarItem 有效
  */
-//@property(nullable, nonatomic, copy) void (^tmui_viewDidLayoutSubviewsBlock)(__kindof UIBarItem *item, UIView * _Nullable view);
+@property(nullable, nonatomic, copy) void (^tmui_viewDidLayoutSubviewsBlock)(__kindof UIBarItem *item, UIView * _Nullable view);
 
 /**
  当 item 内的 view 的 frame 发生变化时就会调用这个 block。
  
  @warning 仅对 UIBarButtonItem、UITabBarItem 有效
  */
-//@property(nullable, nonatomic, copy) void (^tmui_viewLayoutDidChangeBlock)(__kindof UIBarItem *item, UIView * _Nullable view);
+@property(nullable, nonatomic, copy) void (^tmui_viewLayoutDidChangeBlock)(__kindof UIBarItem *item, UIView * _Nullable view);
 
 @end
 

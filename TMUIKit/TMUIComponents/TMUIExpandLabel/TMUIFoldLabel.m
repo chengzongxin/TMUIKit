@@ -8,14 +8,13 @@
 #import "TMUIFoldLabel.h"
 #import <CoreText/CoreText.h>
 #import "NSAttributedString+TMUI.h"
+#import "UIColor+TMUI.h"
 @interface TMUIFoldLabel ()
 
+/// 原始富文本
 @property (nonatomic, strong) NSAttributedString *originAttr;
-
-@property (nonatomic, assign) CGFloat maxWidth;
-/** 收起/展开颜色 默认blueColor*/
-@property (nonatomic, strong) UIColor *foldColor;
-@property (nonatomic, assign) CGRect clickArea;
+/// 原始行数
+@property (nonatomic, assign) NSInteger originNumberOfLine;
 /// 段落样式
 @property (nonatomic, strong) NSMutableParagraphStyle *style;
 
@@ -23,11 +22,13 @@
 @property (nonatomic, strong) NSAttributedString *unfoldAttrString;
 
 @property (nonatomic, strong) NSAttributedString *foldClickString;
+@property (nonatomic, strong) NSAttributedString *unfoldClickString;
+
+@property (nonatomic, assign) CGRect clickFoldArea;
+@property (nonatomic, assign) CGRect clickUnfoldArea;
 
 @property (nonatomic, assign) CGFloat foldHeight;
 @property (nonatomic, assign) CGFloat unfoldHeight;
-
-@property (nonatomic, assign) BOOL isFold;
 
 @property (nonatomic, assign) BOOL numberOfLinesEnoughShowAllContents;
 
@@ -50,9 +51,22 @@
     self.maxWidth = UIScreen.mainScreen.bounds.size.width;
     self.font = [UIFont systemFontOfSize:12];
     self.isFold = YES;
-    self.foldColor = UIColor.redColor;
+    self.isAutoRefreshContentWhenClickFold = YES;
+    self.foldColor = UIColorHex(2C82EC);
     self.userInteractionEnabled = YES;
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionGestureTapped:)]];
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLabel:)]];
+}
+
++ (CGSize)sizeForAttr:(NSAttributedString *)attr line:(NSInteger)line width:(CGFloat)width{
+    TMUIFoldLabel *label = [[TMUIFoldLabel alloc] init];
+    label.numberOfLines = line;
+    label.maxWidth = width;
+    label.attributedText = attr;
+    return [label sizeForFits];
+}
+
+- (CGSize)sizeForFits{
+    return [self sizeThatFits:CGSizeMake(self.maxWidth, CGFLOAT_MAX)];
 }
 
 
@@ -60,47 +74,61 @@
 - (void)setAttributedText:(NSAttributedString *)attributedText{
     _originAttr = attributedText;
     
-    if (self.numberOfLines == 0) {
-        [super setAttributedText:attributedText];
-        return;
-    }
-    // 计算行数
-    NSInteger lineCount = [self numberOfLinesForAttributtedText:attributedText];
-    if (lineCount <= self.numberOfLines) {
-        self.numberOfLinesEnoughShowAllContents = YES;
-        [super setAttributedText:attributedText];
-        return;
-    }
+    // 重置，以免在cell中复用出问题
+    _foldAttrString = nil;
+    _unfoldAttrString = nil;
     
-    self.numberOfLinesEnoughShowAllContents = NO;
+    // 初始设置，会影响后面创建富文本
     self.font = attributedText.tmui_font;
     self.textColor = attributedText.tmui_color;
     self.style = attributedText.tmui_paragraphStyle;
-    self.isFold = YES;
     
-    [self createFoldAttr:attributedText];
-    [self invalidateIntrinsicContentSize];
-    [super setAttributedText:self.foldAttrString];
+    NSInteger lineCount = [self numberOfLinesForAttributtedText:attributedText];
+    
+    if (self.numberOfLines == 0 || lineCount <= self.numberOfLines) {
+        self.isFold = NO;
+    }else{
+        self.isFold = YES;
+        self.originNumberOfLine = self.numberOfLines;
+    }
+    
+    NSAttributedString *attrStr = self.isFold ? self.foldAttrString : self.unfoldAttrString;
+    [super setAttributedText:attrStr];
 }
 
-
+#pragma mark - Action
 /// 点击了展开文本后，显示展开文本
-- (void)actionGestureTapped: (UITapGestureRecognizer*)sender{
-    if (CGRectContainsPoint(_clickArea, [sender locationInView:self])) {
+- (void)tapLabel:(UITapGestureRecognizer *)tap{
+    CGPoint tapPoint = [tap locationInView:self];
+    NSLog(@"%@--%@--%@",NSStringFromCGPoint(tapPoint),NSStringFromCGRect(_clickFoldArea),NSStringFromCGRect(_clickUnfoldArea));
+    CGRect clickArea = self.isFold ? _clickFoldArea : _clickUnfoldArea;
+    if (CGRectContainsPoint(clickArea, tapPoint)) {
+        // 点击展开
         if (self.isFold == YES) {
             self.isFold = NO;
-            self.numberOfLines = 0;
-            [self invalidateIntrinsicContentSize];
-            [super setAttributedText:self.originAttr];
+            if (self.isAutoRefreshContentWhenClickFold) {
+                self.numberOfLines = 0;
+                [super setAttributedText:self.unfoldAttrString];
+            }
+        }else{
+            // 点击收起
+            self.isFold = YES;
+            if (self.isAutoRefreshContentWhenClickFold) {
+                self.numberOfLines = self.originNumberOfLine;
+                [super setAttributedText:self.foldAttrString];
+            }
         }
+        
+        !_clickFold ?: _clickFold(self.isFold,self);
     }else{
-//        !_clickActionBlock?:_clickActionBlock(TMUIExpandLabelClickActionType_Label,CGSizeMake(self.width, self.textHeight));
+        // 没有点击在展开收起
+        !_clickText ?: _clickText(self.isFold,self);
     }
 }
 
 ///  创建折叠文本
 - (void)createFoldAttr:(NSAttributedString *)originAttr{
-    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, self.maxWidth, UIScreen.mainScreen.bounds.size.height), nil);
+    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, self.maxWidth, CGFLOAT_MAX), nil);
 //    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithAttributedString:originAttr];
 //    [attributed tmui_setAttribute:NSParagraphStyleAttributeName value:self.style];
     // CTFrameRef
@@ -123,13 +151,14 @@
         CTLineRef line = (__bridge CTLineRef)lines[i];
         //获取该行的在整个attributed的范围
         CFRange range = CTLineGetStringRange(line);
+        CGFloat lineHeight = [self heightForCTLine:line];
+        CGFloat lineSpace = self.style.lineSpacing;
         //截取这一行的text
         NSAttributedString *lineAttr = [originAttr attributedSubstringFromRange:NSMakeRange(range.location, range.length)];
         if (i != numberOfLines - 1) {
             // 不是最后一行
                 [foldAttrString appendAttributedString:lineAttr];
-                totalHeight += [self heightForCTLine:line];
-                totalHeight += self.style.lineSpacing; // 前面需要多加行高
+                totalHeight += lineSpace; // 前面需要多加行高
         }else{
             // 是限制的最后一行
             NSMutableAttributedString *lastLineAttr = (NSMutableAttributedString*)lineAttr;
@@ -153,23 +182,19 @@
                     CGSize expandSize = CTLineGetBoundsWithOptions(expandLine, 0).size;
                     
                     
-                    self.clickArea = CGRectMake(lastLineSize.width - expandSize.width, totalHeight, expandSize.width, expandSize.height);
+                    self.clickFoldArea = CGRectMake(lastLineSize.width - expandSize.width, totalHeight, expandSize.width, expandSize.height);
                     //                    [self addDebugView:totalHeight];
-                    totalHeight += [self heightForCTLine:line];
-                    
                     CFRelease(expandLine);
                     break;
                 }
             }
         }
+        totalHeight += lineHeight;
         CFRelease(line);
     }
-    self.foldHeight = ceil(totalHeight); // 这里需要向上取整，避免显示不全
-    self.foldAttrString = foldAttrString;
-//    _attrType = TMUIExpandLabelAttrType_Shrink;
-    // 避免重复走一遍逻辑
-//    [self setAttributedText:drawAttributedText];
-//    !_sizeChangeBlock?:_sizeChangeBlock(TMUIExpandLabelClickActionType_Shrink,CGSizeMake(self.width, totalHeight));
+    _foldHeight = ceil(totalHeight); // 这里需要向上取整，避免显示不全
+    _foldAttrString = foldAttrString;
+    
 //    CFRelease(ctFrame);  // 释放会crash
     CFRelease(setter);
     CFRelease(path);
@@ -177,15 +202,12 @@
 
 /// 创建展开文本
 - (void)createUnfoldAttr:(NSAttributedString *)originAttr{
-    NSAttributedString *foldClickAttr = self.foldClickString;
     // 需要拼接 ”展开“
-    NSMutableAttributedString *unfoldAttr = [[NSMutableAttributedString alloc] initWithAttributedString:originAttr];
-    [unfoldAttr appendAttributedString:foldClickAttr];
-    
-    CTFramesetterRef setter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)unfoldAttr);
-    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, self.maxWidth, UIScreen.mainScreen.bounds.size.height), nil);
+    NSMutableAttributedString *unfoldAttrString = [[NSMutableAttributedString alloc] init];
+    CTFramesetterRef setter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)originAttr);
+    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, self.maxWidth, CGFLOAT_MAX), nil);
     // CTFrameRef
-    CTFrameRef ctFrame = CTFramesetterCreateFrame(setter, CFRangeMake(0, unfoldAttr.length), path, NULL);
+    CTFrameRef ctFrame = CTFramesetterCreateFrame(setter, CFRangeMake(0, originAttr.length), path, NULL);
     // CTLines
     NSArray *lines = (NSArray*)CTFrameGetLines(ctFrame);
     CGPoint origins[lines.count];
@@ -194,38 +216,100 @@
     
     for (int i = 0; i < lines.count; i++) {
         CTLineRef line = (__bridge CTLineRef)lines[i];
+        CGFloat lineHeight = [self heightForCTLine:line];
+        CGFloat lineSpace = self.style.lineSpacing;
+        CFRange range = CTLineGetStringRange(line);
+        NSAttributedString *lineAttr = [originAttr attributedSubstringFromRange:NSMakeRange(range.location, range.length)];
+        [unfoldAttrString appendAttributedString:lineAttr];
         if (i < lines.count - 1) {
-//            [self addDebugView:totalHeight];
-            // 前面几行
-            totalHeight += [self heightForCTLine:line];
+            totalHeight += lineSpace;
         }else if (i == lines.count - 1) {
             // 最后一行
-            NSArray *runs = (NSArray*)CTLineGetGlyphRuns(line);
-            CGFloat x = 0;
-            for (int i = 0; i < runs.count - 1; i++) {
-                CTRunRef run = (__bridge CTRunRef)runs[i];
-                x += CTRunGetTypographicBounds(run, CFRangeMake(0, 0), NULL, NULL, NULL);
+            
+//            if (self.type == TMUIFoldLabelType_ShowFoldAndUnfold) {
+//                [unfoldAttrString appendAttributedString:self.unfoldClickString];
+//            }
+            
+            if (self.type == TMUIFoldLabelType_ShowFoldAndUnfold) {
+                
+                
+                NSMutableAttributedString *lastAttr = [lineAttr mutableCopy];
+//                [lastAttr appendAttributedString:self.unfoldAttrString];
+                
+                if ([self numberOfLinesForAttributtedText:lastAttr] > 1) {
+                    
+                }
+                
+                [unfoldAttrString appendAttributedString:self.unfoldClickString];
+                
+                
+                // 获取收起点击位置
+                NSArray *runs = (NSArray*)CTLineGetGlyphRuns(line);
+                CGFloat x = 0;
+                for (int i = 0; i < runs.count - 1; i++) {
+                    CTRunRef run = (__bridge CTRunRef)runs[i];
+                    x += CTRunGetTypographicBounds(run, CFRangeMake(0, 0), NULL, NULL, NULL);
+                }
+                CTLineRef moreLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)self.unfoldClickString);
+                CGSize moreSize = CTLineGetBoundsWithOptions(moreLine, 0).size;
+                self.clickUnfoldArea = CGRectMake(x, totalHeight, moreSize.width, moreSize.height);
+                
+                CFRelease(moreLine);
+                //            [self addDebugView:self.clickUnfoldArea];
+                //            if (self.isNewLine) {
+                //                totalHeight += moreSize.height;
+                //            }
             }
             
-            CTLineRef moreLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)foldClickAttr);
-            CGSize moreSize = CTLineGetBoundsWithOptions(moreLine, 0).size;
-            self.clickArea = CGRectMake(x, totalHeight, moreSize.width, moreSize.height);
-//            [self addDebugView:totalHeight];
-//            if (self.isNewLine) {
-//                totalHeight += moreSize.height;
-//            }
-            CFRelease(moreLine);
         }
+        
+        totalHeight += lineHeight;
     }
     
-    self.unfoldHeight = ceil(totalHeight);
-    self.unfoldAttrString = unfoldAttr;
+    _unfoldHeight = ceil(totalHeight);
+    _unfoldAttrString = unfoldAttrString;
     
     CFRelease(ctFrame);
     CFRelease(path);
     CFRelease(setter);
 }
 
+- (void)addDebugView:(CGRect)frame{
+    UIView *view = [UIView new];
+    view.frame = frame;
+    view.backgroundColor = [UIColor.redColor colorWithAlphaComponent:0.3];
+    [self addSubview:view];
+}
+
+- (CGFloat)foldHeight{
+    if (!_foldHeight) {
+        [self createFoldAttr:self.originAttr];
+    }
+    return _foldHeight;
+}
+
+- (CGFloat)unfoldHeight{
+    if (!_unfoldHeight) {
+        [self createUnfoldAttr:self.originAttr];
+    }
+    return _unfoldHeight;
+}
+
+// 这里如果用懒加载会引起问题，因为在cell中会有重用机制
+- (NSAttributedString *)foldAttrString{
+    if (!_foldAttrString) {
+        [self createFoldAttr:self.originAttr];
+    }
+    return _foldAttrString;
+}
+
+// 这里如果用懒加载会引起问题，因为在cell中会有重用机制
+- (NSAttributedString *)unfoldAttrString{
+    if (!_unfoldAttrString) {
+        [self createUnfoldAttr:self.originAttr];
+    }
+    return _unfoldAttrString;
+}
 
 - (NSAttributedString *)foldClickString{
     if (!_foldClickString) {
@@ -237,10 +321,17 @@
     return _foldClickString;
 }
 
+- (NSAttributedString *)unfoldClickString{
+    if (!_unfoldClickString) {
+        _unfoldClickString = [[NSAttributedString alloc] initWithString:@"收起" attributes:@{NSFontAttributeName:self.font, NSForegroundColorAttributeName:self.foldColor}];
+    }
+    return _unfoldClickString;
+}
+
 #pragma mark - Private
 /** 计算text的行数 */
--(NSInteger)numberOfLinesForAttributtedText:(NSAttributedString*)text {
-    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, self.maxWidth, UIScreen.mainScreen.bounds.size.height), nil);
+- (NSInteger)numberOfLinesForAttributtedText:(NSAttributedString*)text {
+    CGPathRef path = CGPathCreateWithRect(CGRectMake(0, 0, self.maxWidth, CGFLOAT_MAX), nil);
     CTFramesetterRef setter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)text);
     CTFrameRef ctFrame = CTFramesetterCreateFrame(setter, CFRangeMake(0, text.length), path, nil);
     NSArray *lines = (NSArray*)CTFrameGetLines(ctFrame);
@@ -263,13 +354,19 @@
 
 #pragma mark - Super
 - (CGSize)intrinsicContentSize{
-    if (self.numberOfLines == 0 || self.numberOfLinesEnoughShowAllContents) {
-        return [super intrinsicContentSize];
-    }
+//    if (self.numberOfLines == 0 && self.unfoldHeight) {
+//        return CGSizeMake(self.maxWidth, self.unfoldHeight);
+//    }
+//
+//    if (self.numberOfLines == 0 || self.numberOfLinesEnoughShowAllContents) {
+//        return [super intrinsicContentSize];
+//    }
     if (self.isFold) {
-        return CGSizeMake(self.maxWidth, self.foldHeight);
+        CGSize size = [self sizeThatFits:CGSizeMake(self.maxWidth, self.foldHeight)];
+        return size;
     }else{
-        return CGSizeMake(self.maxWidth, self.unfoldHeight);
+        CGSize size =  [self sizeThatFits:CGSizeMake(self.maxWidth, self.unfoldHeight)];
+        return size;
     }
 }
 

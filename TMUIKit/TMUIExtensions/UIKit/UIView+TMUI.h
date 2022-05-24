@@ -179,6 +179,17 @@ extern const CGFloat TMUIViewSelfSizingHeight;
 
 @interface UIView (TMUI_Coordinate)
 
+/// 同 [UIView convertPoint:toView:]，但支持在分属两个不同 window 的 view 之间进行坐标转换，也支持参数 view 直接传一个 window。
+- (CGPoint)tmui_convertPoint:(CGPoint)point toView:(nullable UIView *)view;
+
+/// 同 [UIView convertPoint:fromView:]，但支持在分属两个不同 window 的 view 之间进行坐标转换，也支持参数 view 直接传一个 window。
+- (CGPoint)tmui_convertPoint:(CGPoint)point fromView:(nullable UIView *)view;
+
+/// 同 [UIView convertRect:toView:]，但支持在分属两个不同 window 的 view 之间进行坐标转换，也支持参数 view 直接传一个 window。
+- (CGRect)tmui_convertRect:(CGRect)rect toView:(nullable UIView *)view;
+
+/// 同 [UIView convertRect:fromView:]，但支持在分属两个不同 window 的 view 之间进行坐标转换，也支持参数 view 直接传一个 window。
+- (CGRect)tmui_convertRect:(CGRect)rect fromView:(nullable UIView *)view;
 
 /**
  Converts a point from the receiver's coordinate system to that of the specified view or window.
@@ -240,7 +251,15 @@ extern const CGFloat TMUIViewSelfSizingHeight;
 - (void)tmui_cornerDirect:(UIRectCorner)direct radius:(int)radius;
 
 
+/// 设置4个圆角（一样的数值）
+/// @param cornerRadius 圆角值
 - (void)tmui_cornerRadius:(CGFloat)cornerRadius;
+
+
+/// 设置4个圆角
+/// @param cornerRadiuss 圆角大小的数字，长度必须为4，顺序分别为[左上角、左下角、右下角、右上角]
+/// @param frame 绘制的frame尺寸，因为如果用约束布局，一开始frame没有值，所以需要传入frame，否则直接传view.bounds即可
+- (void)tmui_cornerRadiuss:(NSArray <NSNumber *> *)cornerRadiuss frame:(CGRect)frame;
 
 /**
  设置View和View的阴影圆角
@@ -293,10 +312,10 @@ extern const CGFloat TMUIViewSelfSizingHeight;
                       locations:(NSArray<NSNumber *>*)locations
                           frame:(CGRect)frame;
 
-// MARK: View Border
-- (void)tmui_border:(UIColor *)color
-              width:(CGFloat)width
-               type:(UIRectEdge)rect;
+//// MARK: View Border
+//- (void)tmui_border:(UIColor *)color
+//              width:(CGFloat)width
+//               type:(UIRectEdge)rect;
 
 @end
 
@@ -536,6 +555,20 @@ typedef NS_ENUM(NSInteger, TMUIViewAnimationType) {
 - (UIView *)tmui_subViewOfContainDescription:(NSString *)aString ;
 // 获取第一个class=aClass的视图
 - (UIView *)tmui_subViewOfClass:(Class)aClass;
+
+@end
+
+
+
+@interface UIBezierPath (TMUI)
+
+/**
+ * 创建一条支持四个角的圆角值不相同的路径
+ * @param rect 路径的rect
+ * @param cornerRadius 圆角大小的数字，长度必须为4，顺序分别为[左上角、左下角、右下角、右上角]
+ * @param lineWidth 描边的大小，如果不需要描边（例如path是用于fill而不是用于stroke），则填0
+ */
++ (UIBezierPath *)tmui_bezierPathWithRoundedRect:(CGRect)rect cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius lineWidth:(CGFloat)lineWidth;
 
 @end
 

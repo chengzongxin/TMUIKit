@@ -223,31 +223,6 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
  *  @param tintColor 图片颜色
  */
 
-#pragma mark - 截图
-
-/**
- 对传进来的 `UIView` 截图，生成一个 `UIImage` 并返回。注意这里使用的是 view.layer 来渲染图片内容。
-
- @param view 要截图的 `UIView`
-
- @return `UIView` 的截图
- 
- @warning UIView 的 transform 并不会在截图里生效
- */
-+ (nullable UIImage *)tmui_imageWithView:(UIView *)view;
-
-/**
- 对传进来的 `UIView` 截图，生成一个 `UIImage` 并返回。注意这里使用的是 iOS 7的系统截图接口。
-
- @param view         要截图的 `UIView`
- @param afterUpdates 是否要在界面更新完成后才截图
-
- @return `UIView` 的截图
- 
- @warning UIView 的 transform 并不会在截图里生效
- */
-+ (nullable UIImage *)tmui_imageWithView:(UIView *)view afterScreenUpdates:(BOOL)afterUpdates;
-
 @end
 
 
@@ -348,24 +323,6 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
 
 
 /**
- *  设置一张图片的透明度
- *
- *  @param alpha 要用于渲染透明度
- *
- *  @return 设置了透明度之后的图片
- */
-- (nullable UIImage *)tmui_imageWithAlpha:(CGFloat)alpha;
-
-/**
- *  保持当前图片的形状不变，使用指定的颜色去重新渲染它，生成一张新图片并返回
- *
- *  @param tintColor 要用于渲染的新颜色
- *
- *  @return 与当前图片形状一致但颜色与参数tintColor相同的新图片
- */
-- (nullable UIImage *)tmui_imageWithTintColor:(nullable UIColor *)tintColor;
-
-/**
  *  以 CIColorBlendMode 的模式为当前图片叠加一个颜色，生成一张新图片并返回，在叠加过程中会保留图片内的纹理。
  *
  *  @param blendColor 要叠加的颜色
@@ -387,13 +344,6 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
  *  @return 返回一张与原图大小一致的图片，所叠加的图片若超出原图大小，则超出部分被截掉
  */
 - (nullable UIImage *)tmui_imageWithImageAbove:(UIImage *)image atPoint:(CGPoint)point;
-
-/**
- *  在当前图片的上下左右增加一些空白（不支持负值），通常用于调节NSAttributedString里的图片与文字的间距
- *  @param extension 要拓展的大小
- *  @return 拓展后的图片
- */
-- (nullable UIImage *)tmui_imageWithSpacingExtensionInsets:(UIEdgeInsets)extension;
 
 /**
  *  切割出在指定位置中的图片
@@ -448,15 +398,6 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
  *  @return 处理完的图片
  */
 - (nullable UIImage *)tmui_imageResizedInLimitedSize:(CGSize)size resizingMode:(TMUIImageResizingMode)resizingMode scale:(CGFloat)scale;
-
-/**
- *  将原图进行旋转，只能选择上下左右四个方向
- *
- *  @param  direction 旋转的方向
- *
- *  @return 处理完的图片
- */
-- (nullable UIImage *)tmui_imageWithOrientation:(UIImageOrientation)direction;
 
 /**
  *  为图片加上一个border，border的路径为path
@@ -542,26 +483,6 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
 + (nullable UIImage *)tmui_animatedImageNamed:(NSString *)name scale:(CGFloat)scale;
 
 /**
- *  创建一个size为(4, 4)的纯色的UIImage
- *
- *  @param color 图片的颜色
- *
- *  @return 纯色的UIImage
- */
-+ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color;
-
-/**
- *  创建一个纯色的UIImage
- *
- *  @param  color           图片的颜色
- *  @param  size            图片的大小
- *  @param  cornerRadius    图片的圆角
- *
- * @return 纯色的UIImage
- */
-+ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius;
-
-/**
  *  创建一个纯色的UIImage，支持为四个角设置不同的圆角
  *  @param  color               图片的颜色
  *  @param  size                图片的大小
@@ -579,56 +500,7 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
  */
 + (nullable UIImage *)tmui_imageWithGradientColors:(NSArray<UIColor *> *)colors type:(TMUIImageGradientType)type locations:(nullable NSArray<NSNumber *> *)locations size:(CGSize)size cornerRadiusArray:(nullable NSArray<NSNumber *> *)cornerRadius;
 
-/**
- *  创建一个带边框路径，没有背景色的路径图片，border的路径为path
- *
- *  @param strokeColor  border的颜色
- *  @param path         border的路径
- *  @param addClip      是否要调path的addClip
- *
- *  @return 带border的UIImage
- */
-+ (nullable UIImage *)tmui_imageWithStrokeColor:(nullable UIColor *)strokeColor size:(CGSize)size path:(nullable UIBezierPath *)path addClip:(BOOL)addClip;
-
-/**
- *  创建一个带边框路径，没有背景色的路径图片，border的路径为strokeColor、cornerRadius和lineWidth所创建的path
- *
- *  @param strokeColor  border的颜色
- *  @param lineWidth    border的宽度
- *  @param cornerRadius border的圆角
- *
- *  @return 带border的UIImage
- */
-+ (nullable UIImage *)tmui_imageWithStrokeColor:(nullable UIColor *)strokeColor size:(CGSize)size lineWidth:(CGFloat)lineWidth cornerRadius:(CGFloat)cornerRadius;
-
-/**
- *  创建一个带边框路径，没有背景色的路径图片（可以是任意一条边，也可以是多条组合；只能创建矩形的border，不能添加圆角）
- *
- *  @param strokeColor        路径的颜色
- *  @param size               图片的大小
- *  @param lineWidth          路径的大小
- *  @param borderPosition     图片的路径位置，上左下右
- *
- *  @return 带路径，没有背景色的UIImage
- */
-+ (nullable UIImage *)tmui_imageWithStrokeColor:(nullable UIColor *)strokeColor size:(CGSize)size lineWidth:(CGFloat)lineWidth borderPosition:(TMUIImageBorderPosition)borderPosition;
-/**
- *  创建一个指定大小和颜色的形状图片
- *  @param shape 图片形状
- *  @param size 图片大小
- *  @param tintColor 图片颜色
- */
-+ (nullable UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size tintColor:(nullable UIColor *)tintColor;
-
-/**
- *  创建一个指定大小和颜色的形状图片
- *  @param shape 图片形状
- *  @param size 图片大小
- *  @param lineWidth 路径大小，不会影响最终size
- *  @param tintColor 图片颜色
- */
-+ (nullable UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size lineWidth:(CGFloat)lineWidth tintColor:(nullable UIColor *)tintColor;
-
+#pragma mark - 截图
 /**
  对传进来的 `UIView` 截图，生成一个 `UIImage` 并返回。注意这里使用的是 view.layer 来渲染图片内容。
 

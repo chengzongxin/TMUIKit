@@ -171,6 +171,14 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     self.testColorGreen = UIColorMakeWithRGBA(0, 255, 0, .3);
     self.testColorBlue = UIColorMakeWithRGBA(0, 0, 255, .3);
     
+    #pragma mark - UILabel
+    
+    self.mainColor = UIColorMakeWithHex(0x22C77D);
+    self.textImportantColor = UIColorMakeWithHex(0x1A1C1A);
+    self.textRegularColor = UIColorMakeWithHex(0x333533);
+    self.textWeakColor = UIColorMakeWithHex(0x7E807E);
+    self.textPlaceholderColor = UIColorMakeWithHex(0x7E807E);
+    
     #pragma mark - UIControl
     
     self.controlHighlightedAlpha = 0.5f;

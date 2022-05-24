@@ -14,6 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface TDUIHelper (Button1)
+
++ (TMUIButton *)generateDarkFilledButton;
++ (TMUIButton *)generateLightBorderedButton;
+
+@end
+
 @interface TDUIHelper (Theme)
 
 + (UIImage *)navigationBarBackgroundImageWithThemeColor:(UIColor *)color;

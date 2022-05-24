@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^loadImage)(UIImageView *imageView,TMUIFloatImageModel *model);
 
 /// 实现点击回调
-@property (nonatomic, copy) void (^clickImage)(NSInteger index);
+@property (nonatomic, copy) void (^clickImage)(NSInteger index,NSArray<NSIndexPath *> *visibleIndexPaths,NSArray <UIImageView *> *visibleImageViews);
 
 - (UIImageView *)imageViewAtIndex:(NSInteger)index;
 
@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
 - (void)bindViewModel:(TMUIFloatImagesViewModel *)viewModel;
+
++ (CGFloat)imagesViewHeightFor:(TMUIFloatImagesViewModel *)viewModel maxWidth:(CGFloat)width;
 
 @end
 

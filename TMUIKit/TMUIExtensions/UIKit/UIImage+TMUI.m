@@ -13,17 +13,7 @@
 #import "TMUIKitDefines.h"
 #import "TMUIHelper.h"
 #import "NSArray+TMUI.h"
-
-@interface UIBezierPath (TMUI)
-
-/**
- * 创建一条支持四个角的圆角值不相同的路径
- * @param rect 路径的rect
- * @param cornerRadius 圆角大小的数字，长度必须为4，顺序分别为[左上角、左下角、右下角、右上角]
- * @param lineWidth 描边的大小，如果不需要描边（例如path是用于fill而不是用于stroke），则填0
- */
-+ (UIBezierPath *)tmui_bezierPathWithRoundedRect:(CGRect)rect cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius lineWidth:(CGFloat)lineWidth;
-@end
+#import "UIView+TMUI.h"
 
 #ifdef DEBUG
 #define CGContextInspectContext(context) { \
@@ -194,22 +184,33 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     }];
 }
 
-- (nullable UIImage *)tmui_imageWithTintColor:(nullable UIColor *)tintColor {
+
+- (UIImage *)tmui_imageWithTintColor:(UIColor *)tintColor {
     // iOS 13 的 imageWithTintColor: 方法里并不会去更新 CGImage，所以通过它更改了图片颜色后再获取到的 CGImage 依然是旧的，因此暂不使用
-    //#ifdef IOS13_SDK_ALLOWED
-    //    if (@available(iOS 13.0, *)) {
-    //        return [self imageWithTintColor:tintColor];
-    //    }
-    //#endif
-        return [UIImage tmui_imageWithSize:self.size opaque:self.tmui_opaque scale:self.scale actions:^(CGContextRef contextRef) {
-            CGContextTranslateCTM(contextRef, 0, self.size.height);
-            CGContextScaleCTM(contextRef, 1.0, -1.0);
+//    if (@available(iOS 13.0, *)) {
+//        return [self imageWithTintColor:tintColor];
+//    }
+    BOOL opaque = self.tmui_opaque ? tintColor.tmui_alpha >= 1.0 : NO;// 如果图片不透明但 tintColor 半透明，则生成的图片也应该是半透明的
+    UIImage *result = [UIImage tmui_imageWithSize:self.size opaque:opaque scale:self.scale actions:^(CGContextRef contextRef) {
+        CGContextTranslateCTM(contextRef, 0, self.size.height);
+        CGContextScaleCTM(contextRef, 1.0, -1.0);
+        if (!opaque) {
             CGContextSetBlendMode(contextRef, kCGBlendModeNormal);
             CGContextClipToMask(contextRef, CGRectMakeWithSize(self.size), self.CGImage);
-            CGContextSetFillColorWithColor(contextRef, tintColor.CGColor);
-            CGContextFillRect(contextRef, CGRectMakeWithSize(self.size));
-        }];
+        }
+        CGContextSetFillColorWithColor(contextRef, tintColor.CGColor);
+        CGContextFillRect(contextRef, CGRectMakeWithSize(self.size));
+    }];
+    
+    SEL selector = NSSelectorFromString(@"tmui_generatorSupportsDynamicColor");
+    if ([NSStringFromClass(tintColor.class) containsString:@"TMUIThemeColor"] && [UIImage respondsToSelector:selector]) {
+        BOOL supports;
+        [UIImage.class tmui_performSelector:selector withPrimitiveReturnValue:&supports];
+        NSAssert(supports, @"UIImage (TMUI)", @"UIImage (TMUITheme) hook 尚未生效，TMUIThemeColor 生成的图片无法自动转成 TMUIThemeImage，可能导致 theme 切换时无法刷新。");
+    }
+    return result;
 }
+
 
 - (nullable UIImage *)tmui_imageWithSpacingExtensionInsets:(UIEdgeInsets)extension {
     CGSize contextSize = CGSizeMake(self.size.width + UIEdgeInsetsGetHorizontalValue(extension), self.size.height + UIEdgeInsetsGetVerticalValue(extension));
@@ -219,7 +220,7 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 }
 
 
-- (nullable UIImage *)tmui_imageWithOrientation:(UIImageOrientation)orientation {
+- (UIImage *)tmui_imageWithOrientation:(UIImageOrientation)orientation {
     if (orientation == UIImageOrientationUp) {
         return self;
     }
@@ -228,7 +229,9 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     if (orientation == UIImageOrientationLeft || orientation == UIImageOrientationRight) {
         contextSize = CGSizeMake(contextSize.height, contextSize.width);
     }
-            
+    
+    contextSize = CGSizeFlatSpecificScale(contextSize, self.scale);
+    
     return [UIImage tmui_imageWithSize:contextSize opaque:NO scale:self.scale actions:^(CGContextRef contextRef) {
         // 画布的原点在左上角，旋转后可能图片就飞到画布外了，所以旋转前先把图片摆到特定位置再旋转，图片刚好就落在画布里
         switch (orientation) {
@@ -238,17 +241,17 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
             case UIImageOrientationDown:
                 // 下
                 CGContextTranslateCTM(contextRef, contextSize.width, contextSize.height);
-                CGContextRotateCTM(contextRef, TMUI_AngleWithDegrees(180));
+                CGContextRotateCTM(contextRef, AngleWithDegrees(180));
                 break;
             case UIImageOrientationLeft:
                 // 左
                 CGContextTranslateCTM(contextRef, 0, contextSize.height);
-                CGContextRotateCTM(contextRef, TMUI_AngleWithDegrees(-90));
+                CGContextRotateCTM(contextRef, AngleWithDegrees(-90));
                 break;
             case UIImageOrientationRight:
                 // 右
                 CGContextTranslateCTM(contextRef, contextSize.width, 0);
-                CGContextRotateCTM(contextRef, TMUI_AngleWithDegrees(90));
+                CGContextRotateCTM(contextRef, AngleWithDegrees(90));
                 break;
             case UIImageOrientationUpMirrored:
             case UIImageOrientationDownMirrored:
@@ -271,19 +274,22 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 
 #pragma mark - generate color image
 
-+ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color {
-    return [UIImage tmui_imageWithColor:color size:CGSizeMake(4, 4)];
++ (UIImage *)tmui_imageWithColor:(UIColor *)color {
+    return [UIImage tmui_imageWithColor:color size:CGSizeMake(4, 4) cornerRadius:0];
 }
 
 + (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size {
     return [UIImage tmui_imageWithColor:color size:size cornerRadius:0];
 }
 
-+ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius {
-        
-    color = color ? color : [UIColor clearColor];
+
++ (UIImage *)tmui_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius {
+    size = CGSizeFlatted(size);
+    CGContextInspectSize(size);
+    
+    color = color ? color : UIColor.clearColor;
     BOOL opaque = (cornerRadius == 0.0 && [color tmui_alpha] == 1.0);
-    return [UIImage tmui_imageWithSize:size opaque:opaque scale:0 actions:^(CGContextRef contextRef) {
+    UIImage *result = [UIImage tmui_imageWithSize:size opaque:opaque scale:0 actions:^(CGContextRef contextRef) {
         CGContextSetFillColorWithColor(contextRef, color.CGColor);
         
         if (cornerRadius > 0) {
@@ -294,6 +300,13 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
             CGContextFillRect(contextRef, CGRectMakeWithSize(size));
         }
     }];
+    SEL selector = NSSelectorFromString(@"tmui_generatorSupportsDynamicColor");
+    if ([NSStringFromClass(color.class) containsString:@"TMUIThemeColor"] && [UIImage respondsToSelector:selector]) {
+        BOOL supports;
+        [UIImage.class tmui_performSelector:selector withPrimitiveReturnValue:&supports];
+        NSAssert(supports, @"UIImage (TMUI)", @"UIImage (TMUITheme) hook 尚未生效，TMUIThemeColor 生成的图片无法自动转成 TMUIThemeImage，可能导致 theme 切换时无法刷新。");
+    }
+    return result;
 }
 
 #pragma mark - generate shape image
@@ -322,7 +335,9 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     return [UIImage tmui_imageWithShape:shape size:size lineWidth:lineWidth tintColor:tintColor];
 }
 
-+ (nullable UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size lineWidth:(CGFloat)lineWidth tintColor:(nullable UIColor *)tintColor {
++ (UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size lineWidth:(CGFloat)lineWidth tintColor:(UIColor *)tintColor {
+    size = CGSizeFlatted(size);
+    CGContextInspectSize(size);
     
     tintColor = tintColor ? : [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     
@@ -405,7 +420,7 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
         }
         
         if (shape == TMUIImageShapeDetailButtonImage) {
-            CGFloat fontPointSize = ceilf(size.height * 0.8);
+            CGFloat fontPointSize = flat(size.height * 0.8);
             UIFont *font = [UIFont fontWithName:@"Georgia" size:fontPointSize];
             NSAttributedString *string = [[NSAttributedString alloc] initWithString:@"i" attributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: tintColor}];
             CGSize stringSize = [string boundingRectWithSize:size options:NSStringDrawingUsesFontLeading context:nil].size;
@@ -413,7 +428,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
         }
     }];
 }
-
 
 + (UIImage *)tmui_imageWithStrokeColor:(UIColor *)strokeColor size:(CGSize)size path:(UIBezierPath *)path addClip:(BOOL)addClip {
     size = CGSizeFlatted(size);
@@ -466,23 +480,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
         [path closePath];
         return [UIImage tmui_imageWithStrokeColor:strokeColor size:size path:path addClip:NO];
     }
-}
-
-
-
-#pragma mark - 截图
-
-+ (nullable UIImage *)tmui_imageWithView:(UIView *)view {
-    return [UIImage tmui_imageWithSize:view.bounds.size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
-        [view.layer renderInContext:contextRef];
-    }];
-}
-
-+ (UIImage *)tmui_imageWithView:(UIView *)view afterScreenUpdates:(BOOL)afterUpdates {
-    // iOS 7 截图新方式，性能好会好一点，不过不一定适用，因为这个方法的使用条件是：界面要已经render完，否则截到得图将会是empty。
-    return [UIImage tmui_imageWithSize:view.bounds.size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
-        [view drawViewHierarchyInRect:CGRectMakeWithSize(view.bounds.size) afterScreenUpdates:afterUpdates];
-    }];
 }
 
 @end
@@ -882,39 +879,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 
 @implementation UIImage (TMUI_Size)
 
-
-- (UIImage *)tmui_imageWithAlpha:(CGFloat)alpha {
-    return [UIImage tmui_imageWithSize:self.size opaque:NO scale:self.scale actions:^(CGContextRef contextRef) {
-        [self drawInRect:CGRectMakeWithSize(self.size) blendMode:kCGBlendModeNormal alpha:alpha];
-    }];
-}
-
-- (UIImage *)tmui_imageWithTintColor:(UIColor *)tintColor {
-    // iOS 13 的 imageWithTintColor: 方法里并不会去更新 CGImage，所以通过它更改了图片颜色后再获取到的 CGImage 依然是旧的，因此暂不使用
-//    if (@available(iOS 13.0, *)) {
-//        return [self imageWithTintColor:tintColor];
-//    }
-    BOOL opaque = self.tmui_opaque ? tintColor.tmui_alpha >= 1.0 : NO;// 如果图片不透明但 tintColor 半透明，则生成的图片也应该是半透明的
-    UIImage *result = [UIImage tmui_imageWithSize:self.size opaque:opaque scale:self.scale actions:^(CGContextRef contextRef) {
-        CGContextTranslateCTM(contextRef, 0, self.size.height);
-        CGContextScaleCTM(contextRef, 1.0, -1.0);
-        if (!opaque) {
-            CGContextSetBlendMode(contextRef, kCGBlendModeNormal);
-            CGContextClipToMask(contextRef, CGRectMakeWithSize(self.size), self.CGImage);
-        }
-        CGContextSetFillColorWithColor(contextRef, tintColor.CGColor);
-        CGContextFillRect(contextRef, CGRectMakeWithSize(self.size));
-    }];
-    
-    SEL selector = NSSelectorFromString(@"tmui_generatorSupportsDynamicColor");
-    if ([NSStringFromClass(tintColor.class) containsString:@"TMUIThemeColor"] && [UIImage respondsToSelector:selector]) {
-        BOOL supports;
-        [UIImage.class tmui_performSelector:selector withPrimitiveReturnValue:&supports];
-        NSAssert(supports, @"UIImage (TMUI)", @"UIImage (TMUITheme) hook 尚未生效，TMUIThemeColor 生成的图片无法自动转成 TMUIThemeImage，可能导致 theme 切换时无法刷新。");
-    }
-    return result;
-}
-
 - (UIImage *)tmui_imageWithBlendColor:(UIColor *)blendColor {
     UIImage *coloredImage = [self tmui_imageWithTintColor:blendColor];
     CIFilter *filter = [CIFilter filterWithName:@"CIColorBlendMode"];
@@ -932,13 +896,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     return [UIImage tmui_imageWithSize:self.size opaque:self.tmui_opaque scale:self.scale actions:^(CGContextRef contextRef) {
         [self drawInRect:CGRectMakeWithSize(self.size)];
         [image drawAtPoint:point];
-    }];
-}
-
-- (UIImage *)tmui_imageWithSpacingExtensionInsets:(UIEdgeInsets)extension {
-    CGSize contextSize = CGSizeMake(self.size.width + UIEdgeInsetsGetHorizontalValue(extension), self.size.height + UIEdgeInsetsGetVerticalValue(extension));
-    return [UIImage tmui_imageWithSize:contextSize opaque:self.tmui_opaque scale:self.scale actions:^(CGContextRef contextRef) {
-        [self drawAtPoint:CGPointMake(extension.left, extension.top)];
     }];
 }
 
@@ -1025,58 +982,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     
     return [UIImage tmui_imageWithSize:contextSize opaque:self.tmui_opaque scale:scale actions:^(CGContextRef contextRef) {
         [self drawInRect:drawingRect];
-    }];
-}
-
-- (UIImage *)tmui_imageWithOrientation:(UIImageOrientation)orientation {
-    if (orientation == UIImageOrientationUp) {
-        return self;
-    }
-    
-    CGSize contextSize = self.size;
-    if (orientation == UIImageOrientationLeft || orientation == UIImageOrientationRight) {
-        contextSize = CGSizeMake(contextSize.height, contextSize.width);
-    }
-    
-    contextSize = CGSizeFlatSpecificScale(contextSize, self.scale);
-    
-    return [UIImage tmui_imageWithSize:contextSize opaque:NO scale:self.scale actions:^(CGContextRef contextRef) {
-        // 画布的原点在左上角，旋转后可能图片就飞到画布外了，所以旋转前先把图片摆到特定位置再旋转，图片刚好就落在画布里
-        switch (orientation) {
-            case UIImageOrientationUp:
-                // 上
-                break;
-            case UIImageOrientationDown:
-                // 下
-                CGContextTranslateCTM(contextRef, contextSize.width, contextSize.height);
-                CGContextRotateCTM(contextRef, AngleWithDegrees(180));
-                break;
-            case UIImageOrientationLeft:
-                // 左
-                CGContextTranslateCTM(contextRef, 0, contextSize.height);
-                CGContextRotateCTM(contextRef, AngleWithDegrees(-90));
-                break;
-            case UIImageOrientationRight:
-                // 右
-                CGContextTranslateCTM(contextRef, contextSize.width, 0);
-                CGContextRotateCTM(contextRef, AngleWithDegrees(90));
-                break;
-            case UIImageOrientationUpMirrored:
-            case UIImageOrientationDownMirrored:
-                // 向上、向下翻转是一样的
-                CGContextTranslateCTM(contextRef, 0, contextSize.height);
-                CGContextScaleCTM(contextRef, 1, -1);
-                break;
-            case UIImageOrientationLeftMirrored:
-            case UIImageOrientationRightMirrored:
-                // 向左、向右翻转是一样的
-                CGContextTranslateCTM(contextRef, contextSize.width, 0);
-                CGContextScaleCTM(contextRef, -1, 1);
-                break;
-        }
-        
-        // 在前面画布的旋转、移动的结果上绘制自身即可，这里不用考虑旋转带来的宽高置换的问题
-        [self drawInRect:CGRectMakeWithSize(self.size)];
     }];
 }
 
@@ -1236,89 +1141,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     return [UIImage tmui_animatedImageWithData:data scale:scale];
 }
 
-+ (UIImage *)tmui_imageWithStrokeColor:(UIColor *)strokeColor size:(CGSize)size path:(UIBezierPath *)path addClip:(BOOL)addClip {
-    size = CGSizeFlatted(size);
-    return [UIImage tmui_imageWithSize:size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
-        CGContextSetStrokeColorWithColor(contextRef, strokeColor.CGColor);
-        if (addClip) [path addClip];
-        [path stroke];
-    }];
-}
-
-+ (UIImage *)tmui_imageWithStrokeColor:(UIColor *)strokeColor size:(CGSize)size lineWidth:(CGFloat)lineWidth cornerRadius:(CGFloat)cornerRadius {
-    CGContextInspectSize(size);
-    // 往里面缩一半的lineWidth，应为stroke绘制线的时候是往两边绘制的
-    // 如果cornerRadius为0的时候使用bezierPathWithRoundedRect:cornerRadius:会有问题，左上角老是会多出一点，所以区分开
-    UIBezierPath *path;
-    CGRect rect = CGRectInset(CGRectMakeWithSize(size), lineWidth / 2, lineWidth / 2);
-    if (cornerRadius > 0) {
-        path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
-    } else {
-        path = [UIBezierPath bezierPathWithRect:rect];
-    }
-    [path setLineWidth:lineWidth];
-    return [UIImage tmui_imageWithStrokeColor:strokeColor size:size path:path addClip:NO];
-}
-
-+ (UIImage *)tmui_imageWithStrokeColor:(UIColor *)strokeColor size:(CGSize)size lineWidth:(CGFloat)lineWidth borderPosition:(TMUIImageBorderPosition)borderPosition {
-    CGContextInspectSize(size);
-    if (borderPosition == TMUIImageBorderPositionAll) {
-        return [UIImage tmui_imageWithStrokeColor:strokeColor size:size lineWidth:lineWidth cornerRadius:0];
-    } else {
-        // TODO 使用bezierPathWithRoundedRect:byRoundingCorners:cornerRadii:这个系统接口
-        UIBezierPath* path = [UIBezierPath bezierPath];
-        if ((TMUIImageBorderPositionBottom & borderPosition) == TMUIImageBorderPositionBottom) {
-            [path moveToPoint:CGPointMake(0, size.height - lineWidth / 2)];
-            [path addLineToPoint:CGPointMake(size.width, size.height - lineWidth / 2)];
-        }
-        if ((TMUIImageBorderPositionTop & borderPosition) == TMUIImageBorderPositionTop) {
-            [path moveToPoint:CGPointMake(0, lineWidth / 2)];
-            [path addLineToPoint:CGPointMake(size.width, lineWidth / 2)];
-        }
-        if ((TMUIImageBorderPositionLeft & borderPosition) == TMUIImageBorderPositionLeft) {
-            [path moveToPoint:CGPointMake(lineWidth / 2, 0)];
-            [path addLineToPoint:CGPointMake(lineWidth / 2, size.height)];
-        }
-        if ((TMUIImageBorderPositionRight & borderPosition) == TMUIImageBorderPositionRight) {
-            [path moveToPoint:CGPointMake(size.width - lineWidth / 2, 0)];
-            [path addLineToPoint:CGPointMake(size.width - lineWidth / 2, size.height)];
-        }
-        [path setLineWidth:lineWidth];
-        [path closePath];
-        return [UIImage tmui_imageWithStrokeColor:strokeColor size:size path:path addClip:NO];
-    }
-}
-
-+ (UIImage *)tmui_imageWithColor:(UIColor *)color {
-    return [UIImage tmui_imageWithColor:color size:CGSizeMake(4, 4) cornerRadius:0];
-}
-
-+ (UIImage *)tmui_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius {
-    size = CGSizeFlatted(size);
-    CGContextInspectSize(size);
-    
-    color = color ? color : UIColor.clearColor;
-    BOOL opaque = (cornerRadius == 0.0 && [color tmui_alpha] == 1.0);
-    UIImage *result = [UIImage tmui_imageWithSize:size opaque:opaque scale:0 actions:^(CGContextRef contextRef) {
-        CGContextSetFillColorWithColor(contextRef, color.CGColor);
-        
-        if (cornerRadius > 0) {
-            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMakeWithSize(size) cornerRadius:cornerRadius];
-            [path addClip];
-            [path fill];
-        } else {
-            CGContextFillRect(contextRef, CGRectMakeWithSize(size));
-        }
-    }];
-    SEL selector = NSSelectorFromString(@"tmui_generatorSupportsDynamicColor");
-    if ([NSStringFromClass(color.class) containsString:@"TMUIThemeColor"] && [UIImage respondsToSelector:selector]) {
-        BOOL supports;
-        [UIImage.class tmui_performSelector:selector withPrimitiveReturnValue:&supports];
-        NSAssert(supports, @"UIImage (TMUI)", @"UIImage (TMUITheme) hook 尚未生效，TMUIThemeColor 生成的图片无法自动转成 TMUIThemeImage，可能导致 theme 切换时无法刷新。");
-    }
-    return result;
-}
-
 + (UIImage *)tmui_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius {
     size = CGSizeFlatted(size);
     CGContextInspectSize(size);
@@ -1392,123 +1214,7 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     }];
 }
 
-+ (UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size lineWidth:(CGFloat)lineWidth tintColor:(UIColor *)tintColor {
-    size = CGSizeFlatted(size);
-    CGContextInspectSize(size);
-    
-    tintColor = tintColor ? : [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
-    
-    return [UIImage tmui_imageWithSize:size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
-        UIBezierPath *path = nil;
-        BOOL drawByStroke = NO;
-        CGFloat drawOffset = lineWidth / 2;
-        switch (shape) {
-            case TMUIImageShapeOval: {
-                path = [UIBezierPath bezierPathWithOvalInRect:CGRectMakeWithSize(size)];
-            }
-                break;
-            case TMUIImageShapeTriangle: {
-                path = [UIBezierPath bezierPath];
-                [path moveToPoint:CGPointMake(0, size.height)];
-                [path addLineToPoint:CGPointMake(size.width / 2, 0)];
-                [path addLineToPoint:CGPointMake(size.width, size.height)];
-                [path closePath];
-            }
-                break;
-            case TMUIImageShapeNavBack: {
-                drawByStroke = YES;
-                path = [UIBezierPath bezierPath];
-                path.lineWidth = lineWidth;
-                [path moveToPoint:CGPointMake(size.width - drawOffset, drawOffset)];
-                [path addLineToPoint:CGPointMake(0 + drawOffset, size.height / 2.0)];
-                [path addLineToPoint:CGPointMake(size.width - drawOffset, size.height - drawOffset)];
-            }
-                break;
-            case TMUIImageShapeDisclosureIndicator: {
-                drawByStroke = YES;
-                path = [UIBezierPath bezierPath];
-                path.lineWidth = lineWidth;
-                [path moveToPoint:CGPointMake(drawOffset, drawOffset)];
-                [path addLineToPoint:CGPointMake(size.width - drawOffset, size.height / 2)];
-                [path addLineToPoint:CGPointMake(drawOffset, size.height - drawOffset)];
-            }
-                break;
-            case TMUIImageShapeCheckmark: {
-                CGFloat lineAngle = M_PI_4;
-                path = [UIBezierPath bezierPath];
-                [path moveToPoint:CGPointMake(0, size.height / 2)];
-                [path addLineToPoint:CGPointMake(size.width / 3, size.height)];
-                [path addLineToPoint:CGPointMake(size.width, lineWidth * sin(lineAngle))];
-                [path addLineToPoint:CGPointMake(size.width - lineWidth * cos(lineAngle), 0)];
-                [path addLineToPoint:CGPointMake(size.width / 3, size.height - lineWidth / sin(lineAngle))];
-                [path addLineToPoint:CGPointMake(lineWidth * sin(lineAngle), size.height / 2 - lineWidth * sin(lineAngle))];
-                [path closePath];
-            }
-                break;
-            case TMUIImageShapeDetailButtonImage: {
-                drawByStroke = YES;
-                path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(CGRectMakeWithSize(size), drawOffset, drawOffset)];
-                path.lineWidth = lineWidth;
-            }
-                break;
-            case TMUIImageShapeNavClose: {
-                drawByStroke = YES;
-                path = [UIBezierPath bezierPath];
-                [path moveToPoint:CGPointMake(0, 0)];
-                [path addLineToPoint:CGPointMake(size.width, size.height)];
-                [path closePath];
-                [path moveToPoint:CGPointMake(size.width, 0)];
-                [path addLineToPoint:CGPointMake(0, size.height)];
-                [path closePath];
-                path.lineWidth = lineWidth;
-                path.lineCapStyle = kCGLineCapRound;
-            }
-                break;
-            default:
-                break;
-        }
-        
-        if (drawByStroke) {
-            CGContextSetStrokeColorWithColor(contextRef, tintColor.CGColor);
-            [path stroke];
-        } else {
-            CGContextSetFillColorWithColor(contextRef, tintColor.CGColor);
-            [path fill];
-        }
-        
-        if (shape == TMUIImageShapeDetailButtonImage) {
-            CGFloat fontPointSize = flat(size.height * 0.8);
-            UIFont *font = [UIFont fontWithName:@"Georgia" size:fontPointSize];
-            NSAttributedString *string = [[NSAttributedString alloc] initWithString:@"i" attributes:@{NSFontAttributeName: font, NSForegroundColorAttributeName: tintColor}];
-            CGSize stringSize = [string boundingRectWithSize:size options:NSStringDrawingUsesFontLeading context:nil].size;
-            [string drawAtPoint:CGPointMake(CGFloatGetCenter(size.width, stringSize.width), CGFloatGetCenter(size.height, stringSize.height))];
-        }
-    }];
-}
-
-+ (UIImage *)tmui_imageWithShape:(TMUIImageShape)shape size:(CGSize)size tintColor:(UIColor *)tintColor {
-    CGFloat lineWidth = 0;
-    switch (shape) {
-        case TMUIImageShapeNavBack:
-            lineWidth = 2.0f;
-            break;
-        case TMUIImageShapeDisclosureIndicator:
-            lineWidth = 1.5f;
-            break;
-        case TMUIImageShapeCheckmark:
-            lineWidth = 1.5f;
-            break;
-        case TMUIImageShapeDetailButtonImage:
-            lineWidth = 1.0f;
-            break;
-        case TMUIImageShapeNavClose:
-            lineWidth = 1.2f;   // 取消icon默认的lineWidth
-            break;
-        default:
-            break;
-    }
-    return [UIImage tmui_imageWithShape:shape size:size lineWidth:lineWidth tintColor:tintColor];
-}
+#pragma mark - 截图
 
 + (UIImage *)tmui_imageWithView:(UIView *)view {
     CGContextInspectSize(view.bounds.size);
@@ -1526,30 +1232,3 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 }
 @end
 
-
-
-
-@implementation UIBezierPath (TMUI)
-
-+ (UIBezierPath *)tmui_bezierPathWithRoundedRect:(CGRect)rect cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius lineWidth:(CGFloat)lineWidth {
-    CGFloat topLeftCornerRadius = cornerRadius[0].floatValue;
-    CGFloat bottomLeftCornerRadius = cornerRadius[1].floatValue;
-    CGFloat bottomRightCornerRadius = cornerRadius[2].floatValue;
-    CGFloat topRightCornerRadius = cornerRadius[3].floatValue;
-    CGFloat lineCenter = lineWidth / 2.0;
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(topLeftCornerRadius, lineCenter)];
-    [path addArcWithCenter:CGPointMake(topLeftCornerRadius, topLeftCornerRadius) radius:topLeftCornerRadius - lineCenter startAngle:M_PI * 1.5 endAngle:M_PI clockwise:NO];
-    [path addLineToPoint:CGPointMake(lineCenter, CGRectGetHeight(rect) - bottomLeftCornerRadius)];
-    [path addArcWithCenter:CGPointMake(bottomLeftCornerRadius, CGRectGetHeight(rect) - bottomLeftCornerRadius) radius:bottomLeftCornerRadius - lineCenter startAngle:M_PI endAngle:M_PI * 0.5 clockwise:NO];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - bottomRightCornerRadius, CGRectGetHeight(rect) - lineCenter)];
-    [path addArcWithCenter:CGPointMake(CGRectGetWidth(rect) - bottomRightCornerRadius, CGRectGetHeight(rect) - bottomRightCornerRadius) radius:bottomRightCornerRadius - lineCenter startAngle:M_PI * 0.5 endAngle:0.0 clockwise:NO];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(rect) - lineCenter, topRightCornerRadius)];
-    [path addArcWithCenter:CGPointMake(CGRectGetWidth(rect) - topRightCornerRadius, topRightCornerRadius) radius:topRightCornerRadius - lineCenter startAngle:0.0 endAngle:M_PI * 1.5 clockwise:NO];
-    [path closePath];
-    
-    return path;
-}
-
-@end

@@ -12,6 +12,35 @@
 
 @end
 
+@implementation TDUIHelper (Button1)
+
++ (TMUIButton *)generateDarkFilledButton {
+    TMUIButton *button = [[TMUIButton alloc] tmui_initWithSize:CGSizeMake(200, 40)];
+    button.adjustsButtonWhenHighlighted = YES;
+    button.titleLabel.font = UIFontBoldMake(14);
+    [button setTitleColor:UIColorWhite forState:UIControlStateNormal];
+    button.backgroundColor = UIColor.td_tintColor;
+    button.highlightedBackgroundColor = [UIColor.td_tintColor tmui_transitionToColor:UIColorBlack progress:.15];// 高亮时的背景色
+    button.layer.cornerRadius = 4;
+    return button;
+}
+
++ (TMUIButton *)generateLightBorderedButton {
+    TMUIButton *button = [[TMUIButton alloc] tmui_initWithSize:CGSizeMake(200, 40)];
+    button.titleLabel.font = UIFontBoldMake(14);
+    button.tintColorAdjustsTitleAndImage = UIColor.td_tintColor;
+    button.backgroundColor = [UIColor.td_tintColor tmui_transitionToColor:UIColorWhite progress:.9];
+    button.highlightedBackgroundColor = [UIColor.td_tintColor tmui_transitionToColor:UIColorWhite progress:.75];// 高亮时的背景色
+    button.layer.borderColor = [button.backgroundColor tmui_transitionToColor:UIColor.td_tintColor progress:.5].CGColor;
+    button.layer.borderWidth = 1;
+    button.layer.cornerRadius = 4;
+    button.highlightedBorderColor = [button.backgroundColor tmui_transitionToColor:UIColor.td_tintColor progress:.9];// 高亮时的边框颜色
+    return button;
+}
+
+@end
+
+
 @implementation TDUIHelper (Theme)
 
 + (UIImage *)navigationBarBackgroundImageWithThemeColor:(UIColor *)color {

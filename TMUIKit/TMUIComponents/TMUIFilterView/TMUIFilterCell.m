@@ -6,7 +6,7 @@
 //
 
 #import "TMUIFilterCell.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "TMUIExtensions.h"
 #import "TMUICore.h"
 @interface TMUIFilterCell ()

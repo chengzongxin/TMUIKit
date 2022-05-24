@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class THKFloatImageModel;
+@class TMUIFloatImageModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TMUIFloatImagesViewModel : NSObject
 
-@property (nonatomic, strong, readonly) NSArray <THKFloatImageModel *> *model;
+@property (nonatomic, strong, readonly) NSArray <TMUIFloatImageModel *> *model;
 
+@property (nonatomic, assign) BOOL showNumLabel;
 @property (nonatomic, assign) NSInteger maxShowNum;
 @property (nonatomic, assign) NSInteger imageNum;
 @property (nonatomic, assign) NSInteger minimumInteritemSpacing;
@@ -35,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign) NSInteger              imageHeight;
 @property (nonatomic , copy) NSString              * originUrl;
 @property (nonatomic , copy) NSString              * thumbnailUrl;
+@property (nonatomic , strong) UIImage              * placeholder;
 
 @end
 

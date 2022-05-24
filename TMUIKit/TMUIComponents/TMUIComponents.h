@@ -36,16 +36,8 @@
 #import "TMActionSheet.h"
 #endif
 
-#if __has_include("TMToast.h")
-#import "TMToast.h"
-#endif
-
 #if __has_include("TMPopoverView.h")
 #import "TMPopoverView.h"
-#endif
-
-#if __has_include("TMEmptyView.h")
-#import "TMEmptyView.h"
 #endif
 
 #if __has_include("TMSearchKit.h")
@@ -146,6 +138,25 @@
 
 #if __has_include("TMUIFilterView.h")
 #import "TMUIFilterView.h"
+#endif
+
+#if __has_include("TMUIPickerView.h")
+#import "TMUIPickerView.h"
+#endif
+
+#if __has_include("TMUIAppearance.h")
+#import "TMUIAppearance.h"
+#endif
+
+#if __has_include("TMUIPopupContainerView.h")
+#import "TMUIPickerView.h"
+#import "TMUIPopupMenuBaseItem.h"
+#import "TMUIPopupMenuButtonItem.h"
+#import "TMUIPopupMenuView.h"
+#endif
+
+#if __has_include("TMUINavigationBar.h")
+#import "TMUINavigationBar.h"
 #endif
 
 

@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 #import "TMUICore.h"
 #import "TMUIExtensions.h"
 #import "TMUIComponents.h"
@@ -21,6 +21,7 @@ typedef void(^TMUISearchBarCityClickBlock)(UIButton *cityBtn);
 typedef void(^TMUISearchBarTextBeginBlock)(UITextField *textField);
 typedef void(^TMUISearchBarTextChangeBlock)(UITextField *textField,NSString *text);
 typedef void(^TMUISearchBarTextDoneBlock)(UITextField *textField,NSString *text);
+typedef void(^TMUISearchBarTextEndBlock)(UITextField *textField,NSString *text);
 typedef void(^TMUISearchBarTextMaxLengthBlock)(UITextField *textField,NSRange range,NSString *replacementString);
 typedef void(^TMUISearchBarCancelClickBlock)(UIButton *btn);
 typedef void(^TMUISearchBarClearClickBlock)(void);
@@ -36,6 +37,8 @@ typedef void(^TMUISearchBarClearClickBlock)(void);
 - (void)searchBarTextChange:(TMUISearchBar *)searchBar textField:(UITextField *)textField;
 /// 输入完成，点击完成事件
 - (void)searchBarTextDone:(TMUISearchBar *)searchBar textField:(UITextField *)textField;
+/// 输入完成事件
+- (void)searchBarTextEnd:(TMUISearchBar *)searchBar textField:(UITextField *)textField;
 /// 输入达到最大长度
 - (void)searchBarTextMaxLength:(TMUISearchBar *)searchBar textField:(UITextField *)textField range:(NSRange)range replacementString:(NSString *)replacementString;
 /// 点击取消按钮
@@ -105,8 +108,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) TMUISearchBarTextBeginBlock         textBegin;
 /// 文字改变回调
 @property (nonatomic, copy) TMUISearchBarTextChangeBlock        textChange;
-/// 文字输入完成回调
+/// 文字输入点击return回调
 @property (nonatomic, copy) TMUISearchBarTextDoneBlock          textDone;
+/// 文字输入完成回调
+@property (nonatomic, copy) TMUISearchBarTextEndBlock           textEnd;
 /// 输入达到最大长度回调
 @property (nonatomic, copy) TMUISearchBarTextMaxLengthBlock     maxLength;
 /// 点击取消按钮回调（不实现这个方法，会自动返回上一页）
