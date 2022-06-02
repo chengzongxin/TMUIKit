@@ -317,6 +317,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSObject (TMUI_Extensions)
+
++ (BOOL)tmui_overrideMethod:(SEL)origSel withMethod:(SEL)altSel;
++ (BOOL)tmui_overrideClassMethod:(SEL)origSel withClassMethod:(SEL)altSel;
++ (BOOL)tmui_exchangeMethod:(SEL)origSel withMethod:(SEL)altSel;
++ (BOOL)tmui_exchangeClassMethod:(SEL)origSel withClassMethod:(SEL)altSel;
+
+
+/// 把当前对象的属性转成字典
+- (NSDictionary *)tmui_propertiesToDictionary;
+
+@end
 
 
 NS_ASSUME_NONNULL_END

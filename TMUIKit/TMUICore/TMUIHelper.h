@@ -145,6 +145,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// 如 iPhone 11 Pro Max、iPad Pro (12.9 inch)，如果是模拟器，会在后面带上“ Simulator”字样。
 /// @NEW_DEVICE_CHECKER
 @property(class, nonatomic, readonly) NSString *deviceName;
+@property(class, nonatomic, readonly) NSString *appName;
+@property(class, nonatomic, readonly) NSString *appVersion;
+
+@property(class, nonatomic, readonly) NSString *ipv4Address;
+@property(class, nonatomic, readonly) NSString *ipv6Address;
+@property(class, nonatomic, readonly) NSString *WANIPAddress;
+@property(class, nonatomic, readonly) NSString *macAddress;
+@property(class, nonatomic, readonly) NSString *idfa;
+@property(class, nonatomic, readonly) NSString *idfv;
+@property(class, nonatomic, readonly) NSString *OSVersion;
 
 @property(class, nonatomic, readonly) BOOL isIPad;
 @property(class, nonatomic, readonly) BOOL isIPod;
@@ -261,12 +271,44 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TMUIHelper (ViewController)
 
+
+//+ (nullable UIViewController *)visibleViewController;
 /**
  * 获取当前应用里最顶层的可见viewController
  * @warning 注意返回值可能为nil，要做好保护
  */
-+ (nullable UIViewController *)visibleViewController;
+@property(class, nonatomic, readonly) UIViewController *topViewController;
+
+@property(class, nonatomic, readonly) UIViewController *topViewControllerForPresent;
 
 @end
+
+
+
+
+
+
+
+@interface UIImage (TMUIConfiguration)
+
++ (UIImage *)tmuihelp_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius;
+
++ (nullable UIImage *)tmuihelp_imageWithSize:(CGSize)size opaque:(BOOL)opaque scale:(CGFloat)scale actions:(void (^)(CGContextRef contextRef))actionBlock;
+
+- (nullable UIImage *)tmuihelp_imageWithSpacingExtensionInsets:(UIEdgeInsets)extension;
+
+- (BOOL)tmuihelp_opaque;
+- (CGFloat)tmuihelp_alpha;
+- (UIImage *)tmuihelp_imageWithTintColor:(UIColor *)tintColor;
+
+@end
+
+
+@interface NSArray (TMUIConfiguration)
+
+- (NSArray *)tmuihelp_filter:(BOOL (NS_NOESCAPE^)(id _Nonnull))block;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

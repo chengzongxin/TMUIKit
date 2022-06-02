@@ -7,6 +7,7 @@
 
 #import "UIViewController+TMUI.h"
 #import <objc/runtime.h>
+#import <TMUIHelper.h>
 
 
 @implementation UIViewController (TMUI)
@@ -62,45 +63,62 @@
 
 #pragma mark -  获取当前最顶层的ViewController
 - (UIViewController *)tmui_topViewController {
-    UIViewController *result = nil;
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal) {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows) {
-            if (tmpWin.windowLevel == UIWindowLevelNormal) {
-                window = tmpWin;
-                break;
-            }
-        }
-    }
-    UIView *frontView = [[window subviews] objectAtIndex:0];
-    id nextResponder = [frontView nextResponder];
-    if ([nextResponder isKindOfClass:[UIViewController class]]) {
-        result = nextResponder;
-    } else {
-        result = window.rootViewController;
-    }
-    result = [self topVC:result];
-    while(result.presentedViewController) {
-        result = [self topVC:result.presentedViewController];
-    }
-    return result;
+    return TMUIHelper.topViewController;
 }
 
-- (UIViewController*)topVC:(UIViewController*)VC {
-    if([VC isKindOfClass:[UINavigationController class]]) {
-        return [self topVC:[(UINavigationController*)VC topViewController]];
-    }
-    if([VC isKindOfClass:[UITabBarController class]]) {
-        return [self topVC:[(UITabBarController*)VC selectedViewController]];
-    }
-    return VC;
++ (UIViewController *)tmui_topViewController{
+    return TMUIHelper.topViewController;
 }
++ (UIViewController *)tmui_topViewControllerForPresent{
+    return TMUIHelper.topViewControllerForPresent;
+}
+
 @end
 
 
 
 @implementation UIViewController (TMUI_Alert)
+
+
+- (void)tmui_showAlertWithTitle:(NSString *)title
+                        message:(NSString *)message
+              cancelButtonTitle:(NSString *)cancelButtonTitle
+               buttonIndexBlock:(void (^)(NSInteger))block
+              otherButtonTitles:(NSString *)otherButtonTitles, ...
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    NSInteger index = 0;
+    if (cancelButtonTitle) {
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (block) {
+                block(index);
+            }
+        }];
+        [alertController addAction:cancelAction];
+        index ++;
+    }
+    
+    if (otherButtonTitles)
+    {
+        va_list args;//定义一个指向个数可变的参数列表指针
+        va_start(args, otherButtonTitles);//得到第一个可变参数地址
+        for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString *))
+        {
+            UIAlertAction *action = [UIAlertAction actionWithTitle:arg style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (block) {
+                    block(index);
+                }
+            }];
+            [alertController addAction:action];
+            index ++;
+        }
+        va_end(args);//置空指针
+    }
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 
 - (void)tmui_showAlertWithTitle:(NSString *)title message:(NSString *)message block:(void (^)(NSInteger))block buttons:(NSString *)buttonTitle, ...{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];

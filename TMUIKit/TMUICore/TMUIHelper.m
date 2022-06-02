@@ -11,9 +11,19 @@
 #import <math.h>
 #import <sys/utsname.h>
 #import "TMUIAssociatedPropertyDefines.h"
-#import "NSObject+TMUI.h"
-#import "UIViewController+TMUI.h"
-#import "NSString+TMUI.h"
+// ip、mac
+#include <sys/socket.h>
+#include <sys/sysctl.h>
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+#include <net/if.h>
+#include <net/if_dl.h>
+
+//以下宏为获取ip地址时指定ipv4或Ipv6信息的相关查找key
+#define IOS_CELLULAR    @"pdp_ip0"
+#define IOS_WIFI        @"en0"
+#define IP_ADDR_IPv4    @"ipv4"
+#define IP_ADDR_IPv6    @"ipv6"
 
 
 NSString *const kTMUIResourcesBundleName = @"TMUIResources";
@@ -401,6 +411,161 @@ static CGFloat pixelOne = -1.0f;
     return name;
 }
 
++ (NSString *)appName{
+    return
+    [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleExecutableKey] ?:
+     [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleIdentifierKey];
+}
+
++ (NSString *)appVersion{
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+}
+
+
++ (NSString *)ipv4Address{
+    NSArray *searchArray =
+    @[ IOS_WIFI @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6 ];
+    return [self _getIPAddresses:searchArray];
+}
+
++ (NSString *)ipv6Address{
+    NSArray *searchArray =
+    @[ IOS_WIFI @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4 ];
+    return [self _getIPAddresses:searchArray];
+}
+
++ (NSString *)_getIPAddresses:(NSArray *)searchArray{
+    NSDictionary *addresses = [self _getIPAddresses];
+//    NSLog(@"addresses: %@", addresses);
+    __block NSString *address = nil;
+    [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+         address = addresses[key];
+         if(address) *stop = YES;
+     } ];
+    return address ? address : @"0.0.0.0";
+}
+
++ (NSDictionary *)_getIPAddresses {
+    NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];
+    // retrieve the current interfaces - returns 0 on success
+    struct ifaddrs *interfaces;
+    if(!getifaddrs(&interfaces)) {
+        // Loop through linked list of interfaces
+        struct ifaddrs *interface;
+        for(interface=interfaces; interface; interface=interface->ifa_next) {
+            if(!(interface->ifa_flags & IFF_UP) /* || (interface->ifa_flags & IFF_LOOPBACK) */ ) {
+                continue; // deeply nested code harder to read
+            }
+            const struct sockaddr_in *addr = (const struct sockaddr_in*)interface->ifa_addr;
+            char addrBuf[ MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN) ];
+            if(addr && (addr->sin_family==AF_INET || addr->sin_family==AF_INET6)) {
+                NSString *name = [NSString stringWithUTF8String:interface->ifa_name];
+                NSString *type = nil;
+                if(addr->sin_family == AF_INET) {
+                    if(inet_ntop(AF_INET, &addr->sin_addr, addrBuf, INET_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv4;
+                    }
+                } else {
+                    const struct sockaddr_in6 *addr6 = (const struct sockaddr_in6*)interface->ifa_addr;
+                    if(inet_ntop(AF_INET6, &addr6->sin6_addr, addrBuf, INET6_ADDRSTRLEN)) {
+                        type = IP_ADDR_IPv6;
+                    }
+                }
+                if(type) {
+                    NSString *key = [NSString stringWithFormat:@"%@/%@", name, type];
+                    addresses[key] = [NSString stringWithUTF8String:addrBuf];
+                }
+            }
+        }
+        // Free memory
+        freeifaddrs(interfaces);
+    }
+    return [addresses count] ? addresses : nil;
+}
+
++ (NSString *)WANIPAddress{
+    NSError *error = nil;
+    NSURL *ipURL = [NSURL URLWithString:@"http://pv.sohu.com/cityjson?ie=utf-8"];
+    NSMutableString *ip = [NSMutableString stringWithContentsOfURL:ipURL encoding:NSUTF8StringEncoding error:&error];
+    //判断返回字符串是否为所需数据
+    if ([ip hasPrefix:@"var returnCitySN = "]) {
+        //对字符串进行处理，然后进行json解析
+        //删除字符串多余字符串
+        NSRange range = NSMakeRange(0, 19);
+        [ip deleteCharactersInRange:range];
+        NSString * nowIp = [ip substringToIndex:ip.length-1];
+        //将字符串转换成二进制进行Json解析
+        NSData * data = [nowIp dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@",dict);
+        return dict[@"cip"] ? dict[@"cip"] : @"";
+    }
+    return @"";
+}
+
++ (NSString *)macAddress{
+    int mib[6];
+    size_t len;
+    char *buf;
+    unsigned char *ptr;
+    struct if_msghdr *ifm;
+    struct sockaddr_dl *sdl;
+    
+    mib[0] = CTL_NET;
+    mib[1] = AF_ROUTE;
+    mib[2] = 0;
+    mib[3] = AF_LINK;
+    mib[4] = NET_RT_IFLIST;
+    
+    if ((mib[5] = if_nametoindex("en0")) == 0) {
+        printf("Error: if_nametoindex error\n");
+        return NULL;
+    }
+    
+    if (sysctl(mib, 6, NULL, &len, NULL, 0) < 0) {
+        printf("Error: sysctl, take 1\n");
+        return NULL;
+    }
+    
+    if ((buf = malloc(len)) == NULL) {
+        printf("Could not allocate memory. error!\n");
+        return NULL;
+    }
+    
+    if (sysctl(mib, 6, buf, &len, NULL, 0) < 0) {
+        printf("Error: sysctl, take 2");
+        free(buf);
+        return NULL;
+    }
+    
+    ifm = (struct if_msghdr *)buf;
+    sdl = (struct sockaddr_dl *)(ifm + 1);
+    ptr = (unsigned char *)LLADDR(sdl);
+    NSString *macString = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X",
+                           *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
+    free(buf);
+    
+    return macString;
+}
+
++ (NSString *)idfa{
+    return nil;
+//    return [TUUIDGenerator getIDFA];
+}
+
++ (NSString *)idfv{
+    if([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
+        return [[UIDevice currentDevice].identifierForVendor UUIDString];
+    }
+    return @"";
+}
+
++ (NSString *)OSVersion{
+    return [[UIDevice currentDevice] systemVersion];
+}
+
+#pragma mark - 设备类型
+
 static NSInteger isIPad = -1;
 + (BOOL)isIPad {
     if (isIPad < 0) {
@@ -468,7 +633,14 @@ static NSInteger isNotchedScreen = -1;
                  */
                 SEL peripheryInsetsSelector = NSSelectorFromString([NSString stringWithFormat:@"_%@%@", @"periphery", @"Insets"]);
                 UIEdgeInsets peripheryInsets = UIEdgeInsetsZero;
-                [[UIScreen mainScreen] tmui_performSelector:peripheryInsetsSelector withPrimitiveReturnValue:&peripheryInsets];
+//                [[UIScreen mainScreen] tmui_performSelector:peripheryInsetsSelector withPrimitiveReturnValue:&peripheryInsets];
+                UIScreen *screen = [UIScreen mainScreen];
+                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[screen methodSignatureForSelector:peripheryInsetsSelector]];
+                [invocation setTarget:screen];
+                [invocation setSelector:peripheryInsetsSelector];
+                [invocation invoke];
+                [invocation getReturnValue:&peripheryInsets];
+                
                 if (peripheryInsets.bottom <= 0) {
                     UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
                     peripheryInsets = window.safeAreaInsets;
@@ -741,7 +913,13 @@ static NSInteger isHighPerformanceDevice = -1;
 + (BOOL)isHighPerformanceDevice {
     if (isHighPerformanceDevice < 0) {
         NSString *model = [TMUIHelper deviceModel];
-        NSString *identifier = [model tmui_stringMatchedByPattern:@"\\d+"];
+//        NSString *identifier = [model tmui_stringMatchedByPattern:@"\\d+"];
+        NSString *identifier;
+        NSRange range = [model rangeOfString:@"\\d+" options:NSRegularExpressionSearch|NSCaseInsensitiveSearch];
+        if (range.location != NSNotFound) {
+            identifier = [model substringWithRange:range];
+        }
+        identifier = nil;
         NSInteger version = identifier.integerValue;
         if (IS_IPAD) {
             isHighPerformanceDevice = version >= 5 ? 1 : 0;// iPad Air 2
@@ -926,10 +1104,233 @@ static NSMutableSet<NSString *> *executedIdentifiers;
 
 @implementation TMUIHelper (ViewController)
 
-+ (nullable UIViewController *)visibleViewController {
-    UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
-//    UIViewController *visibleViewController = [rootViewController tmui_visibleViewControllerIfExist];
-    return [rootViewController tmui_topViewController];
+//+ (nullable UIViewController *)visibleViewController {
+//    UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+////    UIViewController *visibleViewController = [rootViewController tmui_visibleViewControllerIfExist];
+//    return [rootViewController tmui_topViewController];
+//}
+
++ (UIViewController *)topViewController{
+    UIViewController *result = [self windowMainVC];
+    result = [self topVC:result];
+    while(result.presentedViewController) {
+        result = [self topVC:result.presentedViewController];
+    }
+    return result;
+}
+
++ (UIViewController *)windowMainVC {
+    UIViewController *result = nil;
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal) {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows) {
+            if (tmpWin.windowLevel == UIWindowLevelNormal) {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    UIView *frontView = [[window subviews] firstObject];
+    id nextResponder = [frontView nextResponder];
+    if ([nextResponder isKindOfClass:[UIViewController class]]) {
+        result = nextResponder;
+    } else {
+        result = window.rootViewController;
+    }
+    return result;
+}
+
+
++ (UIViewController*)topVC:(UIViewController*)VC {
+    if([VC isKindOfClass:[UINavigationController class]]) {
+        return [self topVC:[(UINavigationController*)VC topViewController]];
+    }
+    if([VC isKindOfClass:[UITabBarController class]]) {
+        return [self topVC:[(UITabBarController*)VC selectedViewController]];
+    }
+    return VC;
+}
+
++ (UIViewController *)topViewControllerForPresent{
+    //如果能获取到初始的UITabBarController，直接返回，其他逻辑一致
+    UIViewController *result = [self windowMainVC];
+    if ([result isKindOfClass:[UITabBarController class]]) {
+        while (result.presentedViewController) {
+            result = result.presentedViewController;
+        }
+        return result;
+    } else {
+        return [self topViewController];
+    }
+}
+
+@end
+
+
+
+
+
+
+@implementation UIImage (TMUIConfiguration)
+
++ (UIImage *)tmuihelp_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius {
+    size = CGSizeFlatted(size);
+//    CGContextInspectSize(size);
+    [TMUIHelper inspectContextSize:size];
+    
+    color = color ? color : UIColor.clearColor;
+    CGFloat alpha;
+    if ([color getRed:0 green:0 blue:0 alpha:&alpha]) {
+        
+    }else{
+        alpha = 0;
+    }
+    BOOL opaque = (cornerRadius == 0.0 && alpha == 1.0);
+    UIImage *result = [UIImage tmuihelp_imageWithSize:size opaque:opaque scale:0 actions:^(CGContextRef contextRef) {
+        CGContextSetFillColorWithColor(contextRef, color.CGColor);
+        
+        if (cornerRadius > 0) {
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMakeWithSize(size) cornerRadius:cornerRadius];
+            [path addClip];
+            [path fill];
+        } else {
+            CGContextFillRect(contextRef, CGRectMakeWithSize(size));
+        }
+    }];
+    SEL selector = NSSelectorFromString(@"tmui_generatorSupportsDynamicColor");
+    if ([NSStringFromClass(color.class) containsString:@"TMUIThemeColor"] && [UIImage respondsToSelector:selector]) {
+        BOOL supports;
+//        [UIImage.class tmui_performSelector:selector withPrimitiveReturnValue:&supports];
+        Class imgCls = UIImage.class;
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[imgCls methodSignatureForSelector:selector]];
+        [invocation setTarget:imgCls];
+        [invocation setSelector:selector];
+        [invocation invoke];
+        [invocation getReturnValue:&supports];
+        NSAssert(supports, @"UIImage (TMUI)", @"UIImage (TMUITheme) hook 尚未生效，TMUIThemeColor 生成的图片无法自动转成 TMUIThemeImage，可能导致 theme 切换时无法刷新。");
+    }
+    return result;
+}
+
++ (nullable UIImage *)tmuihelp_imageWithSize:(CGSize)size opaque:(BOOL)opaque scale:(CGFloat)scale actions:(void (^)(CGContextRef contextRef))actionBlock {
+    if (!actionBlock || CGSizeEqualToSize(size, CGSizeZero)) {
+        return nil;
+    }
+    UIGraphicsBeginImageContextWithOptions(size, opaque, scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextInspectContext(context);
+    actionBlock(context);
+    UIImage *imageOut = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return imageOut;
+}
+
+- (nullable UIImage *)tmuihelp_imageWithSpacingExtensionInsets:(UIEdgeInsets)extension {
+    CGSize contextSize = CGSizeMake(self.size.width + UIEdgeInsetsGetHorizontalValue(extension), self.size.height + UIEdgeInsetsGetVerticalValue(extension));
+    return [UIImage tmuihelp_imageWithSize:contextSize opaque:self.tmuihelp_opaque scale:self.scale actions:^(CGContextRef contextRef) {
+        [self drawAtPoint:CGPointMake(extension.left, extension.top)];
+    }];
+}
+
+- (BOOL)tmuihelp_opaque {
+    CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(self.CGImage);
+    BOOL opaque = alphaInfo == kCGImageAlphaNoneSkipLast
+    || alphaInfo == kCGImageAlphaNoneSkipFirst
+    || alphaInfo == kCGImageAlphaNone;
+    return opaque;
+}
+
+//- (CGFloat)tmui_alpha {
+//    CGFloat a;
+//    if ([self getRed:0 green:0 blue:0 alpha:&a]) {
+//        return a;
+//    }
+//    return 0;
+//}
+
+- (UIImage *)tmuihelp_imageWithTintColor:(UIColor *)tintColor {
+    // iOS 13 的 imageWithTintColor: 方法里并不会去更新 CGImage，所以通过它更改了图片颜色后再获取到的 CGImage 依然是旧的，因此暂不使用
+//    if (@available(iOS 13.0, *)) {
+//        return [self imageWithTintColor:tintColor];
+//    }
+    CGFloat alpha;
+    if ([tintColor getRed:0 green:0 blue:0 alpha:&alpha]) {
+        
+    }else{
+        alpha = 0;
+    }
+    BOOL opaque = self.tmuihelp_opaque ? alpha >= 1.0 : NO;// 如果图片不透明但 tintColor 半透明，则生成的图片也应该是半透明的
+    UIImage *result = [UIImage tmuihelp_imageWithSize:self.size opaque:opaque scale:self.scale actions:^(CGContextRef contextRef) {
+        CGContextTranslateCTM(contextRef, 0, self.size.height);
+        CGContextScaleCTM(contextRef, 1.0, -1.0);
+        if (!opaque) {
+            CGContextSetBlendMode(contextRef, kCGBlendModeNormal);
+            CGContextClipToMask(contextRef, CGRectMakeWithSize(self.size), self.CGImage);
+        }
+        CGContextSetFillColorWithColor(contextRef, tintColor.CGColor);
+        CGContextFillRect(contextRef, CGRectMakeWithSize(self.size));
+    }];
+    
+    SEL selector = NSSelectorFromString(@"tmui_generatorSupportsDynamicColor");
+    if ([NSStringFromClass(tintColor.class) containsString:@"TMUIThemeColor"] && [UIImage respondsToSelector:selector]) {
+        BOOL supports;
+        [UIImage.class tmuihelp_performSelector:selector withPrimitiveReturnValue:&supports];
+        NSAssert(supports, @"UIImage (TMUI)", @"UIImage (TMUITheme) hook 尚未生效，TMUIThemeColor 生成的图片无法自动转成 TMUIThemeImage，可能导致 theme 切换时无法刷新。");
+    }
+    return result;
+}
+
+
+- (void)tmuihelp_performSelector:(SEL)selector withPrimitiveReturnValue:(void *)returnValue {
+    [self tmuihelp_performSelector:selector withPrimitiveReturnValue:returnValue arguments:nil];
+}
+
+- (void)tmuihelp_performSelector:(SEL)selector withPrimitiveReturnValue:(void *)returnValue arguments:(void *)firstArgument, ... {
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+    [invocation setTarget:self];
+    [invocation setSelector:selector];
+    
+    if (firstArgument) {
+        va_list valist;
+        va_start(valist, firstArgument);
+        [invocation setArgument:firstArgument atIndex:2];// 0->self, 1->_cmd
+        
+        void *currentArgument;
+        NSInteger index = 3;
+        while ((currentArgument = va_arg(valist, void *))) {
+            [invocation setArgument:currentArgument atIndex:index];
+            index++;
+        }
+        va_end(valist);
+    }
+    
+    [invocation invoke];
+    
+    if (returnValue) {
+        [invocation getReturnValue:returnValue];
+    }
+}
+
+
+@end
+
+
+@implementation NSArray (TMUIConfiguration)
+
+- (NSArray *)tmuihelp_filter:(BOOL (NS_NOESCAPE^)(id _Nonnull))block {
+    if (!block) {
+        return self;
+    }
+    
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < self.count; i++) {
+        id item = self[i];
+        if (block(item)) {
+            [result addObject:item];
+        }
+    }
+    return [result copy];
 }
 
 @end

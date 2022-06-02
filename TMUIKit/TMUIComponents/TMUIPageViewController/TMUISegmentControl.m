@@ -7,6 +7,7 @@
 
 #import "TMUISegmentControl.h"
 #import "TMUIExtensions.h"
+#import "TMUICore.h"
 //#import <GECommonEventTracker.h>
 
 @interface TMUISegmentControl ()<UIScrollViewDelegate>

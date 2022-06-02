@@ -29,11 +29,13 @@
 ///MARK: UIColor
 #define UIColorRGB(r, g, b)       [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define UIColorRGBA(r, g, b, a)   [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
-/// UIColor 相关的宏，用于快速创建一个 UIColor 对象，更多创建的宏可查看 UIColor+TMUI.h
-/// UIColorHexString(hexStr)
+#ifndef UIColorHex
+#define UIColorHex(_hex_)   tmui_colorWithHexString((__bridge NSString *)CFSTR(#_hex_))
+#endif
+#ifndef UIColorHexString
+#define UIColorHexString(hexStr) tmui_colorWithHexString(hexStr)
+#endif
 
-#define UIColorMakeWithHex(hex) tmui_colorWithHex(hex,1)
-#define UIColorMakeWithHexStr(hexStr) tmui_colorWithHexString(hexStr,1)
 #define UIColorMake(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define UIColorMakeWithRGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
 
@@ -225,41 +227,70 @@ tmui_colorWithHex(NSUInteger hex,CGFloat alpha){
                            alpha:a];
 }
 
+NS_INLINE CGFloat
+tmui_colorComponentFrom(NSString *string, NSUInteger start, NSUInteger length) {
+    NSString *substring = [string substringWithRange: NSMakeRange(start, length)];
+    NSString *fullHex = length == 2 ? substring : [NSString stringWithFormat: @"%@%@", substring, substring];
+    unsigned hexComponent;
+    [[NSScanner scannerWithString: fullHex] scanHexInt: &hexComponent];
+    return hexComponent / 255.0;
+}
+
+/**
+ *  使用HEX命名方式的颜色字符串生成一个UIColor对象
+ *
+ *  @param hexString 支持以 # 开头、0x开头、 纯hex 字符串
+ *      #RGB        例如#f0f，等同于#ffff00ff，RGBA(255, 0, 255, 1)
+ *      #ARGB       例如#0f0f，等同于#00ff00ff，RGBA(255, 0, 255, 0)
+ *      #RRGGBB     例如#ff00ff，等同于#ffff00ff，RGBA(255, 0, 255, 1)
+ *      #AARRGGBB   例如#00ff00ff，等同于RGBA(255, 0, 255, 0)
+ *
+ * @return UIColor对象
+ */
 NS_INLINE UIColor *
-tmui_colorWithHexString(NSString *hexColor,CGFloat alpha){
-    NSString * cString = [[hexColor stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-
-        // String should be 6 or 8 characters
-        if ([cString length] < 6) return [UIColor blackColor];
-
-        // strip 0X if it appears
-        if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
-        if ([cString hasPrefix:@"#"]) cString = [cString substringFromIndex:1];
-
-        if ([cString length] != 6) return [UIColor blackColor];
-
-        // Separate into r, g, b substrings
-        NSRange range;
-        range.location = 0;
-        range.length = 2;
-        NSString * rString = [cString substringWithRange:range];
-
-        range.location = 2;
-        NSString * gString = [cString substringWithRange:range];
-
-        range.location = 4;
-        NSString * bString = [cString substringWithRange:range];
-
-        // Scan values
-        unsigned int r, g, b;
-        [[NSScanner scannerWithString:rString] scanHexInt:&r];
-        [[NSScanner scannerWithString:gString] scanHexInt:&g];
-        [[NSScanner scannerWithString:bString] scanHexInt:&b];
-
-        return [UIColor colorWithRed:((float)r / 255.0f)
-                               green:((float)g / 255.0f)
-                                blue:((float)b / 255.0f)
-                               alpha:alpha];
+tmui_colorWithHexString(NSString *hexString) {
+    if (hexString.length <= 0) return nil;
+    
+    NSString *colorString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    if ([colorString hasPrefix:@"#"]) {
+        colorString = [colorString substringFromIndex:1];
+    } else if ([colorString hasPrefix:@"0X"]) {
+        colorString = [colorString substringFromIndex:2];
+    }
+    
+    CGFloat alpha, red, blue, green;
+    switch ([colorString length]) {
+        case 3: // #RGB
+            alpha = 1.0f;
+            red   = tmui_colorComponentFrom(colorString,  0,  1);
+            green = tmui_colorComponentFrom(colorString,  1,  1);
+            blue  = tmui_colorComponentFrom(colorString,  2,  1);
+            break;
+        case 4: // #ARGB
+            alpha = tmui_colorComponentFrom(colorString,  0,  1);
+            red   = tmui_colorComponentFrom(colorString,  1,  1);
+            green = tmui_colorComponentFrom(colorString,  2,  1);
+            blue  = tmui_colorComponentFrom(colorString,  3,  1);
+            break;
+        case 6: // #RRGGBB
+            alpha = 1.0f;
+            red   = tmui_colorComponentFrom(colorString,  0,  2);
+            green = tmui_colorComponentFrom(colorString,  2,  2);
+            blue  = tmui_colorComponentFrom(colorString,  4,  2);
+            break;
+        case 8: // #AARRGGBB
+            alpha = tmui_colorComponentFrom(colorString,  0,  2);
+            red   = tmui_colorComponentFrom(colorString,  2,  2);
+            green = tmui_colorComponentFrom(colorString,  4,  2);
+            blue  = tmui_colorComponentFrom(colorString,  6,  2);
+            break;
+        default: {
+//            NSAssert(NO, @"Color value %@ is invalid. It should be a hex value of the form #RBG, #ARGB, #RRGGBB, or #AARRGGBB", hexString);
+            return nil;
+        }
+            break;
+    }
+    return [UIColor colorWithRed: red green: green blue: blue alpha: alpha];
 }
 
 
@@ -346,6 +377,34 @@ NSLog(@"dealloc: %@", NSStringFromClass(self.class));   \
 + (id)allocWithZone:(struct _NSZone *)zone {\
     return [self sharedInstance];\
 }
+
+#pragma mark - 文件目录
+// 缓存路径-cach目录
+NS_INLINE NSString *tmui_filePathAtCacheWithName(NSString *fileName) {
+    static NSString *cachFilePath = nil;
+    if (!cachFilePath) {
+        cachFilePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    }
+    return [cachFilePath stringByAppendingPathComponent:fileName];
+}
+
+// 缓存路径-document目录
+NS_INLINE NSString *tmui_filePathAtDocumentWithName(NSString *fileName) {
+    static NSString *documentFilePath = nil;
+    if (!documentFilePath) {
+        documentFilePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    }
+    return [documentFilePath stringByAppendingPathComponent:fileName];
+}
+
+// 缓存路径-temp目录
+NS_INLINE NSString *tmui_filePathAtTempWithName(NSString *fileName) {
+//    return [NSTemporaryDirectory() stringByAppendingString:fileName]; //  旧的是没有拼接path的，替换需要注意
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+    
+}
+
+
 
 
 #pragma mark - Clang

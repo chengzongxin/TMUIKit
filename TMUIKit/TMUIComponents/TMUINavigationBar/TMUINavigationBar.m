@@ -12,9 +12,9 @@
 #import "TMUINavigationStackView.h"
 #import "TMUINavigationBarApprance.h"
 
-CGFloat const kTMUINavBarMargin = 15;
-CGFloat const kTMUINavBarBtnW = 40.0;
-CGFloat const kTMUINavBarBtnH = 40.0;
+CGFloat const kTMUINavBarMargin = 5;
+CGFloat const kTMUINavBarBtnW = 44.0;
+CGFloat const kTMUINavBarBtnH = 44.0;
 
 @interface TMUINavigationBar ()
 
@@ -516,6 +516,9 @@ CGFloat const kTMUINavBarBtnH = 40.0;
     if (!_backBtn) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_backBtn addTarget:self action:@selector(navBackAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(kTMUINavigationBarItemSize);
+        }];
     }
     return _backBtn;
 }
@@ -524,6 +527,9 @@ CGFloat const kTMUINavBarBtnH = 40.0;
     if (!_rightBtn) {
         _rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_rightBtn addTarget:self action:@selector(navRightAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(kTMUINavigationBarItemSize);
+        }];
     }
     return _rightBtn;
 }

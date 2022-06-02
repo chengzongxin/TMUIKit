@@ -38,6 +38,8 @@ typedef NS_OPTIONS(NSInteger, TMUITableViewCellPosition) {
  */
 @interface UITableView (TMUI)
 
+/// 表格分割线处理,在控制器中viewDidLoad和viewDidLayoutSubviews调用
+- (void)tmui_setSeparatorInset:(UIEdgeInsets)edge;
 //将NSIndexPath转换成index
 - (NSUInteger)tmui_indexOfIndexPath:(NSIndexPath *)indexPath;
 //将index转换成NSIndexPath
@@ -110,6 +112,14 @@ typedef NS_OPTIONS(NSInteger, TMUITableViewCellPosition) {
  *  UITableView的tableHeaderView如果是UISearchBar的话，tableView.contentSize会强制设置为至少比bounds高（从而实现headerView的吸附效果），从而导致tmui_canScroll的判断不准确。所以为UITableView重写了tmui_canScroll方法
  */
 - (BOOL)tmui_canScroll;
+
+/// 是否能滚动到某个indexPath
+/// @param indexPath 指定indexPath
+- (BOOL)tmui_canScrollToIndexPath:(NSIndexPath *)indexPath;
+
+
+/// 最后一个indexPath
+- (NSIndexPath *)tmui_lastIndexPath;
 
 /**
  等同于 UITableView 自 iOS 11 开始新增的同名方法，但兼容 iOS 11 以下的系统使用。

@@ -75,14 +75,6 @@ Pod::Spec.new do |s|
     ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
     ss.dependency 'TMUIKit/TMUICore'
 
-    #TMUIDefines Core中依赖部分拆离出来，以便二进制
-    ss.subspec 'TMUIDefines' do |sss|
-      #引入TMUICore中所有资源文件
-      sss.source_files = 'TMUIKit/TMUIExtensions/TMUIDefines/**/*'
-      # #公开TMUICore模块中的头文件
-      # sss.public_header_files = 'TMUIKit/TMUIExtensions/TMUIDefines/*.h'
-    end
-
     ss.subspec 'UIKit' do |sss|
       sss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
     end

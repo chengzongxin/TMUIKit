@@ -7,13 +7,9 @@
 
 #import "TMUIConfiguration.h"
 #import "TMUICore.h"
-#import "UIImage+TMUI.h"
-#import "NSString+TMUI.h"
-#import "UIViewController+TMUI.h"
 #import "TMUIConfigurationMacros.h"
 #import "TMUIKitDefines.h"
 #import "TMUICommonDefines.h"
-#import "NSArray+TMUI.h"
 
 @implementation UITabBarAppearance (QMUI)
 
@@ -130,16 +126,16 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 }
 
 - (void)sendAnalyticsWithQuery:(NSString *)query {
-    NSString *identifier = [NSBundle mainBundle].bundleIdentifier.tmui_stringByEncodingUserInputQuery;
-    NSString *displayName = ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"] ?: [NSBundle mainBundle].infoDictionary[@"CFBundleName"])).tmui_stringByEncodingUserInputQuery;
-    NSString *TMUIVersion = @"1.1.0".tmui_stringByEncodingUserInputQuery;// 如果不以 framework 方式引入 TMUI 的话，是无法通过 CFBundleShortVersionString 获取到 TMUI 所在的 bundle 的版本号的，所以这里改为用脚本生成的变量来获取
-    NSString *queryString = [NSString stringWithFormat:@"appId=%@&appName=%@&version=%@&platform=iOS", identifier, displayName, TMUIVersion];
-    if (query.length > 0) queryString = [NSString stringWithFormat:@"%@&%@", queryString, query];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://tmuiteam.com/analytics/usageReport"]];
-    request.HTTPMethod = @"POST";
-    request.HTTPBody = [queryString dataUsingEncoding:NSUTF8StringEncoding];
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithRequest:request] resume];
+//    NSString *identifier = [NSBundle mainBundle].bundleIdentifier.tmui_stringByEncodingUserInputQuery;
+//    NSString *displayName = ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"] ?: [NSBundle mainBundle].infoDictionary[@"CFBundleName"])).tmui_stringByEncodingUserInputQuery;
+//    NSString *TMUIVersion = @"1.1.0".tmui_stringByEncodingUserInputQuery;// 如果不以 framework 方式引入 TMUI 的话，是无法通过 CFBundleShortVersionString 获取到 TMUI 所在的 bundle 的版本号的，所以这里改为用脚本生成的变量来获取
+//    NSString *queryString = [NSString stringWithFormat:@"appId=%@&appName=%@&version=%@&platform=iOS", identifier, displayName, TMUIVersion];
+//    if (query.length > 0) queryString = [NSString stringWithFormat:@"%@&%@", queryString, query];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://tmuiteam.com/analytics/usageReport"]];
+//    request.HTTPMethod = @"POST";
+//    request.HTTPBody = [queryString dataUsingEncoding:NSUTF8StringEncoding];
+//    NSURLSession *session = [NSURLSession sharedSession];
+//    [[session dataTaskWithRequest:request] resume];
 }
 
 #pragma mark - Initialize default values
@@ -173,11 +169,11 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     
     #pragma mark - UILabel
     
-    self.mainColor = UIColorMakeWithHex(0x22C77D);
-    self.textImportantColor = UIColorMakeWithHex(0x1A1C1A);
-    self.textRegularColor = UIColorMakeWithHex(0x333533);
-    self.textWeakColor = UIColorMakeWithHex(0x7E807E);
-    self.textPlaceholderColor = UIColorMakeWithHex(0x7E807E);
+    self.mainColor = UIColorHex(0x22C77D);
+    self.textImportantColor = UIColorHex(0x1A1C1A);
+    self.textRegularColor = UIColorHex(0x333533);
+    self.textWeakColor = UIColorHex(0x7E807E);
+    self.textPlaceholderColor = UIColorHex(0x7E807E);
     
     #pragma mark - UIControl
     
@@ -214,12 +210,12 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     self.navBarHighlightedAlpha = 0.2f;
     self.navBarDisabledAlpha = 0.2f;
     self.sizeNavBarBackIndicatorImageAutomatically = YES;
-    self.navBarCloseButtonImage = [UIImage tmui_imageWithShape:TMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:self.navBarTintColor];
+//    self.navBarCloseButtonImage = [UIImage tmui_imageWithShape:TMUIImageShapeNavClose size:CGSizeMake(16, 16) tintColor:self.navBarTintColor];
     
     self.navBarLoadingMarginRight = 3;
     self.navBarAccessoryViewMarginLeft = 5;
     self.navBarActivityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-    self.navBarAccessoryViewTypeDisclosureIndicatorImage = [[UIImage tmui_imageWithShape:TMUIImageShapeTriangle size:CGSizeMake(8, 5) tintColor:self.navBarTitleColor] tmui_imageWithOrientation:UIImageOrientationDown];
+//    self.navBarAccessoryViewTypeDisclosureIndicatorImage = [[UIImage tmui_imageWithShape:TMUIImageShapeTriangle size:CGSizeMake(8, 5) tintColor:self.navBarTitleColor] tmui_imageWithOrientation:UIImageOrientationDown];
     
     
     #pragma mark - Toolbar
@@ -406,10 +402,10 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     if (shadowImage || self.navBarShadowImageColor) {
         if (shadowImage) {
             if (self.navBarShadowImageColor && shadowImage.renderingMode != UIImageRenderingModeAlwaysOriginal) {
-                shadowImage = [shadowImage tmui_imageWithTintColor:self.navBarShadowImageColor];
+                shadowImage = [shadowImage tmuihelp_imageWithTintColor:self.navBarShadowImageColor];
             }
         } else {
-            shadowImage = [UIImage tmui_imageWithColor:self.navBarShadowImageColor size:CGSizeMake(4, PixelOne) cornerRadius:0];
+            shadowImage = [UIImage tmuihelp_imageWithColor:self.navBarShadowImageColor size:CGSizeMake(4, PixelOne) cornerRadius:0];
         }
         
         // 反向更新 NavBarShadowImage，以保证业务代码直接使用 NavBarShadowImage 宏能得到正确的图片
@@ -539,7 +535,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         CGSize customBackIndicatorImageSize = _navBarBackIndicatorImage.size;
         if (!CGSizeEqualToSize(customBackIndicatorImageSize, systemBackIndicatorImageSize)) {
             CGFloat imageExtensionVerticalFloat = CGFloatGetCenter(systemBackIndicatorImageSize.height, customBackIndicatorImageSize.height);
-            _navBarBackIndicatorImage = [[_navBarBackIndicatorImage tmui_imageWithSpacingExtensionInsets:UIEdgeInsetsMake(imageExtensionVerticalFloat,
+            _navBarBackIndicatorImage = [[_navBarBackIndicatorImage tmuihelp_imageWithSpacingExtensionInsets:UIEdgeInsetsMake(imageExtensionVerticalFloat,
                                                                                                                           0,
                                                                                                                           imageExtensionVerticalFloat,
                                                                                                                           systemBackIndicatorImageSize.width - customBackIndicatorImageSize.width)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];// UIImageRenderingModeAlwaysOriginal 这里要设置为原始渲染，修复iOS15，会变成蓝色图标
@@ -614,7 +610,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 - (void)setToolBarShadowImageColor:(UIColor *)toolBarShadowImageColor {
     _toolBarShadowImageColor = toolBarShadowImageColor;
-    UIImage *shadowImage = toolBarShadowImageColor ? [UIImage tmui_imageWithColor:_toolBarShadowImageColor size:CGSizeMake(1, PixelOne) cornerRadius:0] : nil;
+    UIImage *shadowImage = toolBarShadowImageColor ? [UIImage tmuihelp_imageWithColor:_toolBarShadowImageColor size:CGSizeMake(1, PixelOne) cornerRadius:0] : nil;
     [UIToolbar.tmui_appearanceConfigured setShadowImage:shadowImage forToolbarPosition:UIBarPositionAny];
     [self.appearanceUpdatingToolbarControllers enumerateObjectsUsingBlock:^(UINavigationController * _Nonnull navigationController, NSUInteger idx, BOOL * _Nonnull stop) {
         [navigationController.toolbar setShadowImage:shadowImage forToolbarPosition:UIBarPositionAny];
@@ -689,7 +685,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         self.tabBarAppearance.shadowColor = tabBarShadowImageColor;
         [self updateTabBarAppearance];
     } else {
-        UIImage *shadowImage = [UIImage tmui_imageWithColor:_tabBarShadowImageColor size:CGSizeMake(1, PixelOne) cornerRadius:0];
+        UIImage *shadowImage = [UIImage tmuihelp_imageWithColor:_tabBarShadowImageColor size:CGSizeMake(1, PixelOne) cornerRadius:0];
         [UITabBar.tmui_appearanceConfigured setShadowImage:shadowImage];
         [self.appearanceUpdatingTabBarControllers enumerateObjectsUsingBlock:^(UITabBarController * _Nonnull tabBarController, NSUInteger idx, BOOL * _Nonnull stop) {
             tabBarController.tabBar.shadowImage = shadowImage;
@@ -824,7 +820,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 
 - (void)setStatusbarStyleLightInitially:(BOOL)statusbarStyleLightInitially {
     _statusbarStyleLightInitially = statusbarStyleLightInitially;
-    [[UIViewController.new tmui_topViewController] setNeedsStatusBarAppearanceUpdate];
+    [TMUIHelper.topViewController setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - Appearance Updating Views
@@ -839,7 +835,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         classes = @[UITabBarController.class];
     }
     // tabBarContainerClasses 里可能会设置非 UITabBarController 的 class，由于这里只需要关注 UITabBarController 的，所以做一次过滤
-    classes = [classes tmui_filter:^BOOL(Class<UIAppearanceContainer>  _Nonnull item) {
+    classes = [classes tmuihelp_filter:^BOOL(Class<UIAppearanceContainer>  _Nonnull item) {
         return [item.class isSubclassOfClass:UITabBarController.class];
     }];
     return (NSArray <UITabBarController *>*)[self appearanceUpdatingViewControllersOfClasses:classes];
@@ -853,7 +849,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         classes = @[UINavigationController.class];
     }
     // navBarContainerClasses 里可能会设置非 UINavigationController 的 class，由于这里只需要关注 UINavigationController 的，所以做一次过滤
-    classes = [classes tmui_filter:^BOOL(Class<UIAppearanceContainer>  _Nonnull item) {
+    classes = [classes tmuihelp_filter:^BOOL(Class<UIAppearanceContainer>  _Nonnull item) {
         return [item.class isSubclassOfClass:UINavigationController.class];
     }];
     return (NSArray <UINavigationController *>*)[self appearanceUpdatingViewControllersOfClasses:classes];
@@ -867,7 +863,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         classes = @[UINavigationController.class];
     }
     // toolBarContainerClasses 里可能会设置非 UINavigationController 的 class，由于这里只需要关注 UINavigationController 的，所以做一次过滤
-    classes = [classes tmui_filter:^BOOL(Class<UIAppearanceContainer>  _Nonnull item) {
+    classes = [classes tmuihelp_filter:^BOOL(Class<UIAppearanceContainer>  _Nonnull item) {
         return [item.class isSubclassOfClass:UINavigationController.class];
     }];
     return (NSArray <UINavigationController *>*)[self appearanceUpdatingViewControllersOfClasses:classes];
@@ -929,4 +925,3 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 }
 
 @end
-

@@ -1232,3 +1232,74 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 }
 @end
 
+
+#define HORIZONTAL_SPACEING 40//水印文本水平间距pt
+#define VERTICAL_SPACEING 60//水印文本竖直间距pt
+
+
+@implementation UIImage (FullWatermark)
+
+
+- (UIImage *)tmui_imageWithWaterMarkText:(NSString *)text
+                          textAlpha:(CGFloat)alpha
+                      textAttributs:(NSDictionary *)textAttributes {
+    NSMutableAttributedString * attr_str = text.length > 0 ? [[NSMutableAttributedString alloc] initWithString:text attributes:textAttributes] : nil;
+    return [self tmui_imageWithWaterMarkAttributedText:attr_str textAlpha:alpha];
+}
+
+- (UIImage *)tmui_imageWithWaterMarkAttributedText:(NSAttributedString *)attr_str
+                                    textAlpha:(CGFloat)alpha {
+    if (attr_str.length > 0) {
+        CGSize size = self.size;
+        UIGraphicsBeginImageContextWithOptions(size, NO, self.scale);
+        [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+                
+        //文字：字符串显示所需的宽、高
+        CGFloat str_w = attr_str.size.width;
+        CGFloat str_h = attr_str.size.height;
+        
+        //根据中心开启旋转上下文矩阵，绘制水印文字
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        //将绘制原点调整到中心点位置
+        CGContextConcatCTM(ctx, CGAffineTransformMakeTranslation(size.width/2, size.height/2));
+        //旋转30度使下面绘制文字时效果是倾斜30度
+        CGContextConcatCTM(ctx, CGAffineTransformMakeRotation(-(M_PI_2 / 3.0)));
+        //按中心点旋转45度完成后，将绘制原点从中心点位置还原到默认的起始点{0,0}
+        CGContextConcatCTM(ctx, CGAffineTransformMakeTranslation(-size.width/2, -size.height/2));
+        //sqrtLength：原始image对角线length。在水印旋转矩阵中只要矩阵的宽高是原始image的对角线长度，无论旋转多少度都不会有空白。
+        CGFloat sqrtLength = sqrt(size.width*size.width + size.height*size.height);
+        //计算需要绘制的列数和行数, 单数行与偶数行的显示有错落感，即单数行里偶数列不绘制、偶数行里单数列不绘制
+        int cols = sqrtLength / (str_w + HORIZONTAL_SPACEING) + 1;
+        int rows = sqrtLength / (str_h + VERTICAL_SPACEING) + 1;
+        
+        CGFloat originX = -(sqrtLength - size.width)/2;
+        CGFloat originY = -(sqrtLength - size.height)/2;
+                
+        CGContextSetAlpha(ctx, alpha);
+        for (NSInteger i = 0; i < rows; ++i) {
+            for (NSInteger j = 0; j < cols; ++j) {
+                if (i%2 == 0) {
+                    if (j%2 != 0) {
+                        continue;
+                    }
+                }else {
+                    if (j%2 == 0) {
+                        continue;
+                    }
+                }
+                
+                [attr_str drawInRect:CGRectMake(originX + (str_w + HORIZONTAL_SPACEING) * j, originY + (str_h + VERTICAL_SPACEING) * i, str_w, str_h)];
+            }
+        }
+        
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return img;
+    }
+    
+    return self;
+}
+
+
+@end

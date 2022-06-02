@@ -152,6 +152,14 @@
     return [formatter stringFromDate:self];
 }
 
+- (NSString *)tmui_stringWithDateFormatYMD{
+    return [self tmui_stringWithFormat:kTMUIDateFormatYMD];
+}
+
+- (NSString *)tmui_stringWithDateFormatYMDHMS{
+    return [self tmui_stringWithFormat:kTMUIDateFormatYMDHMS];
+}
+
 + (NSDate *)tmui_dateWithString:(NSString *)dateString format:(NSString *)format {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:format];
@@ -620,6 +628,48 @@
     }
 
     return nil;
+}
+
+
+
+/**
+ *  判断两个NSDate是否是同一天
+ *
+ *  @param date 与self比较的date
+ *
+ *  @return 比较结果
+ */
+- (BOOL)tmui_isSameDay:(NSDate *)date{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:self];
+    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date];
+    return [comp1 day]   == [comp2 day] &&
+    
+    [comp1 month] == [comp2 month] &&
+    
+    [comp1 year]  == [comp2 year];
+}
+
+- (BOOL)tmui_isSameMonth:(NSDate *)date{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:self];
+    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date];
+    return [comp1 month] == [comp2 month] &&[comp1 year]  == [comp2 year];
+
+}
+
+-(NSDateComponents *)tmui_createDateComponentsWithYMD{
+    NSCalendar *calender = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents* components = [calender components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self];
+    return components;
+}
+
+- (NSDate *)tmui_dateWithSampleWithYMD{
+    NSCalendar *calender = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *com = [self tmui_createDateComponentsWithYMD];
+    return [calender dateFromComponents:com];
 }
 
 @end

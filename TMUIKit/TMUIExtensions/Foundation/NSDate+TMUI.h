@@ -7,6 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString *const kTMUIDateFormatYMD = @"yyyy-MM-dd";
+static NSString *const kTMUIDateFormatYMDHMS = @"yyyy-MM-dd HH:mm:ss";
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSDate (TMUI)
@@ -141,6 +144,22 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)tmui_stringWithISOFormat;
 
 /**
+ Returns a string representing this date yyyy-MM-dd.
+ e.g. "2010-07-09"
+ 
+ @return NSString representing the formatted date string Y-M-D.
+ */
+- (nullable NSString *)tmui_stringWithDateFormatYMD;
+
+/**
+ Returns a string representing this date yyyy-MM-dd HH-mm-ss.
+ e.g. "2010-07-09"
+ 
+ @return NSString representing the formatted date string Y-M-D.
+ */
+- (nullable NSString *)tmui_stringWithDateFormatYMDHMS;
+
+/**
  Returns a date parsed from given string interpreted using the format.
  
  @param dateString The string to parse.
@@ -261,6 +280,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///格式化直播预告时间
 + (NSString *)tmui_formatLivePreviewDateFromInterval:(NSTimeInterval)timeInterval isShowHour:(BOOL *)isShowHour;
+//判断是否是同一天
+- (BOOL)tmui_isSameDay:(NSDate *)date;
+//判断是否是同月
+- (BOOL)tmui_isSameMonth:(NSDate *)date;
+//将日期转换成年月日的格式
+- (NSDateComponents *)tmui_createDateComponentsWithYMD;
+//将当前日期转换成只有日月年的NSDate
+- (NSDate *)tmui_dateWithSampleWithYMD;
 
 @end
 

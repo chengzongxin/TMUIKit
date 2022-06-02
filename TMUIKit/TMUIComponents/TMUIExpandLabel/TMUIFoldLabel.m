@@ -8,7 +8,7 @@
 #import "TMUIFoldLabel.h"
 #import <CoreText/CoreText.h>
 #import "NSAttributedString+TMUI.h"
-#import "UIColor+TMUI.h"
+#import "TMUICore.h"
 @interface TMUIFoldLabel ()
 
 /// 原始富文本

@@ -102,7 +102,7 @@
                 type = UIRectEdgeBottom;
                 break;
         }
-        [view tmui_border:UIColor.tmui_randomColor width:10 type:type];
+//        [view tmui_border:UIColor.tmui_randomColor width:10 type:type];
     }];
 }
 

@@ -100,6 +100,16 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
 //    });
 //}
 
+
+- (void)tmui_setSeparatorInset:(UIEdgeInsets)edge{
+    if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self setSeparatorInset:edge];
+    }
+    if ([self respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self setLayoutMargins:edge];
+    }
+}
+
 // 防止 release 版本滚动到不合法的 indexPath 会 crash
 - (void)tmui_scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animated {
     if (!indexPath) {
@@ -374,6 +384,25 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
         return [super tmui_canScroll];
     }
 }
+
+- (BOOL)tmui_canScrollToIndexPath:(NSIndexPath *)indexPath{
+    if (!indexPath) {
+        return NO;
+    }
+    return indexPath.section < self.numberOfSections && indexPath.row < [self numberOfRowsInSection:indexPath.section];
+}
+
+- (NSIndexPath *)tmui_lastIndexPath{
+    int section = (int)[self numberOfSections] - 1;
+    int row = (int)[self numberOfRowsInSection:section] - 1;
+    if (section < 0 || row < 0) {
+        return nil;
+    }
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    return lastIndexPath;
+}
+
+
 
 - (void)alertEstimatedHeightUsageIfDetected {
     BOOL usingEstimatedRowHeight = [self.delegate respondsToSelector:@selector(tableView:estimatedHeightForRowAtIndexPath:)] || self.estimatedRowHeight > 0;

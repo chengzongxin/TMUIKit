@@ -9,14 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#ifndef UIColorHex
-#define UIColorHex(_hex_)   [UIColor tmui_colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
-#endif
-
-#ifndef UIColorHexString
-#define UIColorHexString(hexStr) [UIColor tmui_colorWithHexString:hexStr]
-#endif
-
 
 @interface UIColor (TMUI)
 

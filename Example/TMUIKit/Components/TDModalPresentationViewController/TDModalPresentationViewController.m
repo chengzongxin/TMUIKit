@@ -177,7 +177,7 @@ static NSString * const kSectionTitleForStyling = @"内容及动画";
         button.imagePosition = TMUIButtonImagePositionRight;
         [button sizeToFit];
         button.tmui_click = ^{
-            [TMUIHelper.visibleViewController.navigationController pushViewController:TDModalPresentationViewController.new animated:YES];
+            [UIViewController.tmui_topViewController.navigationController pushViewController:TDModalPresentationViewController.new animated:YES];
         };
         [contentView addSubview:button];
         

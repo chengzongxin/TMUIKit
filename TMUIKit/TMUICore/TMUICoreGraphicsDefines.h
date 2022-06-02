@@ -187,6 +187,28 @@ CGFloatToFixed(CGFloat value, NSUInteger precision) {
     return result;
 }
 
+
+CG_INLINE CGFloat
+frameScaleX() {
+    static CGFloat frameScaleX = 1.0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        frameScaleX = SCREEN_WIDTH/375.0;
+    });
+    return frameScaleX;
+}
+
+CG_INLINE CGFloat
+fameScaleY() {
+    static CGFloat frameScaleY = 1.0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        frameScaleY = SCREEN_HEIGHT/667.0;
+    });
+    return frameScaleY;
+}
+
+
 /**
  用于两个 CGFloat 值之间的比较运算，支持 ==、>、<、>=、<= 5种，内部会将浮点数转成整型，从而避免浮点数精度导致的判断错误。
  

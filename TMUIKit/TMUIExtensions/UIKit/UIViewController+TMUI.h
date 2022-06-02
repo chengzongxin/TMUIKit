@@ -30,7 +30,15 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 - (UIViewController*)tmui_nextViewController;
 // 获取当前最顶层的ViewController
 - (UIViewController *)tmui_topViewController;
+/**
+ 获取最上层vc
+ */
++ (UIViewController *)tmui_topViewController;
 
+/**
+ 获取最上层vc，用于present，返回tabBarController
+ */
++ (UIViewController *)tmui_topViewControllerForPresent;
 
 // 导航栏返回按钮方法
 -(void)tmui_navBackAction:(nullable id)sender;
@@ -43,6 +51,11 @@ typedef NS_OPTIONS(NSUInteger, TMUIViewControllerVisibleState) {
 
 
 
+- (void)tmui_showAlertWithTitle:(NSString *)title
+                        message:(NSString *)message
+              cancelButtonTitle:(NSString *)cancelButtonTitle
+               buttonIndexBlock:(void(^)(NSInteger buttonIndex))block
+              otherButtonTitles:(NSString *)otherButtonTitles, ...;
 /**
  * show alert with number of button
  * arguments: string button

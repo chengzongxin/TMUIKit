@@ -13,6 +13,7 @@
 #import "TMUIHelper.h"
 #import "TMUIConfigurationMacros.h"
 #import "TMUICommonDefines.h"
+#import "UIViewController+TMUI.h"
 @interface UIViewController ()
 
 @property(nonatomic, weak, readwrite) TMUIModalPresentationViewController *tmui_modalPresentationViewController;
@@ -93,7 +94,7 @@
     self.modalPresentationStyle = UIModalPresentationCustom;
     
     // 这一段是给以 present 方式显示的浮层用的，其他方式显示的浮层，会在 supportedInterfaceOrientations 里实时获取支持的设备方向
-    UIViewController *visibleViewController = [TMUIHelper visibleViewController];
+    UIViewController *visibleViewController = [UIViewController tmui_topViewController];
     if (visibleViewController) {
         self.supportedOrientationMask = visibleViewController.supportedInterfaceOrientations;
     } else {
@@ -645,7 +646,7 @@
 #pragma mark - 屏幕旋转
 
 - (BOOL)shouldAutorotate {
-    UIViewController *visibleViewController = [TMUIHelper visibleViewController];
+    UIViewController *visibleViewController = [UIViewController tmui_topViewController];
     if (visibleViewController != self && [visibleViewController respondsToSelector:@selector(shouldAutorotate)]) {
         return [visibleViewController shouldAutorotate];
     }
@@ -653,7 +654,7 @@
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    UIViewController *visibleViewController = [TMUIHelper visibleViewController];
+    UIViewController *visibleViewController = [UIViewController tmui_topViewController];
     if (visibleViewController != self && [visibleViewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
         return [visibleViewController supportedInterfaceOrientations];
     }
