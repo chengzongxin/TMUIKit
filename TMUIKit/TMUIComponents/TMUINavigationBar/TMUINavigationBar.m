@@ -16,6 +16,13 @@ CGFloat const kTMUINavBarMargin = 5;
 CGFloat const kTMUINavBarBtnW = 44.0;
 CGFloat const kTMUINavBarBtnH = 44.0;
 
+
+@interface UIView (LayoutCheck)
+/// 外部设置了size
+- (BOOL)isExistSizeLayout;
+- (void)isExistLayout:(NSLayoutConstraint *)constraint;
+@end
+
 @interface TMUINavigationBar ()
 
 @property (nonatomic, strong) TMUINavigationBarApprance *apprance;
@@ -173,17 +180,15 @@ CGFloat const kTMUINavBarBtnH = 44.0;
 - (void)setTitle:(NSString *)title{
     _title = title;
     // 创建默认Label
-    [self addTitleViewToContentView:self.titleLbl];
-    
     self.titleLbl.text = title;
+    [self addTitleViewToContentView:self.titleLbl];
 }
 
 - (void)setAttrTitle:(NSAttributedString *)attrTitle{
     _attrTitle = attrTitle;
    // 创建默认Label
-    [self addTitleViewToContentView:self.titleLbl];
-    
     self.titleLbl.attributedText = attrTitle;
+    [self addTitleViewToContentView:self.titleLbl];
 }
 
 
@@ -199,21 +204,42 @@ CGFloat const kTMUINavBarBtnH = 44.0;
 }
 
 - (void)addTitleViewToContentView:(UIView *)titleView{
+    if (_titleView == titleView) {
+        // 重复添加，不处理
+        return;
+    }
     [_titleView removeFromSuperview]; // 移除旧的
     _titleView = titleView;
     
     [_contentView addSubview:titleView];
-    [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.titleViewInset);
-    }];
+    // 这里设置下优先级，如果外部设置的size约束，则不会撑开titleView
+    
+    if ([titleView isExistSizeLayout]) {
+        // 如果外部设置了size约束，则只需要居中即可
+        [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(_contentView);
+        }];
+    }else if (!CGSizeIsEmpty(titleView.intrinsicContentSize) && titleView.intrinsicContentSize.width <= SCREEN_WIDTH && titleView.intrinsicContentSize.height <= kTMUINavBarBtnH){
+        // 有内置size，会自动调整，则只需要居中即可
+        [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(_contentView);
+        }];
+    }else{
+        // 如果外部没设约束，则自动按照titleViewInset缩进填充整个导航栏，
+        [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.titleViewInset);
+        }];
+    }
 }
 
 
 - (void)setLeftViewType:(TMUINavigationBarLeftViewType)leftViewType{
     _leftViewType = leftViewType;
     
+    self.leftStackView.hidden = NO;
     if (leftViewType == TMUINavigationBarLeftViewType_None) {
         [self.leftStackView removeAllArrangeViews];
+        self.leftStackView.hidden = YES;
     }else if (leftViewType == TMUINavigationBarLeftViewType_Back){
         [self setLeftViews:self.backBtn,nil];
     }
@@ -222,8 +248,10 @@ CGFloat const kTMUINavBarBtnH = 44.0;
 - (void)setRightViewType:(TMUINavigationBarRightViewType)rightViewType{
     _rightViewType = rightViewType;
     
+    self.rightStackView.hidden = NO;
     if (rightViewType == TMUINavigationBarRightViewType_None) {
         [self.rightStackView removeAllArrangeViews];
+        self.rightStackView.hidden = YES;
     }else if (rightViewType == TMUINavigationBarRightViewType_Share){
         self.rightBtn.tmui_image = self.apprance.shareImg;
         [self setRightViews:self.rightBtn,nil];
@@ -266,6 +294,7 @@ CGFloat const kTMUINavBarBtnH = 44.0;
 
 - (void)setLeftViews:(UIView *)view, ...{
     [self.leftStackView removeAllArrangeViews];
+    self.leftStackView.hidden = NO;
     va_list args;//定义一个指向个数可变的参数列表指针
     va_start(args, view);//得到第一个可变参数地址
     for (UIView *arg = view; arg != nil; arg = va_arg(args, UIView *)) {
@@ -276,6 +305,7 @@ CGFloat const kTMUINavBarBtnH = 44.0;
 
 - (void)setRightViews:(UIView *)view, ...{
     [self.rightStackView removeAllArrangeViews];
+    self.rightStackView.hidden = NO;
     va_list args;//定义一个指向个数可变的参数列表指针
     va_start(args, view);//得到第一个可变参数地址
     for (UIView *arg = view; arg != nil; arg = va_arg(args, UIView *)) {
@@ -352,6 +382,7 @@ CGFloat const kTMUINavBarBtnH = 44.0;
 //}
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage{
+    self.backgroundImageView.hidden = NO;
     self.backgroundImageView.image = backgroundImage;
 }
 
@@ -486,6 +517,7 @@ CGFloat const kTMUINavBarBtnH = 44.0;
     if (!_backgroundImageView) {
         _backgroundImageView = [[UIImageView alloc] init];
         _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _backgroundImageView.hidden = YES;
     }
     return _backgroundImageView;
 }
@@ -550,6 +582,50 @@ CGFloat const kTMUINavBarBtnH = 44.0;
         _titleLbl.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLbl;
+}
+
+@end
+
+
+
+
+@implementation UIView (LayoutCheck)
+
+- (void)isExistLayout:(NSLayoutConstraint *)constraint{
+    NSLog(@"%@",constraint.firstItem);
+    NSLog(@"%ld",(long)constraint.firstAttribute);
+    NSLog(@"%@",constraint.secondItem);
+    NSLog(@"%ld",(long)constraint.secondAttribute);
+    
+    
+    NSLog(@"%ld",(long)constraint.relation);
+    NSLog(@"%f",constraint.constant);
+    
+    NSLog(@"%d",constraint.isActive);
+    
+}
+
+- (BOOL)isExistSizeLayout{
+    __block BOOL isExistW = NO;
+    __block BOOL isExistH = NO;
+    [self.constraints enumerateObjectsUsingBlock:^(__kindof NSLayoutConstraint * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([self isLayoutEffect:obj attr:NSLayoutAttributeWidth]) {
+            isExistW = YES;
+        }
+        if ([self isLayoutEffect:obj attr:NSLayoutAttributeHeight]) {
+            isExistH = YES;
+        }
+    }];
+    
+    return isExistW && isExistH;
+}
+
+- (BOOL)isLayoutEffect:(NSLayoutConstraint *)layoutCons attr:(NSLayoutAttribute)attr{
+    if (layoutCons.firstAttribute == attr && layoutCons.active == YES) {
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 @end

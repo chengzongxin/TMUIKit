@@ -20,10 +20,6 @@
 #import "TMUICoreGraphicsDefines.h"
 #endif
 
-#if __has_include("TMUIInitMacro.h")
-#import "TMUIInitMacro.h"
-#endif
-
 #if __has_include("TMUIRuntime.h")
 #import "TMUIRuntime.h"
 #endif

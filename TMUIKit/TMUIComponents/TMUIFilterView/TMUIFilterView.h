@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isMultiSelect;
 /// 列数，一行有几列, 如果设为0，则不进行列数排列，采用流式排列所有选择菜单
 @property (nonatomic, assign) NSInteger column;
+/// 从哪个view中弹出，设置sourceView或者topInset都可以，选其一
+@property (nonatomic, weak) __kindof UIView *sourceView;
 /// 距离顶部距离
 @property (nonatomic, assign) CGFloat topInset;
 /// 虽然传了多组item，但是不是多组数据，只有header头部，在装修首页的综合搜索中使用

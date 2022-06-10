@@ -40,6 +40,8 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
 
 @property (nonatomic, assign) TMUIFilterViewType type;
 
+@property(nonatomic, assign) CGRect sourceRect;
+
 @end
 
 @implementation TMUIFilterView
@@ -150,10 +152,26 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
     [self.collectionView reloadData];
 }
 
+- (void)setSourceView:(__kindof UIView *)sourceView {
+    _sourceView = sourceView;
+    __weak __typeof(self)weakSelf = self;
+    sourceView.tmui_frameDidChangeBlock = ^(__kindof UIView * _Nonnull view, CGRect precedingFrame) {
+//        if (!view.window || !weakSelf.superview) return;
+        UIView *convertToView = weakSelf.superview ?: UIApplication.sharedApplication.delegate.window;
+        CGRect rect = [view tmui_convertRect:view.bounds toView:convertToView];
+        weakSelf.sourceRect = rect;
+    };
+    sourceView.tmui_frameDidChangeBlock(sourceView, sourceView.frame);// update layout immediately
+}
 
 - (void)setTopInset:(CGFloat)topInset{
     _topInset = topInset;
     self.frame = CGRectMake(0, self.topInset, TMUI_SCREEN_WIDTH, TMUI_SCREEN_HEIGHT - self.topInset);
+}
+
+- (void)setSourceRect:(CGRect)sourceRect{
+    _sourceRect = sourceRect;
+    [self setTopInset:CGRectGetMaxY(sourceRect)];
 }
 
 - (void)setAllowsMultipleSelection:(BOOL)allowsMultipleSelection{
