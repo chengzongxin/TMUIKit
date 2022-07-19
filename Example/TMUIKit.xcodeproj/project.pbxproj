@@ -79,6 +79,7 @@
 		1699517E260F026100944BCA /* VC7Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1699517C260F026100944BCA /* VC7Cell.xib */; };
 		169EB2E925FCA2A4008E3F07 /* CAAnimationTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */; };
 		169FA7282611E39B00363F75 /* TDThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 169FA7272611E39B00363F75 /* TDThemeManager.m */; };
+		16AC584B285823270003AA9D /* TMUIHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AC584A285823270003AA9D /* TMUIHelperViewController.m */; };
 		16B05E8D2653ACAF00CC08A1 /* TDDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B05E8C2653ACAF00CC08A1 /* TDDebugViewController.m */; };
 		16B30B3F25FB014800785EDD /* TMUIExampleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B30B3E25FB014800785EDD /* TMUIExampleConfiguration.m */; };
 		16B540E625FB73320019808F /* CALayerTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B540E525FB73320019808F /* CALayerTMUIViewController.m */; };
@@ -280,6 +281,8 @@
 		169EB2E825FCA2A4008E3F07 /* CAAnimationTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAAnimationTMUIViewController.m; sourceTree = "<group>"; };
 		169FA7262611E39B00363F75 /* TDThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDThemeManager.h; sourceTree = "<group>"; };
 		169FA7272611E39B00363F75 /* TDThemeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDThemeManager.m; sourceTree = "<group>"; };
+		16AC5849285823270003AA9D /* TMUIHelperViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIHelperViewController.h; sourceTree = "<group>"; };
+		16AC584A285823270003AA9D /* TMUIHelperViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMUIHelperViewController.m; sourceTree = "<group>"; };
 		16B05E8B2653ACAF00CC08A1 /* TDDebugViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDDebugViewController.h; sourceTree = "<group>"; };
 		16B05E8C2653ACAF00CC08A1 /* TDDebugViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDDebugViewController.m; sourceTree = "<group>"; };
 		16B30B3D25FB014800785EDD /* TMUIExampleConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMUIExampleConfiguration.h; sourceTree = "<group>"; };
@@ -759,6 +762,8 @@
 				16D89D7525F9E6D5004FD70F /* TMUICoreViewController6.m */,
 				166D2E7F2817F84600E8AB45 /* TMUIConfigurationViewController.h */,
 				166D2E802817F84600E8AB45 /* TMUIConfigurationViewController.m */,
+				16AC5849285823270003AA9D /* TMUIHelperViewController.h */,
+				16AC584A285823270003AA9D /* TMUIHelperViewController.m */,
 			);
 			path = UIViewTMUIViewController;
 			sourceTree = "<group>";
@@ -1031,7 +1036,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				50D5BA5C61224A1B2402313F /* [CP] Copy Pods Resources */,
-				22859CD9F049CDF5EA753F42 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1159,24 +1163,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# shell script goes here\n\nmkdir -p headerDoc\n\n# ./Doc 为项目相对路径目录，根据实际情况修改\n\nfind ./Docs -name \\*.h -print | xargs headerdoc2html -j -o headerDoc\n\ngatherheaderdoc headerDoc\n";
 		};
-		22859CD9F049CDF5EA753F42 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh",
-				"${PODS_ROOT}/LookinServer/LookinServer.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMUIKit_Example/Pods-TMUIKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		50D5BA5C61224A1B2402313F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1289,6 +1275,7 @@
 				3B806CC025CA75CC00B78CD1 /* TMFoundationViewController.m in Sources */,
 				16C6507825BC02410047618E /* TMUITextViewViewController.m in Sources */,
 				16C389C125E5EEA3003E107D /* UIViewTMUI2ViewController.m in Sources */,
+				16AC584B285823270003AA9D /* TMUIHelperViewController.m in Sources */,
 				16857290261F120A007A0E6D /* TMUIConfigurationTemplateDark.m in Sources */,
 				16E4A57E261178E9005879A5 /* TMUIBadgeViewController.m in Sources */,
 				16236E4626A97EF200DB466A /* UILabelTMUIViewController2.m in Sources */,

@@ -56,6 +56,9 @@
                            ROW_CREATE(@"TMUIConfiguration",
                                       @"全局配置",
                                       @"TMUIConfigurationViewController"),
+                           ROW_CREATE(@"TMUIHelper",
+                                      @"工具类",
+                                      @"TMUIHelperViewController"),
                            ).THEME_TITLE(@"TMUI Core"),
             ).embedIn(self.view);
     

@@ -43,6 +43,7 @@
 #import "UITableView+TMUIGroup.h"
 #import "UITextView+TMUIPlaceholder.h"
 #import "UINavigationItem+TMUI.h"
+#import "UIControl+TMUI.h"
 
 /// Foundation
 #import "NSBundle+TMUI.h"

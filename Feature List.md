@@ -413,3 +413,50 @@
 - 如果需要更大程度地修改样式，比如说字体大小，选中的 segment 的文字颜色等等
 
 - TMUISegmentedControl 也同样支持使用图片来做样式。
+
+#### TMUICycleView（轮播图组件）
+- 数据驱动，只需配置数据模型数组
+
+#### TMUIFilterView （筛选组件）
+- 支持3中不同布局样式
+- 普通标签布局
+- 标题-内容布局
+- 流式布局
+- 支持单选、多选模式（参照网店筛选）
+
+#### TMUIFloatImagesView（九宫格）
+- 简单解耦的九宫格组件
+
+#### TMUIExpandLabel （展开文本）
+- 简单解耦的展开文本组件
+
+#### TMUIModalPresentationViewController （弹出页面组件）
+- 弹出组件容器，适合作为弹窗的容器，提供自带的3种方式弹出子VC
+- addSubview：添加到弹出容器上
+- addWindow：添加到window上
+- present：作为present弹出VC弹窗
+- 只需要简单配置内容视图，解耦视图层次
+
+#### TMUINavigationBar （导航栏组件）
+- 自定义导航栏，与系统导航栏的使用方式极为相识
+- 支持Light、Dark两种常用模式、Apprance设置外观
+- 支持快捷设置标题、返回按钮、右边按钮、自定义titleView
+- 支持简单的滑动渐变
+- 拓展两种常用titleView（采用MVVM模式，接入文件在项目中）
+
+#### TMUIPickerView （选择器）
+- 统一风格的选择器组件
+- 支持单列、多列
+- 支持级联
+
+#### TMUIPopupContainerView （泡泡弹窗）
+- 支持不同方向的泡泡弹窗
+- 丰富的属性支持
+
+#### TMUISearchBar （搜索框）
+- 统一风格的搜索框组件
+- 支持简单搜索、城市搜索两种UI样式
+- 提供delegate、block两种方式回调事件
+
+#### TMUITimer （计时器）
+- 简单的二次封装计时器，便于使用

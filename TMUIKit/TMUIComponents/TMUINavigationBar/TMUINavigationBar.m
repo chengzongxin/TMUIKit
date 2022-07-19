@@ -450,11 +450,18 @@ CGFloat const kTMUINavBarBtnH = 44.0;
     if ([view isKindOfClass:[UILabel class]]) {
         [(UILabel *)view setTextColor:textColor];
     }
-    else if (![view isKindOfClass:NSClassFromString(@"THKFocusButtonView")]) {
+    else if ([self isCanGradient:view] && ![view isKindOfClass:NSClassFromString(@"THKFocusButtonView")]) {
         for (UIView *subv in view.subviews) {
             [self foreachLabelViewsIn:subv toTextColor:textColor];
         }
     }
+}
+
+- (BOOL)isCanGradient:(UIView *)view{
+    if (self.canGradient) {
+        return self.canGradient(view);
+    }
+    return YES;
 }
 
 - (void)foreachImageViewsIn:(UIView *)view toTintColor:(UIColor *)tintColor {

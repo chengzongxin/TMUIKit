@@ -15,6 +15,30 @@
 #import "TMUIHelper.h"
 
 
+
+#pragma mark - other
+
+// App名称
+#define kAppName [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"]
+// App版本
+#define kAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+
+//消息发送
+#define SAFE_SEND_MESSAGE(obj, msg) if ((obj) && [(obj) respondsToSelector:@selector(msg)])
+
+//当一些方法需要子类进行具体实现的时候可能在父里方法里调用以下宏，子类方法不能调super
+#define Method_NotImplementation_Assert(_cmd, self) \
+NSAssert2(NO, @"method %@ need complete by subClass: %@", NSStringFromSelector(_cmd), NSStringFromClass(self.class)); \
+
+#define kUserDefaults [NSUserDefaults standardUserDefaults]
+
+// block self
+#define WEAKSELF typeof(self) __weak weakSelf = self;
+#define STRONGSELF typeof(weakSelf) __strong strongSelf = weakSelf;
+
+
+#define TMUI_CURRENT_TIMESTAMP (CFAbsoluteTimeGetCurrent()+kCFAbsoluteTimeIntervalSince1970) * 1000
+
 #pragma mark - 变量-设备相关
 
 /// 设备类型

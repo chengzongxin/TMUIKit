@@ -148,12 +148,13 @@
                                   action:(SEL)action{
     //config font & textColor
     UIColor *textColor;
-    if (titleColorStyle == UIBarButtonItem_TMUIColorStyleWhite) {
+    if (titleColorStyle == UIBarButtonItem_TMUIColorStyleBlack) {
+        // 默认-黑色文字
+        textColor = NavBarItemDarkColor;
+    }else if (titleColorStyle == UIBarButtonItem_TMUIColorStyleWhite) {
         textColor = NavBarItemLightColor;
     }else if (titleColorStyle == UIBarButtonItem_TMUIColorStyleTheme) {
         textColor = NavBarItemThemeColor;
-    }else if (titleColorStyle == UIBarButtonItem_TMUIColorStyleBlack) {
-        textColor = NavBarItemDarkColor;
     }
     UIColor *highlightTextColor = [textColor colorWithAlphaComponent:0.5];
     UIFont *textFont = NavBarItemFont;

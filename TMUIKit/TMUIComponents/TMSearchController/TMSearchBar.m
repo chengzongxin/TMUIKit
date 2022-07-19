@@ -91,7 +91,7 @@ TMUI_DEBUG_Code_Dealloc_Other(
     
     _textField = [[TMSearchBarInnerTextField alloc] init];
     _textField.clipsToBounds = YES;
-    _textField.backgroundColor = UIColorRGB(235.0f, 235.0f, 236.0f);
+    _textField.backgroundColor = UIColorMake(235.0f, 235.0f, 236.0f);
     [self addSubview:_textField];
     [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.mas_equalTo(self.mas_leading).mas_offset(self.contentEdgeInsets.left);
@@ -116,7 +116,7 @@ TMUI_DEBUG_Code_Dealloc_Other(
     
     self.bottomLineView = [[UIView alloc] init];
     self.bottomLineView.clipsToBounds = YES;
-    self.bottomLineView.backgroundColor = UIColorRGB(228.0f, 228.0f, 229.0f);
+    self.bottomLineView.backgroundColor = UIColorMake(228.0f, 228.0f, 229.0f);
     [self addSubview:self.bottomLineView];
     [self.bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.mas_equalTo(0);

@@ -535,15 +535,15 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
 /// @param alpha 水印文本整体的显示alpha值
 /// @param textAttributes 水印文本对应的属性字典，包括字体大小、字颜色等,外部必传
 - (UIImage *)tmui_imageWithWaterMarkText:(NSString *)text
-                          textAlpha:(CGFloat)alpha
-                      textAttributs:(NSDictionary *)textAttributes;
+                               textAlpha:(CGFloat)alpha
+                           textAttributs:(NSDictionary *)textAttributes;
 
 
 /// 获取生成平铺水印后的图片
-/// @param attr_str 需要绘制的副文本，包含显示文本及相关显示UI属性
+/// @param attrStr 需要绘制的副文本，包含显示文本及相关显示UI属性
 /// @param alpha 水印的整体显示alpha值
-- (UIImage *)tmui_imageWithWaterMarkAttributedText:(NSAttributedString *)attr_str
-                                    textAlpha:(CGFloat)alpha;
+- (UIImage *)tmui_imageWithWaterMarkAttributedText:(NSAttributedString *)attrStr
+                                         textAlpha:(CGFloat)alpha;
 @end
 
 NS_ASSUME_NONNULL_END

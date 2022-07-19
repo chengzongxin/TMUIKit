@@ -12,6 +12,27 @@
 
 #pragma mark - 变量-设备相关
 
+#define kCurrentWindow [[UIApplication sharedApplication].windows firstObject]
+
+// 屏幕高度
+#define kScreenHeight CGRectGetHeight([UIScreen mainScreen].bounds)
+// 屏幕宽
+#define kScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds)
+
+//statusbar、navBar、tabbar
+#define STATUS_BAR_HEIGHT [UIApplication sharedApplication].statusBarFrame.size.height
+#define NAVBAR_CONTENT_HEIGHT 44
+#define NAVBAR_HEIGHT (STATUS_BAR_HEIGHT + NAVBAR_CONTENT_HEIGHT)
+#define TABBAR_CONTENT_HEIGHT 49
+
+// 视图的宽、高、y
+#define kSelfViewWidth CGRectGetWidth(self.view.frame)
+#define kSelfViewHeight CGRectGetHeight(self.view.frame)
+#define kSelfViewOriginY self.view.frame.origin.y
+
+//是否iPhoneX以上机型
+#define isIphoneXAscending (^BOOL(){if (@available(iOS 11.0, *)) {return [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom>0;} return NO;}())
+
 /// 是否横竖屏
 /// 用户界面横屏了才会返回YES
 #define IS_LANDSCAPE UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)
@@ -60,7 +81,23 @@ tmui_pixelOne() {
     }
     return _tmui_pixelOne;
 }
+#pragma mark - 安全距离
 
+#pragma mark - 颜色生成图片
+NS_INLINE UIImage* tmui_imageWithColor(UIColor *clr)
+{
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextSetFillColorWithColor(context, [clr CGColor]);
+    CGContextFillRect(context, rect);
+
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return image;
+}
 #pragma mark - 上下内容安全边距
 NS_INLINE CGFloat
 tmui_safeAreaTopInset(){
@@ -189,7 +226,7 @@ CGFloatToFixed(CGFloat value, NSUInteger precision) {
 
 
 CG_INLINE CGFloat
-frameScaleX() {
+tmui_frameScaleX() {
     static CGFloat frameScaleX = 1.0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -199,7 +236,7 @@ frameScaleX() {
 }
 
 CG_INLINE CGFloat
-fameScaleY() {
+tmui_frameScaleY() {
     static CGFloat frameScaleY = 1.0;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

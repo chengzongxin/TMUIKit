@@ -1241,22 +1241,22 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 
 
 - (UIImage *)tmui_imageWithWaterMarkText:(NSString *)text
-                          textAlpha:(CGFloat)alpha
-                      textAttributs:(NSDictionary *)textAttributes {
-    NSMutableAttributedString * attr_str = text.length > 0 ? [[NSMutableAttributedString alloc] initWithString:text attributes:textAttributes] : nil;
-    return [self tmui_imageWithWaterMarkAttributedText:attr_str textAlpha:alpha];
+                               textAlpha:(CGFloat)alpha
+                           textAttributs:(NSDictionary *)textAttributes {
+    NSMutableAttributedString * attrStr = text.length > 0 ? [[NSMutableAttributedString alloc] initWithString:text attributes:textAttributes] : nil;
+    return [self tmui_imageWithWaterMarkAttributedText:attrStr textAlpha:alpha];
 }
 
-- (UIImage *)tmui_imageWithWaterMarkAttributedText:(NSAttributedString *)attr_str
-                                    textAlpha:(CGFloat)alpha {
-    if (attr_str.length > 0) {
+- (UIImage *)tmui_imageWithWaterMarkAttributedText:(NSAttributedString *)attrStr
+                                         textAlpha:(CGFloat)alpha {
+    if (attrStr.length > 0) {
         CGSize size = self.size;
         UIGraphicsBeginImageContextWithOptions(size, NO, self.scale);
         [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
                 
         //文字：字符串显示所需的宽、高
-        CGFloat str_w = attr_str.size.width;
-        CGFloat str_h = attr_str.size.height;
+        CGFloat str_w = attrStr.size.width;
+        CGFloat str_h = attrStr.size.height;
         
         //根据中心开启旋转上下文矩阵，绘制水印文字
         CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -1288,7 +1288,7 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
                     }
                 }
                 
-                [attr_str drawInRect:CGRectMake(originX + (str_w + HORIZONTAL_SPACEING) * j, originY + (str_h + VERTICAL_SPACEING) * i, str_w, str_h)];
+                [attrStr drawInRect:CGRectMake(originX + (str_w + HORIZONTAL_SPACEING) * j, originY + (str_h + VERTICAL_SPACEING) * i, str_w, str_h)];
             }
         }
         

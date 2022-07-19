@@ -160,6 +160,7 @@
 
 #pragma mark - SearchBar
 
+#define SearchBarCornerRadius                           [TMUICMI searchBarCornerRadius]
 #define SearchBarTextFieldBorderColor                   [TMUICMI searchBarTextFieldBorderColor]
 #define SearchBarTextFieldBackgroundImage               [TMUICMI searchBarTextFieldBackgroundImage]
 #define SearchBarBackgroundImage                        [TMUICMI searchBarBackgroundImage]

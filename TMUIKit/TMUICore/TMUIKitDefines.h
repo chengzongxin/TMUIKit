@@ -27,14 +27,19 @@
 #define UIImageMakeWithFileAndSuffix(name, suffix) [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.%@", [[NSBundle mainBundle] resourcePath], name, suffix]]
 
 ///MARK: UIColor
-#define UIColorRGB(r, g, b)       [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
-#define UIColorRGBA(r, g, b, a)   [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
+//#define UIColorRGB(r, g, b)       [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+//#define UIColorRGBA(r, g, b, a)   [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
 #ifndef UIColorHex
 #define UIColorHex(_hex_)   tmui_colorWithHexString((__bridge NSString *)CFSTR(#_hex_))
 #endif
 #ifndef UIColorHexString
 #define UIColorHexString(hexStr) tmui_colorWithHexString(hexStr)
 #endif
+
+//UIColorFromRGB(0x1A1C1A)
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+//UIColorFromRGBAlpha(0x111111,0.1)
+#define UIColorFromRGBAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:(a)]
 
 #define UIColorMake(r, g, b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 #define UIColorMakeWithRGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
@@ -184,6 +189,23 @@ setterWithGetter(SEL getter) {
     return setter;
 }
 
+#pragma mark - 数据判断
+// 非空的NSNumber
+#define kUnNilNumber(number) ([number isKindOfClass:[NSNumber class]]?number:@(0))
+// 非空的字符串 避免输出null
+#define kUnNilStr(str) ((str && ![str isEqual:[NSNull null]])?str:@"")
+// 非空的字符串 输出空格
+#define kUnNilStrSpace(str) ((str && ![str isEqual:[NSNull null]] && ![str isEqualToString:@"(null)"])?str:@" ")
+// 整数转换成字符串
+#define kStrWithInter(i) [NSString stringWithFormat:@"%@",@(i)]
+// CGFloat转换成字符串
+#define kStrWithFloat(f) [NSString stringWithFormat:@"%0.1f",f]
+
+// 验证字典有没有某个key 并且判断值的类型
+#define ValidateDicWithKey(dic,key) ([dic objectForKey:key] && [dic objectForKey:key] != [NSNull null])
+#define ValidateDicWithKey_Dic(dic,key) ([dic objectForKey:key] && [[dic objectForKey:key] isKindOfClass:[NSDictionary class]])
+#define ValidateDicWithKey_Arr(dic,key) ([dic objectForKey:key] && [[dic objectForKey:key] isKindOfClass:[NSArray class]])
+#define ValidateDicWithKey_Str(dic,key) ([dic objectForKey:key] && [[dic objectForKey:key] isKindOfClass:[NSString class]])
 
 /**
  *  判断字符串是否为空
@@ -210,6 +232,29 @@ tmui_isNullString(NSString *string){
         return YES;
     }
     return NO;
+}
+
+/**
+ *
+ *  判断字符串是否全部是数字
+ *
+ *  @param string 输入字符串
+ *
+ *  @return YES 是,NO 不是
+ */
+NS_INLINE BOOL
+tmui_isAllNum(NSString *string){
+    if (tmui_isNullString(string)) {
+        return NO;
+    }
+    unichar c;
+    for (int i = 0; i < string.length; i++) {
+        c = [string characterAtIndex:i];
+        if (!isdigit(c)) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 NS_INLINE UIColor *
@@ -403,7 +448,6 @@ NS_INLINE NSString *tmui_filePathAtTempWithName(NSString *fileName) {
     return [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
     
 }
-
 
 
 //分别对UIView及NSObject    子类实现相关init方法时提取相关重复代码定义为宏，让子类的初始化过程中仅需专注于子类自身的变量或其它数据的初始化处理

@@ -204,8 +204,8 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     
     #pragma mark - NavigationBar
     self.navBarItemLightColor = self.whiteColor;
-    self.navBarItemThemeColor = UIColorMake(42, 209, 130);
-    self.navBarItemDarkColor = UIColorMake(11, 11, 11);
+    self.navBarItemThemeColor = self.mainColor;
+    self.navBarItemDarkColor = UIColorHex(333333);
     self.navBarItemFont = UIFontMake(16);
     self.navBarHighlightedAlpha = 0.2f;
     self.navBarDisabledAlpha = 0.2f;
@@ -225,6 +225,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     
     #pragma mark - SearchBar
     
+    self.searchBarCornerRadius = 8.0;
     self.searchBarPlaceholderColor = self.placeholderColor;
     self.searchBarTextFieldCornerRadius = 2.0;
     

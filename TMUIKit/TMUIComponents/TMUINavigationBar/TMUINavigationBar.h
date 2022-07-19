@@ -82,6 +82,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setNavigationBarColor:(UIColor *)color originTintColor:(UIColor *)oriTintColor toTintColor:(UIColor *)toTintColor gradientPercent:(float)percent;
 
+/// 滚动渐变的时候，是否允许某个view产生渐变效果
+@property (nonatomic, copy) BOOL (^canGradient)(UIView *view);
+
 /// 供外界VC访问，根据滑动percent，动态切换状态栏样式
 @property (nonatomic, assign, readonly) UIStatusBarStyle preferredStatusBarStyle;
 

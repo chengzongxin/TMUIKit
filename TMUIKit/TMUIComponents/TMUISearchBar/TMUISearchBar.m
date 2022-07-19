@@ -66,7 +66,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
 }
 
 - (void)setupViews{
-    self.layer.cornerRadius = TMUISearchBarHeight/2;
+    self.layer.cornerRadius = SearchBarCornerRadius;
     self.userInteractionEnabled = YES;
     
     [self addSubview:self.contentView];
@@ -288,7 +288,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _contentView.clipsToBounds = YES;
         _contentView.backgroundColor = UIColorHex(F9FAF9);
         _contentView.layer.borderColor = UIColorHex(ECEEEC).CGColor;
-        _contentView.layer.cornerRadius = TMUISearchBarHeight/2;
+        _contentView.layer.cornerRadius = SearchBarCornerRadius;
         _contentView.layer.borderWidth = .5;
         _contentView.userInteractionEnabled = YES;
     }

@@ -1,8 +1,8 @@
 //
-//  TMUIMenuVIewController.h
+//  TMUIHelperViewController.h
 //  TMUIKit_Example
 //
-//  Created by 熊熙 on 2022/4/25.
+//  Created by Joe.cheng on 2022/6/14.
 //  Copyright © 2022 chengzongxin. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TMUIMenuViewController : UIViewController
+@interface TMUIHelperViewController : UIViewController
 
 @end
 

@@ -44,13 +44,39 @@
     id i5 = [Img(@"angel") tmui_imageWithOrientation:UIImageOrientationDown];
     UIImageView *iv5 = ImageView.img(i5).aspectFit.styles(s3);
     
+    id l6 = Label.str(@"image water mark").styles(s2).multiline;
+    id i6 = [Img(@"angel") tmui_imageWithWaterMarkAttributedText:AttStr(@"water mark text").color(@"red").fnt(30) textAlpha:0.9];
+    UIImageView *iv6 = ImageView.img(i6).aspectFit.styles(s3);
+    
+    
     id scrollView = [UIScrollView new].embedIn(self.view);
     VerStack(HorStack(l1,iv1),
              HorStack(l2,iv2),
              HorStack(l3,iv3),
              HorStack(l4,iv4),
-             HorStack(l5,iv5)
+             HorStack(l5,iv5),
+             HorStack(l6,iv6),
              ).embedIn(scrollView, 20, 20, 80);
+    
+    iv1.onClick(^{
+        [TMShowBigImageViewController showBigImageWithImageView:iv1 transitionStyle:THKTransitionStylePush];
+    });
+    iv2.onClick(^{
+        [TMShowBigImageViewController showBigImageWithImageView:iv2 transitionStyle:THKTransitionStylePush];
+    });
+    iv3.onClick(^{
+        [TMShowBigImageViewController showBigImageWithImageView:iv3 transitionStyle:THKTransitionStylePush];
+    });
+    iv4.onClick(^{
+        [TMShowBigImageViewController showBigImageWithImageView:iv4 transitionStyle:THKTransitionStylePush];
+    });
+    iv5.onClick(^{
+        [TMShowBigImageViewController showBigImageWithImageView:iv5 transitionStyle:THKTransitionStylePush];
+    });
+    iv6.onClick(^{
+        [TMShowBigImageViewController showBigImageWithImageView:iv6 transitionStyle:THKTransitionStylePush];
+    });
+    
 }
 
 

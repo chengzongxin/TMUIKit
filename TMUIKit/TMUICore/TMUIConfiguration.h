@@ -156,6 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - SearchBar
 
+@property(nonatomic, assign) CGFloat            searchBarCornerRadius;
 @property(nonatomic, strong, nullable) UIImage  *searchBarTextFieldBackgroundImage;
 @property(nonatomic, strong, nullable) UIColor  *searchBarTextFieldBorderColor;
 @property(nonatomic, strong, nullable) UIImage  *searchBarBackgroundImage;
