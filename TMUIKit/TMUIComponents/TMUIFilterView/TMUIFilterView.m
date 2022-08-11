@@ -64,7 +64,7 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
     _allowsUnSelection = NO;
     _allowsMultipleSelection = NO;
     _lastSelectIndexPath = [NSIndexPath indexPathForItem:NSNotFound inSection:NSNotFound];
-    _selectColor = UIColorHex(22C77D);
+    _selectColor = UIColorGreen;
     _maxHeight = TMUI_SCREEN_HEIGHT - self.topInset;
     
     self.frame = CGRectMake(0, self.topInset, TMUI_SCREEN_WIDTH, TMUI_SCREEN_HEIGHT - self.topInset);
@@ -362,7 +362,7 @@ static CGFloat TMUIFilterOnlyHeaderFullHeight = 61;
     TMUIFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TMUIFilterCell class])
                                                                            forIndexPath:indexPath];
     cell.btn.tmui_text = self.models[indexPath.section].items[indexPath.item].text;
-    [cell.btn tmui_setNormalBackGroundColor:UIColorHex(F6F8F6) selectedBackGroundColor:self.selectColor];
+    [cell.btn tmui_setNormalBackGroundColor:UIColorBackgroundLight selectedBackGroundColor:self.selectColor];
     return cell;
 }
 

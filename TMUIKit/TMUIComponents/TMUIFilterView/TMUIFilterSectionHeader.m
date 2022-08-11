@@ -44,9 +44,9 @@
 
 - (void)setSelected:(BOOL)selected{
     if (selected) {
-        _titleLbl.textColor = UIColorHex(22C77D);
+        _titleLbl.textColor = UIColorGreen;
     }else{
-        _titleLbl.textColor = UIColorHex(1A1C1A);
+        _titleLbl.textColor = UIColorDark;
     }
 }
 
@@ -63,7 +63,7 @@
 - (UILabel *)titleLbl{
     if (!_titleLbl) {
         _titleLbl = [[UILabel alloc] init];
-        _titleLbl.textColor = UIColorHex(1A1C1A);
+        _titleLbl.textColor = UIColorDark;
         _titleLbl.font = UIFontMedium(14);
     }
     return _titleLbl;

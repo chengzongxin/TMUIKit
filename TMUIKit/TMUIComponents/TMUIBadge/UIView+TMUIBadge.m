@@ -12,6 +12,7 @@
 #import "UIView+TMUI.h"
 #import "UITabBarItem+TMUI.h"
 #import "TMUIConfigurationMacros.h"
+#import "UIColor+TMUI.h"
 
 @protocol _TMUIBadgeViewProtocol <NSObject>
 
@@ -41,63 +42,99 @@
 
 TMUISynthesizeIdStrongProperty(tmuibdg_layoutSubviewsBlock, setTmuibdg_layoutSubviewsBlock)
 
-//+ (void)load {
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        // 保证配置表里的默认值正确被设置
-//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithFrame:), CGRect, UIView *, ^UIView *(UIView *selfObject, CGRect firstArgv, UIView *originReturnValue) {
-//            [selfObject tmuibdg_didInitialize];
-//            return originReturnValue;
-//        });
-//        
-//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithCoder:), NSCoder *, UIView *, ^UIView *(UIView *selfObject, NSCoder *firstArgv, UIView *originReturnValue) {
-//            [selfObject tmuibdg_didInitialize];
-//            return originReturnValue;
-//        });
-//        
-//        OverrideImplementation([UIView class], @selector(setTmui_layoutSubviewsBlock:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-//            return ^(UIView *selfObject, void (^firstArgv)(__kindof UIView *aView)) {
-//                
-//                if (firstArgv && selfObject.tmuibdg_layoutSubviewsBlock && firstArgv != selfObject.tmuibdg_layoutSubviewsBlock) {
-//                    firstArgv = ^void(__kindof UIView *aaView) {
-//                        firstArgv(aaView);
-//                        aaView.tmuibdg_layoutSubviewsBlock(aaView);
-//                    };
-//                }
-//                
-//                // call super
-//                void (*originSelectorIMP)(id, SEL, void (^firstArgv)(__kindof UIView *aView));
-//                originSelectorIMP = (void (*)(id, SEL, void (^firstArgv)(__kindof UIView *aView)))originalIMPProvider();
-//                originSelectorIMP(selfObject, originCMD, firstArgv);
-//            };
-//        });
-//    });
-//}
-
-- (void)tmuibdg_didInitialize {
-    if (TMUICMIActivated) {
-        self.tmui_badgeBackgroundColor = BadgeBackgroundColor;
-        self.tmui_badgeTextColor = BadgeTextColor;
-        self.tmui_badgeFont = BadgeFont;
-        self.tmui_badgeContentEdgeInsets = BadgeContentEdgeInsets;
-        self.tmui_badgeOffset = BadgeOffset;
-        self.tmui_badgeOffsetLandscape = BadgeOffsetLandscape;
-
-        self.tmui_updatesIndicatorColor = UpdatesIndicatorColor;
-        self.tmui_updatesIndicatorSize = UpdatesIndicatorSize;
-        self.tmui_updatesIndicatorOffset = UpdatesIndicatorOffset;
-        self.tmui_updatesIndicatorOffsetLandscape = UpdatesIndicatorOffsetLandscape;
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 保证配置表里的默认值正确被设置
+        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithFrame:), CGRect, UIView *, ^UIView *(UIView *selfObject, CGRect firstArgv, UIView *originReturnValue) {
+            [selfObject tmuibg_didInitialize];
+            return originReturnValue;
+        });
         
-        BeginIgnoreDeprecatedWarning
-        self.tmui_badgeCenterOffset = BadgeCenterOffset;
-        self.tmui_badgeCenterOffsetLandscape = BadgeCenterOffsetLandscape;
-        self.tmui_updatesIndicatorCenterOffset = UpdatesIndicatorCenterOffset;
-        self.tmui_updatesIndicatorCenterOffsetLandscape = UpdatesIndicatorCenterOffsetLandscape;
-        EndIgnoreDeprecatedWarning
-    }
+        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIView class], @selector(initWithCoder:), NSCoder *, UIView *, ^UIView *(UIView *selfObject, NSCoder *firstArgv, UIView *originReturnValue) {
+            [selfObject tmuibg_didInitialize];
+            return originReturnValue;
+        });
+        
+        OverrideImplementation([UIView class], @selector(setTmui_layoutSubviewsBlock:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIView *selfObject, void (^firstArgv)(__kindof UIView *aView)) {
+                
+                if (firstArgv && selfObject.tmuibdg_layoutSubviewsBlock && firstArgv != selfObject.tmuibdg_layoutSubviewsBlock) {
+                    firstArgv = ^void(__kindof UIView *aaView) {
+                        firstArgv(aaView);
+                        aaView.tmuibdg_layoutSubviewsBlock(aaView);
+                    };
+                }
+                
+                // call super
+                void (*originSelectorIMP)(id, SEL, void (^firstArgv)(__kindof UIView *aView));
+                originSelectorIMP = (void (*)(id, SEL, void (^firstArgv)(__kindof UIView *aView)))originalIMPProvider();
+                originSelectorIMP(selfObject, originCMD, firstArgv);
+            };
+        });
+    });
+}
+
+- (void)tmuibg_didInitialize {
+//    if (TMUICMIActivated) {
+    self.tmui_badgeGradientBackgroundColors = BadgeGradientBackgroundColors;
+    self.tmui_badgeGradientType = BadgeGradientType;//TMUIImageGradientTypeHorizontal;
+    self.tmui_badgeBackgroundColor = BadgeBackgroundColor;
+    self.tmui_badgeTextColor = BadgeTextColor;
+    self.tmui_badgeFont = BadgeFont;
+    self.tmui_badgeContentEdgeInsets = BadgeContentEdgeInsets;
+    self.tmui_badgeOffset = BadgeOffset;
+    self.tmui_badgeOffsetLandscape = BadgeOffsetLandscape;
+
+    self.tmui_updatesIndicatorColor = UpdatesIndicatorColor;
+    self.tmui_updatesIndicatorSize = UpdatesIndicatorSize;
+    self.tmui_updatesIndicatorOffset = UpdatesIndicatorOffset;
+    self.tmui_updatesIndicatorOffsetLandscape = UpdatesIndicatorOffsetLandscape;
+    
+    
+    BeginIgnoreDeprecatedWarning
+    self.tmui_badgeCenterOffset = BadgeCenterOffset;
+    self.tmui_badgeCenterOffsetLandscape = BadgeCenterOffsetLandscape;
+    self.tmui_updatesIndicatorCenterOffset = UpdatesIndicatorCenterOffset;
+    self.tmui_updatesIndicatorCenterOffsetLandscape = UpdatesIndicatorCenterOffsetLandscape;
+    
+    self.tmui_badgeLocation = BadgeLocation;
+    EndIgnoreDeprecatedWarning
+//    }
 }
 
 #pragma mark - Badge
+
+static char kAssociatedObjectKey_badgeLocation;
+- (void)setTmui_badgeLocation:(TMUIBadgeLocation)tmui_badgeLocation {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_badgeLocation, @(tmui_badgeLocation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    switch (tmui_badgeLocation) {
+        case TMUIBadgePositionTopRight:
+            break;
+        case TMUIBadgePositionBottomRight:
+            break;
+        case TMUIBadgePositionTopLeft:
+            break;
+        case TMUIBadgePositionBottomLeft:
+            break;
+        case TMUIBadgePositionCenter:
+        {
+            self.tmui_badgeOffsetLandscape = TMUIBadgeInvalidateOffset;
+            self.tmui_badgeOffset = TMUIBadgeInvalidateOffset;
+            self.tmui_badgeCenterOffset = CGPointZero;
+            self.tmui_badgeCenterOffsetLandscape = CGPointZero;
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (TMUIBadgeLocation)tmui_badgeLocation {
+    return [((NSNumber *)objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeLocation)) unsignedIntegerValue];
+}
 
 static char kAssociatedObjectKey_badgeInteger;
 - (void)setTmui_badgeInteger:(NSUInteger)tmui_badgeInteger {
@@ -134,10 +171,25 @@ static char kAssociatedObjectKey_badgeString;
         self.tmui_badgeLabel.text = tmui_badgeString;
         self.tmui_badgeLabel.hidden = NO;
         [self setNeedsUpdateBadgeLabelLayout];
+        [self updateBackgroudView];
         self.clipsToBounds = NO;
     } else {
         self.tmui_badgeLabel.hidden = YES;
     }
+}
+
+- (void)updateBackgroudView{
+    if (self.tmui_shouldShowUpdatesIndicator) {
+        [self gradientBackGroundView:self.tmui_updatesIndicatorView];
+    }
+    if (!tmui_isNullString(self.tmui_badgeString)) {
+        [self gradientBackGroundView:self.tmui_badgeLabel];
+    }
+}
+
+- (void)gradientBackGroundView:(UIView *)view{
+    CGSize size = [view sizeThatFits:CGSizeMax];
+    view.backgroundColor = [UIColor tmui_gradientColorImageFromColors:self.tmui_badgeGradientBackgroundColors gradientType:self.tmui_badgeGradientType imgSize:size];
 }
 
 - (NSString *)tmui_badgeString {
@@ -153,6 +205,27 @@ static char kAssociatedObjectKey_badgeBackgroundColor;
 - (UIColor *)tmui_badgeBackgroundColor {
     return (UIColor *)objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeBackgroundColor);
 }
+
+static char kAssociatedObjectKey_badgeGradientBackgroundColors;
+- (void)setTmui_badgeGradientBackgroundColors:(NSArray<UIColor *> *)tmui_badgeGradientBackgroundColors{
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_badgeGradientBackgroundColors, tmui_badgeGradientBackgroundColors, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self updateBackgroudView];
+}
+
+- (NSArray<UIColor *> *)tmui_badgeGradientBackgroundColors{
+    return (NSArray<UIColor *> *)objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeGradientBackgroundColors);
+}
+
+static char kAssociatedObjectKey_badgeGradientType;
+- (void)setTmui_badgeGradientType:(NSInteger)tmui_badgeGradientType{
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_badgeGradientType, @(tmui_badgeGradientType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self updateBackgroudView];
+}
+
+- (NSInteger)tmui_badgeGradientType{
+    return [objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeGradientType) integerValue];
+}
+
 
 static char kAssociatedObjectKey_badgeTextColor;
 - (void)setTmui_badgeTextColor:(UIColor *)tmui_badgeTextColor {
@@ -271,6 +344,7 @@ static char kAssociatedObjectKey_shouldShowUpdatesIndicator;
             [self updateLayoutSubviewsBlockIfNeeded];
         }
         [self setNeedsUpdateIndicatorLayout];
+        [self updateBackgroudView];
         self.clipsToBounds = NO;
         self.tmui_updatesIndicatorView.hidden = NO;
     } else {
@@ -549,6 +623,7 @@ const CGPoint TMUIBadgeInvalidateOffset = {-1000, -1000};
 - (CGSize)sizeThatFits:(CGSize)size {
     CGSize result = [super sizeThatFits:size];
     result = CGSizeMake(MAX(result.width, result.height), result.height);
+    result = CGSizeCeil(result); // 向上取整，避免裁剪
     return result;
 }
 

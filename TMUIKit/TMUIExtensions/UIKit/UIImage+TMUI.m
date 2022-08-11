@@ -75,6 +75,72 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     }
 }
 
++ (UIImage *)tmui_animatedImageWithData:(NSData *)data {
+    return [self tmui_animatedImageWithData:data scale:1];
+}
+
++ (UIImage *)tmui_animatedImageWithData:(NSData *)data scale:(CGFloat)scale {
+    // http://www.jianshu.com/p/767af9c690a3
+    // https://github.com/rs/SDWebImage
+    if (!data) {
+        return nil;
+    }
+    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
+    size_t count = CGImageSourceGetCount(source);
+    UIImage *animatedImage = nil;
+    scale = scale == 0 ? ScreenScale : scale;
+    if (count <= 1) {
+        animatedImage = [[UIImage alloc] initWithData:data scale:scale];
+    } else {
+        NSMutableArray<UIImage *> *images = [[NSMutableArray alloc] init];
+        NSTimeInterval duration = 0.0f;
+        for (size_t i = 0; i < count; i++) {
+            CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);
+            duration += [self tmui_frameDurationAtIndex:i source:source];
+            UIImage *frameImage = [UIImage imageWithCGImage:image scale:scale orientation:UIImageOrientationUp];
+            [images addObject:frameImage];
+            CGImageRelease(image);
+        }
+        if (!duration) {
+            duration = (1.0f / 10.0f) * count;
+        }
+        animatedImage = [UIImage animatedImageWithImages:images duration:duration];
+    }
+    CFRelease(source);
+    return animatedImage;
+}
+
++ (float)tmui_frameDurationAtIndex:(NSUInteger)index source:(CGImageSourceRef)source {
+    float frameDuration = 0.1f;
+    CFDictionaryRef cfFrameProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil);
+    NSDictionary<NSString *, NSDictionary *> *frameProperties = (__bridge NSDictionary *)cfFrameProperties;
+    NSDictionary<NSString *, NSNumber *> *gifProperties = frameProperties[(NSString *)kCGImagePropertyGIFDictionary];
+    NSNumber *delayTimeUnclampedProp = gifProperties[(NSString *)kCGImagePropertyGIFUnclampedDelayTime];
+    if (delayTimeUnclampedProp) {
+        frameDuration = [delayTimeUnclampedProp floatValue];
+    } else {
+        NSNumber *delayTimeProp = gifProperties[(NSString *)kCGImagePropertyGIFDelayTime];
+        if (delayTimeProp) {
+            frameDuration = [delayTimeProp floatValue];
+        }
+    }
+    CFRelease(cfFrameProperties);
+    return frameDuration;
+}
+
++ (UIImage *)tmui_animatedImageNamed:(NSString *)name {
+    return [UIImage tmui_animatedImageNamed:name scale:1];
+}
+
++ (UIImage *)tmui_animatedImageNamed:(NSString *)name scale:(CGFloat)scale {
+    NSString *type = name.pathExtension.lowercaseString;
+    type = type.length > 0 ? type : @"gif";
+    NSString *path = [[NSBundle mainBundle] pathForResource:name.stringByDeletingPathExtension ofType:type];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    return [UIImage tmui_animatedImageWithData:data scale:scale];
+}
+
+
 + (NSString *)pathForResourceWithBundleName:(NSString *)strBundleName fileName:(NSString *)fileName {
     NSBundle *bundle = strBundleName ? [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:strBundleName withExtension:@"bundle"]] : NSBundle.mainBundle;
     NSString *filePath = [bundle pathForResource:fileName ofType:@""];
@@ -307,6 +373,193 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
         NSAssert(supports, @"UIImage (TMUI)", @"UIImage (TMUITheme) hook 尚未生效，TMUIThemeColor 生成的图片无法自动转成 TMUIThemeImage，可能导致 theme 切换时无法刷新。");
     }
     return result;
+}
+
+- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor path:(UIBezierPath *)path {
+    if (!borderColor) {
+        return self;
+    }
+    
+    return [UIImage tmui_imageWithSize:self.size opaque:self.tmui_opaque scale:self.scale actions:^(CGContextRef contextRef) {
+        [self drawInRect:CGRectMakeWithSize(self.size)];
+        CGContextSetStrokeColorWithColor(contextRef, borderColor.CGColor);
+        [path stroke];
+    }];
+}
+
+- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius {
+    return [self tmui_imageWithBorderColor:borderColor borderWidth:borderWidth cornerRadius:cornerRadius dashedLengths:0];
+}
+
+- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius dashedLengths:(const CGFloat *)dashedLengths {
+    if (!borderColor || !borderWidth) {
+        return self;
+    }
+    
+    UIBezierPath *path;
+    CGRect rect = CGRectInset(CGRectMake(0, 0, self.size.width, self.size.height), borderWidth / 2, borderWidth / 2);// 调整rect，从而保证绘制描边时像素对齐
+    if (cornerRadius > 0) {
+        path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
+    } else {
+        path = [UIBezierPath bezierPathWithRect:rect];
+    }
+    
+    path.lineWidth = borderWidth;
+    if (dashedLengths) {
+        [path setLineDash:dashedLengths count:2 phase:0];
+    }
+    return [self tmui_imageWithBorderColor:borderColor path:path];
+}
+
+- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth borderPosition:(TMUIImageBorderPosition)borderPosition {
+    if (borderPosition == TMUIImageBorderPositionAll) {
+        return [self tmui_imageWithBorderColor:borderColor borderWidth:borderWidth cornerRadius:0];
+    } else {
+        // TODO 使用bezierPathWithRoundedRect:byRoundingCorners:cornerRadii:这个系统接口
+        UIBezierPath* path = [UIBezierPath bezierPath];
+        if ((TMUIImageBorderPositionBottom & borderPosition) == TMUIImageBorderPositionBottom) {
+            [path moveToPoint:CGPointMake(0, self.size.height - borderWidth / 2)];
+            [path addLineToPoint:CGPointMake(self.size.width, self.size.height - borderWidth / 2)];
+        }
+        if ((TMUIImageBorderPositionTop & borderPosition) == TMUIImageBorderPositionTop) {
+            [path moveToPoint:CGPointMake(0, borderWidth / 2)];
+            [path addLineToPoint:CGPointMake(self.size.width, borderWidth / 2)];
+        }
+        if ((TMUIImageBorderPositionLeft & borderPosition) == TMUIImageBorderPositionLeft) {
+            [path moveToPoint:CGPointMake(borderWidth / 2, 0)];
+            [path addLineToPoint:CGPointMake(borderWidth / 2, self.size.height)];
+        }
+        if ((TMUIImageBorderPositionRight & borderPosition) == TMUIImageBorderPositionRight) {
+            [path moveToPoint:CGPointMake(self.size.width - borderWidth / 2, 0)];
+            [path addLineToPoint:CGPointMake(self.size.width - borderWidth / 2, self.size.height)];
+        }
+        [path setLineWidth:borderWidth];
+        [path closePath];
+        return [self tmui_imageWithBorderColor:borderColor path:path];
+    }
+    return self;
+}
+
++ (UIImage *)tmui_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius {
+    size = CGSizeFlatted(size);
+    CGContextInspectSize(size);
+    color = color ? color : [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+    return [UIImage tmui_imageWithSize:size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
+        
+        CGContextSetFillColorWithColor(contextRef, color.CGColor);
+        
+        UIBezierPath *path = [UIBezierPath tmui_bezierPathWithRoundedRect:CGRectMakeWithSize(size) cornerRadiusArray:cornerRadius lineWidth:0];
+        [path addClip];
+        [path fill];
+    }];
+}
+
++ (UIImage *)tmui_imageWithGradientColors:(NSArray<UIColor *> *)colors type:(TMUIImageGradientType)type locations:(NSArray<NSNumber *> *)locations size:(CGSize)size cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius {
+    size = CGSizeFlatted(size);
+    CGContextInspectSize(size);
+    locations = locations ?: @[@0, @1];
+    NSAssert(type != TMUIImageGradientTypeRadial || (type == TMUIImageGradientTypeRadial && locations.count == 2), @"UIImage (TMUI)", @"TMUIImageGradientTypeRadial 只能与2个 location 搭配使用，目前 locations 为 %@ 个", @(locations.count));
+    return [UIImage tmui_imageWithSize:size opaque:NO scale:0 actions:^(CGContextRef  _Nonnull contextRef) {
+        if (cornerRadius) {
+            UIBezierPath *path = [UIBezierPath tmui_bezierPathWithRoundedRect:CGRectMakeWithSize(size) cornerRadiusArray:cornerRadius lineWidth:0];
+            [path addClip];
+        }
+        
+        // 这里不用 CAGradientLayer 来渲染，因为发现实际效果会产生一些色差，暂不清楚为什么，所以只能用 Core Graphic 渲染
+        CGColorSpaceRef spaceRef = CGColorSpaceCreateDeviceRGB();
+        CGFloat cLocations[locations.count];
+        for (NSInteger i = 0; i < locations.count; i++) {
+            cLocations[i] = locations[i].doubleValue;
+        }
+
+        CGGradientRef gradient = CGGradientCreateWithColors(spaceRef, (CFArrayRef)[colors tmui_map:^id _Nonnull(UIColor * _Nonnull item) {
+            return (id)item.CGColor;
+        }], cLocations);
+        if (type == TMUIImageGradientTypeRadial) {
+            CGFloat minSize = MIN(size.width, size.height);
+            CGFloat radius = minSize / 2;
+            CGFloat horizontalRatio = size.width / minSize;
+            CGFloat verticalRatio = size.height / minSize;
+            // 缩放是为了让渐变的圆形可以按照 size 变成椭圆的
+            CGContextTranslateCTM(contextRef, -(horizontalRatio - 1) * size.width / 2, -(verticalRatio - 1) * size.height / 2);
+            CGContextScaleCTM(contextRef, horizontalRatio, verticalRatio);
+            CGContextDrawRadialGradient(contextRef,
+                                        gradient,
+                                        CGPointMake(size.width / 2, size.height / 2),
+                                        0,
+                                        CGPointMake(size.width / 2, size.height / 2),
+                                        radius,
+                                        kCGGradientDrawsBeforeStartLocation);
+        } else {
+            CGPoint startPoint = CGPointZero;
+            CGPoint endPoint = CGPointZero;
+            if (type == TMUIImageGradientTypeHorizontal) {
+                startPoint = CGPointMake(0, 0);
+                endPoint = CGPointMake(size.width, 0);
+            } else if(type == TMUIImageGradientTypeVertical) {
+                startPoint = CGPointMake(0, 0);
+                endPoint = CGPointMake(0, size.height);
+            }else if (type == TMUIImageGradientTypeTopLeftToBottomRight){
+                startPoint = CGPointMake(0, 0);
+                endPoint = CGPointMake(size.width, size.height);
+            }else if (type == TMUIImageGradientTypeTopRightToBottomLeft){
+                startPoint = CGPointMake(size.width, 0);
+                endPoint = CGPointMake(0, size.height);
+            }
+            CGContextDrawLinearGradient(contextRef, gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation);
+        }
+        CGColorSpaceRelease(spaceRef);
+        CGGradientRelease(gradient);
+    }];
+}
+
+
+
+- (UIImage *)tmui_imageWithMaskImage:(UIImage *)maskImage usingMaskImageMode:(BOOL)usingMaskImageMode {
+    CGImageRef maskRef = [maskImage CGImage];
+    CGImageRef mask;
+    if (usingMaskImageMode) {
+        // 用CGImageMaskCreate创建生成的 image mask。
+        // 黑色部分显示，白色部分消失，透明部分显示，其他颜色会按照颜色的灰色度对图片做透明处理。
+        mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
+                                 CGImageGetHeight(maskRef),
+                                 CGImageGetBitsPerComponent(maskRef),
+                                 CGImageGetBitsPerPixel(maskRef),
+                                 CGImageGetBytesPerRow(maskRef),
+                                 CGImageGetDataProvider(maskRef), nil, YES);
+    } else {
+        // 用一个纯CGImage作为mask。这个image必须是单色(例如：黑白色、灰色)、没有alpha通道、不能被其他图片mask。系统的文档：If `mask' is an image, then it must be in a monochrome color space (e.g. DeviceGray, GenericGray, etc...), may not have alpha, and may not itself be masked by an image mask or a masking color.
+        // 白色部分显示，黑色部分消失，透明部分消失，其他灰色度对图片做透明处理。
+         mask = maskRef;
+    }
+    CGImageRef maskedImage = CGImageCreateWithMask(self.CGImage, mask);
+    UIImage *returnImage = [UIImage imageWithCGImage:maskedImage scale:self.scale orientation:self.imageOrientation];
+    if (usingMaskImageMode) {
+        CGImageRelease(mask);
+    }
+    CGImageRelease(maskedImage);
+    return returnImage;
+}
+
+
+- (UIImage *)tmui_imageWithBlendColor:(UIColor *)blendColor {
+    UIImage *coloredImage = [self tmui_imageWithTintColor:blendColor];
+    CIFilter *filter = [CIFilter filterWithName:@"CIColorBlendMode"];
+    [filter setValue:[CIImage imageWithCGImage:self.CGImage] forKey:kCIInputBackgroundImageKey];
+    [filter setValue:[CIImage imageWithCGImage:coloredImage.CGImage] forKey:kCIInputImageKey];
+    CIImage *outputImage = filter.outputImage;
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef imageRef = [context createCGImage:outputImage fromRect:outputImage.extent];
+    UIImage *resultImage = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
+    CGImageRelease(imageRef);
+    return resultImage;
+}
+
+- (UIImage *)tmui_imageWithImageAbove:(UIImage *)image atPoint:(CGPoint)point {
+    return [UIImage tmui_imageWithSize:self.size opaque:self.tmui_opaque scale:self.scale actions:^(CGContextRef contextRef) {
+        [self drawInRect:CGRectMakeWithSize(self.size)];
+        [image drawAtPoint:point];
+    }];
 }
 
 #pragma mark - generate shape image
@@ -879,26 +1132,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
 
 @implementation UIImage (TMUI_Size)
 
-- (UIImage *)tmui_imageWithBlendColor:(UIColor *)blendColor {
-    UIImage *coloredImage = [self tmui_imageWithTintColor:blendColor];
-    CIFilter *filter = [CIFilter filterWithName:@"CIColorBlendMode"];
-    [filter setValue:[CIImage imageWithCGImage:self.CGImage] forKey:kCIInputBackgroundImageKey];
-    [filter setValue:[CIImage imageWithCGImage:coloredImage.CGImage] forKey:kCIInputImageKey];
-    CIImage *outputImage = filter.outputImage;
-    CIContext *context = [CIContext contextWithOptions:nil];
-    CGImageRef imageRef = [context createCGImage:outputImage fromRect:outputImage.extent];
-    UIImage *resultImage = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
-    CGImageRelease(imageRef);
-    return resultImage;
-}
-
-- (UIImage *)tmui_imageWithImageAbove:(UIImage *)image atPoint:(CGPoint)point {
-    return [UIImage tmui_imageWithSize:self.size opaque:self.tmui_opaque scale:self.scale actions:^(CGContextRef contextRef) {
-        [self drawInRect:CGRectMakeWithSize(self.size)];
-        [image drawAtPoint:point];
-    }];
-}
-
 - (UIImage *)tmui_imageWithClippedRect:(CGRect)rect {
     CGContextInspectSize(rect.size);
     CGRect imageRect = CGRectMakeWithSize(self.size);
@@ -985,234 +1218,6 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     }];
 }
 
-- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor path:(UIBezierPath *)path {
-    if (!borderColor) {
-        return self;
-    }
-    
-    return [UIImage tmui_imageWithSize:self.size opaque:self.tmui_opaque scale:self.scale actions:^(CGContextRef contextRef) {
-        [self drawInRect:CGRectMakeWithSize(self.size)];
-        CGContextSetStrokeColorWithColor(contextRef, borderColor.CGColor);
-        [path stroke];
-    }];
-}
-
-- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius {
-    return [self tmui_imageWithBorderColor:borderColor borderWidth:borderWidth cornerRadius:cornerRadius dashedLengths:0];
-}
-
-- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius dashedLengths:(const CGFloat *)dashedLengths {
-    if (!borderColor || !borderWidth) {
-        return self;
-    }
-    
-    UIBezierPath *path;
-    CGRect rect = CGRectInset(CGRectMake(0, 0, self.size.width, self.size.height), borderWidth / 2, borderWidth / 2);// 调整rect，从而保证绘制描边时像素对齐
-    if (cornerRadius > 0) {
-        path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:cornerRadius];
-    } else {
-        path = [UIBezierPath bezierPathWithRect:rect];
-    }
-    
-    path.lineWidth = borderWidth;
-    if (dashedLengths) {
-        [path setLineDash:dashedLengths count:2 phase:0];
-    }
-    return [self tmui_imageWithBorderColor:borderColor path:path];
-}
-
-- (UIImage *)tmui_imageWithBorderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth borderPosition:(TMUIImageBorderPosition)borderPosition {
-    if (borderPosition == TMUIImageBorderPositionAll) {
-        return [self tmui_imageWithBorderColor:borderColor borderWidth:borderWidth cornerRadius:0];
-    } else {
-        // TODO 使用bezierPathWithRoundedRect:byRoundingCorners:cornerRadii:这个系统接口
-        UIBezierPath* path = [UIBezierPath bezierPath];
-        if ((TMUIImageBorderPositionBottom & borderPosition) == TMUIImageBorderPositionBottom) {
-            [path moveToPoint:CGPointMake(0, self.size.height - borderWidth / 2)];
-            [path addLineToPoint:CGPointMake(self.size.width, self.size.height - borderWidth / 2)];
-        }
-        if ((TMUIImageBorderPositionTop & borderPosition) == TMUIImageBorderPositionTop) {
-            [path moveToPoint:CGPointMake(0, borderWidth / 2)];
-            [path addLineToPoint:CGPointMake(self.size.width, borderWidth / 2)];
-        }
-        if ((TMUIImageBorderPositionLeft & borderPosition) == TMUIImageBorderPositionLeft) {
-            [path moveToPoint:CGPointMake(borderWidth / 2, 0)];
-            [path addLineToPoint:CGPointMake(borderWidth / 2, self.size.height)];
-        }
-        if ((TMUIImageBorderPositionRight & borderPosition) == TMUIImageBorderPositionRight) {
-            [path moveToPoint:CGPointMake(self.size.width - borderWidth / 2, 0)];
-            [path addLineToPoint:CGPointMake(self.size.width - borderWidth / 2, self.size.height)];
-        }
-        [path setLineWidth:borderWidth];
-        [path closePath];
-        return [self tmui_imageWithBorderColor:borderColor path:path];
-    }
-    return self;
-}
-
-- (UIImage *)tmui_imageWithMaskImage:(UIImage *)maskImage usingMaskImageMode:(BOOL)usingMaskImageMode {
-    CGImageRef maskRef = [maskImage CGImage];
-    CGImageRef mask;
-    if (usingMaskImageMode) {
-        // 用CGImageMaskCreate创建生成的 image mask。
-        // 黑色部分显示，白色部分消失，透明部分显示，其他颜色会按照颜色的灰色度对图片做透明处理。
-        mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
-                                 CGImageGetHeight(maskRef),
-                                 CGImageGetBitsPerComponent(maskRef),
-                                 CGImageGetBitsPerPixel(maskRef),
-                                 CGImageGetBytesPerRow(maskRef),
-                                 CGImageGetDataProvider(maskRef), nil, YES);
-    } else {
-        // 用一个纯CGImage作为mask。这个image必须是单色(例如：黑白色、灰色)、没有alpha通道、不能被其他图片mask。系统的文档：If `mask' is an image, then it must be in a monochrome color space (e.g. DeviceGray, GenericGray, etc...), may not have alpha, and may not itself be masked by an image mask or a masking color.
-        // 白色部分显示，黑色部分消失，透明部分消失，其他灰色度对图片做透明处理。
-         mask = maskRef;
-    }
-    CGImageRef maskedImage = CGImageCreateWithMask(self.CGImage, mask);
-    UIImage *returnImage = [UIImage imageWithCGImage:maskedImage scale:self.scale orientation:self.imageOrientation];
-    if (usingMaskImageMode) {
-        CGImageRelease(mask);
-    }
-    CGImageRelease(maskedImage);
-    return returnImage;
-}
-
-+ (UIImage *)tmui_animatedImageWithData:(NSData *)data {
-    return [self tmui_animatedImageWithData:data scale:1];
-}
-
-+ (UIImage *)tmui_animatedImageWithData:(NSData *)data scale:(CGFloat)scale {
-    // http://www.jianshu.com/p/767af9c690a3
-    // https://github.com/rs/SDWebImage
-    if (!data) {
-        return nil;
-    }
-    CGImageSourceRef source = CGImageSourceCreateWithData((__bridge CFDataRef)data, NULL);
-    size_t count = CGImageSourceGetCount(source);
-    UIImage *animatedImage = nil;
-    scale = scale == 0 ? ScreenScale : scale;
-    if (count <= 1) {
-        animatedImage = [[UIImage alloc] initWithData:data scale:scale];
-    } else {
-        NSMutableArray<UIImage *> *images = [[NSMutableArray alloc] init];
-        NSTimeInterval duration = 0.0f;
-        for (size_t i = 0; i < count; i++) {
-            CGImageRef image = CGImageSourceCreateImageAtIndex(source, i, NULL);
-            duration += [self tmui_frameDurationAtIndex:i source:source];
-            UIImage *frameImage = [UIImage imageWithCGImage:image scale:scale orientation:UIImageOrientationUp];
-            [images addObject:frameImage];
-            CGImageRelease(image);
-        }
-        if (!duration) {
-            duration = (1.0f / 10.0f) * count;
-        }
-        animatedImage = [UIImage animatedImageWithImages:images duration:duration];
-    }
-    CFRelease(source);
-    return animatedImage;
-}
-
-+ (float)tmui_frameDurationAtIndex:(NSUInteger)index source:(CGImageSourceRef)source {
-    float frameDuration = 0.1f;
-    CFDictionaryRef cfFrameProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil);
-    NSDictionary<NSString *, NSDictionary *> *frameProperties = (__bridge NSDictionary *)cfFrameProperties;
-    NSDictionary<NSString *, NSNumber *> *gifProperties = frameProperties[(NSString *)kCGImagePropertyGIFDictionary];
-    NSNumber *delayTimeUnclampedProp = gifProperties[(NSString *)kCGImagePropertyGIFUnclampedDelayTime];
-    if (delayTimeUnclampedProp) {
-        frameDuration = [delayTimeUnclampedProp floatValue];
-    } else {
-        NSNumber *delayTimeProp = gifProperties[(NSString *)kCGImagePropertyGIFDelayTime];
-        if (delayTimeProp) {
-            frameDuration = [delayTimeProp floatValue];
-        }
-    }
-    CFRelease(cfFrameProperties);
-    return frameDuration;
-}
-
-+ (UIImage *)tmui_animatedImageNamed:(NSString *)name {
-    return [UIImage tmui_animatedImageNamed:name scale:1];
-}
-
-+ (UIImage *)tmui_animatedImageNamed:(NSString *)name scale:(CGFloat)scale {
-    NSString *type = name.pathExtension.lowercaseString;
-    type = type.length > 0 ? type : @"gif";
-    NSString *path = [[NSBundle mainBundle] pathForResource:name.stringByDeletingPathExtension ofType:type];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    return [UIImage tmui_animatedImageWithData:data scale:scale];
-}
-
-+ (UIImage *)tmui_imageWithColor:(UIColor *)color size:(CGSize)size cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius {
-    size = CGSizeFlatted(size);
-    CGContextInspectSize(size);
-    color = color ? color : [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
-    return [UIImage tmui_imageWithSize:size opaque:NO scale:0 actions:^(CGContextRef contextRef) {
-        
-        CGContextSetFillColorWithColor(contextRef, color.CGColor);
-        
-        UIBezierPath *path = [UIBezierPath tmui_bezierPathWithRoundedRect:CGRectMakeWithSize(size) cornerRadiusArray:cornerRadius lineWidth:0];
-        [path addClip];
-        [path fill];
-    }];
-}
-
-+ (UIImage *)tmui_imageWithGradientColors:(NSArray<UIColor *> *)colors type:(TMUIImageGradientType)type locations:(NSArray<NSNumber *> *)locations size:(CGSize)size cornerRadiusArray:(NSArray<NSNumber *> *)cornerRadius {
-    size = CGSizeFlatted(size);
-    CGContextInspectSize(size);
-    locations = locations ?: @[@0, @1];
-    NSAssert(type != TMUIImageGradientTypeRadial || (type == TMUIImageGradientTypeRadial && locations.count == 2), @"UIImage (TMUI)", @"TMUIImageGradientTypeRadial 只能与2个 location 搭配使用，目前 locations 为 %@ 个", @(locations.count));
-    return [UIImage tmui_imageWithSize:size opaque:NO scale:0 actions:^(CGContextRef  _Nonnull contextRef) {
-        if (cornerRadius) {
-            UIBezierPath *path = [UIBezierPath tmui_bezierPathWithRoundedRect:CGRectMakeWithSize(size) cornerRadiusArray:cornerRadius lineWidth:0];
-            [path addClip];
-        }
-        
-        // 这里不用 CAGradientLayer 来渲染，因为发现实际效果会产生一些色差，暂不清楚为什么，所以只能用 Core Graphic 渲染
-        CGColorSpaceRef spaceRef = CGColorSpaceCreateDeviceRGB();
-        CGFloat cLocations[locations.count];
-        for (NSInteger i = 0; i < locations.count; i++) {
-            cLocations[i] = locations[i].doubleValue;
-        }
-
-        CGGradientRef gradient = CGGradientCreateWithColors(spaceRef, (CFArrayRef)[colors tmui_map:^id _Nonnull(UIColor * _Nonnull item) {
-            return (id)item.CGColor;
-        }], cLocations);
-        if (type == TMUIImageGradientTypeRadial) {
-            CGFloat minSize = MIN(size.width, size.height);
-            CGFloat radius = minSize / 2;
-            CGFloat horizontalRatio = size.width / minSize;
-            CGFloat verticalRatio = size.height / minSize;
-            // 缩放是为了让渐变的圆形可以按照 size 变成椭圆的
-            CGContextTranslateCTM(contextRef, -(horizontalRatio - 1) * size.width / 2, -(verticalRatio - 1) * size.height / 2);
-            CGContextScaleCTM(contextRef, horizontalRatio, verticalRatio);
-            CGContextDrawRadialGradient(contextRef,
-                                        gradient,
-                                        CGPointMake(size.width / 2, size.height / 2),
-                                        0,
-                                        CGPointMake(size.width / 2, size.height / 2),
-                                        radius,
-                                        kCGGradientDrawsBeforeStartLocation);
-        } else {
-            CGPoint startPoint = CGPointZero;
-            CGPoint endPoint = CGPointZero;
-            if (type == TMUIImageGradientTypeHorizontal) {
-                startPoint = CGPointMake(0, 0);
-                endPoint = CGPointMake(size.width, 0);
-            } else if(type == TMUIImageGradientTypeVertical) {
-                startPoint = CGPointMake(0, 0);
-                endPoint = CGPointMake(0, size.height);
-            }else if (type == TMUIImageGradientTypeTopLeftToBottomRight){
-                startPoint = CGPointMake(0, 0);
-                endPoint = CGPointMake(size.width, size.height);
-            }else if (type == TMUIImageGradientTypeTopRightToBottomLeft){
-                startPoint = CGPointMake(size.width, 0);
-                endPoint = CGPointMake(0, size.height);
-            }
-            CGContextDrawLinearGradient(contextRef, gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation);
-        }
-        CGColorSpaceRelease(spaceRef);
-        CGGradientRelease(gradient);
-    }];
-}
 
 #pragma mark - 截图
 

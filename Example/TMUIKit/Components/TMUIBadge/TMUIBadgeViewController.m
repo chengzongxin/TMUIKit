@@ -20,17 +20,41 @@
 
 @implementation TMUIBadgeViewController
 
+- (void)testGradient{
+    
+    UIView *v0 = View.xywh(100,400,100,100);
+    [self.view addSubview:v0];
+    
+    UIView *v1 = View.xywh(250,400,100,100);
+    [self.view addSubview:v1];
+    
+    // 某些机型渐变会失效
+    UIImage *img = [UIImage tmui_imageWithGradientColors:@[UIColorRed,UIColorYellow] type:1 locations:@[@0.5] size:v1.frame.size cornerRadiusArray:nil];
+    UIColor *color0 = [UIColor colorWithPatternImage:img];
+    v0.backgroundColor = color0;
+    
+    
+    UIColor *color1 = [UIColor tmui_gradientColorImageFromColors:@[UIColorRed,UIColorYellow] gradientType:0 imgSize:v1.frame.size];
+    v1.backgroundColor = color1;
+    
+    v1.tmui_badgeLocation = TMUIBadgePositionCenter;
+    v1.tmui_badgeString = @"99+";
+    //    v1.tmui_badgeCenterOffset = CGPointMake(30, 0);  调整位置
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.bgColor(@"white");
     
+    [self testGradient];
+    
     [self viewBadge];
     
     [self barbuttonBadge];
-    
+
     [self toolBarBadge];
-    
+
     [self tabbarBadge];
 }
 
@@ -64,11 +88,8 @@
     
     
     _v2 = v2;
-    
-    
-//    self.v2.tmui_badgeBackgroundColor = UIColor.redColor;
+
     self.v2.tmui_badgeInteger = 5;
-//    self.v2.tmui_badgeTextColor = UIColor.whiteColor;
 }
 
 - (void)barbuttonBadge{
@@ -129,12 +150,13 @@
     item1.tmui_shouldShowUpdatesIndicator = YES;
     
     UITabBarItem *item2 = [self tabBarItemWithTitle:@"Components" image:[UIImageMake(@"icon_tabbar_component") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"icon_tabbar_component_selected") tag:1];
-    item2.tmui_badgeString = @"99+";// 支持字符串
+    item2.tmui_badgeInteger = 8;
 //    item2.tmui_badgeTextColor = UIColor.whiteColor;
 //    item2.tmui_badgeBackgroundColor = UIColor.redColor;
 //    item2.tmui_badgeFont = Fnt(10);
     
     UITabBarItem *item3 = [self tabBarItemWithTitle:@"Lab" image:[UIImageMake(@"icon_tabbar_lab") imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:UIImageMake(@"icon_tabbar_lab_selected") tag:2];
+    item3.tmui_badgeString = @"99+";// 支持字符串
     
     self.tabBar.items = @[item1, item2, item3];
     self.tabBar.selectedItem = item1;

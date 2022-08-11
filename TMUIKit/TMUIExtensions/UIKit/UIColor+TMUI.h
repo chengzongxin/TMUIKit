@@ -6,9 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+TMUI.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 @interface UIColor (TMUI)
 
@@ -130,6 +130,19 @@ NS_ASSUME_NONNULL_BEGIN
  *  产生一个随机色，大部分情况下用于测试
  */
 + (UIColor *)tmui_randomColor;
+
+//--------------------------------------------------------------------------------
+//
+// Description  - 基础数据请求
+// Para         - 1.(NSArray) colors，请求地址
+//              - 2.(TMUIGradientType) TMUIGradientType, 渐变方向
+//              - 3.(CGSize) imgSize,区域大小
+//
+// Return       - UIColor
+//
++ (UIColor *)tmui_gradientColorImageFromColors:(NSArray *)colors
+                                  gradientType:(TMUIGradientType)gradientType
+                                       imgSize:(CGSize)imgSize;
 
 @end
 

@@ -55,6 +55,9 @@
                     Row.str(@"TDSearchBarViewController").detailStr(@"搜索组件").THEME_CELL.onClick(^{
                             [self push:TDSearchBarViewController.class];
                         }),
+                    Row.str(@"TMUIBadge").detailStr(@"一行代码添加badge").THEME_CELL.onClick(^{
+                            [self push:TMUIBadgeViewController.class];
+                    }),
                     Row.str(@"TDFoldLabelViewController").detailStr(@"展开文本组件").THEME_CELL.onClick(^{
                             [self push:TDFoldLabelViewController.class];
                         }),
@@ -83,9 +86,6 @@
             Section(
                     Row.str(@"TMUITableView").detailStr(@"多样式UITableView").THEME_CELL.onClick(^{
                             [self push:TMUITableViewController.class];
-                        }),
-                    Row.str(@"TMUIBadge").detailStr(@"一行代码添加badge").THEME_CELL.onClick(^{
-                            [self push:TMUIBadgeViewController.class];
                         }),
                     Row.str(@"TMUIMultipleDelegates").detailStr(@"让对象支持多个delegate、支持自定义的delegate").THEME_CELL.onClick(^{
                             [self push:TMUICoreViewController6.class];

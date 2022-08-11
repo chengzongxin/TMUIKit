@@ -295,7 +295,7 @@ static CGFloat const kButtonW = 70;
 - (UILabel *)titleLbl{
     if (!_titleLbl) {
         _titleLbl = [[UILabel alloc] init];
-        _titleLbl.textColor = UIColorHex(1A1C1A);
+        _titleLbl.textColor = UIColorDark;
         _titleLbl.font = UIFontMedium(15);
         _titleLbl.textAlignment = NSTextAlignmentCenter;
     }
@@ -307,7 +307,7 @@ static CGFloat const kButtonW = 70;
     if (!_cancelBtn) {
         _cancelBtn = [[UIButton alloc] init];
         _cancelBtn.tmui_text = @"取消";
-        _cancelBtn.tmui_titleColor = UIColorHex(979997);
+        _cancelBtn.tmui_titleColor = UIColorPlaceholder;
         _cancelBtn.tmui_font = UIFontMedium(15);
         [_cancelBtn tmui_addTarget:self action:@selector(cancelBtnClick:)];
     }
@@ -318,7 +318,7 @@ static CGFloat const kButtonW = 70;
     if (!_confirmBtn) {
         _confirmBtn = [[UIButton alloc] init];
         _confirmBtn.tmui_text = @"确定";
-        _confirmBtn.tmui_titleColor = UIColorHex(1A1C1A);
+        _confirmBtn.tmui_titleColor = UIColorDark;
         _confirmBtn.tmui_font = UIFontMedium(15);
         [_confirmBtn tmui_addTarget:self action:@selector(confirmBtnClick:)];
     }

@@ -195,6 +195,54 @@
     return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
 
++ (UIColor *)tmui_gradientColorImageFromColors:(NSArray *)colors
+                                  gradientType:(TMUIGradientType)gradientType
+                                       imgSize:(CGSize)imgSize{
+    NSMutableArray *ar = [NSMutableArray array];
+    
+    for(UIColor *c in colors) {
+        [ar addObject:(id)c.CGColor];
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(imgSize, YES, 1);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    CGColorSpaceRef colorSpace = CGColorGetColorSpace([[colors lastObject] CGColor]);
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)ar, NULL);
+    CGPoint start;
+    CGPoint end;
+    
+    switch (gradientType) {
+        case TMUIGradientTypeLeftToRight:
+            start = CGPointMake(0.0, 0.0);
+            end = CGPointMake(imgSize.width, 0.0);
+            break;
+        case TMUIGradientTypeTopToBottom:
+            start = CGPointMake(0.0, 0.0);
+            end = CGPointMake(0.0, imgSize.height);
+            break;
+        case TMUIGradientTypeTopLeftToBottomRight:
+            start = CGPointMake(0.0, 0.0);
+            end = CGPointMake(imgSize.width, imgSize.height);
+            break;
+        case TMUIGradientTypeTopRightToBottomLeft:
+            start = CGPointMake(imgSize.width, 0.0);
+            end = CGPointMake(0.0, imgSize.height);
+            break;
+        default:
+            break;
+    }
+    
+    CGContextDrawLinearGradient(context, gradient, start, end, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    CGGradientRelease(gradient);
+    CGContextRestoreGState(context);
+    CGColorSpaceRelease(colorSpace);
+    UIGraphicsEndImageContext();
+    
+    return [UIColor colorWithPatternImage:image];
+}
+
 @end
 
 

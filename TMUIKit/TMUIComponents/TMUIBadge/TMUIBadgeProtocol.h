@@ -8,11 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIView+TMUI.h"
 
 // TODO: molice 等废弃 tmui_badgeCenterOffset 系列接口后再删除
 #import "TMUICore.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+/// 控制Badge在父视图里的位置，默认为TMUIBadgePositionTopRight
+typedef NS_ENUM(NSUInteger, TMUIBadgeLocation) {
+    TMUIBadgePositionTopRight,                // Badge在父视图的右上角
+    TMUIBadgePositionBottomRight,             // Badge在父视图的右下角，暂不可用
+    TMUIBadgePositionTopLeft,                 // Badge在父视图的左上角，暂不可用
+    TMUIBadgePositionBottomLeft,              // Badge在父视图的左下角，暂不可用
+    TMUIBadgePositionCenter,                  // Badge在父视图的中心点
+};
+
 
 @class TMUILabel;
 
@@ -26,9 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// 用字符串设置未读数，nil 表示不显示未读数
 @property(nonatomic, copy, nullable) NSString *tmui_badgeString;
 
+@property(nonatomic, strong, nullable) NSArray <UIColor *>  *tmui_badgeGradientBackgroundColors;
+@property(nonatomic, assign) TMUIGradientType   tmui_badgeGradientType; //TMUIGradientType
 @property(nonatomic, strong, nullable) UIColor *tmui_badgeBackgroundColor;
 @property(nonatomic, strong, nullable) UIColor *tmui_badgeTextColor;
 @property(nonatomic, strong, nullable) UIFont *tmui_badgeFont;
+
+@property(nonatomic, assign) TMUIBadgeLocation    tmui_badgeLocation; //控制Badge在父视图里的位置，默认为TMUIBadgePositionTopRight
 
 /// 未读数字与圆圈之间的 padding，会影响最终 badge 的大小。当只有一位数字时，会取宽/高中最大的值作为最终的宽高，以保证整个 badge 是正圆。
 @property(nonatomic, assign) UIEdgeInsets tmui_badgeContentEdgeInsets;

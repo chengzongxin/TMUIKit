@@ -15,7 +15,7 @@ static const void *blkKey = "tmuiControlBlockKey";
 - (void)tmui_addActionBlock:(void (^)(NSInteger tag))blk
            forControlEvents:(UIControlEvents)event{
     objc_setAssociatedObject(self, blkKey, blk, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    [self addTarget:self action:@selector(action) forControlEvents:event];
+    [self addTarget:self action:@selector(tmui_action) forControlEvents:event];
 }
 
 - (void)tmui_action{

@@ -63,6 +63,46 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
  * arguments: bundle name ，image name
  */
 + (UIImage *)tmui_imageInBundle:(NSString * _Nullable)bundleName imageName:(NSString *)imageName;
+
+
+/**
+ 将 data 转换成 animated UIImage（如果非 animated 则转换成普通 UIImage），image 倍数为 1（与系统的 [UIImage imageWithData:] 接口一致）
+
+ @param data 图片文件的 data
+ @return 转换成的 UIImage
+ */
++ (nullable UIImage *)tmui_animatedImageWithData:(NSData *)data;
+
+/**
+ 将 data 转换成 animated UIImage（如果非 animated 则转换成普通 UIImage）
+
+ @param data 图片文件的 data
+ @param scale 图片的倍数，0 表示获取当前设备的屏幕倍数
+ @return 转换成的 UIImage
+ @see http://www.jianshu.com/p/767af9c690a3
+ @see https://github.com/rs/SDWebImage
+ */
++ (nullable UIImage *)tmui_animatedImageWithData:(NSData *)data scale:(CGFloat)scale;
+
+/**
+ 在 mainBundle 里找到对应名字的图片， 注意图片 scale 为 1，与系统的 [UIImage imageWithData:] 接口一致，若需要修改倍数，请使用 -tmui_animatedImageNamed:scale:
+
+ @param name 图片名，可指定后缀，若不写后缀，默认为“gif”。不写后缀的情况下会先找“gif”后缀的图片，不存在再找无后缀的文件，仍不存在则返回 nil
+ @return  转换成的 UIImage
+ */
++ (nullable UIImage *)tmui_animatedImageNamed:(NSString *)name;
+
+/**
+ 在 mainBundle 里找到对应名字的图片
+ 
+ @param name 图片名，可指定后缀，若不写后缀，默认为“gif”。不写后缀的情况下会先找“gif”后缀的图片，不存在再找无后缀的文件，仍不存在则返回 nil
+ @param scale 图片的倍数，0 表示获取当前设备的屏幕倍数
+ @return  转换成的 UIImage
+ */
++ (nullable UIImage *)tmui_animatedImageNamed:(NSString *)name scale:(CGFloat)scale;
+
+
+
 /**
  用于绘制一张图并以 UIImage 的形式返回
 
@@ -162,6 +202,97 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
  * @return 纯色的UIImage
  */
 + (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size cornerRadius:(CGFloat)cornerRadius;
+
+
+/**
+ *  创建一个纯色的UIImage，支持为四个角设置不同的圆角
+ *  @param  color               图片的颜色
+ *  @param  size                图片的大小
+ *  @param  cornerRadius   四个角的圆角值的数组，长度必须为4，顺序分别为[左上角、左下角、右下角、右上角]
+ */
++ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size cornerRadiusArray:(nullable NSArray<NSNumber *> *)cornerRadius;
+
+/**
+ 创建一个渐变图片，支持线性、径向。
+ @param colors 渐变的颜色，不能为空，数量必须与 locations 数量一致（除非 locations 为 nil）
+ @param type 渐变的类型，可选为水平、垂直、径向、左上至右下、右上至左下
+ @param locations 渐变变化的位置，数量必须与 colors 一致，值为 [0.0-1.0] 之间的 CGFloat。如果参数传 nil 则默认为 @[@0, @1]
+ @param size 图片的尺寸，如果是径向渐变，宽高不相等时会变成椭圆的渐变。
+ @param cornerRadius   四个角的圆角值的数组，长度必须为4，顺序分别为[左上角、左下角、右下角、右上角]
+ */
++ (nullable UIImage *)tmui_imageWithGradientColors:(NSArray<UIColor *> *)colors type:(TMUIImageGradientType)type locations:(nullable NSArray<NSNumber *> *)locations size:(CGSize)size cornerRadiusArray:(nullable NSArray<NSNumber *> *)cornerRadius;
+
+
+/**
+ *  为图片加上一个border，border的路径为path
+ *
+ *  @param borderColor  border的颜色
+ *  @param path         border的路径
+ *
+ *  @return 带border的UIImage
+ *  @warning 注意通过`path.lineWidth`设置边框大小，同时注意路径要考虑像素对齐（`path.lineWidth / 2.0`）
+ */
+- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor path:(nullable UIBezierPath *)path;
+
+/**
+ *  为图片加上一个border，border的路径为borderColor、cornerRadius和borderWidth所创建的path
+ *
+ *  @param borderColor   border的颜色
+ *  @param borderWidth    border的宽度
+ *  @param cornerRadius  border的圆角
+ *
+ *  @param dashedLengths 一个CGFloat的数组，例如`CGFloat dashedLengths[] = {2, 4}`。如果不需要虚线，则传0即可
+ *
+ *  @return 带border的UIImage
+ */
+- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius dashedLengths:(nullable const CGFloat *)dashedLengths;
+- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius;
+
+
+/**
+ *  为图片加上一个border（可以是任意一条边，也可以是多条组合；只能创建矩形的border，不能添加圆角）
+ *
+ *  @param borderColor       border的颜色
+ *  @param borderWidth        border的宽度
+ *  @param borderPosition    border的位置
+ *
+ *  @return 带border的UIImage
+ */
+- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor borderWidth:(CGFloat)borderWidth borderPosition:(TMUIImageBorderPosition)borderPosition;
+
+/**
+ *  返回一个被mask的图片
+ *
+ *  @param maskImage             mask图片
+ *  @param usingMaskImageMode    是否使用“mask image”的方式，若为 YES，则黑色部分显示，白色部分消失，透明部分显示，其他颜色会按照颜色的灰色度对图片做透明处理。若为 NO，则 maskImage 要求必须为灰度颜色空间的图片（黑白图），白色部分显示，黑色部分消失，透明部分消失，其他灰色度对图片做透明处理。
+ *
+ *  @return 被mask的图片
+ */
+- (nullable UIImage *)tmui_imageWithMaskImage:(UIImage *)maskImage usingMaskImageMode:(BOOL)usingMaskImageMode;
+
+
+/**
+ *  以 CIColorBlendMode 的模式为当前图片叠加一个颜色，生成一张新图片并返回，在叠加过程中会保留图片内的纹理。
+ *
+ *  @param blendColor 要叠加的颜色
+ *
+ *  @return 基于当前图片纹理保持不变的情况下颜色变为指定的叠加颜色的新图片
+ *
+ *  @warning 这个方法可能比较慢，会卡住主线程，建议异步使用
+ */
+- (nullable UIImage *)tmui_imageWithBlendColor:(nullable UIColor *)blendColor;
+
+/**
+ *  在当前图片的基础上叠加一张图片，并指定绘制叠加图片的起始位置
+ *
+ *  叠加上去的图片将保持原图片的大小不变，不被压缩、拉伸
+ *
+ *  @param image 要叠加的图片
+ *  @param point 所叠加图片的绘制的起始位置
+ *
+ *  @return 返回一张与原图大小一致的图片，所叠加的图片若超出原图大小，则超出部分被截掉
+ */
+- (nullable UIImage *)tmui_imageWithImageAbove:(UIImage *)image atPoint:(CGPoint)point;
 
 #pragma mark - generate shape image
 
@@ -322,28 +453,6 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
 @interface UIImage (TMUI_Size)
 
 
-/**
- *  以 CIColorBlendMode 的模式为当前图片叠加一个颜色，生成一张新图片并返回，在叠加过程中会保留图片内的纹理。
- *
- *  @param blendColor 要叠加的颜色
- *
- *  @return 基于当前图片纹理保持不变的情况下颜色变为指定的叠加颜色的新图片
- *
- *  @warning 这个方法可能比较慢，会卡住主线程，建议异步使用
- */
-- (nullable UIImage *)tmui_imageWithBlendColor:(nullable UIColor *)blendColor;
-
-/**
- *  在当前图片的基础上叠加一张图片，并指定绘制叠加图片的起始位置
- *
- *  叠加上去的图片将保持原图片的大小不变，不被压缩、拉伸
- *
- *  @param image 要叠加的图片
- *  @param point 所叠加图片的绘制的起始位置
- *
- *  @return 返回一张与原图大小一致的图片，所叠加的图片若超出原图大小，则超出部分被截掉
- */
-- (nullable UIImage *)tmui_imageWithImageAbove:(UIImage *)image atPoint:(CGPoint)point;
 
 /**
  *  切割出在指定位置中的图片
@@ -398,107 +507,6 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
  *  @return 处理完的图片
  */
 - (nullable UIImage *)tmui_imageResizedInLimitedSize:(CGSize)size resizingMode:(TMUIImageResizingMode)resizingMode scale:(CGFloat)scale;
-
-/**
- *  为图片加上一个border，border的路径为path
- *
- *  @param borderColor  border的颜色
- *  @param path         border的路径
- *
- *  @return 带border的UIImage
- *  @warning 注意通过`path.lineWidth`设置边框大小，同时注意路径要考虑像素对齐（`path.lineWidth / 2.0`）
- */
-- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor path:(nullable UIBezierPath *)path;
-
-/**
- *  为图片加上一个border，border的路径为borderColor、cornerRadius和borderWidth所创建的path
- *
- *  @param borderColor   border的颜色
- *  @param borderWidth    border的宽度
- *  @param cornerRadius  border的圆角
- *
- *  @param dashedLengths 一个CGFloat的数组，例如`CGFloat dashedLengths[] = {2, 4}`。如果不需要虚线，则传0即可
- *
- *  @return 带border的UIImage
- */
-- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius dashedLengths:(nullable const CGFloat *)dashedLengths;
-- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius;
-
-
-/**
- *  为图片加上一个border（可以是任意一条边，也可以是多条组合；只能创建矩形的border，不能添加圆角）
- *
- *  @param borderColor       border的颜色
- *  @param borderWidth        border的宽度
- *  @param borderPosition    border的位置
- *
- *  @return 带border的UIImage
- */
-- (nullable UIImage *)tmui_imageWithBorderColor:(nullable UIColor *)borderColor borderWidth:(CGFloat)borderWidth borderPosition:(TMUIImageBorderPosition)borderPosition;
-
-/**
- *  返回一个被mask的图片
- *
- *  @param maskImage             mask图片
- *  @param usingMaskImageMode    是否使用“mask image”的方式，若为 YES，则黑色部分显示，白色部分消失，透明部分显示，其他颜色会按照颜色的灰色度对图片做透明处理。若为 NO，则 maskImage 要求必须为灰度颜色空间的图片（黑白图），白色部分显示，黑色部分消失，透明部分消失，其他灰色度对图片做透明处理。
- *
- *  @return 被mask的图片
- */
-- (nullable UIImage *)tmui_imageWithMaskImage:(UIImage *)maskImage usingMaskImageMode:(BOOL)usingMaskImageMode;
-
-/**
- 将 data 转换成 animated UIImage（如果非 animated 则转换成普通 UIImage），image 倍数为 1（与系统的 [UIImage imageWithData:] 接口一致）
-
- @param data 图片文件的 data
- @return 转换成的 UIImage
- */
-+ (nullable UIImage *)tmui_animatedImageWithData:(NSData *)data;
-
-/**
- 将 data 转换成 animated UIImage（如果非 animated 则转换成普通 UIImage）
-
- @param data 图片文件的 data
- @param scale 图片的倍数，0 表示获取当前设备的屏幕倍数
- @return 转换成的 UIImage
- @see http://www.jianshu.com/p/767af9c690a3
- @see https://github.com/rs/SDWebImage
- */
-+ (nullable UIImage *)tmui_animatedImageWithData:(NSData *)data scale:(CGFloat)scale;
-
-/**
- 在 mainBundle 里找到对应名字的图片， 注意图片 scale 为 1，与系统的 [UIImage imageWithData:] 接口一致，若需要修改倍数，请使用 -tmui_animatedImageNamed:scale:
-
- @param name 图片名，可指定后缀，若不写后缀，默认为“gif”。不写后缀的情况下会先找“gif”后缀的图片，不存在再找无后缀的文件，仍不存在则返回 nil
- @return  转换成的 UIImage
- */
-+ (nullable UIImage *)tmui_animatedImageNamed:(NSString *)name;
-
-/**
- 在 mainBundle 里找到对应名字的图片
- 
- @param name 图片名，可指定后缀，若不写后缀，默认为“gif”。不写后缀的情况下会先找“gif”后缀的图片，不存在再找无后缀的文件，仍不存在则返回 nil
- @param scale 图片的倍数，0 表示获取当前设备的屏幕倍数
- @return  转换成的 UIImage
- */
-+ (nullable UIImage *)tmui_animatedImageNamed:(NSString *)name scale:(CGFloat)scale;
-
-/**
- *  创建一个纯色的UIImage，支持为四个角设置不同的圆角
- *  @param  color               图片的颜色
- *  @param  size                图片的大小
- *  @param  cornerRadius   四个角的圆角值的数组，长度必须为4，顺序分别为[左上角、左下角、右下角、右上角]
- */
-+ (nullable UIImage *)tmui_imageWithColor:(nullable UIColor *)color size:(CGSize)size cornerRadiusArray:(nullable NSArray<NSNumber *> *)cornerRadius;
-
-/**
- 创建一个渐变图片，支持线性、径向。
- @param colors 渐变的颜色，不能为空，数量必须与 locations 数量一致（除非 locations 为 nil）
- @param type 渐变的类型，可选为水平、垂直、径向、左上至右下、右上至左下
- @param locations 渐变变化的位置，数量必须与 colors 一致，值为 [0.0-1.0] 之间的 CGFloat。如果参数传 nil 则默认为 @[@0, @1]
- @param size 图片的尺寸，如果是径向渐变，宽高不相等时会变成椭圆的渐变。
- @param cornerRadius   四个角的圆角值的数组，长度必须为4，顺序分别为[左上角、左下角、右下角、右上角]
- */
-+ (nullable UIImage *)tmui_imageWithGradientColors:(NSArray<UIColor *> *)colors type:(TMUIImageGradientType)type locations:(nullable NSArray<NSNumber *> *)locations size:(CGSize)size cornerRadiusArray:(nullable NSArray<NSNumber *> *)cornerRadius;
 
 #pragma mark - 截图
 /**

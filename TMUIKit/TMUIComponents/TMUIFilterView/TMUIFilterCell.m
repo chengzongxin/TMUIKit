@@ -40,12 +40,12 @@
 - (UIButton *)btn{
     if (!_btn) {
         _btn = [UIButton tmui_button];
-        _btn.backgroundColor = UIColorHex(F6F8F6);
+        _btn.backgroundColor = UIColorBackgroundLight;
         _btn.titleLabel.font = UIFont(14);
         _btn.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        [_btn setTitleColor:UIColorHex(7E807E) forState:UIControlStateNormal];
+        [_btn setTitleColor:UIColorWeak forState:UIControlStateNormal];
         [_btn setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
-        [_btn tmui_setNormalBackGroundColor:UIColorHex(F6F8F6) selectedBackGroundColor:UIColorHex(22C77D)];
+        [_btn tmui_setNormalBackGroundColor:UIColorBackgroundLight selectedBackGroundColor:UIColorGreen];
         _btn.cornerRadius = 4;
         _btn.userInteractionEnabled = NO;
 //        _btn.enabled = NO;

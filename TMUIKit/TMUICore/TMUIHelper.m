@@ -1110,6 +1110,20 @@ static NSMutableSet<NSString *> *executedIdentifiers;
 //    return [rootViewController tmui_topViewController];
 //}
 
++(void)dismissViewControllerAnimated:(BOOL)flag completion: (void (^)(void))completion{
+    UIViewController *rootVc = nil;
+    if ([UIApplication sharedApplication].keyWindow && ![[UIApplication sharedApplication].keyWindow isHidden]) {
+        rootVc = [[UIApplication sharedApplication].keyWindow rootViewController];
+    }
+    if (!rootVc) {
+        rootVc = [UIApplication sharedApplication].delegate.window.rootViewController;
+    }
+    while (rootVc.presentedViewController) {
+        rootVc = rootVc.presentedViewController;
+    }
+    [rootVc dismissViewControllerAnimated:flag completion:completion];
+}
+
 + (UIViewController *)topViewController{
     UIViewController *result = [self windowMainVC];
     result = [self topVC:result];

@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// https://doc.weixin.qq.com/slide/p3_AEkA6wYLALQhsAuHKZYS5KlIGOK9Q?scode=AGcAeweXAA0NtM6M1eAEkA6wYLALQ
 /// 所有配置表都应该实现的 protocol
 /// All configuration templates should implement this protocal
 @protocol TMUIConfigurationTemplateProtocol <NSObject>
@@ -43,20 +44,38 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIColor            *grayColor;
 @property(nonatomic, strong) UIColor            *grayDarkenColor;
 @property(nonatomic, strong) UIColor            *grayLightenColor;
+
+#pragma mark - Main Color
+
 @property(nonatomic, strong) UIColor            *redColor;
 @property(nonatomic, strong) UIColor            *greenColor;
 @property(nonatomic, strong) UIColor            *blueColor;
 @property(nonatomic, strong) UIColor            *yellowColor;
+@property(nonatomic, strong) UIColor            *cyanColor;
+@property(nonatomic, strong) UIColor            *orangeColor;
+@property(nonatomic, strong) UIColor            *darkGreenColor;
 
+#pragma mark - Content Color
+
+@property(nonatomic, strong) UIColor            *darkColor;///< 1A1C1A  ---极黑，重点突出
+@property(nonatomic, strong) UIColor            *primaryColor; ///< 333533 ---主黑色
+@property(nonatomic, strong) UIColor            *secondaryColor; ///< 4C4E4C ---次黑
+@property(nonatomic, strong) UIColor            *regularColor; ///< 656866 ---正文
+@property(nonatomic, strong) UIColor            *weakColor; ///< 7E807E   ---弱提示
+@property(nonatomic, strong) UIColor            *placeholderColor; ///< 979997 ---占位
+@property(nonatomic, strong) UIColor            *borderColor; ///< C9CBC9  ---边框
+@property(nonatomic, strong) UIColor            *separatorColor;///< E2E4E2 --分割
+@property(nonatomic, strong) UIColor            *backgroundGrayColor;///< ECEEEC --灰色背景
+@property(nonatomic, strong) UIColor            *backgroundLightColor;///< F6F8F6 --偏白色背景
+
+#pragma mark - Function Color
+@property(nonatomic, strong) UIColor            *backgroundColor;///< 通常为白色
 @property(nonatomic, strong) UIColor            *linkColor;
 @property(nonatomic, strong) UIColor            *disabledColor;
-@property(nonatomic, strong, nullable) UIColor  *backgroundColor;
 @property(nonatomic, strong) UIColor            *maskDarkColor;
 @property(nonatomic, strong) UIColor            *maskLightColor;
-@property(nonatomic, strong) UIColor            *separatorColor;
 @property(nonatomic, strong) UIColor            *separatorDashedColor;
-@property(nonatomic, strong) UIColor            *placeholderColor;
-
+///
 @property(nonatomic, strong) UIColor            *testColorRed;
 @property(nonatomic, strong) UIColor            *testColorGreen;
 @property(nonatomic, strong) UIColor            *testColorBlue;
@@ -254,6 +273,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - TMUIBadge
 
+@property(nonatomic, strong, nullable) NSArray <UIColor *>  *badgeGradientBackgroundColors;
+@property(nonatomic, assign) NSInteger          badgeGradientType; // 0:left-right, 1:top-bottom
 @property(nonatomic, strong, nullable) UIColor  *badgeBackgroundColor;
 @property(nonatomic, strong, nullable) UIColor  *badgeTextColor;
 @property(nonatomic, strong, nullable) UIFont   *badgeFont;
@@ -269,6 +290,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) CGPoint            updatesIndicatorOffsetLandscape;
 @property(nonatomic, assign) CGPoint            updatesIndicatorCenterOffset DEPRECATED_MSG_ATTRIBUTE("请改为使用 updatesIndicatorOffset");
 @property(nonatomic, assign) CGPoint            updatesIndicatorCenterOffsetLandscape DEPRECATED_MSG_ATTRIBUTE("请改为使用 updatesIndicatorOffsetLandscape");
+
+@property(nonatomic, assign) NSInteger          badgeLocation;
 
 #pragma mark - Others
 

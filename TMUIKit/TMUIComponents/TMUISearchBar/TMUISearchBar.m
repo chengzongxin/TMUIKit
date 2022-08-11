@@ -287,7 +287,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _contentView = [[UIView alloc] init];
         _contentView.clipsToBounds = YES;
         _contentView.backgroundColor = UIColorHex(F9FAF9);
-        _contentView.layer.borderColor = UIColorHex(ECEEEC).CGColor;
+        _contentView.layer.borderColor = UIColorBackgroundGray.CGColor;
         _contentView.layer.cornerRadius = SearchBarCornerRadius;
         _contentView.layer.borderWidth = .5;
         _contentView.userInteractionEnabled = YES;
@@ -302,7 +302,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _cityBtn.imagePosition = TMUIButtonImagePositionRight;
         _cityBtn.tmui_text = @"深圳";
         _cityBtn.tmui_image = kImgName(@"tmui_searchBar_arrow");
-        _cityBtn.tmui_titleColor = UIColorHex(1A1C1A);
+        _cityBtn.tmui_titleColor = UIColorDark;
         _cityBtn.tmui_font = UIFont(14);
         [_cityBtn tmui_addTarget:self action:@selector(cityBtnClick:)];
     }
@@ -312,7 +312,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
 - (UIView *)seperator{
     if (!_seperator) {
         _seperator = [[UIView alloc] init];
-        _seperator.backgroundColor = UIColorHex(E2E4E2);
+        _seperator.backgroundColor = UIColorSeparator;
     }
     return _seperator;
 }
@@ -329,9 +329,9 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
 - (TMUITextField *)textField{
     if (!_textField) {
         _textField = [[TMUITextField alloc] init];
-        _textField.tintColor = UIColorHex(22C77D);
-        _textField.textColor = UIColorHex(1A1C1A);
-        _textField.placeholderColor = UIColorHex(7E807E);
+        _textField.tintColor = UIColorGreen;
+        _textField.textColor = UIColorDark;
+        _textField.placeholderColor = UIColorWeak;
         _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField.clipsToBounds = YES;
         _textField.font = UIFont(14);
@@ -347,7 +347,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = UIFont(14);
-        [_cancelBtn setTitleColor:UIColorHex(1A1C1A) forState:UIControlStateNormal];
+        [_cancelBtn setTitleColor:UIColorDark forState:UIControlStateNormal];
         _cancelBtn.frame = CGRectMake(0, 0, 44, 44);
         [_cancelBtn addTarget:self action:@selector(cancelBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -377,7 +377,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
 // [UIBarButtonItem itemWithTitle:@" 取消 " font:UIFont(14) titleColor:UIColorFromRGB(0x111111) target:self action:@selector(cancelClick)
 + (NSArray <UIBarButtonItem *> *)cancelItemWithTarget:(id)target action:(SEL)action{
     UIBarButtonItem *space = [UIBarButtonItem tmui_fixedSpaceItemWithWidth:10];
-    UIBarButtonItem *item = [UIBarButtonItem tmui_itemWithTitle:@"取消" color:UIColorHex(0x1A1C1A) font:UIFont(14) size:CGSizeMake(44, 44) target:target action:action];
+    UIBarButtonItem *item = [UIBarButtonItem tmui_itemWithTitle:@"取消" color:UIColorDark font:UIFont(14) size:CGSizeMake(44, 44) target:target action:action];
     return @[item,space];
 }
 

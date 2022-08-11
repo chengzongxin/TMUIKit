@@ -23,27 +23,29 @@ static UIImage *disclosureIndicatorImageDark;
     if (!disclosureIndicatorImageDark) disclosureIndicatorImageDark = [UIImage tmui_imageWithShape:TMUIImageShapeDisclosureIndicator size:CGSizeMake(6, 10) lineWidth:1 tintColor:UIColorMake(98, 100, 104)];
     
     // === 修改配置值 === //
-    
 #pragma mark - Global Color
     
-    TMUICMI.clearColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];       // UIColorClear : 透明色
-    TMUICMI.whiteColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];       // UIColorWhite : 白色（不用 [UIColor whiteColor] 是希望保持颜色空间为 RGB）
-    TMUICMI.blackColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];       // UIColorBlack : 黑色（不用 [UIColor blackColor] 是希望保持颜色空间为 RGB）
-    TMUICMI.grayColor = UIColorGray4;                                           // UIColorGray  : 最常用的灰色
-    TMUICMI.grayDarkenColor = UIColor.td_mainTextColor;                          // UIColorGrayDarken : 深一点的灰色
-    TMUICMI.grayLightenColor = UIColorGray7;                                    // UIColorGrayLighten : 浅一点的灰色
-    TMUICMI.redColor = UIColorMake(250, 58, 58);                                // UIColorRed : 红色
-    TMUICMI.greenColor = UIColorTheme4;                                         // UIColorGreen : 绿色
-    TMUICMI.blueColor = UIColorTheme6;                                    // UIColorBlue : 蓝色
-    TMUICMI.yellowColor = UIColorTheme3;                                        // UIColorYellow : 黄色
+//    TMUICMI.clearColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0];       // UIColorClear : 透明色
+//    TMUICMI.whiteColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];       // UIColorWhite : 白色（不用 [UIColor whiteColor] 是希望保持颜色空间为 RGB）
+//    TMUICMI.blackColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];       // UIColorBlack : 黑色（不用 [UIColor blackColor] 是希望保持颜色空间为 RGB）
+//    TMUICMI.grayColor = UIColorGray4;                                           // UIColorGray  : 最常用的灰色
+//    TMUICMI.grayDarkenColor = UIColor.td_mainTextColor;                          // UIColorGrayDarken : 深一点的灰色
+//    TMUICMI.grayLightenColor = UIColorGray7;                                    // UIColorGrayLighten : 浅一点的灰色
+//    TMUICMI.redColor = UIColorMake(250, 58, 58);                                // UIColorRed : 红色
+//    TMUICMI.greenColor = UIColorTheme4;                                         // UIColorGreen : 绿色
+//    TMUICMI.blueColor = UIColorTheme6;                                    // UIColorBlue : 蓝色
+//    TMUICMI.yellowColor = UIColorTheme3;                                        // UIColorYellow : 黄色
     
     TMUICMI.linkColor = UIColorMake(56, 116, 171);                              // UIColorLink : 文字链接颜色
     TMUICMI.disabledColor = UIColorGray;                                        // UIColorDisabled : 全局 disabled 的颜色，一般用于 UIControl 等控件
+    // 这里如果用动态颜色，再赋值会造成死循环
     TMUICMI.backgroundColor = UIColor.td_backgroundColor;                                     // UIColorForBackground : 界面背景色，默认用于 TMUICommonViewController.view 的背景色
     TMUICMI.maskDarkColor = UIColorMakeWithRGBA(0, 0, 0, .35f);                 // UIColorMask : 深色的背景遮罩，默认用于 QMAlertController、TMUIDialogViewController 等弹出控件的遮罩
     TMUICMI.maskLightColor = UIColorMakeWithRGBA(255, 255, 255, .5f);           // UIColorMaskWhite : 浅色的背景遮罩，TMUIKit 里默认没用到，只是占个位
+    // 这里如果用动态颜色，再赋值会造成死循环
     TMUICMI.separatorColor = UIColor.td_separatorColor;                          // UIColorSeparator : 全局默认的分割线颜色，默认用于列表分隔线颜色、UIView (TMUIBorder) 分隔线颜色
     TMUICMI.separatorDashedColor = UIColorMake(17, 17, 17);                     // UIColorSeparatorDashed : 全局默认的虚线分隔线的颜色，默认 TMUIKit 暂时没用到
+    // 这里如果用动态颜色，再赋值会造成死循环
     TMUICMI.placeholderColor = UIColor.td_placeholderColor;                                    // UIColorPlaceholder，全局的输入框的 placeholder 颜色，默认用于 TMUITextField、TMUITextView，不影响系统 UIKit 的输入框
     
     // 测试用的颜色
@@ -251,26 +253,27 @@ static UIImage *disclosureIndicatorImageDark;
     TMUICMI.shouldPrintTMUIWarnLogToConsole = YES;                              // ShouldPrintTMUIWarnLogToConsole : 是否在出现 TMUILogWarn 时自动把这些 log 以 TMUIConsole 的方式显示到设备屏幕上
     
 #pragma mark - TMUIBadge
+    // 继承 TMUIConfiguration
     
-    TMUICMI.badgeBackgroundColor = UIColorRed;                                  // BadgeBackgroundColor : TMUIBadge 上的未读数的背景色
-    TMUICMI.badgeTextColor = UIColorWhite;                                      // BadgeTextColor : TMUIBadge 上的未读数的文字颜色
-    TMUICMI.badgeFont = UIFontBoldMake(11);                                     // BadgeFont : TMUIBadge 上的未读数的字体
-    TMUICMI.badgeContentEdgeInsets = UIEdgeInsetsMake(2, 4, 2, 4);              // BadgeContentEdgeInsets : TMUIBadge 上的未读数与圆圈之间的 padding
-    TMUICMI.badgeOffset = CGPointMake(-9, 11);                                  // BadgeOffset : TMUIBadge 上的未读数相对于目标 view 右上角的偏移
-    TMUICMI.badgeOffsetLandscape = CGPointMake(-9, 6);                          // BadgeOffsetLandscape : TMUIBadge 上的未读数在横屏下相对于目标 view 右上角的偏移
-    BeginIgnoreDeprecatedWarning
-    TMUICMI.badgeCenterOffset = CGPointMake(14, -10);                           // BadgeCenterOffset : TMUIBadge 未读数相对于目标 view 中心的偏移
-    TMUICMI.badgeCenterOffsetLandscape = CGPointMake(16, -7);                   // BadgeCenterOffsetLandscape : TMUIBadge 未读数在横屏下相对于目标 view 中心的偏移
-    EndIgnoreDeprecatedWarning
-    
-    TMUICMI.updatesIndicatorColor = UIColorRed;                                 // UpdatesIndicatorColor : TMUIBadge 上的未读红点的颜色
-    TMUICMI.updatesIndicatorSize = CGSizeMake(7, 7);                            // UpdatesIndicatorSize : TMUIBadge 上的未读红点的大小
-    TMUICMI.updatesIndicatorOffset = CGPointMake(4, UpdatesIndicatorSize.height);// UpdatesIndicatorOffset : TMUIBadge 未读红点相对于目标 view 右上角的偏移
-    TMUICMI.updatesIndicatorOffsetLandscape = UpdatesIndicatorOffset;           // UpdatesIndicatorOffsetLandscape : TMUIBadge 未读红点在横屏下相对于目标 view 右上角的偏移
-    BeginIgnoreDeprecatedWarning
-    TMUICMI.updatesIndicatorCenterOffset = CGPointMake(14, -10);                // UpdatesIndicatorCenterOffset : TMUIBadge 未读红点相对于目标 view 中心的偏移
-    TMUICMI.updatesIndicatorCenterOffsetLandscape = CGPointMake(14, -10);       // UpdatesIndicatorCenterOffsetLandscape : TMUIBadge 未读红点在横屏下相对于目标 view 中心点的偏移
-    EndIgnoreDeprecatedWarning
+//    TMUICMI.badgeBackgroundColor = UIColorRed;                                  // BadgeBackgroundColor : TMUIBadge 上的未读数的背景色
+//    TMUICMI.badgeTextColor = UIColorWhite;                                      // BadgeTextColor : TMUIBadge 上的未读数的文字颜色
+//    TMUICMI.badgeFont = UIFontBoldMake(11);                                     // BadgeFont : TMUIBadge 上的未读数的字体
+//    TMUICMI.badgeContentEdgeInsets = UIEdgeInsetsMake(2, 4, 2, 4);              // BadgeContentEdgeInsets : TMUIBadge 上的未读数与圆圈之间的 padding
+//    TMUICMI.badgeOffset = CGPointMake(-9, 11);                                  // BadgeOffset : TMUIBadge 上的未读数相对于目标 view 右上角的偏移
+//    TMUICMI.badgeOffsetLandscape = CGPointMake(-9, 6);                          // BadgeOffsetLandscape : TMUIBadge 上的未读数在横屏下相对于目标 view 右上角的偏移
+//    BeginIgnoreDeprecatedWarning
+//    TMUICMI.badgeCenterOffset = CGPointMake(14, -10);                           // BadgeCenterOffset : TMUIBadge 未读数相对于目标 view 中心的偏移
+//    TMUICMI.badgeCenterOffsetLandscape = CGPointMake(16, -7);                   // BadgeCenterOffsetLandscape : TMUIBadge 未读数在横屏下相对于目标 view 中心的偏移
+//    EndIgnoreDeprecatedWarning
+//
+//    TMUICMI.updatesIndicatorColor = UIColorRed;                                 // UpdatesIndicatorColor : TMUIBadge 上的未读红点的颜色
+//    TMUICMI.updatesIndicatorSize = CGSizeMake(7, 7);                            // UpdatesIndicatorSize : TMUIBadge 上的未读红点的大小
+//    TMUICMI.updatesIndicatorOffset = CGPointMake(4, UpdatesIndicatorSize.height);// UpdatesIndicatorOffset : TMUIBadge 未读红点相对于目标 view 右上角的偏移
+//    TMUICMI.updatesIndicatorOffsetLandscape = UpdatesIndicatorOffset;           // UpdatesIndicatorOffsetLandscape : TMUIBadge 未读红点在横屏下相对于目标 view 右上角的偏移
+//    BeginIgnoreDeprecatedWarning
+//    TMUICMI.updatesIndicatorCenterOffset = CGPointMake(14, -10);                // UpdatesIndicatorCenterOffset : TMUIBadge 未读红点相对于目标 view 中心的偏移
+//    TMUICMI.updatesIndicatorCenterOffsetLandscape = CGPointMake(14, -10);       // UpdatesIndicatorCenterOffsetLandscape : TMUIBadge 未读红点在横屏下相对于目标 view 中心点的偏移
+//    EndIgnoreDeprecatedWarning
     
 #pragma mark - Others
     
@@ -336,7 +339,9 @@ static UIImage *disclosureIndicatorImageDark;
 }
 
 - (UIColor *)themePlaceholderColor {
-    return UIColorGray8;
+//    return UIColorGray8;
+//    return UIColorPlaceholder; // 使用这个宏会造成循环引用
+    return UIColorHex(0x979997);
 }
 
 - (UIColor *)themeCodeColor {
@@ -344,7 +349,9 @@ static UIImage *disclosureIndicatorImageDark;
 }
 
 - (UIColor *)themeSeparatorColor {
-    return UIColorMake(222, 224, 226);
+//    return UIColorMake(222, 224, 226);
+//    return UIColorSeparator; // 使用这个宏会造成循环引用
+    return UIColorHex(0xE2E4E2);
 }
 
 - (UIColor *)themeGridItemTintColor {

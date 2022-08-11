@@ -32,20 +32,40 @@
 #define UIColorGray                 [TMUICMI grayColor]
 #define UIColorGrayDarken           [TMUICMI grayDarkenColor]
 #define UIColorGrayLighten          [TMUICMI grayLightenColor]
+
+// 主要颜色
 #define UIColorRed                  [TMUICMI redColor]
 #define UIColorGreen                [TMUICMI greenColor]
 #define UIColorBlue                 [TMUICMI blueColor]
 #define UIColorYellow               [TMUICMI yellowColor]
+#define UIColorCyan                 [TMUICMI cyanColor]
+#define UIColorOrange               [TMUICMI orangeColor]
+#define UIColorDarkGreen            [TMUICMI darkGreenColor]
+
+// 内容色
+
+#define UIColorDark                 [TMUICMI darkColor]///< 1A1C1A  ---极黑，重点突出
+#define UIColorPrimary              [TMUICMI primaryColor]///< 333533 ---主黑色
+#define UIColorSecondary            [TMUICMI secondaryColor]///< 4C4E4C ---次黑
+#define UIColorRegular              [TMUICMI regularColor]///< 656866 ---正文
+#define UIColorWeak                 [TMUICMI weakColor]///< 7E807E   ---弱提示
+#define UIColorPlaceholder          [TMUICMI placeholderColor] ///< 979997 ---占位
+#define UIColorBorder               [TMUICMI borderColor]///< C9CBC9  ---边框
+#define UIColorSeparator            [TMUICMI separatorColor]///< E2E4E2 --分割
+#define UIColorBackgroundGray       [TMUICMI backgroundGrayColor]///< ECEEEC --灰色背景
+#define UIColorBackgroundLight      [TMUICMI backgroundLightColor]///< F6F8F6 --偏白色背景
 
 // 功能颜色
+
+#define UIColorBackground           [TMUICMI backgroundColor]                 // 全局统一背景色，白色
 #define UIColorLink                 [TMUICMI linkColor]                       // 全局统一文字链接颜色
 #define UIColorDisabled             [TMUICMI disabledColor]                   // 全局统一文字disabled颜色
 #define UIColorForBackground        [TMUICMI backgroundColor]                 // 全局统一的背景色
 #define UIColorMask                 [TMUICMI maskDarkColor]                   // 全局统一的mask背景色
 #define UIColorMaskWhite            [TMUICMI maskLightColor]                  // 全局统一的mask背景色，白色
-#define UIColorSeparator            [TMUICMI separatorColor]                  // 全局分隔线颜色
+//#define UIColorSeparator            [TMUICMI separatorColor]                  // 全局分隔线颜色
 #define UIColorSeparatorDashed      [TMUICMI separatorDashedColor]            // 全局分隔线颜色（虚线）
-#define UIColorPlaceholder          [TMUICMI placeholderColor]                // 全局的输入框的placeholder颜色
+//#define UIColorPlaceholder          [TMUICMI placeholderColor]                // 全局的输入框的placeholder颜色
 
 // 测试用的颜色
 #define UIColorTestRed              [TMUICMI testColorRed]
@@ -255,6 +275,8 @@
 #define ShouldPrintTMUIWarnLogToConsole                 [TMUICMI shouldPrintTMUIWarnLogToConsole] // 是否在出现 TMUILogWarn 时自动把这些 log 以 TMUIConsole 的方式显示到设备屏幕上
 
 #pragma mark - TMUIBadge
+#define BadgeGradientBackgroundColors                   [TMUICMI badgeGradientBackgroundColors];
+#define BadgeGradientType                               [TMUICMI badgeGradientType]
 #define BadgeBackgroundColor                            [TMUICMI badgeBackgroundColor]
 #define BadgeTextColor                                  [TMUICMI badgeTextColor]
 #define BadgeFont                                       [TMUICMI badgeFont]
@@ -270,6 +292,8 @@
 #define UpdatesIndicatorOffsetLandscape                 [TMUICMI updatesIndicatorOffsetLandscape]
 #define UpdatesIndicatorCenterOffset                    [TMUICMI updatesIndicatorCenterOffset]
 #define UpdatesIndicatorCenterOffsetLandscape           [TMUICMI updatesIndicatorCenterOffsetLandscape]
+
+#define BadgeLocation                                   [TMUICMI badgeLocation]
 
 #pragma mark - Others
 

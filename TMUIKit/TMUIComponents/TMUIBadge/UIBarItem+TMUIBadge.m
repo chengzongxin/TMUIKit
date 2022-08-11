@@ -11,65 +11,101 @@
 #import "UIView+TMUIBadge.h"
 #import "UIBarItem+TMUI.h"
 #import "TMUIConfigurationMacros.h"
+#import "UIColor+TMUI.h"
 
 @implementation UIBarItem (TMUIBadge)
 
-//+ (void)load {
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        // 保证配置表里的默认值正确被设置
-//        ExtendImplementationOfNonVoidMethodWithoutArguments([UIBarItem class], @selector(init), __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, __kindof UIBarItem *originReturnValue) {
-//            [selfObject tmuibaritem_didInitialize];
-//            return originReturnValue;
-//        });
-//        
-//        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIBarItem class], @selector(initWithCoder:), NSCoder *, __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, NSCoder *firstArgv, __kindof UIBarItem *originReturnValue) {
-//            [selfObject tmuibaritem_didInitialize];
-//            return originReturnValue;
-//        });
-//        
-//        // UITabBarButton 在 layoutSubviews 时每次都重新让 imageView 和 label addSubview:，这会导致我们用 tmui_layoutSubviewsBlock 时产生持续的重复调用（但又不死循环，因为每次都在下一次 runloop 执行，而且奇怪的是如果不放到下一次 runloop，反而不会重复调用），所以这里 hack 地屏蔽 addSubview: 操作
-//        OverrideImplementation(NSClassFromString([NSString stringWithFormat:@"%@%@", @"UITab", @"BarButton"]), @selector(addSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
-//            return ^(UIView *selfObject, UIView *firstArgv) {
-//                
-//                if (firstArgv.superview == selfObject) {
-//                    return;
-//                }
-//                
-//                // call super
-//                IMP originalIMP = originalIMPProvider();
-//                void (*originSelectorIMP)(id, SEL, UIView *);
-//                originSelectorIMP = (void (*)(id, SEL, UIView *))originalIMP;
-//                originSelectorIMP(selfObject, originCMD, firstArgv);
-//            };
-//        });
-//    });
-//}
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 保证配置表里的默认值正确被设置
+        ExtendImplementationOfNonVoidMethodWithoutArguments([UIBarItem class], @selector(init), __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, __kindof UIBarItem *originReturnValue) {
+            [selfObject tmuibarbgitem_didInitialize];
+            return originReturnValue;
+        });
+        
+        ExtendImplementationOfNonVoidMethodWithSingleArgument([UIBarItem class], @selector(initWithCoder:), NSCoder *, __kindof UIBarItem *, ^__kindof UIBarItem *(UIBarItem *selfObject, NSCoder *firstArgv, __kindof UIBarItem *originReturnValue) {
+            [selfObject tmuibarbgitem_didInitialize];
+            return originReturnValue;
+        });
+        
+        // UITabBarButton 在 layoutSubviews 时每次都重新让 imageView 和 label addSubview:，这会导致我们用 tmui_layoutSubviewsBlock 时产生持续的重复调用（但又不死循环，因为每次都在下一次 runloop 执行，而且奇怪的是如果不放到下一次 runloop，反而不会重复调用），所以这里 hack 地屏蔽 addSubview: 操作
+        OverrideImplementation(NSClassFromString([NSString stringWithFormat:@"%@%@", @"UITab", @"BarButton"]), @selector(addSubview:), ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
+            return ^(UIView *selfObject, UIView *firstArgv) {
+                
+                if (firstArgv.superview == selfObject) {
+                    return;
+                }
+                
+                // call super
+                IMP originalIMP = originalIMPProvider();
+                void (*originSelectorIMP)(id, SEL, UIView *);
+                originSelectorIMP = (void (*)(id, SEL, UIView *))originalIMP;
+                originSelectorIMP(selfObject, originCMD, firstArgv);
+            };
+        });
+    });
+}
 
-- (void)tmuibaritem_didInitialize {
-    if (TMUICMIActivated) {
-        self.tmui_badgeBackgroundColor = BadgeBackgroundColor;
-        self.tmui_badgeTextColor = BadgeTextColor;
-        self.tmui_badgeFont = BadgeFont;
-        self.tmui_badgeContentEdgeInsets = BadgeContentEdgeInsets;
-        self.tmui_badgeOffset = BadgeOffset;
-        self.tmui_badgeOffsetLandscape = BadgeOffsetLandscape;
-        
-        self.tmui_updatesIndicatorColor = UpdatesIndicatorColor;
-        self.tmui_updatesIndicatorSize = UpdatesIndicatorSize;
-        self.tmui_updatesIndicatorOffset = UpdatesIndicatorOffset;
-        self.tmui_updatesIndicatorOffsetLandscape = UpdatesIndicatorOffsetLandscape;
-        
-        BeginIgnoreDeprecatedWarning
-        self.tmui_badgeCenterOffset = BadgeCenterOffset;
-        self.tmui_badgeCenterOffsetLandscape = BadgeCenterOffsetLandscape;
-        self.tmui_updatesIndicatorCenterOffset = UpdatesIndicatorCenterOffset;
-        self.tmui_updatesIndicatorCenterOffsetLandscape = UpdatesIndicatorCenterOffsetLandscape;
-        EndIgnoreClangWarning
-    }
+- (void)tmuibarbgitem_didInitialize {
+//    if (TMUICMIActivated) {
+    self.tmui_badgeGradientBackgroundColors = BadgeGradientBackgroundColors;
+    self.tmui_badgeGradientType = BadgeGradientType;//TMUIImageGradientTypeHorizontal;
+    self.tmui_badgeBackgroundColor = BadgeBackgroundColor;
+    self.tmui_badgeTextColor = BadgeTextColor;
+    self.tmui_badgeFont = BadgeFont;
+    self.tmui_badgeContentEdgeInsets = BadgeContentEdgeInsets;
+    self.tmui_badgeOffset = BadgeOffset;
+    self.tmui_badgeOffsetLandscape = BadgeOffsetLandscape;
+    
+    self.tmui_updatesIndicatorColor = UpdatesIndicatorColor;
+    self.tmui_updatesIndicatorSize = UpdatesIndicatorSize;
+    self.tmui_updatesIndicatorOffset = UpdatesIndicatorOffset;
+    self.tmui_updatesIndicatorOffsetLandscape = UpdatesIndicatorOffsetLandscape;
+    
+    BeginIgnoreDeprecatedWarning
+    self.tmui_badgeCenterOffset = BadgeCenterOffset;
+    self.tmui_badgeCenterOffsetLandscape = BadgeCenterOffsetLandscape;
+    self.tmui_updatesIndicatorCenterOffset = UpdatesIndicatorCenterOffset;
+    self.tmui_updatesIndicatorCenterOffsetLandscape = UpdatesIndicatorCenterOffsetLandscape;
+    EndIgnoreClangWarning
+//    }
 }
 
 #pragma mark - Badge
+
+
+static char kAssociatedObjectKey_badgeLocation;
+- (void)setTmui_badgeLocation:(TMUIBadgeLocation)tmui_badgeLocation {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_badgeLocation, @(tmui_badgeLocation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    switch (tmui_badgeLocation) {
+        case TMUIBadgePositionTopRight:
+            break;
+        case TMUIBadgePositionBottomRight:
+            break;
+        case TMUIBadgePositionTopLeft:
+            break;
+        case TMUIBadgePositionBottomLeft:
+            break;
+        case TMUIBadgePositionCenter:
+        {
+            self.tmui_badgeOffsetLandscape = TMUIBadgeInvalidateOffset;
+            self.tmui_badgeOffset = TMUIBadgeInvalidateOffset;
+            self.tmui_badgeCenterOffset = CGPointZero;
+            self.tmui_badgeCenterOffsetLandscape = CGPointZero;
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (TMUIBadgeLocation)tmui_badgeLocation {
+    return [((NSNumber *)objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeLocation)) unsignedIntegerValue];
+}
+
 
 static char kAssociatedObjectKey_badgeInteger;
 - (void)setTmui_badgeInteger:(NSUInteger)tmui_badgeInteger {
@@ -103,6 +139,34 @@ static char kAssociatedObjectKey_badgeBackgroundColor;
 - (UIColor *)tmui_badgeBackgroundColor {
     return (UIColor *)objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeBackgroundColor);
 }
+
+
+static char kAssociatedObjectKey_badgeGradientBackgroundColors;
+- (void)setTmui_badgeGradientBackgroundColors:(NSArray<UIColor *> *)tmui_badgeGradientBackgroundColors{
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_badgeGradientBackgroundColors, tmui_badgeGradientBackgroundColors, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self updateBackgroudView];
+}
+
+- (NSArray<UIColor *> *)tmui_badgeGradientBackgroundColors{
+    return (NSArray<UIColor *> *)objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeGradientBackgroundColors);
+}
+
+static char kAssociatedObjectKey_badgeGradientType;
+- (void)setTmui_badgeGradientType:(NSInteger)tmui_badgeGradientType{
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_badgeGradientType, @(tmui_badgeGradientType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self updateBackgroudView];
+}
+
+- (NSInteger)tmui_badgeGradientType{
+    return [objc_getAssociatedObject(self, &kAssociatedObjectKey_badgeGradientType) integerValue];
+}
+
+
+- (void)updateBackgroudView{
+    CGSize size = [self.tmui_view sizeThatFits:CGSizeMax];
+    self.tmui_view.backgroundColor = [UIColor tmui_gradientColorImageFromColors:self.tmui_badgeGradientBackgroundColors gradientType:self.tmui_badgeGradientType imgSize:size];
+}
+
 
 static char kAssociatedObjectKey_badgeTextColor;
 - (void)setTmui_badgeTextColor:(UIColor *)tmui_badgeTextColor {
@@ -295,6 +359,9 @@ EndIgnoreDeprecatedWarning
             
             view.tmui_badgeString = item.tmui_badgeString;
             view.tmui_shouldShowUpdatesIndicator = item.tmui_shouldShowUpdatesIndicator;
+            
+            view.tmui_badgeGradientType = item.tmui_badgeGradientType;
+            view.tmui_badgeGradientBackgroundColors = item.tmui_badgeGradientBackgroundColors;
         };
         
         // 为 tmui_viewDidSetBlock 赋值前 item 已经 set 完 view，则手动触发一次

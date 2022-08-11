@@ -274,12 +274,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 //+ (nullable UIViewController *)visibleViewController;
 /**
+ * 等同于houseKeeper的getCurrentVC
  * 获取当前应用里最顶层的可见viewController
  * @warning 注意返回值可能为nil，要做好保护
  */
 @property(class, nonatomic, readonly) UIViewController *topViewController;
 
 @property(class, nonatomic, readonly) UIViewController *topViewControllerForPresent;
+
+
++(void)dismissViewControllerAnimated:(BOOL)flag completion: (void (^)(void))completion;
 
 @end
 

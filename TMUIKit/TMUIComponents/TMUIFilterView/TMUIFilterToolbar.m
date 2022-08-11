@@ -38,7 +38,7 @@
     [self addSubview:self.resetBtn];
     [self addSubview:self.confirmBtn];
     self.tmui_borderPosition = TMUIViewBorderPositionTop;
-    self.tmui_borderColor = UIColorHex(ECEEEC);
+    self.tmui_borderColor = UIColorBackgroundGray;
     self.tmui_borderWidth = 0.5;
     
     [self.resetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -61,7 +61,7 @@
     if (!_resetBtn) {
         _resetBtn = [UIButton tmui_button];
         _resetBtn.tmui_text = @"重置";
-        _resetBtn.tmui_titleColor = UIColorHex(1A1C1A);
+        _resetBtn.tmui_titleColor = UIColorDark;
         _resetBtn.tmui_font = UIFont(16);
         _resetBtn.backgroundColor = UIColor.whiteColor;
         _resetBtn.tag = 0;
@@ -76,7 +76,7 @@
         _confirmBtn.tmui_text = @"确定";
         _confirmBtn.tmui_titleColor = UIColor.whiteColor;
         _confirmBtn.tmui_font = UIFont(16);
-        _confirmBtn.backgroundColor = UIColorHex(22C77D);
+        _confirmBtn.backgroundColor = UIColorGreen;
         _confirmBtn.tag = 1;
         [_confirmBtn tmui_addTarget:self action:@selector(tapItem:)];
     }

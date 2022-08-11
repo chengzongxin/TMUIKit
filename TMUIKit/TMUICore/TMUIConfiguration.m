@@ -150,18 +150,37 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     self.grayColor = UIColorMake(179, 179, 179);
     self.grayDarkenColor = UIColorMake(163, 163, 163);
     self.grayLightenColor = UIColorMake(198, 198, 198);
-    self.redColor = UIColorMake(250, 58, 58);
-    self.greenColor = UIColorMake(159, 214, 97);
-    self.blueColor = UIColorMake(49, 189, 243);
-    self.yellowColor = UIColorMake(255, 207, 71);
+    
+    #pragma mark - Main Color
+    
+    self.redColor = UIColorHex(0xFD6343);
+    self.greenColor = UIColorHex(0x22C77D);
+    self.blueColor = UIColorHex(0x3A8EF0);
+    self.yellowColor = UIColorHex(0xFFC63F);
+    self.cyanColor = UIColorHex(0x1BD6DD);
+    self.orangeColor = UIColorHex(0xFF832B);
+    self.darkGreenColor = UIColorHex(0x23AD78);
+    
+    #pragma mark - Content Color
 
+    self.darkColor = UIColorHex(0x1A1C1A);
+    self.primaryColor = UIColorHex(0x333533);
+    self.secondaryColor = UIColorHex(0x4C4E4C);
+    self.regularColor = UIColorHex(0x656866);
+    self.weakColor = UIColorHex(0x7E807E);
+    self.placeholderColor = UIColorHex(0x979997);
+    self.borderColor = UIColorHex(0xC9CBC9);
+    self.separatorColor = UIColorHex(0xE2E4E2);
+    self.backgroundGrayColor = UIColorHex(0xECEEEC);
+    self.backgroundLightColor = UIColorHex(0xF6F8F6);
+    
+    #pragma mark - Function Color
+    self.backgroundColor = self.whiteColor;
     self.linkColor = UIColorMake(56, 116, 171);
     self.disabledColor = self.grayColor;
     self.maskDarkColor = UIColorMakeWithRGBA(0, 0, 0, .35f);
     self.maskLightColor = UIColorMakeWithRGBA(255, 255, 255, .5f);
-    self.separatorColor = UIColorMake(222, 224, 226);
     self.separatorDashedColor = UIColorMake(17, 17, 17);
-    self.placeholderColor = UIColorMake(196, 200, 208);
     
     self.testColorRed = UIColorMakeWithRGBA(255, 0, 0, .3);
     self.testColorGreen = UIColorMakeWithRGBA(0, 255, 0, .3);
@@ -173,7 +192,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     self.textImportantColor = UIColorHex(0x1A1C1A);
     self.textRegularColor = UIColorHex(0x333533);
     self.textWeakColor = UIColorHex(0x7E807E);
-    self.textPlaceholderColor = UIColorHex(0x7E807E);
+    self.textPlaceholderColor = UIColorHex(0x979997);
     
     #pragma mark - UIControl
     
@@ -292,6 +311,28 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 //    self.badgeOffsetLandscape = TMUIBadgeInvalidateOffset;
 //    self.updatesIndicatorOffset = TMUIBadgeInvalidateOffset;
 //    self.updatesIndicatorOffsetLandscape = TMUIBadgeInvalidateOffset;
+    self.badgeGradientBackgroundColors = @[UIColorHex(FE9770),self.redColor];
+    self.badgeGradientType = 0;
+    self.badgeBackgroundColor = self.redColor;                                  // BadgeBackgroundColor : TMUIBadge 上的未读数的背景色
+    self.badgeTextColor = self.whiteColor;                                      // BadgeTextColor : TMUIBadge 上的未读数的文字颜色
+    self.badgeFont = UIFontDINAlt(10);                                       // BadgeFont : TMUIBadge 上的未读数的字体
+    self.badgeContentEdgeInsets = UIEdgeInsetsMake(2, 4, 2, 4);              // BadgeContentEdgeInsets : TMUIBadge 上的未读数与圆圈之间的 padding
+    self.badgeOffset = CGPointMake(-9, 11);                                  // BadgeOffset : TMUIBadge 上的未读数相对于目标 view 右上角的偏移
+    self.badgeOffsetLandscape = CGPointMake(-9, 6);                          // BadgeOffsetLandscape : TMUIBadge 上的未读数在横屏下相对于目标 view 右上角的偏移
+    BeginIgnoreDeprecatedWarning
+    self.badgeCenterOffset = CGPointMake(14, -10);                           // BadgeCenterOffset : TMUIBadge 未读数相对于目标 view 中心的偏移
+    self.badgeCenterOffsetLandscape = CGPointMake(16, -7);                   // BadgeCenterOffsetLandscape : TMUIBadge 未读数在横屏下相对于目标 view 中心的偏移
+    EndIgnoreDeprecatedWarning
+    
+    self.updatesIndicatorColor = self.redColor;                                 // UpdatesIndicatorColor : TMUIBadge 上的未读红点的颜色
+    self.updatesIndicatorSize = CGSizeMake(7, 7);                            // UpdatesIndicatorSize : TMUIBadge 上的未读红点的大小
+    self.updatesIndicatorOffset = CGPointMake(4, self.updatesIndicatorSize.height);// UpdatesIndicatorOffset : TMUIBadge 未读红点相对于目标 view 右上角的偏移
+    self.updatesIndicatorOffsetLandscape = self.updatesIndicatorOffset;           // UpdatesIndicatorOffsetLandscape : TMUIBadge 未读红点在横屏下相对于目标 view 右上角的偏移
+    BeginIgnoreDeprecatedWarning
+    self.updatesIndicatorCenterOffset = CGPointMake(14, -10);                // UpdatesIndicatorCenterOffset : TMUIBadge 未读红点相对于目标 view 中心的偏移
+    self.updatesIndicatorCenterOffsetLandscape = CGPointMake(14, -10);       // UpdatesIndicatorCenterOffsetLandscape : TMUIBadge 未读红点在横屏下相对于目标 view 中心点的偏移
+    self.badgeLocation = 0;
+    EndIgnoreDeprecatedWarning
     
     #pragma mark - Others
     

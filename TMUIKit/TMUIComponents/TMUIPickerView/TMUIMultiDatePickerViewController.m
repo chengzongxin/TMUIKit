@@ -188,14 +188,14 @@
 - (void)updateDayContentViewLabelAndButtons
 {
     if (self.actionFlag == 1) {
-        [self.dayBeginBtn setTitleColor:UIColorHex(1A1C1A) forState:UIControlStateNormal];
+        [self.dayBeginBtn setTitleColor:UIColorDark forState:UIControlStateNormal];
 //        [self.dayBeginLine setBackgroundColor:UIColorHex(24C77E)];
         [self.dayEndBtn setTitleColor:UIColorHex(C1C1C1) forState:UIControlStateNormal];
 //        [self.dayEndLine setBackgroundColor:UIColorHex(24C1C1C1)];
     }else if (self.actionFlag == 2) {
         [self.dayBeginBtn setTitleColor:UIColorHex(C1C1C1) forState:UIControlStateNormal];
 //        [self.dayBeginLine setBackgroundColor:UIColorHex(24C1C1C1)];
-        [self.dayEndBtn setTitleColor:UIColorHex(1A1C1A) forState:UIControlStateNormal];
+        [self.dayEndBtn setTitleColor:UIColorDark forState:UIControlStateNormal];
 //        [self.dayEndLine setBackgroundColor:UIColorHex(24C77E)];
     }
 }
@@ -323,7 +323,7 @@
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(15,(_contentTopBar.bounds.size.height-36)/2, 40, 36)];
         [btn.titleLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
         [btn setTitle:@"取消" forState:UIControlStateNormal];
-        [btn setTitleColor:UIColorHex(979997) forState:UIControlStateNormal];
+        [btn setTitleColor:UIColorPlaceholder forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
         self.cancelBtn = btn;
         [_contentTopBar addSubview:btn];
@@ -331,7 +331,7 @@
         btn = [[UIButton alloc] initWithFrame:CGRectMake(_contentTopBar.bounds.size.width-15-40,(_contentTopBar.bounds.size.height-36)/2, 40, 36)];
         [btn.titleLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
         [btn setTitle:@"确定" forState:UIControlStateNormal];
-        [btn setTitleColor:UIColorHex(1A1C1A) forState:UIControlStateNormal];
+        [btn setTitleColor:UIColorDark forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(okClick) forControlEvents:UIControlEventTouchUpInside];
         self.okBtn = btn;
         [_contentTopBar addSubview:btn];
@@ -340,10 +340,10 @@
         rt.origin.x = (_contentTopBar.bounds.size.width-rt.size.width)/2;
         rt.origin.y = (_contentTopBar.bounds.size.height-rt.size.height)/2;
         self.segmengtControl = [[UISegmentedControl alloc] initWithItems:@[@"按月选择",@"按日选择"]];
-        [self.segmengtControl setTintColor:UIColorHex(F6F8F6)];
-        [self.segmengtControl setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorHex(979997),
+        [self.segmengtControl setTintColor:UIColorBackgroundLight];
+        [self.segmengtControl setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorPlaceholder,
                                                        NSFontAttributeName:[UIFont systemFontOfSize:12 weight:UIFontWeightRegular]} forState:UIControlStateNormal];
-        [self.segmengtControl setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorHex(1A1C1A),
+        [self.segmengtControl setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorDark,
             NSFontAttributeName:[UIFont systemFontOfSize:12 weight:UIFontWeightMedium]} forState:UIControlStateSelected];
         [self.segmengtControl setFrame:rt];
         [self.segmengtControl addTarget:self action:@selector(segmengtChanged:) forControlEvents:UIControlEventValueChanged];
@@ -368,7 +368,7 @@
         rt.origin.y = _monthBgView.bounds.size.height - 5 - rt.size.height;
         self.monthLabel = [[UILabel alloc] initWithFrame:rt];
         self.monthLabel.textAlignment = NSTextAlignmentCenter;
-        [self.monthLabel setTextColor:UIColorHex(1A1C1A)];
+        [self.monthLabel setTextColor:UIColorDark];
         [self.monthLabel setFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular]];
         
         [self.dateFormatter setDateFormat:@"yyyy-MM"];
@@ -392,7 +392,7 @@
         rt.size.height = 24*1;
         rt.origin.y = _dayBgView.bounds.size.height - 5 - rt.size.height;
         self.dayBeginBtn = [[UIButton alloc] initWithFrame:rt];
-        [self.dayBeginBtn setTitleColor:UIColorHex(1A1C1A) forState:UIControlStateNormal];
+        [self.dayBeginBtn setTitleColor:UIColorDark forState:UIControlStateNormal];
         [self.dayBeginBtn.titleLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightRegular]];
         [self.dayBeginBtn addTarget:self action:@selector(dayBeginBtnClick) forControlEvents:UIControlEventTouchUpInside];
         [_dayBgView addSubview:self.dayBeginBtn];

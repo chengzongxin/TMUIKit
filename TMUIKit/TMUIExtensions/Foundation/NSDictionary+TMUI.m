@@ -113,15 +113,20 @@
 /** 安全返回NSString */
 - (NSString *)tmui_stringForKey:(id)aKey
 {
-    if (!aKey) {
+    if (!aKey || ![self isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
-    id obj = [self objectForKey:aKey];
-    if (![obj isKindOfClass:[NSString class]]) {
-        obj = nil;
+    NSString *string = [self objectForKey:aKey];
+    if ([string isKindOfClass:[NSNumber class]]) {
+        string = [NSString stringWithFormat:@"%@",string];
     }
-    return obj;
+    
+    if (![string isKindOfClass:[NSString class]]) {
+        string = nil;
+    }
+    return string;
 }
+
 
 /** 安全返回NSArray */
 - (NSArray *)tmui_arrayForKey:(id)aKey

@@ -10,6 +10,7 @@
 #import "TMUIBadgeProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
+extern const CGPoint TMUIBadgeInvalidateOffset;
 /**
  用于在任意 UIView 上显示未读红点或者未读数，提供的属性请查看 @c TMUIBadgeProtocol ，属性的默认值在 TMUIConfigurationTemplate 配置表里设置，如果不使用配置表，则所有属性的默认值均为 0 或 nil。
  

@@ -74,6 +74,8 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:TMUITableViewStyleInsetGrouped];
+        _tableView.tmui_insetGroupedCornerRadius = 12;
+        _tableView.tmui_insetGroupedHorizontalInset = 20;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = UIColorHexString(@"EEEEEE");

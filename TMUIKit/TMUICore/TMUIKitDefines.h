@@ -60,10 +60,14 @@
 
 #define TMUIFontWeight(size_, weight_) [UIFont systemFontOfSize:size_ weight:weight_]
 /// 字体相关的宏，用于快速创建一个字体对象，更多创建宏可查看 UIFont+TMUI.h
-#define UIFontMake(size) [UIFont systemFontOfSize:size]
-#define UIFontItalicMake(size) [UIFont italicSystemFontOfSize:size] /// 斜体只对数字和字母有效，中文无效
-#define UIFontBoldMake(size) [UIFont boldSystemFontOfSize:size]
-#define UIFontBoldWithFont(_font) [UIFont boldSystemFontOfSize:_font.pointSize]
+
+
+#define UIFontDINAlt(size1)         [UIFont fontWithName:@"DINAlternate-Bold" size:size1]/// DINAlternate-Bold
+#define UIFontMake(size)            [UIFont systemFontOfSize:size]
+#define UIFontItalicMake(size)      [UIFont italicSystemFontOfSize:size] /// 斜体只对数字和字母有效，中文无效
+#define UIFontBoldMake(size)        [UIFont boldSystemFontOfSize:size]
+#define UIFontBoldWithFont(_font)   [UIFont boldSystemFontOfSize:_font.pointSize]
+
 
 
 
