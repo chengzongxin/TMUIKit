@@ -165,7 +165,7 @@ Pod::Spec.new do |s|
       
       ss.subspec 'TMUIMenuView' do |sss|
          sss.source_files = 'TMUIKit/TMUIComponents/TMUIMenuView/*.{h,m}'
-      end    
+      end  
       
       ss.subspec 'TMSearchController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
@@ -196,7 +196,7 @@ Pod::Spec.new do |s|
       ss.subspec 'TMUIPageViewController' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
       end
-      
+
       ss.subspec 'TMUIToast' do |sss|
         sss.source_files = 'TMUIKit/TMUIComponents/TMUIToast/*.{h,m}'
         # TMUIToastUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMUIToastUIAssets.bundle
@@ -258,49 +258,5 @@ Pod::Spec.new do |s|
             'TMUINavigationBarUIAssets' => ['TMUIKit/TMUIComponents/TMUINavigationBar/Resource/*']
           }
       end
-
-    ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
-
-     ss.subspec 'TMUITableView' do |sss|
-       sss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
-     end
-
-
-     ss.subspec 'TMShowBigImageController' do |sss|
-       sss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
-     end
-
-     ss.subspec 'TMUIModalPresentationViewController' do |sss|
-       sss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
-     end
-
-     ss.subspec 'TMUITheme' do |sss|
-       sss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
-     end
-
-      #ChainUI
-      ss.subspec 'ChainUI' do |sss|
-        sss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
-        sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
-        sss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-        sss.subspec 'Private' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
-          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
-        end
-        sss.subspec 'Public' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
-          ssss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-        end
-        sss.subspec 'Chainable' do |ssss|
-          ssss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Public'
-          ssss.dependency 'TMUIKit/TMUIComponents/ChainUI/Private'
-        end
-      end
-
-      ########################  end 以上组件只在demo中打开  ########################
-
-
   end
 end
