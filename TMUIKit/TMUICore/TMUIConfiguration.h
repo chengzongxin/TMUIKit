@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - UILabel
 
-@property(nonatomic, strong) UIColor            *mainColor;
+@property(nonatomic, strong) UIColor            *textGreen;
 @property(nonatomic, strong) UIColor            *textImportantColor;
 @property(nonatomic, strong) UIColor            *textRegularColor;
 @property(nonatomic, strong) UIColor            *textWeakColor;

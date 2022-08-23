@@ -154,7 +154,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     #pragma mark - Main Color
     
     self.redColor = UIColorHex(0xFD6343);
-    self.greenColor = UIColorHex(0x22C77D);
+    self.greenColor = UIColorHex(0x22C787);
     self.blueColor = UIColorHex(0x3A8EF0);
     self.yellowColor = UIColorHex(0xFFC63F);
     self.cyanColor = UIColorHex(0x1BD6DD);
@@ -188,11 +188,11 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     
     #pragma mark - UILabel
     
-    self.mainColor = UIColorHex(0x22C77D);
-    self.textImportantColor = UIColorHex(0x1A1C1A);
-    self.textRegularColor = UIColorHex(0x333533);
-    self.textWeakColor = UIColorHex(0x7E807E);
-    self.textPlaceholderColor = UIColorHex(0x979997);
+    self.textGreen = self.greenColor;
+    self.textImportantColor = self.darkColor;
+    self.textRegularColor = self.primaryColor;
+    self.textWeakColor = self.weakColor;
+    self.textPlaceholderColor = self.placeholderColor;
     
     #pragma mark - UIControl
     
@@ -223,7 +223,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     
     #pragma mark - NavigationBar
     self.navBarItemLightColor = self.whiteColor;
-    self.navBarItemThemeColor = self.mainColor;
+    self.navBarItemThemeColor = self.greenColor;
     self.navBarItemDarkColor = UIColorHex(333333);
     self.navBarItemFont = UIFontMake(16);
     self.navBarHighlightedAlpha = 0.2f;

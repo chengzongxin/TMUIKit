@@ -51,6 +51,7 @@ typedef void(^TMUISearchBarClearClickBlock)(void);
 typedef enum : NSUInteger {
     TMUISearchBarStyle_Normal,  ///< 普通样式搜索，只有一个单独的搜索框
     TMUISearchBarStyle_City,  ///< 城市搜索样式，左边有一个城市选择按钮，右边是搜索框
+    TMUISearchBarStyle_City_White,  ///< 城市搜索样式，左边有一个城市选择按钮，右边是搜索框, 白色样式
 } TMUISearchBarStyle;
 
 /*

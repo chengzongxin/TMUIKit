@@ -104,7 +104,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        UIImage *img = [UIImage tmui_imageWithGradientColors:@[UIColorMain,UIColorBlue] type:TMUIImageGradientTypeTopLeftToBottomRight locations:@[@0.5] size:CGSizeMake(TMUI_SCREEN_WIDTH, tmui_navigationBarHeight()) cornerRadiusArray:nil];
+        UIImage *img = [UIImage tmui_imageWithGradientColors:@[UIColorGreen,UIColorBlue] type:TMUIImageGradientTypeTopLeftToBottomRight locations:@[@0.5] size:CGSizeMake(TMUI_SCREEN_WIDTH, tmui_navigationBarHeight()) cornerRadiusArray:nil];
         img = [img resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];
         [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
 //        self.navigationController.navigationBar.translucent = YES;

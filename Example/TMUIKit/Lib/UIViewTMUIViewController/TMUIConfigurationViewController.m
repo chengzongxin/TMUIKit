@@ -108,21 +108,12 @@
 }
 
 - (void)color1{
-    
-    /*
-     #define UIColorMain                 [TMUICMI mainColor]                        // 小面积使用，用于特别需要强调的文字、按钮和图标
-     #define UIColorTextImportant        [TMUICMI textImportantColor]               // 用于重要级文字信息，页内标题信息
-     #define UIColorTextRegular          [TMUICMI textRegularColor]                 // 用于一般文字信息，正文或常规文字
-     #define UIColorTextWeak             [TMUICMI textWeakColor]                    // 用于辅助、次要、弱提示类的文字信息
-     #define UIColorTextPlaceholder      [TMUICMI textPlaceholderColor]             // 用于占位文字
-     */
-    
     id s1 = Style().fixWH(44,44).borderRadius(22);
-    id s2 = Style().fnt(14).color(UIColorMain).multiline;
+    id s2 = Style().fnt(14).color(UIColorGreen).multiline;
     // origin
-    id v1 = View.styles(s1).bgColor(UIColorMain);
+    id v1 = View.styles(s1).bgColor(UIColorGreen);
     id a1 = AttStr(
-                   AttStr(Str(@"UIColorMain")).styles(s1),
+                   AttStr(Str(@"UIColorGreen")).styles(s1),
                    AttStr(Str(@"\n小面积使用，用于特别需要强调的文字、按钮和图标")).styles(body)
                    ).lineGap(3);
     id l1 = Label.styles(s2).str(a1);

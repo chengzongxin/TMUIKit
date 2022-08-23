@@ -111,6 +111,10 @@ func(self, selector);
 //    [search setHotwords:@[@"123",@"456"]];
 //
 //    _navBar.titleView = search;
+    TMUISearchBar *search = [[TMUISearchBar alloc] initWithStyle:TMUISearchBarStyle_City_White frame:CGRectMake(20, 500, TMUI_SCREEN_WIDTH - 40, 44)];
+    
+    [self.view addSubview:search];
+    
 }
 
 

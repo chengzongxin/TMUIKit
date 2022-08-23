@@ -74,7 +74,7 @@
 
 #pragma mark - UILabel
 
-#define UIColorMain                 [TMUICMI mainColor]                        // 小面积使用，用于特别需要强调的文字、按钮和图标
+#define UIColorTextGreen            [TMUICMI textGreen]                        // 小面积使用，用于特别需要强调的文字、按钮和图标
 #define UIColorTextImportant        [TMUICMI textImportantColor]               // 用于重要级文字信息，页内标题信息
 #define UIColorTextRegular          [TMUICMI textRegularColor]                 // 用于一般文字信息，正文或常规文字
 #define UIColorTextWeak             [TMUICMI textWeakColor]                    // 用于辅助、次要、弱提示类的文字信息

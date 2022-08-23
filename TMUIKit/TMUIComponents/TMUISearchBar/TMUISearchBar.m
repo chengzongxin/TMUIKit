@@ -92,37 +92,80 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
             make.left.equalTo(_searchIcon.mas_right).with.offset(8);
             make.right.equalTo(self.contentView);
         }];
-    }else if (self.style == TMUISearchBarStyle_City) {
+    }else if (self.style == TMUISearchBarStyle_City || self.style == TMUISearchBarStyle_City_White) {
         // city style, left city ,right search
+        
         [self.contentView addSubview:self.cityBtn];
-        [_cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_offset(0);
-            make.centerY.equalTo(self.contentView);
-            make.height.equalTo(self.contentView);
-            make.width.mas_equalTo(80);
-        }];
         
         [self.contentView addSubview:self.seperator];
-        [_seperator mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.contentView);
-            make.left.equalTo(_cityBtn.mas_right);
-            make.size.mas_equalTo(CGSizeMake(1, 14));
-        }];
         
         [self.contentView addSubview:self.searchIcon];
-        [_searchIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_cityBtn.mas_right).offset(15);
-            make.centerY.equalTo(self.contentView);
-            make.size.mas_equalTo(CGSizeMake(16, 16));
-        }];
         
         [self.contentView addSubview:self.textField];
-        [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.contentView);
-            make.height.mas_equalTo(TMUISearchBarHeight);
-            make.left.equalTo(_searchIcon.mas_right).with.offset(8);
-            make.right.equalTo(self.contentView);
-        }];
+        
+        if (self.style == TMUISearchBarStyle_City) {
+            
+            [_cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_offset(0);
+                make.centerY.equalTo(self.contentView);
+                make.height.equalTo(self.contentView);
+                make.width.mas_equalTo(80);
+            }];
+            
+            [_seperator mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.contentView);
+                make.left.equalTo(_cityBtn.mas_right);
+                make.size.mas_equalTo(CGSizeMake(1, 14));
+            }];
+            
+            [_searchIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(_cityBtn.mas_right).offset(15);
+                make.centerY.equalTo(self.contentView);
+                make.size.mas_equalTo(CGSizeMake(16, 16));
+            }];
+            
+            [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.contentView);
+                make.height.mas_equalTo(TMUISearchBarHeight);
+                make.left.equalTo(_searchIcon.mas_right).with.offset(8);
+                make.right.equalTo(self.contentView);
+            }];
+            
+            
+        }else if (self.style == TMUISearchBarStyle_City_White) {
+            self.contentView.backgroundColor = UIColorWhite;
+            
+            self.cityBtn.tmui_font = UIFontMedium(16);
+            self.textField.font = UIFontMedium(16);
+            [self tmui_shadowColor:UIColorBlack opacity:0.05 offsetSize:CGSizeMake(0, 0) corner:5];
+            
+            [_cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_offset(0);
+                make.centerY.equalTo(self.contentView);
+                make.height.equalTo(self.contentView);
+                make.width.mas_equalTo(82);
+            }];
+            
+            [_seperator mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.contentView);
+                make.left.equalTo(_cityBtn.mas_right);
+                make.size.mas_equalTo(CGSizeMake(1, 14));
+            }];
+            
+            [_searchIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(_cityBtn.mas_right).offset(13.5);
+                make.centerY.equalTo(self.contentView);
+                make.size.mas_equalTo(CGSizeMake(16, 16));
+            }];
+            
+            [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.contentView);
+                make.height.mas_equalTo(TMUISearchBarHeight);
+                make.left.equalTo(_searchIcon.mas_right).with.offset(8);
+                make.right.equalTo(self.contentView);
+            }];
+        }
+       
     }
 }
 

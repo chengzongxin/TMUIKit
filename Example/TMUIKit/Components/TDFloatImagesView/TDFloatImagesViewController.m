@@ -32,6 +32,7 @@
     
     UILabel *label = Label.styles(h1).addTo(self.view).makeCons(^{
         make.top.left.constants(NavigationContentTop+20,20);
+        
     }).str(@"只显示3行");
     
     TMUIFloatImagesView *imgsView  = [[TMUIFloatImagesView alloc] initWithMaxWidth:TMUI_SCREEN_WIDTH-40];
