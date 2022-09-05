@@ -127,7 +127,10 @@
     if (self.config.type != TMUIPickerViewType_MultiColumnConcatenation) {
         return;
     }
-    
+    if (self.config.scrollRowBlock) {
+        self.config.scrollRowBlock(pickerView, row, component);
+        return;
+    }
     if (component == 0) {
         self.curColumn1Row = row;
         [pickerView reloadComponent:1];

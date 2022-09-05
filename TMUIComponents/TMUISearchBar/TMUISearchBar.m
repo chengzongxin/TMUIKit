@@ -137,6 +137,8 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
             
             self.cityBtn.tmui_font = UIFontMedium(16);
             self.textField.font = UIFontMedium(16);
+            self.textField.placeholderColor = UIColorBorder;
+            self.cityBtn.tmui_image = kImgName(@"tmui_searchBar_arrow2");
             [self tmui_shadowColor:UIColorBlack opacity:0.05 offsetSize:CGSizeMake(0, 0) corner:5];
             
             [_cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {

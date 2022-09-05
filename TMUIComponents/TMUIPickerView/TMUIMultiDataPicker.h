@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) TMUIPickerNumberOfColumnsBlock columnsBlock;
 @property (nonatomic, copy) TMMUIPickerNumberOfRowInColumnBlock rowsBlock;
 @property (nonatomic, copy) TMUIPickerTextForRowBlock textBlock;
+@property (nonatomic, copy) TMUIPickerForScrollRowBlock scrollRowBlock;
 
 - (void)setupDefalutRows;
 

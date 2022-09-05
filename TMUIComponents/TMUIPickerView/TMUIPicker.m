@@ -58,6 +58,7 @@ return nil;
         picker.columnsBlock = columnsBlock;
         picker.rowsBlock = rowsBlock;
         picker.textBlock = textBlock;
+        picker.scrollRowBlock = config.scrollRowBlock;
         self.picker = picker;
         [self didInitalizePicker];
     }

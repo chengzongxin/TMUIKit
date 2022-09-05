@@ -58,6 +58,7 @@ typedef NS_ENUM(int, TMUIMultiDatePickerViewControllerType) {
 
 
 
+typedef void (^TMUIPickerForScrollRowBlock)(UIPickerView *pickView, NSInteger rowIndex,NSInteger columnIndex);
 @interface TMUIPickerViewConfig : NSObject
 
 #pragma mark - 通用方法
@@ -99,6 +100,8 @@ typedef NS_ENUM(int, TMUIMultiDatePickerViewControllerType) {
 /// 结束日期
 @property (nonatomic, strong)NSDate *dayEndDate;
 
+
+@property (nonatomic, copy) TMUIPickerForScrollRowBlock scrollRowBlock;
 @end
 
 NS_ASSUME_NONNULL_END

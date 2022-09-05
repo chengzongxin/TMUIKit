@@ -554,4 +554,9 @@ typedef NS_ENUM(NSInteger, TMUIImageGradientType) {
                                          textAlpha:(CGFloat)alpha;
 @end
 
+// 本地图片
+NS_INLINE UIImage *tmui_imgAtBundle(NSString *imageName) {
+    return [UIImage tmui_imageInBundleWithName:imageName];
+}
+
 NS_ASSUME_NONNULL_END
