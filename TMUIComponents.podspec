@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIComponents'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -22,12 +22,12 @@ Pod::Spec.new do |s|
   旨在帮助快速高效的构建工程的基础设计元素，以及统一维护基础元素的版本兼容性处理，助于提高开发效率和项目质量。'
                        DESC
 
-  s.homepage         = 'http://repo.we.com/tubroker/tmuikit.git'
+  s.homepage         = 'https://github.com/chengzongxin/TMUIKit.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chengzongxin' => 'joe.cheng@corp.to8to.com' }
-  s.source           = { :git => './'}
-  # s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => "v"+"#{s.version}" }
+  # s.source           = { :git => './'}
+  s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => "v"+"#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
@@ -35,12 +35,12 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   
   # s.resource_bundles = {
-  #   'TMUIKit' => ['TMUIKit/Assets/*.png']
+  #   'TMUIKit' => [Assets/*.png']
   # }
 
   #代码源文件地址，**/*表示Classes目录及其子目录下所有文件，如果有多个目录下则用逗号分开，如果需要在项目中分组显示，这里也要做相应的设置
-  s.source_files = 'TMUIKit/TMUIComponents/**/*'
-  s.public_header_files = 'TMUIKit/TMUIComponents/*.h'
+  s.source_files = 'TMUIComponents/**/*'
+  s.public_header_files = 'TMUIComponents/*.h'
   s.dependency 'TMUICore'
   s.dependency 'TMUIExtensions'
   s.dependency "Masonry"
@@ -48,159 +48,159 @@ Pod::Spec.new do |s|
   #TMUIWidgets 基类控件
   s.subspec 'TMUIWidgets' do |ss|
     #引入TMUIWidgets中所有资源文件
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUIWidgets.h'
+    ss.source_files = 'TMUIComponents/TMUIWidgets/TMUIWidgets.h'
     # TMUIButton
     ss.subspec 'TMUIButton' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUIButton'
+      sss.source_files = 'TMUIComponents/TMUIWidgets/TMUIButton'
     end
     # TMUILabel
     ss.subspec 'TMUILabel' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUILabel'
+      sss.source_files = 'TMUIComponents/TMUIWidgets/TMUILabel'
     end
     # TMUITextField
     ss.subspec 'TMUITextField' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUITextField'
+      sss.source_files = 'TMUIComponents/TMUIWidgets/TMUITextField'
     end
     # TMUITextView
     ss.subspec 'TMUITextView' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUITextView'
+      sss.source_files = 'TMUIComponents/TMUIWidgets/TMUITextView'
     end
     # TMUISlider
     ss.subspec 'TMUISlider' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUISlider'
+      sss.source_files = 'TMUIComponents/TMUIWidgets/TMUISlider'
     end
     # TMUISegmentedControl
     ss.subspec 'TMUISegmentedControl' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMUIWidgets/TMUISegmentedControl'
+      sss.source_files = 'TMUIComponents/TMUIWidgets/TMUISegmentedControl'
     end
   end
   
   # TMUIMultipleDelegates
   s.subspec 'TMUIMultipleDelegates' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIMultipleDelegates/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIMultipleDelegates/*.{h,m}'
   end
   
   s.subspec 'TMContentAlert' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMContentAlert/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMContentAlert/*.{h,m}'
   end
   
   s.subspec 'TMContentPicker' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMContentPicker/*.{h,m}'
     ss.subspec 'TMNormalPicker' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMNormalPicker'
+      sss.source_files = 'TMUIComponents/TMContentPicker/TMNormalPicker'
     end
     ss.subspec 'TMDatePicker' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
+      sss.source_files = 'TMUIComponents/TMContentPicker/TMDatePicker'
     end
     ss.subspec 'TMMultiDataPicker' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
+      sss.source_files = 'TMUIComponents/TMContentPicker/TMMultiDataPicker'
     end
     ss.subspec 'TMCityPicker' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
+      sss.source_files = 'TMUIComponents/TMContentPicker/TMCityPicker'
     end
   end
   
   s.subspec 'TMActionSheet' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMActionSheet/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMActionSheet/*.{h,m}'
   end
   
   s.subspec 'TMPopoverView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMPopoverView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMPopoverView/*.{h,m}'
   end
   
   s.subspec 'TMUIMenuView' do |ss|
-      ss.source_files = 'TMUIKit/TMUIComponents/TMUIMenuView/*.{h,m}'
+      ss.source_files = 'TMUIComponents/TMUIMenuView/*.{h,m}'
   end  
   
   s.subspec 'TMSearchController' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMSearchController/*.{h,m}'
     ss.subspec 'Private' do |sss|
-      sss.private_header_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h}'
-      sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Private/*.{h,m}'
+      sss.private_header_files = 'TMUIComponents/TMSearchController/Private/*.{h}'
+      sss.source_files = 'TMUIComponents/TMSearchController/Private/*.{h,m}'
     end
     ss.subspec 'Extensions' do |sss|
-      sss.source_files = 'TMUIKit/TMUIComponents/TMSearchController/Extensions/*.{h,m}'
+      sss.source_files = 'TMUIComponents/TMSearchController/Extensions/*.{h,m}'
     end
     # TMSearchUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMSearchUIAssets.bundle
     ss.resource_bundles = {
-      'TMSearchUIAssets' => ['TMUIKit/TMUIComponents/TMSearchController/Resource/*.png']
+      'TMSearchUIAssets' => ['TMUIComponents/TMSearchController/Resource/*.png']
     }
   end
   
   # TMUICellHeightCache
   s.subspec 'TMUICellHeightCache' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUICellHeightCache/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUICellHeightCache/*.{h,m}'
   end
   
   # TMUIBadge
   s.subspec 'TMUIBadge' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIBadge/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIBadge/*.{h,m}'
   end
 
   # TMUIPageViewController 项目中的 THKPageContentViewController封装抽取
   s.subspec 'TMUIPageViewController' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIPageViewController/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIPageViewController/*.{h,m}'
   end
 
   s.subspec 'TMUIToast' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIToast/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIToast/*.{h,m}'
     # TMUIToastUIAssets 后续不要随便修改名字，pod库内相关图片数据读取的Bundle名是固定写死为TMUIToastUIAssets.bundle
     ss.resource_bundles = {
-      'TMUIToastUIAssets' => ['TMUIKit/TMUIComponents/TMUIToast/Resource/*']
+      'TMUIToastUIAssets' => ['TMUIComponents/TMUIToast/Resource/*']
     }
   end
 
   s.subspec 'TMUIExpandLabel' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIExpandLabel/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIExpandLabel/*.{h,m}'
   end
 
   s.subspec 'TMUIFloatLayoutView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIFloatLayoutView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIFloatLayoutView/*.{h,m}'
   end
 
   s.subspec 'TMUIFloatImagesView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIFloatImagesView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIFloatImagesView/*.{h,m}'
   end
 
   s.subspec 'TMUITimer' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUITimer/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUITimer/*.{h,m}'
   end
 
   s.subspec 'TMUICycleView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUICycleView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUICycleView/*.{h,m}'
   end
 
   s.subspec 'TMUISegmentView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUISegmentView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUISegmentView/*.{h,m}'
   end
 
   s.subspec 'TMUISearchBar' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUISearchBar/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUISearchBar/*.{h,m}'
     ss.resource_bundles = {
-      'TMUISearchBarUIAssets' => ['TMUIKit/TMUIComponents/TMUISearchBar/Resource/*']
+      'TMUISearchBarUIAssets' => ['TMUIComponents/TMUISearchBar/Resource/*']
     }
   end
 
   s.subspec 'TMUIFilterView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIFilterView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIFilterView/*.{h,m}'
   end
 
   s.subspec 'TMUIPickerView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIPickerView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIPickerView/*.{h,m}'
   end
 
   s.subspec 'TMUIAppearance' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIAppearance/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIAppearance/*.{h,m}'
   end
 
   s.subspec 'TMUIPopupContainerView' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUIPopupContainerView/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUIPopupContainerView/*.{h,m}'
   end
 
   s.subspec 'TMUINavigationBar' do |ss|
-    ss.source_files = 'TMUIKit/TMUIComponents/TMUINavigationBar/*.{h,m}'
+    ss.source_files = 'TMUIComponents/TMUINavigationBar/*.{h,m}'
     ss.resource_bundles = {
-        'TMUINavigationBarUIAssets' => ['TMUIKit/TMUIComponents/TMUINavigationBar/Resource/*']
+        'TMUINavigationBarUIAssets' => ['TMUIComponents/TMUINavigationBar/Resource/*']
       }
   end
 
