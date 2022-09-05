@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
       sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMDatePicker'
     end
     ss.subspec 'TMMultiDataPicker' do |sss|
-      sss.source_files = 'TMUIKit/MUIComponents/TMContentPicker/TMMultiDataPicker'
+      sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMMultiDataPicker'
     end
     ss.subspec 'TMCityPicker' do |sss|
       sss.source_files = 'TMUIKit/TMUIComponents/TMContentPicker/TMCityPicker'
