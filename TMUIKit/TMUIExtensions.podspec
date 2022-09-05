@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIExtensions'
-  s.version          = '2.0.3'
+  s.version          = '2.0.4'
   s.summary          = 'TMUIExtensions 是个分类库。'
 
 # This description is used to generate tags and improve search results.
@@ -26,8 +26,8 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chengzongxin' => 'joe.cheng@corp.to8to.com' }
-  s.source           = { :git => './'}
-  # s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => "v"+"#{s.version}" }
+  # s.source           = { :git => './'}
+  s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => "v"+"#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
@@ -39,18 +39,19 @@ Pod::Spec.new do |s|
   # }
 
   #引入TMUIExtensions中所有资源文件
-  s.source_files = 'TMUIExtensions/**/*'
+  s.source_files = 'TMUIKit/TMUIExtensions/**/*'
   #公开TMUIExtensions模块中的头文件
-  s.public_header_files = 'TMUIExtensions/*.h'
+  s.public_header_files = 'TMUIKit/TMUIExtensions/*.h'
   #依赖的三方库，pod库或者可以是自身的subspec
   s.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
 
   s.subspec 'UIKit' do |ss|
-    ss.source_files = 'TMUIExtensions/UIKit'
+    ss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
+    ss.dependency 'TMUIExtensions/Foundation'
   end
 
   s.subspec 'Foundation' do |ss|
-    ss.source_files = 'TMUIExtensions/Foundation'
+    ss.source_files = 'TMUIKit/TMUIExtensions/Foundation'
   end
 
   s.dependency 'TMUICore'
