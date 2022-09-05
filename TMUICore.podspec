@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUICore'
-  s.version          = '2.0.0'
+  s.version          = '2.0.1'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -44,13 +44,4 @@ Pod::Spec.new do |s|
   s.source_files = 'TMUICore/*'
   s.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
 
-  # #TMUICore 内部方法
-  # s.subspec 'TMUICore' do |ss|
-  #   #引入TMUICore中所有资源文件
-  #   ss.source_files = 'TMUICore/*'
-  #   #公开TMUICore模块中的头文件
-  #   ss.public_header_files = 'TMUICore/*.h'
-  #   #依赖的三方库，pod库或者可以是自身的subspec
-  #   ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-  # end
 end
