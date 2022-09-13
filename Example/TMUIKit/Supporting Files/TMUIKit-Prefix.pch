@@ -13,10 +13,12 @@
 #ifdef __OBJC__
     @import UIKit;
     @import Foundation;
-#import <TMUIKit.h>
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/TMUIExtensions.h>
+#import <TMUIComponents/TMUIComponents.h>
+//#import <TMUIComponents/ChainUI.h>
 #import <Masonry.h>
 #import <ReactiveObjC.h>
-#import <ChainUI.h>
 #import "TMAppDelegate.h"
 #import "TMUIExampleConfiguration.h"
 #import "TDCommonUI.h"

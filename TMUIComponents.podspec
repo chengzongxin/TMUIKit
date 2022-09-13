@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIComponents'
-  s.version          = '2.0.1'
+  s.version          = '2.0.5'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -203,5 +203,49 @@ Pod::Spec.new do |s|
         'TMUINavigationBarUIAssets' => ['TMUIKit/TMUIComponents/TMUINavigationBar/Resource/*']
       }
   end
+
+
+    ######################## begin 以下组件在项目中暂不使用，先屏蔽，只在Demo中打开 ########################
+
+    s.subspec 'TMUITableView' do |ss|
+      ss.source_files = 'TMUIKit/TMUIComponents/TMUITableView/*.{h,m}'
+    end
+
+
+    s.subspec 'TMShowBigImageController' do |ss|
+      ss.source_files = 'TMUIKit/TMUIComponents/TMShowBigImageController/*.{h,m}'
+    end
+
+    s.subspec 'TMUIModalPresentationViewController' do |ss|
+      ss.source_files = 'TMUIKit/TMUIComponents/TMUIModalPresentationViewController/*.{h,m}'
+    end
+
+    s.subspec 'TMUITheme' do |ss|
+      ss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
+    end
+
+     #ChainUI
+     s.subspec 'ChainUI' do |ss|
+       ss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
+       ss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
+       ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
+       ss.subspec 'Private' do |sss|
+         sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
+         sss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
+       end
+       ss.subspec 'Public' do |sss|
+         sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
+         sss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
+         sss.dependency 'TMUIComponents/ChainUI/Private'
+       end
+       ss.subspec 'Chainable' do |sss|
+         sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
+         sss.dependency 'TMUIComponents/ChainUI/Public'
+         sss.dependency 'TMUIComponents/ChainUI/Private'
+       end
+     end
+
+     ########################  end 以上组件只在demo中打开  ########################
+
 
 end

@@ -9,7 +9,7 @@
 #import "TMUIPicker.h"
 #import "TMUIExtensions.h"
 #import <Masonry/Masonry.h>
-#import "TMUIKitDefines.h"
+#import <TMUICore/TMUICore.h>
 #import "TMUIPickerViewController.h"
 #import "TMUICustomCornerRadiusView.h"
 #import "TMUIMultiDatePickerViewController.h"

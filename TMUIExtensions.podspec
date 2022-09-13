@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIExtensions'
-  s.version          = '2.0.1'
+  s.version          = '2.0.5'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -52,14 +52,11 @@ Pod::Spec.new do |s|
 
   s.subspec 'UIKit' do |ss|
     ss.source_files = 'TMUIKit/TMUIExtensions/UIKit'
+    ss.dependency 'TMUIExtensions/Foundation'
   end
 
   s.subspec 'Foundation' do |ss|
     ss.source_files = 'TMUIKit/TMUIExtensions/Foundation'
-    # NSString
-    ss.subspec 'NSString' do |sss|
-      sss.source_files = 'TMUIKit/TMUIExtensions/Foundation/NSString'
-    end
   end
 
 end

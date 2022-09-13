@@ -7,7 +7,7 @@
 
 #import "TMUINavigationBarApprance.h"
 #import "TMUIExtensions.h"
-
+#import <TMUICore/TMUICore.h>
 NS_INLINE UIImage *kNavAssetsImgName(NSString *imageName) {
     return [NSBundle tmui_imageName:imageName bundleName:@"TMUINavigationBarUIAssets"]; // 位于pod中使用
 //     [UIImage tmui_imageInBundleWithName:imgName];  // 位于项目中使用

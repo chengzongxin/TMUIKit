@@ -10,7 +10,7 @@
 
 
 /// Common
-#import "TMUICore.h"
+//#import "TMUICore.h"
 
 /// UIKit
 #import "UIView+TMUI.h"

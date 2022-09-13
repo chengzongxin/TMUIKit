@@ -7,7 +7,7 @@
 
 #import "UIViewController+TMUI.h"
 #import <objc/runtime.h>
-#import <TMUIHelper.h>
+#import <TMUICore/TMUICore.h>
 
 
 @implementation UIViewController (TMUI)

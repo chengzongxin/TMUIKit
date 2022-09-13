@@ -10,7 +10,7 @@
 #import <objc/message.h>
 #import "TMUIWeakObjectContainer.h"
 #import "TMUICommonDefines.h"
-#import <TMUIAssociatedPropertyDefines.h>
+#import <TMUICore/TMUIAssociatedPropertyDefines.h>
 
 @implementation NSObject (TMUI)
 
