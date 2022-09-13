@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TMUIExtensions'
-  s.version          = '2.0.5'
+  s.version          = '2.0.6'
   s.summary          = 'TMUIKit 是个UI库，包含UI，组件，宏，库工具等。'
 
 # This description is used to generate tags and improve search results.
@@ -22,12 +22,12 @@ Pod::Spec.new do |s|
   旨在帮助快速高效的构建工程的基础设计元素，以及统一维护基础元素的版本兼容性处理，助于提高开发效率和项目质量。'
                        DESC
 
-  s.homepage         = 'http://repo.we.com/tubroker/tmuikit.git'
+  s.homepage         = 'https://github.com/chengzongxin/TMUIKit.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chengzongxin' => 'joe.cheng@corp.to8to.com' }
-  s.source           = { :git => './'}
-  # s.source           = { :git => 'http://repo.we.com/tubroker/tmuikit.git', :tag => "v"+"#{s.version}" }
+  # s.source           = { :git => './'}
+  s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => "v"+"#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
