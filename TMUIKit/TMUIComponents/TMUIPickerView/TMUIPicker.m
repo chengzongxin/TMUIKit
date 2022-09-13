@@ -49,7 +49,8 @@ return nil;
 
 - (instancetype)initDataPickerWithType:(TMUIPickerViewConfig *)config
                   numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock
-                     numberOfRowsBlock:(TMMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                     numberOfRowsBlock:(TMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                      scrollToRowBlock:(TMUIPickerScrollRowBlock)scrollBlock
                        textForRowBlock:(TMUIPickerTextForRowBlock)textBlock{
     self = [super init];
     if (self) {
@@ -57,8 +58,8 @@ return nil;
         TMUIMultiDataPicker *picker = [[TMUIMultiDataPicker alloc] initWithConfig:config];
         picker.columnsBlock = columnsBlock;
         picker.rowsBlock = rowsBlock;
+        picker.scrollBlock = scrollBlock;
         picker.textBlock = textBlock;
-        picker.scrollRowBlock = config.scrollRowBlock;
         self.picker = picker;
         [self didInitalizePicker];
     }

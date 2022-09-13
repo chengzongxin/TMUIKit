@@ -5,7 +5,7 @@ source 'git@repo.we.com:ios/tspecsrepo.git'       #私有仓库地址
 platform :ios, '9.0'
 
 target 'TMUIKit_Example' do
-  pod 'TMUIKit', :path => '../TMUIKit.podspec'
+  pod 'TMUIKit', :path => '../TMUIKit_Debug.podspec'
   pod 'LookinServer', :configurations => ['Debug']
   pod 'ReactiveObjC'
   pod 'MJRefresh'

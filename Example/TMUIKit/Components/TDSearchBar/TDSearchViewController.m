@@ -112,7 +112,7 @@ func(self, selector);
 //
 //    _navBar.titleView = search;
     TMUISearchBar *search = [[TMUISearchBar alloc] initWithStyle:TMUISearchBarStyle_City_White frame:CGRectMake(20, 500, TMUI_SCREEN_WIDTH - 40, 44)];
-    
+    search.placeholder = @"请输入";
     [self.view addSubview:search];
     
 }

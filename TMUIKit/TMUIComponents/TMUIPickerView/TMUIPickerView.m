@@ -59,7 +59,8 @@ static CGFloat const kButtonW = 70;
 
 - (instancetype)initDataPickerWithConfigBlock:(TMUIPickerConfigBlock)configBlock
                          numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock
-                            numberOfRowsBlock:(TMMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                            numberOfRowsBlock:(TMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                             scrollToRowBlock:(TMUIPickerScrollRowBlock)scrollBlock
                               textForRowBlock:(TMUIPickerTextForRowBlock)textBlock
                                selectRowBlock:(TMUIPickerSelectRowBlock)selectBlock{
     self = [super init];
@@ -69,7 +70,7 @@ static CGFloat const kButtonW = 70;
             configBlock(self.config);
         }
         [self didInitalize];
-        self.picker = [[TMUIPicker alloc] initDataPickerWithType:self.config numberOfColumnsBlock:columnsBlock numberOfRowsBlock:rowsBlock textForRowBlock:textBlock];
+        self.picker = [[TMUIPicker alloc] initDataPickerWithType:self.config numberOfColumnsBlock:columnsBlock numberOfRowsBlock:rowsBlock scrollToRowBlock:scrollBlock textForRowBlock:textBlock];
         self.selectBlock = selectBlock;
         [self setupviews];
         [self applyConfig];
@@ -169,8 +170,18 @@ static CGFloat const kButtonW = 70;
 
 
 #pragma mark 多列选择器
-+ (void)showPickerWithConfigBlock:(TMUIPickerConfigBlock _Nullable)configBlock numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock numberOfRowsBlock:(TMMUIPickerNumberOfRowInColumnBlock)rowsBlock textForRowBlock:(TMUIPickerTextForRowBlock)textBlock selectRowBlock:(TMUIPickerSelectRowBlock)selectBlock{
-    TMUIPickerView *pickerView = [[TMUIPickerView alloc] initDataPickerWithConfigBlock:configBlock numberOfColumnsBlock:columnsBlock numberOfRowsBlock:rowsBlock textForRowBlock:textBlock selectRowBlock:selectBlock];
++ (void)showPickerWithConfigBlock:(TMUIPickerConfigBlock _Nullable)configBlock
+             numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock
+                numberOfRowsBlock:(TMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                 scrollToRowBlock:(nonnull TMUIPickerScrollRowBlock)scrollBlock
+                  textForRowBlock:(TMUIPickerTextForRowBlock)textBlock
+                   selectRowBlock:(TMUIPickerSelectRowBlock)selectBlock{
+    TMUIPickerView *pickerView = [[TMUIPickerView alloc] initDataPickerWithConfigBlock:configBlock
+                                                                  numberOfColumnsBlock:columnsBlock
+                                                                     numberOfRowsBlock:rowsBlock
+                                                                      scrollToRowBlock:scrollBlock
+                                                                       textForRowBlock:textBlock
+                                                                        selectRowBlock:selectBlock];
     [pickerView show];
 }
 
@@ -344,13 +355,28 @@ static CGFloat const kButtonW = 70;
 
 
 + (void)showSinglePickerWithConfigBlock:(TMUIPickerConfigBlock _Nullable)configBlock texts:(NSArray <NSString *> *)texts selectBlock:(void (^)(NSInteger idx,NSString *text))selectBlock{
-    TMUIPickerView *pickerView = [[TMUIPickerView alloc] initDataPickerWithConfigBlock:configBlock numberOfColumnsBlock:^NSInteger{
+//    TMUIPickerView *pickerView = [[TMUIPickerView alloc] initDataPickerWithConfigBlock:configBlock numberOfColumnsBlock:^NSInteger{
+//        return 1;
+//    } numberOfRowsBlock:^NSInteger(NSInteger columnIndex, NSInteger curSelectedColumn1Row) {
+//        return texts.count;
+//    } scrollToRowBlock:^(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSInteger rowIndex) {
+//
+//    } textForRowBlock:^NSString * _Nullable(NSInteger columnIndex, NSInteger rowIndex, NSInteger curSelectedColumn1Row) {
+//        return [texts tmui_safeObjectAtIndex:rowIndex];
+//    } selectRowBlock:^(NSArray<NSIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
+//        selectBlock(indexPaths.firstObject.row,texts.firstObject);
+//    }];
+//    [pickerView show];
+    
+    TMUIPickerView *pickerView = [[TMUIPickerView alloc] initDataPickerWithConfigBlock:configBlock numberOfColumnsBlock:^NSInteger(UIPickerView * _Nonnull pickerView) {
         return 1;
-    } numberOfRowsBlock:^NSInteger(NSInteger columnIndex, NSInteger curSelectedColumn1Row) {
+    } numberOfRowsBlock:^NSInteger(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSArray <NSNumber *>*selectRows) {
         return texts.count;
-    } textForRowBlock:^NSString * _Nullable(NSInteger columnIndex, NSInteger rowIndex, NSInteger curSelectedColumn1Row) {
+    } scrollToRowBlock:^(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSInteger rowIndex, NSArray <NSNumber *>*selectRows) {
+        
+    } textForRowBlock:^NSString * _Nullable(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSInteger rowIndex, NSArray <NSNumber *>*selectRows) {
         return [texts tmui_safeObjectAtIndex:rowIndex];
-    } selectRowBlock:^(NSArray<NSIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
+    } selectRowBlock:^(NSArray<TMUIPickerIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
         selectBlock(indexPaths.firstObject.row,texts.firstObject);
     }];
     [pickerView show];

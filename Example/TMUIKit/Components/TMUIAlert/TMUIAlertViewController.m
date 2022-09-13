@@ -60,17 +60,24 @@
 
 /// MARK: demo 1
 - (void)showCityPicker{
-    [TMCityPicker showPickerWithTitle:@"选择城市" provinceItemListBlock:^NSArray * _Nonnull{
-        return [self provinces];
-    } cityItemListAtProvinceBlock:^NSArray * _Nonnull(id  _Nonnull provinceItem, NSInteger provinceIndex) {
-        return [self citiesInProvinceIndex:provinceIndex];
-    } fetchShowStringForProvinceItem:^NSString * _Nonnull(id  _Nonnull provinceItem, NSInteger provinceIndex) {
-        return provinceItem;
-    } fetchShowStringForCityItem:^NSString * _Nonnull(id  _Nonnull cityItem, NSInteger cityIndex, id  _Nonnull inProvinceItem, NSInteger provinceIndex) {
-        return cityItem;
-    } finishSelectBlock:^(id  _Nonnull selectedProvinceItem, NSInteger selectedProvinceIndex, id  _Nonnull selectedCityItem, NSInteger selectedCityIndex) {
-        TMUITipsText(selectedCityItem);
-    } curProvinceItemIndex:0 curCityItemIndex:0 fromViewController:self];
+//    [TMCityPicker showPickerWithTitle:@"选择城市" provinceItemListBlock:^NSArray * _Nonnull{
+//        return [self provinces];
+//    } cityItemListAtProvinceBlock:^NSArray * _Nonnull(id  _Nonnull provinceItem, NSInteger provinceIndex) {
+//        return [self citiesInProvinceIndex:provinceIndex];
+//    } fetchShowStringForProvinceItem:^NSString * _Nonnull(id  _Nonnull provinceItem, NSInteger provinceIndex) {
+//        return provinceItem;
+//    } fetchShowStringForCityItem:^NSString * _Nonnull(id  _Nonnull cityItem, NSInteger cityIndex, id  _Nonnull inProvinceItem, NSInteger provinceIndex) {
+//        return cityItem;
+//    } finishSelectBlock:^(id  _Nonnull selectedProvinceItem, NSInteger selectedProvinceIndex, id  _Nonnull selectedCityItem, NSInteger selectedCityIndex) {
+//        TMUITipsText(selectedCityItem);
+//    } curProvinceItemIndex:0 curCityItemIndex:0 fromViewController:self];
+    
+    float h = 297 + tmui_safeAreaBottomInset();
+    UIDatePicker *timerPicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, TMUI_SCREEN_HEIGHT- h, TMUI_SCREEN_WIDTH, h)];
+    timerPicker.datePickerMode = UIDatePickerModeDateAndTime;
+    timerPicker.minuteInterval = 10;
+    [self.view addSubview:timerPicker];
+//    _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, TMUI_SCREEN_HEIGHT, TMUI_SCREEN_WIDTH, h)];
 }
 
 - (NSArray *)provinces{

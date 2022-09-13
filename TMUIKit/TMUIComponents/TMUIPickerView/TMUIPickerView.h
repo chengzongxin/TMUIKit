@@ -11,13 +11,23 @@
 //@class TMUIMultiDatePickerResult;
 NS_ASSUME_NONNULL_BEGIN
 
+// 两级
 typedef void (^TMUIPickerConfigBlock)(TMUIPickerViewConfig *config);
-typedef NSInteger (^TMUIPickerNumberOfColumnsBlock)(void);
-typedef NSInteger (^TMMUIPickerNumberOfRowInColumnBlock)(NSInteger columnIndex, NSInteger curSelectedColumn1Row);
-typedef NSString *_Nullable(^TMUIPickerTextForRowBlock)(NSInteger columnIndex, NSInteger rowIndex, NSInteger curSelectedColumn1Row);
+// 返回多少列
+typedef NSInteger (^TMUIPickerNumberOfColumnsBlock)(UIPickerView *pickerView);
+// 返回某一列有多少行
+typedef NSInteger (^TMUIPickerNumberOfRowInColumnBlock)(UIPickerView *pickerView,NSInteger columnIndex, NSArray <NSNumber *>*selectRows);
+// 返回某一行的文本内容
+typedef NSString *_Nullable(^TMUIPickerTextForRowBlock)(UIPickerView *pickerView,NSInteger columnIndex, NSInteger rowIndex, NSArray <NSNumber *>*selectRows);
+// 返回用户滚动某一行回调
+typedef void(^TMUIPickerScrollRowBlock)(UIPickerView *pickerView,NSInteger columnIndex, NSInteger rowIndex, NSArray <NSNumber *>*selectRows);
+
+// 确认操作
 typedef void (^TMUIPickerSelectRowBlock)(NSArray <TMUIPickerIndexPath *> *indexPaths, NSArray <NSString *> *texts);
 typedef void (^TMUIPickerSelectDateBlock)(NSDate *date);
 typedef void (^TMUIPickerMultiDateSelectDateBlock)(TMUIMultiDatePickerResult *result);
+
+
 
 @interface TMUIPickerView : UIView
 
@@ -29,7 +39,8 @@ typedef void (^TMUIPickerMultiDateSelectDateBlock)(TMUIMultiDatePickerResult *re
 /// @param selectBlock 选择器确认回调方法
 + (void)showPickerWithConfigBlock:(TMUIPickerConfigBlock _Nullable)configBlock
              numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock
-                numberOfRowsBlock:(TMMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                numberOfRowsBlock:(TMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                 scrollToRowBlock:(TMUIPickerScrollRowBlock)scrollBlock
                   textForRowBlock:(TMUIPickerTextForRowBlock)textBlock
                    selectRowBlock:(TMUIPickerSelectRowBlock)selectBlock;
 
@@ -47,11 +58,12 @@ typedef void (^TMUIPickerMultiDateSelectDateBlock)(TMUIMultiDatePickerResult *re
 - (instancetype)initDatePickerWithConfigBlock:(TMUIPickerConfigBlock)configBlock
                               selectDateBlock:(TMUIPickerSelectDateBlock)selectDateBlock;
 
-- (instancetype)initDataPickerWithConfigBlock:(TMUIPickerConfigBlock)configBlock
-                         numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock
-                            numberOfRowsBlock:(TMMUIPickerNumberOfRowInColumnBlock)rowsBlock
-                              textForRowBlock:(TMUIPickerTextForRowBlock)textBlock
-                               selectRowBlock:(TMUIPickerSelectRowBlock)selectBlock;
+- (instancetype)initDataPickerWithConfigBlock:(TMUIPickerConfigBlock _Nullable)configBlock
+                         numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock _Nullable)columnsBlock
+                            numberOfRowsBlock:(TMUIPickerNumberOfRowInColumnBlock _Nullable)rowsBlock
+                             scrollToRowBlock:(TMUIPickerScrollRowBlock _Nullable)scrollBlock
+                              textForRowBlock:(TMUIPickerTextForRowBlock _Nullable)textBlock
+                               selectRowBlock:(TMUIPickerSelectRowBlock _Nullable)selectBlock;
 
 @end
 

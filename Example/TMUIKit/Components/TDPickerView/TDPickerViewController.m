@@ -8,8 +8,26 @@
 
 #import "TDPickerViewController.h"
 
+@interface THKDateModel :NSObject
+
+@property (nonatomic, assign) NSInteger year;
+@property (nonatomic, copy) NSString* value;
+@property (nonatomic, copy) NSArray<THKDateModel*>* childs;
+
+@end
+
+@implementation THKDateModel
+@end
+
 @interface TDPickerViewController ()
 @property (strong, nonatomic) NSDateFormatter * dateFormatter;
+
+@property (nonatomic, assign) NSInteger monthIndex;
+@property (nonatomic, assign) NSInteger dayIndex;
+@property (nonatomic, assign) NSInteger hourIndex;
+@property (nonatomic, assign) NSInteger minuteIndex;
+@property (nonatomic, copy) NSArray<THKDateModel*>* monthArray;
+
 @end
 
 @implementation TDPickerViewController
@@ -80,17 +98,18 @@
                               [TMUIPickerIndexPath indexPathForRow:3 inComponent:1],
                               [TMUIPickerIndexPath indexPathForRow:2 inComponent:2],
                               [TMUIPickerIndexPath indexPathForRow:4 inComponent:3]];
-    } numberOfColumnsBlock:^NSInteger{
+    } numberOfColumnsBlock:^NSInteger(UIPickerView * _Nonnull pickerView) {
         return [self provinces].count;
-    } numberOfRowsBlock:^NSInteger(NSInteger columnIndex, NSInteger curSelectedColumn1Row) {
+    } numberOfRowsBlock:^NSInteger(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSArray<NSNumber *> * _Nonnull selectRows) {
         return [self citiesInProvinceIndex:columnIndex].count;
-    } textForRowBlock:^NSString * _Nullable(NSInteger columnIndex, NSInteger rowIndex, NSInteger curSelectedColumn1Row) {
+    } scrollToRowBlock:^(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSInteger rowIndex, NSArray<NSNumber *> * _Nonnull selectRows) {
+        
+    } textForRowBlock:^NSString * _Nullable(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSInteger rowIndex, NSArray<NSNumber *> * _Nonnull selectRows) {
         return [self citiesInProvinceIndex:columnIndex][rowIndex];
-    } selectRowBlock:^(NSArray<NSIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
+    } selectRowBlock:^(NSArray<TMUIPickerIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
         NSLog(@"%@====%@",indexPaths,texts);
         TMUITipsText([texts componentsJoinedByString:@"-"]);
     }];
-    
 }
 
 - (NSArray *)provinces{
@@ -105,31 +124,234 @@
 }
 
 - (void)showConcatenationMultiPicker{
+    
     NSArray *provinces = [self provinces];
     [TMUIPickerView showPickerWithConfigBlock:^(TMUIPickerViewConfig * _Nonnull config) {
         config.title = @"城市级联选择";
         config.type = TMUIPickerViewType_MultiColumnConcatenation;
         config.defautRows = @[[TMUIPickerIndexPath indexPathForRow:3 inComponent:0],
                               [TMUIPickerIndexPath indexPathForRow:2 inComponent:1]];
-    } numberOfColumnsBlock:^NSInteger{
+    } numberOfColumnsBlock:^NSInteger(UIPickerView * _Nonnull pickerView) {
         return 2;
-    } numberOfRowsBlock:^NSInteger(NSInteger columnIndex, NSInteger curSelectedColumn1Row) {
+    } numberOfRowsBlock:^NSInteger(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSArray<NSNumber *> * _Nonnull selectRows) {
         if (columnIndex == 0) {
             return provinces.count;
         }else{
-            return [self citiesInProvinceIndex:curSelectedColumn1Row].count;
+            return [self citiesInProvinceIndex:columnIndex].count;
         }
-    } textForRowBlock:^NSString * _Nullable(NSInteger columnIndex, NSInteger rowIndex, NSInteger curSelectedColumn1Row) {
+    } scrollToRowBlock:^(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSInteger rowIndex, NSArray<NSNumber *> * _Nonnull selectRows) {
+        if (columnIndex == 0) {
+            [pickerView reloadComponent:1];
+            [pickerView selectRow:0 inComponent:1 animated:YES];
+        }
+    } textForRowBlock:^NSString * _Nullable(UIPickerView * _Nonnull pickerView, NSInteger columnIndex, NSInteger rowIndex, NSArray<NSNumber *> * _Nonnull selectRows) {
         if (columnIndex == 0) {
             return provinces[rowIndex];
         }else{
-            return [self citiesInProvinceIndex:curSelectedColumn1Row][rowIndex];
+            return [self citiesInProvinceIndex:selectRows.firstObject.intValue][rowIndex];
         }
-    } selectRowBlock:^(NSArray<NSIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
+    } selectRowBlock:^(NSArray<TMUIPickerIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
         NSLog(@"%@====%@",indexPaths,texts);
         TMUITipsText([texts componentsJoinedByString:@"-"]);
     }];
     
+    [self showConcatenationMultiPicker1];
+}
+
+- (NSInteger)daysfromYear:(NSInteger)year andMonth:(NSInteger)month
+{
+    NSInteger num_year  = year;
+    NSInteger num_month = month;
+    
+    BOOL isrunNian = num_year%4==0 ? (num_year%100==0? (num_year%400==0?YES:NO):YES):NO;
+    switch (num_month) {
+        case 1:case 3:case 5:case 7:case 8:case 10:case 12:{
+            
+            return 31;
+        }
+        case 4:case 6:case 9:case 11:{
+           
+            return 30;
+        }
+        case 2:{
+            if (isrunNian) {
+               
+                return 29;
+            }else{
+               
+                return 28;
+            }
+        }
+        default:
+            break;
+    }
+    return 0;
+}
+- (void)showConcatenationMultiPicker1{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay | NSCalendarUnitHour |NSCalendarUnitMinute;
+
+    NSDateComponents *components = [calendar components:unitFlags fromDate:[NSDate dateWithTimeIntervalSinceNow:300]];
+
+    NSInteger year = [components year];  //当前的年份
+
+    NSInteger month = [components month];  //当前的月份
+
+    NSInteger day = [components day];  // 当前的天数
+    NSInteger hour = [components hour];  // 当前的天数
+    NSInteger minute = [components minute];  // 当前的天数
+
+    minute = minute - minute % 5;
+    NSMutableArray<THKDateModel*> *monthArray = [[NSMutableArray alloc] initWithCapacity:12];
+
+    NSMutableArray<THKDateModel*> *minuteArray = [[NSMutableArray alloc] initWithCapacity:13];
+    for (int m = 0; m < 60; m+=5) {
+        THKDateModel *minuteModel = [[THKDateModel alloc] init];
+        minuteModel.value = [NSString stringWithFormat:@"%02ld分",(long)m];
+        [minuteArray addObject:minuteModel];
+    }
+
+    NSMutableArray<THKDateModel*> *hourArray = [[NSMutableArray alloc] initWithCapacity:60];
+    for (int h = 0; h <= 23; h++) {
+        THKDateModel *model = [[THKDateModel alloc] init];
+        model.value = [NSString stringWithFormat:@"%02ld点",(long)h];
+        model.childs = minuteArray;
+        [hourArray addObject:model];
+    }
+
+    for (NSInteger i = month; monthArray.count < 12; i++) {
+        if (i > 12) {
+            i = 1;
+            year++;
+        }
+        THKDateModel *model = [[THKDateModel alloc] init];
+        model.value = [NSString stringWithFormat:@"%02ld月",(long)i];
+        model.year = year;
+        NSInteger days = [self daysfromYear:year andMonth:i];
+        NSMutableArray *dayArray = [[NSMutableArray alloc] initWithCapacity:days];
+        
+        NSInteger dd = 1;
+        if (i == month) {
+            dd = day;
+        }
+        
+        for (NSInteger d = dd; d <= days; d++) {
+            THKDateModel *dayModel = [[THKDateModel alloc] init];
+            dayModel.value = [NSString stringWithFormat:@"%02ld日",(long)d];
+            if (i == month && d == day) {
+                NSArray<THKDateModel*> *curHours = [hourArray subarrayWithRange:NSMakeRange(hour, hourArray.count - hour)];
+                if (curHours.count > 0) {
+                    THKDateModel *curHour = curHours.firstObject;
+                    
+                    NSArray<THKDateModel*> *curMinutes = [curHour.childs subarrayWithRange:NSMakeRange(minute/5, curHour.childs.count - minute/5)];
+                    if (curMinutes.count > 0) {
+                        curHour.childs = curMinutes;
+                    }
+                }
+                
+                dayModel.childs = curHours;
+            }else{
+                dayModel.childs = hourArray;
+            }
+            [dayArray addObject:dayModel];
+        }
+        model.childs = dayArray;
+        [monthArray addObject:model];
+    }
+    self.monthArray = monthArray;
+//    [TMUIPickerView showPickerWithConfigBlock:^(TMUIPickerViewConfig * _Nonnull config) {
+//        config.title = @"请选择时间";
+//        config.type = TMUIPickerViewType_MultiColumnConcatenation;
+//        config.defautRows = @[[TMUIPickerIndexPath indexPathForRow:12 inComponent:0],
+//                              [TMUIPickerIndexPath indexPathForRow:1 inComponent:0],
+//                              [TMUIPickerIndexPath indexPathForRow:1 inComponent:0],
+//                              [TMUIPickerIndexPath indexPathForRow:1 inComponent:0]];
+//        config.scrollRowBlock = ^(UIPickerView * _Nonnull pickView, NSInteger rowIndex, NSInteger columnIndex) {
+//            switch(columnIndex){
+//
+//                case 0:{
+//                    self.monthIndex = rowIndex;
+//                    [pickView reloadComponent:1];
+//                    [pickView reloadComponent:2];
+//                    [pickView reloadComponent:3];
+//                }break;
+//                case 1:{
+//                    self.dayIndex = rowIndex;
+//
+//                    [pickView reloadComponent:2];
+//                    [pickView reloadComponent:3];
+//                }break;
+//                case 2:{
+//                    self.hourIndex = rowIndex;
+//                    [pickView reloadComponent:3];
+//                }break;
+//                case 3:{
+//                    self.minuteIndex = rowIndex;
+//                }break;
+//            }
+//        };
+//    } numberOfColumnsBlock:^NSInteger{
+//        return 4;
+//    } numberOfRowsBlock:^NSInteger(NSInteger columnIndex, NSInteger curSelectedColumn1Row) {
+//
+//        switch(columnIndex){
+//
+//            case 0:{
+//                return 12;
+//            }break;
+//            case 1:{
+//
+//                return monthArray[self.monthIndex].childs.count;
+//            }break;
+//            case 2:{
+//                if (self.dayIndex >= monthArray[self.monthIndex].childs.count ) {
+//                    self.dayIndex = monthArray[self.monthIndex].childs.count -1;
+//                }
+//                return monthArray[self.monthIndex].childs[self.dayIndex].childs.count;
+//            }break;
+//            case 3:{
+//
+//                if (self.dayIndex >= monthArray[self.monthIndex].childs.count ) {
+//                    self.dayIndex = monthArray[self.monthIndex].childs.count -1;
+//                }
+//                if (self.hourIndex >= monthArray[self.monthIndex].childs[self.dayIndex].childs.count ) {
+//                    self.hourIndex = monthArray[self.monthIndex].childs[self.dayIndex].childs.count -1;
+//                }
+//                return monthArray[self.monthIndex].childs[self.dayIndex].childs[self.hourIndex].childs.count;
+//            }break;
+//        }
+//        return 10;
+//    } textForRowBlock:^NSString * _Nullable(NSInteger columnIndex, NSInteger rowIndex, NSInteger curSelectedColumn1Row) {
+//
+////            NSLog(@"row =======  %d,%d,%d",columnIndex,rowIndex,self.monthIndex);
+//        switch(columnIndex){
+//            case 0:{
+//                return monthArray[rowIndex].value;
+//            }break;
+//            case 1:{
+//                return monthArray[self.monthIndex].childs[rowIndex].value;
+//            }break;
+//            case 2:{
+//                return monthArray[self.monthIndex].childs[self.dayIndex].childs[rowIndex].value;
+//            }break;
+//            case 3:{
+//                return monthArray[self.monthIndex].childs[self.dayIndex].childs[self.hourIndex].childs[rowIndex].value;
+//            }break;
+//        }
+//        return @"";
+//    } selectRowBlock:^(NSArray<NSIndexPath *> * _Nonnull indexPaths, NSArray<NSString *> * _Nonnull texts) {
+//        NSLog(@"%@====%@",indexPaths,texts);
+//        THKDateModel *month = monthArray[self.monthIndex];
+//        NSMutableString *value = [[NSMutableString alloc] initWithFormat:@"%ld-",month.year];
+//        [value appendString:[texts componentsJoinedByString:@"-"]];
+//        NSString *result = [value stringByReplacingOccurrencesOfString:@"月" withString:@""];
+//        result = [result stringByReplacingOccurrencesOfString:@"日-" withString:@" "];
+//        result = [result stringByReplacingOccurrencesOfString:@"点-" withString:@":"];
+//        result = [result stringByReplacingOccurrencesOfString:@"分" withString:@""];
+//        TMUITipsText(result);
+//    }];
+
 }
 
 /// MARK: demo 3,4,5
@@ -184,6 +406,29 @@
         [array addObject:Str(columnIndex)];
     }
     return array;
+}
+
+
+
+-(NSArray<THKDateModel*>*)currentDayArray{
+    if (self.monthIndex >= self.monthArray.count) {
+        self.monthIndex = self.monthArray.count - 1;
+    }
+    return self.monthArray[self.monthIndex].childs;
+}
+
+-(NSArray<THKDateModel*>*)currentHourArray{
+    if (self.dayIndex >= [self currentDayArray].count) {
+        self.dayIndex = [self currentDayArray].count - 1;
+    }
+    return [self currentDayArray][self.dayIndex].childs;
+}
+
+-(NSArray<THKDateModel*>*)currentMinuteArray{
+    if (self.hourIndex >= [self currentHourArray].count) {
+        self.hourIndex = [self currentHourArray].count - 1;
+    }
+    return [self currentHourArray][self.hourIndex].childs;
 }
 
 @end

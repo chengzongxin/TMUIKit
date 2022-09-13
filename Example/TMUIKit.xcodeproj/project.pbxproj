@@ -38,6 +38,7 @@
 		1632A13926454A320074424D /* TDModalPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1632A13826454A320074424D /* TDModalPresentationViewController.m */; };
 		16331EE4264664A6006FB17D /* UIImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 16331EE3264664A6006FB17D /* UIImageEffects.m */; };
 		163444AA25BA70910091D4EF /* UIButtonTMUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */; };
+		163BE0F328C092440003FCC1 /* icon_share_case_strategy_diary.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 163BE0F228C092440003FCC1 /* icon_share_case_strategy_diary.jpg */; };
 		16402B56260C1D1C00B4ADBF /* TMPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B55260C1D1C00B4ADBF /* TMPopoverViewController.m */; };
 		16402B5F260C1D4E00B4ADBF /* TMMyPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B5E260C1D4E00B4ADBF /* TMMyPopoverViewController.m */; };
 		16402B66260C28E300B4ADBF /* ChainStyleConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16402B65260C28E300B4ADBF /* ChainStyleConfigViewController.m */; };
@@ -203,6 +204,7 @@
 		16331EE3264664A6006FB17D /* UIImageEffects.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIImageEffects.m; sourceTree = "<group>"; };
 		163444A825BA70910091D4EF /* UIButtonTMUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIButtonTMUIViewController.h; sourceTree = "<group>"; };
 		163444A925BA70910091D4EF /* UIButtonTMUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIButtonTMUIViewController.m; sourceTree = "<group>"; };
+		163BE0F228C092440003FCC1 /* icon_share_case_strategy_diary.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon_share_case_strategy_diary.jpg; sourceTree = "<group>"; };
 		16402B54260C1D1C00B4ADBF /* TMPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMPopoverViewController.h; sourceTree = "<group>"; };
 		16402B55260C1D1C00B4ADBF /* TMPopoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMPopoverViewController.m; sourceTree = "<group>"; };
 		16402B5D260C1D4E00B4ADBF /* TMMyPopoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMMyPopoverViewController.h; sourceTree = "<group>"; };
@@ -629,6 +631,7 @@
 				16CDF23025EF839B00C02C98 /* UIImageTMUIViewController1.m */,
 				16CDF23525EF8E7B00C02C98 /* UIImageTMUIViewController2.h */,
 				16CDF23625EF8E7B00C02C98 /* UIImageTMUIViewController2.m */,
+				163BE0F228C092440003FCC1 /* icon_share_case_strategy_diary.jpg */,
 				16B540E425FB73320019808F /* CALayerTMUIViewController.h */,
 				16B540E525FB73320019808F /* CALayerTMUIViewController.m */,
 				169EB2E725FCA2A4008E3F07 /* CAAnimationTMUIViewController.h */,
@@ -1149,6 +1152,7 @@
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				16E8FFFA25EE281E005D8E4B /* appList.plist in Resources */,
 				3B806CC125CA75CC00B78CD1 /* VerifyViewController.xib in Resources */,
+				163BE0F328C092440003FCC1 /* icon_share_case_strategy_diary.jpg in Resources */,
 				8CD3C3D32816A17200F0FACF /* schoolListItem@2x.png in Resources */,
 				8CD3C3D82816A17200F0FACF /* item_battle@2x.png in Resources */,
 				16455E0A25B6EDEC00BBBEC2 /* Main.storyboard in Resources */,

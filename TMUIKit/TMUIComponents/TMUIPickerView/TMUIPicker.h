@@ -43,8 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// 多列级联
 - (instancetype)initDataPickerWithType:(TMUIPickerViewConfig *)config
                   numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock
-                     numberOfRowsBlock:(TMMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                     numberOfRowsBlock:(TMUIPickerNumberOfRowInColumnBlock)rowsBlock
+                      scrollToRowBlock:(TMUIPickerScrollRowBlock)scrollBlock
                        textForRowBlock:(TMUIPickerTextForRowBlock)textBlock;
+
+
 
 
 - (NSArray <TMUIPickerIndexPath *>*)selectedIndexPaths;

@@ -58,7 +58,7 @@
     Style(@"img_demo").fixWH(150,100).aspectFit;
     
     UIImage *img = Img(@"angel");
-    
+//    img = tmui_imgAtBundle(@"icon_share_case_strategy_diary.jpg");
     id a1 = AttStr(AttStr(@"Origin img\n").styles(h1),
            AttStr(Str(@"data length %zd",img.tmui_dataLength)).styles(body));
     id l1 = Label.str(a1).multiline;
