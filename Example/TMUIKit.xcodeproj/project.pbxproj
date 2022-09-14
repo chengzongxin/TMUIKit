@@ -1104,7 +1104,7 @@
 						ProvisioningStyle = Automatic;
 					};
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = SM5GN8GTPY;
+						DevelopmentTeam = 5XB293ZE6R;
 						ProvisioningStyle = Automatic;
 					};
 					6003F5AD195388D20070C39A = {
@@ -1520,7 +1520,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SM5GN8GTPY;
+				DEVELOPMENT_TEAM = 5XB293ZE6R;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMUIKit/Supporting Files/TMUIKit-Prefix.pch";
 				INFOPLIST_FILE = "TMUIKit/Supporting Files/TMUIKit-Info.plist";
@@ -1540,8 +1540,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5XB293ZE6R;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TMUIKit/Supporting Files/TMUIKit-Prefix.pch";
 				INFOPLIST_FILE = "TMUIKit/Supporting Files/TMUIKit-Info.plist";

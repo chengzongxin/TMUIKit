@@ -7,9 +7,9 @@
 //
 
 #import "TMUITableViewController1.h"
-#import <TMUIKit/TMUITableView.h>
-#import <TMUIKit/TMUITableViewCell.h>
-#import <TMUIKit/TMUITableViewHeaderFooterView.h>
+#import <TMUIComponents/TMUITableView.h>
+#import <TMUIComponents/TMUITableViewCell.h>
+#import <TMUIComponents/TMUITableViewHeaderFooterView.h>
 
 @interface TMUITableViewController1 ()<UITableViewDelegate,UITableViewDataSource>
 

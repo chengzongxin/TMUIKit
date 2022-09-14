@@ -13,7 +13,7 @@ target 'TMUIKit_Example' do
   pod 'ReactiveObjC'
   pod 'MJRefresh'
   pod 'YYWebImage'
-  
+  pod 'ChainUI', :git => 'https://github.com/chengzongxin/ChainUI.git'
   
   target 'TMUIKit_Tests' do
     inherit! :search_paths

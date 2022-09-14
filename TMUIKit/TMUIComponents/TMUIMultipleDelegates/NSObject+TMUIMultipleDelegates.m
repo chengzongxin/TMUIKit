@@ -9,7 +9,7 @@
 #import "TMUIMultipleDelegates.h"
 #import "TMUICore.h"
 #import "NSString+TMUI.h"
-#import <TMUIAssociatedPropertyDefines.h>
+#import <TMUICore/TMUICore.h>
 #import "TMUIRuntime.h"
 #import "TMUICommonDefines.h"
 

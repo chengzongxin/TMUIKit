@@ -7,10 +7,16 @@
 
 #import "TMUINavigationBar.h"
 #import <Masonry/Masonry.h>
-#import "TMUIExtensions.h"
-#import "TMUIComponents.h"
+//#import "TMUIExtensions.h"
+//#import "TMUIComponents.h"
+#import "TMUICore.h"
+#import "UIView+TMUI.h"
+#import "UIButton+TMUI.h"
+#import "UIImage+TMUI.h"
+#import "UIViewController+TMUI.h"
 #import "TMUINavigationStackView.h"
 #import "TMUINavigationBarApprance.h"
+#import "TMUIAppearance.h"
 
 CGFloat const kTMUINavBarMargin = 5;
 CGFloat const kTMUINavBarBtnW = 44.0;

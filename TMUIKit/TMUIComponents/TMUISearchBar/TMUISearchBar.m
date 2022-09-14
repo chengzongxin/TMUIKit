@@ -6,6 +6,11 @@
 //
 
 #import "TMUISearchBar.h"
+#import "NSBundle+TMUI.h"
+#import "UIButton+TMUI.h"
+#import "UIView+TMUI.h"
+#import "UIBarButtonItem+TMUI.h"
+#import "UIViewController+TMUI.h"
 
 CGFloat const TMUISearchBarHeight = 36;
 

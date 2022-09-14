@@ -6,10 +6,11 @@
 //
 
 #import "TMUITextField.h"
-#import "TMUICommonDefines.h"
+#import "TMUICore.h"
 #import "NSString+TMUI.h"
 #import "UITextField+TMUI.h"
-#import "TMUIComponents.h"
+//#import "TMUIComponents.h"
+#import "NSObject+TMUIMultipleDelegates.h"
 // 私有的类，专用于实现 TMUITextFieldDelegate，避免 self.delegate = self 的写法（以前是 TMUITextField 自己实现了 delegate）
 @interface _TMUITextFieldDelegator : NSObject <TMUITextFieldDelegate, UIScrollViewDelegate>
 

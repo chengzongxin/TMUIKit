@@ -26,8 +26,8 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chengzongxin' => 'joe.cheng@corp.to8to.com' }
-  # s.source           = { :git => './'}
-  s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => "v"+"#{s.version}" }
+  s.source           = { :git => './'}
+  # s.source           = { :git => 'https://github.com/chengzongxin/TMUIKit.git', :tag => "v"+"#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
 #  s.ios.deployment_target = '9.0'
@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
   # }
 
   #代码源文件地址，**/*表示Classes目录及其子目录下所有文件，如果有多个目录下则用逗号分开，如果需要在项目中分组显示，这里也要做相应的设置
-  s.source_files = 'TMUIKit/TMUIComponents/**/*'
+  # s.source_files = 'TMUIKit/TMUIComponents/**/*'
   s.public_header_files = 'TMUIKit/TMUIComponents/*.h'
 
   s.dependency 'Masonry'
@@ -224,27 +224,6 @@ Pod::Spec.new do |s|
     s.subspec 'TMUITheme' do |ss|
       ss.source_files = 'TMUIKit/TMUIComponents/TMUITheme/*.{h,m}'
     end
-
-     #ChainUI
-     s.subspec 'ChainUI' do |ss|
-       ss.public_header_files = 'TMUIKit/TMUIComponents/ChainUI/*.h'
-       ss.source_files = 'TMUIKit/TMUIComponents/ChainUI/*.{h,m}'
-       ss.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
-       ss.subspec 'Private' do |sss|
-         sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Private/*.{h,m}'
-         sss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Private/*.h"
-       end
-       ss.subspec 'Public' do |sss|
-         sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Public/*.{h,m}'
-         sss.public_header_files = "TMUIKit/TMUIComponents/ChainUI/Public/*.h"
-         sss.dependency 'TMUIComponents/ChainUI/Private'
-       end
-       ss.subspec 'Chainable' do |sss|
-         sss.source_files = 'TMUIKit/TMUIComponents/ChainUI/Chainable/*.{h,m}'
-         sss.dependency 'TMUIComponents/ChainUI/Public'
-         sss.dependency 'TMUIComponents/ChainUI/Private'
-       end
-     end
 
      ########################  end 以上组件只在demo中打开  ########################
 

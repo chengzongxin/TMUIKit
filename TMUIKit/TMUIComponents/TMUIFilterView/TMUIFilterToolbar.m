@@ -9,7 +9,7 @@
 #import <Masonry/Masonry.h>
 #import "TMUICore.h"
 #import "TMUIExtensions.h"
-#import "TMUIComponents.h"
+//#import "TMUIComponents.h"
 
 @interface TMUIFilterToolbar ()
 
