@@ -341,7 +341,7 @@ static UIImage *disclosureIndicatorImageDark;
 - (UIColor *)themePlaceholderColor {
 //    return UIColorGray8;
 //    return UIColorPlaceholder; // 使用这个宏会造成循环引用
-    return UIColorHex(0x979997);
+    return TMUIColorHex(0x979997);
 }
 
 - (UIColor *)themeCodeColor {
@@ -351,7 +351,7 @@ static UIImage *disclosureIndicatorImageDark;
 - (UIColor *)themeSeparatorColor {
 //    return UIColorMake(222, 224, 226);
 //    return UIColorSeparator; // 使用这个宏会造成循环引用
-    return UIColorHex(0xE2E4E2);
+    return TMUIColorHex(0xE2E4E2);
 }
 
 - (UIColor *)themeGridItemTintColor {

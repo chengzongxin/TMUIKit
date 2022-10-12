@@ -16,7 +16,7 @@ typedef void (^TMUIPickerConfigBlock)(TMUIPickerViewConfig *config);
 // 返回多少列
 typedef NSInteger (^TMUIPickerNumberOfColumnsBlock)(UIPickerView *pickerView);
 // 返回某一列有多少行
-typedef NSInteger (^TMUIPickerNumberOfRowInColumnBlock)(UIPickerView *pickerView,NSInteger columnIndex, NSArray <NSNumber *>*selectRows);
+typedef NSInteger (^TMUIPickerNumberOfRowInColumnBlock)(UIPickerView *pickerView,NSInteger columnIndex, NSArray <NSNumber *> * _Nullable selectRows);
 // 返回某一行的文本内容
 typedef NSString *_Nullable(^TMUIPickerTextForRowBlock)(UIPickerView *pickerView,NSInteger columnIndex, NSInteger rowIndex, NSArray <NSNumber *>*selectRows);
 // 返回用户滚动某一行回调

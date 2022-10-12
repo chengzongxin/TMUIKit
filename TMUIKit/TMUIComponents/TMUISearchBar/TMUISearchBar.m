@@ -336,7 +336,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
         _contentView.clipsToBounds = YES;
-        _contentView.backgroundColor = UIColorHex(F9FAF9);
+        _contentView.backgroundColor = TMUIColorHex(F9FAF9);
         _contentView.layer.borderColor = UIColorBackgroundGray.CGColor;
         _contentView.layer.cornerRadius = SearchBarCornerRadius;
         _contentView.layer.borderWidth = .5;

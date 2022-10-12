@@ -81,14 +81,14 @@
     }
     
     NSInteger rowIndex1 = componentsThis.month-1;
-    if (rowIndex1>=0 && rowIndex1 < [self numberOfRowsInComponent:1]) {
+    if (rowIndex1>=0 && self.numberOfComponents > 1 && rowIndex1 < [self numberOfRowsInComponent:1]) {
         [self selectRow:rowIndex1 inComponent:1 animated:NO];
         [self reloadComponent:1];
     }
     
     if (self.datePickerMode == TMUIDatePickerMode_YearMonthDay) {
         NSInteger rowIndex2 = componentsThis.day-1;
-        if (rowIndex2>=0 && rowIndex2 < [self numberOfRowsInComponent:2]) {
+        if (rowIndex2>=0 && self.numberOfComponents > 2 && rowIndex2 < [self numberOfRowsInComponent:2]) {
             [self selectRow:rowIndex2 inComponent:2 animated:NO];
             [self reloadComponent:2];
         }
@@ -124,7 +124,7 @@
     if (![lbl isKindOfClass:UILabel.class]) {
         lbl = [[UILabel alloc] init];
         lbl.textAlignment = NSTextAlignmentCenter;
-        lbl.textColor = UIColorHex(333333);
+        lbl.textColor = TMUIColorHex(333333);
         lbl.font = UIFont(18);
     }
     
@@ -144,13 +144,28 @@
 
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+//    NSInteger day = 1;
+//    NSInteger yearIndex = [pickerView selectedRowInComponent:0];
+//    yearIndex = MAX(0, yearIndex);
+//    NSInteger year = [self.years[yearIndex] intValue];
+//    NSInteger monthIndex = [pickerView selectedRowInComponent:1];
+//    monthIndex = MAX(0, monthIndex);
+//    NSInteger month = monthIndex+1;
+    
     NSInteger day = 1;
+    NSInteger month = 1;
+    if ([pickerView numberOfComponents] == 0) {
+        return;
+    }
     NSInteger yearIndex = [pickerView selectedRowInComponent:0];
     yearIndex = MAX(0, yearIndex);
     NSInteger year = [self.years[yearIndex] intValue];
-    NSInteger monthIndex = [pickerView selectedRowInComponent:1];
-    monthIndex = MAX(0, monthIndex);
-    NSInteger month = monthIndex+1;
+    BOOL hasMonth = self.datePickerMode == TMUIDatePickerMode_YearMonthDay || self.datePickerMode == TMUIDatePickerMode_YearMonth;
+    if (hasMonth) {
+        NSInteger monthIndex = [pickerView selectedRowInComponent:1];
+        monthIndex = MAX(0, monthIndex);
+        month = monthIndex+1;
+    }
     
     BOOL needReloadMonthComponent = NO;
     NSDateComponents* componentsMin = nil;
@@ -163,7 +178,7 @@
         
         if (year == componentsMin.year) {
             //若最小值年与选择相同则判断月是否早于最小值对应的月份
-            if (month < componentsMin.month) {
+            if (hasMonth && month < componentsMin.month) {
                 needReloadMonthComponent = YES;
                 month = componentsMin.month;
                 [pickerView selectRow:(month-1) inComponent:1 animated:YES];
@@ -179,7 +194,7 @@
         year = tYear;
         
         if (year == componentsMax.year) {
-            if (month > componentsMax.month) {
+            if (hasMonth && month > componentsMax.month) {
                 needReloadMonthComponent = YES;
                 month = componentsMax.month;
                 [pickerView selectRow:(month-1) inComponent:1 animated:YES];
@@ -306,13 +321,33 @@
 }
 
 - (NSDate*)convertToDateDay:(NSInteger)day month:(NSInteger)month year:(NSInteger)year{
+//    day = MAX(day, 1);
+//    NSDateFormatter *dateFormatter = self.dateFormatter;
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//    if (self.datePickerMode == TMUIDatePickerMode_YearMonth) {
+//        day = 1;
+//    }
+//    NSString *dateString = [NSString stringWithFormat:@"%ld-%ld-%ld", (long)year, (long)month, (long)day];
+//    return [dateFormatter dateFromString:dateString];
+    
     day = MAX(day, 1);
+    day = MIN(day, 31);
+    month = MAX(month, 1);
+    month = MIN(month, 12);
     NSDateFormatter *dateFormatter = self.dateFormatter;
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    if (self.datePickerMode == TMUIDatePickerMode_YearMonth) {
-        day = 1;
+    //[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = nil;
+    if (self.datePickerMode == TMUIDatePickerMode_YearMonthDay) {
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        dateString = [NSString stringWithFormat:@"%ld-%ld-%ld", (long)year, (long)month, (long)day];
+    } else if (self.datePickerMode == TMUIDatePickerMode_YearMonth) {
+        [dateFormatter setDateFormat:@"yyyy-MM"];
+        dateString = [NSString stringWithFormat:@"%ld-%ld", (long)year, (long)month];
+    } else if (self.datePickerMode == TMUIDatePickerMode_Year) {
+        [dateFormatter setDateFormat:@"yyyy"];
+        dateString = [NSString stringWithFormat:@"%ld", (long)year];
     }
-    NSString *dateString = [NSString stringWithFormat:@"%ld-%ld-%ld", (long)year, (long)month, (long)day];
+    //NSString *dateString = [NSString stringWithFormat:@"%ld-%ld-%ld", (long)year, (long)month, (long)day];
     return [dateFormatter dateFromString:dateString];
 }
 

@@ -153,26 +153,26 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     
     #pragma mark - Main Color
     
-    self.redColor = UIColorHex(0xFD6343);
-    self.greenColor = UIColorHex(0x22C787);
-    self.blueColor = UIColorHex(0x3A8EF0);
-    self.yellowColor = UIColorHex(0xFFC63F);
-    self.cyanColor = UIColorHex(0x1BD6DD);
-    self.orangeColor = UIColorHex(0xFF832B);
-    self.darkGreenColor = UIColorHex(0x23AD78);
+    self.redColor = TMUIColorHex(0xFD6343);
+    self.greenColor = TMUIColorHex(0x22C787);
+    self.blueColor = TMUIColorHex(0x3A8EF0);
+    self.yellowColor = TMUIColorHex(0xFFC63F);
+    self.cyanColor = TMUIColorHex(0x1BD6DD);
+    self.orangeColor = TMUIColorHex(0xFF832B);
+    self.darkGreenColor = TMUIColorHex(0x23AD78);
     
     #pragma mark - Content Color
 
-    self.darkColor = UIColorHex(0x1A1C1A);
-    self.primaryColor = UIColorHex(0x333533);
-    self.secondaryColor = UIColorHex(0x4C4E4C);
-    self.regularColor = UIColorHex(0x656866);
-    self.weakColor = UIColorHex(0x7E807E);
-    self.placeholderColor = UIColorHex(0x979997);
-    self.borderColor = UIColorHex(0xC9CBC9);
-    self.separatorColor = UIColorHex(0xE2E4E2);
-    self.backgroundGrayColor = UIColorHex(0xECEEEC);
-    self.backgroundLightColor = UIColorHex(0xF6F8F6);
+    self.darkColor = TMUIColorHex(0x1A1C1A);
+    self.primaryColor = TMUIColorHex(0x333533);
+    self.secondaryColor = TMUIColorHex(0x4C4E4C);
+    self.regularColor = TMUIColorHex(0x656866);
+    self.weakColor = TMUIColorHex(0x7E807E);
+    self.placeholderColor = TMUIColorHex(0x979997);
+    self.borderColor = TMUIColorHex(0xC9CBC9);
+    self.separatorColor = TMUIColorHex(0xE2E4E2);
+    self.backgroundGrayColor = TMUIColorHex(0xECEEEC);
+    self.backgroundLightColor = TMUIColorHex(0xF6F8F6);
     
     #pragma mark - Function Color
     self.backgroundColor = self.whiteColor;
@@ -224,7 +224,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
     #pragma mark - NavigationBar
     self.navBarItemLightColor = self.whiteColor;
     self.navBarItemThemeColor = self.greenColor;
-    self.navBarItemDarkColor = UIColorHex(333333);
+    self.navBarItemDarkColor = TMUIColorHex(333333);
     self.navBarItemFont = UIFontMake(16);
     self.navBarHighlightedAlpha = 0.2f;
     self.navBarDisabledAlpha = 0.2f;
@@ -311,7 +311,7 @@ static BOOL TMUI_hasAppliedInitialTemplate;
 //    self.badgeOffsetLandscape = TMUIBadgeInvalidateOffset;
 //    self.updatesIndicatorOffset = TMUIBadgeInvalidateOffset;
 //    self.updatesIndicatorOffsetLandscape = TMUIBadgeInvalidateOffset;
-    self.badgeGradientBackgroundColors = @[UIColorHex(FE9770),self.redColor];
+    self.badgeGradientBackgroundColors = @[TMUIColorHex(FE9770),self.redColor];
     self.badgeGradientType = 0;
     self.badgeBackgroundColor = self.redColor;                                  // BadgeBackgroundColor : TMUIBadge 上的未读数的背景色
     self.badgeTextColor = self.whiteColor;                                      // BadgeTextColor : TMUIBadge 上的未读数的文字颜色

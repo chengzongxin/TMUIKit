@@ -86,8 +86,8 @@
 
 #pragma mark - private methods
 
-#ifndef UIColorHex
-#define UIColorHex(_hex_)   [UIColor tmui_colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
+#ifndef TMUIColorHex
+#define TMUIColorHex(_hex_)   [UIColor tmui_colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
 #endif
 
 NS_INLINE UIColor * _THKColorWithHexString(NSString *hexStr) {

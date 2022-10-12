@@ -339,7 +339,7 @@ static CGFloat const kButtonW = 70;
 - (UIView *)line{
     if (!_line) {
         _line = [[UIView alloc] init];
-        _line.backgroundColor = UIColorHex(E9E9E9);
+        _line.backgroundColor = TMUIColorHex(E9E9E9);
     }
     return _line;
 }

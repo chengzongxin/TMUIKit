@@ -591,7 +591,7 @@ CGFloat const kTMUINavBarBtnH = 44.0;
     if (!_titleLbl) {
         _titleLbl = [[UILabel alloc] init];
         _titleLbl.font = UIFontMedium(18);
-        _titleLbl.textColor = UIColorHex(333333);
+        _titleLbl.textColor = TMUIColorHex(333333);
         _titleLbl.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLbl;

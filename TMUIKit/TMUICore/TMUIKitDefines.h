@@ -29,9 +29,11 @@
 ///MARK: UIColor
 //#define UIColorRGB(r, g, b)       [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
 //#define UIColorRGBA(r, g, b, a)   [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
-#ifndef UIColorHex
-#define UIColorHex(_hex_)   tmui_colorWithHexString((__bridge NSString *)CFSTR(#_hex_))
+
+#ifndef TMUIColorHex
+#define TMUIColorHex(_hex_)   tmui_colorWithHexString((__bridge NSString *)CFSTR(#_hex_))
 #endif
+
 #ifndef UIColorHexString
 #define UIColorHexString(hexStr) tmui_colorWithHexString(hexStr)
 #endif

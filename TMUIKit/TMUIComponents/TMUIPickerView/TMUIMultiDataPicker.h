@@ -11,20 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TMUIMultiDataPicker : UIPickerView <TMUIPickerProtocol>
 
-
-
-//- (instancetype)initDataPickerWithType:(TMUIPickerViewConfig *)config
-//                  numberOfColumnsBlock:(TMUIPickerNumberOfColumnsBlock)columnsBlock
-//                     numberOfRowsBlock:(TMMUIPickerNumberOfRowInColumnBlock)rowsBlock
-//                       textForRowBlock:(TMUIPickerTextForRowBlock)textBlock;
-
-
 @property (nonatomic, copy) TMUIPickerNumberOfColumnsBlock columnsBlock;
 @property (nonatomic, copy) TMUIPickerNumberOfRowInColumnBlock rowsBlock;
 @property (nonatomic, copy) TMUIPickerTextForRowBlock textBlock;
 @property (nonatomic, copy) TMUIPickerScrollRowBlock scrollBlock;
-
-//@property (nonatomic, copy) TMUIPickerForScrollRowBlock scrollRowBlock;
 
 - (void)setupDefalutRows;
 
