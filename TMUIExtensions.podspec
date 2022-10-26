@@ -44,9 +44,9 @@ Pod::Spec.new do |s|
   s.dependency 'TMUICore'
 
   #引入TMUIExtensions中所有资源文件
-  s.source_files = 'TMUIKit/TMUIExtensions/TMUIExtensions.h'
+  s.source_files = 'TMUIKit/TMUIExtensions/**/*'
   #公开TMUIExtensions模块中的头文件
-  s.public_header_files = 'TMUIKit/TMUIExtensions/TMUIExtensions.h'
+  s.public_header_files = 'TMUIKit/TMUIExtensions/*.h'
   #依赖的三方库，pod库或者可以是自身的subspec
   s.frameworks = 'Foundation', 'UIKit', 'CoreGraphics'
 

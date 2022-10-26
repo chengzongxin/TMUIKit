@@ -394,6 +394,9 @@ const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
 
 - (NSIndexPath *)tmui_lastIndexPath{
     int section = (int)[self numberOfSections] - 1;
+    if (section < 0) {
+        return nil;
+    }
     int row = (int)[self numberOfRowsInSection:section] - 1;
     if (section < 0 || row < 0) {
         return nil;
