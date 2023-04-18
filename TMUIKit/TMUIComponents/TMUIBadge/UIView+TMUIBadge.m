@@ -7,12 +7,12 @@
 //
 
 #import "UIView+TMUIBadge.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "TMUILabel.h"
-#import "UIView+TMUI.h"
-#import "UITabBarItem+TMUI.h"
-#import "TMUIConfigurationMacros.h"
-#import "UIColor+TMUI.h"
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/UITabBarItem+TMUI.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
+#import <TMUIExtensions/UIColor+TMUI.h>
 
 @protocol _TMUIBadgeViewProtocol <NSObject>
 
@@ -122,8 +122,10 @@ static char kAssociatedObjectKey_badgeLocation;
         {
             self.tmui_badgeOffsetLandscape = TMUIBadgeInvalidateOffset;
             self.tmui_badgeOffset = TMUIBadgeInvalidateOffset;
+            BeginIgnoreDeprecatedWarning
             self.tmui_badgeCenterOffset = CGPointZero;
             self.tmui_badgeCenterOffsetLandscape = CGPointZero;
+            EndIgnoreDeprecatedWarning
         }
             break;
             

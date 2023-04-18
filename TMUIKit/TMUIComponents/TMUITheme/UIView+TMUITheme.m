@@ -7,22 +7,22 @@
 
 
 #import "UIView+TMUITheme.h"
-#import "TMUIKitDefines.h"
-#import "TMUIAssociatedPropertyDefines.h"
-#import "TMUICommonDefines.h"
-#import "UIView+TMUI.h"
-#import "UIColor+TMUI.h"
-#import "UIImage+TMUI.h"
+#import <TMUICore/TMUIKitDefines.h>
+#import <TMUICore/TMUIAssociatedPropertyDefines.h>
+#import <TMUICore/TMUICommonDefines.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/UIColor+TMUI.h>
+#import <TMUIExtensions/UIImage+TMUI.h>
 #import "UIImage+TMUITheme.h"
 #import "UIVisualEffect+TMUITheme.h"
 #import "TMUIThemeManagerCenter.h"
-#import "CALayer+TMUI.h"
+#import <TMUIExtensions/CALayer+TMUI.h>
 #import "TMUIThemeManager.h"
 #import "TMUIThemePrivate.h"
-#import "NSObject+TMUI.h"
-#import "UITextInputTraits+TMUI.h"
-#import "TMUIRuntime.h"
-#import "TMUIConfigurationMacros.h"
+#import <TMUIExtensions/NSObject+TMUI.h>
+#import <TMUIExtensions/UITextInputTraits+TMUI.h>
+#import <TMUICore/TMUIRuntime.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
 @implementation UIView (TMUITheme)
 
 TMUISynthesizeIdCopyProperty(tmui_themeDidChangeBlock, setTmui_themeDidChangeBlock)

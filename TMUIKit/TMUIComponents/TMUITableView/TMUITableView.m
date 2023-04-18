@@ -6,8 +6,8 @@
 //
 
 #import "TMUITableView.h"
-#import "UITableView+TMUI.h"
-#import "UIView+TMUI.h"
+#import <TMUIExtensions/UITableView+TMUI.h>
+#import <TMUIExtensions/UIView+TMUI.h>
 
 
 @implementation TMUITableView

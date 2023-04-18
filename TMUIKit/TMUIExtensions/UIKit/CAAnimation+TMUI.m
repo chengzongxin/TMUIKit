@@ -6,8 +6,7 @@
 //
 
 #import "CAAnimation+TMUI.h"
-#import "TMUIRuntime.h"
-//#import "TMUIMultipleDelegates.h"
+#import <TMUICore/TMUICore.h>
 
 @interface _TMUICAAnimationDelegator : NSObject<CAAnimationDelegate>
 

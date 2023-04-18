@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArray (SetupFilterModel)
 
-@property (nonatomic, copy) NSArray <TMUIFilterItemModel *> *filterItemModels;
+@property (nonatomic, copy ,readonly) NSArray <TMUIFilterItemModel *> *filterItemModels;
 
 @end
 

@@ -7,7 +7,7 @@
 
 #import "TMUIMultipleDelegates.h"
 #import <objc/runtime.h>
-#import "NSObject+TMUI.h"
+#import <TMUIExtensions/NSObject+TMUI.h>
 
 @interface TMUIMultipleDelegates ()
 

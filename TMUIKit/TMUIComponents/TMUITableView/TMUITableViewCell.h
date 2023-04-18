@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UITableView+TMUI.h"
+#import <TMUIExtensions/UITableView+TMUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

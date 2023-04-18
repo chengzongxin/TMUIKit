@@ -6,13 +6,13 @@
 //
 
 #import "TMUIToastView.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "TMUIToastAnimator.h"
 #import "TMUIToastContentView.h"
 #import "TMUIToastBackgroundView.h"
 //#import "TMUIKeyboardManager.h"
-#import "UIView+TMUI.h"
-#import "TMUIConfigurationMacros.h"
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
 
 static NSMutableArray <TMUIToastView *> *kToastViews = nil;
 
@@ -142,7 +142,7 @@ static NSMutableArray <TMUIToastView *> *kToastViews = nil;
     CGFloat contentWidth = CGRectGetWidth(self.parentView.bounds);
     CGFloat contentHeight = CGRectGetHeight(self.parentView.bounds);
     
-    UIEdgeInsets marginInsets = UIEdgeInsetsConcat(self.marginInsets, self.parentView.safeAreaInsets);
+    UIEdgeInsets marginInsets = UIEdgeInsetsConcat(self.marginInsets, self.parentView.tmui_safeAreaInsets);
     
     CGFloat limitWidth = contentWidth - UIEdgeInsetsGetHorizontalValue(marginInsets);
     CGFloat limitHeight = contentHeight - UIEdgeInsetsGetVerticalValue(marginInsets);

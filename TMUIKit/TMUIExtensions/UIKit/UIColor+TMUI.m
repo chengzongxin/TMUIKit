@@ -7,7 +7,7 @@
 
 #import "UIColor+TMUI.h"
 #import "NSObject+TMUI.h"
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUICore.h>
 
 @implementation UIColor (TMUI)
 
@@ -230,6 +230,8 @@
             end = CGPointMake(0.0, imgSize.height);
             break;
         default:
+            start = CGPointMake(0.0, 0.0);
+            end = CGPointMake(imgSize.width, 0.0);
             break;
     }
     

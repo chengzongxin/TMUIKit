@@ -8,9 +8,7 @@
 #import "NSObject+TMUI.h"
 #import "NSString+TMUI.h"
 #import <objc/message.h>
-#import "TMUIWeakObjectContainer.h"
-#import "TMUICommonDefines.h"
-#import <TMUICore/TMUIAssociatedPropertyDefines.h>
+#import <TMUICore/TMUICore.h>
 
 @implementation NSObject (TMUI)
 

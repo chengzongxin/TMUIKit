@@ -9,10 +9,7 @@
 #import "NSObject+TMUI.h"
 #import "UIView+TMUI.h"
 #import "UIColor+TMUI.h"
-#import "TMUIAssociatedPropertyDefines.h"
-#import "TMUIRuntime.h"
-#import "TMUIKitDefines.h"
-#import "TMUICoreGraphicsDefines.h"
+#import <TMUICore/TMUICore.h>
 
 @interface CALayer ()
 

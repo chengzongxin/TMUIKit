@@ -9,9 +9,7 @@
 #import "NSObject+TMUI.h"
 #import "UIColor+TMUI.h"
 #import <objc/runtime.h>
-#import "TMUICoreGraphicsDefines.h"
-#import "TMUIKitDefines.h"
-#import "TMUIHelper.h"
+#import <TMUICore/TMUICore.h>
 #import "NSArray+TMUI.h"
 #import "UIView+TMUI.h"
 

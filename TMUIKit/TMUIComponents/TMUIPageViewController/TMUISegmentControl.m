@@ -6,8 +6,8 @@
 //
 
 #import "TMUISegmentControl.h"
-#import "TMUIExtensions.h"
-#import "TMUICore.h"
+#import <TMUIExtensions/TMUIExtensions.h>
+#import <TMUICore/TMUICore.h>
 //#import <GECommonEventTracker.h>
 
 @interface TMUISegmentControl ()<UIScrollViewDelegate>
@@ -256,7 +256,7 @@
 }
 
 - (CGRect)getButtonRect:(UIButton *)button index:(NSInteger)index {
-    CGRect rect = [self convertRect:button.frame toView:self];
+//    CGRect rect = [self convertRect:button.frame toView:self];
     return CGRectMake(button.centerX - self.indicatorView.width / 2, self.indicatorView.top, self.indicatorView.width, self.indicatorView.height);
 }
 

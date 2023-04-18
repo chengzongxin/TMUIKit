@@ -11,9 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TMUISegmentCell : UICollectionViewCell
 
-- (void)updateItem:(TMUISegmentModel *)item;
-
-- (void)updateItem:(TMUISegmentModel *)item isHomeStyle:(BOOL)isHomeStyle;
+//- (void)updateItem:(TMUISegmentModel *)item;
+//
+//- (void)updateItem:(TMUISegmentModel *)item isHomeStyle:(BOOL)isHomeStyle;
 
 @end
 

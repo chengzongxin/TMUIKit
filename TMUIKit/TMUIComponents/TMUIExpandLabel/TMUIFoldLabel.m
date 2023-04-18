@@ -7,8 +7,8 @@
 
 #import "TMUIFoldLabel.h"
 #import <CoreText/CoreText.h>
-#import "NSAttributedString+TMUI.h"
-#import "TMUICore.h"
+#import <TMUIExtensions/NSAttributedString+TMUI.h>
+#import <TMUICore/TMUICore.h>
 @interface TMUIFoldLabel ()
 
 /// 原始富文本
@@ -52,7 +52,7 @@
     self.font = [UIFont systemFontOfSize:12];
     self.isFold = YES;
     self.isAutoRefreshContentWhenClickFold = YES;
-    self.foldColor = TMUIColorHex(2C82EC);
+    self.foldColor = tmui_colorWithHexString(@"0x2C82EC");
     self.userInteractionEnabled = YES;
     [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLabel:)]];
 }

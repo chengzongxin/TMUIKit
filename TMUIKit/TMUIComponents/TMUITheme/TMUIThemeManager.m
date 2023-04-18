@@ -7,11 +7,11 @@
 
 
 #import "TMUIThemeManager.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "UIView+TMUITheme.h"
 #import "UIViewController+TMUITheme.h"
 #import "TMUIThemePrivate.h"
-#import "UITraitCollection+TMUI.h"
+#import <TMUIExtensions/UITraitCollection+TMUI.h>
 
 NSString *const TMUIThemeDidChangeNotification = @"TMUIThemeDidChangeNotification";
 

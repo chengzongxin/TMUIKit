@@ -8,10 +8,10 @@
 
 #import "TMUICellHeightCache.h"
 #import "TMUITableViewProtocols.h"
-#import "TMUICore.h"
-#import "UIScrollView+TMUI.h"
-#import "UITableView+TMUI.h"
-#import "UIView+TMUI.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/UIScrollView+TMUI.h>
+#import <TMUIExtensions/UITableView+TMUI.h>
+#import <TMUIExtensions/UIView+TMUI.h>
 //#import "NSNumber+TMUI.h"
 
 const CGFloat kTMUICellHeightInvalidCache = -1;

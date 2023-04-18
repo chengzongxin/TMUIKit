@@ -6,12 +6,11 @@
 //
 
 #import "UITableView+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "UIScrollView+TMUI.h"
 #import "NSObject+TMUI.h"
 //#import "CALayer+TMUI.h"
 #import "UIView+TMUI.h"
-#import "TMUIConfigurationMacros.h"
 
 const NSUInteger kFloatValuePrecision = 4;// 统一一个小数点运算精度
 

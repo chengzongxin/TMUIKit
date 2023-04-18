@@ -6,7 +6,7 @@
 //
 
 #import "UICollectionViewCell+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 @interface UICollectionViewCell ()
 @property(nonatomic, strong) UIView *tmuicvc_selectedBackgroundView;

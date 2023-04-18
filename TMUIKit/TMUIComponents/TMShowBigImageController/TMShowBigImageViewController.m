@@ -7,7 +7,7 @@
 
 #import "TMShowBigImageViewController.h"
 #import "TMShowImageAnimatorTransition.h"
-#import "UIView+TMUI.h"
+#import <TMUIExtensions/UIView+TMUI.h>
 #import <Masonry/Masonry.h>
 
 @interface TMShowBigImageViewController () <UICollectionViewDataSource,UICollectionViewDelegate>

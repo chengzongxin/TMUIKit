@@ -15,9 +15,13 @@
 #define kCurrentWindow [[UIApplication sharedApplication].windows firstObject]
 
 // 屏幕高度
+#ifndef kScreenHeight
 #define kScreenHeight CGRectGetHeight([UIScreen mainScreen].bounds)
+#endif
 // 屏幕宽
+#ifndef kScreenWidth
 #define kScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds)
+#endif
 
 //statusbar、navBar、tabbar
 #define STATUS_BAR_HEIGHT [UIApplication sharedApplication].statusBarFrame.size.height

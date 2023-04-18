@@ -52,10 +52,6 @@
 #import "TMShowBigImageViewController.h"
 #endif
 
-#if __has_include("ChainUI.h")
-#import "ChainUI.h"
-#endif
-
 #if __has_include("TMUITableView.h")
 #import "TMUITableView.h"
 #endif

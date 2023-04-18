@@ -6,7 +6,7 @@
 //
 
 #import "TMUITimer.h"
-#import "NSTimer+TMUI.h"
+#import <TMUIExtensions/NSTimer+TMUI.h>
 
 @interface TMUITimer ()
 

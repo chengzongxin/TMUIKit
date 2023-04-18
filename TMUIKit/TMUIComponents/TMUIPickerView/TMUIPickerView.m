@@ -7,7 +7,7 @@
 
 #import "TMUIPickerView.h"
 #import "TMUIPicker.h"
-#import "TMUIExtensions.h"
+#import <TMUIExtensions/TMUIExtensions.h>
 #import <Masonry/Masonry.h>
 #import <TMUICore/TMUICore.h>
 #import "TMUIPickerViewController.h"
@@ -339,7 +339,7 @@ static CGFloat const kButtonW = 70;
 - (UIView *)line{
     if (!_line) {
         _line = [[UIView alloc] init];
-        _line.backgroundColor = TMUIColorHex(E9E9E9);
+        _line.backgroundColor = UIColorHexString(@"0xE9E9E9");
     }
     return _line;
 }

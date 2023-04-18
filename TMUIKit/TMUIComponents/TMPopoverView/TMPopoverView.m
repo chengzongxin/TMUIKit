@@ -7,9 +7,9 @@
 
 #import "TMPopoverView.h"
 #import <Masonry/Masonry.h>
-#import "TMUICore.h"
-#import "TMUIExtensions.h"
-#import "TMUIWeakObjectContainer.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/TMUIExtensions.h>
+#import <TMUICore/TMUIWeakObjectContainer.h>
 #import <objc/runtime.h>
 
 

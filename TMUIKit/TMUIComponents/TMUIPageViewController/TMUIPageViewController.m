@@ -8,8 +8,8 @@
 
 
 #import "TMUIPageViewController.h"
-#import "TMUICore.h"
-#import "TMUIExtensions.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/TMUIExtensions.h>
 #import "TMUIMultipleDelegates.h"
 #import <Masonry/Masonry.h>
 
@@ -42,7 +42,7 @@ static NSString *const kParentVC = @"kParentVC";
 static const CGFloat kSliderBarStartX = 0;
 
 
-@interface TMUIPageViewController () <UIScrollViewDelegate,UIPageViewControllerDataSource,UIPageViewControllerDelegate>
+@interface TMUIPageViewController () <UIScrollViewDelegate,UIPageViewControllerDataSource,UIPageViewControllerDelegate,TMUIPageWrapperScrollViewDelegate>
 
 // component
 @property (nonatomic, strong) _TMUIPageHeaderVisualEffectView *effectView;

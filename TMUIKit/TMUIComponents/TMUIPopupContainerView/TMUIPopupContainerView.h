@@ -105,7 +105,7 @@ typedef NS_ENUM(NSUInteger, TMUIPopupContainerViewLayoutDirection) {
 @property(nonatomic, strong) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;
 
 /// 浮层点击 highlighted 时的背景色，作用区域为箭头+圆角矩形区域
-@property(nonatomic, strong) UIColor *highlightedBackgroundColor UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong, nullable) UIColor *highlightedBackgroundColor UI_APPEARANCE_SELECTOR;
 
 /// 当使用方法 2 显示并且打开了 automaticallyHidesWhenUserTap 时，可修改背景遮罩的颜色，默认为 UIColorMask，若非使用方法 2，或者没有打开 automaticallyHidesWhenUserTap，则背景遮罩为透明（可视为不存在背景遮罩）
 @property(nonatomic, strong) UIColor *maskViewBackgroundColor UI_APPEARANCE_SELECTOR;

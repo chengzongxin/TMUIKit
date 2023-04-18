@@ -8,9 +8,9 @@
 
 #import "UIColor+TMUITheme.h"
 #import "TMUIThemeManager.h"
-#import "NSObject+TMUI.h"
-#import "NSMethodSignature+TMUI.h"
-#import "UIColor+TMUI.h"
+#import <TMUIExtensions/NSObject+TMUI.h>
+#import <TMUIExtensions/NSMethodSignature+TMUI.h>
+#import <TMUIExtensions/UIColor+TMUI.h>
 #import "TMUIThemePrivate.h"
 #import "TMUIThemeManagerCenter.h"
 

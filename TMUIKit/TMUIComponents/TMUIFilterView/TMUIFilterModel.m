@@ -6,7 +6,7 @@
 //
 
 #import "TMUIFilterModel.h"
-#import "NSArray+TMUI.h"
+#import <TMUIExtensions/NSArray+TMUI.h>
 @implementation TMUIFilterItemModel
 
 + (instancetype)modelWithText:(NSString *)text{

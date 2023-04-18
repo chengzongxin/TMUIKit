@@ -8,12 +8,12 @@
 
 #import "TMUIModalPresentationViewController.h"
 #import "TMUIAppearance.h"
-#import "TMUICore.h"
-#import "UIView+TMUI.h"
-#import "TMUIHelper.h"
-#import "TMUIConfigurationMacros.h"
-#import "TMUICommonDefines.h"
-#import "UIViewController+TMUI.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUICore/TMUIHelper.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
+#import <TMUICore/TMUICommonDefines.h>
+#import <TMUIExtensions/UIViewController+TMUI.h>
 @interface UIViewController ()
 
 @property(nonatomic, weak, readwrite) TMUIModalPresentationViewController *tmui_modalPresentationViewController;

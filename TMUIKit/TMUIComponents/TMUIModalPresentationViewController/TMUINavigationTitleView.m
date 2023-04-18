@@ -6,16 +6,16 @@
 //
 
 #import "TMUINavigationTitleView.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 //#import "UIFont+TMUI.h"
-#import "UIImage+TMUI.h"
-#import "UILabel+TMUI.h"
+#import <TMUIExtensions/UIImage+TMUI.h>
+#import <TMUIExtensions/UILabel+TMUI.h>
 //#import "UIActivityIndicatorView+TMUI.h"
-#import "UIViewController+TMUI.h"
-#import "UIView+TMUI.h"
-#import "UINavigationItem+TMUI.h"
+#import <TMUIExtensions/UIViewController+TMUI.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/UINavigationItem+TMUI.h>
 #import "TMUIAppearance.h"
-#import "TMUIConfigurationMacros.h"
+#import <TMUICore/TMUIConfigurationMacros.h>
 
 @interface TMUINavigationTitleView ()
 

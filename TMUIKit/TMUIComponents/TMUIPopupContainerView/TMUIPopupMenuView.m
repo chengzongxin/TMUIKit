@@ -6,12 +6,12 @@
 //
 
 #import "TMUIPopupMenuView.h"
-#import "TMUICore.h"
-#import "UIView+TMUI.h"
-#import "CALayer+TMUI.h"
-#import "NSArray+TMUI.h"
-#import "TMUIConfigurationMacros.h"
-#import "TMUICommonDefines.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/CALayer+TMUI.h>
+#import <TMUIExtensions/NSArray+TMUI.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
+#import <TMUICore/TMUICommonDefines.h>
 
 @interface TMUIPopupMenuView ()
 

@@ -6,7 +6,7 @@
 //
 
 #import "TMUIPickerViewController.h"
-#import "UIView+TMUI.h"
+#import <TMUIExtensions/UIView+TMUI.h>
 
 @interface TMUIPickerViewController ()
 @property (nonatomic, weak)UIViewController *pVc;

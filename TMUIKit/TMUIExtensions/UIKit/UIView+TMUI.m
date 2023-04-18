@@ -7,21 +7,15 @@
 
 #import "UIView+TMUI.h"
 #import <objc/runtime.h>
-#import "TMUIWeakObjectContainer.h"
-#import "TMUICoreGraphicsDefines.h"
-#import "TMUIAssociatedPropertyDefines.h"
+#import <TMUICore/TMUICore.h>
 #import "UIImage+TMUI.h"
 #import "UIColor+TMUI.h"
 #import "NSArray+TMUI.h"
-#import "TMUIHelper.h"
-#import "TMUIRuntime.h"
 #import "CALayer+TMUI.h"
 #import "NSObject+TMUI.h"
 
 @implementation UIView (TMUI)
 TMUISynthesizeBOOLProperty(tmui_tintColorCustomized, setTmui_tintColorCustomized)
-TMUISynthesizeIdCopyProperty(tmui_frameWillChangeBlock, setTmui_frameWillChangeBlock)
-TMUISynthesizeIdCopyProperty(tmui_frameDidChangeBlock, setTmui_frameDidChangeBlock)
 //+ (void)load {
 //    static dispatch_once_t onceToken;
 //    dispatch_once(&onceToken, ^{
@@ -93,43 +87,6 @@ static char kAssociatedObjectKey_outsideEdge;
 
 - (UIEdgeInsets)tmui_outsideEdge {
     return [((NSNumber *)objc_getAssociatedObject(self, &kAssociatedObjectKey_outsideEdge)) UIEdgeInsetsValue];
-}
-
-
-static char kAssociatedObjectKey_tintColorDidChangeBlock;
-- (void)setTmui_tintColorDidChangeBlock:(void (^)(__kindof UIView * _Nonnull))tmui_tintColorDidChangeBlock {
-    objc_setAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock, tmui_tintColorDidChangeBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    if (tmui_tintColorDidChangeBlock) {
-        [TMUIHelper executeBlock:^{
-            ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(tintColorDidChange), ^(UIView *selfObject) {
-                if (selfObject.tmui_tintColorDidChangeBlock) {
-                    selfObject.tmui_tintColorDidChangeBlock(selfObject);
-                }
-            });
-        } oncePerIdentifier:@"UIView (TMUI) tintColorDidChangeBlock"];
-    }
-}
-
-- (void (^)(__kindof UIView * _Nonnull))tmui_tintColorDidChangeBlock {
-    return (void (^)(__kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock);
-}
-
-static char kAssociatedObjectKey_hitTestBlock;
-- (void)setTmui_hitTestBlock:(__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))tmui_hitTestBlock {
-    objc_setAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock, tmui_hitTestBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    [TMUIHelper executeBlock:^{
-        ExtendImplementationOfNonVoidMethodWithTwoArguments([UIView class], @selector(hitTest:withEvent:), CGPoint, UIEvent *, UIView *, ^UIView *(UIView *selfObject, CGPoint point, UIEvent *event, UIView *originReturnValue) {
-            if (selfObject.tmui_hitTestBlock) {
-                UIView *view = selfObject.tmui_hitTestBlock(point, event, originReturnValue);
-                return view;
-            }
-            return originReturnValue;
-        });
-    } oncePerIdentifier:@"UIView (TMUI) hitTestBlock"];
-}
-
-- (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))tmui_hitTestBlock {
-    return (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock);
 }
 
 - (void)setTmui_frameApplyTransform:(CGRect)tmui_frameApplyTransform {
@@ -451,6 +408,7 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
 
 @implementation UIView (TMUI_Block)
 
+
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -577,6 +535,90 @@ const CGFloat TMUIViewSelfSizingHeight = INFINITY;
         });
     });
 }
+
+
+TMUISynthesizeIdCopyProperty(tmui_frameWillChangeBlock, setTmui_frameWillChangeBlock)
+TMUISynthesizeIdCopyProperty(tmui_frameDidChangeBlock, setTmui_frameDidChangeBlock)
+
+
+static char kAssociatedObjectKey_layoutSubviewsBlock;
+- (void)setTmui_layoutSubviewsBlock:(void (^)(__kindof UIView * _Nonnull))tmui_layoutSubviewsBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock, tmui_layoutSubviewsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    Class viewClass = self.class;
+    [TMUIHelper executeBlock:^{
+        ExtendImplementationOfVoidMethodWithoutArguments(viewClass, @selector(layoutSubviews), ^(__kindof UIView *selfObject) {
+            if (selfObject.tmui_layoutSubviewsBlock && [selfObject isMemberOfClass:viewClass]) {
+                selfObject.tmui_layoutSubviewsBlock(selfObject);
+            }
+        });
+    } oncePerIdentifier:[NSString stringWithFormat:@"UIView %@-%@", NSStringFromClass(viewClass), NSStringFromSelector(@selector(layoutSubviews))]];
+}
+
+- (void (^)(__kindof UIView * _Nonnull __strong))tmui_layoutSubviewsBlock {
+    return objc_getAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock);
+}
+
+
+static char kAssociatedObjectKey_sizeThatFitsBlock;
+- (void)setTmui_sizeThatFitsBlock:(CGSize (^)(__kindof UIView * _Nonnull, CGSize, CGSize))tmui_sizeThatFitsBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_sizeThatFitsBlock, tmui_sizeThatFitsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    
+    if (!tmui_sizeThatFitsBlock) return;
+    
+    // Extend 每个实例对象的类是为了保证比子类的 sizeThatFits 逻辑要更晚调用
+    Class viewClass = self.class;
+    [TMUIHelper executeBlock:^{
+        ExtendImplementationOfNonVoidMethodWithSingleArgument(viewClass, @selector(sizeThatFits:), CGSize, CGSize, ^CGSize(UIView *selfObject, CGSize firstArgv, CGSize originReturnValue) {
+            if (selfObject.tmui_sizeThatFitsBlock && [selfObject isMemberOfClass:viewClass]) {
+                originReturnValue = selfObject.tmui_sizeThatFitsBlock(selfObject, firstArgv, originReturnValue);
+            }
+            return originReturnValue;
+        });
+    } oncePerIdentifier:[NSString stringWithFormat:@"UIView %@-%@", NSStringFromClass(viewClass), NSStringFromSelector(@selector(sizeThatFits:))]];
+}
+
+- (CGSize (^)(__kindof UIView * _Nonnull, CGSize, CGSize))tmui_sizeThatFitsBlock {
+    return objc_getAssociatedObject(self, &kAssociatedObjectKey_sizeThatFitsBlock);
+}
+
+
+static char kAssociatedObjectKey_hitTestBlock;
+- (void)setTmui_hitTestBlock:(__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))tmui_hitTestBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock, tmui_hitTestBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    [TMUIHelper executeBlock:^{
+        ExtendImplementationOfNonVoidMethodWithTwoArguments([UIView class], @selector(hitTest:withEvent:), CGPoint, UIEvent *, UIView *, ^UIView *(UIView *selfObject, CGPoint point, UIEvent *event, UIView *originReturnValue) {
+            if (selfObject.tmui_hitTestBlock) {
+                UIView *view = selfObject.tmui_hitTestBlock(point, event, originReturnValue);
+                return view;
+            }
+            return originReturnValue;
+        });
+    } oncePerIdentifier:@"UIView (TMUI) hitTestBlock"];
+}
+
+- (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))tmui_hitTestBlock {
+    return (__kindof UIView * _Nonnull (^)(CGPoint, UIEvent * _Nonnull, __kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_hitTestBlock);
+}
+
+
+static char kAssociatedObjectKey_tintColorDidChangeBlock;
+- (void)setTmui_tintColorDidChangeBlock:(void (^)(__kindof UIView * _Nonnull))tmui_tintColorDidChangeBlock {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock, tmui_tintColorDidChangeBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    if (tmui_tintColorDidChangeBlock) {
+        [TMUIHelper executeBlock:^{
+            ExtendImplementationOfVoidMethodWithoutArguments([UIView class], @selector(tintColorDidChange), ^(UIView *selfObject) {
+                if (selfObject.tmui_tintColorDidChangeBlock) {
+                    selfObject.tmui_tintColorDidChangeBlock(selfObject);
+                }
+            });
+        } oncePerIdentifier:@"UIView (TMUI) tintColorDidChangeBlock"];
+    }
+}
+
+- (void (^)(__kindof UIView * _Nonnull))tmui_tintColorDidChangeBlock {
+    return (void (^)(__kindof UIView * _Nonnull))objc_getAssociatedObject(self, &kAssociatedObjectKey_tintColorDidChangeBlock);
+}
+
 
 @end
 
@@ -1428,45 +1470,6 @@ static char kAssociatedObjectKey_shouldShowDebugColor;
 - (BOOL)tmui_shouldShowDebugColor {
     BOOL flag = [objc_getAssociatedObject(self, &kAssociatedObjectKey_shouldShowDebugColor) boolValue];
     return flag;
-}
-
-static char kAssociatedObjectKey_layoutSubviewsBlock;
-- (void)setTmui_layoutSubviewsBlock:(void (^)(__kindof UIView * _Nonnull))tmui_layoutSubviewsBlock {
-    objc_setAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock, tmui_layoutSubviewsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    Class viewClass = self.class;
-    [TMUIHelper executeBlock:^{
-        ExtendImplementationOfVoidMethodWithoutArguments(viewClass, @selector(layoutSubviews), ^(__kindof UIView *selfObject) {
-            if (selfObject.tmui_layoutSubviewsBlock && [selfObject isMemberOfClass:viewClass]) {
-                selfObject.tmui_layoutSubviewsBlock(selfObject);
-            }
-        });
-    } oncePerIdentifier:[NSString stringWithFormat:@"UIView %@-%@", NSStringFromClass(viewClass), NSStringFromSelector(@selector(layoutSubviews))]];
-}
-
-- (void (^)(UIView * _Nonnull))tmui_layoutSubviewsBlock {
-    return objc_getAssociatedObject(self, &kAssociatedObjectKey_layoutSubviewsBlock);
-}
-
-static char kAssociatedObjectKey_sizeThatFitsBlock;
-- (void)setTmui_sizeThatFitsBlock:(CGSize (^)(__kindof UIView * _Nonnull, CGSize, CGSize))tmui_sizeThatFitsBlock {
-    objc_setAssociatedObject(self, &kAssociatedObjectKey_sizeThatFitsBlock, tmui_sizeThatFitsBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    
-    if (!tmui_sizeThatFitsBlock) return;
-    
-    // Extend 每个实例对象的类是为了保证比子类的 sizeThatFits 逻辑要更晚调用
-    Class viewClass = self.class;
-    [TMUIHelper executeBlock:^{
-        ExtendImplementationOfNonVoidMethodWithSingleArgument(viewClass, @selector(sizeThatFits:), CGSize, CGSize, ^CGSize(UIView *selfObject, CGSize firstArgv, CGSize originReturnValue) {
-            if (selfObject.tmui_sizeThatFitsBlock && [selfObject isMemberOfClass:viewClass]) {
-                originReturnValue = selfObject.tmui_sizeThatFitsBlock(selfObject, firstArgv, originReturnValue);
-            }
-            return originReturnValue;
-        });
-    } oncePerIdentifier:[NSString stringWithFormat:@"UIView %@-%@", NSStringFromClass(viewClass), NSStringFromSelector(@selector(sizeThatFits:))]];
-}
-
-- (CGSize (^)(__kindof UIView * _Nonnull, CGSize, CGSize))tmui_sizeThatFitsBlock {
-    return objc_getAssociatedObject(self, &kAssociatedObjectKey_sizeThatFitsBlock);
 }
 
 - (void)renderColorWithSubviews:(NSArray *)subviews {

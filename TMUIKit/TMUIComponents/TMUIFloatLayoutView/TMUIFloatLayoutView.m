@@ -6,7 +6,7 @@
 //
 
 #import "TMUIFloatLayoutView.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 #define ValueSwitchAlignLeftOrRight(valueLeft, valueRight) ([self shouldAlignRight] ? valueRight : valueLeft)
 

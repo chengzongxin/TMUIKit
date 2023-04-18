@@ -7,7 +7,7 @@
 
 #import "NSMethodSignature+TMUI.h"
 #import "NSObject+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 @implementation NSMethodSignature (TMUI)
 

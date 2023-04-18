@@ -9,8 +9,8 @@
 #import "TMUIButton.h"
 //#import "UIControl+TMUI.h"
 #import "TMUIPopupMenuView.h"
-#import "TMUICore.h"
-#import "TMUIConfigurationMacros.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
 
 
 @interface TMUIPopupMenuButtonItem (UIAppearance)

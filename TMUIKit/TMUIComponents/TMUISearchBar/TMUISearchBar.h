@@ -6,12 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Masonry/Masonry.h>
-#import "TMUICore.h"
-#import "TMUIButton.h"
-#import "TMUITextField.h"
-//#import "TMUIExtensions.h"
-//#import "TMUIComponents.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIComponents/TMUIButton.h>
+#import <TMUIComponents/TMUITextField.h>
 
 NS_ASSUME_NONNULL_BEGIN
 ///  搜索栏默认高度
@@ -54,6 +51,7 @@ typedef enum : NSUInteger {
     TMUISearchBarStyle_Normal,  ///< 普通样式搜索，只有一个单独的搜索框
     TMUISearchBarStyle_City,  ///< 城市搜索样式，左边有一个城市选择按钮，右边是搜索框
     TMUISearchBarStyle_City_White,  ///< 城市搜索样式，左边有一个城市选择按钮，右边是搜索框, 白色样式
+    TMUISearchBarStyle_City_Black,  ///< 城市搜索样式，左边有一个城市选择按钮，右边是搜索框, 黑色样式
 } TMUISearchBarStyle;
 
 /*

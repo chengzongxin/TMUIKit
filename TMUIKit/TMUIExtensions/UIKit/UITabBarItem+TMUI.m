@@ -6,7 +6,7 @@
 //
 
 #import "UITabBarItem+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "UIBarItem+TMUI.h"
 
 @implementation UITabBarItem (TMUI)

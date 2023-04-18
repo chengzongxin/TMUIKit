@@ -9,8 +9,7 @@
 #import "UIButton+TMUI.h"
 #import <objc/runtime.h>
 #import "UIImage+TMUI.h"
-#import "TMUICore.h"
-#import "TMUIConfigurationMacros.h"
+#import <TMUICore/TMUICore.h>
 
 // 导航条上相关按钮的宽高定义，通常情况下均为44x44 | 且按钮的icon的size应该规范为24x24
 #define TMUIWidth_NavigationBarButton      (44)

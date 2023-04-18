@@ -836,9 +836,17 @@ static BOOL TMUI_hasAppliedInitialTemplate;
         }];
         [self updateTabBarAppearance];
     } else {
-        UITabBar.tmui_appearanceConfigured.unselectedItemTintColor = tabBarItemImageColor;
+        if (@available(iOS 10.0, *)) {
+            UITabBar.tmui_appearanceConfigured.unselectedItemTintColor = tabBarItemImageColor;
+        } else {
+            // Fallback on earlier versions
+        }
         [self.appearanceUpdatingTabBarControllers enumerateObjectsUsingBlock:^(UITabBarController * _Nonnull tabBarController, NSUInteger idx, BOOL * _Nonnull stop) {
-            tabBarController.tabBar.unselectedItemTintColor = tabBarItemImageColor;
+            if (@available(iOS 10.0, *)) {
+                tabBarController.tabBar.unselectedItemTintColor = tabBarItemImageColor;
+            } else {
+                // Fallback on earlier versions
+            }
         }];
     }
 }

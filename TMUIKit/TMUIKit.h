@@ -9,9 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TMUICore.h"
-#import "TMUIExtensions.h"
-#import "TMUIComponents.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/TMUIExtensions.h>
+#import <TMUIComponents/TMUIComponents.h>
 
 //dependency
 #import <Masonry/Masonry.h>

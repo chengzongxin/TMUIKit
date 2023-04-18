@@ -7,7 +7,7 @@
 //
 
 #import "NSMutableArray+TMUI.h"
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUICore.h>
 @implementation NSMutableArray (TMUI)
 
 //+ (void)load

@@ -7,7 +7,7 @@
 
 
 #import "UITextInputTraits+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 @interface NSObject ()
 

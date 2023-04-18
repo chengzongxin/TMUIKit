@@ -6,7 +6,7 @@
 //
 
 #import "UITableViewHeaderFooterView+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "UITableView+TMUI.h"
 #import "UIView+TMUI.h"
 

@@ -8,11 +8,7 @@
 #import "UIBarItem+TMUI.h"
 #import "NSObject+TMUI.h"
 #import "UIView+TMUI.h"
-#import "TMUIAssociatedPropertyDefines.h"
-#import "TMUICommonDefines.h"
-#import "TMUIHelper.h"
-#import "TMUIRuntime.h"
-//#import "TMUIWeakObjectContainer.h"
+#import <TMUICore/TMUICore.h>
 
 @interface UIBarItem ()
 

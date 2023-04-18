@@ -6,9 +6,9 @@
 //
 
 #import "TMDatePicker.h"
-#import "TMUICommonDefines.h"
-#import "TMUIKitDefines.h"
-#import "TMUIExtensions.h"
+#import <TMUICore/TMUICommonDefines.h>
+#import <TMUICore/TMUIKitDefines.h>
+#import <TMUIExtensions/TMUIExtensions.h>
 
 NSString *const TMDatePickerTitle = @"选择日期";
 

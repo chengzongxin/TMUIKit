@@ -12,14 +12,14 @@
 //#import "NSObject+TMUI.h"
 #import "TMUIKitDefines.h"
 //#import "NSMethodSignature+TMUI.h"
-NS_ASSUME_NONNULL_BEGIN
+//NS_ASSUME_NONNULL_BEGIN
 
 /// 以高级语言的方式描述一个 objc_property_t 的各种属性，请使用 `+descriptorWithProperty` 生成对象后直接读取对象的各种值。
 @interface TMUIPropertyDescriptor : NSObject
 
-@property(nonatomic, strong) NSString *name;
-@property(nonatomic, assign) SEL getter;
-@property(nonatomic, assign) SEL setter;
+@property(nonatomic, strong) NSString *_Nullable name;
+@property(nonatomic, assign) SEL _Nonnull getter;
+@property(nonatomic, assign) SEL _Nonnull setter;
 
 @property(nonatomic, assign) BOOL isAtomic;
 @property(nonatomic, assign) BOOL isNonatomic;
@@ -32,9 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL isReadonly;
 @property(nonatomic, assign) BOOL isReadwrite;
 
-@property(nonatomic, copy) NSString *type;
+@property(nonatomic, copy) NSString *_Nullable type;
 
-+ (instancetype)descriptorWithProperty:(objc_property_t)property;
++ (instancetype _Nonnull )descriptorWithProperty:(objc_property_t _Nullable )property;
 
 @end
 
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Method
 
 CG_INLINE BOOL
-HasOverrideSuperclassMethod(Class targetClass, SEL targetSelector) {
+HasOverrideSuperclassMethod(Class _Nonnull targetClass, SEL _Nonnull targetSelector) {
     Method method = class_getInstanceMethod(targetClass, targetSelector);
     if (!method) return NO;
     
@@ -64,7 +64,7 @@ HasOverrideSuperclassMethod(Class targetClass, SEL targetSelector) {
  *  @return 是否成功替换（或增加）
  */
 CG_INLINE BOOL
-ExchangeImplementationsInTwoClasses(Class _fromClass, SEL _originSelector, Class _toClass, SEL _newSelector) {
+ExchangeImplementationsInTwoClasses(Class _Nullable _fromClass, SEL _Nonnull _originSelector, Class _Nonnull _toClass, SEL _Nonnull _newSelector) {
     if (!_fromClass || !_toClass) {
         return NO;
     }
@@ -89,7 +89,7 @@ ExchangeImplementationsInTwoClasses(Class _fromClass, SEL _originSelector, Class
 
 /// 交换同一个 class 里的 originSelector 和 newSelector 的实现，如果原本不存在 originSelector，则相当于给 class 新增一个叫做 originSelector 的方法
 CG_INLINE BOOL
-ExchangeImplementations(Class _class, SEL _originSelector, SEL _newSelector) {
+ExchangeImplementations(Class _Nullable _class, SEL _Nonnull _originSelector, SEL _Nonnull _newSelector) {
     return ExchangeImplementationsInTwoClasses(_class, _originSelector, _class, _newSelector);
 }
 
@@ -100,7 +100,7 @@ ExchangeImplementations(Class _class, SEL _originSelector, SEL _newSelector) {
  *  @param implementationBlock 该 block 必须返回一个 block，返回的 block 将被当成 targetSelector 的新实现，所以要在内部自己处理对 super 的调用，以及对当前调用方法的 self 的 class 的保护判断（因为如果 targetClass 的 targetSelector 是继承自父类的，targetClass 内部并没有重写这个方法，则我们这个函数最终重写的其实是父类的 targetSelector，所以会产生预期之外的 class 的影响，例如 targetClass 传进来  UIButton.class，则最终可能会影响到 UIView.class），implementationBlock 的参数里第一个为你要修改的 class，也即等同于 targetClass，第二个参数为你要修改的 selector，也即等同于 targetSelector，第三个参数是一个 block，用于获取 targetSelector 原本的实现，由于 IMP 可以直接当成 C 函数调用，所以可利用它来实现“调用 super”的效果，但由于 targetSelector 的参数个数、参数类型、返回值类型，都会影响 IMP 的调用写法，所以这个调用只能由业务自己写。
  */
 CG_INLINE BOOL
-OverrideImplementation(Class targetClass, SEL targetSelector, id (^implementationBlock)(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void))) {
+OverrideImplementation(Class _Nullable targetClass, SEL _Nonnull targetSelector, id _Nullable (^ _Nullable implementationBlock)(__unsafe_unretained Class _Nullable originClass, SEL _Nonnull originCMD, IMP _Nullable (^ _Nullable originalIMPProvider)(void))) {
     Method originMethod = class_getInstanceMethod(targetClass, targetSelector);
     IMP imp = method_getImplementation(originMethod);
     BOOL hasOverride = HasOverrideSuperclassMethod(targetClass, targetSelector);
@@ -151,7 +151,7 @@ OverrideImplementation(Class targetClass, SEL targetSelector, id (^implementatio
  *  @param implementationBlock targetSelector 的自定义实现，直接将你的实现写进去即可，不需要管 super 的调用。参数 selfObject 代表当前正在调用这个方法的对象，也即 self 指针。
  */
 CG_INLINE BOOL
-ExtendImplementationOfVoidMethodWithoutArguments(Class targetClass, SEL targetSelector, void (^implementationBlock)(__kindof NSObject *selfObject)) {
+ExtendImplementationOfVoidMethodWithoutArguments(Class _Nullable targetClass, SEL _Nonnull targetSelector, void (^ _Nullable implementationBlock)(__kindof NSObject * _Nonnull selfObject)) {
     return OverrideImplementation(targetClass, targetSelector, ^id(__unsafe_unretained Class originClass, SEL originCMD, IMP (^originalIMPProvider)(void)) {
         void (^block)(__unsafe_unretained __kindof NSObject *selfObject) = ^(__unsafe_unretained __kindof NSObject *selfObject) {
             
@@ -256,68 +256,61 @@ ExtendImplementationOfVoidMethodWithoutArguments(Class targetClass, SEL targetSe
  
  @see https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html#//apple_ref/doc/uid/TP40008048-CH100-SW1
  */
-#define _TMUITypeEncodingDetectorGenerator(_TypeInFunctionName, _typeForEncode) \
-    CG_INLINE BOOL is##_TypeInFunctionName##TypeEncoding(const char *typeEncoding) {\
-        return strncmp(@encode(_typeForEncode), typeEncoding, strlen(@encode(_typeForEncode))) == 0;\
-    }\
-    CG_INLINE BOOL is##_TypeInFunctionName##Ivar(Ivar ivar) {\
-        return is##_TypeInFunctionName##TypeEncoding(ivar_getTypeEncoding(ivar));\
-    }
-
-_TMUITypeEncodingDetectorGenerator(Char, char)
-_TMUITypeEncodingDetectorGenerator(Int, int)
-_TMUITypeEncodingDetectorGenerator(Short, short)
-_TMUITypeEncodingDetectorGenerator(Long, long)
-_TMUITypeEncodingDetectorGenerator(LongLong, long long)
-_TMUITypeEncodingDetectorGenerator(NSInteger, NSInteger)
-_TMUITypeEncodingDetectorGenerator(UnsignedChar, unsigned char)
-_TMUITypeEncodingDetectorGenerator(UnsignedInt, unsigned int)
-_TMUITypeEncodingDetectorGenerator(UnsignedShort, unsigned short)
-_TMUITypeEncodingDetectorGenerator(UnsignedLong, unsigned long)
-_TMUITypeEncodingDetectorGenerator(UnsignedLongLong, unsigned long long)
-_TMUITypeEncodingDetectorGenerator(NSUInteger, NSUInteger)
-_TMUITypeEncodingDetectorGenerator(Float, float)
-_TMUITypeEncodingDetectorGenerator(Double, double)
-_TMUITypeEncodingDetectorGenerator(CGFloat, CGFloat)
-_TMUITypeEncodingDetectorGenerator(BOOL, BOOL)
-_TMUITypeEncodingDetectorGenerator(Void, void)
-_TMUITypeEncodingDetectorGenerator(Character, char *)
-_TMUITypeEncodingDetectorGenerator(Object, id)
-_TMUITypeEncodingDetectorGenerator(Class, Class)
-_TMUITypeEncodingDetectorGenerator(Selector, SEL)
-
-//CG_INLINE char getCharIvarValue(id object, Ivar ivar) {
-//    ptrdiff_t ivarOffset = ivar_getOffset(ivar);
-//    unsigned char * bytes = (unsigned char *)(__bridge void *)object;
-//    char value = *((char *)(bytes + ivarOffset));
-//    return value;
-//}
-
-#define _TMUIGetIvarValueGenerator(_TypeInFunctionName, _typeForEncode) \
-    CG_INLINE _typeForEncode get##_TypeInFunctionName##IvarValue(id object, Ivar ivar) {\
-        ptrdiff_t ivarOffset = ivar_getOffset(ivar);\
-        unsigned char * bytes = (unsigned char *)(__bridge void *)object;\
-        _typeForEncode value = *((_typeForEncode *)(bytes + ivarOffset));\
-        return value;\
-    }
-
-_TMUIGetIvarValueGenerator(Char, char)
-_TMUIGetIvarValueGenerator(Int, int)
-_TMUIGetIvarValueGenerator(Short, short)
-_TMUIGetIvarValueGenerator(Long, long)
-_TMUIGetIvarValueGenerator(LongLong, long long)
-_TMUIGetIvarValueGenerator(UnsignedChar, unsigned char)
-_TMUIGetIvarValueGenerator(UnsignedInt, unsigned int)
-_TMUIGetIvarValueGenerator(UnsignedShort, unsigned short)
-_TMUIGetIvarValueGenerator(UnsignedLong, unsigned long)
-_TMUIGetIvarValueGenerator(UnsignedLongLong, unsigned long long)
-_TMUIGetIvarValueGenerator(Float, float)
-_TMUIGetIvarValueGenerator(Double, double)
-_TMUIGetIvarValueGenerator(BOOL, BOOL)
-_TMUIGetIvarValueGenerator(Character, char *)
-_TMUIGetIvarValueGenerator(Selector, SEL)
-
-CG_INLINE id getObjectIvarValue(id object, Ivar ivar) {
+//#define _TMUITypeEncodingDetectorGenerator(_TypeInFunctionName, _typeForEncode) \
+//    CG_INLINE BOOL is##_TypeInFunctionName##TypeEncoding(const char * typeEncoding) {\
+//        return strncmp(@encode(_typeForEncode), typeEncoding, strlen(@encode(_typeForEncode))) == 0;\
+//    }\
+//    CG_INLINE BOOL is##_TypeInFunctionName##Ivar(Ivar ivar) {\
+//        return is##_TypeInFunctionName##TypeEncoding(ivar_getTypeEncoding(ivar));\
+//    }
+//
+//_TMUITypeEncodingDetectorGenerator(Char, char)
+//_TMUITypeEncodingDetectorGenerator(Int, int)
+//_TMUITypeEncodingDetectorGenerator(Short, short)
+//_TMUITypeEncodingDetectorGenerator(Long, long)
+//_TMUITypeEncodingDetectorGenerator(LongLong, long long)
+//_TMUITypeEncodingDetectorGenerator(NSInteger, NSInteger)
+//_TMUITypeEncodingDetectorGenerator(UnsignedChar, unsigned char)
+//_TMUITypeEncodingDetectorGenerator(UnsignedInt, unsigned int)
+//_TMUITypeEncodingDetectorGenerator(UnsignedShort, unsigned short)
+//_TMUITypeEncodingDetectorGenerator(UnsignedLong, unsigned long)
+//_TMUITypeEncodingDetectorGenerator(UnsignedLongLong, unsigned long long)
+//_TMUITypeEncodingDetectorGenerator(NSUInteger, NSUInteger)
+//_TMUITypeEncodingDetectorGenerator(Float, float)
+//_TMUITypeEncodingDetectorGenerator(Double, double)
+//_TMUITypeEncodingDetectorGenerator(CGFloat, CGFloat)
+//_TMUITypeEncodingDetectorGenerator(BOOL, BOOL)
+//_TMUITypeEncodingDetectorGenerator(Void, void)
+//_TMUITypeEncodingDetectorGenerator(Character, char *)
+//_TMUITypeEncodingDetectorGenerator(Object, id)
+//_TMUITypeEncodingDetectorGenerator(Class, Class)
+//_TMUITypeEncodingDetectorGenerator(Selector, SEL)
+//
+//#define _TMUIGetIvarValueGenerator(_TypeInFunctionName, _typeForEncode) \
+//    CG_INLINE _typeForEncode get##_TypeInFunctionName##IvarValue(id object, Ivar ivar) {\
+//        ptrdiff_t ivarOffset = ivar_getOffset(ivar);\
+//        unsigned char * bytes = (unsigned char *)(__bridge void *)object;\
+//        _typeForEncode value = *((_typeForEncode *)(bytes + ivarOffset));\
+//        return value;\
+//    }
+//
+//_TMUIGetIvarValueGenerator(Char, char)
+//_TMUIGetIvarValueGenerator(Int, int)
+//_TMUIGetIvarValueGenerator(Short, short)
+//_TMUIGetIvarValueGenerator(Long, long)
+//_TMUIGetIvarValueGenerator(LongLong, long long)
+//_TMUIGetIvarValueGenerator(UnsignedChar, unsigned char)
+//_TMUIGetIvarValueGenerator(UnsignedInt, unsigned int)
+//_TMUIGetIvarValueGenerator(UnsignedShort, unsigned short)
+//_TMUIGetIvarValueGenerator(UnsignedLong, unsigned long)
+//_TMUIGetIvarValueGenerator(UnsignedLongLong, unsigned long long)
+//_TMUIGetIvarValueGenerator(Float, float)
+//_TMUIGetIvarValueGenerator(Double, double)
+//_TMUIGetIvarValueGenerator(BOOL, BOOL)
+//_TMUIGetIvarValueGenerator(Character, char *)
+//_TMUIGetIvarValueGenerator(Selector, SEL)
+//
+CG_INLINE id _Nullable getObjectIvarValue(id _Nullable object, Ivar _Nonnull ivar) {
     return object_getIvar(object, ivar);
 }
 
@@ -339,15 +332,15 @@ typedef struct classref *classref_t;
  Class class = (__bridge Class)classes[0];
  @endcode
  */
-FOUNDATION_EXPORT int tmui_getProjectClassList(classref_t **classes);
+FOUNDATION_EXPORT int tmui_getProjectClassList(classref_t _Nonnull *_Nonnull* _Nullable classes);
 /**
  检测是否存在某个dyld  image
  */
-FOUNDATION_EXPORT BOOL tmui_exists_dyld_image(const char *target_image_name);
+FOUNDATION_EXPORT BOOL tmui_exists_dyld_image(const char * _Nonnull target_image_name);
 
 
 @interface TMUIRuntime : NSObject
 
 @end
 
-NS_ASSUME_NONNULL_END
+//NS_ASSUME_NONNULL_END

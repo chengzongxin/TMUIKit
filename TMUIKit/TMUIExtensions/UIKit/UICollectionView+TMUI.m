@@ -6,7 +6,7 @@
 //
 
 #import "UICollectionView+TMUI.h"
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUICore.h>
 
 @implementation UICollectionView (TMUI)
 

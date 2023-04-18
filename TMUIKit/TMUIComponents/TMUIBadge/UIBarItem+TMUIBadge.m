@@ -7,11 +7,11 @@
 //
 
 #import "UIBarItem+TMUIBadge.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "UIView+TMUIBadge.h"
-#import "UIBarItem+TMUI.h"
-#import "TMUIConfigurationMacros.h"
-#import "UIColor+TMUI.h"
+#import <TMUIExtensions/UIBarItem+TMUI.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
+#import <TMUIExtensions/UIColor+TMUI.h>
 
 @implementation UIBarItem (TMUIBadge)
 
@@ -92,8 +92,10 @@ static char kAssociatedObjectKey_badgeLocation;
         {
             self.tmui_badgeOffsetLandscape = TMUIBadgeInvalidateOffset;
             self.tmui_badgeOffset = TMUIBadgeInvalidateOffset;
+            BeginIgnoreDeprecatedWarning
             self.tmui_badgeCenterOffset = CGPointZero;
             self.tmui_badgeCenterOffsetLandscape = CGPointZero;
+            EndIgnoreDeprecatedWarning
         }
             break;
             

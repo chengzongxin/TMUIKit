@@ -7,9 +7,9 @@
 
 #import "TMUIExpandLabel.h"
 #import <CoreText/CoreText.h>
-#import "NSAttributedString+TMUI.h"
-#import "UIView+TMUI.h"
-#import "UIColor+TMUI.h"
+#import <TMUIExtensions/NSAttributedString+TMUI.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/UIColor+TMUI.h>
 @interface TMUIExpandLabel (){
     CGFloat _lineHeightErrorDimension; //误差值 默认为0.5
 }

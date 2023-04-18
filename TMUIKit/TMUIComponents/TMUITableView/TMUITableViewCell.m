@@ -6,11 +6,11 @@
 //
 
 #import "TMUITableViewCell.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "TMUIButton.h"
-#import "UITableView+TMUI.h"
-#import "UITableViewCell+TMUI.h"
-#import "TMUIConfigurationMacros.h"
+#import <TMUIExtensions/UITableView+TMUI.h>
+#import <TMUIExtensions/UITableViewCell+TMUI.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
 @interface TMUITableViewCell() <UIScrollViewDelegate>
 
 @property(nonatomic, assign) BOOL initByTableView;

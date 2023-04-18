@@ -8,8 +8,7 @@
 
 #import "UILabel+TMUIAttributesTextClick.h"
 #import <CoreText/CoreText.h>
-#import "TMUIAssociatedPropertyDefines.h"
-#import "TMUICoreGraphicsDefines.h"
+#import <TMUICore/TMUICore.h>
 
 @interface TMUILinkGestureRegcognizer : UIGestureRecognizer <UIGestureRecognizerDelegate>
 @end

@@ -34,7 +34,7 @@
     BOOL flag1 = [NSString tmui_isEmpty:str1];
     [mstr appendFormat:@"str1:%@ is empty %d\n\n",str1,flag1];
     
-    NSString *obj1 = [NSObject new];
+    NSString *obj1 = [NSString new];
     BOOL flag2 = [NSString tmui_isEmpty:obj1];
     [mstr appendFormat:@"obj1:%@ is empty %d\n\n",obj1,flag2];
     
@@ -70,10 +70,10 @@
     NSLog(@"caches: %@",[[NSFileManager defaultManager] tmui_sandboxCachesDir]);
     NSLog(@"doc: %@",[[NSFileManager defaultManager] tmui_sandboxDocDir]);
     
-    NSLog(@"");
+    //NSLog(@"");
     
-    NSString *str = [@"" tmui_md5];
-    NSLog(@"");
+    //NSString *str = [@"" tmui_md5];
+    //NSLog(@"");
     
     /** Usages: */
     NSArray *numbers = @[@3,@2,@10];
@@ -83,20 +83,14 @@
         
     NSLog(@"%@", result);
     
-//    NSArray *lst = @[@1,@2,@3,@4,@5];
-//    id obj = [lst objectAtIndexedSubscript:0];
-//    NSLog(@"");
-//    obj = [lst objectAtIndexedSubscript:10];
-//    NSLog(@"");
-    
-    NSArray *p = [NSArray alloc];//__NSPlaceholderArray
-    NSArray *o = @[];//__NSArray0
-    NSArray *s = @[@0];//__NSSingleObjectArrayI
-    NSArray *i = @[@2,@3];//__NSArrayI
-    NSMutableArray *m = @[@4,@5].mutableCopy;//__NSArrayM
-    
-    Class cls1 = NSClassFromString(@"__NSCFArray"); //super NSMutableArray
-    Class cls2 = NSClassFromString(@"__NSFrozenArrayM");//super NSArray
+//    NSArray *p = [NSArray alloc];//__NSPlaceholderArray
+//    NSArray *o = @[];//__NSArray0
+//    NSArray *s = @[@0];//__NSSingleObjectArrayI
+//    NSArray *i = @[@2,@3];//__NSArrayI
+//    NSMutableArray *m = @[@4,@5].mutableCopy;//__NSArrayM
+//
+//    Class cls1 = NSClassFromString(@"__NSCFArray"); //super NSMutableArray
+//    Class cls2 = NSClassFromString(@"__NSFrozenArrayM");//super NSArray
     
     NSLog(@"");
     [self subClasses:NSClassFromString(@"NSArray")];//30

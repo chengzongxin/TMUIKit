@@ -7,11 +7,11 @@
 
 #import "NSObject+TMUIMultipleDelegates.h"
 #import "TMUIMultipleDelegates.h"
-#import "TMUICore.h"
-#import "NSString+TMUI.h"
 #import <TMUICore/TMUICore.h>
-#import "TMUIRuntime.h"
-#import "TMUICommonDefines.h"
+#import <TMUIExtensions/NSString+TMUI.h>
+#import <TMUICore/TMUICore.h>
+#import <TMUICore/TMUIRuntime.h>
+#import <TMUICore/TMUICommonDefines.h>
 
 
 @interface NSObject ()

@@ -6,18 +6,18 @@
 //
 
 #import "TMUIThemePrivate.h"
-#import "TMUIRuntime.h"
-#import "UIColor+TMUI.h"
+#import <TMUICore/TMUIRuntime.h>
+#import <TMUIExtensions/UIColor+TMUI.h>
 #import "UIVisualEffect+TMUITheme.h"
 #import "UIView+TMUITheme.h"
-#import "UIView+TMUI.h"
+#import <TMUIExtensions/UIView+TMUI.h>
 //#import "UISearchBar+TMUI.h"
-#import "UITableViewCell+TMUI.h"
-#import "CALayer+TMUI.h"
-#import "UIVisualEffectView+TMUI.h"
-#import "UIBarItem+TMUI.h"
+#import <TMUIExtensions/UITableViewCell+TMUI.h>
+#import <TMUIExtensions/CALayer+TMUI.h>
+#import <TMUIExtensions/UIVisualEffectView+TMUI.h>
+#import <TMUIExtensions/UIBarItem+TMUI.h>
 //#import "UITabBar+TMUI.h"
-#import "UITabBarItem+TMUI.h"
+#import <TMUIExtensions/UITabBarItem+TMUI.h>
 
 // TMUI classes
 //#import "TMUIImagePickerCollectionViewCell.h"
@@ -42,7 +42,7 @@
 //#import "TMUIToastBackgroundView.h"
 #import "TMUIBadgeProtocol.h"
 
-#import "NSObject+TMUI.h"
+#import <TMUIExtensions/NSObject+TMUI.h>
 
 @interface TMUIThemePropertiesRegister : NSObject
 

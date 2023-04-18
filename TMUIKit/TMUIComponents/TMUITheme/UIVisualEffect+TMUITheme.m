@@ -10,8 +10,8 @@
 #import "TMUIThemeManager.h"
 #import "TMUIThemeManagerCenter.h"
 #import "TMUIThemePrivate.h"
-#import "NSMethodSignature+TMUI.h"
-#import "TMUICore.h"
+#import <TMUIExtensions/NSMethodSignature+TMUI.h>
+#import <TMUICore/TMUICore.h>
 
 @implementation TMUIThemeVisualEffect
 

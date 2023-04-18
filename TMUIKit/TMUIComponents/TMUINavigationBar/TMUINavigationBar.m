@@ -9,11 +9,11 @@
 #import <Masonry/Masonry.h>
 //#import "TMUIExtensions.h"
 //#import "TMUIComponents.h"
-#import "TMUICore.h"
-#import "UIView+TMUI.h"
-#import "UIButton+TMUI.h"
-#import "UIImage+TMUI.h"
-#import "UIViewController+TMUI.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/UIButton+TMUI.h>
+#import <TMUIExtensions/UIImage+TMUI.h>
+#import <TMUIExtensions/UIViewController+TMUI.h>
 #import "TMUINavigationStackView.h"
 #import "TMUINavigationBarApprance.h"
 #import "TMUIAppearance.h"
@@ -153,11 +153,13 @@ CGFloat const kTMUINavBarBtnH = 44.0;
     return self;
 }
 
-- (void)navBackAction:(UIButton *)btn
+- (void)tmui_navBackAction:(UIButton *)btn
 {
     UIViewController <TMUINavigationBarProtocol>* nexResponder = (UIViewController <TMUINavigationBarProtocol>*)self.tmui_viewController;
     if ([nexResponder respondsToSelector:@selector(navBackAction:)]) {
         [(id)nexResponder navBackAction:btn];
+    }else if ([nexResponder respondsToSelector:@selector(tmui_navBackAction:)]) {
+        [(id)nexResponder tmui_navBackAction:btn];
     }
 #if DEBUG
     else {
@@ -560,7 +562,7 @@ CGFloat const kTMUINavBarBtnH = 44.0;
 - (UIButton *)backBtn{
     if (!_backBtn) {
         _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_backBtn addTarget:self action:@selector(navBackAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_backBtn addTarget:self action:@selector(tmui_navBackAction:) forControlEvents:UIControlEventTouchUpInside];
         [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(kTMUINavigationBarItemSize);
         }];
@@ -591,7 +593,7 @@ CGFloat const kTMUINavBarBtnH = 44.0;
     if (!_titleLbl) {
         _titleLbl = [[UILabel alloc] init];
         _titleLbl.font = UIFontMedium(18);
-        _titleLbl.textColor = TMUIColorHex(333333);
+        _titleLbl.textColor = UIColorHexString(@"0x333333");
         _titleLbl.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLbl;

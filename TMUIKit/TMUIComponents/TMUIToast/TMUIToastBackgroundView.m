@@ -6,7 +6,7 @@
 //
 
 #import "TMUIToastBackgroundView.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 @interface TMUIToastBackgroundView ()
 

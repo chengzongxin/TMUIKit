@@ -86,7 +86,6 @@ typedef void(^OnTapMenuItem)(id sender,NSInteger index);
  *  @param origin     菜单的起始点
  *  @param width      菜单的宽度
  *  @param rowHeight  每个item的高度
- *  @param direct     TriangleDirection三角位置kLeftTriangle左，kRightTriangle右
  */
 - (id)initWithTitleArray:(NSArray*)titleArray imageArray:(NSArray*)imageArray origin:(CGPoint)origin width:(CGFloat)width rowHeight:(CGFloat)rowHeight Direct:(TMUITriangleDirection)triDirect;
 
@@ -95,7 +94,7 @@ typedef void(^OnTapMenuItem)(id sender,NSInteger index);
  *
  *  @param completion 隐藏后block
  */
-- (void)dismissMenuView:(dismissCompletion)completion;
+- (void)dismissMenuView:(nullable dismissCompletion)completion;
 
 @end
 

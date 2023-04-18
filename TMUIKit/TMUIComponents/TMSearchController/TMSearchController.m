@@ -9,7 +9,7 @@
 #import "TMSearchController.h"
 #import "TMSearchPresentationAnimatedTransition.h"
 #import <Masonry/Masonry.h>
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 @interface TMSearchController ()<TMSearchBarDelegate, UIViewControllerTransitioningDelegate>
 

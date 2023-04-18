@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "UIColor+TMUI.h"
+#import <TMUIExtensions/UIColor+TMUI.h>
 #import "UIImage+TMUITheme.h"
 #import "UIVisualEffect+TMUITheme.h"
 

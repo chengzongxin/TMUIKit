@@ -8,8 +8,8 @@
 
 #import "TMUIFloatImagesView.h"
 #import <Masonry/Masonry.h>
-#import "TMUICore.h"
-#import "NSMutableArray+TMUI.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/NSMutableArray+TMUI.h>
 //#define kMaxWidth  (TMUI_SCREEN_WIDTH - 15*2)
 
 @interface TMUIFloatImagesCell : UICollectionViewCell

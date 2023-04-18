@@ -7,8 +7,8 @@
 
 #import "TMUIFilterCell.h"
 #import <Masonry/Masonry.h>
-#import "TMUIExtensions.h"
-#import "TMUICore.h"
+#import <TMUIExtensions/TMUIExtensions.h>
+#import <TMUICore/TMUICore.h>
 @interface TMUIFilterCell ()
 
 @property (nonatomic, strong) UIButton *btn;

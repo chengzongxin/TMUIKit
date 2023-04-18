@@ -6,9 +6,9 @@
 //
 
 #import "TMUIPicker.h"
-#import "TMUICommonDefines.h"
-#import "TMUIKitDefines.h"
-#import "TMUIExtensions.h"
+#import <TMUICore/TMUICommonDefines.h>
+#import <TMUICore/TMUIKitDefines.h>
+#import <TMUIExtensions/TMUIExtensions.h>
 #import <Masonry/Masonry.h>
 #import "TMUIMultiDataPicker.h"
 #import "TMUISystemDatePicker.h"

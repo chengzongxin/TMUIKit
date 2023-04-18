@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param range 要变化的文字的位置，如果在 UIControlEventEditingChanged 里，这里的 range 也即文字变化后的 range，所以可能比最大长度要大。
  *  @param replacementString 要变化的文字，如果在 UIControlEventEditingChanged 里，这里永远传入 nil。
  */
-- (void)textField:(TMUITextField *)textField didPreventTextChangeInRange:(NSRange)range replacementString:(NSString *)replacementString;
+- (void)textField:(TMUITextField *)textField didPreventTextChangeInRange:(NSRange)range replacementString:(nullable NSString *)replacementString;
 
 @end
 

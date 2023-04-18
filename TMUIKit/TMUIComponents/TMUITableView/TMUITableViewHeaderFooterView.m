@@ -6,11 +6,11 @@
 //
 
 #import "TMUITableViewHeaderFooterView.h"
-#import "TMUICore.h"
-#import "UIView+TMUI.h"
-#import "UITableView+TMUI.h"
-#import "UITableViewHeaderFooterView+TMUI.h"
-#import "TMUIConfigurationMacros.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/UITableView+TMUI.h>
+#import <TMUIExtensions/UITableViewHeaderFooterView+TMUI.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
 @implementation TMUITableViewHeaderFooterView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {

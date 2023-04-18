@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -302,7 +303,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable UIImage *)tmuihelp_imageWithSpacingExtensionInsets:(UIEdgeInsets)extension;
 
 - (BOOL)tmuihelp_opaque;
-- (CGFloat)tmuihelp_alpha;
+//- (CGFloat)tmuihelp_alpha;
 - (UIImage *)tmuihelp_imageWithTintColor:(UIColor *)tintColor;
 
 @end

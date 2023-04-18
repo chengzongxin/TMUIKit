@@ -6,7 +6,7 @@
 //
 
 #import "UIVisualEffectView+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "CALayer+TMUI.h"
 
 @interface UIView (TMUI_VisualEffectView)

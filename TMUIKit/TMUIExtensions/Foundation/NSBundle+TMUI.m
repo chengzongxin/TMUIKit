@@ -6,7 +6,7 @@
 //
 
 #import "NSBundle+TMUI.h"
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUICore.h>
 @implementation NSBundle (TMUI)
 
 + (UIImage *)tmui_imageName:(NSString *)imageName bundleName:(NSString *)bundleName{

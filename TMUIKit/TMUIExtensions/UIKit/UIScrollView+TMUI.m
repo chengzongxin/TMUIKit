@@ -6,8 +6,7 @@
 //
 
 #import "UIScrollView+TMUI.h"
-#import "TMUICore.h"
-//#import "NSNumber+TMUI.h"
+#import <TMUICore/TMUICore.h>
 #import "UIView+TMUI.h"
 #import "UIViewController+TMUI.h"
 

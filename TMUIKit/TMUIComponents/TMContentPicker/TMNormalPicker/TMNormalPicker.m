@@ -6,9 +6,9 @@
 //
 
 #import "TMNormalPicker.h"
-#import "TMUICoreGraphicsDefines.h"
-#import "TMUIKitDefines.h"
-#import "TMUIExtensions.h"
+#import <TMUICore/TMUICoreGraphicsDefines.h>
+#import <TMUICore/TMUIKitDefines.h>
+#import <TMUIExtensions/TMUIExtensions.h>
 
 @interface TMNormalPicker()<UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic, strong)UIPickerView *itemPickerView;

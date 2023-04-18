@@ -6,7 +6,7 @@
 //
 
 #import "UITextView+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 @implementation UITextView (TMUI)
 

@@ -6,10 +6,10 @@
 //
 
 #import "TMUIButton.h"
-#import "TMUICommonDefines.h"
-#import "TMUICoreGraphicsDefines.h"
-#import "CALayer+TMUI.h"
-#import "TMUIKitDefines.h"
+#import <TMUICore/TMUICommonDefines.h>
+#import <TMUICore/TMUICoreGraphicsDefines.h>
+#import <TMUIExtensions/CALayer+TMUI.h>
+#import <TMUICore/TMUIKitDefines.h>
 
 const CGFloat TMUIButtonCornerRadiusAdjustsBounds = -1;
 

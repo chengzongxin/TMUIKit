@@ -7,7 +7,7 @@
 //
 
 #import "NSMutableDictionary+TMUI.h"
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUICore.h>
 @implementation NSMutableDictionary(TMUI)
 // NSDictionary+NilSafe 已经添加，之后移除后再放开
 //#pragma mark - Safe Crash avoid

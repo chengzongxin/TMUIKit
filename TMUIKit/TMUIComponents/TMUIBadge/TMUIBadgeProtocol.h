@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "UIView+TMUI.h"
+#import <TMUIExtensions/UIView+TMUI.h>
 
 // TODO: molice 等废弃 tmui_badgeCenterOffset 系列接口后再删除
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

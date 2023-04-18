@@ -8,9 +8,9 @@
 
 #import "TMSearchBar.h"
 #import <Masonry/Masonry.h>
-#import "TMUICommonDefines.h"
-#import "TMUIExtensions.h"
-#import "TMUIKitDefines.h"
+#import <TMUICore/TMUICommonDefines.h>
+#import <TMUIExtensions/TMUIExtensions.h>
+#import <TMUICore/TMUIKitDefines.h>
 
 #pragma mark -
 #pragma mark - TMSearchBarCancelButton

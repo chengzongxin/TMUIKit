@@ -6,11 +6,11 @@
 //
 
 #import "TMUITips.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "TMUIToastContentView.h"
 #import "TMUIToastBackgroundView.h"
-#import "NSString+TMUI.h"
-#import "TMUIHelper.h"
+#import <TMUIExtensions/NSString+TMUI.h>
+#import <TMUICore/TMUIHelper.h>
 
 const NSInteger TMUITipsAutomaticallyHideToastSeconds = -1;
 

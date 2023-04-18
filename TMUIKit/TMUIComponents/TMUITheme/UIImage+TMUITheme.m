@@ -10,12 +10,12 @@
 #import "TMUIThemeManager.h"
 #import "TMUIThemeManagerCenter.h"
 #import "TMUIThemePrivate.h"
-#import "NSMethodSignature+TMUI.h"
-#import "NSObject+TMUI.h"
-#import "UIImage+TMUI.h"
+#import <TMUIExtensions/NSMethodSignature+TMUI.h>
+#import <TMUIExtensions/NSObject+TMUI.h>
+#import <TMUIExtensions/UIImage+TMUI.h>
 #import <objc/message.h>
-#import "TMUIAssociatedPropertyDefines.h"
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUIAssociatedPropertyDefines.h>
+#import <TMUICore/TMUIRuntime.h>
 
 @interface UIImage (TMUITheme)
 

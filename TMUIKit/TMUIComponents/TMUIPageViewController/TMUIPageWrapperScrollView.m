@@ -6,8 +6,8 @@
 //
 
 #import "TMUIPageWrapperScrollView.h"
-#import "UIView+TMUI.h"
-#import "TMUICore.h"
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUICore/TMUICore.h>
 
 static void * const kTMUIScrollViewContentOffsetKVOContext = (void*)&kTMUIScrollViewContentOffsetKVOContext;
 

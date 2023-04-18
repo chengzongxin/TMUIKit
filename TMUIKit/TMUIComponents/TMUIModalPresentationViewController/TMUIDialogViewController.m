@@ -6,20 +6,20 @@
 //
 
 #import "TMUIDialogViewController.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "TMUIButton.h"
 #import "TMUILabel.h"
 #import "TMUITextField.h"
 #import "TMUITableViewCell.h"
 //#import "TMUINavigationTitleView.h"
-#import "CALayer+TMUI.h"
-#import "UITableView+TMUI.h"
-#import "NSString+TMUI.h"
-#import "UIScrollView+TMUI.h"
+#import <TMUIExtensions/CALayer+TMUI.h>
+#import <TMUIExtensions/UITableView+TMUI.h>
+#import <TMUIExtensions/NSString+TMUI.h>
+#import <TMUIExtensions/UIScrollView+TMUI.h>
 #import "TMUIAppearance.h"
-#import "TMUIHelper.h"
-#import "TMUIConfigurationMacros.h"
-#import "TMUICommonDefines.h"
+#import <TMUICore/TMUIHelper.h>
+#import <TMUICore/TMUIConfigurationMacros.h>
+#import <TMUICore/TMUICommonDefines.h>
 
 @implementation TMUIDialogViewController (UIAppearance)
 
@@ -470,7 +470,12 @@ const NSInteger TMUIDialogSelectionViewControllerSelectedItemIndexNone = -1;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.alwaysBounceVertical = NO;
-    self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
     // 因为要根据 tableView sizeThatFits: 算出 dialog 的高度，所以禁用 estimated 特性，不然算出来结果不准确
     self.tableView.estimatedRowHeight = 0;
@@ -675,7 +680,12 @@ const NSInteger TMUIDialogSelectionViewControllerSelectedItemIndexNone = -1;
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.scrollsToTop = NO;
     self.scrollView.clipsToBounds = YES;
-    self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    if (@available(iOS 11.0, *)) {
+        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        // Fallback on earlier versions
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     self.contentView = self.scrollView;
     self.scrollView.backgroundColor = self.contentViewBackgroundColor;
 }
@@ -947,7 +957,7 @@ const NSInteger TMUIDialogSelectionViewControllerSelectedItemIndexNone = -1;
         }
     }
     
-    CGFloat contentHeight = textFieldLabelHeight + textFieldHeight + separatorHeight + UIEdgeInsetsGetVerticalValue(self.scrollView.adjustedContentInset);
+    CGFloat contentHeight = textFieldLabelHeight + textFieldHeight + separatorHeight + UIEdgeInsetsGetVerticalValue(self.scrollView.tmui_contentInset);
     CGFloat contentViewVerticalMargin = UIEdgeInsetsGetVerticalValue(self.contentViewMargins);
     
     BOOL isFooterViewShowing = self.footerView && !self.footerView.hidden;

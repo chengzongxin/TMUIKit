@@ -5,7 +5,10 @@
 //  Created by Joe.cheng on 2021/3/15.
 //
 
+#import <TMUICore/TMUICore.h>
 #import "ALAssetsLibrary+TMUI.h"
+
+BeginIgnoreClangWarning(-Wdeprecated-implementations)
 
 @implementation ALAssetsLibrary (TMUI)
 
@@ -51,3 +54,5 @@
 }
 
 @end
+
+EndIgnoreClangWarning

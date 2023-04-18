@@ -7,9 +7,7 @@
 
 #import "UITraitCollection+TMUI.h"
 #import "NSObject+TMUI.h"
-#import "TMUICommonDefines.h"
-#import "TMUIRuntime.h"
-#import "TMUIHelper.h"
+#import <TMUICore/TMUICore.h>
 #import <dlfcn.h>
 
 @implementation UITraitCollection (TMUI)

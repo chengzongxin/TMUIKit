@@ -8,7 +8,7 @@
 #import "NSAttributedString+TMUI.h"
 #import "NSMutableParagraphStyle+TMUI.h"
 #import "NSString+TMUI.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import <CoreText/CoreText.h>
 
 @implementation NSAttributedString (TMUI)
@@ -127,7 +127,7 @@
 + (CGFloat)tmui_heightForString:(NSString *)str font:(UIFont *)font width:(CGFloat)width lineSpacing:(CGFloat)lineSpacing maxLine:(NSUInteger)maxLine{
     CGFloat heightOfAll = [self tmui_heightForString:str font:font width:width lineSpacing:lineSpacing];
     CGFloat heightOfMax = CGFLOAT_MAX;
-    if (lineSpacing != 0) {
+    if (maxLine != 0) {
         NSString *strTem = @"a";
         for (int i=0; i< maxLine - 1; i++) {
             strTem = [strTem stringByAppendingString:@"\na"];

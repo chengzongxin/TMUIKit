@@ -6,11 +6,12 @@
 //
 
 #import "TMUISearchBar.h"
-#import "NSBundle+TMUI.h"
-#import "UIButton+TMUI.h"
-#import "UIView+TMUI.h"
-#import "UIBarButtonItem+TMUI.h"
-#import "UIViewController+TMUI.h"
+#import <Masonry/Masonry.h>
+#import <TMUIExtensions/NSBundle+TMUI.h>
+#import <TMUIExtensions/UIButton+TMUI.h>
+#import <TMUIExtensions/UIView+TMUI.h>
+#import <TMUIExtensions/UIBarButtonItem+TMUI.h>
+#import <TMUIExtensions/UIViewController+TMUI.h>
 
 CGFloat const TMUISearchBarHeight = 36;
 
@@ -97,7 +98,9 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
             make.left.equalTo(_searchIcon.mas_right).with.offset(8);
             make.right.equalTo(self.contentView);
         }];
-    }else if (self.style == TMUISearchBarStyle_City || self.style == TMUISearchBarStyle_City_White) {
+    }else if (self.style == TMUISearchBarStyle_City ||
+              self.style == TMUISearchBarStyle_City_White ||
+              self.style == TMUISearchBarStyle_City_Black) {
         // city style, left city ,right search
         
         [self.contentView addSubview:self.cityBtn];
@@ -140,6 +143,8 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
         }else if (self.style == TMUISearchBarStyle_City_White) {
             self.contentView.backgroundColor = UIColorWhite;
             
+            self.cityBtn.spacingBetweenImageAndTitle = 4;
+            self.cityBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 7, 0, 0);
             self.cityBtn.tmui_font = UIFontMedium(16);
             self.textField.font = UIFontMedium(16);
             self.textField.placeholderColor = UIColorBorder;
@@ -169,6 +174,45 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
                 make.centerY.equalTo(self.contentView);
                 make.height.mas_equalTo(TMUISearchBarHeight);
                 make.left.equalTo(_searchIcon.mas_right).with.offset(8);
+                make.right.equalTo(self.contentView);
+            }];
+        }else if (self.style == TMUISearchBarStyle_City_Black) {
+            self.contentView.backgroundColor = UIColorWhite;
+            
+            self.cityBtn.spacingBetweenImageAndTitle = 4;
+            self.cityBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 7, 0, 0);
+            self.cityBtn.tmui_font = UIFontMedium(16);
+            self.textField.font = UIFontMedium(16);
+            self.textField.placeholderColor = UIColorBorder;
+            self.textField.clearButtonPositionAdjustment = UIOffsetMake(-40, 0);
+            self.cityBtn.tmui_image = kImgName(@"tmui_searchBar_arrow2");
+            self.layer.borderWidth = 2.5;
+            self.layer.borderColor = UIColorDark.CGColor;
+            self.layer.cornerRadius = 12;
+            
+            [_cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_offset(0);
+                make.centerY.equalTo(self.contentView);
+                make.height.equalTo(self.contentView);
+                make.width.mas_equalTo(82);
+            }];
+            
+            [_seperator mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.contentView);
+                make.left.equalTo(_cityBtn.mas_right);
+                make.size.mas_equalTo(CGSizeMake(1, 14));
+            }];
+            
+            [_searchIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(-20);
+                make.centerY.equalTo(self.contentView);
+                make.size.mas_equalTo(CGSizeMake(16, 16));
+            }];
+            
+            [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.contentView);
+                make.height.mas_equalTo(TMUISearchBarHeight);
+                make.left.equalTo(_cityBtn.mas_right).offset(13.5);
                 make.right.equalTo(self.contentView);
             }];
         }
@@ -336,7 +380,7 @@ NS_INLINE UIImage *kImgName(NSString *imageName) {
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
         _contentView.clipsToBounds = YES;
-        _contentView.backgroundColor = TMUIColorHex(F9FAF9);
+        _contentView.backgroundColor = UIColorHexString(@"0xF9FAF9");
         _contentView.layer.borderColor = UIColorBackgroundGray.CGColor;
         _contentView.layer.cornerRadius = SearchBarCornerRadius;
         _contentView.layer.borderWidth = .5;

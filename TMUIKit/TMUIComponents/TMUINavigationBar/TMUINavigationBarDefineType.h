@@ -26,7 +26,10 @@ typedef enum : NSUInteger {
 /// 操作左右按钮回调
 @protocol TMUINavigationBarProtocol <NSObject>
 
+/// 兼容项目
 - (void)navBackAction:(UIButton *)btn;
+
+- (void)tmui_navBackAction:(UIButton *)btn;
 
 - (void)navRightAction:(UIButton *)btn;
 

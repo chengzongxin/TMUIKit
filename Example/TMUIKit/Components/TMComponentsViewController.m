@@ -7,29 +7,10 @@
 //
 
 #import "TMComponentsViewController.h"
-#import "TMPageRootViewController.h"
 #import "ChainUIViewController.h"
 #import "ChainUIViewController1.h"
-#import "TMUITableViewController.h"
-#import "TMUIAlertViewController.h"
-#import "TMPopoverViewController.h"
 #import "ChainStyleConfigViewController.h"
-#import "TMUIBadgeViewController.h"
-#import "TMUICoreViewController6.h"
-#import "TDThemeViewController.h"
-#import "TDModalPresentationViewController.h"
-#import "TDThemeGlobalConfig.h"
-#import "TDDialogViewController.h"
-#import "TMUIExpandViewController.h"
-#import "TDFloatLayoutViewController.h"
-#import "TDFloatImagesViewController.h"
-#import "TDCycleViewController.h"
-#import "TDFoldLabelViewController.h"
-#import "TDFilterViewController.h"
-#import "TDSearchBarViewController.h"
-#import "TDPickerViewController.h"
-#import "TDPopupContainerViewController.h"
-#import "TMUIMenuViewController.h"
+
 @interface TMComponentsViewController ()
 
 @end
@@ -46,64 +27,28 @@
     
     GroupTV(
             Section(
-                    Row.str(@"TDPickerViewController").detailStr(@"选择器组件").THEME_CELL.onClick(^{
-                            [self push:TDPickerViewController.class];
-                        }),
-                    Row.str(@"TDFilterViewController").detailStr(@"筛选组件").THEME_CELL.onClick(^{
-                            [self push:TDFilterViewController.class];
-                        }),
-                    Row.str(@"TDSearchBarViewController").detailStr(@"搜索组件").THEME_CELL.onClick(^{
-                            [self push:TDSearchBarViewController.class];
-                        }),
-                    Row.str(@"TMUIBadge").detailStr(@"一行代码添加badge").THEME_CELL.onClick(^{
-                            [self push:TMUIBadgeViewController.class];
-                    }),
-                    Row.str(@"TDFoldLabelViewController").detailStr(@"展开文本组件").THEME_CELL.onClick(^{
-                            [self push:TDFoldLabelViewController.class];
-                        }),
-                    Row.str(@"TMUIModalPresentationViewController").detailStr(@"自定义弹出视图控制器").THEME_CELL.onClick(^{
-                            [self push:TDModalPresentationViewController.class];
-                        }),
-                    Row.str(@"TMUIExpandViewController").detailStr(@"展开文本").THEME_CELL.onClick(^{
-                            [self push:TMUIExpandViewController.class];
-                        }),
-                    Row.str(@"TDDialogViewController").detailStr(@"自定义弹窗").THEME_CELL.onClick(^{
-                            [self push:TDDialogViewController.class];
-                        }),
-                    Row.str(@"TDFloatLayoutViewController").detailStr(@"流式布局组件").THEME_CELL.onClick(^{
-                            [self push:TDFloatLayoutViewController.class];
-                        }),
-                    Row.str(@"TDFloatImagesViewController").detailStr(@"九宫格组件").THEME_CELL.onClick(^{
-                            [self push:TDFloatImagesViewController.class];
-                        }),
-                    Row.str(@"TDCycleViewController").detailStr(@"轮播图组件").THEME_CELL.onClick(^{
-                            [self push:TDCycleViewController.class];
-                        }),
-                    Row.str(@"TDPopupContainerViewController").detailStr(@"弹出菜单组件").THEME_CELL.onClick(^{
-                            [self push:TDPopupContainerViewController.class];
-                        }),
+                    ROW_CREATE(@"选择器组件",@"TDPickerViewController",@"TDPickerViewController"),
+                    ROW_CREATE(@"筛选组件",@"TDFilterViewController",@"TDFilterViewController"),
+                    ROW_CREATE(@"搜索组件",@"TDSearchBarViewController",@"TDSearchBarViewController"),
+                    ROW_CREATE(@"一行代码添加badge",@"TMUIBadge",@"TMUIBadgeViewController"),
+                    ROW_CREATE(@"展开文本组件",@"TDFoldLabelViewController",@"TDFoldLabelViewController"),
+                    ROW_CREATE(@"自定义弹出视图控制器",@"TMUIModalPresentationViewController",@"TDModalPresentationViewController"),
+                    ROW_CREATE(@"展开文本",@"TMUIExpandViewController",@"TMUIExpandViewController"),
+                    ROW_CREATE(@"自定义弹窗",@"TDDialogViewController",@"TDDialogViewController"),
+                    ROW_CREATE(@"流式布局组件",@"TDFloatLayoutViewController",@"TDFloatLayoutViewController"),
+                    ROW_CREATE(@"九宫格组件",@"TDFloatImagesViewController",@"TDFloatImagesViewController"),
+                    ROW_CREATE(@"轮播图组件",@"TDCycleViewController",@"TDCycleViewController"),
+                    ROW_CREATE(@"弹出菜单组件",@"TDPopupContainerViewController",@"TDPopupContainerViewController"),
                     ).THEME_TITLE(@"业务通用组件 TMUI Universal Components"),
             Section(
-                    Row.str(@"TMUITableView").detailStr(@"多样式UITableView").THEME_CELL.onClick(^{
-                            [self push:TMUITableViewController.class];
-                        }),
-                    Row.str(@"TMUIMultipleDelegates").detailStr(@"让对象支持多个delegate、支持自定义的delegate").THEME_CELL.onClick(^{
-                            [self push:TMUICoreViewController6.class];
-                        }),
-                    Row.str(@"TMPageViewController").detailStr(@"简单代理实现滑动吸顶header，动态tab子VC").THEME_CELL.onClick(^{
-                            [self push:TMPageRootViewController.class];
-                        }),
+                    ROW_CREATE(@"多样式UITableView",@"TMUITableView",@"TMUITableViewController"),
+                    ROW_CREATE(@"让对象支持多个delegate、支持自定义的delegate",@"TMUIMultipleDelegates",@"TMUICoreViewController6"),
+                    ROW_CREATE(@"简单代理实现滑动吸顶header，动态tab子VC",@"TMPageViewController",@"TMPageRootViewController"),
                     ).THEME_TITLE(@"支撑组件 TMUI Components"),
             Section(
-                    Row.str(@"TMContentAlert").detailStr(@"TMContentAlert").THEME_CELL.onClick(^{
-                            [self push:TMUIAlertViewController.class];
-                        }),
-                    Row.str(@"TMPopoverView").detailStr(@"弹窗popover view").THEME_CELL.onClick(^{
-                            [self push:TMPopoverViewController.class];
-                        }),
-                    Row.str(@"TMUIMenuViewController").detailStr(@"弹出菜单组件").THEME_CELL.onClick(^{
-                            [self push:TMUIMenuViewController.class];
-                        }),
+                    ROW_CREATE(@"TMContentAlert",@"TMContentAlert",@"TMUIAlertViewController"),
+                    ROW_CREATE(@"弹窗popover view",@"TMPopoverView",@"TMPopoverViewController"),
+                    ROW_CREATE(@"弹出菜单组件",@"TMUIMenuViewController",@"TMUIMenuViewController"),
                     ).THEME_TITLE(@"选择器 TMUI Alert"),
             SECTION_CREATE(
                            ROW_CREATE(@"TMUITheme",

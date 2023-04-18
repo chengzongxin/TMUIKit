@@ -7,7 +7,7 @@
 
 #import "NSArray+TMUI.h"
 #import <objc/runtime.h>
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUICore.h>
 
 #define TMUI_OBJECT_AT_INDEXED_SUBSCRIPT(cls) \
 - (id)tmui_##cls##_objectAtIndexedSubscript:(NSUInteger)idx {\

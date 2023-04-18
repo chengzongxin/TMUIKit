@@ -8,9 +8,9 @@
 #import "TMUIMultiDatePickerViewController.h"
 #import "TMUIPickerView.h"
 #import "TMUICustomDatePicker.h"
-#import "TMUICore.h"
-#import "TMUIKitDefines.h"
-#import "TMUIExtensions.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUICore/TMUIKitDefines.h>
+#import <TMUIExtensions/TMUIExtensions.h>
 
 @interface TMUIMultiDatePickerViewController ()
 <TMUICustomDatePickerDelegate>
@@ -189,14 +189,10 @@
 {
     if (self.actionFlag == 1) {
         [self.dayBeginBtn setTitleColor:UIColorDark forState:UIControlStateNormal];
-//        [self.dayBeginLine setBackgroundColor:UIColorHex(24C77E)];
-        [self.dayEndBtn setTitleColor:TMUIColorHex(C1C1C1) forState:UIControlStateNormal];
-//        [self.dayEndLine setBackgroundColor:UIColorHex(24C1C1C1)];
+        [self.dayEndBtn setTitleColor:UIColorHexString(@"0xC1C1C1") forState:UIControlStateNormal];
     }else if (self.actionFlag == 2) {
-        [self.dayBeginBtn setTitleColor:TMUIColorHex(C1C1C1) forState:UIControlStateNormal];
-//        [self.dayBeginLine setBackgroundColor:UIColorHex(24C1C1C1)];
+        [self.dayBeginBtn setTitleColor:UIColorHexString(@"0xC1C1C1") forState:UIControlStateNormal];
         [self.dayEndBtn setTitleColor:UIColorDark forState:UIControlStateNormal];
-//        [self.dayEndLine setBackgroundColor:UIColorHex(24C77E)];
     }
 }
 
@@ -317,7 +313,7 @@
         _contentTopBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TMUI_SCREEN_WIDTH, 44*1)];
         _contentTopBar.backgroundColor = [UIColor whiteColor];
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, _contentTopBar.bounds.size.height-0.5, _contentTopBar.bounds.size.width, 0.5)];
-        line.backgroundColor = TMUIColorHex(E9E9E9);
+        line.backgroundColor = UIColorHexString(@"0xE9E9E9");
         [_contentTopBar addSubview:line];
         
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(15,(_contentTopBar.bounds.size.height-36)/2, 40, 36)];
@@ -361,7 +357,7 @@
         CGRect rt = self.monthLine.frame;
         rt.origin.x = (_monthBgView.bounds.size.width-rt.size.width)/2;
         self.monthLine.frame = rt;
-        self.monthLine.backgroundColor = TMUIColorHex(E9E9E9);
+        self.monthLine.backgroundColor = UIColorHexString(@"0xE9E9E9");
         [_monthBgView addSubview:self.monthLine];
         
         rt.size.height = 24*1;
@@ -385,7 +381,7 @@
     if (!_dayBgView) {
         _dayBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 50*1, TMUI_SCREEN_WIDTH, 60 * 1)];
         self.dayBeginLine = [[UIView alloc] initWithFrame:CGRectMake(15, _dayBgView.bounds.size.height - 1, 140*1, 1)];
-        self.dayBeginLine.backgroundColor = TMUIColorHex(E9E9E9);
+        self.dayBeginLine.backgroundColor = UIColorHexString(@"0xE9E9E9");
         [_dayBgView addSubview:self.dayBeginLine];
         
         CGRect rt = self.dayBeginLine.frame;
@@ -403,19 +399,19 @@
         UILabel *centerLabel = [[UILabel alloc] initWithFrame:CGRectMake((_dayBgView.bounds.size.width-rt.size.height)/2, rt.origin.y, rt.size.height, rt.size.height)];
         centerLabel.textAlignment = NSTextAlignmentCenter;
         centerLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightRegular];
-        centerLabel.textColor = TMUIColorHex(C1C1C1);
+        centerLabel.textColor = UIColorHexString(@"0xC1C1C1");
         centerLabel.text = @"至";
         [_dayBgView addSubview:centerLabel];
         
         self.dayEndLine = [[UIView alloc] initWithFrame:CGRectMake(_dayBgView.bounds.size.width - 15 - 140*1, _dayBgView.bounds.size.height - 1, 140*1, 1)];
-        self.dayEndLine.backgroundColor = TMUIColorHex(E9E9E9);
+        self.dayEndLine.backgroundColor = UIColorHexString(@"0xE9E9E9");
         [_dayBgView addSubview:self.dayEndLine];
         
         rt = self.dayEndLine.frame;
         rt.size.height = 24*1;
         rt.origin.y = _dayBgView.bounds.size.height - 5 - rt.size.height;
         self.dayEndBtn = [[UIButton alloc] initWithFrame:rt];
-        [self.dayEndBtn setTitleColor:TMUIColorHex(C1C1C1) forState:UIControlStateNormal];
+        [self.dayEndBtn setTitleColor:UIColorHexString(@"0xC1C1C1") forState:UIControlStateNormal];
         [self.dayEndBtn.titleLabel setFont:[UIFont systemFontOfSize:16 weight:UIFontWeightRegular]];
         [self.dayEndBtn setTitle:@"结束时间" forState:UIControlStateNormal];
         [self.dayEndBtn addTarget:self action:@selector(dayEndBtnClick) forControlEvents:UIControlEventTouchUpInside];

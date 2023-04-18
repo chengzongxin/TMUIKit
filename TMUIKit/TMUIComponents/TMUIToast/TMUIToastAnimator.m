@@ -6,7 +6,7 @@
 //
 
 #import "TMUIToastAnimator.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 #import "TMUIToastView.h"
 
 #define kSlideAnimationKey @"kSlideAnimationKey"

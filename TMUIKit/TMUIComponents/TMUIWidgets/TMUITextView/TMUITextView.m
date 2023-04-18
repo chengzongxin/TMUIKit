@@ -6,9 +6,9 @@
 //
 
 #import "TMUITextView.h"
-#import "NSString+TMUI.h"
-#import "TMUICore.h"
-#import "UITextView+TMUI.h"
+#import <TMUIExtensions/NSString+TMUI.h>
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/UITextView+TMUI.h>
 //#import "TMUIComponents.h"
 #import "NSObject+TMUIMultipleDelegates.h"
 

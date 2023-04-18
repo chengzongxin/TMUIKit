@@ -6,13 +6,10 @@
 //
 
 #import "UITableView+TMUIGroup.h"
-#import "TMUIKitDefines.h"
-#import "TMUIRuntime.h"
-#import "TMUIAssociatedPropertyDefines.h"
-#import "TMUICommonDefines.h"
+#import <TMUICore/TMUICore.h>
 #import "CALayer+TMUI.h"
 #import "UIView+TMUI.h"
-#import "TMUIHelper.h"
+
 @implementation UITableView (TMUIGroup)
 
 @end

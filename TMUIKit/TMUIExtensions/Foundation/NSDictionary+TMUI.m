@@ -6,7 +6,7 @@
 //
 
 #import "NSDictionary+TMUI.h"
-#import "TMUIRuntime.h"
+#import <TMUICore/TMUICore.h>
 
 @implementation NSDictionary (TMUI_NilSafe)
 

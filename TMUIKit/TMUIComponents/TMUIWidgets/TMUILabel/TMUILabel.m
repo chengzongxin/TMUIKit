@@ -6,8 +6,8 @@
 //
 
 #import "TMUILabel.h"
-#import "TMUICoreGraphicsDefines.h"
-#import "TMUICommonDefines.h"
+#import <TMUICore/TMUICoreGraphicsDefines.h>
+#import <TMUICore/TMUICommonDefines.h>
 
 @interface TMUILabel ()
 

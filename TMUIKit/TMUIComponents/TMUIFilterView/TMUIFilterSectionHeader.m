@@ -73,7 +73,7 @@
 - (UILabel *)subtitleLbl{
     if (!_subtitleLbl) {
         _subtitleLbl = [[UILabel alloc] init];
-        _subtitleLbl.textColor = TMUIColorHex(B1B1B1);
+        _subtitleLbl.textColor = UIColorHexString(@"0xB1B1B1");
         _subtitleLbl.font = UIFont(12);
     }
     return _subtitleLbl;

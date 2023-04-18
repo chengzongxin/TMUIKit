@@ -107,14 +107,13 @@ func(self, selector);
 
 /// 滚动搜索
 - (void)style0{
-//    TMUIScrollSearchBar *search = [[TMUIScrollSearchBar alloc] init];
-//    [search setHotwords:@[@"123",@"456"]];
-//
-//    _navBar.titleView = search;
-    TMUISearchBar *search = [[TMUISearchBar alloc] initWithStyle:TMUISearchBarStyle_City_White frame:CGRectMake(20, 500, TMUI_SCREEN_WIDTH - 40, 44)];
-    search.placeholder = @"请输入";
-    [self.view addSubview:search];
+    TMUISearchBar *search1 = [[TMUISearchBar alloc] initWithStyle:TMUISearchBarStyle_City_White frame:CGRectMake(20, 500, TMUI_SCREEN_WIDTH - 40, 44)];
+    search1.placeholder = @"请输入";
+    [self.view addSubview:search1];
     
+    TMUISearchBar *search2 = [[TMUISearchBar alloc] initWithStyle:TMUISearchBarStyle_City_Black frame:CGRectMake(20, 600, TMUI_SCREEN_WIDTH - 40, 64)];
+    search2.placeholder = @"请输入";
+    [self.view addSubview:search2];
 }
 
 
@@ -141,7 +140,7 @@ func(self, selector);
     
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.titleView = search;
-    self.navigationItem.rightBarButtonItems = [UIBarButtonItem cancelItemWithTarget:self action:@selector(navBackAction:)];
+    self.navigationItem.rightBarButtonItems = [UIBarButtonItem cancelItemWithTarget:self action:@selector(tmui_navBackAction:)];
 }
 
 @end

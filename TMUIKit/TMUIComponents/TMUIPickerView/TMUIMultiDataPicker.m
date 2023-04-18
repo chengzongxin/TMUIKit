@@ -6,9 +6,9 @@
 //
 
 #import "TMUIMultiDataPicker.h"
-#import "TMUICommonDefines.h"
-#import "TMUIKitDefines.h"
-#import "TMUIExtensions.h"
+#import <TMUICore/TMUICommonDefines.h>
+#import <TMUICore/TMUIKitDefines.h>
+#import <TMUIExtensions/TMUIExtensions.h>
 #import "TMUIOrderedDictionary.h"
 
 @interface TMUIMultiDataPicker ()<UIPickerViewDataSource,UIPickerViewDelegate>
@@ -96,7 +96,7 @@
     if (![lbl isKindOfClass:UILabel.class]) {
         lbl = [[UILabel alloc] init];
         lbl.textAlignment = NSTextAlignmentCenter;
-        lbl.textColor = TMUIColorHex(333333);
+        lbl.textColor = UIColorHexString(@"0x333333");
         lbl.font = UIFont(18);
     }
     

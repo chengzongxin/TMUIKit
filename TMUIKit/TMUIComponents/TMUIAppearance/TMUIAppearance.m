@@ -7,7 +7,7 @@
 //
 
 #import "TMUIAppearance.h"
-#import "TMUICore.h"
+#import <TMUICore/TMUICore.h>
 
 @implementation TMUIAppearance
 

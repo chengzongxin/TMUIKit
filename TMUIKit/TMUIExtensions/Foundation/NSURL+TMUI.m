@@ -6,6 +6,7 @@
 //
 
 #import "NSURL+TMUI.h"
+#import <TMUICore/TMUICore.h>
 
 @implementation NSURL (TMUI)
 
@@ -31,6 +32,7 @@
         return nil;
     }
     NSString *urlStr = [self absoluteString];
+    BeginIgnoreDeprecatedWarning
     urlStr = [urlStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSString *query = [url query];
@@ -39,6 +41,7 @@
         query = [self absoluteString];
         query = [query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
+    EndIgnoreClangWarning
     NSArray *pairs = [query componentsSeparatedByString:@"&"];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     for (NSString *pair in pairs) {

@@ -7,8 +7,8 @@
 
 #import "TMUIFilterToolbar.h"
 #import <Masonry/Masonry.h>
-#import "TMUICore.h"
-#import "TMUIExtensions.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/TMUIExtensions.h>
 //#import "TMUIComponents.h"
 
 @interface TMUIFilterToolbar ()

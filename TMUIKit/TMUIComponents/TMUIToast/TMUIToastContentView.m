@@ -6,10 +6,10 @@
 //
 
 #import "TMUIToastContentView.h"
-#import "TMUICore.h"
-#import "UIView+TMUI.h"
+#import <TMUICore/TMUICore.h>
+#import <TMUIExtensions/UIView+TMUI.h>
 //#import "NSParagraphStyle+TMUI.h"
-#import "NSMutableParagraphStyle+TMUI.h"
+#import <TMUIExtensions/NSMutableParagraphStyle+TMUI.h>
 
 @implementation TMUIToastContentView
 

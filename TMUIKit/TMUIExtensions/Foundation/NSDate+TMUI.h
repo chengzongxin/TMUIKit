@@ -7,8 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString *const kTMUIDateFormatYMD = @"yyyy-MM-dd";
-static NSString *const kTMUIDateFormatYMDHMS = @"yyyy-MM-dd HH:mm:ss";
+static NSString * _Nullable const kTMUIDateFormatYMD = @"yyyy-MM-dd";
+static NSString * _Nullable const kTMUIDateFormatYMDHMS = @"yyyy-MM-dd HH:mm:ss";
 
 NS_ASSUME_NONNULL_BEGIN
 

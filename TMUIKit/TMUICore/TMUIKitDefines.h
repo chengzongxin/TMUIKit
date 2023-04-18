@@ -50,15 +50,41 @@
 #define UIFont(size)              UIFontRegular(size)
 #define UIFontItalic(size)        [UIFont italicSystemFontOfSize:size] /// 斜体只对数字和字母有效，中文无效
 //其它系统级自定义weight的字体
+#ifndef UIFontRegular
 #define UIFontRegular(size)       TMUIFontWeight(size, UIFontWeightRegular)
+#endif
+
+#ifndef UIFontMedium
 #define UIFontMedium(size)        TMUIFontWeight(size, UIFontWeightMedium)
+#endif
+
+#ifndef UIFontBold
 #define UIFontBold(size)          TMUIFontWeight(size, UIFontWeightBold)
+#endif
+
+#ifndef UIFontSemibold
 #define UIFontSemibold(size)      TMUIFontWeight(size, UIFontWeightSemibold)
+#endif
+
+#ifndef UIFontLight
 #define UIFontLight(size)         TMUIFontWeight(size, UIFontWeightLight)
+#endif
+
+#ifndef UIFontThin
 #define UIFontThin(size)          TMUIFontWeight(size, UIFontWeightThin)
+#endif
+
+#ifndef UIFontUltraLight
 #define UIFontUltraLight(size)    TMUIFontWeight(size, UIFontWeightUltraLight)
+#endif
+
+#ifndef UIFontHeavy
 #define UIFontHeavy(size)         TMUIFontWeight(size, UIFontWeightHeavy)
+#endif
+
+#ifndef UIFontBlack
 #define UIFontBlack(size)         TMUIFontWeight(size, UIFontWeightBlack)
+#endif
 
 #define TMUIFontWeight(size_, weight_) [UIFont systemFontOfSize:size_ weight:weight_]
 /// 字体相关的宏，用于快速创建一个字体对象，更多创建宏可查看 UIFont+TMUI.h

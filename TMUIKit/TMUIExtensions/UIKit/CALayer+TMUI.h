@@ -6,6 +6,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 typedef NS_OPTIONS (NSUInteger, TMUICornerMask) {
     TMUILayerMinXMinYCorner = 1U << 0,

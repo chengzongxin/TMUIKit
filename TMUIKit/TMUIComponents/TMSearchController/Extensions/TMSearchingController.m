@@ -7,7 +7,7 @@
 //
 
 #import "TMSearchingController.h"
-#import "TMUICommonDefines.h"
+#import <TMUICore/TMUICommonDefines.h>
 
 @interface TMSearchingController ()
 
