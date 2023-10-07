@@ -32,6 +32,12 @@ typedef void (^TMUIScrollCycleCell)(TMUICycleView *cycleView, NSInteger index);
 
 @property (nonatomic, copy) TMUIScrollCycleCell scrollCell;
 
+
+/// 页面控制器
+@property (nonatomic, strong, readonly) TMUIPageControl *pageControl;
+/// 底部距离，默认20
+@property (nonatomic, assign) CGFloat pageControlPaddingBottom;
+
 @end
 
 NS_ASSUME_NONNULL_END

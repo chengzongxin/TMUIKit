@@ -93,12 +93,12 @@ CGFloat const kTMUINavBarBtnH = 44.0;
     
     self.apprance = [TMUINavigationBarApprance appranceWithBarStyle:barStyle];
     self.backgroundColor = self.apprance.backgroundColor;
-    _backBtn.tmui_image = self.apprance.backBtnImg;
-    _titleLbl.textColor = self.apprance.titleColor;
+    self.backBtn.tmui_image = self.apprance.backBtnImg;
+    self.titleLbl.textColor = self.apprance.titleColor;
     if (self.rightViewType == TMUINavigationBarRightViewType_Share) {
-        _rightBtn.tmui_image = self.apprance.shareImg;
+        self.rightBtn.tmui_image = self.apprance.shareImg;
     }else if (self.rightViewType == TMUINavigationBarRightViewType_Search) {
-        _rightBtn.tmui_image = self.apprance.searchImg;
+        self.rightBtn.tmui_image = self.apprance.searchImg;
     }
 }
 

@@ -1007,7 +1007,9 @@ CGSizeFlatSpecificScale(CGSize size, float scale) {
     targetRect.size.height = height;
 
     //创建一个基于位图的上下文（context）,并将其设置为当前上下文(context)
-    UIGraphicsBeginImageContext(size);
+//    UIGraphicsBeginImageContext(size);
+    // 透明背景，自适应缩放
+    UIGraphicsBeginImageContextWithOptions(size, YES, self.scale);
     //绘制改变大小的图片
     [self drawInRect:targetRect];
     //从当前context中创建一个改变大小后的图片

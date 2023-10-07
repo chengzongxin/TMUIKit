@@ -21,23 +21,18 @@
     [super viewDidLoad];
     
     NSArray *imgs = @[
-        @"https://pic.to8to.com/case/1911/15/20191115_450bfe88c8d2c4aa0ec53gxciyvxsl7q_750.jpg",
-        @"http://5b0988e595225.cdn.sohucs.com/images/20180520/38493510af9542649fa2eb833cc1f009.jpeg",
-        @"https://pic.to8to.com/case/1911/15/20191115_d68a978f2231db9f3389po6zlgyfl8a0.jpg",
-        @"https://pic.to8to.com/case/1911/15/20191115_92a20b4c5c8272fa8a6amyfem969hih4.jpg",
-        @"https://pic.to8to.com/case/1911/15/20191115_b8d7424774c4369ad70fo0f3cv90dq4i.jpg",
-        @"https://pic.to8to.com/case/1911/15/20191115_aea986df16a399bbe63f1uff3xqbg47p.jpg",
-        @"https://pic.to8to.com/case/1911/15/20191115_5d3d8d9197b3a77ebe5cuzcq0phcrvyx.jpg",
-        @"https://pic.to8to.com/case/1911/15/20191115_bb9cdae40a5b1cd4c93cb3copxf0u4ze.jpg",
-        @"https://pic.to8to.com/case/1911/15/20191115_8e9e1f7dda46f2b94d64b4r83oc23et5.jpg"
+        @"https://pic50.t8tcdn.com/to8to/css/brand/ec64e054417aed4b771cf5cc9f747c70.jpg!500.webp",
+        @"https://pic50.t8tcdn.com/to8to/css/brand/a6ce746fe271ac8916b2f7373811124b.png!500.webp",
+        @"https://pic.to8to.com/public/20220104/3a0b7787128f511eb6849690140693e1.png!500.webp"
     ];
     
     _cycleView = [[TMUICycleView alloc] init];
+    _cycleView.pageControlPaddingBottom = 10;
     [self.view addSubview:_cycleView];
     
     [_cycleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(NavigationContentTop+20);
-        make.left.right.mas_equalTo(self.view).insets(20);
+        make.left.right.mas_equalTo(self.view).inset(20);
         make.height.mas_equalTo(300);
     }];
     _cycleView.configCell = ^(TMUICycleViewCell * _Nonnull cell, id  _Nonnull model) {

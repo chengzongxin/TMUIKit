@@ -6,7 +6,6 @@
 //
 
 
-static CGFloat const kPageControlBottom = 20;
 static CGFloat const kCycleViewMaxCountMultiple = 1000;
 
 #import "TMUICycleView.h"
@@ -87,6 +86,7 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
 
 - (void)setupConfigs {
     self.numbers = 0;
+    self.pageControlPaddingBottom = 20;
     
     [self addTimer];
     [self addObservers];
@@ -103,8 +103,7 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
     self.collectionView.frame = self.bounds;
     self.flowLayout.itemSize = self.bounds.size;
     
-    CGFloat y = self.bounds.size.height - 5.0 - kPageControlBottom;
-    _pageControl.frame = CGRectMake(0, y, self.bounds.size.width, 5.0);
+    [self updatePageControlFrame];
 }
 
 - (void)addObservers {
@@ -162,6 +161,20 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
     [self reloadData];
 }
 
+- (void)setPageControlPaddingBottom:(CGFloat)pageControlPaddingBottom{
+    _pageControlPaddingBottom = pageControlPaddingBottom;
+    
+    [self updatePageControlFrame];
+}
+
+#pragma mark - Private
+
+- (void)updatePageControlFrame{
+    CGFloat y = self.bounds.size.height - _pageControl.indicatorSize.height - self.pageControlPaddingBottom;
+    _pageControl.frame = CGRectMake(0, y, self.bounds.size.width, _pageControl.indicatorSize.height);
+}
+
+#pragma mark - 刷新
 - (void)reloadData {
     self.numbers = self.datas.count;
     self.pageControl.numberOfPages = self.numbers;
@@ -214,7 +227,6 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
     return [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentNumberOfItem inSection:0]];
 }
 
-#pragma mark - Private
 
 // 定时器回调方法
 - (void)timerScheduledAction {
@@ -335,7 +347,7 @@ static CGFloat const kCycleViewMaxCountMultiple = 1000;
 
 - (TMUIPageControl *)pageControl {
     if (!_pageControl) {
-        CGFloat y = self.bounds.size.height - 5.0 - kPageControlBottom;
+        CGFloat y = self.bounds.size.height - 3 - self.pageControlPaddingBottom;
         _pageControl = [[TMUIPageControl alloc] initWithFrame:CGRectMake(0, y, self.bounds.size.width, 3.0)];
         _pageControl.currentIndicatorSize = CGSizeMake(3.0, 3.0);
         _pageControl.indicatorSize = CGSizeMake(3.0, 3.0);
